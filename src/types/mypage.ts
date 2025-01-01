@@ -29,14 +29,14 @@ type TeammateBoardType = {
   full: boolean
 }
 
-export type AccountFormType = UserType
+export type UserAccountFormType = UserType
 export type NewPasswordFormType = PasswordType & { confirm: string }
 
 export type MypageInfoResponse = Pick<UserType, 'nickname' | 'dischargeYear'>
 
 export type MypageAccountResponse = UserType
 
-export type MypageAccountEditRequest = {
+export type UpdateAccountRequest = {
   body: UserType
 }
 

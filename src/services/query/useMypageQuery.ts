@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/queries'
-import type { MypageInfoResponse } from '@/types'
+import type { MypageInfoResponse, UpdateAccountRequest } from '@/types'
 
 const fetchInfo = async () => {
   return await api.get<MypageInfoResponse>(`/mypage`)
@@ -9,6 +9,10 @@ const fetchInfo = async () => {
 
 const deleteUser = async () => {
   return await api.delete(`/exit`)
+}
+
+const updateAccount = async ({ body }: UpdateAccountRequest) => {
+  return await api.put(`/mypage/info`, body)
 }
 
 const queryKeys = {
@@ -28,5 +32,14 @@ export const useUserProfile = () => {
 export const useUserDeletion = () => {
   return useMutation({
     mutationFn: deleteUser,
+  })
+}
+
+export const useUpdateUserAccount = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: updateAccount,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
