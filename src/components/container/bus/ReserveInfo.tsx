@@ -1,61 +1,67 @@
-import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button, InputGroup, SubHeaderWithoutIcon } from '@/components/view'
 import { useBusReserveInfoForm } from '@/hooks'
-import { useBusReserveInfo } from '@/queries'
+import { useBusReservationStatus } from '@/services/service'
+import { BUS_RESERVATION_STATES } from '@/utils'
 
-const stateObj = {
-  '신청 완료': 'text-blue-5',
-  '정보 없음': 'text-red-2',
-  '조회 전': 'text-grey-5',
+const STATE_STYLES = {
+  [BUS_RESERVATION_STATES.COMPLETED]: 'text-blue-5',
+  [BUS_RESERVATION_STATES.NOT_FOUND]: 'text-red-2',
+  [BUS_RESERVATION_STATES.PENDING]: 'text-grey-5',
 } as const
 
-type StateType = keyof typeof stateObj
+type ReservationFormType = {
+  onSubmit: VoidFunction
+}
+
+const ReservationForm = ({ onSubmit }: ReservationFormType) => {
+  const formMethod = useBusReserveInfoForm()
+  const { handleSubmit } = formMethod
+
+  return (
+    <FormProvider {...formMethod}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputGroup>
+          <InputGroup.Label section="studentId">학번</InputGroup.Label>
+          <div className="flex gap-4">
+            <InputGroup.Input section="studentId" placeholder="학번을 입력해주세요." />
+            <Button size="md" type="submit">
+              조회하기
+            </Button>
+          </div>
+        </InputGroup>
+      </form>
+    </FormProvider>
+  )
+}
 
 export const ReserveInfo = () => {
-  const formMethod = useBusReserveInfoForm()
   const navigate = useNavigate()
-  const { handleSubmit, reset, watch } = formMethod
+  const formMethod = useBusReserveInfoForm()
+  const { reset, watch } = formMethod
 
-  const [state, setState] = useState<StateType>('조회 전')
   const studentId = watch('studentId')
-  const { refetch } = useBusReserveInfo({ urls: { studentId } })
+  const { reservationState, checkReservation } = useBusReservationStatus(studentId)
 
-  const handleClickCloseButton = () => {
+  const handleClose = () => {
     reset()
     navigate(-1)
-  }
-  const handleSubmitInfo = async () => {
-    const { data, isSuccess, isError } = await refetch()
-    if (isSuccess) setState(data.reserved ? '신청 완료' : '정보 없음')
-    if (isError) setState('정보 없음')
   }
 
   return (
     <>
-      <SubHeaderWithoutIcon type="null" onClickCancle={handleClickCloseButton} />
+      <SubHeaderWithoutIcon type="null" onClickCancle={handleClose} />
       <div className="mx-4">
         <h4 className="mb-[65px] mt-6 font-bold text-grey-7">예약 내역 조회</h4>
-
-        <FormProvider {...formMethod}>
-          <form onSubmit={handleSubmit(handleSubmitInfo)}>
-            <InputGroup>
-              <InputGroup.Label section="studentId">학번</InputGroup.Label>
-              <div className="flex gap-4">
-                <InputGroup.Input section="studentId" placeholder="학번을 입력해주세요." />
-                <Button size="md" type="submit">
-                  조회하기
-                </Button>
-              </div>
-            </InputGroup>
-          </form>
-        </FormProvider>
+        <ReservationForm onSubmit={checkReservation} />
 
         <div className="mt-5 grid grid-cols-2 border-y border-y-grey-2 text-center">
           <p className="px-4 py-[10px] text-grey-7">신청 여부</p>
-          <p className={`px-4 py-[10px] font-medium ${stateObj[state]}`}>{state}</p>
+          <p className={`px-4 py-[10px] font-medium ${STATE_STYLES[reservationState]}`}>
+            {reservationState}
+          </p>
         </div>
 
         <div className="flex-column mt-5">
