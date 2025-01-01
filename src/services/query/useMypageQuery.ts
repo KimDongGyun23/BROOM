@@ -33,6 +33,10 @@ const teammatePosts = async () => {
   return await api.get<TeammatesFetchResponse>(`/mypage/team`)
 }
 
+const logout = async () => {
+  return await api.post(`/logout`, undefined)
+}
+
 const queryKeys = {
   all: ['mypage'] as const,
   account: () => [...queryKeys.all, 'account'] as const,
@@ -83,5 +87,11 @@ export const useMyCarpoolPost = () => {
     queryFn: carpoolPosts,
     gcTime: 0,
     staleTime: 0,
+  })
+}
+
+export const useLogout = () => {
+  return useMutation({
+    mutationFn: logout,
   })
 }

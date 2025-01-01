@@ -9,7 +9,7 @@ type PasswordType = {
   newPassword: string
 }
 
-type CarpoolBoardType = {
+type CarpoolPostType = {
   carpoolBoardId: number
   title: string
   createdAt: string
@@ -19,7 +19,7 @@ type CarpoolBoardType = {
   full: boolean
 }
 
-type TeammateBoardType = {
+type TeammatePostType = {
   teamBoardId: number
   title: string
   createdAt: string
@@ -45,9 +45,9 @@ export type UpdatePasswordRequest = {
 }
 
 export type CarpoolFetchResponse = {
-  result: CarpoolBoardType[]
+  result: CarpoolPostType[]
 }
 
 export type TeammatesFetchResponse = {
-  result: TeammateBoardType[]
+  result: TeammatePostType[]
 }

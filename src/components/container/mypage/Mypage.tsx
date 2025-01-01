@@ -3,8 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import chainImage from '@/assets/chain.svg'
 import { BottomNav, Loading, ProfileImage } from '@/components/view'
-import { useLogout } from '@/queries'
-import { useUserDeletion, useUserProfile } from '@/services/query'
+import { useLogout, useUserDeletion, useUserProfile } from '@/services/query'
 import type { IconType } from '@/types'
 import {
   clearSessionStorage,
