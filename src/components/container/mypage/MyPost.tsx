@@ -1,16 +1,9 @@
 import { useState } from 'react'
 
-import { Loading, PostItem, SubHeaderWithoutIcon } from '@/components/view'
+import { Loading, PostItem, PostTabs, SubHeaderWithoutIcon } from '@/components/view'
 import { useMyCarpoolPost, useMyTeammatePost } from '@/services/query'
-import type { CarpoolFetchResponse, TeammatesFetchResponse } from '@/types'
+import type { CarpoolFetchResponse, TabType, TeammatesFetchResponse } from '@/types'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
-
-type TabType = (typeof TAB_LIST)[number]
-
-type PostTabsType = {
-  currentTab: TabType
-  onTabClick: (tab: TabType) => void
-}
 
 type CarpoolPostsProps = {
   posts: CarpoolFetchResponse | undefined
@@ -18,27 +11,6 @@ type CarpoolPostsProps = {
 
 type TeammatePostsProps = {
   posts: TeammatesFetchResponse | undefined
-}
-
-const PostTabs = ({ currentTab, onTabClick }: PostTabsType) => {
-  return (
-    <ul className="p-medium flex px-4 py-3 font-medium">
-      {TAB_LIST.map((tab) => {
-        const tabStyle =
-          currentTab === tab
-            ? 'text-blue-6 border-b-[2px] border-b-blue-5'
-            : 'text-grey-6 border-b-[2px] border-b-grey-2'
-
-        return (
-          <li>
-            <button key={tab} className={`grow pb-3 ${tabStyle}`} onClick={() => onTabClick(tab)}>
-              {tab}
-            </button>
-          </li>
-        )
-      })}
-    </ul>
-  )
 }
 
 const CarpoolPosts = ({ posts }: CarpoolPostsProps) => {

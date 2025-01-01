@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
-import { SubHeaderWithoutIcon } from '@/components/view'
+import { PostTabs, SubHeaderWithoutIcon } from '@/components/view'
+import type { TabType } from '@/types'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
-
-type TabType = (typeof TAB_LIST)[number]
 
 export const Bookmark = () => {
   const storageName = `current-bookmark-tab`
@@ -16,26 +15,9 @@ export const Bookmark = () => {
   }
 
   return (
-    <div>
+    <main>
       <SubHeaderWithoutIcon type="null" title="북마크" />
-      <div className="p-medium flex px-4 py-3 font-medium">
-        {TAB_LIST.map((tab) => {
-          const tabStyle =
-            currentTab === tab
-              ? 'text-blue-6 border-b-[2px] border-b-blue-5'
-              : 'text-grey-6 border-b-[2px] border-b-grey-2'
-
-          return (
-            <button
-              key={tab}
-              className={`grow pb-3 ${tabStyle}`}
-              onClick={() => handleClickTab(tab)}
-            >
-              {tab}
-            </button>
-          )
-        })}
-      </div>
-    </div>
+      <PostTabs currentTab={currentTab} onTabClick={handleClickTab} />
+    </main>
   )
 }
