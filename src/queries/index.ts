@@ -12,8 +12,6 @@ export const api = new HttpClient({
 
 export * from './auth/authApi'
 export * from './auth/useAuthService'
-export * from './bus/busApi'
-export * from './bus/useBusService'
 export * from './carpool/carpoolApi'
 export * from './carpool/useCarpoolService'
 export * from './chatting/chattingApi'
