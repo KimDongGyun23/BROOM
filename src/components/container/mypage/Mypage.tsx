@@ -3,32 +3,61 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import chainImage from '@/assets/chain.svg'
 import { BottomNav, Loading, ProfileImage } from '@/components/view'
-import { useExitUser, useLogout, useMypage } from '@/queries'
+import { useLogout } from '@/queries'
+import { useUserDeletion, useUserProfile } from '@/services/query'
 import type { IconType } from '@/types'
-import { clearSessionStorage, getSessionStorageItem, SESSION_MILITARY_CHPLAIN } from '@/utils'
+import {
+  clearSessionStorage,
+  getSessionStorageItem,
+  MYPAGE_PROFILE_SECTIONS,
+  SESSION_MILITARY_CHAPLAIN,
+} from '@/utils'
 
-const mypageArr = [
-  {
-    label: '내 정보',
-    contents: ['계정 정보', '비밀번호 재설정'],
-    urls: ['/mypage/account-info', '/mypage/password'],
-  },
-  {
-    label: '게시글',
-    contents: ['내가 올린 게시글', '북마크'],
-    urls: ['/mypage/myboard', '/mypage/bookmark'],
-  },
-  { label: '고객 지원', contents: ['문의하기', '서비스 정보'], urls: ['/mypage', '/mypage'] },
-] as const
+type ProfileSectionProps = {
+  title: string
+  items: readonly { name: string; path: string }[]
+}
+
+type UserProfileProps = {
+  username: string
+  serviceYear: number
+  iconType: IconType | null
+}
+
+const UserProfile = ({ username, serviceYear, iconType }: UserProfileProps) => (
+  <div className="flex-align relative mx-auto mb-[30px] mt-4 w-fit gap-5 rounded-[40px] border-[10px] border-grey-2 py-[14px] pl-[18px] pr-[30px]">
+    <img src={chainImage} className="absolute -left-7 bottom-5" alt="chain" />
+    <ProfileImage iconType={iconType} size="lg" />
+    <div className="flex-column">
+      <p className="p-medium font-medium">{username}</p>
+      <p className="p-xsmall text-blue-7">예비군 {serviceYear}년차</p>
+    </div>
+  </div>
+)
+
+const ProfileSection = ({ title, items }: ProfileSectionProps) => (
+  <section className="flex-column gap-5">
+    <h6 className="font-bold text-grey-7">{title}</h6>
+    <ul className="flex-column gap-3">
+      {items.map(({ name, path }) => (
+        <li key={name}>
+          <Link to={path} className="p-medium text-grey-7">
+            {name}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </section>
+)
 
 export const Mypage = () => {
   const navigate = useNavigate()
-  const iconType = getSessionStorageItem(SESSION_MILITARY_CHPLAIN) as IconType | null
-  const { data: mypageData, isPending, isError } = useMypage()
+  const iconType = getSessionStorageItem(SESSION_MILITARY_CHAPLAIN) as IconType | null
+  const { data: userProfileData, isPending, isError } = useUserProfile()
   const { mutate: logoutMutation } = useLogout()
-  const { mutate: exitMutation } = useExitUser()
+  const { mutate: deleteUser } = useUserDeletion()
 
-  const handleClickLogout = () => {
+  const handleLogout = () => {
     logoutMutation(undefined, {
       onSuccess: () => {
         clearSessionStorage()
@@ -37,8 +66,8 @@ export const Mypage = () => {
     })
   }
 
-  const handleClickExit = () => {
-    exitMutation(undefined, {
+  const handleAccountDeletion = () => {
+    deleteUser(undefined, {
       onSuccess: () => {
         clearSessionStorage()
         navigate('/login')
@@ -48,45 +77,29 @@ export const Mypage = () => {
 
   if (isPending || isError) return <Loading />
 
-  const { nickname, dischargeYear } = mypageData
+  const { nickname, dischargeYear } = userProfileData
 
   return (
     <div className="flex-column h-full">
       <div className="flex-column scroll">
-        <div className=" flex-align relative mx-auto mb-[30px] mt-4 w-fit gap-5 rounded-[40px] border-[10px]  border-grey-2 py-[14px] pl-[18px] pr-[30px]">
-          <img src={chainImage} className="absolute -left-7 bottom-5" alt="chain" />
-          <ProfileImage iconType={iconType} size="lg" />
-          <div className="flex-column">
-            <p className="p-medium font-medium">{nickname}</p>
-            <p className="p-xsmall text-blue-7">예비군 {dischargeYear}년차</p>
-          </div>
-        </div>
+        <UserProfile username={nickname} serviceYear={dischargeYear} iconType={iconType} />
 
         <div className="flex-column mx-4 mb-6 gap-7">
-          {mypageArr.map(({ label, contents, urls }, labelIndex) => (
-            <Fragment key={label}>
-              <section className="flex-column gap-5">
-                <h6 className="font-bold text-grey-7">{label}</h6>
-                <div className="flex-column gap-3">
-                  {contents.map((content, contentIndex) => (
-                    <Link key={content} to={urls[contentIndex]} className="p-medium text-grey-7">
-                      {content}
-                    </Link>
-                  ))}
-                </div>
-              </section>
-              {labelIndex !== contents.length && <hr className="bg-grey-2" />}
+          {MYPAGE_PROFILE_SECTIONS.map(({ title, items }, index) => (
+            <Fragment key={title}>
+              <ProfileSection title={title} items={items} />
+              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <hr className="bg-grey-2" />}
             </Fragment>
           ))}
 
           <div className="flex-align ml-auto mt-[3svh] px-1">
             <button
               className="p-small border-r border-r-grey-4 px-4 text-grey-6"
-              onClick={handleClickLogout}
+              onClick={handleLogout}
             >
               로그아웃
             </button>
-            <button className="p-small px-4 text-red-2" onClick={handleClickExit}>
+            <button className="p-small px-4 text-red-2" onClick={handleAccountDeletion}>
               회원탈퇴
             </button>
           </div>

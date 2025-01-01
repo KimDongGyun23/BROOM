@@ -1,6 +1,6 @@
 export const SESSION_LOGIN_KEY = 'login' as const
 export const SESSION_NICKNAME = 'user_nickname' as const
-export const SESSION_MILITARY_CHPLAIN = 'user_chplain' as const
+export const SESSION_MILITARY_CHAPLAIN = 'user_chaplain' as const
 export const SESSION_ROOM_TYPE = 'room_type' as const
 export const SESSION_REFRESH = 'hsefr' as const
 
@@ -68,3 +68,27 @@ export const BUS_RESERVATION_STATES = {
   NOT_FOUND: '정보 없음',
   PENDING: '조회 전',
 } as const
+
+export const MYPAGE_PROFILE_SECTIONS = [
+  {
+    title: '내 정보',
+    items: [
+      { name: '계정 정보', path: '/mypage/account-info' },
+      { name: '비밀번호 재설정', path: '/mypage/password' },
+    ],
+  },
+  {
+    title: '게시글',
+    items: [
+      { name: '내가 올린 게시글', path: '/mypage/myboard' },
+      { name: '북마크', path: '/mypage/bookmark' },
+    ],
+  },
+  {
+    title: '고객 지원',
+    items: [
+      { name: '문의하기', path: '/mypage' },
+      { name: '서비스 정보', path: '/mypage' },
+    ],
+  },
+] as const
