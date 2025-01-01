@@ -1,9 +1,4 @@
-import type {
-  MypageAccountResponse,
-  MypageCarpoolResponse,
-  MypagePasswordRequest,
-  MypageTeammateResponse,
-} from '@/types'
+import type { MypageAccountResponse, MypageCarpoolResponse, MypageTeammateResponse } from '@/types'
 
 import { api } from '..'
 
@@ -17,10 +12,6 @@ export const mypageCarpool = async () => {
 
 export const mypageTeammate = async () => {
   return await api.get<MypageTeammateResponse>(`/mypage/team`)
-}
-
-export const mypagePassword = async ({ body }: MypagePasswordRequest) => {
-  return await api.post<string>(`/mypage/password`, body)
 }
 
 export const mypageLogout = async () => {

@@ -40,7 +40,7 @@ export type UpdateAccountRequest = {
   body: UserType
 }
 
-export type MypagePasswordRequest = {
+export type UpdatePasswordRequest = {
   body: PasswordType
 }
 

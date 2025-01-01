@@ -1,12 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-import {
-  mypageAccount,
-  mypageCarpool,
-  mypageLogout,
-  mypagePassword,
-  mypageTeammate,
-} from './mypageApi'
+import { mypageAccount, mypageCarpool, mypageLogout, mypageTeammate } from './mypageApi'
 
 const queryKeys = {
   all: ['mypage'] as const,
@@ -37,12 +31,6 @@ export const useMypageAccount = () => {
   return useQuery({
     queryKey: queryKeys.account(),
     queryFn: mypageAccount,
-  })
-}
-
-export const useMypageNewPassword = () => {
-  return useMutation({
-    mutationFn: mypagePassword,
   })
 }
 
