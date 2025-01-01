@@ -44,10 +44,10 @@ export type UpdatePasswordRequest = {
   body: PasswordType
 }
 
-export type MypageCarpoolResponse = {
+export type CarpoolFetchResponse = {
   result: CarpoolBoardType[]
 }
 
-export type MypageTeammateResponse = {
+export type TeammatesFetchResponse = {
   result: TeammateBoardType[]
 }
