@@ -1,23 +1,23 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 import { api } from '@/queries'
-import type { BusReserveInfoReqeust, BusReserveInfoResponse, BusReserveReqeust } from '@/types'
+import type { BusReserveInfoRequest, BusReserveInfoResponse, BusReserveRequest } from '@/types'
 
-const busReserveInfo = async ({ urls }: BusReserveInfoReqeust) => {
+const busReserveInfo = async ({ urls }: BusReserveInfoRequest) => {
   return await api.get<BusReserveInfoResponse>(`/bus/reservation/${urls.studentId}`)
 }
 
-const busReserve = async ({ body }: BusReserveReqeust) => {
+const busReserve = async ({ body }: BusReserveRequest) => {
   return await api.post(`/bus/reservation`, body)
 }
 
 const queryKeys = {
   all: ['bus'] as const,
-  reserveInfo: (urls: BusReserveInfoReqeust['urls']) =>
+  reserveInfo: (urls: BusReserveInfoRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
-export const useBusReserveInfo = (request: BusReserveInfoReqeust) => {
+export const useBusReserveInfo = (request: BusReserveInfoRequest) => {
   return useQuery({
     queryKey: queryKeys.reserveInfo(request.urls),
     queryFn: () => busReserveInfo(request),

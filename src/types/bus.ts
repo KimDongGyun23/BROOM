@@ -8,11 +8,11 @@ type BusType = {
 export type BusFormType = Omit<BusType, 'reserved'>
 export type BusInfoFormType = Pick<BusType, 'studentId'>
 
-export type BusReserveReqeust = {
+export type BusReserveRequest = {
   body: Omit<BusType, 'reserved'>
 }
 
-export type BusReserveInfoReqeust = {
+export type BusReserveInfoRequest = {
   urls: Pick<BusType, 'studentId'>
 }
 
