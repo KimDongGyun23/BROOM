@@ -1,26 +1,17 @@
 import { Link } from 'react-router-dom'
 
+import type { PostItemType } from '@/types/post'
+
 import { AdditionCircleIcon, StopIcon } from '../icons/NonActiveIcons'
 
 type PostItemProps = {
-  title: string
-  createdAt: string
-  trainingDate: string
-  place: string
-  time: string
-  isFull: boolean
+  item: PostItemType
   to: string
 }
 
-export const PostItem = ({
-  title,
-  createdAt,
-  trainingDate,
-  place,
-  time,
-  isFull,
-  to,
-}: PostItemProps) => {
+export const PostItem = ({ item, to }: PostItemProps) => {
+  const { title, createdAt, trainingDate, place, time, full } = item
+
   return (
     <Link className="flex-column mx-4 block gap-[10px] border-b border-b-grey-2 px-3 py-6" to={to}>
       <div className="flex-between-align gap-3">
@@ -36,7 +27,7 @@ export const PostItem = ({
             <span>{time}</span>
           </div>
         </div>
-        {isFull ? <StopIcon /> : <AdditionCircleIcon />}
+        {full ? <StopIcon /> : <AdditionCircleIcon />}
       </div>
     </Link>
   )
