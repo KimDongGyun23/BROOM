@@ -4,12 +4,9 @@ import type { CarpoolDetailRequest, CarpoolSearchRequest } from '@/types/carpool
 
 import {
   carpoolCheckFull,
-  carpoolCreate,
   carpoolDelete,
   carpoolDetail,
   carpoolEdit,
-  carpoolPage,
-  carpoolRecruit,
   carpoolSearch,
 } from './carpoolApi'
 
@@ -20,25 +17,6 @@ const queryKeys = {
   detail: (urls: CarpoolDetailRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
   recruit: () => [...queryKeys.all, 'recruit'] as const,
-}
-
-export const useCarpoolPage = () => {
-  return useQuery({
-    queryKey: queryKeys.all,
-    queryFn: carpoolPage,
-    gcTime: 0,
-    staleTime: 0,
-  })
-}
-
-export const useCarpoolRecruitPage = () => {
-  return useQuery({
-    queryKey: queryKeys.recruit(),
-    queryFn: carpoolRecruit,
-    gcTime: 0,
-    staleTime: 0,
-    enabled: false,
-  })
 }
 
 export const useCarpoolSearchPage = (request: CarpoolSearchRequest) => {
@@ -53,17 +31,6 @@ export const useCarpoolDetailPage = (request: CarpoolDetailRequest) => {
   return useQuery({
     queryKey: queryKeys.detail(request.urls),
     queryFn: () => carpoolDetail(request),
-  })
-}
-
-export const useCarpoolCreate = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: carpoolCreate,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
   })
 }
 

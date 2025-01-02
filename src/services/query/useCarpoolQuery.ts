@@ -1,12 +1,18 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/queries'
-import type { CarpoolRecruitResponse, CarpoolResponse } from '@/types'
+import type {
+  CarpoolCreateRequest,
+  CarpoolCreateResponse,
+  CarpoolRecruitResponse,
+  CarpoolResponse,
+} from '@/types'
 import type { PostItemType } from '@/types/post'
 
 const API_ENDPOINTS = {
   CARPOOL: '/view/carpool',
-  ACTIVE_CARPOOL: `/view/carpool/recruiting`,
+  ACTIVE_CARPOOL: '/view/carpool/recruiting',
+  CREATE: '/carpool',
 } as const
 
 const queryKeys = {
@@ -44,5 +50,16 @@ export const useActiveCarpoolList = () => {
         place: item.departPlace,
         time: item.departTime,
       })),
+  })
+}
+
+export const useCarpoolCreate = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<CarpoolCreateResponse, Error, CarpoolCreateRequest>({
+    mutationFn: async () => await api.get(API_ENDPOINTS.CREATE),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
   })
 }
