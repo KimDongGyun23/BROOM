@@ -12,6 +12,4 @@ export const api = new HttpClient({
 
 export * from './auth/authApi'
 export * from './auth/useAuthService'
-export * from './chatting/chattingApi'
-export * from './chatting/useChattingService'
 export * from './HttpClient'
