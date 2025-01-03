@@ -2,12 +2,13 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 
-import { carpoolEditPage, mypageAccount, teammateEditPage } from '@/queries'
+import { api, mypageAccount, teammateEditPage } from '@/queries'
 import type {
   AccountFormType,
   BusFormType,
   BusInfoFormType,
   CarpoolEditPageRequest,
+  CarpoolEditResponse,
   CarpoolFormType,
   LoginFormType,
   NewPasswordFormType,
@@ -76,9 +77,11 @@ export const useCarpoolCreateForm = () => {
   return formMethod
 }
 
-export const useCarpoolEditForm = (request: CarpoolEditPageRequest) => {
+export const useCarpoolEditForm = ({ urls }: CarpoolEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { departTime, trainingDate, ...rest } = await carpoolEditPage(request)
+    const { departTime, trainingDate, ...rest } = await api.get<CarpoolEditResponse>(
+      `/carpool/edit/${urls.carpoolBoardId}`,
+    )
     const hour = parseInt(departTime.split(':')[0], 10)
     const minute = parseInt(departTime.split(':')[1], 10)
     const date = dayjs(trainingDate).format('YYYYMMDD')

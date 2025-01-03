@@ -36,7 +36,7 @@ export const CarpoolDetail = () => {
     useCarpoolDetailActions(carpoolBoardId ?? 0, detailData?.item.full ?? false)
 
   if (isPending) return <Loading />
-  if (isError || !detailData) return <div>Error loading data</div>
+  if (isError || !detailData) return <div>error</div>
 
   const isMyPost = detailData.profile.nickname === getSessionStorageItem(SESSION_NICKNAME)
   const contents = transformCarpoolData(detailData.item)

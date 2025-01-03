@@ -101,8 +101,8 @@ export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
 export const useCarpoolCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<CarpoolCreateRequest, Error, CarpoolCreateResponse>({
-    mutationFn: async () => await api.get(API_ENDPOINTS.CREATE),
+  return useMutation<CarpoolCreateResponse, Error, CarpoolCreateRequest>({
+    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
