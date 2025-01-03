@@ -9,6 +9,7 @@ import type {
   TeammateDetailRequest,
   TeammateDetailResponse,
   TeammateEditRequest,
+  TeammateIsFullRequest,
   TeammateRecruitResponse,
   TeammateResponse,
   TeammateSearchRequest,
@@ -20,8 +21,11 @@ const API_ENDPOINTS = {
   ACTIVE_TEAMMATE: `/view/team/recruiting`,
   CREATE: `/team`,
   DETAIL: (id: number) => `/view/team/${id}`,
+  CHECK_FULL: (id: number) => `/team/check/${id}`,
   DELETE: (id: number) => `/team/${id}`,
   EDIT: (id: number) => `/team/edit/${id}`,
+  SEARCH: (category: string, keyword: string) =>
+    `/view/team?category=${category}&keyword=${keyword}`,
 } as const
 
 const queryKeys = {
@@ -80,6 +84,20 @@ export const useTeammateDetailPage = ({ urls }: TeammateDetailRequest) => {
   })
 }
 
+export const useTeammateSearchList = ({ urls }: TeammateSearchRequest) => {
+  return useQuery<TeammateResponse, Error, PostItemType[]>({
+    queryKey: queryKeys.search(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
+    select: (data) =>
+      data.result.map((item) => ({
+        ...item,
+        id: item.teamBoardId,
+        place: item.meetingPlace,
+        time: item.meetingTime,
+      })),
+  })
+}
+
 export const useTeammateCreate = () => {
   const queryClient = useQueryClient()
 
@@ -107,6 +125,18 @@ export const useUpdateTeammate = () => {
 
   return useMutation<void, Error, TeammateEditRequest>({
     mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.teamBoardId), body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useTeammateCheckFull = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, TeammateIsFullRequest>({
+    mutationFn: async ({ body, urls }) =>
+      await api.put(API_ENDPOINTS.CHECK_FULL(urls.teamBoardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
