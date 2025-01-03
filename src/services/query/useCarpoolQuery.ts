@@ -22,8 +22,8 @@ const API_ENDPOINTS = {
   CREATE: '/carpool',
   DETAIL: (id: number) => `/view/carpool/${id}`,
   CHECK_FULL: (id: number) => `/carpool/check/${id}`,
-  DELETE: (id: number) => `/carpool/edit/${id}`,
-  EDIT: (id: number) => `/carpool/delete/${id}`,
+  DELETE: (id: number) => `/carpool/${id}`,
+  EDIT: (id: number) => `/carpool/edit/${id}`,
   SEARCH: (category: string, keyword: string) =>
     `/view/carpool?category=${category}&keyword=${keyword}`,
 } as const
@@ -125,7 +125,7 @@ export const useDeleteCarpool = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, CarpoolDeleteRequest>({
-    mutationFn: async ({ urls }) => await api.put(API_ENDPOINTS.DELETE(urls.carpoolBoardId)),
+    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.carpoolBoardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

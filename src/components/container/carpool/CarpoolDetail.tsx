@@ -24,16 +24,18 @@ const transformCarpoolData = (item: CustomCarpoolDetailType['item']) => [
 
 export const CarpoolDetail = () => {
   const { id } = useParams()
-  const carpoolBoardId = id ? parseInt(id) : null
+  if (!id) return <div>error</div>
+
+  const carpoolBoardId = parseInt(id)
 
   const {
     data: detailData,
     isPending,
     isError,
-  } = useCarpoolDetailPage({ urls: { carpoolBoardId: carpoolBoardId ?? 0 } })
+  } = useCarpoolDetailPage({ urls: { carpoolBoardId: carpoolBoardId } })
 
   const { handleCheckFull, handleEdit, handleDelete, handleClickChatting } =
-    useCarpoolDetailActions(carpoolBoardId ?? 0, detailData?.item.full ?? false)
+    useCarpoolDetailActions(carpoolBoardId, detailData?.item.full as boolean)
 
   if (isPending) return <Loading />
   if (isError || !detailData) return <div>error</div>

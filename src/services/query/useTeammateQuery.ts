@@ -2,9 +2,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/queries'
 import type {
+  CustomTeammateDetailType,
   TeammateCreateRequest,
   TeammateCreateResponse,
+  TeammateDeleteRequest,
   TeammateDetailRequest,
+  TeammateDetailResponse,
   TeammateRecruitResponse,
   TeammateResponse,
   TeammateSearchRequest,
@@ -12,9 +15,11 @@ import type {
 import type { PostItemType } from '@/types/post'
 
 const API_ENDPOINTS = {
-  TEAMMATE: '/view/team',
-  ACTIVE_TEAMMATE: '/view/team/recruiting',
-  CREATE: '/team',
+  TEAMMATE: `/view/team`,
+  ACTIVE_TEAMMATE: `/view/team/recruiting`,
+  CREATE: `/team`,
+  DETAIL: (id: number) => `/view/team/${id}`,
+  DELETE: (id: number) => `/team/${id}`,
 } as const
 
 const queryKeys = {
@@ -59,11 +64,36 @@ export const useActiveTeammateList = () => {
   })
 }
 
+export const useTeammateDetailPage = ({ urls }: TeammateDetailRequest) => {
+  return useQuery<TeammateDetailResponse, Error, CustomTeammateDetailType>({
+    queryKey: queryKeys.detail(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.teamBoardId)),
+    select: (data) => {
+      const { author, createdAt, ...rest } = data
+      return {
+        profile: { ...author, createdAt: createdAt },
+        item: { ...rest },
+      }
+    },
+  })
+}
+
 export const useTeammateCreate = () => {
   const queryClient = useQueryClient()
 
   return useMutation<TeammateCreateResponse, Error, TeammateCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useDeleteTeammate = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, TeammateDeleteRequest>({
+    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.teamBoardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

@@ -1,5 +1,8 @@
 import type { KEBAB_LIST } from '@/utils'
 
+import type { IconType } from './common'
+import type { PostAuthorType } from './post'
+
 type TeammateType = {
   teamBoardId: number
   title: string
@@ -14,7 +17,7 @@ type AuthorType = {
   userId: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: string
+  militaryChaplain: IconType
 }
 
 type TeammateSearchType = {
@@ -25,6 +28,11 @@ type TeammateSearchType = {
 type TeammateDetailType = {
   personnel: number
   content: string
+}
+
+export type CustomTeammateDetailType = {
+  profile: PostAuthorType
+  item: Omit<TeammateType, 'createdAt'> & TeammateDetailType
 }
 
 export type TeammateFormType = Pick<TeammateType, 'title' | 'trainingDate' | 'meetingPlace'> &

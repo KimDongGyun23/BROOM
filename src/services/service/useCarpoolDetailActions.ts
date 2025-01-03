@@ -1,4 +1,3 @@
-// hooks/useCarpoolDetailActions.ts
 import { useNavigate } from 'react-router-dom'
 
 import { useCarpoolChattingId } from '@/queries'
