@@ -4,12 +4,9 @@ import type { TeammateDetailRequest, TeammateSearchRequest } from '@/types/teamm
 
 import {
   teammateCheckFull,
-  teammateCreate,
   teammateDelete,
   teammateDetail,
   teammateEdit,
-  teammatePage,
-  teammateRecruit,
   teammateSearch,
 } from './teammateApi'
 
@@ -20,25 +17,6 @@ const queryKeys = {
   detail: (urls: TeammateDetailRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
   recruit: () => [...queryKeys.all, 'recruit'] as const,
-}
-
-export const useTeammatePage = () => {
-  return useQuery({
-    queryKey: queryKeys.all,
-    queryFn: teammatePage,
-    gcTime: 0,
-    staleTime: 0,
-  })
-}
-
-export const useTeammateRecruitPage = () => {
-  return useQuery({
-    queryKey: queryKeys.recruit(),
-    queryFn: teammateRecruit,
-    gcTime: 0,
-    staleTime: 0,
-    enabled: false,
-  })
 }
 
 export const useTeammateSearchPage = (request: TeammateSearchRequest) => {
@@ -53,17 +31,6 @@ export const useTeammateDetailPage = (request: TeammateDetailRequest) => {
   return useQuery({
     queryKey: queryKeys.detail(request.urls),
     queryFn: () => teammateDetail(request),
-  })
-}
-
-export const useTeammateCreate = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: teammateCreate,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
   })
 }
 

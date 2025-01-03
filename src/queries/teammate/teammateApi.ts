@@ -1,6 +1,4 @@
 import type {
-  TeammateCreateRequest,
-  TeammateCreateResponse,
   TeammateDeleteRequest,
   TeammateDetailRequest,
   TeammateDetailResponse,
@@ -8,20 +6,11 @@ import type {
   TeammateEditRequest,
   TeammateEditResponse,
   TeammateIsFullRequest,
-  TeammateRecruitResponse,
   TeammateResponse,
   TeammateSearchRequest,
 } from '@/types'
 
 import { api } from '..'
-
-export const teammatePage = async () => {
-  return await api.get<TeammateResponse>(`/view/team`)
-}
-
-export const teammateRecruit = async () => {
-  return await api.get<TeammateRecruitResponse>(`/view/team/recruiting`)
-}
 
 export const teammateSearch = async ({ urls }: TeammateSearchRequest) => {
   return await api.get<TeammateResponse>(
@@ -31,10 +20,6 @@ export const teammateSearch = async ({ urls }: TeammateSearchRequest) => {
 
 export const teammateDetail = async ({ urls }: TeammateDetailRequest) => {
   return await api.get<TeammateDetailResponse>(`/view/team/${urls.teamBoardId}`)
-}
-
-export const teammateCreate = async ({ body }: TeammateCreateRequest) => {
-  return await api.post<TeammateCreateResponse>(`/team`, body)
 }
 
 export const teammateEditPage = async ({ urls }: TeammateEditPageRequest) => {

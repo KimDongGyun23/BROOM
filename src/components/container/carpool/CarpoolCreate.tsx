@@ -1,12 +1,11 @@
-import { FormProvider } from 'react-hook-form'
+import { FormProvider, useFormContext } from 'react-hook-form'
 
 import { Button, InputGroup, SubHeaderWithoutIcon } from '@/components/view'
 import { useCarpoolCreateForm } from '@/hooks'
 import { useCarpoolCreation } from '@/services/service'
 
 const CarpoolForm = () => {
-  const formMethods = useCarpoolCreateForm()
-  const { setValue } = formMethods
+  const { setValue } = useFormContext()
 
   return (
     <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">

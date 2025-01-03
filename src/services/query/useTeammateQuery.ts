@@ -1,7 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { api } from '@/queries'
 import type {
+  TeammateCreateRequest,
+  TeammateCreateResponse,
   TeammateDetailRequest,
   TeammateRecruitResponse,
   TeammateResponse,
@@ -12,6 +14,7 @@ import type { PostItemType } from '@/types/post'
 const API_ENDPOINTS = {
   TEAMMATE: '/view/team',
   ACTIVE_TEAMMATE: '/view/team/recruiting',
+  CREATE: '/team',
 } as const
 
 const queryKeys = {
@@ -53,5 +56,16 @@ export const useActiveTeammateList = () => {
         place: item.meetingPlace,
         time: item.meetingTime,
       })),
+  })
+}
+
+export const useTeammateCreate = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<TeammateCreateResponse, Error, TeammateCreateRequest>({
+    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
   })
 }
