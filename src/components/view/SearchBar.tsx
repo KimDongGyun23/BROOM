@@ -8,27 +8,8 @@ import { SEARCH_OPTIONS } from '@/utils'
 import { ArrowBottomIcon, SearchIcon } from './icons/NonActiveIcons'
 import { Kebab } from './Kebab'
 
-type SearchProps = {
-  placeholder?: string
-  onClickSearchButton: VoidFunction
-}
-
 type SearchBarProps = {
   currentTab: 'carpool' | 'teammate'
-}
-
-export const Search = ({ placeholder, onClickSearchButton }: SearchProps) => {
-  return (
-    <div className="p-medium flex-align mx-4 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular shadow-sm">
-      <input
-        className="focus: flex-1 text-grey-7 outline-none placeholder:text-grey-4"
-        placeholder={placeholder ? placeholder : '검색어를 입력해주세요.'}
-      />
-      <button type="button" onClick={onClickSearchButton}>
-        <SearchIcon />
-      </button>
-    </div>
-  )
 }
 
 export const SearchBar = ({ currentTab }: SearchBarProps) => {
