@@ -1,14 +1,13 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import {
-  ArrowBottomIcon,
   BottomNav,
   CheckBoxIcon,
   Loading,
   MainHeader,
   PostAdditionButton,
   PostItem,
-  SearchIcon,
+  SearchBar,
 } from '@/components/view'
 import { useToggle } from '@/hooks'
 import { useActiveCarpoolList, useCarpoolList } from '@/services/query'
@@ -23,23 +22,6 @@ type ActiveToggleProps = {
 type CarpoolListProps = {
   carpools: PostItemType[]
 }
-
-const SearchBar = () => (
-  <Link to="/carpool/search">
-    <div className="p-medium flex-align mx-4 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular">
-      <div className="flex-align shrink-0 gap-1">
-        <p className="p-small shrink-0 text-grey-6">제목</p>
-        <ArrowBottomIcon />
-      </div>
-      <input
-        className="flex-1 text-grey-7 outline-none placeholder:text-grey-4"
-        size={7}
-        placeholder="검색어를 입력해주세요."
-      />
-      <SearchIcon />
-    </div>
-  </Link>
-)
 
 const ActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
   <div className="mx-4 border-b border-b-grey-2">
@@ -85,7 +67,7 @@ export const Carpool = () => {
   return (
     <div className="flex-column h-full">
       <MainHeader />
-      <SearchBar />
+      <SearchBar currentTab="carpool" />
       <ActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
 
       {isLoading ? (

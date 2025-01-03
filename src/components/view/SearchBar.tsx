@@ -51,6 +51,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 
         <input
           type="text"
+          size={7}
           {...register('search')}
           className="focus: flex-1 text-grey-7 outline-none placeholder:text-grey-4"
           placeholder={placeholder}
