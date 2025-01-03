@@ -1,3 +1,5 @@
+import type { IconType } from './common'
+
 type ChattingRoomType = {
   chatRoomId: string
   authorId: string
@@ -32,8 +34,27 @@ type ChattingType = {
 }
 
 export type CarpoolChattingListResponse = {
-  result: (Omit<CarpoolChattingRoomType, 'carpoolBoardId'> &
-    Pick<ChattingType, 'militaryChaplain'>)[]
+  result: {
+    chatRoomId: string
+    authorId: string
+    participantId: string
+    opponentNickname: string
+    carpoolBoardTitle: string
+    lastMessage: string
+    lastMessageDaysAgo: string
+    militaryChaplain: IconType
+    read: boolean
+  }[]
+}
+
+export type ChattingListProfileType = {
+  id: string
+  opponent: string
+  title: string
+  lastMessage: string
+  lastMessageDaysAgo: string
+  militaryChaplain: IconType
+  read: boolean
 }
 
 export type CarpoolChattingIdRequest = {
@@ -52,7 +73,17 @@ export type CarpoolChattingRoomResponse = ChattingType &
   Pick<CarpoolChattingRoomType, 'carpoolBoardTitle'>
 
 export type TeammateChattingListResponse = {
-  result: (Omit<TeammateChattingRoomType, 'teamBoardId'> & Pick<ChattingType, 'militaryChaplain'>)[]
+  result: {
+    chatRoomId: string
+    authorId: string
+    participantId: string
+    opponentNickname: string
+    teamBoardTitle: string
+    lastMessage: string
+    lastMessageDaysAgo: string
+    militaryChaplain: IconType
+    read: boolean
+  }[]
 }
 
 export type TeammateChattingIdRequest = {

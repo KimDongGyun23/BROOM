@@ -1,4 +1,4 @@
-import type { IconType } from '@/types'
+import type { ChattingListProfileType } from '@/types'
 import type { PostAuthorType } from '@/types/post'
 
 import { ProfileImage } from './ProfileImage'
@@ -7,12 +7,8 @@ type PostProfileProps = {
   profile: PostAuthorType
 }
 
-type ChattingProfileType = {
-  name: string
-  title: string
-  message: string
-  time: string
-  iconType: IconType
+type ChattingProfileProps = {
+  profile: ChattingListProfileType
 }
 
 export const PostProfile = ({ profile }: PostProfileProps) => {
@@ -32,18 +28,20 @@ export const PostProfile = ({ profile }: PostProfileProps) => {
   )
 }
 
-export const ChattingProfile = ({ name, title, message, time, iconType }: ChattingProfileType) => {
+export const ChattingProfile = ({ profile }: ChattingProfileProps) => {
+  const { militaryChaplain, opponent, title, lastMessage, lastMessageDaysAgo } = profile
+
   return (
     <div className="flex-align w-full gap-4 border-b border-b-grey-2 px-4 pb-3">
-      <ProfileImage iconType={iconType} size="lg" />
+      <ProfileImage iconType={militaryChaplain} size="lg" />
       <div className="flex-column min-w-0 grow gap-[6px]">
         <div className="flex-align min-w-0 grow gap-3">
-          <h6 className="shrink-0 font-bold">{name}</h6>
+          <h6 className="shrink-0 font-bold">{opponent}</h6>
           <p className="p-small min-w-0 truncate text-blue-5">{title}</p>
         </div>
-        <p className="p-small grow truncate text-grey-7">{message}</p>
+        <p className="p-small grow truncate text-grey-7">{lastMessage}</p>
       </div>
-      <p className="p-xsmall ml-auto shrink-0 text-grey-5">{time}</p>
+      <p className="p-xsmall ml-auto shrink-0 text-grey-5">{lastMessageDaysAgo}</p>
     </div>
   )
 }

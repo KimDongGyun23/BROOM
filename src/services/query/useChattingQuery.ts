@@ -8,6 +8,7 @@ import type {
   CarpoolChattingRoomRequest,
   CarpoolChattingRoomResponse,
   CarpoolExitChattingRoomRequest,
+  ChattingListProfileType,
   TeammateChattingIdRequest,
   TeammateChattingIdResponse,
   TeammateChattingListResponse,
@@ -41,22 +42,42 @@ const queryKeys = {
 export const useCarpoolChattingRoomList = () => {
   const currentPage = POST_PAGES[0]
 
-  return useQuery<CarpoolChattingListResponse, Error>({
+  return useQuery<CarpoolChattingListResponse, Error, ChattingListProfileType[]>({
     queryKey: queryKeys.roomList(currentPage),
     queryFn: async () => await api.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
     gcTime: 0,
     staleTime: 0,
+    select: (data) =>
+      data.result.map((item) => ({
+        id: item.chatRoomId,
+        opponent: item.opponentNickname,
+        title: item.carpoolBoardTitle,
+        lastMessage: item.lastMessage,
+        lastMessageDaysAgo: item.lastMessageDaysAgo,
+        militaryChaplain: item.militaryChaplain,
+        read: item.read,
+      })),
   })
 }
 
 export const useTeammateChattingRoomList = () => {
   const currentPage = POST_PAGES[1]
 
-  return useQuery<TeammateChattingListResponse, Error>({
+  return useQuery<TeammateChattingListResponse, Error, ChattingListProfileType[]>({
     queryKey: queryKeys.roomList(currentPage),
     queryFn: async () => await api.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
     gcTime: 0,
     staleTime: 0,
+    select: (data) =>
+      data.result.map((item) => ({
+        id: item.chatRoomId,
+        opponent: item.opponentNickname,
+        title: item.teamBoardTitle,
+        lastMessage: item.lastMessage,
+        lastMessageDaysAgo: item.lastMessageDaysAgo,
+        militaryChaplain: item.militaryChaplain,
+        read: item.read,
+      })),
   })
 }
 
