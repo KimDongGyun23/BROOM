@@ -28,6 +28,12 @@ export const KEBAB_LIST = {
   departPlace: '출발 장소',
 } as const
 
+export const SEARCH_OPTIONS = [
+  { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
+  { label: '훈련 날짜', key: 'trainingDate', placeholder: '훈련 날짜를 입력해주세요.' },
+  { label: '출발 장소', key: 'departPlace', placeholder: '출발 장소를 입력해주세요.' },
+]
+
 export const BUS_RESERVE_CONTENT = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },
   { label: '신청 대상', contents: ['예비군에 참여하는 광운대학교 재학생'] },

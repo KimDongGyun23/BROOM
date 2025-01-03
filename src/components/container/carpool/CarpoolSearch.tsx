@@ -1,72 +1,58 @@
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
 
-import {
-  ArrowBottomIcon,
-  Kebab,
-  PostItem,
-  SearchIcon,
-  SubHeaderWithoutIcon,
-} from '@/components/view'
-import { useCarpoolSearch } from '@/services/service/useCarpoolSearch'
-import { useFilterName, useFilterVisible, useSearchList } from '@/stores/carpoolSearchList'
+import { Loading, PostItem, SearchBar, SubHeaderWithoutIcon } from '@/components/view'
+import { useCarpoolSearchList } from '@/services/query'
+import { SEARCH_OPTIONS } from '@/utils'
 
-const SearchBar = () => {
-  const formMethod = useForm({ defaultValues: { search: '' } })
-  const { register, watch, handleSubmit } = useFormContext()
-  const watchField = watch('search')
+type SearchListProps = {
+  filterName: string | null
+  searchName: string | null
+}
 
-  const { placeholder, searchOptions, toggleFilterVisibility, handleSearch } =
-    useCarpoolSearch(watchField)
+const SearchList = ({ filterName, searchName }: SearchListProps) => {
+  if (!searchName) {
+    console.error('검색어 없음')
+    return <p>noData</p>
+  }
 
-  const filterName = useFilterName()
-  const isFilterVisible = useFilterVisible()
+  const {
+    data: searchList,
+    isPending,
+    isError,
+  } = useCarpoolSearchList({
+    urls: {
+      category: filterName || SEARCH_OPTIONS[0].label,
+      keyword: searchName,
+    },
+  })
+
+  if (isPending) return <Loading />
+  if (isError) {
+    console.error('데이터 불러오기 실패')
+    return <p>error</p>
+  }
 
   return (
-    <FormProvider {...formMethod}>
-      <form
-        onSubmit={handleSubmit(handleSearch)}
-        className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular"
-      >
-        <button
-          type="button"
-          className="flex-align shrink-0 gap-1"
-          onClick={toggleFilterVisibility}
-        >
-          <p className="p-small shrink-0 text-grey-6">{filterName}</p>
-          <ArrowBottomIcon />
-        </button>
-
-        <input
-          type="text"
-          {...register('search')}
-          className="focus: flex-1 text-grey-7 outline-none placeholder:text-grey-4"
-          placeholder={placeholder}
-        />
-
-        <button type="submit">
-          <SearchIcon />
-        </button>
-      </form>
-
-      {isFilterVisible && <Kebab list={searchOptions} location="left-4 top-[125px]" />}
-    </FormProvider>
+    <ul className="scroll grow">
+      {searchList.map((item) => (
+        <li key={item.id}>
+          <PostItem item={item} to={`/carpool/detail/${item.id}`} />
+        </li>
+      ))}
+    </ul>
   )
 }
 
 export const CarpoolSearch = () => {
-  const searchList = useSearchList()
+  const [searchParams] = useSearchParams()
+  const filterName = searchParams.get('filterName')
+  const searchName = searchParams.get('searchName')
 
   return (
     <main className="flex-column h-full">
       <SubHeaderWithoutIcon type="null" title="검색" />
-      <SearchBar />
-      <ul className="scroll grow">
-        {searchList.map((item) => (
-          <li key={item.id}>
-            <PostItem item={item} to={`/carpool/detail/${item.id}`} />
-          </li>
-        ))}
-      </ul>
+      <SearchBar currentTab="carpool" />
+      <SearchList filterName={filterName} searchName={searchName} />
     </main>
   )
 }

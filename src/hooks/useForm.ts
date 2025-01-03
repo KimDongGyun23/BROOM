@@ -96,6 +96,16 @@ export const useCarpoolEditForm = (request: CarpoolEditPageRequest) => {
   return formMethod
 }
 
+export const useSearchForm = (defaultValue: { search: string }) => {
+  const formMethod = useForm<{ search: string }>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: defaultValue,
+  })
+
+  return formMethod
+}
+
 export const useTeammateCreateForm = () => {
   const formMethod = useForm<TeammateFormType>({
     mode: 'onSubmit',

@@ -88,7 +88,6 @@ export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
   return useQuery<CarpoolResponse, Error, PostItemType[]>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
-    enabled: false,
     select: (data) =>
       data.result.map((item) => ({
         ...item,

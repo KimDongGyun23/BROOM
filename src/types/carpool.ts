@@ -1,5 +1,3 @@
-import type { KEBAB_LIST } from '@/utils'
-
 import type { IconType } from './common'
 import type { PostAuthorType } from './post'
 
@@ -21,7 +19,7 @@ export type AuthorType = {
 }
 
 type CarpoolSearchType = {
-  category: keyof typeof KEBAB_LIST
+  category: string
   keyword: string
 }
 
