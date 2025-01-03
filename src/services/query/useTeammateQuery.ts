@@ -8,6 +8,7 @@ import type {
   TeammateDeleteRequest,
   TeammateDetailRequest,
   TeammateDetailResponse,
+  TeammateEditRequest,
   TeammateRecruitResponse,
   TeammateResponse,
   TeammateSearchRequest,
@@ -20,6 +21,7 @@ const API_ENDPOINTS = {
   CREATE: `/team`,
   DETAIL: (id: number) => `/view/team/${id}`,
   DELETE: (id: number) => `/team/${id}`,
+  EDIT: (id: number) => `/team/edit/${id}`,
 } as const
 
 const queryKeys = {
@@ -94,6 +96,17 @@ export const useDeleteTeammate = () => {
 
   return useMutation<void, Error, TeammateDeleteRequest>({
     mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.teamBoardId)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useUpdateTeammate = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, TeammateEditRequest>({
+    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.teamBoardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

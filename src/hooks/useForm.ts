@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 
-import { api, mypageAccount, teammateEditPage } from '@/queries'
+import { api, mypageAccount } from '@/queries'
 import type {
   AccountFormType,
   BusFormType,
@@ -14,6 +14,7 @@ import type {
   NewPasswordFormType,
   SignupFormType,
   TeammateEditPageRequest,
+  TeammateEditResponse,
   TeammateFormType,
 } from '@/types'
 import {
@@ -119,9 +120,12 @@ export const useTeammateCreateForm = () => {
   return formMethod
 }
 
-export const useTeammateEditForm = (request: TeammateEditPageRequest) => {
+export const useTeammateEditForm = ({ urls }: TeammateEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { meetingTime, trainingDate, ...rest } = await teammateEditPage(request)
+    const { meetingTime, trainingDate, ...rest } = await api.get<TeammateEditResponse>(
+      `/team/edit/${urls.teamBoardId}`,
+    )
+
     const hour = parseInt(meetingTime.split(':')[0], 10)
     const minute = parseInt(meetingTime.split(':')[1], 10)
     const date = dayjs(trainingDate).format('YYYYMMDD')

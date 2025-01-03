@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type { TeammateDetailRequest, TeammateSearchRequest } from '@/types/teammate'
 
-import { teammateCheckFull, teammateEdit, teammateSearch } from './teammateApi'
+import { teammateCheckFull, teammateSearch } from './teammateApi'
 
 const queryKeys = {
   all: ['teammate'] as const,
@@ -18,17 +18,6 @@ export const useTeammateSearchPage = (request: TeammateSearchRequest) => {
     queryKey: queryKeys.search(request.urls),
     queryFn: () => teammateSearch(request),
     enabled: false,
-  })
-}
-
-export const useTeammateEdit = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: teammateEdit,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
   })
 }
 

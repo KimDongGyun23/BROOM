@@ -16,12 +16,12 @@ const formatFormData = (formData: CarpoolFormType) => {
 
 export const useCarpoolUpdate = (postId: string) => {
   const navigate = useNavigate()
-  const { mutate: editMutation } = useUpdateCarpool()
+  const { mutate: carpoolUpdate } = useUpdateCarpool()
 
   const handleSubmitForm = (formData: CarpoolFormType) => {
     const sendingFormData = formatFormData(formData)
 
-    editMutation(
+    carpoolUpdate(
       { body: sendingFormData, urls: { carpoolBoardId: parseInt(postId) } },
       {
         onSuccess: () => navigate(`/carpool/detail/${postId}`, { replace: true }),
