@@ -1,13 +1,6 @@
 import type {
-  CarpoolCreateRequest,
-  CarpoolCreateResponse,
-  CarpoolDeleteRequest,
-  CarpoolDetailRequest,
-  CarpoolDetailResponse,
   CarpoolEditPageRequest,
-  CarpoolEditRequest,
   CarpoolEditResponse,
-  CarpoolIsFullRequest,
   CarpoolRecruitResponse,
   CarpoolResponse,
   CarpoolSearchRequest,
@@ -29,26 +22,6 @@ export const carpoolSearch = async ({ urls }: CarpoolSearchRequest) => {
   )
 }
 
-export const carpoolDetail = async ({ urls }: CarpoolDetailRequest) => {
-  return await api.get<CarpoolDetailResponse>(`/view/carpool/${urls.carpoolBoardId}`)
-}
-
-export const carpoolCreate = async ({ body }: CarpoolCreateRequest) => {
-  return await api.post<CarpoolCreateResponse>(`/carpool`, body)
-}
-
 export const carpoolEditPage = async ({ urls }: CarpoolEditPageRequest) => {
   return await api.get<CarpoolEditResponse>(`/carpool/edit/${urls.carpoolBoardId}`)
-}
-
-export const carpoolEdit = async ({ body, urls }: CarpoolEditRequest) => {
-  return await api.put(`/carpool/edit/${urls.carpoolBoardId}`, body)
-}
-
-export const carpoolDelete = async ({ urls }: CarpoolDeleteRequest) => {
-  return await api.delete(`/carpool/${urls.carpoolBoardId}`)
-}
-
-export const carpoolCheckFull = async ({ body, urls }: CarpoolIsFullRequest) => {
-  return await api.put(`/carpool/check/${urls.carpoolBoardId}`, body)
 }

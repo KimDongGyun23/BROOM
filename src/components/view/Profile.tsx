@@ -1,12 +1,10 @@
 import type { IconType } from '@/types'
+import type { PostAuthorType } from '@/types/post'
 
 import { ProfileImage } from './ProfileImage'
 
-type PostProfileType = {
-  name: string
-  year: string
-  subText: string
-  iconType: IconType
+type PostProfileProps = {
+  profile: PostAuthorType
 }
 
 type ChattingProfileType = {
@@ -17,16 +15,18 @@ type ChattingProfileType = {
   iconType: IconType
 }
 
-export const PostProfile = ({ name, year, subText, iconType }: PostProfileType) => {
+export const PostProfile = ({ profile }: PostProfileProps) => {
+  const { nickname, militaryChaplain, dischargeYear, createdAt } = profile
+
   return (
     <div className="flex-align gap-4 border-b border-b-grey-2 px-4 pb-3">
-      <ProfileImage iconType={iconType} size="lg" />
+      <ProfileImage iconType={militaryChaplain} size="lg" />
       <div className="flex-column gap-[6px]">
         <div className="flex-align gap-3">
-          <h6 className="font-bold">{name}</h6>
-          <p className="p-small text-blue-5">예비군 {year}년차</p>
+          <h6 className="font-bold">{nickname}</h6>
+          <p className="p-small text-blue-5">예비군 {dischargeYear}년차</p>
         </div>
-        <p className="p-small text-grey-5">{subText}</p>
+        <p className="p-small text-grey-5">{createdAt}</p>
       </div>
     </div>
   )

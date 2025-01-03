@@ -1,5 +1,7 @@
 import type { KEBAB_LIST } from '@/utils'
 
+import type { IconType } from './common'
+
 export type PostItemType = {
   id: number
   title: string
@@ -14,7 +16,8 @@ export type PostAuthorType = {
   userId: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: string
+  militaryChaplain: IconType
+  createdAt: string
 }
 
 export type PostSearchType = {

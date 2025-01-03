@@ -4,8 +4,14 @@ import { api } from '@/queries'
 import type {
   CarpoolCreateRequest,
   CarpoolCreateResponse,
+  CarpoolDeleteRequest,
+  CarpoolDetailRequest,
+  CarpoolDetailResponse,
+  CarpoolEditRequest,
+  CarpoolIsFullRequest,
   CarpoolRecruitResponse,
   CarpoolResponse,
+  CustomCarpoolDetailType,
 } from '@/types'
 import type { PostItemType } from '@/types/post'
 
@@ -13,11 +19,17 @@ const API_ENDPOINTS = {
   CARPOOL: '/view/carpool',
   ACTIVE_CARPOOL: '/view/carpool/recruiting',
   CREATE: '/carpool',
+  DETAIL: (id: number) => `/view/carpool/${id}`,
+  CHECK_FULL: (id: number) => `/carpool/check/${id}`,
+  DELETE: (id: number) => `/carpool/edit/${id}`,
+  EDIT: (id: number) => `/carpool/edit/${id}`,
 } as const
 
 const queryKeys = {
   all: ['carpool'] as const,
   activeCarpool: () => [...queryKeys.all, 'recruit'] as const,
+  detail: (urls: CarpoolDetailRequest['urls']) =>
+    [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
 export const useCarpoolList = () => {
@@ -53,11 +65,60 @@ export const useActiveCarpoolList = () => {
   })
 }
 
+export const useCarpoolDetailPage = ({ urls }: CarpoolDetailRequest) => {
+  return useQuery<CarpoolDetailResponse, Error, CustomCarpoolDetailType>({
+    queryKey: queryKeys.detail(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.carpoolBoardId)),
+    select: (data) => {
+      const { author, createdAt, ...rest } = data
+      return {
+        profile: { ...author, createdAt: createdAt },
+        item: { ...rest },
+      }
+    },
+  })
+}
+
 export const useCarpoolCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<CarpoolCreateResponse, Error, CarpoolCreateRequest>({
+  return useMutation<CarpoolCreateRequest, Error, CarpoolCreateResponse>({
     mutationFn: async () => await api.get(API_ENDPOINTS.CREATE),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useCarpoolCheckFull = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, CarpoolIsFullRequest>({
+    mutationFn: async ({ body, urls }) =>
+      await api.put(API_ENDPOINTS.CHECK_FULL(urls.carpoolBoardId), body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useDeleteCarpool = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, CarpoolDeleteRequest>({
+    mutationFn: async ({ urls }) => await api.put(API_ENDPOINTS.DELETE(urls.carpoolBoardId)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useUpdateCarpool = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, CarpoolEditRequest>({
+    mutationFn: async ({ body, urls }) =>
+      await api.put(API_ENDPOINTS.EDIT(urls.carpoolBoardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

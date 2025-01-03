@@ -1,5 +1,8 @@
 import type { KEBAB_LIST } from '@/utils'
 
+import type { IconType } from './common'
+import type { PostAuthorType } from './post'
+
 type CarpoolType = {
   carpoolBoardId: number
   title: string
@@ -10,11 +13,11 @@ type CarpoolType = {
   full: boolean
 }
 
-type AuthorType = {
+export type AuthorType = {
   userId: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: string
+  militaryChaplain: IconType
 }
 
 type CarpoolSearchType = {
@@ -26,6 +29,11 @@ type CarpoolDetailType = {
   personnel: number
   price: number
   content: string
+}
+
+export type CustomCarpoolDetailType = {
+  profile: PostAuthorType
+  item: Omit<CarpoolType, 'createdAt'> & CarpoolDetailType
 }
 
 export type CarpoolFormType = Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> &
