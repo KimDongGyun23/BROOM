@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 
 import {
   ArrowBottomIcon,
@@ -8,57 +7,31 @@ import {
   SearchIcon,
   SubHeaderWithoutIcon,
 } from '@/components/view'
-import { useToggle } from '@/hooks'
-import { useCarpoolSearchPage } from '@/queries'
-import type { FilterNameType, KebabMapType } from '@/types'
-import { KEBAB_LIST } from '@/utils'
+import { useCarpoolSearch } from '@/services/service/useCarpoolSearch'
+import { useFilterName, useFilterVisible, useSearchList } from '@/stores/carpoolSearchList'
 
-const kebabMap: KebabMapType = [
-  {
-    label: '제목',
-    type: 'text',
-    placeholder: '제목을 입력해주세요.',
-  },
-  {
-    label: '출발 장소',
-    type: 'text',
-    placeholder: '출발 장소를 입력해주세요.',
-  },
-]
-
-export const CarpoolSearch = () => {
+const SearchBar = () => {
   const formMethod = useForm({ defaultValues: { search: '' } })
-  const { handleSubmit, watch, register } = formMethod
+  const { register, watch, handleSubmit } = useFormContext()
   const watchField = watch('search')
 
-  const [isShow, toggleIsShow] = useToggle(false)
-  const [filterName, setFilterName] = useState<FilterNameType>('제목')
+  const { placeholder, searchOptions, toggleFilterVisibility, handleSearch } =
+    useCarpoolSearch(watchField)
 
-  const placeholder = kebabMap.find((item) => item.label === filterName)?.placeholder || undefined
-
-  const kebabList = kebabMap.map((item) => ({
-    ...item,
-    onClick: () => {
-      setFilterName(item.label)
-      toggleIsShow()
-    },
-  }))
-
-  const { data: searchData, refetch } = useCarpoolSearchPage({
-    urls: {
-      category: Object.keys(KEBAB_LIST).find(
-        (key) => KEBAB_LIST[key as keyof typeof KEBAB_LIST] === filterName,
-      ) as keyof typeof KEBAB_LIST,
-      keyword: watchField,
-    },
-  })
+  const filterName = useFilterName()
+  const isFilterVisible = useFilterVisible()
 
   return (
-    <div className="flex-column h-full">
-      <SubHeaderWithoutIcon type="null" title="검색" />
-
-      <section className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular">
-        <button type="button" className="flex-align shrink-0 gap-1" onClick={toggleIsShow}>
+    <FormProvider {...formMethod}>
+      <form
+        onSubmit={handleSubmit(handleSearch)}
+        className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular"
+      >
+        <button
+          type="button"
+          className="flex-align shrink-0 gap-1"
+          onClick={toggleFilterVisibility}
+        >
           <p className="p-small shrink-0 text-grey-6">{filterName}</p>
           <ArrowBottomIcon />
         </button>
@@ -66,33 +39,34 @@ export const CarpoolSearch = () => {
         <input
           type="text"
           {...register('search')}
-          size={7}
           className="focus: flex-1 text-grey-7 outline-none placeholder:text-grey-4"
-          placeholder={placeholder ? placeholder : '검색어를 입력해주세요.'}
+          placeholder={placeholder}
         />
-        <button type="button" onClick={handleSubmit(() => refetch())}>
+
+        <button type="submit">
           <SearchIcon />
         </button>
-      </section>
-      {isShow && <Kebab list={kebabList} location="left-4 top-[125px]" />}
+      </form>
 
-      <section className="scroll grow">
-        {searchData &&
-          searchData.result.map(
-            ({ carpoolBoardId, title, createdAt, trainingDate, departPlace, departTime, full }) => (
-              <PostItem
-                key={carpoolBoardId}
-                title={title}
-                createdAt={createdAt}
-                trainingDate={trainingDate}
-                place={departPlace}
-                time={departTime}
-                isFull={full}
-                to={`/carpool/detail/${carpoolBoardId}`}
-              />
-            ),
-          )}
-      </section>
-    </div>
+      {isFilterVisible && <Kebab list={searchOptions} location="left-4 top-[125px]" />}
+    </FormProvider>
+  )
+}
+
+export const CarpoolSearch = () => {
+  const searchList = useSearchList()
+
+  return (
+    <main className="flex-column h-full">
+      <SubHeaderWithoutIcon type="null" title="검색" />
+      <SearchBar />
+      <ul className="scroll grow">
+        {searchList.map((item) => (
+          <li key={item.id}>
+            <PostItem item={item} to={`/carpool/detail/${item.id}`} />
+          </li>
+        ))}
+      </ul>
+    </main>
   )
 }

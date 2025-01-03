@@ -11,6 +11,7 @@ import type {
   CarpoolIsFullRequest,
   CarpoolRecruitResponse,
   CarpoolResponse,
+  CarpoolSearchRequest,
   CustomCarpoolDetailType,
 } from '@/types'
 import type { PostItemType } from '@/types/post'
@@ -22,13 +23,17 @@ const API_ENDPOINTS = {
   DETAIL: (id: number) => `/view/carpool/${id}`,
   CHECK_FULL: (id: number) => `/carpool/check/${id}`,
   DELETE: (id: number) => `/carpool/edit/${id}`,
-  EDIT: (id: number) => `/carpool/edit/${id}`,
+  EDIT: (id: number) => `/carpool/delete/${id}`,
+  SEARCH: (category: string, keyword: string) =>
+    `/view/carpool?category=${category}&keyword=${keyword}`,
 } as const
 
 const queryKeys = {
   all: ['carpool'] as const,
   activeCarpool: () => [...queryKeys.all, 'recruit'] as const,
   detail: (urls: CarpoolDetailRequest['urls']) =>
+    [...queryKeys.all, ...Object.values(urls)] as const,
+  search: (urls: CarpoolSearchRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
@@ -76,6 +81,21 @@ export const useCarpoolDetailPage = ({ urls }: CarpoolDetailRequest) => {
         item: { ...rest },
       }
     },
+  })
+}
+
+export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
+  return useQuery<CarpoolResponse, Error, PostItemType[]>({
+    queryKey: queryKeys.search(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
+    enabled: false,
+    select: (data) =>
+      data.result.map((item) => ({
+        ...item,
+        id: item.carpoolBoardId,
+        place: item.departPlace,
+        time: item.departTime,
+      })),
   })
 }
 
