@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-import { api } from '@/queries'
 import type { BusReserveInfoRequest, BusReserveInfoResponse, BusReserveRequest } from '@/types'
+
+import { api } from '.'
 
 const busReserveInfo = async ({ urls }: BusReserveInfoRequest) => {
   return await api.get<BusReserveInfoResponse>(`/bus/reservation/${urls.studentId}`)

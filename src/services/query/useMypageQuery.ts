@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { api } from '@/queries'
 import type {
   CarpoolFetchResponse,
   MypageInfoResponse,
@@ -8,6 +7,8 @@ import type {
   UpdateAccountRequest,
   UpdatePasswordRequest,
 } from '@/types'
+
+import { api } from '.'
 
 const fetchInfo = async () => {
   return await api.get<MypageInfoResponse>(`/mypage`)

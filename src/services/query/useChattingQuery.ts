@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { api } from '@/queries'
 import type {
   CarpoolChattingIdRequest,
   CarpoolChattingIdResponse,
@@ -17,6 +16,8 @@ import type {
   TeammateChattingRoomResponse,
   TeammateExitChattingRoomRequest,
 } from '@/types'
+
+import { api } from '.'
 
 const POST_PAGES = ['carpool', 'teammate'] as const
 type PostPageType = (typeof POST_PAGES)[number]

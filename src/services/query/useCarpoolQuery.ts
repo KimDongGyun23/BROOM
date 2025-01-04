@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { api } from '@/queries'
 import type {
   CarpoolCreateRequest,
   CarpoolCreateResponse,
@@ -15,6 +14,8 @@ import type {
   CustomCarpoolDetailType,
 } from '@/types'
 import type { PostItemType } from '@/types/post'
+
+import { api } from '.'
 
 const API_ENDPOINTS = {
   CARPOOL: '/view/carpool',

@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { api } from '@/queries'
 import type {
   CustomTeammateDetailType,
   TeammateCreateRequest,
@@ -15,6 +14,8 @@ import type {
   TeammateSearchRequest,
 } from '@/types'
 import type { PostItemType } from '@/types/post'
+
+import { api } from '.'
 
 const API_ENDPOINTS = {
   TEAMMATE: `/view/team`,
