@@ -29,7 +29,7 @@ export type MessageType = {
 type ChattingType = {
   opponentNickname: string
   yearsSinceDischarge: number
-  militaryChaplain: string
+  militaryChaplain: IconType
   previousMessages: MessageType[]
 }
 

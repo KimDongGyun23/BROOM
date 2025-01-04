@@ -100,13 +100,21 @@ export const useCarpoolChattingInfo = ({ urls }: CarpoolChattingRoomRequest) => 
   })
 }
 
-// export const useTeammateChattingRoomInfo = ({ urls }: TeammateChattingRoomRequest) => {
-export const useTeammateChattingRoom = ({ urls }: TeammateChattingRoomRequest) => {
+export const useTeammateChattingInfo = ({ urls }: TeammateChattingRoomRequest) => {
   const currentPage = POST_PAGES[1]
 
-  return useQuery<TeammateChattingRoomResponse, Error, TeammateChattingRoomRequest>({
+  return useQuery<TeammateChattingRoomResponse, Error, CustomChattingRoomType>({
     queryKey: queryKeys.roomInfo(currentPage, urls),
     queryFn: async () => await api.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
+    select: (data) => ({
+      profile: {
+        opponent: data.opponentNickname,
+        dischargeYear: data.yearsSinceDischarge.toString(),
+        militaryChaplain: data.militaryChaplain,
+        title: data.teamBoardTitle,
+      },
+      previousMessages: data.previousMessages,
+    }),
   })
 }
 
