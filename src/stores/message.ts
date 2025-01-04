@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 
-import type { MessegeType } from '@/types'
+import type { MessageType } from '@/types'
 
 type Actions = {
-  initialMessage: (messages: MessegeType[]) => void
-  addMessage: (message: MessegeType) => void
-  sendMessage: (message: MessegeType) => void
+  initialMessage: (messages: MessageType[]) => void
+  addMessage: (message: MessageType) => void
+  sendMessage: (message: MessageType) => void
 }
 
 type MessageStore = {
-  messages: MessegeType[]
+  messages: MessageType[]
   actions: Actions
 }
 

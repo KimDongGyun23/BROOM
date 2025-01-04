@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 
-import type { MessegeType } from '@/types'
+import type { MessageType } from '@/types'
 
-export const useScrollToBottom = (messages: MessegeType[]) => {
+export const useScrollToBottom = (messages: MessageType[]) => {
   const ref = useRef<HTMLDivElement | null>(null)
 
   const scrollToBottom = () => {

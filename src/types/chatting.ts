@@ -20,7 +20,7 @@ type TeammateChattingRoomType = ChattingRoomType & {
   teamBoardId: string
 }
 
-export type MessegeType = {
+export type MessageType = {
   senderName: string
   content: string
   createdAt: string
@@ -30,7 +30,7 @@ type ChattingType = {
   opponentNickname: string
   yearsSinceDischarge: number
   militaryChaplain: string
-  previousMessages: MessegeType[]
+  previousMessages: MessageType[]
 }
 
 export type CarpoolChattingListResponse = {
@@ -69,8 +69,25 @@ export type CarpoolExitChattingRoomRequest = {
 export type CarpoolChattingRoomRequest = {
   urls: Pick<ChattingRoomType, 'chatRoomId'>
 }
-export type CarpoolChattingRoomResponse = ChattingType &
-  Pick<CarpoolChattingRoomType, 'carpoolBoardTitle'>
+export type CarpoolChattingRoomResponse = {
+  carpoolBoardTitle: string
+  opponentNickname: string
+  yearsSinceDischarge: number
+  militaryChaplain: IconType
+  previousMessages: MessageType[]
+}
+
+export type ChattingRoomProfileType = {
+  opponent: string
+  dischargeYear: string
+  militaryChaplain: IconType
+  title: string
+}
+
+export type CustomChattingRoomType = {
+  profile: ChattingRoomProfileType
+  previousMessages: MessageType[]
+}
 
 export type TeammateChattingListResponse = {
   result: {

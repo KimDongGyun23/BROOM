@@ -1,4 +1,4 @@
-import type { ChattingListProfileType } from '@/types'
+import type { ChattingListProfileType, CustomChattingRoomType } from '@/types'
 import type { PostAuthorType } from '@/types/post'
 
 import { ProfileImage } from './ProfileImage'
@@ -23,6 +23,23 @@ export const PostProfile = ({ profile }: PostProfileProps) => {
           <p className="p-small text-blue-5">예비군 {dischargeYear}년차</p>
         </div>
         <p className="p-small text-grey-5">{createdAt}</p>
+      </div>
+    </div>
+  )
+}
+
+export const ChattingRoomProfile = ({ profile }: Pick<CustomChattingRoomType, 'profile'>) => {
+  const { opponent, militaryChaplain, dischargeYear, title } = profile
+
+  return (
+    <div className="flex-align gap-4 border-b border-b-grey-2 px-4 pb-3">
+      <ProfileImage iconType={militaryChaplain} size="lg" />
+      <div className="flex-column gap-[6px]">
+        <div className="flex-align gap-3">
+          <h6 className="font-bold">{opponent}</h6>
+          <p className="p-small text-blue-5">예비군 {dischargeYear}년차</p>
+        </div>
+        <p className="p-small text-grey-5">{title}</p>
       </div>
     </div>
   )
