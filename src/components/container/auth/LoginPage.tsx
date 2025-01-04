@@ -1,45 +1,15 @@
-import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { Button, InputGroup } from '@/components/view'
 import { useLoginForm } from '@/hooks'
-import { api, useLogin } from '@/queries'
-import type { LoginFormType } from '@/types'
-import {
-  SESSION_LOGIN_KEY,
-  SESSION_MILITARY_CHPLAIN,
-  SESSION_NICKNAME,
-  SESSION_REFRESH,
-  setSessionStorageItem,
-} from '@/utils'
+import { useLoginLogic } from '@/services/service'
 
 export const LoginPage = () => {
-  const navigate = useNavigate()
   const formMethod = useLoginForm()
 
   const { handleSubmit } = formMethod
-  const { mutate: loginMutation } = useLogin()
-
-  const [isLoginFailed, setIsLoginFailed] = useState<boolean>(false)
-
-  const handleSubmitLoginForm = (formData: LoginFormType) => {
-    loginMutation(
-      { body: { userId: formData.userId, password: formData.password } },
-      {
-        onSuccess: ({ headers, data: { nickname, militaryChaplain } }) => {
-          api.setAccessToken(headers.authorization)
-          setIsLoginFailed(false)
-          setSessionStorageItem(SESSION_REFRESH, headers.refresh)
-          setSessionStorageItem(SESSION_LOGIN_KEY, 'true')
-          setSessionStorageItem(SESSION_NICKNAME, nickname)
-          setSessionStorageItem(SESSION_MILITARY_CHPLAIN, militaryChaplain)
-          navigate('/home', { replace: true })
-        },
-        onError: () => setIsLoginFailed(true),
-      },
-    )
-  }
+  const { isLoginFailed, handleLogin } = useLoginLogic()
 
   return (
     <div className="flex-column">
@@ -50,7 +20,7 @@ export const LoginPage = () => {
       <FormProvider {...formMethod}>
         <form
           className="flex-column mx-4 mt-[15svh] gap-[22px]"
-          onSubmit={handleSubmit(handleSubmitLoginForm)}
+          onSubmit={handleSubmit(handleLogin)}
         >
           <InputGroup>
             <InputGroup.Label section="userId">아이디</InputGroup.Label>

@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 
 import type { IconType } from '@/types'
-import { getSessionStorageItem, SESSION_LOGIN_KEY, SESSION_MILITARY_CHPLAIN } from '@/utils'
+import { getSessionStorageItem, SESSION_LOGIN_KEY, SESSION_MILITARY_CHAPLAIN } from '@/utils'
 
 import { ProfileImage } from '../ProfileImage'
 
 export const MainHeader = () => {
-  const iconType = (getSessionStorageItem(SESSION_MILITARY_CHPLAIN) as IconType) || null
+  const iconType = (getSessionStorageItem(SESSION_MILITARY_CHAPLAIN) as IconType) || null
   const loginSession = getSessionStorageItem(SESSION_LOGIN_KEY)
 
   return (
