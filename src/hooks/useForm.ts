@@ -13,9 +13,9 @@ import type {
   LoginFormType,
   NewPasswordFormType,
   SignupFormType,
-  TeammateEditPageRequest,
-  TeammateEditResponse,
-  TeammateFormType,
+  TeamEditPageRequest,
+  TeamEditResponse,
+  TeamFormType,
 } from '@/types'
 import {
   accountSchema,
@@ -25,7 +25,7 @@ import {
   loginSchema,
   newPasswordSchema,
   signupSchema,
-  teammateSchema,
+  teamSchema,
 } from '@/utils'
 
 export const useLoginForm = () => {
@@ -110,19 +110,19 @@ export const useSearchForm = (defaultValue: { search: string }) => {
   return formMethod
 }
 
-export const useTeammateCreateForm = () => {
-  const formMethod = useForm<TeammateFormType>({
+export const useTeamCreateForm = () => {
+  const formMethod = useForm<TeamFormType>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    resolver: zodResolver(teammateSchema),
+    resolver: zodResolver(teamSchema),
   })
 
   return formMethod
 }
 
-export const useTeammateEditForm = ({ urls }: TeammateEditPageRequest) => {
+export const useTeamEditForm = ({ urls }: TeamEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { meetingTime, trainingDate, ...rest } = await api.get<TeammateEditResponse>(
+    const { meetingTime, trainingDate, ...rest } = await api.get<TeamEditResponse>(
       `/team/edit/${urls.teamBoardId}`,
     )
 
@@ -133,10 +133,10 @@ export const useTeammateEditForm = ({ urls }: TeammateEditPageRequest) => {
     return { hour, minute, trainingDate: date, ...rest }
   }
 
-  const formMethod = useForm<TeammateFormType>({
+  const formMethod = useForm<TeamFormType>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    resolver: zodResolver(teammateSchema),
+    resolver: zodResolver(teamSchema),
     defaultValues: getDefaultValues,
   })
 

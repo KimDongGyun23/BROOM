@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { Loading, PostItem, SearchBar, SubHeaderWithoutIcon } from '@/components/view'
-import { useTeammateSearchList } from '@/services/query'
+import { useTeamSearchList } from '@/services/query'
 import { SEARCH_OPTIONS } from '@/utils'
 
 type SearchListProps = {
@@ -19,7 +19,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
     data: searchList,
     isPending,
     isError,
-  } = useTeammateSearchList({
+  } = useTeamSearchList({
     urls: {
       category: filterName || SEARCH_OPTIONS[0].label,
       keyword: searchName,
@@ -43,7 +43,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
   )
 }
 
-export const TeammateSearch = () => {
+export const TeamSearch = () => {
   const [searchParams] = useSearchParams()
   const filterName = searchParams.get('filterName')
   const searchName = searchParams.get('searchName')
@@ -51,7 +51,7 @@ export const TeammateSearch = () => {
   return (
     <main className="flex-column h-full">
       <SubHeaderWithoutIcon type="null" title="검색" />
-      <SearchBar currentTab="teammate" />
+      <SearchBar currentTab="team" />
       <SearchList filterName={filterName} searchName={searchName} />
     </main>
   )

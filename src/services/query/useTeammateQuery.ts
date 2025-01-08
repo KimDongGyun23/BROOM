@@ -1,17 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  CustomTeammateDetailType,
-  TeammateCreateRequest,
-  TeammateCreateResponse,
-  TeammateDeleteRequest,
-  TeammateDetailRequest,
-  TeammateDetailResponse,
-  TeammateEditRequest,
-  TeammateIsFullRequest,
-  TeammateRecruitResponse,
-  TeammateResponse,
-  TeammateSearchRequest,
+  CustomTeamDetailType,
+  TeamCreateRequest,
+  TeamCreateResponse,
+  TeamDeleteRequest,
+  TeamDetailRequest,
+  TeamDetailResponse,
+  TeamEditRequest,
+  TeamIsFullRequest,
+  TeamRecruitResponse,
+  TeamResponse,
+  TeamSearchRequest,
 } from '@/types'
 import type { PostItemType } from '@/types/post'
 
@@ -30,16 +30,14 @@ const API_ENDPOINTS = {
 } as const
 
 const queryKeys = {
-  all: ['teammate'] as const,
-  search: (urls: TeammateSearchRequest['urls']) =>
-    [...queryKeys.all, ...Object.values(urls)] as const,
-  detail: (urls: TeammateDetailRequest['urls']) =>
-    [...queryKeys.all, ...Object.values(urls)] as const,
-  activeTeammate: () => [...queryKeys.all, 'activeTeammate'] as const,
+  all: ['team'] as const,
+  search: (urls: TeamSearchRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
+  detail: (urls: TeamDetailRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
+  activeTeam: () => [...queryKeys.all, 'activeTeam'] as const,
 }
 
-export const useTeammateList = () => {
-  return useQuery<TeammateResponse, Error, PostItemType[]>({
+export const useTeamList = () => {
+  return useQuery<TeamResponse, Error, PostItemType[]>({
     queryKey: queryKeys.all,
     queryFn: async () => await api.get(API_ENDPOINTS.TEAMMATE),
     gcTime: 0,
@@ -54,9 +52,9 @@ export const useTeammateList = () => {
   })
 }
 
-export const useActiveTeammateList = () => {
-  return useQuery<TeammateRecruitResponse, Error, PostItemType[]>({
-    queryKey: queryKeys.activeTeammate(),
+export const useActiveTeamList = () => {
+  return useQuery<TeamRecruitResponse, Error, PostItemType[]>({
+    queryKey: queryKeys.activeTeam(),
     queryFn: async () => await api.get(API_ENDPOINTS.ACTIVE_TEAMMATE),
     gcTime: 0,
     staleTime: 0,
@@ -71,8 +69,8 @@ export const useActiveTeammateList = () => {
   })
 }
 
-export const useTeammateDetailPage = ({ urls }: TeammateDetailRequest) => {
-  return useQuery<TeammateDetailResponse, Error, CustomTeammateDetailType>({
+export const useTeamDetailPage = ({ urls }: TeamDetailRequest) => {
+  return useQuery<TeamDetailResponse, Error, CustomTeamDetailType>({
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.teamBoardId)),
     select: (data) => {
@@ -85,8 +83,8 @@ export const useTeammateDetailPage = ({ urls }: TeammateDetailRequest) => {
   })
 }
 
-export const useTeammateSearchList = ({ urls }: TeammateSearchRequest) => {
-  return useQuery<TeammateResponse, Error, PostItemType[]>({
+export const useTeamSearchList = ({ urls }: TeamSearchRequest) => {
+  return useQuery<TeamResponse, Error, PostItemType[]>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
     select: (data) =>
@@ -99,10 +97,10 @@ export const useTeammateSearchList = ({ urls }: TeammateSearchRequest) => {
   })
 }
 
-export const useTeammateCreate = () => {
+export const useTeamCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<TeammateCreateResponse, Error, TeammateCreateRequest>({
+  return useMutation<TeamCreateResponse, Error, TeamCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -110,10 +108,10 @@ export const useTeammateCreate = () => {
   })
 }
 
-export const useDeleteTeammate = () => {
+export const useDeleteTeam = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeammateDeleteRequest>({
+  return useMutation<void, Error, TeamDeleteRequest>({
     mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.teamBoardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -121,10 +119,10 @@ export const useDeleteTeammate = () => {
   })
 }
 
-export const useUpdateTeammate = () => {
+export const useUpdateTeam = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeammateEditRequest>({
+  return useMutation<void, Error, TeamEditRequest>({
     mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.teamBoardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -132,10 +130,10 @@ export const useUpdateTeammate = () => {
   })
 }
 
-export const useTeammateCheckFull = () => {
+export const useTeamCheckFull = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeammateIsFullRequest>({
+  return useMutation<void, Error, TeamIsFullRequest>({
     mutationFn: async ({ body, urls }) =>
       await api.put(API_ENDPOINTS.CHECK_FULL(urls.teamBoardId), body),
     onSuccess: () => {

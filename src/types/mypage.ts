@@ -19,7 +19,7 @@ type CarpoolPostType = {
   full: boolean
 }
 
-type TeammatePostType = {
+type TeamPostType = {
   teamBoardId: number
   title: string
   createdAt: string
@@ -48,6 +48,6 @@ export type CarpoolFetchResponse = {
   result: CarpoolPostType[]
 }
 
-export type TeammatesFetchResponse = {
-  result: TeammatePostType[]
+export type TeamsFetchResponse = {
+  result: TeamPostType[]
 }

@@ -23,12 +23,12 @@ export * from './carpool/CarpoolDetail'
 export * from './carpool/CarpoolEdit'
 export * from './carpool/CarpoolSearch'
 
-// Teammate
-export * from './teammate/Teammate'
-export * from './teammate/TeammateCreate'
-export * from './teammate/TeammateDetail'
-export * from './teammate/TeammateEdit'
-export * from './teammate/TeammateSearch'
+// Team
+export * from './team/Team'
+export * from './team/TeamCreate'
+export * from './team/TeamDetail'
+export * from './team/TeamEdit'
+export * from './team/TeamSearch'
 
 // bus
 export * from './bus/BusReserve'
@@ -38,4 +38,4 @@ export * from './bus/ReserveInfo'
 // chatting
 export * from './chatting/CarpoolChattingRoom'
 export * from './chatting/Chatting'
-export * from './chatting/TeammateChattingRoom'
+export * from './chatting/TeamChattingRoom'

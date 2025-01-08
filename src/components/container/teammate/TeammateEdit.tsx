@@ -2,10 +2,10 @@ import { FormProvider } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
 import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
-import { useTeammateEditForm } from '@/hooks'
-import { useTeammateUpdate } from '@/services/service'
+import { useTeamEditForm } from '@/hooks'
+import { useTeamUpdate } from '@/services/service'
 
-const TeammateEditForm = () => (
+const TeamEditForm = () => (
   <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
     <InputGroup>
       <InputGroup.Label section="title">제목</InputGroup.Label>
@@ -41,12 +41,12 @@ const TeammateEditForm = () => (
   </form>
 )
 
-export const TeammateEdit = () => {
+export const TeamEdit = () => {
   const { id } = useParams()
-  const formMethod = useTeammateEditForm({ urls: { teamBoardId: parseInt(id as string) } })
+  const formMethod = useTeamEditForm({ urls: { teamBoardId: parseInt(id as string) } })
 
   const { handleSubmit } = formMethod
-  const { handleSubmitForm } = useTeammateUpdate(id as string)
+  const { handleSubmitForm } = useTeamUpdate(id as string)
 
   return (
     <div className="flex-column h-svh">
@@ -56,7 +56,7 @@ export const TeammateEdit = () => {
         onClickComplete={handleSubmit(handleSubmitForm)}
       />
       <FormProvider {...formMethod}>
-        <TeammateEditForm />
+        <TeamEditForm />
       </FormProvider>
     </div>
   )

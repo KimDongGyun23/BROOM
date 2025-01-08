@@ -6,7 +6,7 @@ import { NOTICE_ARR } from '@/utils'
 
 const SERVICE_ITEMS = [
   { label: '차 타고 같이 갈 사람 없을까?', url: '/carpool' },
-  { label: '나는 조기퇴소가 목표야!', url: '/teammate' },
+  { label: '나는 조기퇴소가 목표야!', url: '/team' },
   { label: '버스 신청하러 왔어요~', url: '/bus-reserve' },
 ]
 

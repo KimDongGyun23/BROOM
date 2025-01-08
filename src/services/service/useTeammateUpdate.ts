@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-import { useUpdateTeammate } from '@/services/query'
-import type { TeammateFormType } from '@/types'
+import { useUpdateTeam } from '@/services/query'
+import type { TeamFormType } from '@/types'
 
-const formatFormData = (formData: TeammateFormType) => {
+const formatFormData = (formData: TeamFormType) => {
   const { hour, minute, trainingDate, ...rest } = formData
   return {
     trainingDate: dayjs(trainingDate, 'YYYYMMDD').format('YYYY-MM-DD'),
@@ -13,17 +13,17 @@ const formatFormData = (formData: TeammateFormType) => {
   }
 }
 
-export const useTeammateUpdate = (postId: string) => {
+export const useTeamUpdate = (postId: string) => {
   const navigate = useNavigate()
-  const { mutate: teammateUpdate } = useUpdateTeammate()
+  const { mutate: teamUpdate } = useUpdateTeam()
 
-  const handleSubmitForm = (formData: TeammateFormType) => {
+  const handleSubmitForm = (formData: TeamFormType) => {
     const sendingFormData = formatFormData(formData)
 
-    teammateUpdate(
+    teamUpdate(
       { body: sendingFormData, urls: { teamBoardId: parseInt(postId) } },
       {
-        onSuccess: () => navigate(`/teammate/detail/${postId}`, { replace: true }),
+        onSuccess: () => navigate(`/team/detail/${postId}`, { replace: true }),
       },
     )
   }

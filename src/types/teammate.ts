@@ -1,7 +1,7 @@
 import type { IconType } from './common'
 import type { PostAuthorType } from './post'
 
-type TeammateType = {
+type TeamType = {
   teamBoardId: number
   title: string
   createdAt: string
@@ -18,67 +18,67 @@ type AuthorType = {
   militaryChaplain: IconType
 }
 
-type TeammateSearchType = {
+type TeamSearchType = {
   category: string
   keyword: string
 }
 
-type TeammateDetailType = {
+type TeamDetailType = {
   personnel: number
   content: string
 }
 
-export type CustomTeammateDetailType = {
+export type CustomTeamDetailType = {
   profile: PostAuthorType
-  item: Omit<TeammateType, 'createdAt'> & TeammateDetailType
+  item: Omit<TeamType, 'createdAt'> & TeamDetailType
 }
 
-export type TeammateFormType = Pick<TeammateType, 'title' | 'trainingDate' | 'meetingPlace'> &
-  TeammateDetailType & { hour: number; minute: number }
+export type TeamFormType = Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> &
+  TeamDetailType & { hour: number; minute: number }
 
-export type TeammateResponse = {
-  result: TeammateType[]
-}
-
-export type TeammateSearchRequest = {
-  urls: TeammateSearchType
-}
-export type TeammateSearchResponse = {
-  result: TeammateType[]
+export type TeamResponse = {
+  result: TeamType[]
 }
 
-export type TeammateRecruitResponse = {
-  result: TeammateType[]
+export type TeamSearchRequest = {
+  urls: TeamSearchType
+}
+export type TeamSearchResponse = {
+  result: TeamType[]
 }
 
-export type TeammateDetailRequest = {
-  urls: Pick<TeammateType, 'teamBoardId'>
+export type TeamRecruitResponse = {
+  result: TeamType[]
 }
-export type TeammateDetailResponse = TeammateType &
-  TeammateDetailType & {
+
+export type TeamDetailRequest = {
+  urls: Pick<TeamType, 'teamBoardId'>
+}
+export type TeamDetailResponse = TeamType &
+  TeamDetailType & {
     author: AuthorType
   }
 
-export type TeammateCreateRequest = {
-  body: Pick<TeammateType, 'title' | 'trainingDate' | 'meetingPlace'> & TeammateDetailType
+export type TeamCreateRequest = {
+  body: Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> & TeamDetailType
 }
-export type TeammateCreateResponse = Pick<TeammateType, 'teamBoardId'>
+export type TeamCreateResponse = Pick<TeamType, 'teamBoardId'>
 
-export type TeammateEditPageRequest = {
-  urls: Pick<TeammateType, 'teamBoardId'>
-}
-
-export type TeammateEditRequest = {
-  body: Omit<TeammateDetailType, 'createdAt'>
-  urls: Pick<TeammateType, 'teamBoardId'>
-}
-export type TeammateEditResponse = Omit<TeammateType, 'createdAt' | 'full'> & TeammateDetailType
-
-export type TeammateDeleteRequest = {
-  urls: Pick<TeammateType, 'teamBoardId'>
+export type TeamEditPageRequest = {
+  urls: Pick<TeamType, 'teamBoardId'>
 }
 
-export type TeammateIsFullRequest = {
-  body: Pick<TeammateType, 'full'>
-  urls: Pick<TeammateType, 'teamBoardId'>
+export type TeamEditRequest = {
+  body: Omit<TeamDetailType, 'createdAt'>
+  urls: Pick<TeamType, 'teamBoardId'>
+}
+export type TeamEditResponse = Omit<TeamType, 'createdAt' | 'full'> & TeamDetailType
+
+export type TeamDeleteRequest = {
+  urls: Pick<TeamType, 'teamBoardId'>
+}
+
+export type TeamIsFullRequest = {
+  body: Pick<TeamType, 'full'>
+  urls: Pick<TeamType, 'teamBoardId'>
 }

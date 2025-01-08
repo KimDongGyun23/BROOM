@@ -1,10 +1,10 @@
 import { FormProvider } from 'react-hook-form'
 
 import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
-import { useTeammateCreateForm } from '@/hooks'
-import { useTeammateCreation } from '@/services/service'
+import { useTeamCreateForm } from '@/hooks'
+import { useTeamCreation } from '@/services/service'
 
-const TeammateForm = () => (
+const TeamForm = () => (
   <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
     <InputGroup>
       <InputGroup.Label section="title">제목</InputGroup.Label>
@@ -40,10 +40,10 @@ const TeammateForm = () => (
   </form>
 )
 
-export const TeammateCreate = () => {
-  const formMethod = useTeammateCreateForm()
+export const TeamCreate = () => {
+  const formMethod = useTeamCreateForm()
   const { handleSubmit } = formMethod
-  const { handleTeammateCreation } = useTeammateCreation()
+  const { handleTeamCreation } = useTeamCreation()
 
   return (
     <div className="flex-column h-svh">
@@ -51,10 +51,10 @@ export const TeammateCreate = () => {
         <SubHeaderWithoutIcon
           type="complete"
           title="팀원 모집 등록"
-          onClickComplete={handleSubmit(handleTeammateCreation)}
+          onClickComplete={handleSubmit(handleTeamCreation)}
         />
 
-        <TeammateForm />
+        <TeamForm />
       </FormProvider>
     </div>
   )

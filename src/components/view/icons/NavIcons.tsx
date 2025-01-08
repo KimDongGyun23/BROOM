@@ -1,6 +1,6 @@
 import type { SvgIconProps } from '@/types'
 
-export const TeammateIcon = ({ active = false }: SvgIconProps) => {
+export const TeamIcon = ({ active = false }: SvgIconProps) => {
   const fillStyle = active ? '#4196FD' : '#E2E2E2'
   return (
     <svg width="45" height="52" viewBox="0 0 45 52" fill="none" xmlns="http://www.w3.org/2000/svg">

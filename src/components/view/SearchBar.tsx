@@ -9,7 +9,7 @@ import { ArrowBottomIcon, SearchIcon } from './icons/NonActiveIcons'
 import { Kebab } from './Kebab'
 
 type SearchBarProps = {
-  currentTab: 'carpool' | 'teammate'
+  currentTab: 'carpool' | 'team'
 }
 
 export const SearchBar = ({ currentTab }: SearchBarProps) => {

@@ -1,26 +1,26 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useTeammateChattingId, useTeammateCheckFull } from '@/queries'
-import { useDeleteTeammate } from '@/services/query'
+import { useTeamChattingId, useTeamCheckFull } from '@/queries'
+import { useDeleteTeam } from '@/services/query'
 import { SESSION_ROOM_TYPE, setSessionStorageItem, TAB_LIST_EN } from '@/utils'
 
-export const useTeammateDetailActions = (id: number, isFull: boolean) => {
+export const useTeamDetailActions = (id: number, isFull: boolean) => {
   const navigate = useNavigate()
-  const { mutate: chattingMutation } = useTeammateChattingId()
-  const { mutate: checkFullMutation } = useTeammateCheckFull()
-  const { mutate: deleteMutation } = useDeleteTeammate()
+  const { mutate: chattingMutation } = useTeamChattingId()
+  const { mutate: checkFullMutation } = useTeamCheckFull()
+  const { mutate: deleteMutation } = useDeleteTeam()
 
   const handleCheckFull = () => {
     checkFullMutation({ body: { full: !isFull }, urls: { teamBoardId: id } })
   }
 
-  const handleEdit = () => navigate(`/teammate/edit/${id}`)
+  const handleEdit = () => navigate(`/team/edit/${id}`)
 
   const handleDelete = () => {
     deleteMutation(
       { urls: { teamBoardId: id } },
       {
-        onSuccess: () => navigate('/teammate', { replace: true }),
+        onSuccess: () => navigate('/team', { replace: true }),
       },
     )
   }
@@ -31,7 +31,7 @@ export const useTeammateDetailActions = (id: number, isFull: boolean) => {
       {
         onSuccess: ({ chatRoomId }) => {
           setSessionStorageItem(SESSION_ROOM_TYPE, TAB_LIST_EN[0])
-          navigate(`/chatting/chatting-room/teammate/${chatRoomId}`)
+          navigate(`/chatting/chatting-room/team/${chatRoomId}`)
         },
       },
     )

@@ -1,19 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
 
-import {
-  BusReservationIcon,
-  CarpoolIcon,
-  ChattingIcon,
-  HomeIcon,
-  TeammateIcon,
-} from './icons/NavIcons'
+import { BusReservationIcon, CarpoolIcon, ChattingIcon, HomeIcon, TeamIcon } from './icons/NavIcons'
 
 const NAV_ITEMS = [
   { icon: BusReservationIcon, url: '/bus-reserve' },
   { icon: CarpoolIcon, url: '/carpool' },
   { icon: HomeIcon, url: '/home' },
   { icon: ChattingIcon, url: '/chatting' },
-  { icon: TeammateIcon, url: '/teammate' },
+  { icon: TeamIcon, url: '/team' },
 ]
 
 export const BottomNav = () => {

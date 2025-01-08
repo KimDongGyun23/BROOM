@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { BottomNav, ChattingProfile, Loading, MainHeader } from '@/components/view'
 import {
   useCarpoolChattingRoomList,
-  useTeammateChattingRoomList,
+  useTeamChattingRoomList,
 } from '@/services/query/useChattingQuery'
 import {
   getSessionStorageItem,
@@ -61,8 +61,8 @@ const CarpoolChattingList = () => {
   )
 }
 
-const TeammateChattingList = () => {
-  const { data: chattingList, isPending, isError } = useTeammateChattingRoomList()
+const TeamChattingList = () => {
+  const { data: chattingList, isPending, isError } = useTeamChattingRoomList()
 
   if (isPending) return <Loading />
   if (isError) return <div>error</div>
@@ -70,7 +70,7 @@ const TeammateChattingList = () => {
   return (
     <>
       {chattingList.map((profile) => (
-        <Link to={`/chatting/chatting-room/teammate/${profile.id}`} key={profile.id}>
+        <Link to={`/chatting/chatting-room/team/${profile.id}`} key={profile.id}>
           <ChattingProfile profile={profile} />
         </Link>
       ))}
@@ -96,7 +96,7 @@ export const Chatting = () => {
 
       <main className="flex-column scroll mb-2 mt-[30px] grow gap-4">
         {currentTab === TAB_LIST[0] && <CarpoolChattingList />}
-        {currentTab === TAB_LIST[1] && <TeammateChattingList />}
+        {currentTab === TAB_LIST[1] && <TeamChattingList />}
       </main>
 
       <BottomNav />

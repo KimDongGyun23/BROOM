@@ -15,7 +15,7 @@ type CarpoolChattingRoomType = ChattingRoomType & {
   carpoolBoardId: string
 }
 
-type TeammateChattingRoomType = ChattingRoomType & {
+type TeamChattingRoomType = ChattingRoomType & {
   teamBoardTitle: string
   teamBoardId: string
 }
@@ -89,7 +89,7 @@ export type CustomChattingRoomType = {
   previousMessages: MessageType[]
 }
 
-export type TeammateChattingListResponse = {
+export type TeamChattingListResponse = {
   result: {
     chatRoomId: string
     authorId: string
@@ -103,20 +103,19 @@ export type TeammateChattingListResponse = {
   }[]
 }
 
-export type TeammateChattingIdRequest = {
-  urls: Pick<TeammateChattingRoomType, 'teamBoardId'>
+export type TeamChattingIdRequest = {
+  urls: Pick<TeamChattingRoomType, 'teamBoardId'>
 }
-export type TeammateChattingIdResponse = Omit<TeammateChattingRoomType, 'teamBoardId'>
+export type TeamChattingIdResponse = Omit<TeamChattingRoomType, 'teamBoardId'>
 
-export type TeammateExitChattingRoomRequest = {
-  urls: Pick<TeammateChattingRoomType, 'chatRoomId'>
+export type TeamExitChattingRoomRequest = {
+  urls: Pick<TeamChattingRoomType, 'chatRoomId'>
 }
 
-export type TeammateChattingRoomRequest = {
+export type TeamChattingRoomRequest = {
   urls: Pick<ChattingRoomType, 'chatRoomId'>
 }
-export type TeammateChattingRoomResponse = ChattingType &
-  Pick<TeammateChattingRoomType, 'teamBoardTitle'>
+export type TeamChattingRoomResponse = ChattingType & Pick<TeamChattingRoomType, 'teamBoardTitle'>
 
 export type SendingMessageRequset = {
   chatRoomId: string

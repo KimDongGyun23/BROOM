@@ -7,38 +7,40 @@ import {
   PostDetailHeader,
   PostProfile,
 } from '@/components/view'
-import { useTeammateDetailPage } from '@/services/query'
-import { useTeammateDetailActions } from '@/services/service'
-import type { CustomTeammateDetailType } from '@/types'
+import { useTeamDetailPage } from '@/services/query'
+import { useTeamDetailActions } from '@/services/service'
+import type { CustomTeamDetailType } from '@/types'
 import { getSessionStorageItem, SESSION_NICKNAME } from '@/utils'
 
-const transformTeammateData = (item: CustomTeammateDetailType['item']) => [
+const transformTeamData = (item: CustomTeamDetailType['item']) => [
   { label: '훈련 날짜', content: item.trainingDate },
   { label: '모임 정보', content: [item.meetingPlace, item.meetingTime] },
   { label: '모집 인원', content: `${item.personnel}명` },
   { label: '메모', content: item.content },
 ]
 
-export const TeammateDetail = () => {
+export const TeamDetail = () => {
   const { id } = useParams()
   if (!id) return <div>error</div>
 
-  const teammateBoardId = parseInt(id)
+  const teamBoardId = parseInt(id)
 
   const {
     data: detailData,
     isPending,
     isError,
-  } = useTeammateDetailPage({ urls: { teamBoardId: teammateBoardId } })
+  } = useTeamDetailPage({ urls: { teamBoardId: teamBoardId } })
 
-  const { handleCheckFull, handleEdit, handleDelete, handleClickChatting } =
-    useTeammateDetailActions(teammateBoardId as number, detailData?.item.full as boolean)
+  const { handleCheckFull, handleEdit, handleDelete, handleClickChatting } = useTeamDetailActions(
+    teamBoardId as number,
+    detailData?.item.full as boolean,
+  )
 
   if (isPending) return <Loading />
   if (isError || !detailData) return <div>error</div>
 
   const isMyPost = detailData.profile.nickname === getSessionStorageItem(SESSION_NICKNAME)
-  const contents = transformTeammateData(detailData.item)
+  const contents = transformTeamData(detailData.item)
 
   return (
     <>

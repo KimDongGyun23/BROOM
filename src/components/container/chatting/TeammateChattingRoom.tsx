@@ -13,7 +13,7 @@ import {
   SubHeaderWithIcon,
 } from '@/components/view'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
-import { useTeammateChattingInfo, useTeammateExitChattingRoom } from '@/services/query'
+import { useTeamChattingInfo, useTeamExitChattingRoom } from '@/services/query'
 import { useMessageActions, useMessageData } from '@/stores/message'
 import type { ChattingRoomProfileType } from '@/types'
 
@@ -28,7 +28,7 @@ type MessageListType = {
 const ChattingKebab = ({ isKebabOpen }: ChattingKebabProps) => {
   const navigate = useNavigate()
   const { id: roomId } = useParams()
-  const { mutate: exitRoom } = useTeammateExitChattingRoom()
+  const { mutate: exitRoom } = useTeamExitChattingRoom()
 
   const kebabMap = [
     {
@@ -112,22 +112,22 @@ const MessageList = ({ profile }: MessageListType) => {
   )
 }
 
-export const TeammateChattingRoom = () => {
+export const TeamChattingRoom = () => {
   const { id: roomId } = useParams()
   const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
   const { initialMessage } = useMessageActions()
 
   const {
-    data: teammateRoomData,
+    data: teamRoomData,
     isPending,
     isError,
-  } = useTeammateChattingInfo({
+  } = useTeamChattingInfo({
     urls: { chatRoomId: roomId as string },
   })
 
   useEffect(() => {
-    if (teammateRoomData) initialMessage(teammateRoomData.previousMessages)
-  }, [teammateRoomData])
+    if (teamRoomData) initialMessage(teamRoomData.previousMessages)
+  }, [teamRoomData])
 
   if (isPending) return <Loading />
   if (isError) return <div>error</div>
@@ -135,10 +135,10 @@ export const TeammateChattingRoom = () => {
   return (
     <div className="flex-column h-full">
       <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
-      <ChattingRoomProfile profile={teammateRoomData.profile} />
+      <ChattingRoomProfile profile={teamRoomData.profile} />
 
       <ChattingKebab isKebabOpen={isKebabOpen} />
-      <MessageList profile={teammateRoomData.profile} />
+      <MessageList profile={teamRoomData.profile} />
       <MessageBox />
     </div>
   )

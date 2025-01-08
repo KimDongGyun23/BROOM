@@ -22,12 +22,12 @@ import {
   ReserveInfo,
   SignupCompletePage,
   SignupPage,
-  Teammate,
-  TeammateChattingRoom,
-  TeammateCreate,
-  TeammateDetail,
-  TeammateEdit,
-  TeammateSearch,
+  Team,
+  TeamChattingRoom,
+  TeamCreate,
+  TeamDetail,
+  TeamEdit,
+  TeamSearch,
 } from '@/components/container'
 
 import { LoginPrivateRoute, PrivateRoute } from './PrivateRouter'
@@ -41,8 +41,8 @@ export const RouterComponent = () => {
       <Route path="/carpool" element={<Carpool />} />
       <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
 
-      <Route path="/teammate" element={<Teammate />} />
-      <Route path="/teammate/detail/:id" element={<TeammateDetail />} />
+      <Route path="/team" element={<Team />} />
+      <Route path="/team/detail/:id" element={<TeamDetail />} />
 
       <Route path="/bus-reserve" element={<BusReserve />} />
       <Route path="/bus-reserve/create" element={<ReserveCreate />} />
@@ -59,13 +59,13 @@ export const RouterComponent = () => {
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
         <Route path="/carpool/search" element={<CarpoolSearch />} />
 
-        <Route path="/teammate/create" element={<TeammateCreate />} />
-        <Route path="/teammate/edit/:id" element={<TeammateEdit />} />
-        <Route path="/teammate/search" element={<TeammateSearch />} />
+        <Route path="/team/create" element={<TeamCreate />} />
+        <Route path="/team/edit/:id" element={<TeamEdit />} />
+        <Route path="/team/search" element={<TeamSearch />} />
 
         <Route path="/chatting" element={<Chatting />} />
         <Route path="/chatting/chatting-room/carpool/:id" element={<CarpoolChattingRoom />} />
-        <Route path="/chatting/chatting-room/teammate/:id" element={<TeammateChattingRoom />} />
+        <Route path="/chatting/chatting-room/team/:id" element={<TeamChattingRoom />} />
 
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-info" element={<AccountInfo />} />

@@ -10,7 +10,7 @@ import {
   SearchBar,
 } from '@/components/view'
 import { useToggle } from '@/hooks'
-import { useActiveTeammateList, useTeammateList } from '@/services/query'
+import { useActiveTeamList, useTeamList } from '@/services/query'
 import type { PostItemType } from '@/types/post'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
 
@@ -19,8 +19,8 @@ type ActiveToggleProps = {
   onToggle: VoidFunction
 }
 
-type TeammateListProps = {
-  teammates: PostItemType[]
+type TeamListProps = {
+  teams: PostItemType[]
 }
 
 const ActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
@@ -34,44 +34,44 @@ const ActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
   </div>
 )
 
-const TeammateList = ({ teammates }: TeammateListProps) => (
+const TeamList = ({ teams }: TeamListProps) => (
   <main className="scroll grow">
-    {teammates?.map((item: PostItemType) => (
-      <PostItem key={`carpool-${item.id}`} item={item} to={`/teammate/detail/${item.id}`} />
+    {teams?.map((item: PostItemType) => (
+      <PostItem key={`carpool-${item.id}`} item={item} to={`/team/detail/${item.id}`} />
     ))}
   </main>
 )
 
-export const Teammate = () => {
+export const Team = () => {
   const navigate = useNavigate()
   const isLoggedIn = !!getSessionStorageItem(SESSION_LOGIN_KEY)
 
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
-  const { data: allTeammates, isLoading: allLoading, isError: allError } = useTeammateList()
+  const { data: allTeams, isLoading: allLoading, isError: allError } = useTeamList()
 
   const {
-    data: activeTeammates,
-    refetch: refetchActiveTeammates,
+    data: activeTeams,
+    refetch: refetchActiveTeams,
     isLoading: activeLoading,
     isError: activeError,
-  } = useActiveTeammateList()
+  } = useActiveTeamList()
 
   const handleRecruitToggle = () => {
-    refetchActiveTeammates()
+    refetchActiveTeams()
     toggleShowActiveOnly()
   }
 
-  const handleAddTeammateClick = () => navigate('/teammate/create')
+  const handleAddTeamClick = () => navigate('/team/create')
 
   const isLoading = allLoading || activeLoading
   const isError = allError || activeError
-  const teammatesToShow = showActiveOnly ? activeTeammates : allTeammates
+  const teamsToShow = showActiveOnly ? activeTeams : allTeams
 
   return (
     <div className="flex-column h-full">
       <MainHeader />
-      <SearchBar currentTab="teammate" />
+      <SearchBar currentTab="team" />
       <ActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
 
       {isLoading ? (
@@ -79,10 +79,10 @@ export const Teammate = () => {
       ) : isError ? (
         <div>error</div>
       ) : (
-        <TeammateList teammates={teammatesToShow || []} />
+        <TeamList teams={teamsToShow || []} />
       )}
 
-      {isLoggedIn && <PostAdditionButton onClick={handleAddTeammateClick} />}
+      {isLoggedIn && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNav />
     </div>
   )

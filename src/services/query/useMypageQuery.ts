@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import type {
   CarpoolFetchResponse,
   MypageInfoResponse,
-  TeammatesFetchResponse,
+  TeamsFetchResponse,
   UpdateAccountRequest,
   UpdatePasswordRequest,
 } from '@/types'
@@ -30,8 +30,8 @@ const carpoolPosts = async () => {
   return await api.get<CarpoolFetchResponse>(`/mypage/carpool`)
 }
 
-const teammatePosts = async () => {
-  return await api.get<TeammatesFetchResponse>(`/mypage/team`)
+const teamPosts = async () => {
+  return await api.get<TeamsFetchResponse>(`/mypage/team`)
 }
 
 const logout = async () => {
@@ -42,7 +42,7 @@ const queryKeys = {
   all: ['mypage'] as const,
   account: () => [...queryKeys.all, 'account'] as const,
   myCarpoolPost: () => [...queryKeys.all, 'carpool'] as const,
-  myTeammatePost: () => [...queryKeys.all, 'teammate'] as const,
+  myTeamPost: () => [...queryKeys.all, 'team'] as const,
 }
 
 export const useUserProfile = () => {
@@ -73,10 +73,10 @@ export const useUpdatePassword = () => {
   })
 }
 
-export const useMyTeammatePost = () => {
+export const useMyTeamPost = () => {
   return useQuery({
-    queryKey: queryKeys.myTeammatePost(),
-    queryFn: teammatePosts,
+    queryKey: queryKeys.myTeamPost(),
+    queryFn: teamPosts,
     gcTime: 0,
     staleTime: 0,
   })
