@@ -1,4 +1,4 @@
-import type { ProfileIconType } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils'
 
 import type { IconType } from './common'
 
@@ -82,7 +82,7 @@ export type CarpoolChattingRoomResponse = {
 export type ChattingRoomProfileType = {
   opponent: string
   dischargeYear: string
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
   title: string
 }
 

@@ -30,7 +30,8 @@ export const MILITARY_BRANCHES = {
   기타: 'ETC',
 } as const
 
-export type ProfileIconType = (typeof MILITARY_BRANCHES)[keyof typeof MILITARY_BRANCHES]
+export type MilitaryBranchCode = (typeof MILITARY_BRANCHES)[keyof typeof MILITARY_BRANCHES]
+export type MilitaryBranchName = keyof typeof MILITARY_BRANCHES
 
 export const KEBAB_LIST = {
   title: '제목',

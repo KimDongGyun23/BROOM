@@ -1,8 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { SubHeaderWithIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useNicknameValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
@@ -39,11 +40,10 @@ export const SignupTwoStep = ({ label }: StepProps) => {
         <InputGroup>
           <InputGroup.Label
             section="nickname"
-            customSuccessMessage={isNicknameValid ? nicknameValidationMessage : null}
-            customErrorMessage={!isNicknameValid ? nicknameValidationMessage : null}
-          >
-            닉네임
-          </InputGroup.Label>
+            label="닉네임"
+            successMessage={isNicknameValid ? nicknameValidationMessage : null}
+            errorMessage={!isNicknameValid ? nicknameValidationMessage : null}
+          />
           <div className="flex gap-4">
             <InputGroup.Input section="nickname" placeholder="최소 2글자, 최대 8글자" />
             <Button size="md" onClick={() => validateNickname(watchNicknameField)}>
@@ -53,12 +53,12 @@ export const SignupTwoStep = ({ label }: StepProps) => {
         </InputGroup>
 
         <InputGroup>
-          <InputGroup.Label section="dischargeYear">전역연도</InputGroup.Label>
+          <InputGroup.Label section="dischargeYear" label="전역연도" />
           <InputGroup.Input section="dischargeYear" type="number" placeholder="숫자 4자리" />
         </InputGroup>
 
         <InputGroup>
-          <InputGroup.Label section="militaryChaplain">복무했던 군종</InputGroup.Label>
+          <InputGroup.Label section="militaryChaplain" label="복무했던 군종" />
           <InputGroup.SortOfArmy section="militaryChaplain" />
         </InputGroup>
       </div>

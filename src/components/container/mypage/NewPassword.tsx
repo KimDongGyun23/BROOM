@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 
-import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'
 import { usePasswordUpdate } from '@/services/service'
@@ -9,7 +10,7 @@ import { usePasswordUpdate } from '@/services/service'
 const PasswordForm = () => (
   <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
     <InputGroup>
-      <InputGroup.Label section="password">기존 비밀번호</InputGroup.Label>
+      <InputGroup.Label section="password" label="기존 비밀번호" />
       <InputGroup.Input
         section="password"
         type="password"
@@ -18,7 +19,7 @@ const PasswordForm = () => (
     </InputGroup>
 
     <InputGroup>
-      <InputGroup.Label section="newPassword">새로운 비밀번호</InputGroup.Label>
+      <InputGroup.Label section="newPassword" label="새로운 비밀번호" />
       <InputGroup.Input
         section="newPassword"
         type="password"
@@ -27,7 +28,7 @@ const PasswordForm = () => (
     </InputGroup>
 
     <InputGroup>
-      <InputGroup.Label section="confirm">새로운 비밀번호 확인</InputGroup.Label>
+      <InputGroup.Label section="confirm" label="새로운 비밀번호 확인" />
       <InputGroup.Input section="confirm" type="password" placeholder="최소 8글자, 최대 16글자" />
     </InputGroup>
   </form>

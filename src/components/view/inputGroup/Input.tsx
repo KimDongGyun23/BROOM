@@ -6,50 +6,47 @@ import { useToggle } from '@/hooks'
 import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 
 type InputProps = {
-  type?: string
+  type?: 'text' | 'password' | 'id' | 'number'
   section: string
   readOnly?: boolean
   placeholder?: string
 }
-type TimeInputProps = {
-  hourSection: string
-  minuteSection: string
-  readOnly?: boolean
-}
-type UnitInputProps = InputProps & { unitLabel: string; isPrice?: boolean }
-type TextAreaProps = Omit<InputProps, 'type'>
 
 export const Input = ({ type = 'text', section, readOnly = false, placeholder }: InputProps) => {
   const { register } = useFormContext()
-  const isIdField = type === 'id'
   const isPasswordField = type === 'password'
-  const [isShow, setIsShow] = useToggle(false)
+  const [isVisible, toggleVisibility] = useToggle(false)
 
   return (
     <div className="flex-align p-medium w-full gap-3 rounded-lg border border-blue-300 px-4 py-[10px]">
       <input
-        type={isPasswordField && isShow ? 'text' : type}
+        type={isPasswordField && !isVisible ? 'password' : type}
         {...register(section)}
         readOnly={readOnly}
         className="w-full py-1 placeholder:text-grey-500 focus:outline-none"
         placeholder={placeholder}
-        autoComplete={isIdField ? 'username' : isPasswordField ? 'current-password' : 'off'}
+        autoComplete={type === 'id' ? 'username' : isPasswordField ? 'current-password' : 'off'}
       />
       {isPasswordField && !readOnly && (
-        <button type="button" className="shrink-0" onClick={() => setIsShow()}>
-          {isShow ? <EyeIcon /> : <EyeCloseIcon />}
+        <button type="button" className="shrink-0" onClick={toggleVisibility}>
+          {isVisible ? <EyeIcon /> : <EyeCloseIcon />}
         </button>
       )}
     </div>
   )
 }
 
+type UnitInputProps = InputProps & {
+  unitLabel: string
+  isPrice?: boolean
+}
+
 export const UnitInput = ({
   type = 'text',
   section,
+  unitLabel,
   isPrice = false,
   readOnly = false,
-  unitLabel,
   placeholder,
 }: UnitInputProps) => {
   const { register, setValue } = useFormContext()
@@ -76,20 +73,22 @@ export const UnitInput = ({
   )
 }
 
+type TimeInputProps = {
+  hourSection: string
+  minuteSection: string
+  readOnly?: boolean
+}
+
 export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: TimeInputProps) => {
   const { register, setValue } = useFormContext()
 
-  const handleHourChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let value = parseInt(event.target.value, 10)
-    if (isNaN(value) || value < 0) value = 0
-    else if (value > 23) value = 23
+  const handleHourChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = Math.max(0, Math.min(23, parseInt(event.target.value, 10) || 0))
     setValue(hourSection, value)
   }
 
-  const handleMinuteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let value = parseInt(event.target.value, 10)
-    if (isNaN(value) || value < 0) value = 0
-    else if (value > 59) value = 59
+  const handleMinuteChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = Math.max(0, Math.min(59, parseInt(event.target.value, 10) || 0))
     setValue(minuteSection, value)
   }
 
@@ -115,6 +114,8 @@ export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: Time
     </div>
   )
 }
+
+type TextAreaProps = Omit<InputProps, 'type'>
 
 export const TextArea = ({ section, readOnly = false, placeholder }: TextAreaProps) => {
   const { register } = useFormContext()

@@ -1,8 +1,9 @@
 import { FormProvider, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { useCarpoolEditForm } from '@/hooks'
 import { useCarpoolUpdate } from '@/services/service/useCarpoolUpdate'
 
@@ -12,34 +13,34 @@ const CarpoolEditForm = () => {
   return (
     <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
       <InputGroup>
-        <InputGroup.Label section="title">제목</InputGroup.Label>
+        <InputGroup.Label section="title" label="제목" />
         <InputGroup.Input section="title" placeholder="제목을 입력해주세요." />
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Label section="trainingDate">훈련 날짜</InputGroup.Label>
+        <InputGroup.Label section="trainingDate" label="훈련 날짜" />
         <InputGroup.Input section="trainingDate" type="number" placeholder="ex)20240521" />
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Label section="departPlace">출발 장소</InputGroup.Label>
+        <InputGroup.Label section="departPlace" label="출발 장소" />
         <InputGroup.Input section="departPlace" placeholder="출발 장소를 입력해주세요." />
       </InputGroup>
 
       <div className="grid grid-cols-2 gap-5">
         <InputGroup>
-          <InputGroup.Label section="personnel">모집 인원</InputGroup.Label>
+          <InputGroup.Label section="personnel" label="모집 인원" />
           <InputGroup.UnitInput section="personnel" type="number" unitLabel="명" placeholder="0" />
         </InputGroup>
 
         <InputGroup>
-          <InputGroup.Label section="hour">시간</InputGroup.Label>
+          <InputGroup.Label section="hour" label="시간" />
           <InputGroup.TimeInput hourSection="hour" minuteSection="minute" />
         </InputGroup>
       </div>
 
       <InputGroup>
-        <InputGroup.Label section="price">금액</InputGroup.Label>
+        <InputGroup.Label section="price" label="금액" />
         <div className="flex gap-5">
           <InputGroup.UnitInput section="price" unitLabel="원" isPrice placeholder="0" />
           <Button size="md" onClick={() => setValue('price', 0)}>
@@ -49,7 +50,7 @@ const CarpoolEditForm = () => {
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Label section="memo">메모</InputGroup.Label>
+        <InputGroup.Label section="memo" label="메모" />
         <InputGroup.TextArea section="memo" placeholder="원하시는 메모 내용을 적어주세요." />
       </InputGroup>
     </form>

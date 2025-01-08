@@ -1,7 +1,6 @@
 export * from './BottomNav'
 export * from './header/MainHeader'
 export * from './header/SubHeader'
-export * from './inputGroup'
 export * from './post/PostAdditionButton'
 export * from './post/PostBottom'
 export * from './post/PostDetailContent'

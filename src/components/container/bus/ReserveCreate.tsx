@@ -2,8 +2,9 @@ import { useCallback } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
@@ -12,17 +13,17 @@ import type { BusFormType } from '@/types'
 const ReservationForm = () => (
   <form className="flex-column scroll mx-4 mb-2 grow gap-7">
     <InputGroup>
-      <InputGroup.Label section="name">이름</InputGroup.Label>
+      <InputGroup.Label section="name" label="이름" />
       <InputGroup.Input section="name" placeholder="이름을 입력해주세요." />
     </InputGroup>
 
     <InputGroup>
-      <InputGroup.Label section="studentId">학번</InputGroup.Label>
+      <InputGroup.Label section="studentId" label="학번" />
       <InputGroup.Input section="studentId" type="number" placeholder="학번을 입력해주세요." />
     </InputGroup>
 
     <InputGroup>
-      <InputGroup.Label section="phoneNumber">연락처</InputGroup.Label>
+      <InputGroup.Label section="phoneNumber" label="연락처" />
       <InputGroup.Input
         section="phoneNumber"
         type="number"

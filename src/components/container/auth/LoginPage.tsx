@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { InputGroup } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks'
 import { useLoginLogic } from '@/services/service'
 
@@ -24,12 +24,12 @@ export const LoginPage = () => {
           onSubmit={handleSubmit(handleLogin)}
         >
           <InputGroup>
-            <InputGroup.Label section="userId">아이디</InputGroup.Label>
+            <InputGroup.Label section="userId" label="아이디" />
             <InputGroup.Input section="userId" placeholder="아이디를 입력해주세요." />
           </InputGroup>
 
           <InputGroup>
-            <InputGroup.Label section="password">비밀번호</InputGroup.Label>
+            <InputGroup.Label section="password" label="비밀번호" />
             <InputGroup.Input
               section="password"
               type="password"

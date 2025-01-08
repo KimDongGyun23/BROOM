@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils'
 import { MILITARY_BRANCHES } from '@/utils'
 
 type SortOfArmyProps = {
@@ -10,39 +11,29 @@ type SortOfArmyProps = {
 
 export const SortOfArmy = ({ section, disabled = false }: SortOfArmyProps) => {
   const { watch, setValue } = useFormContext()
-  const [selectedSort, setSelectedSort] = useState<string | null>(null)
+  const selectedSort = watch(section) as MilitaryBranchCode | undefined
 
-  const sectionValue = watch(section)
-
-  useEffect(() => {
-    if (sectionValue && selectedSort === null) {
-      const initialSort = Object.entries(MILITARY_BRANCHES).find(
-        ([, value]) => value === sectionValue,
-      )?.[0]
-      setSelectedSort(initialSort || null)
-    }
-  }, [sectionValue, selectedSort])
-
-  const handleClickButton = (sort: keyof typeof MILITARY_BRANCHES) => {
-    setSelectedSort(sort)
-    setValue(section, MILITARY_BRANCHES[sort])
-  }
+  const handleClickButton = useCallback(
+    (sort: MilitaryBranchName) => {
+      setValue(section, MILITARY_BRANCHES[sort])
+    },
+    [section, setValue],
+  )
 
   return (
     <div className="flex-between gap-2">
-      {Object.keys(MILITARY_BRANCHES).map((sort) => {
-        const typedSort = sort as keyof typeof MILITARY_BRANCHES
-        const buttonStyle =
-          selectedSort === typedSort
-            ? 'bg-blue-500 border-none text-grey-100'
-            : 'bg-white border-blue-300 text-grey-700'
+      {Object.entries(MILITARY_BRANCHES).map(([sort, value]) => {
+        const isSelected = selectedSort === value
+        const buttonStyle = isSelected
+          ? 'bg-blue-500 border-none text-grey-100'
+          : 'bg-white border-blue-300 text-grey-700'
         return (
           <button
-            key={typedSort}
+            key={sort}
             type="button"
             disabled={disabled}
             className={`p-medium h-[52px] grow rounded-xl border px-3 ${buttonStyle}`}
-            onClick={() => handleClickButton(typedSort)}
+            onClick={() => handleClickButton(sort as MilitaryBranchName)}
           >
             {sort}
           </button>

@@ -1,8 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { SubHeaderWithIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useIdValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
@@ -39,11 +40,10 @@ export const SignupOneStep = ({ label }: StepProps) => {
         <InputGroup>
           <InputGroup.Label
             section="userId"
-            customSuccessMessage={isIdValid ? idValidationMessage : null}
-            customErrorMessage={!isIdValid ? idValidationMessage : null}
-          >
-            아이디
-          </InputGroup.Label>
+            label="아이디"
+            successMessage={isIdValid ? idValidationMessage : null}
+            errorMessage={!isIdValid ? idValidationMessage : null}
+          />
           <div className="flex gap-4">
             <InputGroup.Input section="userId" placeholder="최소 6글자, 최대 12글자" />
             <Button size="md" onClick={() => validateId(watchUserIdField)}>
@@ -53,7 +53,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
         </InputGroup>
 
         <InputGroup>
-          <InputGroup.Label section="password">비밀번호</InputGroup.Label>
+          <InputGroup.Label section="password" label="비밀번호" />
           <InputGroup.Input
             section="password"
             type="password"
@@ -62,7 +62,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
         </InputGroup>
 
         <InputGroup>
-          <InputGroup.Label section="confirm">비밀번호 확인</InputGroup.Label>
+          <InputGroup.Label section="confirm" label="비밀번호 확인" />
           <InputGroup.Input
             section="confirm"
             type="password"

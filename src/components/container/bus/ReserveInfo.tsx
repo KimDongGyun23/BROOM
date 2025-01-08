@@ -1,8 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { useBusReserveInfoForm } from '@/hooks'
 import { useBusReservationStatus } from '@/services/service'
 import { BUS_RESERVATION_STATES } from '@/utils'
@@ -25,7 +26,7 @@ const ReservationForm = ({ onSubmit }: ReservationFormType) => {
     <FormProvider {...formMethod}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputGroup>
-          <InputGroup.Label section="studentId">학번</InputGroup.Label>
+          <InputGroup.Label section="studentId" label="학번" />
           <div className="flex gap-4">
             <InputGroup.Input section="studentId" placeholder="학번을 입력해주세요." />
             <Button size="md" type="submit">

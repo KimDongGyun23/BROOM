@@ -12,7 +12,7 @@ import { ProfileImage } from '@/components/view/ProfileImage'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
 import { useCarpoolChattingInfo, useCarpoolExitChattingRoom } from '@/services/query'
 import { useMessageActions, useMessageData } from '@/stores/message'
-import type { ProfileIconType } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils'
 
 type ChattingKebabProps = {
   isKebabOpen: boolean
@@ -20,7 +20,7 @@ type ChattingKebabProps = {
 
 type MessageListProps = {
   opponent: string
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
 }
 
 const ChattingKebab = ({ isKebabOpen }: ChattingKebabProps) => {

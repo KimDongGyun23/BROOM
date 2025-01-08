@@ -1,9 +1,9 @@
-import type { ProfileIconType } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils'
 
 import { ProfileImage } from './ProfileImage'
 
 type BaseProfileProps = {
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
   name: string
   subtitle: string
   description: string
@@ -24,7 +24,7 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
 
 type PostProfileProps = {
   nickname: string
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
   dischargeYear: number
   createdAt: string
 }
@@ -40,7 +40,7 @@ export const PostProfile = ({ nickname, iconType, dischargeYear, createdAt }: Po
 
 type ChattingRoomProfileProps = {
   opponent: string
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
   dischargeYear: number
   title: string
 }
@@ -60,7 +60,7 @@ export const ChattingRoomProfile = ({
 )
 
 type ChattingProfileProps = {
-  iconType: ProfileIconType
+  iconType: MilitaryBranchCode
   opponent: string
   title: string
   lastMessage: string

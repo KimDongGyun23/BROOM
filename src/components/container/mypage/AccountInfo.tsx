@@ -1,7 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 
-import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useAccountForm, useBoolean } from '@/hooks'
 import { useAccountUpdate } from '@/services/service'
@@ -14,7 +15,7 @@ const AccountForm = ({ isEditMode }: AccountFormType) => {
   return (
     <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
       <InputGroup>
-        <InputGroup.Label section="nickname">닉네임</InputGroup.Label>
+        <InputGroup.Label section="nickname" label="닉네임" />
         <div className="flex gap-4">
           <InputGroup.Input
             section="nickname"
@@ -30,7 +31,7 @@ const AccountForm = ({ isEditMode }: AccountFormType) => {
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Label section="dischargeYear">전역연도</InputGroup.Label>
+        <InputGroup.Label section="dischargeYear" label="전역 연도" />
         <InputGroup.Input
           section="dischargeYear"
           type="number"
@@ -40,7 +41,7 @@ const AccountForm = ({ isEditMode }: AccountFormType) => {
       </InputGroup>
 
       <InputGroup>
-        <InputGroup.Label section="militaryChaplain">복무했던 군종</InputGroup.Label>
+        <InputGroup.Label section="militaryChaplain" label="복무했던 군종" />
         <InputGroup.SortOfArmy section="militaryChaplain" disabled={!isEditMode} />
       </InputGroup>
     </form>
