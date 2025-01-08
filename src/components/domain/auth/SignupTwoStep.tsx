@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button, InputGroup, LabelWithStep, SubHeaderWithIcon } from '@/components/view'
-import { useValidateNickname } from '@/queries'
+import { useNicknameValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
 
@@ -11,61 +10,27 @@ export const SignupTwoStep = ({ label }: StepProps) => {
   const navigate = useNavigate()
   const totalStep = useTotalStep()
 
-  const [validationSuccessMessage, setValidationSuccessMessage] = useState<string | null>(null)
-  const [validationErrorMessage, setValidationErrorMessage] = useState<string | null>(null)
-  const [isNicknameValidated, setIsNicknameValidated] = useState(false)
-
-  const { mutate: validateNicknameMutation } = useValidateNickname()
-  const { getValues, trigger, reset, watch } = useFormContext()
+  const { trigger, reset, watch } = useFormContext()
   const { goNextStep, goPreviousStep } = useStepsActions()
+  const { validateNickname, isNicknameValid, nicknameValidationMessage } = useNicknameValidation()
 
   const watchNicknameField = watch('nickname')
 
-  const handleClickCloseButton = () => {
+  const handleClose = () => {
     navigate('/login')
     reset()
   }
 
-  const handleClickNextButton = async () => {
+  const handleNext = async () => {
     const isValid = await trigger(['nickname', 'dischargeYear', 'militaryChaplain'])
-    if (isValid) goNextStep()
-  }
-
-  const handleClickValidateNickname = async () => {
-    const isValid = await trigger(['nickname'])
-    if (isValid) {
-      const nickname = getValues('nickname')
-      validateNicknameMutation(
-        { body: { nickname: nickname } },
-        {
-          onSuccess: (res) => {
-            setValidationSuccessMessage(res.data)
-            setValidationErrorMessage(null)
-            setIsNicknameValidated(true)
-          },
-          onError: (error) => {
-            setValidationSuccessMessage(null)
-            setValidationErrorMessage(error.message)
-            setIsNicknameValidated(false)
-          },
-        },
-      )
+    if (isValid && isNicknameValid) {
+      goNextStep()
     }
   }
 
-  useEffect(() => {
-    setIsNicknameValidated(false)
-    setValidationSuccessMessage(null)
-    setValidationErrorMessage(null)
-  }, [watchNicknameField])
-
   return (
     <>
-      <SubHeaderWithIcon
-        type="close"
-        onClickCancle={goPreviousStep}
-        onClickClose={handleClickCloseButton}
-      />
+      <SubHeaderWithIcon type="close" onClickCancle={goPreviousStep} onClickClose={handleClose} />
 
       <LabelWithStep currentStep={2} totalStep={totalStep}>
         {label}
@@ -75,14 +40,14 @@ export const SignupTwoStep = ({ label }: StepProps) => {
         <InputGroup>
           <InputGroup.Label
             section="nickname"
-            customSuccessMessage={validationSuccessMessage}
-            customErrorMessage={validationErrorMessage}
+            customSuccessMessage={isNicknameValid ? nicknameValidationMessage : null}
+            customErrorMessage={!isNicknameValid ? nicknameValidationMessage : null}
           >
             닉네임
           </InputGroup.Label>
           <div className="flex gap-4">
             <InputGroup.Input section="nickname" placeholder="최소 2글자, 최대 8글자" />
-            <Button size="md" onClick={handleClickValidateNickname}>
+            <Button size="md" onClick={() => validateNickname(watchNicknameField)}>
               중복 확인
             </Button>
           </div>
@@ -101,9 +66,9 @@ export const SignupTwoStep = ({ label }: StepProps) => {
 
       <Button
         size="lg"
-        onClick={handleClickNextButton}
+        onClick={handleNext}
         classname="mt-2 mb-10 mx-4"
-        disabled={!isNicknameValidated}
+        disabled={!isNicknameValid}
       >
         다음으로
       </Button>

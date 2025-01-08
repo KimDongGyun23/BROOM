@@ -11,12 +11,15 @@ export const SignupOneStep = ({ label }: StepProps) => {
   const totalStep = useTotalStep()
 
   const { goNextStep } = useStepsActions()
-  const { trigger, watch } = useFormContext()
+  const { trigger, reset, watch } = useFormContext()
   const { validateId, isIdValid, idValidationMessage } = useIdValidation()
 
   const watchUserIdField = watch('userId')
 
-  const handleClose = () => navigate('/login')
+  const handleClose = () => {
+    navigate('/login')
+    reset()
+  }
 
   const handleNext = async () => {
     const isValid = await trigger(['userId', 'password', 'confirm'])

@@ -12,11 +12,11 @@ export const useIdValidation = () => {
       { body: { userId } },
       {
         onSuccess: () => {
-          setIdValidationMessage('사용 가능한 아이디입니다')
+          setIdValidationMessage('사용 가능한 아이디입니다.')
           setIsIdValid(true)
         },
         onError: () => {
-          setIdValidationMessage('이미 사용 중인 아이디입니다')
+          setIdValidationMessage('이미 사용 중인 아이디입니다.')
           setIsIdValid(false)
         },
       },
