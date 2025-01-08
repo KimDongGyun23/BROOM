@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 
-import { PostItem } from '@/components/domain/post/PostItem'
+import { PostList } from '@/components/domain/post/PostList'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
@@ -35,15 +35,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
     return <p>error</p>
   }
 
-  return (
-    <ul className="scroll grow">
-      {searchList.map((item) => (
-        <li key={item.id}>
-          <PostItem item={item} to={`/carpool/detail/${item.id}`} />
-        </li>
-      ))}
-    </ul>
-  )
+  return <PostList items={searchList} to={`/carpool/detail`} />
 }
 
 export const TeamSearch = () => {

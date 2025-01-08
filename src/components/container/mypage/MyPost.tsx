@@ -1,39 +1,12 @@
 import { useState } from 'react'
 
-import { PostItem } from '@/components/domain/post/PostItem'
+import { PostList } from '@/components/domain/post/PostList'
 import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query'
 import type { TabType } from '@/types'
-import type { PostItemType } from '@/types/post'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
-
-type PostsProps = {
-  items: PostItemType[] | undefined
-}
-
-const CarpoolPosts = ({ items }: PostsProps) => {
-  if (!items) return null
-  return (
-    <section aria-labelledby="carpool-posts">
-      {items.map((item) => (
-        <PostItem key={item.id} item={item} to={`/carpool/detail/${item.id}`} />
-      ))}
-    </section>
-  )
-}
-
-const TeamPosts = ({ items }: PostsProps) => {
-  if (!items) return null
-  return (
-    <section aria-labelledby="team-posts">
-      {items.map((item) => (
-        <PostItem key={item.id} item={item} to={`/team/detail/${item.id}`} />
-      ))}
-    </section>
-  )
-}
 
 export const MyPost = () => {
   const storageKey = `current-post-tab`
@@ -46,6 +19,7 @@ export const MyPost = () => {
     isLoading: carpoolLoading,
     error: carpoolError,
   } = useMyCarpoolPost()
+
   const {
     data: teamPostsData,
     refetch: refetchTeamPosts,
@@ -70,8 +44,8 @@ export const MyPost = () => {
       <PostTabs currentTab={currentTab} onTabClick={handleTabClick} />
 
       <div className="scroll grow">
-        {currentTab === TAB_LIST[0] && <CarpoolPosts items={carpoolPostsData} />}
-        {currentTab === TAB_LIST[1] && <TeamPosts items={teamPostsData} />}
+        {currentTab === TAB_LIST[0] && <PostList items={carpoolPostsData} to={`/carpool/detail`} />}
+        {currentTab === TAB_LIST[1] && <PostList items={teamPostsData} to={`/team/detail`} />}
       </div>
     </main>
   )

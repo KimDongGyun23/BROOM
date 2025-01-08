@@ -8,7 +8,7 @@ type PostItemProps = {
   to: string
 }
 
-export const PostItem = ({ item, to }: PostItemProps) => {
+const PostItem = ({ item, to }: PostItemProps) => {
   const { title, createdAt, trainingDate, place, time, full } = item
 
   return (
@@ -32,5 +32,21 @@ export const PostItem = ({ item, to }: PostItemProps) => {
         {full ? <StopIcon /> : <AdditionCircleIcon />}
       </div>
     </Link>
+  )
+}
+
+type PostListProps = {
+  items: PostItemType[] | undefined
+  to: string
+}
+
+export const PostList = ({ items, to }: PostListProps) => {
+  if (!items) return null
+  return (
+    <section className="scroll grow">
+      {items.map((item) => (
+        <PostItem key={item.id} item={item} to={`${to}/${item.id}`} />
+      ))}
+    </section>
   )
 }
