@@ -1,11 +1,11 @@
-import type { IconType } from './common'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 export type AuthType = {
   userId: string
   password: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: IconType
+  militaryChaplain: MilitaryBranchCode
 }
 
 export type LoginFormType = Pick<AuthType, 'userId' | 'password'>

@@ -1,6 +1,4 @@
-import type { KEBAB_LIST } from '@/utils'
-
-import type { IconType } from './common'
+import type { KEBAB_LIST, MilitaryBranchCode } from '@/utils/constants'
 
 export type PostItemType = {
   id: number
@@ -16,7 +14,7 @@ export type PostAuthorType = {
   userId: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: IconType
+  militaryChaplain: MilitaryBranchCode
   createdAt: string
 }
 

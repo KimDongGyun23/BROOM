@@ -4,8 +4,8 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useSearchForm, useToggle } from '@/hooks'
 import type { SearchType } from '@/types'
-import type { SearchOption } from '@/utils'
-import { SEARCH_OPTIONS } from '@/utils'
+import type { SearchOption } from '@/utils/constants'
+import { SEARCH_OPTIONS } from '@/utils/constants'
 
 import { ArrowBottomIcon, SearchIcon } from './icons/NonActiveIcons'
 import { Kebab } from './Kebab'

@@ -1,6 +1,6 @@
 import type { ElementType } from 'react'
 
-import type { IconType } from '@/types'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { AirforceIcon, ArmyIcon, EtcIcon, MarineIcon, NavyIcon } from './icons/ProfileIcons'
 
@@ -11,11 +11,11 @@ const sizeMap = {
 } as const
 
 type ProfileImageProps = {
-  iconType: IconType | null
+  iconType: MilitaryBranchCode | null
   size: keyof typeof sizeMap
 }
 
-const iconMap: Record<IconType, ElementType> = {
+const iconMap: Record<MilitaryBranchCode, ElementType> = {
   ARMY: ArmyIcon,
   MARINE: MarineIcon,
   NAVY: NavyIcon,

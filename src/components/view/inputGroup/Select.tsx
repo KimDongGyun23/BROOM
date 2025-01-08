@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils'
-import { MILITARY_BRANCHES } from '@/utils'
+import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils/constants'
+import { MILITARY_BRANCHES } from '@/utils/constants'
 
 type SortOfArmyProps = {
   section: string

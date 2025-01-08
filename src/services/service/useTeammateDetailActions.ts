@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useTeamChattingId, useTeamCheckFull } from '@/queries'
-import { useDeleteTeam } from '@/services/query'
-import { SESSION_ROOM_TYPE, setSessionStorageItem, TAB_LIST_EN } from '@/utils'
+import { SESSION_KEYS, TAB_KEYS } from '@/utils/constants'
+import { setSessionStorageItem } from '@/utils/storage'
+
+import { useTeamChattingId } from '../query/useChattingQuery'
+import { useDeleteTeam, useTeamCheckFull } from '../query/useTeamQuery'
 
 export const useTeamDetailActions = (id: number, isFull: boolean) => {
   const navigate = useNavigate()
@@ -30,7 +32,7 @@ export const useTeamDetailActions = (id: number, isFull: boolean) => {
       { urls: { teamBoardId: id.toString() } },
       {
         onSuccess: ({ chatRoomId }) => {
-          setSessionStorageItem(SESSION_ROOM_TYPE, TAB_LIST_EN[0])
+          setSessionStorageItem(SESSION_KEYS.ROOM_TYPE, TAB_KEYS[0])
           navigate(`/chatting/chatting-room/team/${chatRoomId}`)
         },
       },

@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
-import { api } from '@/queries'
+import { api } from '@/services/query'
 import { useMessageActions } from '@/stores/message'
-import { getSessionStorageItem, SESSION_NICKNAME } from '@/utils'
+import { SESSION_KEYS } from '@/utils/constants'
+import { getSessionStorageItem } from '@/utils/storage'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
 // import { useMessageActions } from 'store/chatData'
@@ -47,7 +48,7 @@ export const useWebSocket = (roomId: string | undefined, type: 'carpool' | 'team
         body: JSON.stringify({
           chatRoomId: roomId,
           content: content,
-          senderId: getSessionStorageItem(SESSION_NICKNAME),
+          senderId: getSessionStorageItem(SESSION_KEYS.NICKNAME),
         }),
       })
     }

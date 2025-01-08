@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { BottomNav } from '@/components/view/BottomNav'
 import { Button } from '@/components/view/Button'
 import { MainHeader } from '@/components/view/header/MainHeader'
-import { BUS_RESERVE_CONTENT } from '@/utils'
+import { BUS_RESERVE_CONTENT } from '@/utils/constants'
 
 type ContentItemProps = {
   label: string

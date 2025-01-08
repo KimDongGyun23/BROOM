@@ -1,6 +1,4 @@
-import type { MilitaryBranchCode } from '@/utils'
-
-import type { IconType } from './common'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 type ChattingRoomType = {
   chatRoomId: string
@@ -31,7 +29,7 @@ export type MessageType = {
 type ChattingType = {
   opponentNickname: string
   yearsSinceDischarge: number
-  militaryChaplain: IconType
+  militaryChaplain: MilitaryBranchCode
   previousMessages: MessageType[]
 }
 
@@ -44,7 +42,7 @@ export type CarpoolChattingListResponse = {
     carpoolBoardTitle: string
     lastMessage: string
     lastMessageDaysAgo: string
-    militaryChaplain: IconType
+    militaryChaplain: MilitaryBranchCode
     read: boolean
   }[]
 }
@@ -55,7 +53,7 @@ export type ChattingListProfileType = {
   title: string
   lastMessage: string
   lastMessageDaysAgo: string
-  militaryChaplain: IconType
+  militaryChaplain: MilitaryBranchCode
   read: boolean
 }
 
@@ -75,7 +73,7 @@ export type CarpoolChattingRoomResponse = {
   carpoolBoardTitle: string
   opponentNickname: string
   yearsSinceDischarge: number
-  militaryChaplain: IconType
+  militaryChaplain: MilitaryBranchCode
   previousMessages: MessageType[]
 }
 
@@ -95,7 +93,7 @@ export type TeamChattingListResponse = {
     teamBoardTitle: string
     lastMessage: string
     lastMessageDaysAgo: string
-    militaryChaplain: IconType
+    militaryChaplain: MilitaryBranchCode
     read: boolean
   }[]
 }

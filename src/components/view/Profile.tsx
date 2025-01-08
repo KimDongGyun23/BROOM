@@ -1,4 +1,4 @@
-import type { MilitaryBranchCode } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ProfileImage } from './ProfileImage'
 

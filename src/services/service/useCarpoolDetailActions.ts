@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useCarpoolChattingId } from '@/queries'
 import { useCarpoolCheckFull, useDeleteCarpool } from '@/services/query'
-import { SESSION_ROOM_TYPE, setSessionStorageItem, TAB_LIST_EN } from '@/utils'
+import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
+import { SESSION_KEYS, TAB_KEYS } from '@/utils/constants'
+import { setSessionStorageItem } from '@/utils/storage'
 
 export const useCarpoolDetailActions = (id: number, isFull: boolean) => {
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ export const useCarpoolDetailActions = (id: number, isFull: boolean) => {
       { urls: { carpoolBoardId: id.toString() } },
       {
         onSuccess: ({ chatRoomId }) => {
-          setSessionStorageItem(SESSION_ROOM_TYPE, TAB_LIST_EN[0])
+          setSessionStorageItem(SESSION_KEYS.ROOM_TYPE, TAB_KEYS[0])
           navigate(`/chatting/chatting-room/carpool/${chatRoomId}`)
         },
       },

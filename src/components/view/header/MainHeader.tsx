@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom'
 
-import type { IconType } from '@/types'
-import { getSessionStorageItem, SESSION_LOGIN_KEY, SESSION_MILITARY_CHAPLAIN } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils/constants'
+import { SESSION_KEYS } from '@/utils/constants'
+import { getSessionStorageItem } from '@/utils/storage'
 
 import { ProfileImage } from '../ProfileImage'
 
 export const MainHeader = () => {
-  const iconType = (getSessionStorageItem(SESSION_MILITARY_CHAPLAIN) as IconType) || null
-  const loginSession = getSessionStorageItem(SESSION_LOGIN_KEY)
+  const iconType =
+    (getSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN) as MilitaryBranchCode) || null
+  const loginSession = getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   return (
     <header className="flex-between-align relative mx-4 h-20 py-4">

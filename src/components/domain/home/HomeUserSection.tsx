@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 
-import { TentIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
-import { getSessionStorageItem, SESSION_LOGIN_KEY, SESSION_NICKNAME } from '@/utils'
+import { TentIcon } from '@/components/view/icons/NonActiveIcons'
+import { SESSION_KEYS } from '@/utils/constants'
+import { getSessionStorageItem } from '@/utils/storage'
 
 const LoggedInUserContent = () => {
-  const nickname = getSessionStorageItem(SESSION_NICKNAME)
+  const nickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
 
   return (
     <>
@@ -28,7 +29,7 @@ const LoggedOutUserContent = () => (
 
 export const HomeUserSection = () => {
   const navigate = useNavigate()
-  const loginSession = getSessionStorageItem(SESSION_LOGIN_KEY)
+  const loginSession = getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   const handleLogin = () => navigate('/login')
   const handleSignUp = () => navigate('/sign-up')

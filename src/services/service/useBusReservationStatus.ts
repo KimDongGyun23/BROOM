@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
-import { useBusReserveInfo } from '@/queries'
 import type { BusReservationStateType } from '@/types'
-import { BUS_RESERVATION_STATES } from '@/utils'
+import { BUS_RESERVATION_STATES } from '@/utils/constants'
+
+import { useBusReserveInfo } from '../query/useBusQuery'
 
 type ReturnType = (studentId: string) => {
   reservationState: BusReservationStateType

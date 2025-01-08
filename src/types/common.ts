@@ -1,9 +1,6 @@
-import type { BUS_RESERVATION_STATES, TAB_LIST } from '@/utils'
+import type { BUS_RESERVATION_STATES } from '@/utils/constants'
 
-export type IconType = 'ARMY' | 'MARINE' | 'NAVY' | 'AIRFORCE' | 'ETC'
 export type FilterNameType = '제목' | '훈련 날짜' | '출발 장소'
-
-export type TabType = (typeof TAB_LIST)[number]
 
 export type SvgIconProps = {
   size?: string

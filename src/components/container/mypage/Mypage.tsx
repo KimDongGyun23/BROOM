@@ -6,13 +6,9 @@ import { BottomNav } from '@/components/view/BottomNav'
 import { Loading } from '@/components/view/Loading'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import { useLogout, useUserDeletion, useUserProfile } from '@/services/query'
-import type { IconType } from '@/types'
-import {
-  clearSessionStorage,
-  getSessionStorageItem,
-  MYPAGE_PROFILE_SECTIONS,
-  SESSION_MILITARY_CHAPLAIN,
-} from '@/utils'
+import type { MilitaryBranchCode } from '@/utils/constants'
+import { MYPAGE_PROFILE_SECTIONS, SESSION_KEYS } from '@/utils/constants'
+import { clearSessionStorage, getSessionStorageItem } from '@/utils/storage'
 
 type ProfileSectionProps = {
   title: string
@@ -22,7 +18,7 @@ type ProfileSectionProps = {
 type UserProfileProps = {
   username: string
   serviceYear: number
-  iconType: IconType | null
+  iconType: MilitaryBranchCode | null
 }
 
 const UserProfile = ({ username, serviceYear, iconType }: UserProfileProps) => (
@@ -53,7 +49,9 @@ const ProfileSection = ({ title, items }: ProfileSectionProps) => (
 
 export const Mypage = () => {
   const navigate = useNavigate()
-  const iconType = getSessionStorageItem(SESSION_MILITARY_CHAPLAIN) as IconType | null
+  const iconType = getSessionStorageItem(
+    SESSION_KEYS.MILITARY_CHAPLAIN,
+  ) as MilitaryBranchCode | null
   const { data: userProfileData, isPending, isError } = useUserProfile()
   const { mutate: logoutMutation } = useLogout()
   const { mutate: deleteUser } = useUserDeletion()

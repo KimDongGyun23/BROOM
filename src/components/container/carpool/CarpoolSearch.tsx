@@ -5,7 +5,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useCarpoolSearchList } from '@/services/query'
-import { SEARCH_OPTIONS } from '@/utils'
+import { SEARCH_OPTIONS } from '@/utils/constants'
 
 type SearchListProps = {
   filterName: string | null

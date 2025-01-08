@@ -1,15 +1,15 @@
-import type { TabType } from '@/types'
-import { TAB_LIST } from '@/utils'
+import type { TabLabelType } from '@/utils/constants'
+import { TAB_LABELS } from '@/utils/constants'
 
 type PostTabsProps = {
-  currentTab: TabType
-  onTabClick: (tab: TabType) => void
+  currentTab: TabLabelType
+  onTabClick: (tab: TabLabelType) => void
 }
 
 export const PostTabs = ({ currentTab, onTabClick }: PostTabsProps) => {
   return (
     <ul className="p-medium flex px-4 py-3 font-medium">
-      {TAB_LIST.map((tab) => {
+      {TAB_LABELS.map((tab) => {
         const tabStyle =
           currentTab === tab
             ? 'text-blue-600 border-b-[2px] border-b-blue-500'

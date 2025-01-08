@@ -7,9 +7,9 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
-import { clearSessionStorage } from '@/utils'
+import { clearSessionStorage } from '@/utils/storage'
 
-import { reIssue } from './auth/authApi'
+import { reIssue } from './useAuthQuery'
 
 export class HttpClient {
   private readonly client: AxiosInstance

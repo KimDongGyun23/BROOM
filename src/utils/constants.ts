@@ -1,18 +1,19 @@
-export const SESSION_LOGIN_KEY = 'login' as const
-export const SESSION_NICKNAME = 'user_nickname' as const
-export const SESSION_MILITARY_CHAPLAIN = 'user_chaplain' as const
-export const SESSION_ROOM_TYPE = 'room_type' as const
-export const SESSION_REFRESH = 'hsefr' as const
+export const SESSION_KEYS = {
+  LOGIN: 'login' as const,
+  NICKNAME: 'nickname' as const,
+  MILITARY_CHAPLAIN: 'chaplain' as const,
+  ROOM_TYPE: 'room_type' as const,
+  REFRESH: 'hserfer' as const,
+} as const
 
-export const TAB_LIST = ['승차 공유', '팀원 모집'] as const
-export const TAB_LIST_EN = ['carpool', 'team']
-
-export const NOTICE_ARR = [
-  '예비군 버스 대절 추첨 인원 선정',
-  '예비군 버스 대절 추첨 인원 선정',
-  '예비군 버스 대절 추첨 인원 선정',
-  '예비군 버스 대절 추첨 인원 선정',
+const TAB_LIST = [
+  { label: '승차 공유', key: 'carpool' },
+  { label: '팀원 모집', key: 'team' },
 ] as const
+export const TAB_LABELS = TAB_LIST.map((tab) => tab.label)
+export const TAB_KEYS = TAB_LIST.map((tab) => tab.key)
+
+export type TabLabelType = (typeof TAB_LIST)[number]['label']
 
 export const SEARCH_OPTIONS = [
   { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
@@ -38,6 +39,13 @@ export const KEBAB_LIST = {
   trainingDate: '훈련 날짜',
   departPlace: '출발 장소',
 } as const
+
+export const NOTICE_ARR = [
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+] as const
 
 export const BUS_RESERVE_CONTENT = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },

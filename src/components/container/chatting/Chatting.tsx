@@ -9,15 +9,10 @@ import {
   useCarpoolChattingRoomList,
   useTeamChattingRoomList,
 } from '@/services/query/useChattingQuery'
-import {
-  getSessionStorageItem,
-  SESSION_ROOM_TYPE,
-  setSessionStorageItem,
-  TAB_LIST,
-  TAB_LIST_EN,
-} from '@/utils'
+import { SESSION_KEYS, TAB_KEYS, TAB_LABELS } from '@/utils/constants'
+import { getSessionStorageItem, setSessionStorageItem } from '@/utils/storage'
 
-type TabType = (typeof TAB_LIST)[number]
+type TabType = (typeof TAB_LABELS)[number]
 
 type ChattingTabProps = {
   currentTab: TabType
@@ -32,7 +27,7 @@ const ChattingTab = ({ currentTab, onClick }: ChattingTabProps) => {
 
   return (
     <div className="p-medium flex px-4 py-3 font-medium">
-      {TAB_LIST.map((tab) => (
+      {TAB_LABELS.map((tab) => (
         <button
           key={tab}
           className={`grow pb-3 ${getTabStyle(currentTab === tab)}`}
@@ -99,11 +94,11 @@ const TeamChattingList = () => {
 
 export const Chatting = () => {
   const storageName = `current-chatting-tab`
-  const initialTab = (getSessionStorageItem(storageName) || TAB_LIST[0]) as TabType
+  const initialTab = (getSessionStorageItem(storageName) || TAB_LABELS[0]) as TabType
   const [currentTab, setCurrentTab] = useState<TabType>(initialTab)
 
   const handleClickTab = (tab: TabType) => {
-    setSessionStorageItem(SESSION_ROOM_TYPE, tab === TAB_LIST[0] ? TAB_LIST_EN[0] : TAB_LIST_EN[1])
+    setSessionStorageItem(SESSION_KEYS.ROOM_TYPE, tab === TAB_LABELS[0] ? TAB_KEYS[0] : TAB_KEYS[1])
     setSessionStorageItem(storageName, tab)
     setCurrentTab(tab)
   }
@@ -114,8 +109,8 @@ export const Chatting = () => {
       <ChattingTab currentTab={currentTab} onClick={handleClickTab} />
 
       <main className="flex-column scroll mb-2 mt-[30px] grow gap-4">
-        {currentTab === TAB_LIST[0] && <CarpoolChattingList />}
-        {currentTab === TAB_LIST[1] && <TeamChattingList />}
+        {currentTab === TAB_LABELS[0] && <CarpoolChattingList />}
+        {currentTab === TAB_LABELS[1] && <TeamChattingList />}
       </main>
 
       <BottomNav />

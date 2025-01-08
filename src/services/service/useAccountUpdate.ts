@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 
 import type { UserAccountFormType } from '@/types'
-import { SESSION_MILITARY_CHAPLAIN, SESSION_NICKNAME, setSessionStorageItem } from '@/utils'
+import { SESSION_KEYS } from '@/utils/constants'
+import { setSessionStorageItem } from '@/utils/storage'
 
 import { useUpdateUserAccount } from '../query'
 
@@ -18,8 +19,8 @@ export const useAccountUpdate: ReturnType = (onSuccess) => {
         { body: formData },
         {
           onSuccess: () => {
-            setSessionStorageItem(SESSION_MILITARY_CHAPLAIN, formData.militaryChaplain)
-            setSessionStorageItem(SESSION_NICKNAME, formData.nickname)
+            setSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN, formData.militaryChaplain)
+            setSessionStorageItem(SESSION_KEYS.NICKNAME, formData.nickname)
             onSuccess()
           },
         },

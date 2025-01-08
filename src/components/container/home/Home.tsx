@@ -4,7 +4,7 @@ import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNav } from '@/components/view/BottomNav'
 import { MainHeader } from '@/components/view/header/MainHeader'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
-import { NOTICE_ARR } from '@/utils'
+import { NOTICE_ARR } from '@/utils/constants'
 
 const SERVICE_ITEMS = [
   { label: '차 타고 같이 갈 사람 없을까?', url: '/carpool' },

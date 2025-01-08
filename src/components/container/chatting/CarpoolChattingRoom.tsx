@@ -12,7 +12,7 @@ import { ProfileImage } from '@/components/view/ProfileImage'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
 import { useCarpoolChattingInfo, useCarpoolExitChattingRoom } from '@/services/query'
 import { useMessageActions, useMessageData } from '@/stores/message'
-import type { MilitaryBranchCode } from '@/utils'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 type ChattingKebabProps = {
   isKebabOpen: boolean

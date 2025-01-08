@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 
-import { api, mypageAccount } from '@/queries'
+import { api } from '@/services/query'
 import type {
   AccountFormType,
   BusFormType,
@@ -11,6 +11,7 @@ import type {
   CarpoolEditResponse,
   CarpoolFormType,
   LoginFormType,
+  MypageAccountResponse,
   NewPasswordFormType,
   SearchType,
   SignupFormType,
@@ -27,7 +28,7 @@ import {
   newPasswordSchema,
   signupSchema,
   teamSchema,
-} from '@/utils'
+} from '@/utils/schema'
 
 export const useLoginForm = () => {
   const formMethod = useForm<LoginFormType>({
@@ -55,7 +56,8 @@ export const useSignupForm = () => {
 
 export const useAccountForm = () => {
   const getDefaultValues = async () => {
-    const { nickname, dischargeYear, militaryChaplain } = await mypageAccount()
+    const { nickname, dischargeYear, militaryChaplain } =
+      await api.get<MypageAccountResponse>(`/mypage/info`)
     return { nickname, dischargeYear, militaryChaplain }
   }
 

@@ -2,13 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import type { LoginFormType } from '@/types'
-import {
-  SESSION_LOGIN_KEY,
-  SESSION_MILITARY_CHAPLAIN,
-  SESSION_NICKNAME,
-  SESSION_REFRESH,
-  setSessionStorageItem,
-} from '@/utils'
+import { SESSION_KEYS } from '@/utils/constants'
+import { setSessionStorageItem } from '@/utils/storage'
 
 import { api, useLogin } from '../query'
 
@@ -20,10 +15,10 @@ export const useLoginLogic = () => {
   const handleLoginSuccess = (headers, data) => {
     api.setAccessToken(headers.authorization)
     setIsLoginFailed(false)
-    setSessionStorageItem(SESSION_REFRESH, headers.refresh)
-    setSessionStorageItem(SESSION_LOGIN_KEY, 'true')
-    setSessionStorageItem(SESSION_NICKNAME, data.nickname)
-    setSessionStorageItem(SESSION_MILITARY_CHAPLAIN, data.militaryChaplain)
+    setSessionStorageItem(SESSION_KEYS.REFRESH, headers.refresh)
+    setSessionStorageItem(SESSION_KEYS.LOGIN, 'true')
+    setSessionStorageItem(SESSION_KEYS.NICKNAME, data.nickname)
+    setSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN, data.militaryChaplain)
     navigate('/home', { replace: true })
   }
 

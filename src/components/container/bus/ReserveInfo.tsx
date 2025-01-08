@@ -6,7 +6,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useBusReserveInfoForm } from '@/hooks'
 import { useBusReservationStatus } from '@/services/service'
-import { BUS_RESERVATION_STATES } from '@/utils'
+import { BUS_RESERVATION_STATES } from '@/utils/constants'
 
 const STATE_STYLES = {
   [BUS_RESERVATION_STATES.COMPLETED]: 'text-blue-500',

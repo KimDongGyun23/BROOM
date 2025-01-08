@@ -7,7 +7,8 @@ import type {
   ValidateIdRequest,
   ValidateNicknameRequest,
 } from '@/types'
-import { getSessionStorageItem, SESSION_REFRESH } from '@/utils'
+import { SESSION_KEYS } from '@/utils/constants'
+import { getSessionStorageItem } from '@/utils/storage'
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
@@ -52,7 +53,7 @@ export const useValidateNickname = () => {
 export const reIssue = async () => {
   return await axios.post(`${BASE_URL}/reissue`, undefined, {
     headers: {
-      refresh: getSessionStorageItem(SESSION_REFRESH),
+      refresh: getSessionStorageItem(SESSION_KEYS.REFRESH),
     },
   })
 }
