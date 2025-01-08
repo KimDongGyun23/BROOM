@@ -1,7 +1,8 @@
 import { useSearchParams } from 'react-router-dom'
 
-import { Loading, PostItem, SearchBar, SubHeaderWithoutIcon } from '@/components/view'
-import { useTeamSearchList } from '@/services/query'
+import { Loading, PostItem, SubHeaderWithoutIcon } from '@/components/view'
+import { SearchBar } from '@/components/view/SearchBar'
+import { useTeamSearchList } from '@/services/query/useTeammateQuery'
 import { SEARCH_OPTIONS } from '@/utils'
 
 type SearchListProps = {

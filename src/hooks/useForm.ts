@@ -12,6 +12,7 @@ import type {
   CarpoolFormType,
   LoginFormType,
   NewPasswordFormType,
+  SearchType,
   SignupFormType,
   TeamEditPageRequest,
   TeamEditResponse,
@@ -100,8 +101,8 @@ export const useCarpoolEditForm = ({ urls }: CarpoolEditPageRequest) => {
   return formMethod
 }
 
-export const useSearchForm = (defaultValue: { search: string }) => {
-  const formMethod = useForm<{ search: string }>({
+export const useSearchForm = (defaultValue: SearchType) => {
+  const formMethod = useForm<SearchType>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: defaultValue,

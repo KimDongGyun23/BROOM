@@ -7,10 +7,10 @@ import {
   MainHeader,
   PostAdditionButton,
   PostItem,
-  SearchBar,
 } from '@/components/view'
+import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
-import { useActiveTeamList, useTeamList } from '@/services/query'
+import { useActiveTeamList, useTeamList } from '@/services/query/useTeammateQuery'
 import type { PostItemType } from '@/types/post'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
 

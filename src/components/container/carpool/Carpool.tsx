@@ -7,8 +7,8 @@ import {
   MainHeader,
   PostAdditionButton,
   PostItem,
-  SearchBar,
 } from '@/components/view'
+import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
 import { useActiveCarpoolList, useCarpoolList } from '@/services/query'
 import type { PostItemType } from '@/types/post'

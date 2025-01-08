@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useSearchForm, useToggle } from '@/hooks'
+import type { SearchType } from '@/types'
+import type { SearchOption } from '@/utils'
 import { SEARCH_OPTIONS } from '@/utils'
 
 import { ArrowBottomIcon, SearchIcon } from './icons/NonActiveIcons'
@@ -15,24 +17,34 @@ type SearchBarProps = {
 export const SearchBar = ({ currentTab }: SearchBarProps) => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-  const defaultFilterName = searchParams.get('filterName')
-  const defaultSearchName = searchParams.get('searchName')
+  const [isFilterVisible, toggleFilterVisibility] = useToggle(false)
 
-  const formMethod = useSearchForm({ search: defaultSearchName || '' })
+  const defaultFilterName = searchParams.get('filterName') || SEARCH_OPTIONS[0].label
+  const defaultSearchName = searchParams.get('searchName') || ''
+
+  const [selectedFilter, setSelectedFilter] = useState<SearchOption>(
+    SEARCH_OPTIONS.find((option) => option.label === defaultFilterName) || SEARCH_OPTIONS[0],
+  )
+
+  const formMethod = useSearchForm({ search: defaultSearchName })
   const { register, handleSubmit } = formMethod
 
-  const [isFilterVisible, toggleFilterVisibility] = useToggle(false)
-  const [filterName, setFilterName] = useState(defaultFilterName || SEARCH_OPTIONS[0].label)
+  const handleSearch = useCallback(
+    (formData: SearchType) => {
+      navigate(
+        `/${currentTab}/search?filterName=${selectedFilter.label}&searchName=${formData.search}`,
+      )
+    },
+    [currentTab, selectedFilter.label],
+  )
 
-  const handleSearch = (formData: { search: string }) =>
-    navigate(`/${currentTab}/search?filterName=${filterName}&searchName=${formData.search}`)
-
-  const searchOptions = SEARCH_OPTIONS.map((filter) => ({
-    ...filter,
-    onClick: () => setFilterName(filter.label),
-  }))
-
-  const placeholder = SEARCH_OPTIONS.find((filter) => filter.label === filterName)?.placeholder
+  const handleFilterSelect = useCallback(
+    (filter: SearchOption) => {
+      setSelectedFilter(filter)
+      toggleFilterVisibility()
+    },
+    [toggleFilterVisibility],
+  )
 
   return (
     <FormProvider {...formMethod}>
@@ -44,25 +56,36 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           type="button"
           className="flex-align shrink-0 gap-1"
           onClick={toggleFilterVisibility}
+          aria-haspopup="true"
+          aria-expanded={isFilterVisible}
         >
-          <p className="p-small shrink-0 text-grey-600">{filterName}</p>
+          <span className="p-small shrink-0 text-grey-600">{selectedFilter.label}</span>
           <ArrowBottomIcon />
         </button>
 
         <input
-          type="text"
+          type="search"
           size={7}
           {...register('search')}
           className="focus: flex-1 text-grey-700 outline-none placeholder:text-grey-400"
-          placeholder={placeholder}
+          placeholder={selectedFilter.placeholder}
+          aria-label={`${selectedFilter.label} 검색`}
         />
 
-        <button type="submit">
+        <button type="submit" aria-label="검색">
           <SearchIcon />
         </button>
       </form>
 
-      {isFilterVisible && <Kebab list={searchOptions} location="left-4 top-[125px]" />}
+      {isFilterVisible && (
+        <Kebab
+          list={SEARCH_OPTIONS.map((option) => ({
+            ...option,
+            onClick: () => handleFilterSelect(option),
+          }))}
+          location="left-4 top-[125px]"
+        />
+      )}
     </FormProvider>
   )
 }

@@ -20,5 +20,9 @@ export type StepProps = {
   label: string
 }
 
+export type SearchType = {
+  search: string
+}
+
 export type BusReservationStateType =
   (typeof BUS_RESERVATION_STATES)[keyof typeof BUS_RESERVATION_STATES]

@@ -14,6 +14,14 @@ export const NOTICE_ARR = [
   '예비군 버스 대절 추첨 인원 선정',
 ] as const
 
+export const SEARCH_OPTIONS = [
+  { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
+  { label: '훈련 날짜', key: 'trainingDate', placeholder: '훈련 날짜를 입력해주세요.' },
+  { label: '출발 장소', key: 'departPlace', placeholder: '출발 장소를 입력해주세요.' },
+] as const
+
+export type SearchOption = (typeof SEARCH_OPTIONS)[number]
+
 export const MILITARY_BRANCHES = {
   육군: 'ARMY',
   해군: 'NAVY',
@@ -27,12 +35,6 @@ export const KEBAB_LIST = {
   trainingDate: '훈련 날짜',
   departPlace: '출발 장소',
 } as const
-
-export const SEARCH_OPTIONS = [
-  { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
-  { label: '훈련 날짜', key: 'trainingDate', placeholder: '훈련 날짜를 입력해주세요.' },
-  { label: '출발 장소', key: 'departPlace', placeholder: '출발 장소를 입력해주세요.' },
-]
 
 export const BUS_RESERVE_CONTENT = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },
