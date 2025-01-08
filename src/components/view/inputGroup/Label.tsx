@@ -19,13 +19,13 @@ export const Label = ({
 
   return (
     <div className="flex-align gap-3">
-      <p className="p-large font-medium text-grey-7">{children}</p>
+      <p className="p-large font-medium text-grey-700">{children}</p>
       {errors && errors[section] && errors[section].message ? (
-        <p className="p-xsmall text-red-2">* {errors[section].message.toString()}</p>
+        <p className="p-xsmall text-red-200">* {errors[section].message.toString()}</p>
       ) : (
         <>
           {customSuccessMessage && <p className="p-xsmall text-green">* {customSuccessMessage}</p>}
-          {customErrorMessage && <p className="p-xsmall text-red-2">* {customErrorMessage}</p>}
+          {customErrorMessage && <p className="p-xsmall text-red-200">* {customErrorMessage}</p>}
         </>
       )}
     </div>

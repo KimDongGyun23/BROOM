@@ -24,23 +24,23 @@ type UserProfileProps = {
 }
 
 const UserProfile = ({ username, serviceYear, iconType }: UserProfileProps) => (
-  <div className="flex-align relative mx-auto mb-[30px] mt-4 w-fit gap-5 rounded-[40px] border-[10px] border-grey-2 py-[14px] pl-[18px] pr-[30px]">
+  <div className="flex-align relative mx-auto mb-[30px] mt-4 w-fit gap-5 rounded-[40px] border-[10px] border-grey-200 py-[14px] pl-[18px] pr-[30px]">
     <img src={chainImage} className="absolute -left-7 bottom-5" alt="chain" />
     <ProfileImage iconType={iconType} size="lg" />
     <div className="flex-column">
       <p className="p-medium font-medium">{username}</p>
-      <p className="p-xsmall text-blue-7">예비군 {serviceYear}년차</p>
+      <p className="p-xsmall text-blue-700">예비군 {serviceYear}년차</p>
     </div>
   </div>
 )
 
 const ProfileSection = ({ title, items }: ProfileSectionProps) => (
   <section className="flex-column gap-5">
-    <h6 className="font-bold text-grey-7">{title}</h6>
+    <h6 className="font-bold text-grey-700">{title}</h6>
     <ul className="flex-column gap-3">
       {items.map(({ name, path }) => (
         <li key={name}>
-          <Link to={path} className="p-medium text-grey-7">
+          <Link to={path} className="p-medium text-grey-700">
             {name}
           </Link>
         </li>
@@ -87,18 +87,18 @@ export const Mypage = () => {
           {MYPAGE_PROFILE_SECTIONS.map(({ title, items }, index) => (
             <Fragment key={title}>
               <ProfileSection title={title} items={items} />
-              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <hr className="bg-grey-2" />}
+              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <hr className="bg-grey-200" />}
             </Fragment>
           ))}
 
           <div className="flex-align ml-auto mt-[3svh] px-1">
             <button
-              className="p-small border-r border-r-grey-4 px-4 text-grey-6"
+              className="p-small border-r border-r-grey-400 px-4 text-grey-600"
               onClick={handleLogout}
             >
               로그아웃
             </button>
-            <button className="p-small px-4 text-red-2" onClick={handleAccountDeletion}>
+            <button className="p-small px-4 text-red-200" onClick={handleAccountDeletion}>
               회원탈퇴
             </button>
           </div>

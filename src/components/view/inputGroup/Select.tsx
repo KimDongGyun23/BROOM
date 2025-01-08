@@ -34,8 +34,8 @@ export const SortOfArmy = ({ section, disabled = false }: SortOfArmyProps) => {
         const typedSort = sort as keyof typeof MILITARY_BRANCHES
         const buttonStyle =
           selectedSort === typedSort
-            ? 'bg-blue-5 border-none text-grey-1'
-            : 'bg-white border-blue-3 text-grey-7'
+            ? 'bg-blue-500 border-none text-grey-100'
+            : 'bg-white border-blue-300 text-grey-700'
         return (
           <button
             key={typedSort}

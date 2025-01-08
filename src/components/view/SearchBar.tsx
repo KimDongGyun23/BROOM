@@ -38,14 +38,14 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
     <FormProvider {...formMethod}>
       <form
         onSubmit={handleSubmit(handleSearch)}
-        className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-2 py-[10px] pl-4 pr-[10px] font-regular"
+        className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-200 py-[10px] pl-4 pr-[10px] font-regular"
       >
         <button
           type="button"
           className="flex-align shrink-0 gap-1"
           onClick={toggleFilterVisibility}
         >
-          <p className="p-small shrink-0 text-grey-6">{filterName}</p>
+          <p className="p-small shrink-0 text-grey-600">{filterName}</p>
           <ArrowBottomIcon />
         </button>
 
@@ -53,7 +53,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           type="text"
           size={7}
           {...register('search')}
-          className="focus: flex-1 text-grey-7 outline-none placeholder:text-grey-4"
+          className="focus: flex-1 text-grey-700 outline-none placeholder:text-grey-400"
           placeholder={placeholder}
         />
 

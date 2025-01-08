@@ -13,7 +13,7 @@ export const LoginPage = () => {
 
   return (
     <div className="flex-column">
-      <h1 className="mt-[20svh] text-center font-jalnan text-6xl leading-[44px] text-blue-6">
+      <h1 className="mt-[20svh] text-center font-jalnan text-6xl leading-[44px] text-blue-600">
         BROOM
       </h1>
 
@@ -46,9 +46,12 @@ export const LoginPage = () => {
         className={`mx-4 mt-[22px] ${isLoginFailed ? 'flex-between-align' : 'flex justify-end'}`}
       >
         {isLoginFailed && (
-          <p className="p-xsmall text-red-2">* 아이디 또는 비밀번호가 일치하지 않습니다.</p>
+          <p className="p-xsmall text-red-200">* 아이디 또는 비밀번호가 일치하지 않습니다.</p>
         )}
-        <Link to={'/sign-up'} className=" inline-block border-b border-b-grey-5 pb-1 text-grey-5">
+        <Link
+          to={'/sign-up'}
+          className=" inline-block border-b border-b-grey-500 pb-1 text-grey-500"
+        >
           회원가입
         </Link>
       </div>

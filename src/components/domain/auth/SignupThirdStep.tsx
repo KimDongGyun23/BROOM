@@ -26,7 +26,7 @@ const AGREEMENTS = [
 type AgreementId = (typeof AGREEMENTS)[number]['id']
 
 const AgreementItem = ({ text, isChecked, onToggle }: AgreementItemProps) => {
-  const textStyle = isChecked ? 'text-blue-5 font-bold' : 'text-grey-5 font-medium'
+  const textStyle = isChecked ? 'text-blue-500 font-bold' : 'text-grey-500 font-medium'
 
   return (
     <div className="flex-align">
@@ -34,7 +34,7 @@ const AgreementItem = ({ text, isChecked, onToggle }: AgreementItemProps) => {
         <CheckIcon active={isChecked} />
         <p className={`p-large ${textStyle}`}>{text}</p>
       </button>
-      <button type="button" className="p-small ml-auto border-b border-b-grey-4 text-grey-4">
+      <button type="button" className="p-small ml-auto border-b border-b-grey-400 text-grey-400">
         보기
       </button>
     </div>
@@ -82,7 +82,7 @@ export const SignupThirdStep = ({ label }: StepProps) => {
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
         <button type="button" onClick={toggleAllAgreements} className="flex-align gap-2">
           <AllCheckIcon active={isAllChecked} />
-          <h4 className={`font-bold ${isAllChecked ? 'text-blue-5' : 'text-grey-5'}`}>
+          <h4 className={`font-bold ${isAllChecked ? 'text-blue-500' : 'text-grey-500'}`}>
             모두 동의합니다.
           </h4>
         </button>

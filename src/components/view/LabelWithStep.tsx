@@ -12,8 +12,8 @@ export const LabelWithStep = ({
 }: PropsWithChildren<LabelWithStepProps>) => {
   return (
     <div className="flex-between mx-4 mt-6 items-end">
-      <h4 className="font-bold text-grey-7">{children}</h4>
-      <p className="p-small font-medium text-blue-4">
+      <h4 className="font-bold text-grey-700">{children}</h4>
+      <p className="p-small font-medium text-blue-400">
         {currentStep} / {totalStep}
       </p>
     </div>

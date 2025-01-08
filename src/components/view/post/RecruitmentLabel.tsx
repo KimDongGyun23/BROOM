@@ -8,7 +8,7 @@ type RecruitmentLabelProps = {
 
 export const RecruitmentLabel = ({ onClick }: RecruitmentLabelProps) => {
   const [isChecked, toggleIsChecked] = useToggle()
-  const textStyle = isChecked ? 'text-blue-5' : 'text-grey-5'
+  const textStyle = isChecked ? 'text-blue-500' : 'text-grey-500'
 
   const handleClick = () => {
     onClick()
@@ -16,7 +16,7 @@ export const RecruitmentLabel = ({ onClick }: RecruitmentLabelProps) => {
   }
 
   return (
-    <div className="border-b border-b-grey-2">
+    <div className="border-b border-b-grey-200">
       <button type="button" className="flex-align mx-4 ml-auto gap-1 py-3" onClick={handleClick}>
         <CheckBoxIcon active={isChecked} />
         <p className={`p-small ${textStyle}`}>모집 중인 글만 보기</p>

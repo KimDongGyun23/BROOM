@@ -10,7 +10,7 @@ const LoggedInUserContent = () => {
     <>
       <p className="p-medium font-medium">{nickname}님 안녕하세요.</p>
       <p className="p-medium flex-align gap-1 font-medium">
-        <span className="font-bold text-blue-5">BROOM</span>에 오신걸 환영합니다.
+        <span className="font-bold text-blue-500">BROOM</span>에 오신걸 환영합니다.
       </p>
     </>
   )
@@ -19,7 +19,7 @@ const LoggedInUserContent = () => {
 const LoggedOutUserContent = () => (
   <>
     <p className="p-medium flex-align gap-1 font-medium">
-      <span className="font-bold text-blue-5">BROOM</span>에 가입하고
+      <span className="font-bold text-blue-500">BROOM</span>에 가입하고
     </p>
     <p className="p-medium font-medium">다른 사람들을 모아보세요.</p>
   </>

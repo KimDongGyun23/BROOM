@@ -24,8 +24,8 @@ type ChattingTabProps = {
 const ChattingTab = ({ currentTab, onClick }: ChattingTabProps) => {
   const getTabStyle = (isActive: boolean) =>
     isActive
-      ? 'text-blue-6 border-b-[2px] border-b-blue-5'
-      : 'text-grey-6 border-b-[2px] border-b-grey-2'
+      ? 'text-blue-600 border-b-[2px] border-b-blue-500'
+      : 'text-grey-600 border-b-[2px] border-b-grey-200'
 
   return (
     <div className="p-medium flex px-4 py-3 font-medium">

@@ -35,13 +35,13 @@ export const Button = ({
   secondary = false,
   children,
 }: PropsWithChildren<ButtonProps>) => {
-  const bgStyle = disabled || secondary ? 'bg-grey-2 text-grey-5' : 'bg-blue-5 text-grey-1'
+  const bgStyle = disabled || secondary ? 'bg-grey-200 text-grey-500' : 'bg-blue-500 text-grey-100'
   const buttonStyle = `${sizeMap[size].padding} ${sizeMap[size].font} ${bgStyle} ${classname}`
 
   return (
     <button
       type={type}
-      className={`w-auto shrink-0 rounded-xl text-grey-1 ${buttonStyle}`}
+      className={`w-auto shrink-0 rounded-xl text-grey-100 ${buttonStyle}`}
       disabled={disabled}
       onClick={onClick}
     >

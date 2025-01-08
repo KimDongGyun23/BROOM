@@ -59,7 +59,7 @@ export const ReserveCreate = () => {
   return (
     <div className="flex-column h-svh">
       <SubHeaderWithoutIcon type="null" onClickCancle={handleCancel} />
-      <h4 className="mx-4 mb-[65px] mt-6 font-bold text-grey-7">예약 정보 입력</h4>
+      <h4 className="mx-4 mb-[65px] mt-6 font-bold text-grey-700">예약 정보 입력</h4>
 
       <FormProvider {...formMethod}>
         <ReservationForm />

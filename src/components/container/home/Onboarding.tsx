@@ -17,7 +17,7 @@ const SectionDot = ({ currentTab, onDotClick }: SectionDotType) => {
   return (
     <div className="mt-6 flex gap-2">
       {[...Array(3)].map((_, index) => {
-        const dotStyle = index === currentTab ? 'w-6 bg-blue-5' : 'w-2 bg-grey-3 opacity-50'
+        const dotStyle = index === currentTab ? 'w-6 bg-blue-500' : 'w-2 bg-grey-300 opacity-50'
         return (
           <button
             key={index}

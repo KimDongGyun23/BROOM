@@ -11,8 +11,8 @@ type DetailContentProps = {
 const PostInfoField = ({ label, content }: ContentType) => {
   return (
     <li className="flex-column w-full gap-1">
-      <p className="p-small font-medium text-blue-5">{label}</p>
-      <p className="p-large text-grey-6">{content}</p>
+      <p className="p-small font-medium text-blue-500">{label}</p>
+      <p className="p-large text-grey-600">{content}</p>
     </li>
   )
 }
@@ -34,7 +34,7 @@ export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
   return (
     <div className="scroll mt-6 grow">
       <div className="flex-column px-4">
-        <h5 className="mb-8 font-bold text-blue-6">{title}</h5>
+        <h5 className="mb-8 font-bold text-blue-600">{title}</h5>
         <div className="flex-column gap-6">
           {contents.map((content, index) => (
             <ContentRow key={index} {...content} />

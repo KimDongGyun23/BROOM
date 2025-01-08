@@ -71,13 +71,13 @@ const MessageBox = () => {
         <div className="shrink-0">
           <AdditionIcon />
         </div>
-        <div className="flex-align grow gap-1 rounded-full bg-grey-1 py-2 pl-4 pr-2">
+        <div className="flex-align grow gap-1 rounded-full bg-grey-100 py-2 pl-4 pr-2">
           <input
             type="text"
             size={8}
             {...register}
             placeholder="메세지를 입력해주세요."
-            className="grow bg-transparent text-grey-7 placeholder:text-grey-4 focus:outline-none"
+            className="grow bg-transparent text-grey-700 placeholder:text-grey-400 focus:outline-none"
           />
 
           <button type="submit" className="shrink-0">
@@ -104,7 +104,7 @@ const MessageList = ({ profile }: MessageListType) => {
           <div key={index} className={`${layoutStyle} gap-3`}>
             {!isMyMessage && <ProfileImage size="sm" iconType={militaryChaplain} />}
             <Bubble isMyMessage={isMyMessage} message={content} />
-            <span className="p-xsmall shrink-0 self-end text-grey-5">{createdAt}</span>
+            <span className="p-xsmall shrink-0 self-end text-grey-500">{createdAt}</span>
           </div>
         )
       })}

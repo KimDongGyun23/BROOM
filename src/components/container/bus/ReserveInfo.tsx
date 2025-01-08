@@ -7,9 +7,9 @@ import { useBusReservationStatus } from '@/services/service'
 import { BUS_RESERVATION_STATES } from '@/utils'
 
 const STATE_STYLES = {
-  [BUS_RESERVATION_STATES.COMPLETED]: 'text-blue-5',
-  [BUS_RESERVATION_STATES.NOT_FOUND]: 'text-red-2',
-  [BUS_RESERVATION_STATES.PENDING]: 'text-grey-5',
+  [BUS_RESERVATION_STATES.COMPLETED]: 'text-blue-500',
+  [BUS_RESERVATION_STATES.NOT_FOUND]: 'text-red-200',
+  [BUS_RESERVATION_STATES.PENDING]: 'text-grey-500',
 } as const
 
 type ReservationFormType = {
@@ -54,19 +54,21 @@ export const ReserveInfo = () => {
     <>
       <SubHeaderWithoutIcon type="null" onClickCancle={handleClose} />
       <div className="mx-4">
-        <h4 className="mb-[65px] mt-6 font-bold text-grey-7">예약 내역 조회</h4>
+        <h4 className="mb-[65px] mt-6 font-bold text-grey-700">예약 내역 조회</h4>
         <ReservationForm onSubmit={checkReservation} />
 
-        <div className="mt-5 grid grid-cols-2 border-y border-y-grey-2 text-center">
-          <p className="px-4 py-[10px] text-grey-7">신청 여부</p>
+        <div className="mt-5 grid grid-cols-2 border-y border-y-grey-200 text-center">
+          <p className="px-4 py-[10px] text-grey-700">신청 여부</p>
           <p className={`px-4 py-[10px] font-medium ${STATE_STYLES[reservationState]}`}>
             {reservationState}
           </p>
         </div>
 
         <div className="flex-column mt-5">
-          <p className="p-xsmall text-grey-5">개인 정보 보호를 위해 신청 여부만 확인 가능합니다.</p>
-          <p className="p-xsmall text-grey-5">
+          <p className="p-xsmall text-grey-500">
+            개인 정보 보호를 위해 신청 여부만 확인 가능합니다.
+          </p>
+          <p className="p-xsmall text-grey-500">
             기타 문의사항이 있다면 공지사항의 연락수단을 확인해주세요.
           </p>
         </div>

@@ -25,7 +25,7 @@ const BaseHeader = ({ title, onClickCancle, children }: PropsWithChildren<SubHea
         <ArrowLeftIcon />
       </button>
 
-      <h6 className="absolute left-1/2 w-fit -translate-x-1/2 text-center font-bold text-blue-6">
+      <h6 className="absolute left-1/2 w-fit -translate-x-1/2 text-center font-bold text-blue-600">
         {title}
       </h6>
 
@@ -70,7 +70,7 @@ export const SubHeaderWithoutIcon = ({
         <span className="w-6" />
       ) : (
         <button type="button" onClick={handleClickButton}>
-          <p className="p-medium pr-[2px] font-medium text-grey-4">
+          <p className="p-medium pr-[2px] font-medium text-grey-400">
             {isEditMode ? '수정' : '완료'}
           </p>
         </button>

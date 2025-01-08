@@ -33,7 +33,7 @@ export const PostBottom = ({
         onClick={handleClickBookmark}
       >
         <BookmarkIcon active={isBookmarked} />
-        <p className="p-xsmall text-grey-5">북마크</p>
+        <p className="p-xsmall text-grey-500">북마크</p>
       </button>
       <Button
         classname="grow"

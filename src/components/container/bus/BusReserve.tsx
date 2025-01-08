@@ -15,10 +15,10 @@ const ContentItem = ({ label, contents }: ContentItemProps) => {
 
   return (
     <div className={layoutStyle}>
-      <h6 className="mr-4 shrink-0 font-medium text-blue-5">{label}</h6>
+      <h6 className="mr-4 shrink-0 font-medium text-blue-500">{label}</h6>
       <ul className="flex-column gap-2">
         {contents.map((content) => (
-          <li key={content} className={`text-grey-6 ${dotStyle}`}>
+          <li key={content} className={`text-grey-600 ${dotStyle}`}>
             {content}
           </li>
         ))}
