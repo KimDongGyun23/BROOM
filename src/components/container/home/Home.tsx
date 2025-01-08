@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { HomeUserSection } from '@/components/domain'
+import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNav } from '@/components/view/BottomNav'
 import { MainHeader } from '@/components/view/header/MainHeader'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
