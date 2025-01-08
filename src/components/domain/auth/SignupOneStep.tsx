@@ -1,7 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useIdValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
@@ -70,7 +71,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
         </InputGroup>
       </div>
 
-      <Button size="lg" onClick={handleNext} disabled={!isIdValid} classname="mt-2 mb-10 mx-4">
+      <Button size="lg" onClick={handleNext} disabled={!isIdValid} className="mx-4 mb-10 mt-2">
         다음으로
       </Button>
     </>

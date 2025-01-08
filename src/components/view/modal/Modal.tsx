@@ -55,7 +55,7 @@ export const ModalWithOneButton = ({
 }: ModalWithOneButtonProps) => {
   return (
     <ModalLayout isOpen={isOpen} closeModal={closeModal} content={content}>
-      <Button size="lg" onClick={onClick} classname="w-full">
+      <Button size="lg" onClick={onClick} className="w-full">
         {buttonLabel}
       </Button>
     </ModalLayout>

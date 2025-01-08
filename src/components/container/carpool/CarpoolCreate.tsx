@@ -1,6 +1,7 @@
 import { FormProvider, useFormContext } from 'react-hook-form'
 
-import { Button, InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useCarpoolCreateForm } from '@/hooks'
 import { useCarpoolCreation } from '@/services/service'
 

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { AllCheckIcon, Button, CheckIcon, SubHeaderWithIcon } from '@/components/view'
+import { AllCheckIcon, CheckIcon, SubHeaderWithIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
@@ -91,7 +92,7 @@ export const SignupThirdStep = ({ label }: StepProps) => {
         </div>
       </div>
 
-      <Button size="lg" type="submit" disabled={!isAllChecked} classname="mt-2 mb-10 mx-4">
+      <Button size="lg" type="submit" disabled={!isAllChecked} className="mx-4 mb-10 mt-2">
         회원가입 완료
       </Button>
     </>

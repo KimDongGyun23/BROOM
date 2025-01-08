@@ -1,7 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useNicknameValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
@@ -65,7 +66,7 @@ export const SignupTwoStep = ({ label }: StepProps) => {
       <Button
         size="lg"
         onClick={handleNext}
-        classname="mt-2 mb-10 mx-4"
+        className="mx-4 mb-10 mt-2"
         disabled={!isNicknameValid}
       >
         다음으로

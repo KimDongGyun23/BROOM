@@ -1,7 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useBusReserveInfoForm } from '@/hooks'
 import { useBusReservationStatus } from '@/services/service'
 import { BUS_RESERVATION_STATES } from '@/utils'

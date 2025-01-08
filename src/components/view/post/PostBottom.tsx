@@ -36,7 +36,7 @@ export const PostBottom = ({
         <p className="p-xsmall text-grey-500">북마크</p>
       </button>
       <Button
-        classname="grow"
+        className="grow"
         secondary={isMyPost}
         size="sm"
         onClick={isMyPost ? undefined : onClickChattingButton}

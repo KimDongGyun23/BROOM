@@ -1,7 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 
-import { Button, InputGroup } from '@/components/view'
+import { InputGroup } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useLoginForm } from '@/hooks'
 import { useLoginLogic } from '@/services/service'
 

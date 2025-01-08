@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import onboarding_first from '@/assets/onboarding1.svg'
 import onboarding_second from '@/assets/onboarding2.svg'
 import onboarding_third from '@/assets/onboarding3.svg'
-import { Button } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useTouchEvent } from '@/hooks'
 
 type SectionDotType = {
@@ -53,7 +53,7 @@ export const Onboarding = () => {
       </div>
 
       <div className="my-5 w-full shrink-0 px-4 py-10 pt-1">
-        <Button size="lg" classname="w-full" onClick={() => navigate('/home')}>
+        <Button size="lg" className="w-full" onClick={() => navigate('/home')}>
           시작하기
         </Button>
       </div>

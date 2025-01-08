@@ -2,7 +2,8 @@ import { useCallback } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
 import type { BusFormType } from '@/types'
@@ -65,7 +66,7 @@ export const ReserveCreate = () => {
         <ReservationForm />
       </FormProvider>
 
-      <Button size="lg" classname="mt-2 mb-10 mx-4" onClick={handleSubmit(handleReservation)}>
+      <Button size="lg" className="mx-4 mb-10 mt-2" onClick={handleSubmit(handleReservation)}>
         예약하기
       </Button>
 

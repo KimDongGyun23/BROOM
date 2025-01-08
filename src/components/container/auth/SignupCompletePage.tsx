@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@/components/view'
+import { Button } from '@/components/view/Button'
 
 export const SignupCompletePage = () => {
   const navigate = useNavigate()
@@ -12,7 +12,7 @@ export const SignupCompletePage = () => {
       <p className="p-large mx-4 mt-[30px] text-center font-bold text-blue-500">
         회원가입이 완료되었습니다.
       </p>
-      <Button size="lg" classname="mx-4 mt-auto mb-10" onClick={() => navigate('/login')}>
+      <Button size="lg" className="mx-4 mb-10 mt-auto" onClick={() => navigate('/login')}>
         로그인 페이지로 이동
       </Button>
     </div>

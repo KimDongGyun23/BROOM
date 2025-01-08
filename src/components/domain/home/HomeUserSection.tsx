@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Button, TentIcon } from '@/components/view'
+import { TentIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { getSessionStorageItem, SESSION_LOGIN_KEY, SESSION_NICKNAME } from '@/utils'
 
 const LoggedInUserContent = () => {
@@ -43,10 +44,10 @@ export const HomeUserSection = () => {
 
       {!loginSession && (
         <div className="flex-align mt-4 w-full gap-3">
-          <Button size="sm" classname="grow" onClick={handleLogin}>
+          <Button size="sm" className="grow" onClick={handleLogin}>
             로그인
           </Button>
-          <Button size="sm" secondary classname="grow" onClick={handleSignUp}>
+          <Button size="sm" secondary className="grow" onClick={handleSignUp}>
             회원가입
           </Button>
         </div>

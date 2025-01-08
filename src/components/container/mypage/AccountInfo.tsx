@@ -1,6 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 
-import { Button, InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { Button } from '@/components/view/Button'
 import { useAccountForm, useBoolean } from '@/hooks'
 import { useAccountUpdate } from '@/services/service'
 
