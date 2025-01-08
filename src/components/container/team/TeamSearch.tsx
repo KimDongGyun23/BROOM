@@ -4,7 +4,7 @@ import { PostItem } from '@/components/domain/post/PostItem'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
-import { useTeamSearchList } from '@/services/query/useTeammateQuery'
+import { useTeamSearchList } from '@/services/query/useTeamQuery'
 import { SEARCH_OPTIONS } from '@/utils'
 
 type SearchListProps = {

@@ -5,9 +5,9 @@ import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
 import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
-import { useTeamDetailPage } from '@/services/query/useTeammateQuery'
+import { useTeamDetailPage } from '@/services/query/useTeamQuery'
 import { useTeamDetailActions } from '@/services/service/useTeammateDetailActions'
-import type { CustomTeamDetailType } from '@/types/teammate'
+import type { CustomTeamDetailType } from '@/types/team'
 import { getSessionStorageItem, SESSION_NICKNAME } from '@/utils'
 
 const transformTeamData = (item: CustomTeamDetailType['item']) => [

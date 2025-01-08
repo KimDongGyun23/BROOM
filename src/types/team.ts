@@ -1,4 +1,3 @@
-import type { IconType } from './common'
 import type { PostAuthorType } from './post'
 
 type TeamType = {
@@ -9,13 +8,6 @@ type TeamType = {
   meetingPlace: string
   meetingTime: string
   full: boolean
-}
-
-type AuthorType = {
-  userId: string
-  nickname: string
-  dischargeYear: number
-  militaryChaplain: IconType
 }
 
 type TeamSearchType = {

@@ -1,4 +1,3 @@
-import type { IconType } from './common'
 import type { PostAuthorType } from './post'
 
 type CarpoolType = {
@@ -9,13 +8,6 @@ type CarpoolType = {
   departPlace: string
   departTime: string
   full: boolean
-}
-
-export type AuthorType = {
-  userId: string
-  nickname: string
-  dischargeYear: number
-  militaryChaplain: IconType
 }
 
 type CarpoolSearchType = {

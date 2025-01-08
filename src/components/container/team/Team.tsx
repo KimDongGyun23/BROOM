@@ -8,7 +8,7 @@ import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
-import { useActiveTeamList, useTeamList } from '@/services/query/useTeammateQuery'
+import { useActiveTeamList, useTeamList } from '@/services/query/useTeamQuery'
 import type { PostItemType } from '@/types/post'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
 
