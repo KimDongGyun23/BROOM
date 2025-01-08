@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 
+import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import type { PostItemType } from '@/types/post'
-
-import { AdditionCircleIcon, StopIcon } from '../icons/NonActiveIcons'
 
 type PostItemProps = {
   item: PostItemType

@@ -7,36 +7,19 @@ import type {
   UpdateAccountRequest,
   UpdatePasswordRequest,
 } from '@/types'
+import type { PostItemType } from '@/types/post'
 
 import { api } from '.'
 
-const fetchInfo = async () => {
-  return await api.get<MypageInfoResponse>(`/mypage`)
-}
-
-const deleteUser = async () => {
-  return await api.delete(`/exit`)
-}
-
-const updateAccount = async ({ body }: UpdateAccountRequest) => {
-  return await api.put(`/mypage/info`, body)
-}
-
-const updatePassword = async ({ body }: UpdatePasswordRequest) => {
-  return await api.post<string>(`/mypage/password`, body)
-}
-
-const carpoolPosts = async () => {
-  return await api.get<CarpoolFetchResponse>(`/mypage/carpool`)
-}
-
-const teamPosts = async () => {
-  return await api.get<TeamsFetchResponse>(`/mypage/team`)
-}
-
-const logout = async () => {
-  return await api.post(`/logout`, undefined)
-}
+const API_ENDPOINTS = {
+  ACCOUNT: `/mypage/info`,
+  DELETE_USER: `/exit`,
+  FETCH_MYPAGE: `/mypage`,
+  UPDATE_PASSWORD: `/mypage/password`,
+  CARPOOL_POST: `/mypage/carpool`,
+  TEAM_POST: `/mypage/team`,
+  LOG_OUT: `/logout`,
+} as const
 
 const queryKeys = {
   all: ['mypage'] as const,
@@ -46,53 +29,67 @@ const queryKeys = {
 }
 
 export const useUserProfile = () => {
-  return useQuery({
+  return useQuery<MypageInfoResponse, Error>({
     queryKey: queryKeys.all,
-    queryFn: fetchInfo,
+    queryFn: async () => await api.get(API_ENDPOINTS.FETCH_MYPAGE),
   })
 }
 
 export const useUserDeletion = () => {
-  return useMutation({
-    mutationFn: deleteUser,
+  return useMutation<void, Error, void>({
+    mutationFn: async () => api.delete(API_ENDPOINTS.DELETE_USER),
   })
 }
 
 export const useUpdateUserAccount = () => {
   const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: updateAccount,
+  return useMutation<void, Error, UpdateAccountRequest>({
+    mutationFn: async ({ body }) => await api.put(API_ENDPOINTS.ACCOUNT, body),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
 
 export const useUpdatePassword = () => {
-  return useMutation({
-    mutationFn: updatePassword,
+  return useMutation<string, Error, UpdatePasswordRequest>({
+    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.UPDATE_PASSWORD, body),
   })
 }
 
 export const useMyTeamPost = () => {
-  return useQuery({
+  return useQuery<TeamsFetchResponse, Error, PostItemType[]>({
     queryKey: queryKeys.myTeamPost(),
-    queryFn: teamPosts,
+    queryFn: async () => await api.get(API_ENDPOINTS.TEAM_POST),
     gcTime: 0,
     staleTime: 0,
+    select: (data) =>
+      data.result.map((item) => ({
+        ...item,
+        id: item.teamBoardId,
+        place: item.meetingPlace,
+        time: item.meetingTime,
+      })),
   })
 }
 
 export const useMyCarpoolPost = () => {
-  return useQuery({
+  return useQuery<CarpoolFetchResponse, Error, PostItemType[]>({
     queryKey: queryKeys.myCarpoolPost(),
-    queryFn: carpoolPosts,
+    queryFn: async () => await api.get(API_ENDPOINTS.CARPOOL_POST),
     gcTime: 0,
     staleTime: 0,
+    select: (data) =>
+      data.result.map((item) => ({
+        ...item,
+        id: item.carpoolBoardId,
+        place: item.departPlace,
+        time: item.departTime,
+      })),
   })
 }
 
 export const useLogout = () => {
   return useMutation({
-    mutationFn: logout,
+    mutationFn: async () => await api.post(API_ENDPOINTS.LOG_OUT, null),
   })
 }

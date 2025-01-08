@@ -1,6 +1,5 @@
+import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks'
-
-import { CheckBoxIcon } from '../icons/ActiveIcons'
 
 type RecruitmentLabelProps = {
   onClick: VoidFunction

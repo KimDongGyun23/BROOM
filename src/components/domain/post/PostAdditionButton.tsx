@@ -1,4 +1,4 @@
-import { AdditionIcon } from '../icons/NonActiveIcons'
+import { AdditionIcon } from '@/components/view/icons/NonActiveIcons'
 
 type PostAdditionButtonProps = {
   onClick: VoidFunction

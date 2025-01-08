@@ -1,9 +1,8 @@
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view'
+import { Kebab } from '@/components/view/Kebab'
+import { ModalWithTwoButton } from '@/components/view/Modal'
 import { useBoolean } from '@/hooks'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
-
-import { Kebab } from '../Kebab'
-import { ModalWithTwoButton } from '../Modal'
 
 type PostDetailHeaderProps = {
   isMyPost: boolean

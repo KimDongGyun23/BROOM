@@ -1,7 +1,6 @@
+import { Button } from '@/components/view/Button'
+import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks'
-
-import { Button } from '../Button'
-import { BookmarkIcon } from '../icons/ActiveIcons'
 
 type PostBottomProps = {
   isMyPost?: boolean

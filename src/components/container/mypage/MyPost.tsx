@@ -1,60 +1,36 @@
 import { useState } from 'react'
 
-import { PostItem, PostTabs, SubHeaderWithoutIcon } from '@/components/view'
+import { PostItem } from '@/components/domain/post/PostItem'
+import { PostTabs } from '@/components/domain/post/PostTabs'
+import { SubHeaderWithoutIcon } from '@/components/view'
 import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query'
-import type { CarpoolFetchResponse, TabType, TeamsFetchResponse } from '@/types'
+import type { TabType } from '@/types'
+import type { PostItemType } from '@/types/post'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
 
-type CarpoolPostsProps = {
-  posts: CarpoolFetchResponse | undefined
+type PostsProps = {
+  items: PostItemType[] | undefined
 }
 
-type TeamPostsProps = {
-  posts: TeamsFetchResponse | undefined
-}
-
-const CarpoolPosts = ({ posts }: CarpoolPostsProps) => {
-  if (!posts) return null
+const CarpoolPosts = ({ items }: PostsProps) => {
+  if (!items) return null
   return (
     <section aria-labelledby="carpool-posts">
-      {posts &&
-        posts.result.map((item) => (
-          <PostItem
-            item={item}
-            key={carpoolBoardId}
-            title={title}
-            createdAt={createdAt}
-            trainingDate={trainingDate}
-            place={departPlace}
-            time={departTime}
-            isFull={full}
-            to={`/carpool/detail/${carpoolBoardId}`}
-          />
-        ))}
+      {items.map((item) => (
+        <PostItem key={item.id} item={item} to={`/carpool/detail/${item.id}`} />
+      ))}
     </section>
   )
 }
 
-const TeamPosts = ({ posts }: TeamPostsProps) => {
-  if (!posts) return null
+const TeamPosts = ({ items }: PostsProps) => {
+  if (!items) return null
   return (
     <section aria-labelledby="team-posts">
-      {posts &&
-        posts.result.map(
-          ({ teamBoardId, title, createdAt, trainingDate, meetingPlace, meetingTime, full }) => (
-            <PostItem
-              key={teamBoardId}
-              title={title}
-              createdAt={createdAt}
-              trainingDate={trainingDate}
-              place={meetingPlace}
-              time={meetingTime}
-              isFull={full}
-              to={`/team/detail/${teamBoardId}`}
-            />
-          ),
-        )}
+      {items.map((item) => (
+        <PostItem key={item.id} item={item} to={`/team/detail/${item.id}`} />
+      ))}
     </section>
   )
 }
@@ -94,8 +70,8 @@ export const MyPost = () => {
       <PostTabs currentTab={currentTab} onTabClick={handleTabClick} />
 
       <div className="scroll grow">
-        {currentTab === TAB_LIST[0] && <CarpoolPosts posts={carpoolPostsData} />}
-        {currentTab === TAB_LIST[1] && <TeamPosts posts={teamPostsData} />}
+        {currentTab === TAB_LIST[0] && <CarpoolPosts items={carpoolPostsData} />}
+        {currentTab === TAB_LIST[1] && <TeamPosts items={teamPostsData} />}
       </div>
     </main>
   )

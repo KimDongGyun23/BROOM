@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
 
-import { PostBottom, PostDetailContent, PostDetailHeader } from '@/components/view'
+import { PostBottom } from '@/components/domain/post/PostBottom'
+import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
+import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useCarpoolDetailPage } from '@/services/query'

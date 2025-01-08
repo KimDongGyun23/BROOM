@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
-import { BottomNav, MainHeader, PostAdditionButton, PostItem } from '@/components/view'
+import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
+import { PostItem } from '@/components/domain/post/PostItem'
+import { BottomNav, MainHeader } from '@/components/view'
 import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'

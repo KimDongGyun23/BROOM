@@ -45,7 +45,15 @@ export type UpdatePasswordRequest = {
 }
 
 export type CarpoolFetchResponse = {
-  result: CarpoolPostType[]
+  result: {
+    carpoolBoardId: number
+    title: string
+    createdAt: string
+    trainingDate: string
+    departPlace: string
+    departTime: string
+    full: boolean
+  }[]
 }
 
 export type TeamsFetchResponse = {
