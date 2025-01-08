@@ -12,15 +12,34 @@ import {
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
 
-type AgreementStatusType = {
-  personalConsent: boolean
-  serviceConsent: boolean
+type AgreementItemProps = {
+  text: string
+  isChecked: boolean
+  onToggle: VoidFunction
 }
 
-const agreementTexts = {
-  personalConsent: '(필수) 개인정보 이용 약관 동의',
-  serviceConsent: '(필수) 서비스 이용 약관 동의',
-} as const
+const AGREEMENTS = [
+  { id: 'personalConsent', text: '(필수) 개인정보 이용 약관 동의' },
+  { id: 'serviceConsent', text: '(필수) 서비스 이용 약관 동의' },
+] as const
+
+type AgreementId = (typeof AGREEMENTS)[number]['id']
+
+const AgreementItem = ({ text, isChecked, onToggle }: AgreementItemProps) => {
+  const textStyle = isChecked ? 'text-blue-5 font-bold' : 'text-grey-5 font-medium'
+
+  return (
+    <div className="flex-align">
+      <button type="button" className="flex-align gap-2" onClick={onToggle}>
+        <CheckIcon active={isChecked} />
+        <p className={`p-large ${textStyle}`}>{text}</p>
+      </button>
+      <button type="button" className="p-small ml-auto border-b border-b-grey-4 text-grey-4">
+        보기
+      </button>
+    </div>
+  )
+}
 
 export const SignupThirdStep = ({ label }: StepProps) => {
   const navigate = useNavigate()
@@ -29,39 +48,32 @@ export const SignupThirdStep = ({ label }: StepProps) => {
   const { reset } = useFormContext()
   const { goPreviousStep } = useStepsActions()
 
-  const [agreementStatus, setAgreementStatus] = useState<AgreementStatusType>({
-    personalConsent: false,
-    serviceConsent: false,
-  })
-  const isAllAgreed = Object.values(agreementStatus).every((isAgreed) => isAgreed)
+  const [checkedAgreements, setCheckedAgreements] = useState<Set<AgreementId>>(new Set())
+  const isAllChecked = checkedAgreements.size === AGREEMENTS.length
 
-  const toggleAgreement = (type: keyof AgreementStatusType) => {
-    setAgreementStatus((prev) => ({
-      ...prev,
-      [type]: !prev[type],
-    }))
-  }
-
-  const toggleAllAgreements = () => {
-    const newStatus = !isAllAgreed
-    setAgreementStatus({
-      personalConsent: newStatus,
-      serviceConsent: newStatus,
+  const toggleAgreement = (id: AgreementId) => {
+    setCheckedAgreements((prev) => {
+      const next = new Set(prev)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
+      return next
     })
   }
 
-  const handleClickCloseButton = () => {
+  const toggleAllAgreements = () => {
+    setCheckedAgreements((prev) =>
+      prev.size === AGREEMENTS.length ? new Set() : new Set(AGREEMENTS.map((a) => a.id)),
+    )
+  }
+
+  const handleClose = () => {
     navigate('/login')
     reset()
   }
 
   return (
     <>
-      <SubHeaderWithIcon
-        type="close"
-        onClickCancle={goPreviousStep}
-        onClickClose={handleClickCloseButton}
-      />
+      <SubHeaderWithIcon type="close" onClickCancle={goPreviousStep} onClickClose={handleClose} />
 
       <LabelWithStep currentStep={3} totalStep={totalStep}>
         {label}
@@ -69,43 +81,25 @@ export const SignupThirdStep = ({ label }: StepProps) => {
 
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
         <button type="button" onClick={toggleAllAgreements} className="flex-align gap-2">
-          <AllCheckIcon active={isAllAgreed} />
-          <h4 className={`font-bold ${isAllAgreed ? 'text-blue-5' : 'text-grey-5'}`}>
+          <AllCheckIcon active={isAllChecked} />
+          <h4 className={`font-bold ${isAllChecked ? 'text-blue-5' : 'text-grey-5'}`}>
             모두 동의합니다.
           </h4>
         </button>
 
         <div className="flex-column gap-6">
-          {Object.keys(agreementStatus).map((type) => {
-            const isAgreed = agreementStatus[type as keyof AgreementStatusType]
-            const textStyle = isAgreed ? 'text-blue-5 font-bold' : 'text-grey-5 font-medium'
-
-            return (
-              <div key={type} className="flex-align">
-                <button
-                  type="button"
-                  className="flex-align gap-2"
-                  onClick={() => toggleAgreement(type as keyof AgreementStatusType)}
-                >
-                  <CheckIcon active={isAgreed} />
-                  <p className={`p-large ${textStyle}`}>
-                    {agreementTexts[type as keyof AgreementStatusType]}
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  className="p-small ml-auto border-b border-b-grey-4 text-grey-4"
-                >
-                  보기
-                </button>
-              </div>
-            )
-          })}
+          {AGREEMENTS.map(({ id, text }) => (
+            <AgreementItem
+              key={id}
+              text={text}
+              isChecked={checkedAgreements.has(id)}
+              onToggle={() => toggleAgreement(id)}
+            />
+          ))}
         </div>
       </div>
 
-      <Button size="lg" type="submit" disabled={!isAllAgreed} classname="mt-2 mb-10 mx-4">
+      <Button size="lg" type="submit" disabled={!isAllChecked} classname="mt-2 mb-10 mx-4">
         회원가입 완료
       </Button>
     </>
