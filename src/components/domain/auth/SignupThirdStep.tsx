@@ -2,13 +2,8 @@ import { useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import {
-  AllCheckIcon,
-  Button,
-  CheckIcon,
-  LabelWithStep,
-  SubHeaderWithIcon,
-} from '@/components/view'
+import { AllCheckIcon, Button, CheckIcon, SubHeaderWithIcon } from '@/components/view'
+import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
 
@@ -74,10 +69,7 @@ export const SignupThirdStep = ({ label }: StepProps) => {
   return (
     <>
       <SubHeaderWithIcon type="close" onClickCancle={goPreviousStep} onClickClose={handleClose} />
-
-      <LabelWithStep currentStep={3} totalStep={totalStep}>
-        {label}
-      </LabelWithStep>
+      <LabelWithStep currentStep={3} totalStep={totalStep} label={label} />
 
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
         <button type="button" onClick={toggleAllAgreements} className="flex-align gap-2">

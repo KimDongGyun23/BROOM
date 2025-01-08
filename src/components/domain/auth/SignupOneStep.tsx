@@ -1,7 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { Button, InputGroup, LabelWithStep, SubHeaderWithIcon } from '@/components/view'
+import { Button, InputGroup, SubHeaderWithIcon } from '@/components/view'
+import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useIdValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
@@ -31,10 +32,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
   return (
     <>
       <SubHeaderWithIcon type="close" onClickCancle={handleClose} onClickClose={handleClose} />
-
-      <LabelWithStep currentStep={1} totalStep={totalStep}>
-        {label}
-      </LabelWithStep>
+      <LabelWithStep currentStep={1} totalStep={totalStep} label={label} />
 
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
         <InputGroup>
