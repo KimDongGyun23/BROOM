@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { PostItem } from '@/components/domain/post/PostItem'
 import { PostTabs } from '@/components/domain/post/PostTabs'
-import { SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query'
 import type { TabType } from '@/types'

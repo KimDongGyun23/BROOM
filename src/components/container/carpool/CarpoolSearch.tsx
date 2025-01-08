@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { PostItem } from '@/components/domain/post/PostItem'
-import { SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useCarpoolSearchList } from '@/services/query'

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { PostTabs } from '@/components/domain/post/PostTabs'
-import { SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import type { TabType } from '@/types'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
 

@@ -6,29 +6,32 @@ import { ArrowLeftIcon, CloseIcon, KebabIcon } from '../icons/NonActiveIcons'
 type SubHeaderProps = {
   title?: string
   type: 'close' | 'edit' | 'complete' | 'null' | 'kebab'
-  onClickCancle?: VoidFunction
+  onClickCancel?: VoidFunction
   onClickClose?: VoidFunction
   onClickKebab?: VoidFunction
   onClickEdit?: VoidFunction
   onClickComplete?: VoidFunction
 }
-type SubHeaderWithIconType = Omit<SubHeaderProps, 'onClickEdit' | 'onClickComplete'>
+
+type SubHeaderWithIconType = Pick<SubHeaderProps, 'title' | 'onClickCancel'>
 type SubHeaderWithoutIconType = Omit<SubHeaderProps, 'onClickClose' | 'onClickKebab'>
 
-const BaseHeader = ({ title, onClickCancle, children }: PropsWithChildren<SubHeaderProps>) => {
+const BaseHeader = ({
+  title,
+  onClickCancel,
+  children,
+}: PropsWithChildren<SubHeaderWithIconType>) => {
   const navigate = useNavigate()
-  const handleClickCancle = onClickCancle ? onClickCancle : () => navigate(-1)
+  const handleClickCancel = onClickCancel ? onClickCancel : () => navigate(-1)
 
   return (
     <div className="flex-between-align relative p-4">
-      <button type="button" onClick={handleClickCancle}>
+      <button type="button" onClick={handleClickCancel}>
         <ArrowLeftIcon />
       </button>
-
       <h6 className="absolute left-1/2 w-fit -translate-x-1/2 text-center font-bold text-blue-600">
         {title}
       </h6>
-
       {children}
     </div>
   )
@@ -37,15 +40,15 @@ const BaseHeader = ({ title, onClickCancle, children }: PropsWithChildren<SubHea
 export const SubHeaderWithIcon = ({
   title,
   type,
-  onClickCancle,
+  onClickCancel,
   onClickClose,
   onClickKebab,
-}: SubHeaderWithIconType) => {
+}: SubHeaderProps) => {
   const isCloseType = type === 'close'
   const handleIconClick = isCloseType ? onClickClose : onClickKebab
 
   return (
-    <BaseHeader title={title} type={type} onClickCancle={onClickCancle}>
+    <BaseHeader title={title} onClickCancel={onClickCancel}>
       <button type="button" onClick={handleIconClick}>
         {isCloseType ? <CloseIcon /> : <KebabIcon />}
       </button>
@@ -56,20 +59,18 @@ export const SubHeaderWithIcon = ({
 export const SubHeaderWithoutIcon = ({
   title,
   type,
-  onClickCancle,
+  onClickCancel,
   onClickEdit,
   onClickComplete,
 }: SubHeaderWithoutIconType) => {
   const isEditMode = type === 'edit'
-  const isNullType = type === 'null'
-  const handleClickButton = isEditMode ? onClickEdit : onClickComplete
 
   return (
-    <BaseHeader title={title} type={type} onClickCancle={onClickCancle}>
-      {isNullType ? (
+    <BaseHeader title={title} onClickCancel={onClickCancel}>
+      {type === 'null' ? (
         <span className="w-6" />
       ) : (
-        <button type="button" onClick={handleClickButton}>
+        <button type="button" onClick={isEditMode ? onClickEdit : onClickComplete}>
           <p className="p-medium pr-[2px] font-medium text-grey-400">
             {isEditMode ? '수정' : '완료'}
           </p>

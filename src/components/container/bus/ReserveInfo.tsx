@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useBusReserveInfoForm } from '@/hooks'
 import { useBusReservationStatus } from '@/services/service'
@@ -54,7 +54,7 @@ export const ReserveInfo = () => {
 
   return (
     <>
-      <SubHeaderWithoutIcon type="null" onClickCancle={handleClose} />
+      <SubHeaderWithoutIcon type="null" onClickCancel={handleClose} />
       <div className="mx-4">
         <h4 className="mb-[65px] mt-6 font-bold text-grey-700">예약 내역 조회</h4>
         <ReservationForm onSubmit={checkReservation} />

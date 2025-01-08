@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { BottomNav, MainHeader } from '@/components/view'
+import { BottomNav } from '@/components/view/BottomNav'
+import { MainHeader } from '@/components/view/header/MainHeader'
 import { Loading } from '@/components/view/Loading'
 import { ChattingProfile } from '@/components/view/Profile'
 import {

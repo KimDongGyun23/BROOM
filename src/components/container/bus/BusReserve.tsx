@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
-import { BottomNav, MainHeader } from '@/components/view'
+import { BottomNav } from '@/components/view/BottomNav'
 import { Button } from '@/components/view/Button'
+import { MainHeader } from '@/components/view/header/MainHeader'
 import { BUS_RESERVE_CONTENT } from '@/utils'
 
 type ContentItemProps = {

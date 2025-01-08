@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 
 import { HomeUserSection } from '@/components/domain'
-import { ArrowRightIcon, BottomNav, MainHeader } from '@/components/view'
+import { BottomNav } from '@/components/view/BottomNav'
+import { MainHeader } from '@/components/view/header/MainHeader'
+import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
 import { NOTICE_ARR } from '@/utils'
 
 const SERVICE_ITEMS = [

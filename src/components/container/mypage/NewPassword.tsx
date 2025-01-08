@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 
-import { SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'

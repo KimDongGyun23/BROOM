@@ -1,8 +1,8 @@
 import { FormProvider, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useCarpoolEditForm } from '@/hooks'
 import { useCarpoolUpdate } from '@/services/service/useCarpoolUpdate'

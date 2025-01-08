@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
@@ -61,7 +61,7 @@ export const ReserveCreate = () => {
 
   return (
     <div className="flex-column h-svh">
-      <SubHeaderWithoutIcon type="null" onClickCancle={handleCancel} />
+      <SubHeaderWithoutIcon type="null" onClickCancel={handleCancel} />
       <h4 className="mx-4 mb-[65px] mt-6 font-bold text-grey-700">예약 정보 입력</h4>
 
       <FormProvider {...formMethod}>
