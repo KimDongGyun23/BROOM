@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button, InputGroup, LabelWithStep, SubHeaderWithIcon } from '@/components/view'
-import { useValidateId } from '@/queries'
+import { useIdValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
 
@@ -11,61 +10,24 @@ export const SignupOneStep = ({ label }: StepProps) => {
   const navigate = useNavigate()
   const totalStep = useTotalStep()
 
-  const [validationSuccessMessage, setValidationSuccessMessage] = useState<string | null>(null)
-  const [validationErrorMessage, setValidationErrorMessage] = useState<string | null>(null)
-  const [isIdValidated, setIsIdValidated] = useState(false)
-
   const { goNextStep } = useStepsActions()
-  const { mutate: validateIdMutation } = useValidateId()
-  const { getValues, trigger, reset, watch } = useFormContext()
+  const { trigger, watch } = useFormContext()
+  const { validateId, isIdValid, idValidationMessage } = useIdValidation()
 
   const watchUserIdField = watch('userId')
 
-  const handleClickCloseButton = () => {
-    navigate('/login')
-    reset()
-  }
+  const handleClose = () => navigate('/login')
 
-  const handleClickNextButton = async () => {
+  const handleNext = async () => {
     const isValid = await trigger(['userId', 'password', 'confirm'])
-    if (isValid) goNextStep()
-  }
-
-  const handleClickValidateId = async () => {
-    const isValid = await trigger(['userId'])
-    if (isValid) {
-      const userId = getValues('userId')
-      validateIdMutation(
-        { body: { userId: userId } },
-        {
-          onSuccess: () => {
-            setValidationSuccessMessage('사용 가능한 아이디입니다')
-            setValidationErrorMessage(null)
-            setIsIdValidated(true)
-          },
-          onError: () => {
-            setValidationSuccessMessage(null)
-            setValidationErrorMessage('이미 사용 중인 아이디입니다')
-            setIsIdValidated(false)
-          },
-        },
-      )
+    if (isValid && isIdValid) {
+      goNextStep()
     }
   }
 
-  useEffect(() => {
-    setIsIdValidated(false)
-    setValidationSuccessMessage(null)
-    setValidationErrorMessage(null)
-  }, [watchUserIdField])
-
   return (
     <>
-      <SubHeaderWithIcon
-        type="close"
-        onClickCancle={handleClickCloseButton}
-        onClickClose={handleClickCloseButton}
-      />
+      <SubHeaderWithIcon type="close" onClickCancle={handleClose} onClickClose={handleClose} />
 
       <LabelWithStep currentStep={1} totalStep={totalStep}>
         {label}
@@ -75,14 +37,14 @@ export const SignupOneStep = ({ label }: StepProps) => {
         <InputGroup>
           <InputGroup.Label
             section="userId"
-            customSuccessMessage={validationSuccessMessage}
-            customErrorMessage={validationErrorMessage}
+            customSuccessMessage={isIdValid ? idValidationMessage : null}
+            customErrorMessage={!isIdValid ? idValidationMessage : null}
           >
             아이디
           </InputGroup.Label>
           <div className="flex gap-4">
             <InputGroup.Input section="userId" placeholder="최소 6글자, 최대 12글자" />
-            <Button size="md" onClick={handleClickValidateId}>
+            <Button size="md" onClick={() => validateId(watchUserIdField)}>
               중복 확인
             </Button>
           </div>
@@ -107,12 +69,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
         </InputGroup>
       </div>
 
-      <Button
-        size="lg"
-        onClick={handleClickNextButton}
-        disabled={!isIdValidated}
-        classname="mt-2 mb-10 mx-4"
-      >
+      <Button size="lg" onClick={handleNext} disabled={!isIdValid} classname="mt-2 mb-10 mx-4">
         다음으로
       </Button>
     </>

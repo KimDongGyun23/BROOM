@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { SignupOneStep, SignupThirdStep, SignupTwoStep } from '@/components/domain'
 import { useSignupForm } from '@/hooks'
-import { useSignup } from '@/queries'
+import { useSignup } from '@/services/query'
 import { useCurrentStep, useStepsActions } from '@/stores'
 import type { SignupFormType } from '@/types'
 
