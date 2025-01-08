@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react'
 import ReactDOM from 'react-dom'
 
-import { Button } from '../Button'
+import { Button } from './Button'
 
 type ModalBaseProps = {
   isOpen: boolean

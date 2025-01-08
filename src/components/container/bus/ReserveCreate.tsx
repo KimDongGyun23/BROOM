@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
-import { ModalWithOneButton } from '@/components/view/modal/Modal'
+import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
 import type { BusFormType } from '@/types'

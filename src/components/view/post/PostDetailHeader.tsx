@@ -3,7 +3,7 @@ import { useBoolean } from '@/hooks'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
 
 import { Kebab } from '../Kebab'
-import { ModalWithTwoButton } from '../modal/Modal'
+import { ModalWithTwoButton } from '../Modal'
 
 type PostDetailHeaderProps = {
   isMyPost: boolean

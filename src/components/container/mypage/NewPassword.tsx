@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 
 import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
-import { ModalWithOneButton } from '@/components/view/modal/Modal'
+import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'
 import { usePasswordUpdate } from '@/services/service'
 
