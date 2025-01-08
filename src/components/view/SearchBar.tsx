@@ -79,11 +79,11 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 
       {isFilterVisible && (
         <Kebab
-          list={SEARCH_OPTIONS.map((option) => ({
+          items={SEARCH_OPTIONS.map((option) => ({
             ...option,
             onClick: () => handleFilterSelect(option),
           }))}
-          location="left-4 top-[125px]"
+          position="left-4 top-[125px]"
         />
       )}
     </FormProvider>

@@ -6,12 +6,12 @@ import { Bubble } from '@/components/domain'
 import {
   AdditionIcon,
   ChattingRoomProfile,
-  Kebab,
   Loading,
   ProfileImage,
   SendingIcon,
   SubHeaderWithIcon,
 } from '@/components/view'
+import { Kebab } from '@/components/view/Kebab'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
 import { useTeamChattingInfo, useTeamExitChattingRoom } from '@/services/query'
 import { useMessageActions, useMessageData } from '@/stores/message'
@@ -38,10 +38,10 @@ const ChattingKebab = ({ isKebabOpen }: ChattingKebabProps) => {
         navigate('/chatting')
       },
     },
-    { label: '차단하기', onClick: () => console.log('차단하기') },
+    { label: '차단하기', onClick: () => console.log('차단하기'), isRed: true },
   ]
 
-  if (isKebabOpen) return <Kebab list={kebabMap} location="right-4 top-12" redIndex={1} />
+  if (isKebabOpen) return <Kebab items={kebabMap} position="right-4 top-12" />
   return null
 }
 
