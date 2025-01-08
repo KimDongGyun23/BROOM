@@ -2,8 +2,9 @@ import { useCallback } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
-import { InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { ModalWithOneButton } from '@/components/view/modal/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
 import type { BusFormType } from '@/types'
@@ -72,10 +73,9 @@ export const ReserveCreate = () => {
 
       <ModalWithOneButton
         isOpen={isModalOpen}
-        closeModal={closeModal}
+        onClose={closeModal}
         content="성공적으로 예약되었습니다."
-        buttonLabel="완료"
-        onClick={handleModalClose}
+        button={{ onClick: handleModalClose, label: '완료' }}
       />
     </div>
   )

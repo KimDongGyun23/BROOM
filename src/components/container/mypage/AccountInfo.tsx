@@ -1,7 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 
-import { InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
 import { Button } from '@/components/view/Button'
+import { ModalWithOneButton } from '@/components/view/modal/Modal'
 import { useAccountForm, useBoolean } from '@/hooks'
 import { useAccountUpdate } from '@/services/service'
 
@@ -74,10 +75,9 @@ export const AccountInfo = () => {
 
       <ModalWithOneButton
         isOpen={isModalOpen}
-        closeModal={closeModal}
+        onClose={closeModal}
         content="계정 정보가 수정되었습니다."
-        buttonLabel="완료"
-        onClick={closeModal}
+        button={{ onClick: closeModal, label: '완료' }}
       />
     </>
   )

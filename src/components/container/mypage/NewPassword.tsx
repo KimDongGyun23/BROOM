@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 
-import { InputGroup, ModalWithOneButton, SubHeaderWithoutIcon } from '@/components/view'
+import { InputGroup, SubHeaderWithoutIcon } from '@/components/view'
+import { ModalWithOneButton } from '@/components/view/modal/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'
 import { usePasswordUpdate } from '@/services/service'
 
@@ -57,10 +58,9 @@ export const NewPassword = () => {
 
       <ModalWithOneButton
         isOpen={isModalOpen}
-        closeModal={closeModal}
+        onClose={closeModal}
         content={modalContent}
-        buttonLabel="완료"
-        onClick={closeModal}
+        button={{ onClick: closeModal, label: '완료' }}
       />
     </>
   )

@@ -1,8 +1,9 @@
-import { ModalWithTwoButton, SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view'
+import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view'
 import { useBoolean } from '@/hooks'
 import { getSessionStorageItem, SESSION_LOGIN_KEY } from '@/utils'
 
 import { Kebab } from '../Kebab'
+import { ModalWithTwoButton } from '../modal/Modal'
 
 type PostDetailHeaderProps = {
   isMyPost: boolean
@@ -38,12 +39,10 @@ const LoggedInHeader = ({
 
       <ModalWithTwoButton
         isOpen={isModalOpen}
-        closeModal={closeModal}
+        onClose={closeModal}
         content="게시글을 삭제하시겠습니까?"
-        cancleButtonLabel="취소"
-        completeButtonLabel="삭제"
-        cancleOnClick={closeModal}
-        completeOnClick={onDelete}
+        secondaryButton={{ onClick: closeModal, label: '취소' }}
+        primaryButton={{ onClick: onDelete, label: '삭제' }}
       />
     </>
   )
