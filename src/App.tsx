@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { Splash } from './components/container'
-import { RouterComponent } from './components/view'
+import { Splash } from './components/container/home/Splash'
+import { RouterComponent } from './components/view/RouterComponent'
 
 function App() {
   const [showSplash, setShowSplash] = useState<boolean>(true)
