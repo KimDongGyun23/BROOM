@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { BottomNav, ChattingProfile, Loading, MainHeader } from '@/components/view'
+import { BottomNav, MainHeader } from '@/components/view'
+import { Loading } from '@/components/view/Loading'
+import { ChattingProfile } from '@/components/view/Profile'
 import {
   useCarpoolChattingRoomList,
   useTeamChattingRoomList,
@@ -52,11 +54,19 @@ const CarpoolChattingList = () => {
 
   return (
     <>
-      {chattingList.map((profile) => (
-        <Link to={`/chatting/chatting-room/carpool/${profile.id}`} key={profile.id}>
-          <ChattingProfile profile={profile} />
-        </Link>
-      ))}
+      {chattingList.map(
+        ({ id, opponent, militaryChaplain, title, lastMessage, lastMessageDaysAgo }) => (
+          <Link to={`/chatting/chatting-room/carpool/${id}`} key={id}>
+            <ChattingProfile
+              opponent={opponent}
+              iconType={militaryChaplain}
+              title={title}
+              lastMessage={lastMessage}
+              lastMessageDaysAgo={lastMessageDaysAgo}
+            />
+          </Link>
+        ),
+      )}
     </>
   )
 }
@@ -69,11 +79,19 @@ const TeamChattingList = () => {
 
   return (
     <>
-      {chattingList.map((profile) => (
-        <Link to={`/chatting/chatting-room/team/${profile.id}`} key={profile.id}>
-          <ChattingProfile profile={profile} />
-        </Link>
-      ))}
+      {chattingList.map(
+        ({ id, opponent, militaryChaplain, title, lastMessage, lastMessageDaysAgo }) => (
+          <Link to={`/chatting/chatting-room/team/${id}`} key={id}>
+            <ChattingProfile
+              opponent={opponent}
+              iconType={militaryChaplain}
+              title={title}
+              lastMessage={lastMessage}
+              lastMessageDaysAgo={lastMessageDaysAgo}
+            />
+          </Link>
+        ),
+      )}
     </>
   )
 }

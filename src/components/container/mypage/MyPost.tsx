@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { Loading, PostItem, PostTabs, SubHeaderWithoutIcon } from '@/components/view'
+import { PostItem, PostTabs, SubHeaderWithoutIcon } from '@/components/view'
+import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query'
 import type { CarpoolFetchResponse, TabType, TeamsFetchResponse } from '@/types'
 import { getSessionStorageItem, setSessionStorageItem, TAB_LIST } from '@/utils'
@@ -18,20 +19,19 @@ const CarpoolPosts = ({ posts }: CarpoolPostsProps) => {
   return (
     <section aria-labelledby="carpool-posts">
       {posts &&
-        posts.result.map(
-          ({ carpoolBoardId, title, createdAt, trainingDate, departPlace, departTime, full }) => (
-            <PostItem
-              key={carpoolBoardId}
-              title={title}
-              createdAt={createdAt}
-              trainingDate={trainingDate}
-              place={departPlace}
-              time={departTime}
-              isFull={full}
-              to={`/carpool/detail/${carpoolBoardId}`}
-            />
-          ),
-        )}
+        posts.result.map((item) => (
+          <PostItem
+            item={item}
+            key={carpoolBoardId}
+            title={title}
+            createdAt={createdAt}
+            trainingDate={trainingDate}
+            place={departPlace}
+            time={departTime}
+            isFull={full}
+            to={`/carpool/detail/${carpoolBoardId}`}
+          />
+        ))}
     </section>
   )
 }

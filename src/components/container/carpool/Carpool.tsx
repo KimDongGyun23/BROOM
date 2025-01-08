@@ -1,13 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
-import {
-  BottomNav,
-  CheckBoxIcon,
-  Loading,
-  MainHeader,
-  PostAdditionButton,
-  PostItem,
-} from '@/components/view'
+import { BottomNav, MainHeader, PostAdditionButton, PostItem } from '@/components/view'
+import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
+import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
 import { useActiveCarpoolList, useCarpoolList } from '@/services/query'
