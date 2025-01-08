@@ -1,3 +1,5 @@
+import type { ProfileIconType } from '@/utils'
+
 import type { IconType } from './common'
 
 type ChattingRoomType = {
@@ -80,13 +82,8 @@ export type CarpoolChattingRoomResponse = {
 export type ChattingRoomProfileType = {
   opponent: string
   dischargeYear: string
-  militaryChaplain: IconType
+  iconType: ProfileIconType
   title: string
-}
-
-export type CustomChattingRoomType = {
-  profile: ChattingRoomProfileType
-  previousMessages: MessageType[]
 }
 
 export type TeamChattingListResponse = {

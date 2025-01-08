@@ -3,26 +3,22 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Bubble } from '@/components/domain'
-import {
-  AdditionIcon,
-  ChattingRoomProfile,
-  Loading,
-  ProfileImage,
-  SendingIcon,
-  SubHeaderWithIcon,
-} from '@/components/view'
+import { AdditionIcon, Loading, SendingIcon, SubHeaderWithIcon } from '@/components/view'
 import { Kebab } from '@/components/view/Kebab'
+import { ChattingRoomProfile } from '@/components/view/Profile'
+import { ProfileImage } from '@/components/view/ProfileImage'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
 import { useTeamChattingInfo, useTeamExitChattingRoom } from '@/services/query'
 import { useMessageActions, useMessageData } from '@/stores/message'
-import type { ChattingRoomProfileType } from '@/types'
+import type { ProfileIconType } from '@/utils'
 
 type ChattingKebabProps = {
   isKebabOpen: boolean
 }
 
-type MessageListType = {
-  profile: ChattingRoomProfileType
+type MessageListProps = {
+  opponent: string
+  iconType: ProfileIconType
 }
 
 const ChattingKebab = ({ isKebabOpen }: ChattingKebabProps) => {
@@ -89,11 +85,9 @@ const MessageBox = () => {
   )
 }
 
-const MessageList = ({ profile }: MessageListType) => {
+const MessageList = ({ opponent, iconType }: MessageListProps) => {
   const messageList = useMessageData()
   const ref = useScrollToBottom(messageList)
-
-  const { opponent, militaryChaplain } = profile
 
   return (
     <main className="scroll flex-column mx-4 grow gap-4 py-4" ref={ref}>
@@ -102,7 +96,7 @@ const MessageList = ({ profile }: MessageListType) => {
         const layoutStyle = isMyMessage ? 'flex flex-row-reverse items-center' : 'flex-align'
         return (
           <div key={index} className={`${layoutStyle} gap-3`}>
-            {!isMyMessage && <ProfileImage size="sm" iconType={militaryChaplain} />}
+            {!isMyMessage && <ProfileImage size="sm" iconType={iconType} />}
             <Bubble isMyMessage={isMyMessage} message={content} />
             <span className="p-xsmall shrink-0 self-end text-grey-500">{createdAt}</span>
           </div>
@@ -135,10 +129,18 @@ export const TeamChattingRoom = () => {
   return (
     <div className="flex-column h-full">
       <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
-      <ChattingRoomProfile profile={teamRoomData.profile} />
+      <ChattingRoomProfile
+        opponent={teamRoomData.opponentNickname}
+        iconType={teamRoomData.militaryChaplain}
+        dischargeYear={teamRoomData.yearsSinceDischarge}
+        title={teamRoomData.teamBoardTitle}
+      />
 
       <ChattingKebab isKebabOpen={isKebabOpen} />
-      <MessageList profile={teamRoomData.profile} />
+      <MessageList
+        opponent={teamRoomData.opponentNickname}
+        iconType={teamRoomData.militaryChaplain}
+      />
       <MessageBox />
     </div>
   )

@@ -30,8 +30,8 @@ type CarpoolDetailType = {
 }
 
 export type CustomCarpoolDetailType = {
-  profile: PostAuthorType
-  item: Omit<CarpoolType, 'createdAt'> & CarpoolDetailType
+  author: PostAuthorType
+  item: CarpoolType & CarpoolDetailType
 }
 
 export type CarpoolFormType = Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> &
@@ -55,10 +55,19 @@ export type CarpoolRecruitResponse = {
 export type CarpoolDetailRequest = {
   urls: Pick<CarpoolType, 'carpoolBoardId'>
 }
-export type CarpoolDetailResponse = CarpoolType &
-  CarpoolDetailType & {
-    author: AuthorType
-  }
+export type CarpoolDetailResponse = {
+  carpoolBoardId: number
+  author: PostAuthorType
+  createdAt: string
+  title: string
+  trainingDate: string
+  departPlace: string
+  personnel: number
+  departTime: string
+  price: number
+  content: string
+  full: boolean
+}
 
 export type CarpoolCreateRequest = {
   body: Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> & CarpoolDetailType

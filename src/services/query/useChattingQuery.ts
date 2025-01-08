@@ -8,7 +8,6 @@ import type {
   CarpoolChattingRoomResponse,
   CarpoolExitChattingRoomRequest,
   ChattingListProfileType,
-  CustomChattingRoomType,
   TeamChattingIdRequest,
   TeamChattingIdResponse,
   TeamChattingListResponse,
@@ -86,36 +85,18 @@ export const useTeamChattingRoomList = () => {
 export const useCarpoolChattingInfo = ({ urls }: CarpoolChattingRoomRequest) => {
   const currentPage = POST_PAGES[0]
 
-  return useQuery<CarpoolChattingRoomResponse, Error, CustomChattingRoomType>({
+  return useQuery<CarpoolChattingRoomResponse, Error>({
     queryKey: queryKeys.roomInfo(currentPage, urls),
     queryFn: async () => await api.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
-    select: (data) => ({
-      profile: {
-        opponent: data.opponentNickname,
-        dischargeYear: data.yearsSinceDischarge.toString(),
-        militaryChaplain: data.militaryChaplain,
-        title: data.carpoolBoardTitle,
-      },
-      previousMessages: data.previousMessages,
-    }),
   })
 }
 
 export const useTeamChattingInfo = ({ urls }: TeamChattingRoomRequest) => {
   const currentPage = POST_PAGES[1]
 
-  return useQuery<TeamChattingRoomResponse, Error, CustomChattingRoomType>({
+  return useQuery<TeamChattingRoomResponse, Error>({
     queryKey: queryKeys.roomInfo(currentPage, urls),
     queryFn: async () => await api.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
-    select: (data) => ({
-      profile: {
-        opponent: data.opponentNickname,
-        dischargeYear: data.yearsSinceDischarge.toString(),
-        militaryChaplain: data.militaryChaplain,
-        title: data.teamBoardTitle,
-      },
-      previousMessages: data.previousMessages,
-    }),
   })
 }
 

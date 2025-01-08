@@ -1,12 +1,7 @@
 import { useParams } from 'react-router-dom'
 
-import {
-  Loading,
-  PostBottom,
-  PostDetailContent,
-  PostDetailHeader,
-  PostProfile,
-} from '@/components/view'
+import { Loading, PostBottom, PostDetailContent, PostDetailHeader } from '@/components/view'
+import { PostProfile } from '@/components/view/Profile'
 import { useCarpoolDetailPage } from '@/services/query'
 import { useCarpoolDetailActions } from '@/services/service'
 import type { CustomCarpoolDetailType } from '@/types'
@@ -40,23 +35,30 @@ export const CarpoolDetail = () => {
   if (isPending) return <Loading />
   if (isError || !detailData) return <div>error</div>
 
-  const isMyPost = detailData.profile.nickname === getSessionStorageItem(SESSION_NICKNAME)
-  const contents = transformCarpoolData(detailData.item)
+  const { author, item } = detailData
+
+  const isMyPost = author.nickname === getSessionStorageItem(SESSION_NICKNAME)
+  const contents = transformCarpoolData(item)
 
   return (
     <div className="flex-column h-full">
       <PostDetailHeader
         isMyPost={isMyPost}
-        isFull={detailData.item.full}
+        isFull={item.full}
         onCheckFull={handleCheckFull}
         onDelete={handleDelete}
         onEdit={handleEdit}
       />
-      <PostProfile profile={detailData.profile} />
-      <PostDetailContent title={detailData.item.title} contents={contents} />
+      <PostProfile
+        iconType={author.militaryChaplain}
+        nickname={author.nickname}
+        dischargeYear={author.dischargeYear}
+        createdAt={item.createdAt}
+      />
+      <PostDetailContent title={item.title} contents={contents} />
       <PostBottom
         isMyPost={isMyPost}
-        disabled={detailData.item.full}
+        disabled={item.full}
         onClickBookmark={() => {}}
         onClickChattingButton={handleClickChatting}
       />

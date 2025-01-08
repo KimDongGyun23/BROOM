@@ -29,8 +29,8 @@ type TeamDetailType = {
 }
 
 export type CustomTeamDetailType = {
-  profile: PostAuthorType
-  item: Omit<TeamType, 'createdAt'> & TeamDetailType
+  author: PostAuthorType
+  item: TeamType & TeamDetailType
 }
 
 export type TeamFormType = Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> &
@@ -54,10 +54,18 @@ export type TeamRecruitResponse = {
 export type TeamDetailRequest = {
   urls: Pick<TeamType, 'teamBoardId'>
 }
-export type TeamDetailResponse = TeamType &
-  TeamDetailType & {
-    author: AuthorType
-  }
+export type TeamDetailResponse = {
+  teamBoardId: number
+  author: PostAuthorType
+  title: string
+  createdAt: string
+  trainingDate: string
+  meetingPlace: string
+  meetingTime: string
+  personnel: number
+  content: string
+  full: boolean
+}
 
 export type TeamCreateRequest = {
   body: Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> & TeamDetailType

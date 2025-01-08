@@ -2,7 +2,8 @@ import { Fragment } from 'react/jsx-runtime'
 import { Link, useNavigate } from 'react-router-dom'
 
 import chainImage from '@/assets/chain.svg'
-import { BottomNav, Loading, ProfileImage } from '@/components/view'
+import { BottomNav, Loading } from '@/components/view'
+import { ProfileImage } from '@/components/view/ProfileImage'
 import { useLogout, useUserDeletion, useUserProfile } from '@/services/query'
 import type { IconType } from '@/types'
 import {

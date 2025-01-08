@@ -74,11 +74,8 @@ export const useTeamDetailPage = ({ urls }: TeamDetailRequest) => {
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.teamBoardId)),
     select: (data) => {
-      const { author, createdAt, ...rest } = data
-      return {
-        profile: { ...author, createdAt: createdAt },
-        item: { ...rest },
-      }
+      const { author, ...rest } = data
+      return { author, item: { ...rest } }
     },
   })
 }
