@@ -1,6 +1,7 @@
 import { Button } from '@/components/view/Button'
 import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostBottomProps = {
   isMyPost?: boolean
@@ -17,6 +18,7 @@ export const PostBottom = ({
   onBookmark,
   onChatStart,
 }: PostBottomProps) => {
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
   const [isBookmarked, setIsBookmarked] = useToggle(initialIsBookmarked)
 
   const handleClickBookmark = () => {
@@ -24,6 +26,7 @@ export const PostBottom = ({
     setIsBookmarked()
   }
 
+  if (!session) return null
   return (
     <div className="flex-align w-full gap-6 px-4 pb-[27px] pt-[9px] shadow-md">
       <button
