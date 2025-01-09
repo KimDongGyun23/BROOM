@@ -1,8 +1,7 @@
 import { useCallback } from 'react'
 
 import type { UserAccountFormType } from '@/types'
-import { SESSION_KEYS } from '@/utils/constants'
-import { setSessionStorageItem } from '@/utils/storage'
+import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 import { useUpdateUserAccount } from '../query'
 

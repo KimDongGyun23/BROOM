@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom'
 
 import type { MilitaryBranchCode } from '@/utils/constants'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 import { ProfileImage } from '../ProfileImage'
 
 export const MainHeader = () => {
   const iconType =
     (getSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN) as MilitaryBranchCode) || null
-  const loginSession = getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   return (
     <header className="flex-between-align relative mx-4 h-20 py-4">
@@ -19,7 +18,7 @@ export const MainHeader = () => {
         </h1>
       </Link>
 
-      {loginSession && iconType && (
+      {session && iconType && (
         <Link to={'/mypage'} className="cursor-pointer">
           <ProfileImage iconType={iconType} size="md" />
         </Link>

@@ -2,8 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import type { LoginFormType } from '@/types'
-import { SESSION_KEYS } from '@/utils/constants'
-import { setSessionStorageItem } from '@/utils/storage'
+import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 import { api, useLogin } from '../query'
 

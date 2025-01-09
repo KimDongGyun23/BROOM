@@ -2,17 +2,16 @@ import { useState } from 'react'
 
 import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
-import type { TabLabelType } from '@/utils/constants'
+import type { TabLabel } from '@/utils/constants'
 import { TAB_LABELS } from '@/utils/constants'
-import { getSessionStorageItem, setSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 export const Bookmark = () => {
-  const storageName = `current-bookmark-tab`
-  const initialTab = (getSessionStorageItem(storageName) || TAB_LABELS[0]) as TabLabelType
-  const [currentTab, setCurrentTab] = useState<TabLabelType>(initialTab)
+  const initialTab = (getSessionStorageItem(SESSION_KEYS.BOOKMARK_TAB) || TAB_LABELS[0]) as TabLabel
+  const [currentTab, setCurrentTab] = useState<TabLabel>(initialTab)
 
-  const handleClickTab = (tab: TabLabelType) => {
-    setSessionStorageItem(storageName, tab)
+  const handleClickTab = (tab: TabLabel) => {
+    setSessionStorageItem(SESSION_KEYS.BOOKMARK_TAB, tab)
     setCurrentTab(tab)
   }
 

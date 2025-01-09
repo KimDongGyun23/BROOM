@@ -1,9 +1,9 @@
-import type { TabLabelType } from '@/utils/constants'
+import type { TabLabel } from '@/utils/constants'
 import { TAB_LABELS } from '@/utils/constants'
 
 type PostTabsProps = {
-  currentTab: TabLabelType
-  onTabClick: (tab: TabLabelType) => void
+  currentTab: TabLabel
+  onTabClick: (tab: TabLabel) => void
 }
 
 export const PostTabs = ({ currentTab, onTabClick }: PostTabsProps) => {

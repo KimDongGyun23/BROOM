@@ -7,8 +7,7 @@ import type {
   ValidateIdRequest,
   ValidateNicknameRequest,
 } from '@/types'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 

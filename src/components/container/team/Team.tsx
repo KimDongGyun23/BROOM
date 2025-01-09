@@ -9,12 +9,11 @@ import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
 import { useActiveTeamList, useTeamList } from '@/services/query/useTeamQuery'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 export const Team = () => {
   const navigate = useNavigate()
-  const isLoggedIn = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
@@ -52,7 +51,7 @@ export const Team = () => {
         <PostList items={teamsToShow} to={`/team/detail`} />
       )}
 
-      {isLoggedIn && <PostAdditionButton onClick={handleAddTeamClick} />}
+      {session && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNav />
     </div>
   )

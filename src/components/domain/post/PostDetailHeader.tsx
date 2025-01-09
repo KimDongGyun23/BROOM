@@ -2,8 +2,7 @@ import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/heade
 import { Kebab } from '@/components/view/Kebab'
 import { ModalWithTwoButton } from '@/components/view/Modal'
 import { useBoolean } from '@/hooks'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostDetailHeaderProps = {
   isMyPost: boolean
@@ -51,7 +50,7 @@ const LoggedInHeader = ({
 const LoggedOutHeader = () => <SubHeaderWithoutIcon type="null" />
 
 export const PostDetailHeader = (props: PostDetailHeaderProps) => {
-  const loginSession = getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
-  return loginSession ? <LoggedInHeader {...props} /> : <LoggedOutHeader />
+  return session ? <LoggedInHeader {...props} /> : <LoggedOutHeader />
 }

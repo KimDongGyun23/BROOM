@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { useCarpoolCheckFull, useDeleteCarpool } from '@/services/query'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
-import { SESSION_KEYS, TAB_KEYS } from '@/utils/constants'
-import { setSessionStorageItem } from '@/utils/storage'
+import { TAB_KEYS } from '@/utils/constants'
+import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 export const useCarpoolDetailActions = (id: number, isFull: boolean) => {
   const navigate = useNavigate()

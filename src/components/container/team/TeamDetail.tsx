@@ -8,8 +8,7 @@ import { PostProfile } from '@/components/view/Profile'
 import { useTeamDetailPage } from '@/services/query/useTeamQuery'
 import { useTeamDetailActions } from '@/services/service/useTeammateDetailActions'
 import type { CustomTeamDetailType } from '@/types/team'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const transformTeamData = (item: CustomTeamDetailType['item']) => [
   { label: '훈련 날짜', content: item.trainingDate },

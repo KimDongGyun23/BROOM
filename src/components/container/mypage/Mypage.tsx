@@ -7,8 +7,31 @@ import { Loading } from '@/components/view/Loading'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import { useLogout, useUserDeletion, useUserProfile } from '@/services/query'
 import type { MilitaryBranchCode } from '@/utils/constants'
-import { MYPAGE_PROFILE_SECTIONS, SESSION_KEYS } from '@/utils/constants'
-import { clearSessionStorage, getSessionStorageItem } from '@/utils/storage'
+import { clearSessionStorage, getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+
+const MYPAGE_PROFILE_SECTIONS = [
+  {
+    title: '내 정보',
+    items: [
+      { name: '계정 정보', path: '/mypage/account-info' },
+      { name: '비밀번호 재설정', path: '/mypage/password' },
+    ],
+  },
+  {
+    title: '게시글',
+    items: [
+      { name: '내가 올린 게시글', path: '/mypage/myboard' },
+      { name: '북마크', path: '/mypage/bookmark' },
+    ],
+  },
+  {
+    title: '고객 지원',
+    items: [
+      { name: '문의하기', path: '/mypage' },
+      { name: '서비스 정보', path: '/mypage' },
+    ],
+  },
+] as const
 
 type ProfileSectionProps = {
   title: string

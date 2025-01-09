@@ -5,14 +5,14 @@ import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query'
-import type { TabLabelType } from '@/utils/constants'
+import type { TabLabel } from '@/utils/constants'
 import { TAB_LABELS } from '@/utils/constants'
-import { getSessionStorageItem, setSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 export const MyPost = () => {
-  const storageKey = `current-post-tab`
-  const initialTab = (getSessionStorageItem(storageKey) || TAB_LABELS[0]) as TabLabelType
-  const [currentTab, setCurrentTab] = useState<TabLabelType>(initialTab)
+  const [currentTab, setCurrentTab] = useState<TabLabel>(
+    (getSessionStorageItem(SESSION_KEYS.POST_TAB) as TabLabel) || TAB_LABELS[0],
+  )
 
   const {
     data: carpoolPostsData,
@@ -28,11 +28,11 @@ export const MyPost = () => {
     error: teamError,
   } = useMyTeamPost()
 
-  const handleTabClick = (tab: TabLabelType) => {
+  const handleTabClick = (tab: TabLabel) => {
     if (tab === TAB_LABELS[0]) refetchCarpoolPosts()
     else refetchTeamPosts()
 
-    setSessionStorageItem(storageKey, tab)
+    setSessionStorageItem(SESSION_KEYS.POST_TAB, tab)
     setCurrentTab(tab)
   }
 

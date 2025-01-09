@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/view/Button'
 import { TentIcon } from '@/components/view/icons/NonActiveIcons'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const LoggedInUserContent = () => {
   const nickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
@@ -29,7 +28,7 @@ const LoggedOutUserContent = () => (
 
 export const HomeUserSection = () => {
   const navigate = useNavigate()
-  const loginSession = getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   const handleLogin = () => navigate('/login')
   const handleSignUp = () => navigate('/sign-up')
@@ -38,12 +37,12 @@ export const HomeUserSection = () => {
     <section className="bg-white px-4 py-7 shadow-sm">
       <div className="flex-align">
         <div className="flex-column grow gap-1">
-          {loginSession ? <LoggedInUserContent /> : <LoggedOutUserContent />}
+          {session ? <LoggedInUserContent /> : <LoggedOutUserContent />}
         </div>
         <TentIcon />
       </div>
 
-      {!loginSession && (
+      {!session && (
         <div className="flex-align mt-4 w-full gap-3">
           <Button size="sm" className="grow" onClick={handleLogin}>
             로그인

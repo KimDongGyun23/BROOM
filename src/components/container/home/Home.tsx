@@ -4,13 +4,13 @@ import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNav } from '@/components/view/BottomNav'
 import { MainHeader } from '@/components/view/header/MainHeader'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
-import { NOTICE_ARR } from '@/utils/constants'
 
-const SERVICE_ITEMS = [
-  { label: '차 타고 같이 갈 사람 없을까?', url: '/carpool' },
-  { label: '나는 조기퇴소가 목표야!', url: '/team' },
-  { label: '버스 신청하러 왔어요~', url: '/bus-reserve' },
-]
+const NOTICE_ARR = [
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+  '예비군 버스 대절 추첨 인원 선정',
+] as const
 
 const NoticeSection = () => (
   <section className="flex-column gap-5 bg-white p-4 shadow-sm">
@@ -31,6 +31,12 @@ const NoticeSection = () => (
     </ul>
   </section>
 )
+
+const SERVICE_ITEMS = [
+  { label: '차 타고 같이 갈 사람 없을까?', url: '/carpool' },
+  { label: '나는 조기퇴소가 목표야!', url: '/team' },
+  { label: '버스 신청하러 왔어요~', url: '/bus-reserve' },
+] as const
 
 const ServiceSection = () => (
   <section className="flex-column gap-5 bg-white p-4 shadow-sm">

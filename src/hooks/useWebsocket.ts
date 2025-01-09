@@ -3,8 +3,7 @@ import { Client } from '@stomp/stompjs'
 
 import { api } from '@/services/query'
 import { useMessageActions } from '@/stores/message'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
 // import { useMessageActions } from 'store/chatData'

@@ -1,17 +1,17 @@
 import { useState } from 'react'
 
-import type { BusReservationStateType } from '@/types'
+import type { BusReservationState } from '@/utils/constants'
 import { BUS_RESERVATION_STATES } from '@/utils/constants'
 
 import { useBusReserveInfo } from '../query/useBusQuery'
 
 type ReturnType = (studentId: string) => {
-  reservationState: BusReservationStateType
+  reservationState: BusReservationState
   checkReservation: VoidFunction
 }
 
 export const useBusReservationStatus: ReturnType = (studentId) => {
-  const [state, setState] = useState<BusReservationStateType>(BUS_RESERVATION_STATES.PENDING)
+  const [state, setState] = useState<BusReservationState>(BUS_RESERVATION_STATES.PENDING)
   const { refetch } = useBusReserveInfo({ urls: { studentId } })
 
   const checkReservation = () => {

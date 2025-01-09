@@ -9,12 +9,11 @@ import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useToggle } from '@/hooks'
 import { useActiveCarpoolList, useCarpoolList } from '@/services/query'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 export const Carpool = () => {
   const navigate = useNavigate()
-  const isLoggedIn = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
   const { data: allCarpools, isLoading: allLoading, isError: allError } = useCarpoolList()
@@ -49,7 +48,7 @@ export const Carpool = () => {
       ) : (
         <PostList items={carpoolsToShow || []} to={`/carpool/detail`} />
       )}
-      {isLoggedIn && <PostAdditionButton onClick={handleAddCarpoolClick} />}
+      {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNav />
     </div>
   )

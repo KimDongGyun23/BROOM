@@ -1,4 +1,4 @@
-import type { KEBAB_LIST, MilitaryBranchCode } from '@/utils/constants'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 export type PostItemType = {
   id: number
@@ -16,11 +16,6 @@ export type PostAuthorType = {
   dischargeYear: number
   militaryChaplain: MilitaryBranchCode
   createdAt: string
-}
-
-export type PostSearchType = {
-  category: keyof typeof KEBAB_LIST
-  keyword: string
 }
 
 export type PostDetailType = {

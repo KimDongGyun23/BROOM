@@ -8,8 +8,7 @@ import { PostProfile } from '@/components/view/Profile'
 import { useCarpoolDetailPage } from '@/services/query'
 import { useCarpoolDetailActions } from '@/services/service'
 import type { CustomCarpoolDetailType } from '@/types'
-import { SESSION_KEYS } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const transformCarpoolData = (item: CustomCarpoolDetailType['item']) => [
   { label: '훈련 날짜', content: item.trainingDate },
