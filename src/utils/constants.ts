@@ -34,3 +34,7 @@ export const BUS_RESERVATION_STATES = {
 
 export type BusReservationState =
   (typeof BUS_RESERVATION_STATES)[keyof typeof BUS_RESERVATION_STATES]
+
+export const ERROR_MESSAGES = {
+  NO_POST: '게시글이 존재하지 않습니다.',
+}

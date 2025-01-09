@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 
+import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import type { PostItemType } from '@/types/post'
+import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
   item: PostItemType
@@ -40,7 +42,8 @@ type PostListProps = {
 }
 
 export const PostList = ({ items, to }: PostListProps) => {
-  if (!items) return null
+  if (!items || !items.length) return <EmptyMessage>{ERROR_MESSAGES.NO_POST}</EmptyMessage>
+
   return (
     <section className="scroll grow px-4">
       {items.map((item) => (
