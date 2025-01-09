@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  CustomTeamDetailType,
   TeamCreateRequest,
   TeamCreateResponse,
   TeamDeleteRequest,
@@ -13,7 +12,7 @@ import type {
   TeamResponse,
   TeamSearchRequest,
 } from '@/types'
-import type { PostItemType } from '@/types/post'
+import type { CustomPostDetailType, PostItemType } from '@/types/post'
 
 import { api } from '.'
 
@@ -70,12 +69,21 @@ export const useActiveTeamList = () => {
 }
 
 export const useTeamDetailPage = ({ urls }: TeamDetailRequest) => {
-  return useQuery<TeamDetailResponse, Error, CustomTeamDetailType>({
+  return useQuery<TeamDetailResponse, Error, CustomPostDetailType>({
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.teamBoardId)),
     select: (data) => {
-      const { author, ...rest } = data
-      return { author, item: { ...rest } }
+      const { author, createdAt, teamBoardId, meetingPlace, meetingTime, ...rest } = data
+      return {
+        profile: { ...author, createdAt },
+        item: {
+          id: teamBoardId,
+          place: meetingPlace,
+          time: meetingTime,
+          createdAt: createdAt,
+          ...rest,
+        },
+      }
     },
   })
 }

@@ -20,11 +20,6 @@ type TeamDetailType = {
   content: string
 }
 
-export type CustomTeamDetailType = {
-  author: PostAuthorType
-  item: TeamType & TeamDetailType
-}
-
 export type TeamFormType = Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> &
   TeamDetailType & { hour: number; minute: number }
 

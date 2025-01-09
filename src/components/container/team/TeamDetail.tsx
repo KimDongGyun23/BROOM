@@ -7,12 +7,12 @@ import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useTeamDetailPage } from '@/services/query/useTeamQuery'
 import { useTeamDetailActions } from '@/services/service/useTeammateDetailActions'
-import type { CustomTeamDetailType } from '@/types/team'
+import type { CustomPostDetailType } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-const transformTeamData = (item: CustomTeamDetailType['item']) => [
+const transformTeamData = (item: CustomPostDetailType['item']) => [
   { label: '훈련 날짜', content: item.trainingDate },
-  { label: '모임 정보', content: [item.meetingPlace, item.meetingTime] },
+  { label: '모임 정보', content: [item.place, item.time] },
   { label: '모집 인원', content: `${item.personnel}명` },
   { label: '메모', content: item.content },
 ]
@@ -37,9 +37,9 @@ export const TeamDetail = () => {
   if (isPending) return <Loading />
   if (isError || !detailData) return <div>error</div>
 
-  const { author, item } = detailData
+  const { profile, item } = detailData
 
-  const isMyPost = author.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
+  const isMyPost = profile.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
   const contents = transformTeamData(item)
 
   return (
@@ -52,12 +52,7 @@ export const TeamDetail = () => {
           onDelete={handleDelete}
           onEdit={handleEdit}
         />
-        <PostProfile
-          iconType={author.militaryChaplain}
-          nickname={author.nickname}
-          dischargeYear={author.dischargeYear}
-          createdAt={item.createdAt}
-        />
+        <PostProfile profile={profile} />
         <PostDetailContent title={item.title} contents={contents} />
         <PostBottom
           isMyPost={isMyPost}

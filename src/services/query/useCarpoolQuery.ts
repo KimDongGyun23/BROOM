@@ -11,9 +11,8 @@ import type {
   CarpoolRecruitResponse,
   CarpoolResponse,
   CarpoolSearchRequest,
-  CustomCarpoolDetailType,
 } from '@/types'
-import type { PostItemType } from '@/types/post'
+import type { CustomPostDetailType, PostItemType } from '@/types/post'
 
 import { api } from '.'
 
@@ -72,12 +71,21 @@ export const useActiveCarpoolList = () => {
 }
 
 export const useCarpoolDetailPage = ({ urls }: CarpoolDetailRequest) => {
-  return useQuery<CarpoolDetailResponse, Error, CustomCarpoolDetailType>({
+  return useQuery<CarpoolDetailResponse, Error, CustomPostDetailType>({
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.carpoolBoardId)),
     select: (data) => {
-      const { author, ...rest } = data
-      return { author, item: { ...rest } }
+      const { author, createdAt, carpoolBoardId, departPlace, departTime, ...rest } = data
+      return {
+        profile: { ...author, createdAt },
+        item: {
+          id: carpoolBoardId,
+          place: departPlace,
+          time: departTime,
+          createdAt: createdAt,
+          ...rest,
+        },
+      }
     },
   })
 }

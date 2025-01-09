@@ -21,11 +21,6 @@ type CarpoolDetailType = {
   content: string
 }
 
-export type CustomCarpoolDetailType = {
-  author: PostAuthorType
-  item: CarpoolType & CarpoolDetailType
-}
-
 export type CarpoolFormType = Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> &
   CarpoolDetailType & { hour: number; minute: number }
 

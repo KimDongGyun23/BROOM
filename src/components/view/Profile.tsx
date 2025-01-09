@@ -1,3 +1,4 @@
+import type { PostAuthorType } from '@/types/post'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ProfileImage } from './ProfileImage'
@@ -23,18 +24,15 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
 )
 
 type PostProfileProps = {
-  nickname: string
-  iconType: MilitaryBranchCode
-  dischargeYear: number
-  createdAt: string
+  profile: PostAuthorType
 }
 
-export const PostProfile = ({ nickname, iconType, dischargeYear, createdAt }: PostProfileProps) => (
+export const PostProfile = ({ profile }: PostProfileProps) => (
   <BaseProfile
-    iconType={iconType}
-    name={nickname}
-    subtitle={`예비군 ${dischargeYear}년차`}
-    description={createdAt}
+    iconType={profile.militaryChaplain}
+    name={profile.nickname}
+    subtitle={`예비군 ${profile.dischargeYear}년차`}
+    description={profile.createdAt}
   />
 )
 

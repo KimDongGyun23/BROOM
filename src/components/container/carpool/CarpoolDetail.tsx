@@ -7,12 +7,12 @@ import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useCarpoolDetailPage } from '@/services/query'
 import { useCarpoolDetailActions } from '@/services/service'
-import type { CustomCarpoolDetailType } from '@/types'
+import type { CustomPostDetailType } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-const transformCarpoolData = (item: CustomCarpoolDetailType['item']) => [
+const transformCarpoolData = (item: CustomPostDetailType['item']) => [
   { label: '훈련 날짜', content: item.trainingDate },
-  { label: '출발 장소', content: [item.departPlace, item.departTime] },
+  { label: '출발 장소', content: [item.place, item.time] },
   {
     label: '모집 정보',
     content: [`${item.personnel}명`, item.price === 0 ? '무료' : `${item.price}원`],
@@ -38,9 +38,9 @@ export const CarpoolDetail = () => {
   if (isPending) return <Loading />
   if (isError || !detailData) return <div>error</div>
 
-  const { author, item } = detailData
+  const { profile, item } = detailData
 
-  const isMyPost = author.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
+  const isMyPost = profile.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
   const contents = transformCarpoolData(item)
 
   return (
@@ -52,12 +52,7 @@ export const CarpoolDetail = () => {
         onDelete={handleDelete}
         onEdit={handleEdit}
       />
-      <PostProfile
-        iconType={author.militaryChaplain}
-        nickname={author.nickname}
-        dischargeYear={author.dischargeYear}
-        createdAt={item.createdAt}
-      />
+      <PostProfile profile={profile} />
       <PostDetailContent title={item.title} contents={contents} />
       <PostBottom
         isMyPost={isMyPost}

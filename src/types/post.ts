@@ -18,8 +18,13 @@ export type PostAuthorType = {
   createdAt: string
 }
 
-export type PostDetailType = {
+export type PostDetailType = PostItemType & {
   personnel: number
   price?: number
   content: string
+}
+
+export type CustomPostDetailType = {
+  profile: PostAuthorType
+  item: PostDetailType
 }
