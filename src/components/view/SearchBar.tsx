@@ -7,7 +7,7 @@ import type { SearchType } from '@/types'
 import type { SearchOption } from '@/utils/constants'
 import { SEARCH_OPTIONS } from '@/utils/constants'
 
-import { ArrowBottomIcon, SearchIcon } from './icons/NonActiveIcons'
+import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from './icons/NonActiveIcons'
 import { Kebab } from './Kebab'
 
 type SearchBarProps = {
@@ -60,7 +60,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           aria-expanded={isFilterVisible}
         >
           <span className="p-800 shrink-0 text-black-500">{selectedFilter.label}</span>
-          <ArrowBottomIcon />
+          {isFilterVisible ? <ArrowUpIcon /> : <ArrowBottomIcon />}
         </button>
 
         <input
