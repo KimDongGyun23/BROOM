@@ -50,7 +50,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
     <FormProvider {...formMethod}>
       <form
         onSubmit={handleSubmit(handleSearch)}
-        className="p-medium flex-align mx-4 mt-2 gap-2 rounded-lg border border-grey-200 py-[10px] pl-4 pr-[10px] font-regular"
+        className="flex-align mx-4 gap-2 rounded-lg border border-black-200 py-[10px] pl-4 pr-[10px]"
       >
         <button
           type="button"
@@ -59,7 +59,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           aria-haspopup="true"
           aria-expanded={isFilterVisible}
         >
-          <span className="p-small shrink-0 text-grey-600">{selectedFilter.label}</span>
+          <span className="p-800 shrink-0 text-black-500">{selectedFilter.label}</span>
           <ArrowBottomIcon />
         </button>
 
@@ -67,7 +67,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           type="search"
           size={7}
           {...register('search')}
-          className="focus: flex-1 text-grey-700 outline-none placeholder:text-grey-400"
+          className="p-800 flex-1 grow text-black-500 placeholder:text-black-300 focus:outline-none"
           placeholder={selectedFilter.placeholder}
           aria-label={`${selectedFilter.label} 검색`}
         />
