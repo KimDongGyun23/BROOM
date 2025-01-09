@@ -13,7 +13,7 @@ export const MainHeader = () => {
   return (
     <header className="flex-between-align relative mx-4 h-20 py-4">
       <Link to={'/home'}>
-        <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-jalnan text-[28px] leading-9 text-blue-600">
+        <h1 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center font-jalnan text-[32px] leading-9 text-black-600">
           BROOM
         </h1>
       </Link>
