@@ -12,8 +12,8 @@ const ContentRow = ({ label, content }: ContentType) => {
   if (Array.isArray(content)) {
     return (
       <ul className="flex-between-align">
-        {content.map((item) => (
-          <li key={label} className="flex-column w-full gap-1">
+        {content.map((item, index) => (
+          <li key={index} className="flex-column w-full gap-1">
             <p className="p-800 text-black-600">{label}</p>
             <p className="p-600 text-black-400">{item}</p>
           </li>
