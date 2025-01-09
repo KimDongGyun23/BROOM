@@ -15,12 +15,12 @@ const NOTICE_ARR = [
 const NoticeSection = () => (
   <section className="flex-column gap-5 bg-white p-4 shadow-sm">
     <div className="flex-between-align">
-      <p className="p-large font-medium">공지사항</p>
-      <Link to={'/home'} className="p-xsmall border-b border-b-blue-400 text-blue-500">
+      <p className="p-600">공지사항</p>
+      <Link to={'/home'} className="p-900 border-b border-b-blue-500 text-blue-500">
         전체보기
       </Link>
     </div>
-    <ul className="flex-column gap-3 text-grey-600">
+    <ul className="flex-column p-800 gap-3 text-black-400">
       {NOTICE_ARR.map((item, index) => (
         <li key={index}>
           <Link to={'/home'} className="block w-full">
@@ -40,12 +40,12 @@ const SERVICE_ITEMS = [
 
 const ServiceSection = () => (
   <section className="flex-column gap-5 bg-white p-4 shadow-sm">
-    <p className="p-large font-medium">어떤 서비스를 찾고 있나요?</p>
+    <p className="p-600">어떤 서비스를 찾고 있나요?</p>
     <ul className="flex-column gap-3">
       {SERVICE_ITEMS.map(({ label, url }) => (
         <li
           key={label}
-          className="p-medium hover-scale rounded-xl bg-blue-400 py-[18px] pl-7 pr-3 font-medium text-grey-100 shadow-sm"
+          className="p-700 hover-scale rounded-xl bg-black-400 py-[18px] pl-7 pr-3 text-black-100 shadow-sm"
         >
           <Link to={url} className="flex-between-align">
             <p>{label}</p>
