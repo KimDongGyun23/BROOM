@@ -65,7 +65,7 @@ export const CarpoolCreate = () => {
     <div className="flex-column h-svh">
       <SubHeaderWithoutIcon
         type="complete"
-        title="카풀 모집 등록"
+        title="승차 공유 등록"
         onClickComplete={handleSubmit(handleCarpoolCreation)}
       />
       <FormProvider {...formMethod}>

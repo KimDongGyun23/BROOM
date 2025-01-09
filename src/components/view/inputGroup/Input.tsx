@@ -18,12 +18,12 @@ export const Input = ({ type = 'text', section, readOnly = false, placeholder }:
   const [isVisible, toggleVisibility] = useToggle(false)
 
   return (
-    <div className="flex-align p-medium w-full gap-3 rounded-lg border border-blue-300 px-4 py-[10px]">
+    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
       <input
         type={isPasswordField && !isVisible ? 'password' : type}
         {...register(section)}
         readOnly={readOnly}
-        className="w-full py-1 placeholder:text-grey-500 focus:outline-none"
+        className="p-700 w-full py-1 text-black-500 placeholder:text-black-300 focus:outline-none"
         placeholder={placeholder}
         autoComplete={type === 'id' ? 'username' : isPasswordField ? 'current-password' : 'off'}
       />
@@ -59,16 +59,16 @@ export const UnitInput = ({
   }
 
   return (
-    <div className="flex-align p-medium w-full gap-3 rounded-lg border border-blue-300 px-4 py-[10px]">
+    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
       <input
         type={type}
         size={5}
         {...register(section, { onChange: isPrice ? handleCurrencyChange : undefined })}
         readOnly={readOnly}
-        className="min-w-0 grow text-right placeholder:text-grey-500 focus:outline-none"
+        className="p-700 min-w-0 grow text-right text-black-500 placeholder:text-black-300 focus:outline-none"
         placeholder={placeholder}
       />
-      <p className="shrink-0 py-1 text-grey-700">{unitLabel}</p>
+      <p className="shrink-0 py-1 text-black-500">{unitLabel}</p>
     </div>
   )
 }
@@ -93,22 +93,22 @@ export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: Time
   }
 
   return (
-    <div className="flex-align p-medium w-full gap-3 rounded-lg border border-blue-300 px-4 py-[10px]">
+    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
       <input
         type="number"
         {...register(hourSection, { onChange: handleHourChange })}
         readOnly={readOnly}
         size={2}
-        className="w-full grow text-center placeholder:text-grey-500 focus:outline-none"
+        className="p-700 w-full grow text-center text-black-500 placeholder:text-black-300 focus:outline-none"
         placeholder="00"
       />
-      <span className="shrink-0 py-1 text-grey-700">:</span>
+      <span className="shrink-0 py-1 text-black-500">:</span>
       <input
         type="number"
         {...register(minuteSection, { onChange: handleMinuteChange })}
         readOnly={readOnly}
         size={2}
-        className="w-full grow text-center placeholder:text-grey-500 focus:outline-none"
+        className="p-700 w-full grow text-center text-black-500 placeholder:text-black-300 focus:outline-none"
         placeholder="00"
       />
     </div>
@@ -123,7 +123,7 @@ export const TextArea = ({ section, readOnly = false, placeholder }: TextAreaPro
     <textarea
       {...register(section)}
       readOnly={readOnly}
-      className="p-medium h-[104px] resize-none rounded-lg border border-blue-300 px-4 py-[10px] placeholder:text-grey-500 focus:outline-none"
+      className="p-700 h-[104px] resize-none rounded-lg border border-black-300 px-4 py-[10px] text-black-500 placeholder:text-black-300 focus:outline-none"
       placeholder={placeholder}
     />
   )

@@ -5,7 +5,7 @@ import { Label } from './Label'
 import { SortOfArmy } from './Select'
 
 const Container = ({ children }: PropsWithChildren) => {
-  return <div className="flex-column w-full gap-[10px]">{children}</div>
+  return <section className="flex-column w-full gap-[10px]">{children}</section>
 }
 
 export const InputGroup = Object.assign(Container, {
