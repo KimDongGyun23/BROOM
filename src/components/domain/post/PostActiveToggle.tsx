@@ -6,10 +6,10 @@ type ActiveToggleProps = {
 }
 
 export const PostActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
-  <div className="mx-4 border-b border-b-grey-200">
-    <button type="button" className="flex-align ml-auto gap-1 py-3" onClick={onToggle}>
+  <div className="mx-4 border-b border-b-grey-200 py-2">
+    <button type="button" className="flex-align ml-auto gap-1" onClick={onToggle}>
       <CheckBoxIcon active={isChecked} />
-      <p className={`p-small ${isChecked ? 'text-blue-500' : 'text-grey-500'}`}>
+      <p className={`p-900 ${isChecked ? 'text-blue-500' : 'text-black-300'}`}>
         모집 중인 글만 보기
       </p>
     </button>

@@ -1,5 +1,7 @@
 import type { SvgIconProps } from '@/types'
 
+const colorStyle = (active: boolean) => (active ? '#5BA2F8' : '#D2D0CD')
+
 export const AllCheckIcon = ({ active = false }: SvgIconProps) => {
   const fillStyle = active ? '#4196FD' : '#777777'
 
@@ -36,26 +38,22 @@ export const CheckIcon = ({ active = false }: SvgIconProps) => {
   )
 }
 
-export const CheckBoxIcon = ({ active = false }: SvgIconProps) => {
-  const fillStyle = active ? '#00A0FC' : '#9E9E9E'
-
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M15 4.16667H5C4.53976 4.16667 4.16667 4.53976 4.16667 5V15C4.16667 15.4602 4.53976 15.8333 5 15.8333H15C15.4602 15.8333 15.8333 15.4602 15.8333 15V5C15.8333 4.53976 15.4602 4.16667 15 4.16667ZM5 2.5C3.61929 2.5 2.5 3.61929 2.5 5V15C2.5 16.3807 3.61929 17.5 5 17.5H15C16.3807 17.5 17.5 16.3807 17.5 15V5C17.5 3.61929 16.3807 2.5 15 2.5H5Z"
-        fill={fillStyle}
-      />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M13.9225 6.91083C14.248 7.23626 14.248 7.7639 13.9225 8.08934L9.5118 12.5001C8.86093 13.151 7.80566 13.151 7.15478 12.5001L5.6607 11.006C5.33527 10.6806 5.33527 10.1529 5.6607 9.82749C5.98614 9.50206 6.51378 9.50206 6.83921 9.82749L8.33329 11.3216L12.744 6.91083C13.0695 6.58539 13.5971 6.58539 13.9225 6.91083Z"
-        fill={fillStyle}
-      />
-    </svg>
-  )
-}
+export const CheckBoxIcon = ({ active = false }: SvgIconProps) => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12 3.33333H4C3.63181 3.33333 3.33333 3.63181 3.33333 4V12C3.33333 12.3682 3.63181 12.6667 4 12.6667H12C12.3682 12.6667 12.6667 12.3682 12.6667 12V4C12.6667 3.63181 12.3682 3.33333 12 3.33333ZM4 2C2.89543 2 2 2.89543 2 4V12C2 13.1046 2.89543 14 4 14H12C13.1046 14 14 13.1046 14 12V4C14 2.89543 13.1046 2 12 2H4Z"
+      fill={colorStyle(active)}
+    />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.138 5.52851C11.3983 5.78886 11.3983 6.21097 11.138 6.47132L7.60939 9.99992C7.0887 10.5206 6.24448 10.5206 5.72378 9.99992L4.52851 8.80466C4.26816 8.54431 4.26816 8.1222 4.52851 7.86185C4.78886 7.6015 5.21097 7.6015 5.47132 7.86185L6.66659 9.05711L10.1952 5.52851C10.4555 5.26816 10.8776 5.26816 11.138 5.52851Z"
+      fill={colorStyle(active)}
+    />
+  </svg>
+)
 
 export const BookmarkIcon = ({ active = false }: SvgIconProps) => {
   const fillStyle = active ? '#FF8E5D' : '#CBCBCB'
