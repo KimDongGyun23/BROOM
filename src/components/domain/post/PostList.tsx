@@ -12,24 +12,23 @@ const PostItem = ({ item, to }: PostItemProps) => {
   const { title, createdAt, trainingDate, place, time, full } = item
 
   return (
-    <Link
-      className="flex-column mx-4 block gap-[10px] border-b border-b-grey-200 px-3 py-6"
-      to={to}
-    >
+    <Link className="flex-column block gap-[10px] border-b border-b-grey-200 px-3 py-6" to={to}>
       <div className="flex-between-align gap-3">
-        <p className="p-large truncate font-bold text-blue-500">{title}</p>
-        <p className="p-xsmall text-grey-400">{createdAt}</p>
+        <p className="p-600 truncate text-black-600">{title}</p>
+        <p className="p-900 text-black-300">{createdAt}</p>
       </div>
+
       <div className="flex-between-align gap-3 text-left">
-        <div className="flex-column gap-1">
-          <p className="p-small font-bold text-grey-600">{trainingDate} 훈련</p>
-          <div className="p-small text-grey-500">
-            <span>{place}</span>
-            <span className="mx-2">|</span>
+        <div className="flex-column grow gap-1 overflow-hidden">
+          <p className="p-800 text-black-500">{trainingDate} 훈련</p>
+          <div className="p-900 flex gap-2 text-black-400">
+            <span className="truncate">{place}</span>
+            <span>|</span>
             <span>{time}</span>
           </div>
         </div>
-        {full ? <StopIcon /> : <AdditionCircleIcon />}
+
+        <div className="shrink-0">{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
       </div>
     </Link>
   )
@@ -43,7 +42,7 @@ type PostListProps = {
 export const PostList = ({ items, to }: PostListProps) => {
   if (!items) return null
   return (
-    <section className="scroll grow">
+    <section className="scroll grow px-4">
       {items.map((item) => (
         <PostItem key={item.id} item={item} to={`${to}/${item.id}`} />
       ))}
