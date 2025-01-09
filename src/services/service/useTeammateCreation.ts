@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-import type { TeamFormType } from '@/types'
+import type { TeamForm } from '@/types'
 
 import { useTeamCreate } from '../query'
 
-const formatSubmissionData = (formData: TeamFormType) => {
+const formatSubmissionData = (formData: TeamForm) => {
   const { hour, minute, trainingDate, ...rest } = formData
   return {
     trainingDate: dayjs(trainingDate, 'YYYYMMDD').format('YYYY-MM-DD'),
@@ -18,7 +18,7 @@ export const useTeamCreation = () => {
   const navigate = useNavigate()
   const { mutate: createTeam } = useTeamCreate()
 
-  const handleTeamCreation = (formData: TeamFormType) => {
+  const handleTeamCreation = (formData: TeamForm) => {
     const submissionData = formatSubmissionData(formData)
     createTeam(
       { body: submissionData },

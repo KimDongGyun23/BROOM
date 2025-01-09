@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 import { useUpdateTeam } from '@/services/query'
-import type { TeamFormType } from '@/types'
+import type { TeamForm } from '@/types'
 
-const formatFormData = (formData: TeamFormType) => {
+const formatFormData = (formData: TeamForm) => {
   const { hour, minute, trainingDate, ...rest } = formData
   return {
     trainingDate: dayjs(trainingDate, 'YYYYMMDD').format('YYYY-MM-DD'),
@@ -17,7 +17,7 @@ export const useTeamUpdate = (postId: string) => {
   const navigate = useNavigate()
   const { mutate: teamUpdate } = useUpdateTeam()
 
-  const handleSubmitForm = (formData: TeamFormType) => {
+  const handleSubmitForm = (formData: TeamForm) => {
     const sendingFormData = formatFormData(formData)
 
     teamUpdate(

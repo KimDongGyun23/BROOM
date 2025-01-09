@@ -1,6 +1,6 @@
-import type { PostAuthorType } from './post'
+import type { PostAuthorType, PostSearchType } from './post'
 
-type TeamType = {
+type TeamPost = {
   teamBoardId: number
   title: string
   createdAt: string
@@ -10,70 +10,63 @@ type TeamType = {
   full: boolean
 }
 
-type TeamSearchType = {
-  category: string
-  keyword: string
-}
-
-type TeamDetailType = {
+type TeamPostDetail = {
   personnel: number
   content: string
 }
 
-export type TeamFormType = Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> &
-  TeamDetailType & { hour: number; minute: number }
+export type TeamForm = Pick<TeamPost, 'title' | 'trainingDate' | 'meetingPlace'> &
+  TeamPostDetail & {
+    hour: number
+    minute: number
+  }
+
+type Author = { author: PostAuthorType }
+type TeamId = Pick<TeamPost, 'teamBoardId'>
+type TeamFull = Pick<TeamPost, 'full'>
+type TeamSendingForm = Omit<TeamForm, 'hour' | 'minute'> & Pick<TeamPost, 'meetingTime'>
 
 export type TeamResponse = {
-  result: TeamType[]
+  result: TeamPost[]
 }
 
 export type TeamSearchRequest = {
-  urls: TeamSearchType
+  urls: PostSearchType
 }
 export type TeamSearchResponse = {
-  result: TeamType[]
+  result: TeamPost[]
 }
 
 export type TeamRecruitResponse = {
-  result: TeamType[]
+  result: TeamPost[]
 }
 
 export type TeamDetailRequest = {
-  urls: Pick<TeamType, 'teamBoardId'>
+  urls: TeamId
 }
-export type TeamDetailResponse = {
-  teamBoardId: number
-  author: PostAuthorType
-  title: string
-  createdAt: string
-  trainingDate: string
-  meetingPlace: string
-  meetingTime: string
-  personnel: number
-  content: string
-  full: boolean
-}
+
+export type TeamDetailResponse = TeamPost & TeamPostDetail & Author
 
 export type TeamCreateRequest = {
-  body: Pick<TeamType, 'title' | 'trainingDate' | 'meetingPlace'> & TeamDetailType
+  body: TeamSendingForm
 }
-export type TeamCreateResponse = Pick<TeamType, 'teamBoardId'>
+export type TeamCreateResponse = TeamId
 
 export type TeamEditPageRequest = {
-  urls: Pick<TeamType, 'teamBoardId'>
+  urls: TeamId
 }
 
 export type TeamEditRequest = {
-  body: Omit<TeamDetailType, 'createdAt'>
-  urls: Pick<TeamType, 'teamBoardId'>
+  body: TeamSendingForm
+  urls: TeamId
 }
-export type TeamEditResponse = Omit<TeamType, 'createdAt' | 'full'> & TeamDetailType
+export type TeamEditResponse = Omit<TeamPost, 'createdAt' | 'full'> & TeamPostDetail
 
 export type TeamDeleteRequest = {
-  urls: Pick<TeamType, 'teamBoardId'>
+  urls: TeamId
 }
 
 export type TeamIsFullRequest = {
-  body: Pick<TeamType, 'full'>
-  urls: Pick<TeamType, 'teamBoardId'>
+  body: TeamFull
+  urls: TeamId
 }

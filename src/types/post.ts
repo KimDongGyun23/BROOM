@@ -28,3 +28,8 @@ export type CustomPostDetailType = {
   profile: PostAuthorType
   item: PostDetailType
 }
+
+export type PostSearchType = {
+  category: string
+  keyword: string
+}

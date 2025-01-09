@@ -1,6 +1,6 @@
-import type { PostAuthorType } from './post'
+import type { PostAuthorType, PostSearchType } from './post'
 
-type CarpoolType = {
+type CarpoolPost = {
   carpoolBoardId: number
   title: string
   createdAt: string
@@ -10,72 +10,63 @@ type CarpoolType = {
   full: boolean
 }
 
-type CarpoolSearchType = {
-  category: string
-  keyword: string
-}
-
-type CarpoolDetailType = {
+type CarpoolPostDetail = {
   personnel: number
   price: number
   content: string
 }
 
-export type CarpoolFormType = Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> &
-  CarpoolDetailType & { hour: number; minute: number }
+export type CarpoolForm = Pick<CarpoolPost, 'title' | 'trainingDate' | 'departPlace'> &
+  CarpoolPostDetail & {
+    hour: number
+    minute: number
+  }
+
+type Author = { author: PostAuthorType }
+type CarpoolId = Pick<CarpoolPost, 'carpoolBoardId'>
+type CarpoolFull = Pick<CarpoolPost, 'full'>
+type CarpoolSendingForm = Omit<CarpoolForm, 'hour' | 'minute'> & Pick<CarpoolPost, 'departTime'>
 
 export type CarpoolResponse = {
-  result: CarpoolType[]
+  result: CarpoolPost[]
 }
 
 export type CarpoolSearchRequest = {
-  urls: CarpoolSearchType
+  urls: PostSearchType
 }
 export type CarpoolSearchResponse = {
-  result: CarpoolType[]
+  result: CarpoolPost[]
 }
 
 export type CarpoolRecruitResponse = {
-  result: CarpoolType[]
+  result: CarpoolPost[]
 }
 
 export type CarpoolDetailRequest = {
-  urls: Pick<CarpoolType, 'carpoolBoardId'>
+  urls: CarpoolId
 }
-export type CarpoolDetailResponse = {
-  carpoolBoardId: number
-  author: PostAuthorType
-  createdAt: string
-  title: string
-  trainingDate: string
-  departPlace: string
-  personnel: number
-  departTime: string
-  price: number
-  content: string
-  full: boolean
-}
+export type CarpoolDetailResponse = CarpoolPost & CarpoolPostDetail & Author
 
 export type CarpoolCreateRequest = {
-  body: Pick<CarpoolType, 'title' | 'trainingDate' | 'departPlace'> & CarpoolDetailType
+  body: CarpoolSendingForm
 }
-export type CarpoolCreateResponse = Pick<CarpoolType, 'carpoolBoardId'>
+export type CarpoolCreateResponse = CarpoolId
 
 export type CarpoolEditPageRequest = {
-  urls: Pick<CarpoolType, 'carpoolBoardId'>
+  urls: CarpoolId
 }
 
 export type CarpoolEditRequest = {
-  body: Omit<CarpoolDetailType, 'createdAt'>
-  urls: Pick<CarpoolType, 'carpoolBoardId'>
+  body: CarpoolSendingForm
+  urls: CarpoolId
 }
-export type CarpoolEditResponse = Omit<CarpoolType, 'createdAt' | 'full'> & CarpoolDetailType
+export type CarpoolEditResponse = Omit<CarpoolPost, 'createdAt' | 'full'> & CarpoolPostDetail
 
 export type CarpoolDeleteRequest = {
-  urls: Pick<CarpoolType, 'carpoolBoardId'>
+  urls: CarpoolId
 }
 
 export type CarpoolIsFullRequest = {
-  body: Pick<CarpoolType, 'full'>
-  urls: Pick<CarpoolType, 'carpoolBoardId'>
+  body: CarpoolFull
+  urls: CarpoolId
 }

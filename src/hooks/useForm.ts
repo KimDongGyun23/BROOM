@@ -9,7 +9,7 @@ import type {
   BusInfoFormType,
   CarpoolEditPageRequest,
   CarpoolEditResponse,
-  CarpoolFormType,
+  CarpoolForm,
   LoginFormType,
   MypageAccountResponse,
   NewPasswordFormType,
@@ -17,7 +17,7 @@ import type {
   SignupFormType,
   TeamEditPageRequest,
   TeamEditResponse,
-  TeamFormType,
+  TeamForm,
 } from '@/types'
 import {
   accountSchema,
@@ -72,7 +72,7 @@ export const useAccountForm = () => {
 }
 
 export const useCarpoolCreateForm = () => {
-  const formMethod = useForm<CarpoolFormType>({
+  const formMethod = useForm<CarpoolForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(carpoolSchema),
@@ -93,7 +93,7 @@ export const useCarpoolEditForm = ({ urls }: CarpoolEditPageRequest) => {
     return { hour, minute, trainingDate: date, ...rest }
   }
 
-  const formMethod = useForm<CarpoolFormType>({
+  const formMethod = useForm<CarpoolForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(carpoolSchema),
@@ -114,7 +114,7 @@ export const useSearchForm = (defaultValue: SearchType) => {
 }
 
 export const useTeamCreateForm = () => {
-  const formMethod = useForm<TeamFormType>({
+  const formMethod = useForm<TeamForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(teamSchema),
@@ -136,7 +136,7 @@ export const useTeamEditForm = ({ urls }: TeamEditPageRequest) => {
     return { hour, minute, trainingDate: date, ...rest }
   }
 
-  const formMethod = useForm<TeamFormType>({
+  const formMethod = useForm<TeamForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(teamSchema),
