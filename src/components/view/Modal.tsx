@@ -43,7 +43,7 @@ const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<M
           aria-label="모달 닫기"
         />
         <div className="flex-column absolute min-w-[310px] gap-4 rounded-xl bg-white px-4 py-[10px]">
-          <p className="p-large py-9 text-center font-medium">{content}</p>
+          <p className="p-600 py-9 text-center text-black-600">{content}</p>
           {children}
         </div>
       </div>

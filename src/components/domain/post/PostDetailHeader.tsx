@@ -38,7 +38,7 @@ const LoggedInHeader = ({
         isOpen={isModalOpen}
         onClose={closeModal}
         content="게시글을 삭제하시겠습니까?"
-        secondaryButton={{ onClick: closeModal, label: '취소' }}
+        secondaryButton={{ onClick: closeModal, label: '취소', secondary: true }}
         primaryButton={{ onClick: onDelete, label: '삭제' }}
       />
     </>
