@@ -1,9 +1,9 @@
 import type { ButtonHTMLAttributes } from 'react'
 
 const SIZE_STYLES = {
-  lg: 'px-5 py-4 p-medium',
-  md: 'px-4 py-[15px] p-small',
-  sm: 'px-3 py-[14px] p-xsmall',
+  lg: 'px-5 py-4 p-700',
+  md: 'px-4 py-4 p-800',
+  sm: 'px-3 py-[14px] p-900',
 } as const
 
 type ButtonSize = keyof typeof SIZE_STYLES
@@ -25,9 +25,9 @@ export const Button = ({
 }: ButtonProps) => {
   const sizeStyle = SIZE_STYLES[size]
   const variantStyle =
-    secondary || disabled ? 'bg-grey-200 text-grey-500' : 'bg-blue-500 text-grey-100'
+    secondary || disabled ? 'bg-black-100 text-black-500' : 'bg-black-600 text-black-100'
 
-  const buttonStyle = `font-bold rounded-xl w-auto shrink-0 ${sizeStyle} ${variantStyle} ${className}`
+  const buttonStyle = `rounded-xl w-auto shrink-0 ${sizeStyle} ${variantStyle} ${className}`
 
   return (
     <button type={type} className={buttonStyle} disabled={disabled} {...rest}>
