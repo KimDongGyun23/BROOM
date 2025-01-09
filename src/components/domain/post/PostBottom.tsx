@@ -5,22 +5,22 @@ import { useToggle } from '@/hooks'
 type PostBottomProps = {
   isMyPost?: boolean
   disabled?: boolean
-  initialBookmarkState?: boolean
-  onClickBookmark: VoidFunction
-  onClickChattingButton: VoidFunction
+  initialIsBookmarked?: boolean
+  onBookmark: VoidFunction
+  onChatStart: VoidFunction
 }
 
 export const PostBottom = ({
   isMyPost = false,
   disabled = false,
-  initialBookmarkState = false,
-  onClickBookmark,
-  onClickChattingButton,
+  initialIsBookmarked = false,
+  onBookmark,
+  onChatStart,
 }: PostBottomProps) => {
-  const [isBookmarked, setIsBookmarked] = useToggle(initialBookmarkState)
+  const [isBookmarked, setIsBookmarked] = useToggle(initialIsBookmarked)
 
   const handleClickBookmark = () => {
-    onClickBookmark()
+    onBookmark()
     setIsBookmarked()
   }
 
@@ -32,13 +32,13 @@ export const PostBottom = ({
         onClick={handleClickBookmark}
       >
         <BookmarkIcon active={isBookmarked} />
-        <p className="p-xsmall text-grey-500">북마크</p>
+        <p className="p-900 text-black-400">북마크</p>
       </button>
       <Button
         className="grow"
         secondary={isMyPost}
         size="sm"
-        onClick={isMyPost ? undefined : onClickChattingButton}
+        onClick={isMyPost ? undefined : onChatStart}
         disabled={disabled}
       >
         {disabled ? '모집 마감' : '채팅하기'}

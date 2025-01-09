@@ -33,9 +33,7 @@ const LoggedInHeader = ({
   return (
     <>
       <SubHeaderWithIcon type="kebab" onClickKebab={isKebabOpen ? closeKebab : openKebab} />
-
       {isKebabOpen && <Kebab items={isMyPost ? myKebabMap : kebabMap} position="right-4 top-12" />}
-
       <ModalWithTwoButton
         isOpen={isModalOpen}
         onClose={closeModal}

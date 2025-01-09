@@ -57,8 +57,8 @@ export const TeamDetail = () => {
         <PostBottom
           isMyPost={isMyPost}
           disabled={item.full}
-          onClickBookmark={() => {}}
-          onClickChattingButton={handleClickChatting}
+          onBookmark={() => {}}
+          onChatStart={handleClickChatting}
         />
       </div>
     </>

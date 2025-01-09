@@ -11,14 +11,14 @@ type BaseProfileProps = {
 }
 
 const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps) => (
-  <div className="flex-align gap-4 border-b border-b-grey-200 px-4 pb-3">
+  <div className="flex-align gap-4 border-b border-b-black-100 px-4 pb-3">
     <ProfileImage iconType={iconType} size="lg" />
     <div className="flex-column gap-[6px]">
       <div className="flex-align gap-3">
-        <h6 className="font-bold">{name}</h6>
-        <p className="p-small text-blue-500">{subtitle}</p>
+        <span className="p-600 text-black-600">{name}</span>
+        <span className="p-800 text-blue-500">{subtitle}</span>
       </div>
-      <p className="p-small text-grey-500">{description}</p>
+      <p className="p-800 text-black-400">{description}</p>
     </div>
   </div>
 )

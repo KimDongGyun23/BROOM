@@ -29,9 +29,9 @@ const BaseHeader = ({
       <button type="button" onClick={handleClickCancel}>
         <ArrowLeftIcon />
       </button>
-      <h6 className="absolute left-1/2 w-fit -translate-x-1/2 text-center font-bold text-blue-600">
+      <h2 className="p-500 absolute left-1/2 w-fit -translate-x-1/2 text-center text-black-700">
         {title}
-      </h6>
+      </h2>
       {children}
     </div>
   )
@@ -71,9 +71,7 @@ export const SubHeaderWithoutIcon = ({
         <span className="w-6" />
       ) : (
         <button type="button" onClick={isEditMode ? onClickEdit : onClickComplete}>
-          <p className="p-medium pr-[2px] font-medium text-grey-400">
-            {isEditMode ? '수정' : '완료'}
-          </p>
+          <p className="p-700 pr-[2px] text-black-400">{isEditMode ? '수정' : '완료'}</p>
         </button>
       )}
     </BaseHeader>

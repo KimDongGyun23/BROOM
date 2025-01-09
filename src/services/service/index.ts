@@ -1,7 +1,6 @@
 export * from './useAccountUpdate'
 export * from './useBusReservationStatus'
 export * from './useCarpoolCreation'
-export * from './useCarpoolDetailActions'
 export * from './useIdValidation'
 export * from './useLoginLogic'
 export * from './useNicknameValidation'

@@ -8,33 +8,32 @@ type DetailContentProps = {
   contents: ContentType[]
 }
 
-const PostInfoField = ({ label, content }: ContentType) => {
-  return (
-    <li className="flex-column w-full gap-1">
-      <p className="p-small font-medium text-blue-500">{label}</p>
-      <p className="p-large text-grey-600">{content}</p>
-    </li>
-  )
-}
-
 const ContentRow = ({ label, content }: ContentType) => {
   if (Array.isArray(content)) {
     return (
       <ul className="flex-between-align">
-        {content.map((item, index) => (
-          <PostInfoField key={index} label={label} content={item} />
+        {content.map((item) => (
+          <li key={label} className="flex-column w-full gap-1">
+            <p className="p-800 text-black-600">{label}</p>
+            <p className="p-600 text-black-400">{item}</p>
+          </li>
         ))}
       </ul>
     )
   }
-  return <PostInfoField label={label} content={content} />
+  return (
+    <li className="flex-column w-full gap-1">
+      <p className="p-800 text-black-600">{label}</p>
+      <p className="p-600 text-black-400">{content}</p>
+    </li>
+  )
 }
 
 export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
   return (
     <div className="scroll mt-6 grow">
       <div className="flex-column px-4">
-        <h5 className="mb-8 font-bold text-blue-600">{title}</h5>
+        <h3 className="p-500 mb-8 text-black-600">{title}</h3>
         <div className="flex-column gap-6">
           {contents.map((content, index) => (
             <ContentRow key={index} {...content} />
