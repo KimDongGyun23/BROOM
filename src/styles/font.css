@@ -25,42 +25,42 @@
 }
 
 @layer utilities {
-  .p1 {
+  .p-100 {
     font-size: 36px;
     line-height: 44px;
     letter-spacing: -0.72px;
   }
-  .p2 {
+  .p--200 {
     font-size: 32px;
     line-height: 40px;
     letter-spacing: -0.64px;
   }
-  .p3 {
+  .p-300 {
     font-size: 28px;
     line-height: 36px;
     letter-spacing: -0.56px;
   }
-  .p4 {
+  .p-400 {
     font-size: 24px;
     line-height: 32px;
   }
-  .p5 {
+  .p-500 {
     font-size: 20px;
     line-height: 28px;
   }
-  .p6 {
+  .p-600 {
     font-size: 18px;
     line-height: 26px;
   }
-  .p7 {
+  .p-700 {
     font-size: 16px;
     line-height: 24px;
   }
-  .p8 {
+  .p-800 {
     font-size: 14px;
     line-height: 20px;
   }
-  .p9 {
+  .p-900 {
     font-size: 12px;
     line-height: 16px;
   }
