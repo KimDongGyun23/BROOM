@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useCarpoolCheckFull, useDeleteCarpool } from '@/services/query'
+import { useCarpoolCheckFull, useDeleteCarpool } from '@/services/query/useCarpoolQuery'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
 import { TAB_KEYS } from '@/utils/constants'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
