@@ -13,7 +13,7 @@ const KebabListItem = ({ label, onClick, isRed, isLast }: KebabItem & { isLast: 
   <li className="w-full">
     <button
       type="button"
-      className={`w-full ${isRed ? 'text-red-200' : 'text-grey-700'}`}
+      className={`p-800 w-full text-center ${isRed ? 'text-error' : 'text-black-500'}`}
       onClick={onClick}
     >
       {label}
@@ -25,7 +25,7 @@ const KebabListItem = ({ label, onClick, isRed, isLast }: KebabItem & { isLast: 
 export const Kebab = ({ items, position }: KebabProps) => {
   return (
     <nav
-      className={`flex-column-align p-small absolute w-fit rounded bg-white px-3 py-[10px] text-center shadow-md ${position}`}
+      className={`flex-column-align absolute w-fit rounded bg-white px-3 py-[10px] shadow-md ${position}`}
       aria-label="추가 옵션"
     >
       <ul className="w-full list-none p-0">
