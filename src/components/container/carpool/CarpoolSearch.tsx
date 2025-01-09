@@ -1,11 +1,14 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { PostList } from '@/components/domain/post/PostList'
+import { EmptyMessage } from '@/components/view/Error'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
 import { useCarpoolSearchList } from '@/services/query'
-import { SEARCH_OPTIONS } from '@/utils/constants'
+import { ERROR_MESSAGES, SEARCH_OPTIONS } from '@/utils/constants'
+
+import { ErrorPage } from '../home/ErrorPage'
 
 type SearchListProps = {
   filterName: string | null
@@ -13,10 +16,7 @@ type SearchListProps = {
 }
 
 const SearchList = ({ filterName, searchName }: SearchListProps) => {
-  if (!searchName) {
-    console.error('검색어 없음')
-    return <p>noData</p>
-  }
+  if (!searchName) return <EmptyMessage label={ERROR_MESSAGES.NO_SEARCH_NAME} />
 
   const {
     data: searchList,
@@ -30,10 +30,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
   })
 
   if (isPending) return <Loading />
-  if (isError) {
-    console.error('데이터 불러오기 실패')
-    return <p>error</p>
-  }
+  if (isError) return <ErrorPage />
 
   return <PostList items={searchList} to={`/carpool/detail`} />
 }

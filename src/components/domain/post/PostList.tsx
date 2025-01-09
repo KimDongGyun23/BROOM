@@ -42,7 +42,7 @@ type PostListProps = {
 }
 
 export const PostList = ({ items, to }: PostListProps) => {
-  if (!items || !items.length) return <EmptyMessage>{ERROR_MESSAGES.NO_POST}</EmptyMessage>
+  if (!items || !items.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
     <section className="scroll grow px-4">

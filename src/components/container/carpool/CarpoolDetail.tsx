@@ -67,8 +67,6 @@ export const CarpoolDetail = () => {
   const { profile, item } = detailData
   // const { profile, item } = dummy
 
-  console.log(detailData)
-
   const isMyPost = profile.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
   const contents = transformCarpoolData(item)
 
