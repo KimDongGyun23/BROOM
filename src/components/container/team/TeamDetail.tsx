@@ -6,7 +6,7 @@ import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useTeamDetailPage } from '@/services/query/useTeamQuery'
-import { useTeamDetailActions } from '@/services/service/useTeammateDetailActions'
+import { useTeamDetailActions } from '@/services/service/useTeamDetailActions'
 import type { CustomPostDetailType } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 

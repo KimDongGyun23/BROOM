@@ -3,7 +3,7 @@ import { FormProvider } from 'react-hook-form'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useTeamCreateForm } from '@/hooks'
-import { useTeamCreation } from '@/services/service/useTeammateCreation'
+import { useTeamCreation } from '@/services/service/useTeamCreation'
 
 const TeamForm = () => (
   <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">

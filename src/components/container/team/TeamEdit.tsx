@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useTeamEditForm } from '@/hooks'
-import { useTeamUpdate } from '@/services/service/useTeammateUpdate'
+import { useTeamUpdate } from '@/services/service/useTeamUpdate'
 
 const TeamEditForm = () => (
   <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
