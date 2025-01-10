@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { BusReservationState } from '@/utils/constants'
 import { BUS_RESERVATION_STATES } from '@/utils/constants'
 
-import { useBusReserveInfo } from '../query/useBusQuery'
+import { useBusReservationQuery } from '../query/useBusQuery'
 
 type ReturnType = (studentId: string) => {
   reservationState: BusReservationState
@@ -12,7 +12,7 @@ type ReturnType = (studentId: string) => {
 
 export const useBusReservationStatus: ReturnType = (studentId) => {
   const [state, setState] = useState<BusReservationState>(BUS_RESERVATION_STATES.PENDING)
-  const { refetch } = useBusReserveInfo({ urls: { studentId } })
+  const { refetch } = useBusReservationQuery({ urls: { studentId } })
 
   const checkReservation = () => {
     refetch()

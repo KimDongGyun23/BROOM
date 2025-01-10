@@ -7,7 +7,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
-import { useBusReserve } from '@/services/query'
+import { useBusReservationMutation } from '@/services/query'
 import type { BusReservationForm } from '@/types/bus'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
@@ -36,7 +36,7 @@ export const ReserveCreate = () => {
   const { handleSubmit, reset } = formMethod
 
   const [isModalOpen, openModal, closeModal] = useBoolean(false)
-  const { mutate: reserveBus } = useBusReserve()
+  const { mutate: reserveBus } = useBusReservationMutation()
 
   const handleCancel = useCallback(() => {
     reset()

@@ -4,11 +4,11 @@ import type { BusReservationCreate, BusReservationQuery, ReservationStatus } fro
 
 import { api } from '.'
 
-const busReserveInfo = async ({ urls }: BusReservationQuery) => {
+const getBusReservation = async ({ urls }: BusReservationQuery) => {
   return await api.get<ReservationStatus>(`/bus/reservation/${urls.studentId}`)
 }
 
-const busReserve = async ({ body }: BusReservationCreate) => {
+const createBusReservation = async ({ body }: BusReservationCreate) => {
   return await api.post(`/bus/reservation`, body)
 }
 
@@ -18,16 +18,16 @@ const queryKeys = {
     [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
-export const useBusReserveInfo = (request: BusReservationQuery) => {
+export const useBusReservationQuery = (request: BusReservationQuery) => {
   return useQuery({
     queryKey: queryKeys.reserveInfo(request.urls),
-    queryFn: () => busReserveInfo(request),
+    queryFn: () => getBusReservation(request),
     enabled: false,
   })
 }
 
-export const useBusReserve = () => {
+export const useBusReservationMutation = () => {
   return useMutation({
-    mutationFn: busReserve,
+    mutationFn: createBusReservation,
   })
 }
