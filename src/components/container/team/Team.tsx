@@ -11,6 +11,38 @@ import { useToggle } from '@/hooks'
 import { useActiveTeamList, useTeamList } from '@/services/query/useTeamQuery'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
+import { ErrorPage } from '../home/ErrorPage'
+
+const dummy = [
+  {
+    id: 0,
+    title: '소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
+    time: '07:30',
+    full: false,
+  },
+  {
+    id: 1,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: false,
+  },
+  {
+    id: 2,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: true,
+  },
+]
+
 export const Team = () => {
   const navigate = useNavigate()
   const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
@@ -34,8 +66,9 @@ export const Team = () => {
   const handleAddTeamClick = () => navigate('/team/create')
 
   const isLoading = allLoading || activeLoading
-  const isError = allError || activeError
   const teamsToShow = showActiveOnly ? activeTeams : allTeams
+
+  if (allError || activeError) return <ErrorPage />
 
   return (
     <div className="flex-column h-full">
@@ -43,13 +76,8 @@ export const Team = () => {
       <SearchBar currentTab="team" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
 
-      {isLoading ? (
-        <Loading />
-      ) : isError ? (
-        <div>error</div>
-      ) : (
-        <PostList items={teamsToShow} to={`/team/detail`} />
-      )}
+      {/* {isLoading ? <Loading /> : <PostList items={dummy} to={`/team/detail`} />} */}
+      {isLoading ? <Loading /> : <PostList items={teamsToShow} to={`/team/detail`} />}
 
       {session && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNav />
