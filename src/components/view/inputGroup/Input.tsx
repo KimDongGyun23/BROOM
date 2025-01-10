@@ -1,19 +1,19 @@
-import type { ChangeEvent } from 'react'
+import { type ChangeEvent, type InputHTMLAttributes, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { useToggle } from '@/hooks'
 
 import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 
-type InputProps = {
-  type?: 'text' | 'password' | 'id' | 'number'
-  section: string
-  readOnly?: boolean
-  placeholder?: string
-}
+import { InputGroupContext } from '.'
 
-export const Input = ({ type = 'text', section, readOnly = false, placeholder }: InputProps) => {
+export const Input = ({
+  type = 'text',
+  readOnly = false,
+  placeholder,
+}: InputHTMLAttributes<HTMLInputElement>) => {
   const { register } = useFormContext()
+  const section = useContext(InputGroupContext)
   const isPasswordField = type === 'password'
   const [isVisible, toggleVisibility] = useToggle(false)
 
@@ -36,20 +36,20 @@ export const Input = ({ type = 'text', section, readOnly = false, placeholder }:
   )
 }
 
-type UnitInputProps = InputProps & {
+type UnitInputProps = InputHTMLAttributes<HTMLInputElement> & {
   unitLabel: string
   isPrice?: boolean
 }
 
 export const UnitInput = ({
   type = 'text',
-  section,
   unitLabel,
   isPrice = false,
   readOnly = false,
   placeholder,
 }: UnitInputProps) => {
   const { register, setValue } = useFormContext()
+  const section = useContext(InputGroupContext)
 
   const handleCurrencyChange = (event: ChangeEvent<HTMLInputElement>) => {
     let formattedValue = event.target.value.replace(/[^0-9]/g, '')
@@ -73,7 +73,7 @@ export const UnitInput = ({
   )
 }
 
-type TimeInputProps = {
+type TimeInputProps = InputHTMLAttributes<HTMLInputElement> & {
   hourSection: string
   minuteSection: string
   readOnly?: boolean
@@ -115,10 +115,13 @@ export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: Time
   )
 }
 
-type TextAreaProps = Omit<InputProps, 'type'>
-
-export const TextArea = ({ section, readOnly = false, placeholder }: TextAreaProps) => {
+export const TextArea = ({
+  readOnly = false,
+  placeholder,
+}: InputHTMLAttributes<HTMLTextAreaElement>) => {
   const { register } = useFormContext()
+  const section = useContext(InputGroupContext)
+
   return (
     <textarea
       {...register(section)}

@@ -1,16 +1,18 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils/constants'
 import { MILITARY_BRANCHES } from '@/utils/constants'
 
+import { InputGroupContext } from '.'
+
 type SortOfArmyProps = {
-  section: string
   disabled?: boolean
 }
 
-export const SortOfArmy = ({ section, disabled = false }: SortOfArmyProps) => {
+export const SortOfArmy = ({ disabled = false }: SortOfArmyProps) => {
   const { watch, setValue } = useFormContext()
+  const section = useContext(InputGroupContext)
   const selectedSort = watch(section) as MilitaryBranchCode | undefined
 
   const handleClickButton = useCallback(
@@ -25,14 +27,14 @@ export const SortOfArmy = ({ section, disabled = false }: SortOfArmyProps) => {
       {Object.entries(MILITARY_BRANCHES).map(([sort, value]) => {
         const isSelected = selectedSort === value
         const buttonStyle = isSelected
-          ? 'bg-blue-500 border-none text-grey-100'
-          : 'bg-white border-blue-300 text-grey-700'
+          ? 'bg-black-600 border-none text-black-100'
+          : 'bg-white border-black-300 text-black-500'
         return (
           <button
             key={sort}
             type="button"
             disabled={disabled}
-            className={`p-medium h-[52px] grow rounded-xl border px-3 ${buttonStyle}`}
+            className={`p-800 h-[52px] grow rounded-xl border px-3 ${buttonStyle}`}
             onClick={() => handleClickButton(sort as MilitaryBranchName)}
           >
             {sort}

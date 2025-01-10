@@ -1,17 +1,19 @@
+import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 
+import { InputGroupContext } from '.'
+
 type LabelProps = {
-  section: string
   label: string
   successMessage?: string | null
   errorMessage?: string | null
 }
 
-export const Label = ({ section, successMessage, errorMessage, label }: LabelProps) => {
+export const Label = ({ successMessage, errorMessage, label }: LabelProps) => {
   const {
     formState: { errors },
   } = useFormContext()
-
+  const section = useContext(InputGroupContext)
   const currentErrorMessage = errors[section]?.message?.toString()
 
   return (
