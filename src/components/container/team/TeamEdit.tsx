@@ -5,63 +5,42 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useTeamEditForm } from '@/hooks'
 import { useTeamUpdate } from '@/services/service/useTeamUpdate'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 import { ErrorPage } from '../home/ErrorPage'
 
-const FORM_ATT = {
-  TITLE: { section: 'title', label: '제목', placeholder: '제목을 입력해주세요.' },
-  DATE: { section: 'trainingDate', label: '훈련 날짜', placeholder: 'ex)20240521', type: 'number' },
-  PLACE: { section: 'meetingPlace', label: '만날 장소', placeholder: '만날 장소를 입력해주세요.' },
-  PERSONNEL: {
-    section: 'personnel',
-    label: '모집 인원',
-    placeholder: '0',
-    type: 'number',
-    unitLabel: '명',
-  },
-  TIME: { section: 'hour', label: '시간', hourSection: 'hour', minuteSection: 'minute' },
-  MEMO: { section: 'content', label: '메모', placeholder: '원하시는 메모 내용을 적어주세요.' },
-}
-
 const TeamEditForm = () => (
   <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
-    <InputGroup section={FORM_ATT.TITLE.section}>
-      <InputGroup.Label label={FORM_ATT.TITLE.label} />
-      <InputGroup.Input placeholder={FORM_ATT.TITLE.placeholder} />
+    <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
     </InputGroup>
 
-    <InputGroup section={FORM_ATT.DATE.section}>
-      <InputGroup.Label label={FORM_ATT.DATE.label} />
-      <InputGroup.Input type={FORM_ATT.DATE.type} placeholder={FORM_ATT.DATE.placeholder} />
+    <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
     </InputGroup>
 
-    <InputGroup section={FORM_ATT.PLACE.section}>
-      <InputGroup.Label label={FORM_ATT.PLACE.label} />
-      <InputGroup.Input placeholder={FORM_ATT.PLACE.placeholder} />
+    <InputGroup section={FORM_ATTRIBUTE.MEETING_PLACE.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.MEETING_PLACE.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.MEETING_PLACE.input} />
     </InputGroup>
 
     <div className="grid grid-cols-2 gap-5">
-      <InputGroup section={FORM_ATT.PERSONNEL.section}>
-        <InputGroup.Label label={FORM_ATT.PERSONNEL.label} />
-        <InputGroup.UnitInput
-          type={FORM_ATT.PERSONNEL.type}
-          unitLabel={FORM_ATT.PERSONNEL.unitLabel}
-          placeholder={FORM_ATT.PERSONNEL.placeholder}
-        />
+      <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
+        <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
       </InputGroup>
 
-      <InputGroup section={FORM_ATT.TIME.section}>
-        <InputGroup.Label label={FORM_ATT.TIME.label} />
-        <InputGroup.TimeInput
-          hourSection={FORM_ATT.TIME.hourSection}
-          minuteSection={FORM_ATT.TIME.minuteSection}
-        />
+      <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
+        <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
       </InputGroup>
     </div>
 
-    <InputGroup section={FORM_ATT.MEMO.section}>
-      <InputGroup.Label label={FORM_ATT.MEMO.label} />
-      <InputGroup.TextArea placeholder={FORM_ATT.MEMO.placeholder} />
+    <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
+      <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
     </InputGroup>
   </form>
 )

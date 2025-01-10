@@ -5,15 +5,19 @@ type BusType = {
   reserved: boolean
 }
 
-export type BusFormType = Omit<BusType, 'reserved'>
-export type BusInfoFormType = Pick<BusType, 'studentId'>
+type StudentId = Pick<BusType, 'studentId'>
+type NewBusForm = Omit<BusType, 'reserved'>
+type ReservedInfo = Pick<BusType, 'reserved'>
+
+export type BusFormType = NewBusForm
+export type BusReservedInfo = StudentId
 
 export type BusReserveRequest = {
-  body: Omit<BusType, 'reserved'>
+  body: NewBusForm
 }
 
 export type BusReserveInfoRequest = {
-  urls: Pick<BusType, 'studentId'>
+  urls: StudentId
 }
 
-export type BusReserveInfoResponse = Pick<BusType, 'reserved'>
+export type BusReserveInfoResponse = ReservedInfo

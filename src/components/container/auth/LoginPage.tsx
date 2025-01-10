@@ -5,16 +5,7 @@ import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks'
 import { useLoginLogic } from '@/services/service'
-
-const FORM_ATT = {
-  ID: { section: 'userId', label: '아이디', placeholder: '아이디를 입력해주세요.' },
-  PASSWORD: {
-    section: 'password',
-    label: '비밀번호',
-    placeholder: '비밀번호를 입력해주세요.',
-    type: 'password',
-  },
-}
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 export const LoginPage = () => {
   const formMethod = useLoginForm()
@@ -33,17 +24,14 @@ export const LoginPage = () => {
           className="flex-column mx-4 mt-[15svh] gap-[22px]"
           onSubmit={handleSubmit(handleLogin)}
         >
-          <InputGroup section={FORM_ATT.ID.section}>
-            <InputGroup.Label label={FORM_ATT.ID.label} />
-            <InputGroup.Input placeholder={FORM_ATT.ID.placeholder} />
+          <InputGroup section={FORM_ATTRIBUTE.LOGIN_ID.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_ID.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_ID.input} />
           </InputGroup>
 
-          <InputGroup section={FORM_ATT.PASSWORD.section}>
-            <InputGroup.Label label={FORM_ATT.PASSWORD.label} />
-            <InputGroup.Input
-              type={FORM_ATT.PASSWORD.type}
-              placeholder={FORM_ATT.PASSWORD.placeholder}
-            />
+          <InputGroup section={FORM_ATTRIBUTE.LOGIN_PASSWORD.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_PASSWORD.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_PASSWORD.input} />
           </InputGroup>
 
           <Button size="lg" type="submit">

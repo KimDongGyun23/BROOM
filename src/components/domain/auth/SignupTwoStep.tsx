@@ -8,6 +8,7 @@ import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useNicknameValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 export const SignupTwoStep = ({ label }: StepProps) => {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export const SignupTwoStep = ({ label }: StepProps) => {
   const { goNextStep, goPreviousStep } = useStepsActions()
   const { validateNickname, isNicknameValid, nicknameValidationMessage } = useNicknameValidation()
 
-  const watchNicknameField = watch('nickname')
+  const watchNicknameField = watch(FORM_ATTRIBUTE.NICKNAME.section)
 
   const handleClose = () => {
     navigate('/login')
@@ -25,7 +26,11 @@ export const SignupTwoStep = ({ label }: StepProps) => {
   }
 
   const handleNext = async () => {
-    const isValid = await trigger(['nickname', 'dischargeYear', 'militaryChaplain'])
+    const isValid = await trigger([
+      FORM_ATTRIBUTE.NICKNAME.section,
+      FORM_ATTRIBUTE.DISCHARGE_YEAR.section,
+      FORM_ATTRIBUTE.SORT.section,
+    ])
     if (isValid && isNicknameValid) {
       goNextStep()
     }
@@ -37,29 +42,28 @@ export const SignupTwoStep = ({ label }: StepProps) => {
       <LabelWithStep currentStep={2} totalStep={totalStep} label={label} />
 
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
-        <InputGroup>
+        <InputGroup section={FORM_ATTRIBUTE.NICKNAME.section}>
           <InputGroup.Label
-            section="nickname"
-            label="닉네임"
+            label={FORM_ATTRIBUTE.NICKNAME.label}
             successMessage={isNicknameValid ? nicknameValidationMessage : null}
             errorMessage={!isNicknameValid ? nicknameValidationMessage : null}
           />
           <div className="flex gap-4">
-            <InputGroup.Input section="nickname" placeholder="최소 2글자, 최대 8글자" />
+            <InputGroup.Input {...FORM_ATTRIBUTE.NICKNAME.input} />
             <Button size="md" onClick={() => validateNickname(watchNicknameField)}>
               중복 확인
             </Button>
           </div>
         </InputGroup>
 
-        <InputGroup>
-          <InputGroup.Label section="dischargeYear" label="전역연도" />
-          <InputGroup.Input section="dischargeYear" type="number" placeholder="숫자 4자리" />
+        <InputGroup section={FORM_ATTRIBUTE.DISCHARGE_YEAR.section}>
+          <InputGroup.Label label={FORM_ATTRIBUTE.DISCHARGE_YEAR.label} />
+          <InputGroup.Input {...FORM_ATTRIBUTE.DISCHARGE_YEAR.input} />
         </InputGroup>
 
-        <InputGroup>
-          <InputGroup.Label section="militaryChaplain" label="복무했던 군종" />
-          <InputGroup.SortOfArmy section="militaryChaplain" />
+        <InputGroup section={FORM_ATTRIBUTE.SORT.section}>
+          <InputGroup.Label label={FORM_ATTRIBUTE.SORT.label} />
+          <InputGroup.SortOfArmy />
         </InputGroup>
       </div>
 

@@ -6,30 +6,23 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'
 import { usePasswordUpdate } from '@/services/service'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const PasswordForm = () => (
   <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
-    <InputGroup>
-      <InputGroup.Label section="password" label="기존 비밀번호" />
-      <InputGroup.Input
-        section="password"
-        type="password"
-        placeholder="기존 비밀번호를 입력해주세요."
-      />
+    <InputGroup section={FORM_ATTRIBUTE.PREV_PASSWORD.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.PREV_PASSWORD.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.PREV_PASSWORD.input} />
     </InputGroup>
 
-    <InputGroup>
-      <InputGroup.Label section="newPassword" label="새로운 비밀번호" />
-      <InputGroup.Input
-        section="newPassword"
-        type="password"
-        placeholder="최소 8글자, 최대 16글자"
-      />
+    <InputGroup section={FORM_ATTRIBUTE.NEW_PASSWORD.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.NEW_PASSWORD.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.NEW_PASSWORD.input} />
     </InputGroup>
 
-    <InputGroup>
-      <InputGroup.Label section="confirm" label="새로운 비밀번호 확인" />
-      <InputGroup.Input section="confirm" type="password" placeholder="최소 8글자, 최대 16글자" />
+    <InputGroup section={FORM_ATTRIBUTE.CONFIRM.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.CONFIRM.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.CONFIRM.input} />
     </InputGroup>
   </form>
 )

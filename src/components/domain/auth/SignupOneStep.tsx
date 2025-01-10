@@ -8,6 +8,7 @@ import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useIdValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
 import type { StepProps } from '@/types'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 export const SignupOneStep = ({ label }: StepProps) => {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export const SignupOneStep = ({ label }: StepProps) => {
   const { trigger, reset, watch } = useFormContext()
   const { validateId, isIdValid, idValidationMessage } = useIdValidation()
 
-  const watchUserIdField = watch('userId')
+  const watchUserIdField = watch(FORM_ATTRIBUTE.SIGNUP_ID.section)
 
   const handleClose = () => {
     navigate('/login')
@@ -25,7 +26,11 @@ export const SignupOneStep = ({ label }: StepProps) => {
   }
 
   const handleNext = async () => {
-    const isValid = await trigger(['userId', 'password', 'confirm'])
+    const isValid = await trigger([
+      FORM_ATTRIBUTE.SIGNUP_ID.section,
+      FORM_ATTRIBUTE.SIGNUP_PASSWORD.section,
+      FORM_ATTRIBUTE.CONFIRM.section,
+    ])
     if (isValid && isIdValid) {
       goNextStep()
     }
@@ -37,37 +42,28 @@ export const SignupOneStep = ({ label }: StepProps) => {
       <LabelWithStep currentStep={1} totalStep={totalStep} label={label} />
 
       <div className="flex-column scroll mx-4 mb-2 mt-[65px] grow gap-7">
-        <InputGroup>
+        <InputGroup section={FORM_ATTRIBUTE.SIGNUP_ID.section}>
           <InputGroup.Label
-            section="userId"
-            label="아이디"
+            label={FORM_ATTRIBUTE.SIGNUP_ID.label}
             successMessage={isIdValid ? idValidationMessage : null}
             errorMessage={!isIdValid ? idValidationMessage : null}
           />
           <div className="flex gap-4">
-            <InputGroup.Input section="userId" placeholder="최소 6글자, 최대 12글자" />
+            <InputGroup.Input {...FORM_ATTRIBUTE.SIGNUP_ID.input} />
             <Button size="md" onClick={() => validateId(watchUserIdField)}>
               중복 확인
             </Button>
           </div>
         </InputGroup>
 
-        <InputGroup>
-          <InputGroup.Label section="password" label="비밀번호" />
-          <InputGroup.Input
-            section="password"
-            type="password"
-            placeholder="최소 8글자, 최대 16글자"
-          />
+        <InputGroup section={FORM_ATTRIBUTE.SIGNUP_PASSWORD.section}>
+          <InputGroup.Label label={FORM_ATTRIBUTE.SIGNUP_PASSWORD.label} />
+          <InputGroup.Input {...FORM_ATTRIBUTE.SIGNUP_PASSWORD.input} />
         </InputGroup>
 
-        <InputGroup>
-          <InputGroup.Label section="confirm" label="비밀번호 확인" />
-          <InputGroup.Input
-            section="confirm"
-            type="password"
-            placeholder="최소 8글자, 최대 16글자"
-          />
+        <InputGroup section={FORM_ATTRIBUTE.CONFIRM.section}>
+          <InputGroup.Label label={FORM_ATTRIBUTE.CONFIRM.label} />
+          <InputGroup.Input {...FORM_ATTRIBUTE.CONFIRM.input} />
         </InputGroup>
       </div>
 

@@ -4,9 +4,8 @@ import dayjs from 'dayjs'
 
 import { api } from '@/services/query'
 import type {
-  AccountFormType,
   BusFormType,
-  BusInfoFormType,
+  BusReservedInfo,
   CarpoolEditPageRequest,
   CarpoolEditResponse,
   CarpoolForm,
@@ -18,6 +17,7 @@ import type {
   TeamEditPageRequest,
   TeamEditResponse,
   TeamForm,
+  UserAccountFormType,
 } from '@/types'
 import {
   accountSchema,
@@ -61,7 +61,7 @@ export const useAccountForm = () => {
     return { nickname, dischargeYear, militaryChaplain }
   }
 
-  const formMethod = useForm<AccountFormType>({
+  const formMethod = useForm<UserAccountFormType>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(accountSchema),
@@ -156,8 +156,8 @@ export const useBusForm = () => {
   return formMethod
 }
 
-export const useBusReserveInfoForm = () => {
-  const formMethod = useForm<BusInfoFormType>({
+export const useBusReservedInfoForm = () => {
+  const formMethod = useForm<BusReservedInfo>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(busReserveInfoSchema),

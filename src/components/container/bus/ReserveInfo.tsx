@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/view/Button'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
-import { useBusReserveInfoForm } from '@/hooks'
+import { useBusReservedInfoForm } from '@/hooks'
 import { useBusReservationStatus } from '@/services/service'
-import { BUS_RESERVATION_STATES } from '@/utils/constants'
+import { BUS_RESERVATION_STATES, FORM_ATTRIBUTE } from '@/utils/constants'
 
 const STATE_STYLES = {
   [BUS_RESERVATION_STATES.COMPLETED]: 'text-blue-500',
@@ -19,16 +19,16 @@ type ReservationFormType = {
 }
 
 const ReservationForm = ({ onSubmit }: ReservationFormType) => {
-  const formMethod = useBusReserveInfoForm()
+  const formMethod = useBusReservedInfoForm()
   const { handleSubmit } = formMethod
 
   return (
     <FormProvider {...formMethod}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <InputGroup>
-          <InputGroup.Label section="studentId" label="학번" />
+        <InputGroup section={FORM_ATTRIBUTE.STUDENT_ID.section}>
+          <InputGroup.Label label={FORM_ATTRIBUTE.STUDENT_ID.label} />
           <div className="flex gap-4">
-            <InputGroup.Input section="studentId" placeholder="학번을 입력해주세요." />
+            <InputGroup.Input {...FORM_ATTRIBUTE.STUDENT_ID.input} />
             <Button size="md" type="submit">
               조회하기
             </Button>
@@ -41,10 +41,10 @@ const ReservationForm = ({ onSubmit }: ReservationFormType) => {
 
 export const ReserveInfo = () => {
   const navigate = useNavigate()
-  const formMethod = useBusReserveInfoForm()
+  const formMethod = useBusReservedInfoForm()
   const { reset, watch } = formMethod
 
-  const studentId = watch('studentId')
+  const studentId = watch(FORM_ATTRIBUTE.STUDENT_ID.section)
   const { reservationState, checkReservation } = useBusReservationStatus(studentId)
 
   const handleClose = () => {

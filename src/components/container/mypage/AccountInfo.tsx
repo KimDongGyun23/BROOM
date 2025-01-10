@@ -6,6 +6,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useAccountForm, useBoolean } from '@/hooks'
 import { useAccountUpdate } from '@/services/service'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 type AccountFormType = {
   isEditMode: boolean
@@ -14,14 +15,10 @@ type AccountFormType = {
 const AccountForm = ({ isEditMode }: AccountFormType) => {
   return (
     <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
-      <InputGroup>
-        <InputGroup.Label section="nickname" label="닉네임" />
+      <InputGroup section={FORM_ATTRIBUTE.NICKNAME.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.NICKNAME.label} />
         <div className="flex gap-4">
-          <InputGroup.Input
-            section="nickname"
-            readOnly={!isEditMode}
-            placeholder="최소 2글자, 최대 8글자"
-          />
+          <InputGroup.Input readOnly={!isEditMode} {...FORM_ATTRIBUTE.NICKNAME.input} />
           {isEditMode && (
             <Button size="md" onClick={() => {}}>
               중복 확인
@@ -30,19 +27,14 @@ const AccountForm = ({ isEditMode }: AccountFormType) => {
         </div>
       </InputGroup>
 
-      <InputGroup>
-        <InputGroup.Label section="dischargeYear" label="전역 연도" />
-        <InputGroup.Input
-          section="dischargeYear"
-          type="number"
-          readOnly={!isEditMode}
-          placeholder="숫자 4자리"
-        />
+      <InputGroup section={FORM_ATTRIBUTE.DISCHARGE_YEAR.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.DISCHARGE_YEAR.label} />
+        <InputGroup.Input readOnly={!isEditMode} {...FORM_ATTRIBUTE.DISCHARGE_YEAR.input} />
       </InputGroup>
 
-      <InputGroup>
-        <InputGroup.Label section="militaryChaplain" label="복무했던 군종" />
-        <InputGroup.SortOfArmy section="militaryChaplain" disabled={!isEditMode} />
+      <InputGroup section={FORM_ATTRIBUTE.SORT.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.SORT.label} />
+        <InputGroup.SortOfArmy disabled={!isEditMode} />
       </InputGroup>
     </form>
   )

@@ -9,26 +9,23 @@ import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
 import type { BusFormType } from '@/types'
+import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const ReservationForm = () => (
   <form className="flex-column scroll mx-4 mb-2 grow gap-7">
-    <InputGroup>
-      <InputGroup.Label section="name" label="이름" />
-      <InputGroup.Input section="name" placeholder="이름을 입력해주세요." />
+    <InputGroup section={FORM_ATTRIBUTE.NAME.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.NAME.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.NAME.input} />
     </InputGroup>
 
-    <InputGroup>
-      <InputGroup.Label section="studentId" label="학번" />
-      <InputGroup.Input section="studentId" type="number" placeholder="학번을 입력해주세요." />
+    <InputGroup section={FORM_ATTRIBUTE.STUDENT_ID.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.STUDENT_ID.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.STUDENT_ID.input} />
     </InputGroup>
 
-    <InputGroup>
-      <InputGroup.Label section="phoneNumber" label="연락처" />
-      <InputGroup.Input
-        section="phoneNumber"
-        type="number"
-        placeholder="-를 제외한 숫자만 입력해주세요."
-      />
+    <InputGroup section={FORM_ATTRIBUTE.PHONE_NUMBER.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.PHONE_NUMBER.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.PHONE_NUMBER.input} />
     </InputGroup>
   </form>
 )
@@ -62,7 +59,7 @@ export const ReserveCreate = () => {
   return (
     <div className="flex-column h-svh">
       <SubHeaderWithoutIcon type="null" onClickCancel={handleCancel} />
-      <h4 className="mx-4 mb-[65px] mt-6 font-bold text-grey-700">예약 정보 입력</h4>
+      <h2 className="mx-4 mb-[65px] mt-6 font-bold text-grey-700">예약 정보 입력</h2>
 
       <FormProvider {...formMethod}>
         <ReservationForm />
