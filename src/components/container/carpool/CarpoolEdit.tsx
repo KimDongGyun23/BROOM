@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { Button } from '@/components/view/Button'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
-import { useCarpoolEditForm } from '@/hooks'
+import { useCarpoolEditForm } from '@/hooks/useForm'
 import { useCarpoolUpdate } from '@/services/service/useCarpoolUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 

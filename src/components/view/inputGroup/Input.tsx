@@ -1,7 +1,7 @@
 import { type ChangeEvent, type InputHTMLAttributes, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { useToggle } from '@/hooks'
+import { useToggle } from '@/hooks/useToggle'
 
 import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 

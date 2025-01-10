@@ -4,7 +4,7 @@ import onboarding_first from '@/assets/onboarding1.svg'
 import onboarding_second from '@/assets/onboarding2.svg'
 import onboarding_third from '@/assets/onboarding3.svg'
 import { Button } from '@/components/view/Button'
-import { useTouchEvent } from '@/hooks'
+import { useTouchEvent } from '@/hooks/useTouchEvent'
 
 type SectionDotType = {
   currentTab: number

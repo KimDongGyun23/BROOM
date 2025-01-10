@@ -7,7 +7,7 @@ import { BottomNav } from '@/components/view/BottomNav'
 import { MainHeader } from '@/components/view/header/MainHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
-import { useToggle } from '@/hooks'
+import { useToggle } from '@/hooks/useToggle'
 import { useActiveTeamList, useTeamList } from '@/services/query/useTeamQuery'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 

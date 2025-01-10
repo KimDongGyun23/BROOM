@@ -1,7 +1,7 @@
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Kebab } from '@/components/view/Kebab'
 import { ModalWithTwoButton } from '@/components/view/Modal'
-import { useBoolean } from '@/hooks'
+import { useBoolean } from '@/hooks/useBoolean'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostDetailHeaderProps = {

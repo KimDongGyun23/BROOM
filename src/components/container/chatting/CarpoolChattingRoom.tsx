@@ -9,7 +9,9 @@ import { Kebab } from '@/components/view/Kebab'
 import { Loading } from '@/components/view/Loading'
 import { ChattingRoomProfile } from '@/components/view/Profile'
 import { ProfileImage } from '@/components/view/ProfileImage'
-import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
+import { useBoolean } from '@/hooks/useBoolean'
+import { useScrollToBottom } from '@/hooks/useScrollToBottom'
+import { useWebSocket } from '@/hooks/useWebsocket'
 import {
   useCarpoolChattingInfo,
   useCarpoolExitChattingRoom,

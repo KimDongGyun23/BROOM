@@ -3,7 +3,7 @@ import { FormProvider, useFormContext } from 'react-hook-form'
 import { Button } from '@/components/view/Button'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
-import { useCarpoolCreateForm } from '@/hooks'
+import { useCarpoolCreateForm } from '@/hooks/useForm'
 import { useCarpoolCreation } from '@/services/service/useCarpoolCreation'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
