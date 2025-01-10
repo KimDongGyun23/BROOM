@@ -6,7 +6,7 @@ import { Button } from '@/components/view/Button'
 import { SubHeaderWithIcon } from '@/components/view/header/SubHeader'
 import { AllCheckIcon, CheckIcon } from '@/components/view/icons/ActiveIcons'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
-import { useStepsActions, useTotalStep } from '@/stores'
+import { useStepsActions, useTotalStep } from '@/stores/steps'
 import type { StepProps } from '@/types/common'
 
 type AgreementItemProps = {

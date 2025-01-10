@@ -7,7 +7,7 @@ import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
 import { useSignupForm } from '@/hooks'
 import { useSignup } from '@/services/query/useAuthQuery'
-import { useCurrentStep, useStepsActions } from '@/stores'
+import { useCurrentStep, useStepsActions } from '@/stores/steps'
 import type { SignupData } from '@/types/auth'
 
 const signupMap = {

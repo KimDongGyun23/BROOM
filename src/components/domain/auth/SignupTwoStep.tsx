@@ -6,7 +6,7 @@ import { SubHeaderWithIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useNicknameValidation } from '@/services/service'
-import { useStepsActions, useTotalStep } from '@/stores'
+import { useStepsActions, useTotalStep } from '@/stores/steps'
 import type { StepProps } from '@/types/common'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
