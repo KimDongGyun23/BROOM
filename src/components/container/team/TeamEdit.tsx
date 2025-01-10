@@ -20,7 +20,7 @@ const FORM_ATT = {
     unitLabel: '명',
   },
   TIME: { section: 'hour', label: '시간', hourSection: 'hour', minuteSection: 'minute' },
-  MEMO: { section: 'memo', label: '메모', placeholder: '원하시는 메모 내용을 적어주세요.' },
+  MEMO: { section: 'content', label: '메모', placeholder: '원하시는 메모 내용을 적어주세요.' },
 }
 
 const TeamEditForm = () => (

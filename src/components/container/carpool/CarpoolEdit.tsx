@@ -22,7 +22,7 @@ const FORM_ATT = {
   },
   TIME: { section: 'hour', label: '시간', hourSection: 'hour', minuteSection: 'minute' },
   PRICE: { section: 'price', label: '금액', placeholder: '0', unitLabel: '원' },
-  MEMO: { section: 'memo', label: '메모', placeholder: '원하시는 메모 내용을 적어주세요.' },
+  MEMO: { section: 'content', label: '메모', placeholder: '원하시는 메모 내용을 적어주세요.' },
 }
 
 const CarpoolEditForm = () => {
@@ -99,7 +99,7 @@ export const CarpoolEdit = () => {
     <div className="flex-column h-svh">
       <SubHeaderWithoutIcon
         type="complete"
-        title="카풀 모집 수정"
+        title="승차 공유 수정"
         onClickComplete={handleSubmit(handleSubmitForm)}
       />
       <FormProvider {...formMethod}>
