@@ -46,8 +46,8 @@ const transformCarpoolData = (item: CustomPostDetailType['item']) => [
 
 export const CarpoolDetail = () => {
   const { id } = useParams()
+  if (!id) return <ErrorPage />
 
-  if (!id) return <div>error</div>
   const carpoolBoardId = parseInt(id)
 
   const {
