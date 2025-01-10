@@ -6,6 +6,16 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks'
 import { useLoginLogic } from '@/services/service'
 
+const FORM_ATT = {
+  ID: { section: 'userId', label: '아이디', placeholder: '아이디를 입력해주세요.' },
+  PASSWORD: {
+    section: 'password',
+    label: '비밀번호',
+    placeholder: '비밀번호를 입력해주세요.',
+    type: 'password',
+  },
+}
+
 export const LoginPage = () => {
   const formMethod = useLoginForm()
 
@@ -14,7 +24,7 @@ export const LoginPage = () => {
 
   return (
     <div className="flex-column">
-      <h1 className="mt-[20svh] text-center font-jalnan text-6xl leading-[44px] text-blue-600">
+      <h1 className="mt-[20svh] text-center font-jalnan text-6xl leading-[44px] text-black-600">
         BROOM
       </h1>
 
@@ -23,17 +33,16 @@ export const LoginPage = () => {
           className="flex-column mx-4 mt-[15svh] gap-[22px]"
           onSubmit={handleSubmit(handleLogin)}
         >
-          <InputGroup>
-            <InputGroup.Label section="userId" label="아이디" />
-            <InputGroup.Input section="userId" placeholder="아이디를 입력해주세요." />
+          <InputGroup section={FORM_ATT.ID.section}>
+            <InputGroup.Label label={FORM_ATT.ID.label} />
+            <InputGroup.Input placeholder={FORM_ATT.ID.placeholder} />
           </InputGroup>
 
-          <InputGroup>
-            <InputGroup.Label section="password" label="비밀번호" />
+          <InputGroup section={FORM_ATT.PASSWORD.section}>
+            <InputGroup.Label label={FORM_ATT.PASSWORD.label} />
             <InputGroup.Input
-              section="password"
-              type="password"
-              placeholder="비밀번호를 입력해주세요."
+              type={FORM_ATT.PASSWORD.type}
+              placeholder={FORM_ATT.PASSWORD.placeholder}
             />
           </InputGroup>
 
@@ -47,11 +56,11 @@ export const LoginPage = () => {
         className={`mx-4 mt-[22px] ${isLoginFailed ? 'flex-between-align' : 'flex justify-end'}`}
       >
         {isLoginFailed && (
-          <p className="p-xsmall text-red-200">* 아이디 또는 비밀번호가 일치하지 않습니다.</p>
+          <p className="p-900 text-error">* 아이디 또는 비밀번호가 일치하지 않습니다.</p>
         )}
         <Link
           to={'/sign-up'}
-          className=" inline-block border-b border-b-grey-500 pb-1 text-grey-500"
+          className="inline-block border-b border-b-black-500 pb-1 text-black-500"
         >
           회원가입
         </Link>
