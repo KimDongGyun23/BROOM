@@ -10,7 +10,10 @@ import { Loading } from '@/components/view/Loading'
 import { ChattingRoomProfile } from '@/components/view/Profile'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import { useBoolean, useScrollToBottom, useWebSocket } from '@/hooks'
-import { useCarpoolChattingInfo, useCarpoolExitChattingRoom } from '@/services/query'
+import {
+  useCarpoolChattingInfo,
+  useCarpoolExitChattingRoom,
+} from '@/services/query/useChattingQuery'
 import { useMessageActions, useMessageData } from '@/stores/message'
 import type { MilitaryBranchCode } from '@/utils/constants'
 

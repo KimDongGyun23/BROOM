@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-import { useUpdateTeam } from '@/services/query'
 import type { TeamForm } from '@/types/team'
+
+import { useUpdateTeam } from '../query/useTeamQuery'
 
 const formatFormData = (formData: TeamForm) => {
   const { hour, minute, trainingDate, ...rest } = formData

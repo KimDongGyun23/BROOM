@@ -5,7 +5,7 @@ import chainImage from '@/assets/chain.svg'
 import { BottomNav } from '@/components/view/BottomNav'
 import { Loading } from '@/components/view/Loading'
 import { ProfileImage } from '@/components/view/ProfileImage'
-import { useLogout, useUserDeletion, useUserProfile } from '@/services/query'
+import { useLogout, useUserDeletion, useUserProfile } from '@/services/query/useMypageQuery'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { clearSessionStorage, getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 

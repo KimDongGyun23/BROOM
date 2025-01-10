@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useValidateNickname } from '@/services/query'
+import { useValidateNickname } from '../query/useAuthQuery'
 
 export const useNicknameValidation = () => {
   const [isNicknameValid, setIsNicknameValid] = useState(false)

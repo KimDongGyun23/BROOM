@@ -6,7 +6,7 @@ import { SignupOneStep } from '@/components/domain/auth/SignupOneStep'
 import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
 import { useSignupForm } from '@/hooks'
-import { useSignup } from '@/services/query'
+import { useSignup } from '@/services/query/useAuthQuery'
 import { useCurrentStep, useStepsActions } from '@/stores'
 import type { SignupData } from '@/types/auth'
 

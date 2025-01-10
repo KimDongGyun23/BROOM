@@ -5,7 +5,7 @@ import { EmptyMessage } from '@/components/view/Error'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
-import { useSearchCarpoolList } from '@/services/query'
+import { useSearchCarpoolList } from '@/services/query/useCarpoolQuery'
 import { ERROR_MESSAGES, SEARCH_OPTIONS } from '@/utils/constants'
 
 import { ErrorPage } from '../home/ErrorPage'

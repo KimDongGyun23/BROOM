@@ -9,10 +9,3 @@ export const api = new HttpClient({
   },
   withCredentials: true,
 })
-
-export * from './useAuthQuery'
-export * from './useBusQuery'
-export * from './useCarpoolQuery'
-export * from './useChattingQuery'
-export * from './useMypageQuery'
-export * from './useTeamQuery'

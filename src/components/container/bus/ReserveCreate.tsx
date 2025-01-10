@@ -7,7 +7,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
-import { useBusReservationMutation } from '@/services/query'
+import { useBusReservationMutation } from '@/services/query/useBusQuery'
 import type { BusReservationForm } from '@/types/bus'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
