@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks'
-import { useLoginLogic } from '@/services/service'
+import { useLoginLogic } from '@/services/service/useLoginLogic'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 export const LoginPage = () => {

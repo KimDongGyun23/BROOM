@@ -5,7 +5,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useNewPasswordForm } from '@/hooks'
-import { usePasswordUpdate } from '@/services/service'
+import { usePasswordUpdate } from '@/services/service/usePasswordUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const PasswordForm = () => (

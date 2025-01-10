@@ -5,7 +5,7 @@ import { Button } from '@/components/view/Button'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useBusReservedInfoForm } from '@/hooks'
-import { useBusReservationStatus } from '@/services/service'
+import { useBusReservationStatus } from '@/services/service/useBusReservationStatus'
 import { BUS_RESERVATION_STATES, FORM_ATTRIBUTE } from '@/utils/constants'
 
 const STATE_STYLES = {

@@ -4,7 +4,7 @@ import { Button } from '@/components/view/Button'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useCarpoolCreateForm } from '@/hooks'
-import { useCarpoolCreation } from '@/services/service'
+import { useCarpoolCreation } from '@/services/service/useCarpoolCreation'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const CarpoolForm = () => {

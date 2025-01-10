@@ -5,7 +5,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useAccountForm, useBoolean } from '@/hooks'
-import { useAccountUpdate } from '@/services/service'
+import { useAccountUpdate } from '@/services/service/useAccountUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 type AccountFormType = {
