@@ -8,16 +8,12 @@ type User = {
   militaryChaplain: MilitaryBranchCode
 }
 
-type Confirm = {
-  confirm: string
-}
-
-export type Login = Pick<User, 'userId' | 'password'>
-export type Signup = User & Confirm
+export type LoginCredentials = Pick<User, 'userId' | 'password'>
+export type SignupData = User & { confirm: string }
 export type SavedUserData = Pick<User, 'nickname' | 'militaryChaplain'>
 
 export type LoginRequest = {
-  body: Login
+  body: LoginCredentials
 }
 
 export type SignupRequest = {

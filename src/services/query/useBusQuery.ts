@@ -1,33 +1,33 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 
-import type { BusReservationCreate, BusReservationQuery, ReservationStatus } from '@/types/bus'
+import type {
+  BusReservationInfoRequest,
+  BusReservationRequest,
+  ReservationStatus,
+} from '@/types/bus'
 
 import { api } from '.'
 
-const getBusReservation = async ({ urls }: BusReservationQuery) => {
-  return await api.get<ReservationStatus>(`/bus/reservation/${urls.studentId}`)
-}
-
-const createBusReservation = async ({ body }: BusReservationCreate) => {
-  return await api.post(`/bus/reservation`, body)
-}
+const API_ENDPOINTS = {
+  RESERVATION: (studentId: string) => `/bus/reservation/${studentId}`,
+} as const
 
 const queryKeys = {
   all: ['bus'] as const,
-  reserveInfo: (urls: BusReservationQuery['urls']) =>
+  reservation: (urls: BusReservationInfoRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
-export const useBusReservationQuery = (request: BusReservationQuery) => {
-  return useQuery({
-    queryKey: queryKeys.reserveInfo(request.urls),
-    queryFn: () => getBusReservation(request),
+export const useBusReservationQuery = ({ urls }: BusReservationInfoRequest) => {
+  return useQuery<ReservationStatus, Error>({
+    queryKey: queryKeys.reservation(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.RESERVATION(urls.studentId)),
     enabled: false,
   })
 }
 
 export const useBusReservationMutation = () => {
-  return useMutation({
-    mutationFn: createBusReservation,
+  return useMutation<void, Error, BusReservationRequest>({
+    mutationFn: async ({ body }) => await api.post(`/bus/reservation`, body),
   })
 }

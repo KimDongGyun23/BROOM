@@ -6,13 +6,13 @@ import type {
   SignupRequest,
   ValidateIdRequest,
   ValidateNicknameRequest,
-} from '@/types'
+} from '@/types/auth'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
 const API_ENDPOINTS = {
-  SIGN_IN: `${BASE_URL}/signup`,
+  SIGN_IN: `${BASE_URL}/signin`,
   SIGN_UP: `${BASE_URL}/signup`,
   VALIDATE_ID: `${BASE_URL}/validate-id`,
   VALIDATE_NICKNAME: `${BASE_URL}/validate-nickname`,
@@ -27,7 +27,6 @@ export const useLogin = () => {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       }),
-    onSuccess: (res) => console.log(res),
   })
 }
 

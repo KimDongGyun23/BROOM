@@ -10,8 +10,8 @@ import type {
   SearchType,
   TeamEditPageRequest,
 } from '@/types'
-import type { Login, Signup } from '@/types/auth'
-import type { BusReservationForm, BusReservationCheck } from '@/types/bus'
+import type { LoginCredentials, SignupData } from '@/types/auth'
+import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { CarpoolPostContent } from '@/types/carpool'
 import type { MypageUser } from '@/types/mypage'
 import type { TeamForm, TeamPostContent } from '@/types/team'
@@ -27,7 +27,7 @@ import {
 } from '@/utils/schema'
 
 export const useLoginForm = () => {
-  const formMethod = useForm<Login>({
+  const formMethod = useForm<LoginCredentials>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: {
@@ -41,7 +41,7 @@ export const useLoginForm = () => {
 }
 
 export const useSignupForm = () => {
-  const formMethod = useForm<Signup>({
+  const formMethod = useForm<SignupData>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(signupSchema),

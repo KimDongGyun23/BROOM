@@ -12,10 +12,10 @@ export type ReservationStatus = Pick<BusPassenger, 'reserved'>
 export type BusReservationForm = NewBusReservation
 export type BusReservationCheck = StudentId
 
-export type BusReservationCreate = {
+export type BusReservationRequest = {
   body: NewBusReservation
 }
 
-export type BusReservationQuery = {
+export type BusReservationInfoRequest = {
   urls: StudentId
 }
