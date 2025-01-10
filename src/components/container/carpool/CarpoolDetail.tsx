@@ -6,7 +6,7 @@ import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
 import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
-import { useCarpoolDetailPage } from '@/services/query/useCarpoolQuery'
+import { useCarpoolDetail } from '@/services/query/useCarpoolQuery'
 import { useCarpoolDetailActions } from '@/services/service/useCarpoolDetailActions'
 import type { CustomPostDetailType } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
@@ -54,7 +54,7 @@ export const CarpoolDetail = () => {
     data: detailData,
     isPending,
     isError,
-  } = useCarpoolDetailPage({ urls: { carpoolBoardId: carpoolBoardId } })
+  } = useCarpoolDetail({ urls: { carpoolBoardId: carpoolBoardId } })
 
   const { handleCheckFull, handleEdit, handleDelete, handleClickChatting } =
     useCarpoolDetailActions(carpoolBoardId, detailData?.item.full as boolean)

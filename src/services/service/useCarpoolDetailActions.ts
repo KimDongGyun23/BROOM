@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useCarpoolCheckFull, useDeleteCarpool } from '@/services/query/useCarpoolQuery'
+import { useMarkCarpoolAsFull, useDeleteCarpool } from '@/services/query/useCarpoolQuery'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
 import { TAB_KEYS } from '@/utils/constants'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
@@ -8,7 +8,7 @@ import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 export const useCarpoolDetailActions = (id: number, isFull: boolean) => {
   const navigate = useNavigate()
   const { mutate: chattingMutation } = useCarpoolChattingId()
-  const { mutate: checkFullMutation } = useCarpoolCheckFull()
+  const { mutate: checkFullMutation } = useMarkCarpoolAsFull()
   const { mutate: deleteMutation } = useDeleteCarpool()
 
   const handleCheckFull = () => {

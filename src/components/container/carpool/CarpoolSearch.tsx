@@ -5,7 +5,7 @@ import { EmptyMessage } from '@/components/view/Error'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/view/SearchBar'
-import { useCarpoolSearchList } from '@/services/query'
+import { useSearchCarpoolList } from '@/services/query'
 import { ERROR_MESSAGES, SEARCH_OPTIONS } from '@/utils/constants'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -22,7 +22,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
     data: searchList,
     isPending,
     isError,
-  } = useCarpoolSearchList({
+  } = useSearchCarpoolList({
     urls: {
       category: filterName || SEARCH_OPTIONS[0].label,
       keyword: searchName,

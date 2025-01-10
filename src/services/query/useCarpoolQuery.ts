@@ -6,12 +6,12 @@ import type {
   CarpoolDetailRequest,
   CarpoolDetailResponse,
   CarpoolEditRequest,
+  CarpoolId,
   CarpoolIsFullRequest,
   CarpoolRecruitResponse,
   CarpoolResponse,
   CarpoolSearchRequest,
-} from '@/types'
-import type { CarpoolId } from '@/types/carpool'
+} from '@/types/carpool'
 import type { CustomPostDetailType, PostItemType } from '@/types/post'
 
 import { api } from '.'
@@ -70,7 +70,7 @@ export const useActiveCarpoolList = () => {
   })
 }
 
-export const useCarpoolDetailPage = ({ urls }: CarpoolDetailRequest) => {
+export const useCarpoolDetail = ({ urls }: CarpoolDetailRequest) => {
   return useQuery<CarpoolDetailResponse, Error, CustomPostDetailType>({
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.carpoolBoardId)),
@@ -90,7 +90,7 @@ export const useCarpoolDetailPage = ({ urls }: CarpoolDetailRequest) => {
   })
 }
 
-export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
+export const useSearchCarpoolList = ({ urls }: CarpoolSearchRequest) => {
   return useQuery<CarpoolResponse, Error, PostItemType[]>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
@@ -104,7 +104,7 @@ export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
   })
 }
 
-export const useCarpoolCreate = () => {
+export const useCreateCarpoolPost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<CarpoolId, Error, CarpoolCreateRequest>({
@@ -115,7 +115,7 @@ export const useCarpoolCreate = () => {
   })
 }
 
-export const useCarpoolCheckFull = () => {
+export const useMarkCarpoolAsFull = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, CarpoolIsFullRequest>({
