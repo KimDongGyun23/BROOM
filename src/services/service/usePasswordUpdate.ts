@@ -1,17 +1,17 @@
 import type { AxiosError } from 'axios'
 
-import type { NewPasswordFormType } from '@/types'
+import type { NewPasswordForm } from '@/types'
 
 import { useUpdatePassword } from '../query'
 
 type ReturnType = (onSuccess: (message: string) => void) => {
-  handlePasswordUpdate: (formData: NewPasswordFormType) => void
+  handlePasswordUpdate: (formData: NewPasswordForm) => void
 }
 
 export const usePasswordUpdate: ReturnType = (onSuccess) => {
   const { mutate: updatePassword } = useUpdatePassword()
 
-  const handlePasswordUpdate = (formData: NewPasswordFormType) => {
+  const handlePasswordUpdate = (formData: NewPasswordForm) => {
     updatePassword(
       { body: { password: formData.password, newPassword: formData.newPassword } },
       {

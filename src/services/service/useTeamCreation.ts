@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-import type { TeamForm } from '@/types'
+import type { TeamForm } from '@/types/team'
 
 import { useTeamCreate } from '../query'
 

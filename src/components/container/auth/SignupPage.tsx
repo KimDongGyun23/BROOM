@@ -8,7 +8,7 @@ import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
 import { useSignupForm } from '@/hooks'
 import { useSignup } from '@/services/query'
 import { useCurrentStep, useStepsActions } from '@/stores'
-import type { SignupFormType } from '@/types'
+import type { Signup } from '@/types/auth'
 
 const signupMap = {
   1: '계정 정보 기입',
@@ -25,7 +25,7 @@ export const SignupPage = () => {
   const { mutate: signupMutation } = useSignup()
   const { handleSubmit } = formMethod
 
-  const handleSubmitSignupForm = (formData: SignupFormType) => {
+  const handleSubmitSignupForm = (formData: Signup) => {
     // eslint-disable-next-line unused-imports/no-unused-vars
     const { confirm, ...dataWithoutConfirm } = formData
     signupMutation(

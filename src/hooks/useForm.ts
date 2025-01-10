@@ -4,21 +4,17 @@ import dayjs from 'dayjs'
 
 import { api } from '@/services/query'
 import type {
-  BusFormType,
-  BusReservedInfo,
   CarpoolEditPageRequest,
-  CarpoolEditResponse,
   CarpoolForm,
-  LoginFormType,
-  MypageAccountResponse,
-  NewPasswordFormType,
+  NewPasswordForm,
   SearchType,
-  SignupFormType,
   TeamEditPageRequest,
-  TeamEditResponse,
-  TeamForm,
-  UserAccountFormType,
 } from '@/types'
+import type { Login, Signup } from '@/types/auth'
+import type { BusReservationForm, BusReservationCheck } from '@/types/bus'
+import type { CarpoolPostContent } from '@/types/carpool'
+import type { MypageUser } from '@/types/mypage'
+import type { TeamForm, TeamPostContent } from '@/types/team'
 import {
   accountSchema,
   busReserveInfoSchema,
@@ -31,7 +27,7 @@ import {
 } from '@/utils/schema'
 
 export const useLoginForm = () => {
-  const formMethod = useForm<LoginFormType>({
+  const formMethod = useForm<Login>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: {
@@ -45,7 +41,7 @@ export const useLoginForm = () => {
 }
 
 export const useSignupForm = () => {
-  const formMethod = useForm<SignupFormType>({
+  const formMethod = useForm<Signup>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(signupSchema),
@@ -56,12 +52,11 @@ export const useSignupForm = () => {
 
 export const useAccountForm = () => {
   const getDefaultValues = async () => {
-    const { nickname, dischargeYear, militaryChaplain } =
-      await api.get<MypageAccountResponse>(`/mypage/info`)
+    const { nickname, dischargeYear, militaryChaplain } = await api.get<MypageUser>(`/mypage/info`)
     return { nickname, dischargeYear, militaryChaplain }
   }
 
-  const formMethod = useForm<UserAccountFormType>({
+  const formMethod = useForm<MypageUser>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(accountSchema),
@@ -83,7 +78,7 @@ export const useCarpoolCreateForm = () => {
 
 export const useCarpoolEditForm = ({ urls }: CarpoolEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { departTime, trainingDate, ...rest } = await api.get<CarpoolEditResponse>(
+    const { departTime, trainingDate, ...rest } = await api.get<CarpoolPostContent>(
       `/carpool/edit/${urls.carpoolBoardId}`,
     )
     const hour = parseInt(departTime.split(':')[0], 10)
@@ -125,7 +120,7 @@ export const useTeamCreateForm = () => {
 
 export const useTeamEditForm = ({ urls }: TeamEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { meetingTime, trainingDate, ...rest } = await api.get<TeamEditResponse>(
+    const { meetingTime, trainingDate, ...rest } = await api.get<TeamPostContent>(
       `/team/edit/${urls.teamBoardId}`,
     )
 
@@ -147,7 +142,7 @@ export const useTeamEditForm = ({ urls }: TeamEditPageRequest) => {
 }
 
 export const useBusForm = () => {
-  const formMethod = useForm<BusFormType>({
+  const formMethod = useForm<BusReservationForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(busSchema),
@@ -157,7 +152,7 @@ export const useBusForm = () => {
 }
 
 export const useBusReservedInfoForm = () => {
-  const formMethod = useForm<BusReservedInfo>({
+  const formMethod = useForm<BusReservationCheck>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(busReserveInfoSchema),
@@ -167,7 +162,7 @@ export const useBusReservedInfoForm = () => {
 }
 
 export const useNewPasswordForm = () => {
-  const formMethod = useForm<NewPasswordFormType>({
+  const formMethod = useForm<NewPasswordForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(newPasswordSchema),

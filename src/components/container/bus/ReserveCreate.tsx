@@ -8,7 +8,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean, useBusForm } from '@/hooks'
 import { useBusReserve } from '@/services/query'
-import type { BusFormType } from '@/types'
+import type { BusReservationForm } from '@/types/bus'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const ReservationForm = () => (
@@ -44,7 +44,7 @@ export const ReserveCreate = () => {
   }, [reset, navigate])
 
   const handleReservation = useCallback(
-    (formData: BusFormType) => {
+    (formData: BusReservationForm) => {
       reserveBus({ body: formData }, { onSuccess: openModal })
     },
     [reserveBus, openModal],

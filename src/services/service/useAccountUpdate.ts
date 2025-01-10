@@ -1,19 +1,19 @@
 import { useCallback } from 'react'
 
-import type { UserAccountFormType } from '@/types'
+import type { MypageUser } from '@/types/mypage'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 import { useUpdateUserAccount } from '../query'
 
 type ReturnType = (onSuccess: VoidFunction) => {
-  handleAccountUpdate: (formData: UserAccountFormType) => void
+  handleAccountUpdate: (formData: MypageUser) => void
 }
 
 export const useAccountUpdate: ReturnType = (onSuccess) => {
   const { mutate: updateAccount } = useUpdateUserAccount()
 
   const handleAccountUpdate = useCallback(
-    (formData: UserAccountFormType) => {
+    (formData: MypageUser) => {
       updateAccount(
         { body: formData },
         {

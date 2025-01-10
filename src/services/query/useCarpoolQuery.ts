@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
   CarpoolCreateRequest,
-  CarpoolCreateResponse,
   CarpoolDeleteRequest,
   CarpoolDetailRequest,
   CarpoolDetailResponse,
@@ -12,6 +11,7 @@ import type {
   CarpoolResponse,
   CarpoolSearchRequest,
 } from '@/types'
+import type { CarpoolId } from '@/types/carpool'
 import type { CustomPostDetailType, PostItemType } from '@/types/post'
 
 import { api } from '.'
@@ -107,7 +107,7 @@ export const useCarpoolSearchList = ({ urls }: CarpoolSearchRequest) => {
 export const useCarpoolCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<CarpoolCreateResponse, Error, CarpoolCreateRequest>({
+  return useMutation<CarpoolId, Error, CarpoolCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })

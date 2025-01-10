@@ -1,13 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type {
-  CarpoolFetchResponse,
-  MypageInfoResponse,
-  TeamsFetchResponse,
-  UpdateAccountRequest,
-  UpdatePasswordRequest,
-} from '@/types'
+import type { UpdateAccountRequest, UpdatePasswordRequest } from '@/types'
+import type { CarpoolResponse } from '@/types/carpool'
+import type { UserProfile } from '@/types/mypage'
 import type { PostItemType } from '@/types/post'
+import type { TeamResponse } from '@/types/team'
 
 import { api } from '.'
 
@@ -29,7 +26,7 @@ const queryKeys = {
 }
 
 export const useUserProfile = () => {
-  return useQuery<MypageInfoResponse, Error>({
+  return useQuery<UserProfile, Error>({
     queryKey: queryKeys.all,
     queryFn: async () => await api.get(API_ENDPOINTS.FETCH_MYPAGE),
   })
@@ -57,7 +54,7 @@ export const useUpdatePassword = () => {
 }
 
 export const useMyTeamPost = () => {
-  return useQuery<TeamsFetchResponse, Error, PostItemType[]>({
+  return useQuery<TeamResponse, Error, PostItemType[]>({
     queryKey: queryKeys.myTeamPost(),
     queryFn: async () => await api.get(API_ENDPOINTS.TEAM_POST),
     gcTime: 0,
@@ -73,7 +70,7 @@ export const useMyTeamPost = () => {
 }
 
 export const useMyCarpoolPost = () => {
-  return useQuery<CarpoolFetchResponse, Error, PostItemType[]>({
+  return useQuery<CarpoolResponse, Error, PostItemType[]>({
     queryKey: queryKeys.myCarpoolPost(),
     queryFn: async () => await api.get(API_ENDPOINTS.CARPOOL_POST),
     gcTime: 0,

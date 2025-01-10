@@ -1,23 +1,21 @@
-type BusType = {
+type BusPassenger = {
   name: string
   studentId: string
   phoneNumber: string
   reserved: boolean
 }
 
-type StudentId = Pick<BusType, 'studentId'>
-type NewBusForm = Omit<BusType, 'reserved'>
-type ReservedInfo = Pick<BusType, 'reserved'>
+type StudentId = Pick<BusPassenger, 'studentId'>
+type NewBusReservation = Omit<BusPassenger, 'reserved'>
+export type ReservationStatus = Pick<BusPassenger, 'reserved'>
 
-export type BusFormType = NewBusForm
-export type BusReservedInfo = StudentId
+export type BusReservationForm = NewBusReservation
+export type BusReservationCheck = StudentId
 
-export type BusReserveRequest = {
-  body: NewBusForm
+export type BusReservationCreate = {
+  body: NewBusReservation
 }
 
-export type BusReserveInfoRequest = {
+export type BusReservationQuery = {
   urls: StudentId
 }
-
-export type BusReserveInfoResponse = ReservedInfo

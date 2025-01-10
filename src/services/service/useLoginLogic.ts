@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import type { LoginFormType } from '@/types'
+import type { Login } from '@/types/auth'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 import { api, useLogin } from '../query'
@@ -23,7 +23,7 @@ export const useLoginLogic = () => {
 
   const handleLoginError = () => setIsLoginFailed(true)
 
-  const handleLogin = (formData: LoginFormType) => {
+  const handleLogin = (formData: Login) => {
     login(
       { body: { userId: formData.userId, password: formData.password } },
       {

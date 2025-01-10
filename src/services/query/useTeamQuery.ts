@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
   TeamCreateRequest,
-  TeamCreateResponse,
   TeamDeleteRequest,
   TeamDetailRequest,
   TeamDetailResponse,
@@ -13,6 +12,7 @@ import type {
   TeamSearchRequest,
 } from '@/types'
 import type { CustomPostDetailType, PostItemType } from '@/types/post'
+import type { TeamId } from '@/types/team'
 
 import { api } from '.'
 
@@ -105,7 +105,7 @@ export const useTeamSearchList = ({ urls }: TeamSearchRequest) => {
 export const useTeamCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<TeamCreateResponse, Error, TeamCreateRequest>({
+  return useMutation<TeamId, Error, TeamCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })

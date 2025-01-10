@@ -1,12 +1,15 @@
 import type { PostAuthorType, PostSearchType } from './post'
 
-type TeamPost = {
-  teamBoardId: number
+type TeamPostBasicInfo = {
   title: string
-  createdAt: string
   trainingDate: string
   meetingPlace: string
   meetingTime: string
+}
+
+type TeamPostMetadata = {
+  createdAt: string
+  teamBoardId: number
   full: boolean
 }
 
@@ -15,58 +18,57 @@ type TeamPostDetail = {
   content: string
 }
 
-export type TeamForm = Pick<TeamPost, 'title' | 'trainingDate' | 'meetingPlace'> &
-  TeamPostDetail & {
-    hour: number
-    minute: number
-  }
+type Form = Omit<TeamPostBasicInfo, 'meetingTime'> & {
+  hour: number
+  minute: number
+}
 
 type Author = { author: PostAuthorType }
-type TeamId = Pick<TeamPost, 'teamBoardId'>
-type TeamFull = Pick<TeamPost, 'full'>
-type TeamSendingForm = Omit<TeamForm, 'hour' | 'minute'> & Pick<TeamPost, 'meetingTime'>
+type TeamPostSummary = TeamPostBasicInfo & TeamPostMetadata
+
+export type TeamPostContent = TeamPostBasicInfo & TeamPostDetail
+export type TeamId = Pick<TeamPostSummary, 'teamBoardId'>
+export type TeamForm = Form & TeamPostDetail
 
 export type TeamResponse = {
-  result: TeamPost[]
+  result: TeamPostSummary[]
 }
 
 export type TeamSearchRequest = {
   urls: PostSearchType
 }
 export type TeamSearchResponse = {
-  result: TeamPost[]
+  result: TeamPostSummary[]
 }
 
 export type TeamRecruitResponse = {
-  result: TeamPost[]
+  result: TeamPostSummary[]
 }
 
 export type TeamDetailRequest = {
   urls: TeamId
 }
 
-export type TeamDetailResponse = TeamPost & TeamPostDetail & Author
+export type TeamDetailResponse = TeamPostBasicInfo & TeamPostMetadata & TeamPostDetail & Author
 
 export type TeamCreateRequest = {
-  body: TeamSendingForm
+  body: TeamPostContent
 }
-export type TeamCreateResponse = TeamId
 
 export type TeamEditPageRequest = {
   urls: TeamId
 }
 
 export type TeamEditRequest = {
-  body: TeamSendingForm
+  body: TeamPostContent
   urls: TeamId
 }
-export type TeamEditResponse = Omit<TeamPost, 'createdAt' | 'full'> & TeamPostDetail
 
 export type TeamDeleteRequest = {
   urls: TeamId
 }
 
 export type TeamIsFullRequest = {
-  body: TeamFull
+  body: Pick<TeamPostMetadata, 'full'>
   urls: TeamId
 }

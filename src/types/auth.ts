@@ -1,6 +1,6 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-export type AuthType = {
+type User = {
   userId: string
   password: string
   nickname: string
@@ -8,24 +8,26 @@ export type AuthType = {
   militaryChaplain: MilitaryBranchCode
 }
 
-export type LoginFormType = Pick<AuthType, 'userId' | 'password'>
-export type SignupFormType = AuthType & { confirm: string }
+type Confirm = {
+  confirm: string
+}
+
+export type Login = Pick<User, 'userId' | 'password'>
+export type Signup = User & Confirm
+export type SavedUserData = Pick<User, 'nickname' | 'militaryChaplain'>
 
 export type LoginRequest = {
-  body: Pick<AuthType, 'userId' | 'password'>
+  body: Login
 }
-export type LoginResponse = Pick<AuthType, 'nickname' | 'militaryChaplain'>
 
 export type SignupRequest = {
-  body: AuthType
+  body: User
 }
 
 export type ValidateIdRequest = {
-  body: Pick<AuthType, 'userId'>
+  body: Pick<User, 'userId'>
 }
-export type ValidateIdResponse = string
 
 export type ValidateNicknameRequest = {
-  body: Pick<AuthType, 'nickname'>
+  body: Pick<User, 'nickname'>
 }
-export type ValidateNicknameResponse = string
