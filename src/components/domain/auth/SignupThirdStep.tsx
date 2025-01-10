@@ -7,7 +7,7 @@ import { SubHeaderWithIcon } from '@/components/view/header/SubHeader'
 import { AllCheckIcon, CheckIcon } from '@/components/view/icons/ActiveIcons'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useStepsActions, useTotalStep } from '@/stores'
-import type { StepProps } from '@/types'
+import type { StepProps } from '@/types/common'
 
 type AgreementItemProps = {
   text: string

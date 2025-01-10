@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
-import type { CarpoolForm } from '@/types'
+import type { CarpoolForm } from '@/types/carpool'
 
 import { useCreateCarpoolPost } from '../query'
 

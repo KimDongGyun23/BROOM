@@ -1,18 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
+import type { CustomPostDetailType, PostItemType } from '@/types/post'
 import type {
   TeamCreateRequest,
   TeamDeleteRequest,
   TeamDetailRequest,
   TeamDetailResponse,
   TeamEditRequest,
+  TeamId,
   TeamIsFullRequest,
   TeamRecruitResponse,
   TeamResponse,
   TeamSearchRequest,
-} from '@/types'
-import type { CustomPostDetailType, PostItemType } from '@/types/post'
-import type { TeamId } from '@/types/team'
+} from '@/types/team'
 
 import { api } from '.'
 

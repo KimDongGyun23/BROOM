@@ -3,7 +3,7 @@ import { FormProvider } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { useSearchForm, useToggle } from '@/hooks'
-import type { SearchType } from '@/types'
+import type { SearchType } from '@/types/common'
 import type { SearchOption } from '@/utils/constants'
 import { SEARCH_OPTIONS } from '@/utils/constants'
 

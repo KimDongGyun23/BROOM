@@ -3,18 +3,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 
 import { api } from '@/services/query'
-import type {
-  CarpoolEditPageRequest,
-  CarpoolForm,
-  NewPasswordForm,
-  SearchType,
-  TeamEditPageRequest,
-} from '@/types'
 import type { LoginCredentials, SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
-import type { CarpoolPostContent } from '@/types/carpool'
-import type { MypageUser } from '@/types/mypage'
-import type { TeamForm, TeamPostContent } from '@/types/team'
+import type { CarpoolEditPageRequest, CarpoolForm, CarpoolPostContent } from '@/types/carpool'
+import type { SearchType } from '@/types/common'
+import type { MypageUser, NewPasswordForm } from '@/types/mypage'
+import type { TeamEditPageRequest, TeamForm, TeamPostContent } from '@/types/team'
 import {
   accountSchema,
   busReserveInfoSchema,

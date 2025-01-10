@@ -1,6 +1,6 @@
 import type { AxiosError } from 'axios'
 
-import type { NewPasswordForm } from '@/types'
+import type { NewPasswordForm } from '@/types/mypage'
 
 import { useUpdatePassword } from '../query'
 

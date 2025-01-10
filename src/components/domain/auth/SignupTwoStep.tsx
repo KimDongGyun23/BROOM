@@ -7,7 +7,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useNicknameValidation } from '@/services/service'
 import { useStepsActions, useTotalStep } from '@/stores'
-import type { StepProps } from '@/types'
+import type { StepProps } from '@/types/common'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 export const SignupTwoStep = ({ label }: StepProps) => {

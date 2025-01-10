@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import dayjs from 'dayjs'
 
 import { useUpdateCarpool } from '@/services/query'
-import type { CarpoolForm } from '@/types'
+import type { CarpoolForm } from '@/types/carpool'
 
 const formatFormData = (formData: CarpoolForm) => {
   const { hour, minute, trainingDate, price, ...rest } = formData

@@ -1,4 +1,4 @@
-import type { SvgIconProps } from '@/types'
+import type { SvgIconProps } from /common'
 
 export const AirforceIcon = ({ size }: SvgIconProps) => {
   return (

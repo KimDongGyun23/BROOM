@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { UpdateAccountRequest, UpdatePasswordRequest } from '@/types'
 import type { CarpoolResponse } from '@/types/carpool'
-import type { UserProfile } from '@/types/mypage'
+import type { UpdateAccountRequest, UpdatePasswordRequest, UserProfile } from '@/types/mypage'
 import type { PostItemType } from '@/types/post'
 import type { TeamResponse } from '@/types/team'
 

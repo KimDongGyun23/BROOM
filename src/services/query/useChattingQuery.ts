@@ -14,7 +14,7 @@ import type {
   TeamChattingRoomRequest,
   TeamChattingRoomResponse,
   TeamExitChattingRoomRequest,
-} from '@/types'
+} from '@/types/chatting'
 
 import { api } from '.'
 

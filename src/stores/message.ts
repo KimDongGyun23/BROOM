@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { MessageType } from '@/types'
+import type { MessageType } from '@/types/chatting'
 
 type Actions = {
   initialMessage: (messages: MessageType[]) => void
