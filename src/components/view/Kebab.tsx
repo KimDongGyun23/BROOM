@@ -2,17 +2,6 @@ import styled, { css } from 'styled-components'
 
 type Position = [top?: number, right?: number, bottom?: number, left?: number]
 
-type KebabItemProps = {
-  label: string
-  onClick: VoidFunction
-  isRed?: boolean
-}
-
-type KebabProps = {
-  items: KebabItemProps[]
-  position: Position
-}
-
 const KebabNav = styled.nav<{ $position: Position }>`
   display: flex;
   flex-direction: column;
@@ -57,6 +46,12 @@ const KebabDivider = styled.hr`
   border: none;
 `
 
+type KebabItemProps = {
+  label: string
+  onClick: VoidFunction
+  isRed?: boolean
+}
+
 const KebabItem = ({ label, onClick, isRed, isLast }: KebabItemProps & { isLast: boolean }) => (
   <li>
     <KebabButton type="button" onClick={onClick} $isRed={isRed}>
@@ -65,6 +60,11 @@ const KebabItem = ({ label, onClick, isRed, isLast }: KebabItemProps & { isLast:
     {!isLast && <KebabDivider aria-hidden="true" />}
   </li>
 )
+
+type KebabProps = {
+  items: KebabItemProps[]
+  position: Position
+}
 
 export const Kebab = ({ items, position }: KebabProps) => {
   return (

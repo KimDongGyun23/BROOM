@@ -5,13 +5,6 @@ import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ProfileImage } from './ProfileImage'
 
-type BaseProfileProps = {
-  iconType: MilitaryBranchCode
-  name: string
-  subtitle: string
-  description: string
-}
-
 const ProfileContainer = styled.div`
   display: flex;
   align-items: center;
@@ -49,6 +42,13 @@ const Description = styled.p`
   line-height: ${({ theme }) => theme.lineHeight[800]};
   color: ${({ theme }) => theme.colors.black[400]};
 `
+
+type BaseProfileProps = {
+  iconType: MilitaryBranchCode
+  name: string
+  subtitle: string
+  description: string
+}
 
 const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps) => (
   <ProfileContainer>

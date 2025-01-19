@@ -1,11 +1,5 @@
 import styled from 'styled-components'
 
-type LabelWithStepProps = {
-  currentStep: number
-  totalStep: number
-  label: string
-}
-
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -22,6 +16,12 @@ const StepIndicator = styled.p`
   line-height: ${({ theme }) => theme.lineHeight[900]};
   color: ${({ theme }) => theme.colors.blue[500]};
 `
+
+type LabelWithStepProps = {
+  currentStep: number
+  totalStep: number
+  label: string
+}
 
 export const LabelWithStep = ({ currentStep, totalStep, label }: LabelWithStepProps) => {
   return (

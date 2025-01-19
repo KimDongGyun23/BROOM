@@ -19,14 +19,14 @@ const iconMap: Record<MilitaryBranchCode, ElementType> = {
   ETC: EtcIcon,
 }
 
+const IconContainer = styled.div`
+  flex-shrink: 0;
+`
+
 type ProfileImageProps = {
   iconType: MilitaryBranchCode | null
   size: keyof typeof sizeMap
 }
-
-const IconContainer = styled.div`
-  flex-shrink: 0;
-`
 
 export const ProfileImage = ({ iconType, size }: ProfileImageProps) => {
   if (!iconType || !iconMap[iconType]) return null

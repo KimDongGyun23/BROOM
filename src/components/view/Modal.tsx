@@ -4,27 +4,6 @@ import styled from 'styled-components'
 
 import { Button } from './Button'
 
-type ModalBaseProps = {
-  isOpen: boolean
-  onClose: VoidFunction
-  content: string
-}
-
-type ModalButtonProps = {
-  label: string
-  onClick: VoidFunction
-  secondary?: boolean
-}
-
-type ModalWithOneButtonProps = ModalBaseProps & {
-  button: ModalButtonProps
-}
-
-type ModalWithTwoButtonProps = ModalBaseProps & {
-  primaryButton: ModalButtonProps
-  secondaryButton: ModalButtonProps
-}
-
 const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
@@ -76,6 +55,18 @@ const ModalPortal = ({ children }: PropsWithChildren) => {
   return ReactDOM.createPortal(children, modalRoot)
 }
 
+type ModalBaseProps = {
+  isOpen: boolean
+  onClose: VoidFunction
+  content: string
+}
+
+type ModalButtonProps = {
+  label: string
+  onClick: VoidFunction
+  secondary?: boolean
+}
+
 const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<ModalBaseProps>) => {
   if (!isOpen) return null
 
@@ -92,6 +83,10 @@ const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<M
   )
 }
 
+type ModalWithOneButtonProps = ModalBaseProps & {
+  button: ModalButtonProps
+}
+
 export const ModalWithOneButton = ({
   isOpen,
   onClose,
@@ -104,6 +99,11 @@ export const ModalWithOneButton = ({
     </Button>
   </ModalLayout>
 )
+
+type ModalWithTwoButtonProps = ModalBaseProps & {
+  primaryButton: ModalButtonProps
+  secondaryButton: ModalButtonProps
+}
 
 export const ModalWithTwoButton = ({
   isOpen,

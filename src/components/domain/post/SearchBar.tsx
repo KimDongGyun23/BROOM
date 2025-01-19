@@ -12,10 +12,6 @@ import { SEARCH_OPTIONS } from '@/utils/constants'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '../../view/icons/NonActiveIcons'
 import { Kebab } from '../../view/Kebab'
 
-type SearchBarProps = {
-  currentTab: 'carpool' | 'team'
-}
-
 const SearchForm = styled.form`
   display: flex;
   align-items: center;
@@ -61,6 +57,10 @@ const SearchButton = styled.button`
   padding: 0;
   cursor: pointer;
 `
+
+type SearchBarProps = {
+  currentTab: 'carpool' | 'team'
+}
 
 export const SearchBar = ({ currentTab }: SearchBarProps) => {
   const navigate = useNavigate()

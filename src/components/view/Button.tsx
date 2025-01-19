@@ -3,13 +3,6 @@ import styled, { css } from 'styled-components'
 
 import theme from '@/styles/theme'
 
-type ButtonSize = keyof typeof SIZE_STYLES
-
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  size: ButtonSize
-  secondary?: boolean
-}
-
 const SIZE_STYLES = {
   lg: css`
     padding: ${theme.gap.xl} ${theme.gap.xxl};
@@ -44,6 +37,13 @@ const StyledButton = styled.button<ButtonProps>`
           color: ${theme.colors.black[100]};
         `}
 `
+
+type ButtonSize = keyof typeof SIZE_STYLES
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  size: ButtonSize
+  secondary?: boolean
+}
 
 export const Button = ({
   size,

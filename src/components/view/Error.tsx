@@ -1,9 +1,5 @@
 import styled from 'styled-components'
 
-type EmptyMessageProps = {
-  label: string
-}
-
 const StyledEmptyMessage = styled.p`
   font-size: ${({ theme }) => theme.fontSize[700]};
   line-height: ${({ theme }) => theme.lineHeight[700]};
@@ -15,6 +11,10 @@ const StyledEmptyMessage = styled.p`
   padding: ${({ theme }) => theme.gap.xxl};
   color: ${({ theme }) => theme.colors.black[500]};
 `
+
+type EmptyMessageProps = {
+  label: string
+}
 
 export const EmptyMessage = ({ label }: EmptyMessageProps) => {
   return <StyledEmptyMessage>{label}</StyledEmptyMessage>
