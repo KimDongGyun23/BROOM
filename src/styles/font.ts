@@ -8,7 +8,7 @@ export const fontSize = {
   700: '16px',
   800: '14px',
   900: '12px',
-}
+} as const
 
 export const lineHeight = {
   100: '44px',
@@ -20,4 +20,4 @@ export const lineHeight = {
   700: '24px',
   800: '20px',
   900: '16px',
-}
+} as const
