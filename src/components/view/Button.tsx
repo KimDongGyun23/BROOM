@@ -1,37 +1,61 @@
 import type { ButtonHTMLAttributes } from 'react'
+import styled, { css } from 'styled-components'
 
-const SIZE_STYLES = {
-  lg: 'px-5 py-4 p-700',
-  md: 'px-4 py-4 p-800',
-  sm: 'px-3 py-[14px] p-900',
-} as const
+import theme from '@/styles/theme'
 
 type ButtonSize = keyof typeof SIZE_STYLES
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size: ButtonSize
   secondary?: boolean
-  className?: string
 }
+
+const SIZE_STYLES = {
+  lg: css`
+    padding: ${theme.gap.xl} ${theme.gap.xxl};
+    font-size: ${theme.fontSize[700]};
+    line-height: ${theme.lineHeight[700]};
+  `,
+  md: css`
+    padding: ${theme.gap.xl} ${theme.gap.xl};
+    font-size: ${theme.fontSize[800]};
+    line-height: ${theme.lineHeight[800]};
+  `,
+  sm: css`
+    padding: ${theme.gap.lg} ${theme.gap.lg};
+    font-size: ${theme.fontSize[900]};
+    line-height: ${theme.lineHeight[900]};
+  `,
+}
+
+const StyledButton = styled.button<ButtonProps>`
+  border-radius: ${theme.borderRadius.lg};
+  width: auto;
+  flex-shrink: 0;
+  ${({ size }) => SIZE_STYLES[size]}
+  ${({ secondary, disabled }) =>
+    secondary || disabled
+      ? css`
+          background-color: ${theme.colors.black[100]};
+          color: ${theme.colors.black[500]};
+        `
+      : css`
+          background-color: ${theme.colors.black[600]};
+          color: ${theme.colors.black[100]};
+        `}
+`
 
 export const Button = ({
   size,
-  className = '',
   disabled = false,
   type = 'button',
   secondary = false,
   children,
   ...rest
 }: ButtonProps) => {
-  const sizeStyle = SIZE_STYLES[size]
-  const variantStyle =
-    secondary || disabled ? 'bg-black-100 text-black-500' : 'bg-black-600 text-black-100'
-
-  const buttonStyle = `rounded-xl w-auto shrink-0 ${sizeStyle} ${variantStyle} ${className}`
-
   return (
-    <button type={type} className={buttonStyle} disabled={disabled} {...rest}>
+    <StyledButton type={type} size={size} disabled={disabled} secondary={secondary} {...rest}>
       {children}
-    </button>
+    </StyledButton>
   )
 }

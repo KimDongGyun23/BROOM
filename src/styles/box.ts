@@ -16,4 +16,5 @@ export const gap = {
   md: '8px',
   lg: '12px',
   xl: '16px',
+  xxl: '20px',
 } as const
