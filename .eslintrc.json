@@ -22,6 +22,7 @@
     ],
     "no-duplicate-imports": "off",
     "import/newline-after-import": "warn",
+    "import/no-named-as-default": "off",
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-unused-vars": [
       "warn",
