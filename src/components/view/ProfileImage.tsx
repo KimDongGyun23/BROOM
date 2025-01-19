@@ -1,4 +1,5 @@
 import type { ElementType } from 'react'
+import styled from 'styled-components'
 
 import type { MilitaryBranchCode } from '@/utils/constants'
 
@@ -10,11 +11,6 @@ const sizeMap = {
   sm: '40',
 } as const
 
-type ProfileImageProps = {
-  iconType: MilitaryBranchCode | null
-  size: keyof typeof sizeMap
-}
-
 const iconMap: Record<MilitaryBranchCode, ElementType> = {
   ARMY: ArmyIcon,
   MARINE: MarineIcon,
@@ -23,13 +19,22 @@ const iconMap: Record<MilitaryBranchCode, ElementType> = {
   ETC: EtcIcon,
 }
 
+type ProfileImageProps = {
+  iconType: MilitaryBranchCode | null
+  size: keyof typeof sizeMap
+}
+
+const IconContainer = styled.div`
+  flex-shrink: 0;
+`
+
 export const ProfileImage = ({ iconType, size }: ProfileImageProps) => {
   if (!iconType || !iconMap[iconType]) return null
   const IconComponent = iconMap[iconType]
 
   return (
-    <div className="shrink-0">
+    <IconContainer>
       <IconComponent size={sizeMap[size]} />
-    </div>
+    </IconContainer>
   )
 }
