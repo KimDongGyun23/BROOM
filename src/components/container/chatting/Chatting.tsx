@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { ChattingItem } from '@/components/domain/chatting/ChattingItem'
 import { BottomNav } from '@/components/view/BottomNav'
 import { MainHeader } from '@/components/view/header/MainHeader'
 import { Loading } from '@/components/view/Loading'
-import { ChattingProfile } from '@/components/view/Profile'
 import {
   useCarpoolChattingRoomList,
   useTeamChattingRoomList,
@@ -53,7 +53,7 @@ const CarpoolChattingList = () => {
       {chattingList.map(
         ({ id, opponent, militaryChaplain, title, lastMessage, lastMessageDaysAgo }) => (
           <Link to={`/chatting/chatting-room/carpool/${id}`} key={id}>
-            <ChattingProfile
+            <ChattingItem
               opponent={opponent}
               iconType={militaryChaplain}
               title={title}
@@ -78,7 +78,7 @@ const TeamChattingList = () => {
       {chattingList.map(
         ({ id, opponent, militaryChaplain, title, lastMessage, lastMessageDaysAgo }) => (
           <Link to={`/chatting/chatting-room/team/${id}`} key={id}>
-            <ChattingProfile
+            <ChattingItem
               opponent={opponent}
               iconType={militaryChaplain}
               title={title}

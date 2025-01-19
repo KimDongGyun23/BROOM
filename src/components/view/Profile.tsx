@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 import type { PostAuthorType } from '@/types/post'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
@@ -10,17 +12,55 @@ type BaseProfileProps = {
   description: string
 }
 
+const ProfileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.xl};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
+  padding: 0 ${({ theme }) => `${theme.gap.xl} ${theme.gap.lg}`};
+`
+
+const ProfileInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.gap.sm};
+`
+
+const NameSubtitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.lg};
+
+  .name {
+    font-size: ${({ theme }) => theme.fontSize[600]};
+    line-height: ${({ theme }) => theme.lineHeight[600]};
+    color: ${({ theme }) => theme.colors.black[600]};
+  }
+
+  .subtitle {
+    font-size: ${({ theme }) => theme.fontSize[800]};
+    line-height: ${({ theme }) => theme.lineHeight[800]};
+    color: ${({ theme }) => theme.colors.blue[500]};
+  }
+`
+
+const Description = styled.p`
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  color: ${({ theme }) => theme.colors.black[400]};
+`
+
 const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps) => (
-  <div className="flex-align gap-4 border-b border-b-black-100 px-4 pb-3">
+  <ProfileContainer>
     <ProfileImage iconType={iconType} size="lg" />
-    <div className="flex-column gap-[6px]">
-      <div className="flex-align gap-3">
-        <span className="p-600 text-black-600">{name}</span>
-        <span className="p-800 text-blue-500">{subtitle}</span>
-      </div>
-      <p className="p-800 text-black-400">{description}</p>
-    </div>
-  </div>
+    <ProfileInfo>
+      <NameSubtitleContainer>
+        <span className="name">{name}</span>
+        <span className="subtitle">{subtitle}</span>
+      </NameSubtitleContainer>
+      <Description>{description}</Description>
+    </ProfileInfo>
+  </ProfileContainer>
 )
 
 type PostProfileProps = {
@@ -55,32 +95,4 @@ export const ChattingRoomProfile = ({
     subtitle={`예비군 ${dischargeYear}년차`}
     description={title}
   />
-)
-
-type ChattingProfileProps = {
-  iconType: MilitaryBranchCode
-  opponent: string
-  title: string
-  lastMessage: string
-  lastMessageDaysAgo: string
-}
-
-export const ChattingProfile = ({
-  iconType,
-  opponent,
-  title,
-  lastMessage,
-  lastMessageDaysAgo,
-}: ChattingProfileProps) => (
-  <div className="flex-align w-full gap-4 border-b border-b-grey-200 px-4 pb-3">
-    <ProfileImage iconType={iconType} size="lg" />
-    <div className="flex-column min-w-0 grow gap-[6px]">
-      <div className="flex-align min-w-0 grow gap-3">
-        <h6 className="shrink-0 font-bold">{opponent}</h6>
-        <p className="p-small min-w-0 truncate text-blue-500">{title}</p>
-      </div>
-      <p className="p-small grow truncate text-grey-700">{lastMessage}</p>
-    </div>
-    <p className="p-xsmall ml-auto shrink-0 text-grey-500">{lastMessageDaysAgo}</p>
-  </div>
 )
