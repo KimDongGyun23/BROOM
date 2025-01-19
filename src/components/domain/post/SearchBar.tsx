@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { useSearchForm } from '@/hooks/useForm'
 import { useToggle } from '@/hooks/useToggle'
@@ -8,12 +9,58 @@ import type { SearchType } from '@/types/common'
 import type { SearchOption } from '@/utils/constants'
 import { SEARCH_OPTIONS } from '@/utils/constants'
 
-import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from './icons/NonActiveIcons'
-import { Kebab } from './Kebab'
+import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '../../view/icons/NonActiveIcons'
+import { Kebab } from '../../view/Kebab'
 
 type SearchBarProps = {
   currentTab: 'carpool' | 'team'
 }
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin: 0 ${({ theme }) => theme.gap.xl};
+  gap: ${({ theme }) => theme.gap.md};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[200]};
+  padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};
+`
+
+const FilterButton = styled.button`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: ${({ theme }) => theme.gap.xs};
+
+  .filter-label {
+    flex-shrink: 0;
+    font-size: ${({ theme }) => theme.fontSize[800]};
+    line-height: ${({ theme }) => theme.lineHeight[800]};
+    color: ${({ theme }) => theme.colors.black[500]};
+  }
+`
+
+const SearchInput = styled.input`
+  flex: 1;
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const SearchButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+`
 
 export const SearchBar = ({ currentTab }: SearchBarProps) => {
   const navigate = useNavigate()
@@ -49,34 +96,29 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 
   return (
     <FormProvider {...formMethod}>
-      <form
-        onSubmit={handleSubmit(handleSearch)}
-        className="flex-align mx-4 gap-2 rounded-lg border border-black-200 py-[10px] pl-4 pr-[10px]"
-      >
-        <button
+      <SearchForm onSubmit={handleSubmit(handleSearch)}>
+        <FilterButton
           type="button"
-          className="flex-align shrink-0 gap-1"
           onClick={toggleFilterVisibility}
           aria-haspopup="true"
           aria-expanded={isFilterVisible}
         >
-          <span className="p-800 shrink-0 text-black-500">{selectedFilter.label}</span>
+          <span className="filter-label">{selectedFilter.label}</span>
           {isFilterVisible ? <ArrowUpIcon /> : <ArrowBottomIcon />}
-        </button>
+        </FilterButton>
 
-        <input
+        <SearchInput
           type="search"
           size={7}
           {...register('search')}
-          className="p-800 flex-1 grow text-black-500 placeholder:text-black-300 focus:outline-none"
           placeholder={selectedFilter.placeholder}
           aria-label={`${selectedFilter.label} 검색`}
         />
 
-        <button type="submit" aria-label="검색">
+        <SearchButton type="submit" aria-label="검색">
           <SearchIcon />
-        </button>
-      </form>
+        </SearchButton>
+      </SearchForm>
 
       {isFilterVisible && (
         <Kebab
@@ -84,7 +126,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
             ...option,
             onClick: () => handleFilterSelect(option),
           }))}
-          position="left-4 top-[125px]"
+          position={[125, 0, 0, 16]}
         />
       )}
     </FormProvider>

@@ -4,7 +4,7 @@ import { PostList } from '@/components/domain/post/PostList'
 import { EmptyMessage } from '@/components/view/Error'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
-import { SearchBar } from '@/components/view/SearchBar'
+import { SearchBar } from '@/components/domain/post/SearchBar'
 import { useSearchCarpoolList } from '@/services/query/useCarpoolQuery'
 import { ERROR_MESSAGES, SEARCH_OPTIONS } from '@/utils/constants'
 

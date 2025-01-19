@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { PostList } from '@/components/domain/post/PostList'
 import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
 import { Loading } from '@/components/view/Loading'
-import { SearchBar } from '@/components/view/SearchBar'
+import { SearchBar } from '@/components/domain/post/SearchBar'
 import { useTeamSearchList } from '@/services/query/useTeamQuery'
 import { SEARCH_OPTIONS } from '@/utils/constants'
 
