@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react'
 import ReactDOM from 'react-dom'
+import styled from 'styled-components'
 
 import { Button } from './Button'
 
@@ -24,6 +25,50 @@ type ModalWithTwoButtonProps = ModalBaseProps & {
   secondaryButton: ModalButtonProps
 }
 
+const ModalOverlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100svh;
+`
+
+const ModalBackdrop = styled.button`
+  position: fixed;
+  inset: 0;
+  background-color: #d9d9d9;
+  opacity: 0.58;
+`
+
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  min-width: 310px;
+  gap: ${({ theme }) => theme.gap.xl};
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  background-color: white;
+  padding: 10px ${({ theme }) => theme.gap.xl};
+`
+
+const ModalText = styled.p`
+  padding: 0 36px;
+  font-size: ${({ theme }) => theme.fontSize[600]};
+  line-height: ${({ theme }) => theme.lineHeight[600]};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.black[600]};
+`
+
+const ButtonGrid = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.gap.xl};
+`
+
 const ModalPortal = ({ children }: PropsWithChildren) => {
   const modalRoot = document.getElementById('modal') as HTMLElement
   if (!modalRoot) return null
@@ -36,17 +81,13 @@ const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<M
 
   return (
     <ModalPortal>
-      <div className="flex-center fixed inset-0 z-20 h-svh w-full">
-        <button
-          className="fixed inset-0 bg-[#D9D9D9] opacity-[58%]"
-          onClick={onClose}
-          aria-label="모달 닫기"
-        />
-        <div className="flex-column absolute min-w-[310px] gap-4 rounded-xl bg-white px-4 py-[10px]">
-          <p className="p-600 py-9 text-center text-black-600">{content}</p>
+      <ModalOverlay>
+        <ModalBackdrop onClick={onClose} aria-label="모달 닫기" />
+        <ModalContent>
+          <ModalText>{content}</ModalText>
           {children}
-        </div>
-      </div>
+        </ModalContent>
+      </ModalOverlay>
     </ModalPortal>
   )
 }
@@ -58,7 +99,7 @@ export const ModalWithOneButton = ({
   button: { onClick, label, secondary },
 }: ModalWithOneButtonProps) => (
   <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
-    <Button size="lg" onClick={onClick} secondary={secondary} className="w-full">
+    <Button size="lg" onClick={onClick} secondary={secondary}>
       {label}
     </Button>
   </ModalLayout>
@@ -72,23 +113,13 @@ export const ModalWithTwoButton = ({
   secondaryButton,
 }: ModalWithTwoButtonProps) => (
   <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
-    <div className="grid w-full grid-cols-2 gap-4">
-      <Button
-        size="lg"
-        onClick={secondaryButton.onClick}
-        secondary={secondaryButton.secondary}
-        className="w-full"
-      >
+    <ButtonGrid>
+      <Button size="lg" onClick={secondaryButton.onClick} secondary={secondaryButton.secondary}>
         {secondaryButton.label}
       </Button>
-      <Button
-        size="lg"
-        onClick={primaryButton.onClick}
-        secondary={primaryButton.secondary}
-        className="w-full"
-      >
+      <Button size="lg" onClick={primaryButton.onClick} secondary={primaryButton.secondary}>
         {primaryButton.label}
       </Button>
-    </div>
+    </ButtonGrid>
   </ModalLayout>
 )
