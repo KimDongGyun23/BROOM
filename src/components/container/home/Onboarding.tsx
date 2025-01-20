@@ -1,10 +1,69 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import onboarding_first from '@/assets/onboarding1.svg'
 import onboarding_second from '@/assets/onboarding2.svg'
 import onboarding_third from '@/assets/onboarding3.svg'
 import { Button } from '@/components/view/Button'
 import { useTouchEvent } from '@/hooks/useTouchEvent'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+`
+
+const CarouselContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`
+
+const Carousel = styled.div`
+  display: flex;
+  overflow: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 70px;
+`
+
+const CarouselItem = styled.div`
+  display: flex;
+  width: 100%;
+  flex-shrink: 0;
+  align-items: flex-end;
+`
+
+const DotContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.md};
+  margin-top: 24px;
+`
+
+const Dot = styled.button<{ $isActive: boolean }>`
+  width: ${({ $isActive }) => ($isActive ? '24px' : '8px')};
+  height: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  opacity: ${({ $isActive }) => ($isActive ? '0.9' : '0.5')};
+  background-color: ${({ theme, $isActive }) =>
+    $isActive ? theme.colors.black[600] : theme.colors.black[200]};
+  cursor: pointer;
+`
+
+const ButtonContainer = styled.div`
+  flex-shrink: 0;
+  width: 100%;
+  margin: ${({ theme }) => theme.gap.xxl} 0;
+  padding: ${({ theme }) => `40px ${theme.gap.xl}`};
+  padding-top: ${({ theme }) => theme.gap.xs};
+`
+
+const StyledButton = styled(Button)`
+  width: 100%;
+`
 
 type SectionDotType = {
   currentTab: number
@@ -15,18 +74,11 @@ const onboardingData = [onboarding_first, onboarding_second, onboarding_third]
 
 const SectionDot = ({ currentTab, onDotClick }: SectionDotType) => {
   return (
-    <div className="mt-6 flex gap-2">
-      {[...Array(3)].map((_, index) => {
-        const dotStyle = index === currentTab ? 'w-6 bg-blue-500' : 'w-2 bg-grey-300 opacity-50'
-        return (
-          <button
-            key={index}
-            className={`h-2 cursor-pointer rounded-full opacity-90 ${dotStyle}`}
-            onClick={() => onDotClick(index)}
-          />
-        )
-      })}
-    </div>
+    <DotContainer>
+      {[...Array(3)].map((_, index) => (
+        <Dot key={index} $isActive={index === currentTab} onClick={() => onDotClick(index)} />
+      ))}
+    </DotContainer>
   )
 }
 
@@ -35,28 +87,24 @@ export const Onboarding = () => {
   const { currentTab, carouselRef, onDotClick, ...event } = useTouchEvent()
 
   return (
-    <div className="flex-column-align h-full">
-      <div className="flex-column-align flex-1 grow justify-center">
-        <div
-          ref={carouselRef}
-          {...event}
-          className="webkit-overflow-scrolling-touch mx-[70px] flex overflow-auto overflow-x-hidden"
-        >
+    <Container>
+      <CarouselContainer>
+        <Carousel ref={carouselRef} {...event}>
           {onboardingData.map((image, index) => (
-            <div className="flex w-full shrink-0 items-end" key={index}>
+            <CarouselItem key={index}>
               <img src={image} alt={`onboarding-${index}`} />
-            </div>
+            </CarouselItem>
           ))}
-        </div>
+        </Carousel>
 
         <SectionDot currentTab={currentTab} onDotClick={onDotClick} />
-      </div>
+      </CarouselContainer>
 
-      <div className="my-5 w-full shrink-0 px-4 py-10 pt-1">
-        <Button size="lg" className="w-full" onClick={() => navigate('/home')}>
+      <ButtonContainer>
+        <StyledButton size="lg" onClick={() => navigate('/home')}>
           시작하기
-        </Button>
-      </div>
-    </div>
+        </StyledButton>
+      </ButtonContainer>
+    </Container>
   )
 }
