@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { BottomNav } from '@/components/view/BottomNav'
+import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Button } from '@/components/view/Button'
 import { MainHeader } from '@/components/view/MainHeader'
 
@@ -89,7 +89,7 @@ export const BusReserve = () => {
         </div>
       </main>
 
-      <BottomNav />
+      <BottomNavigation />
     </div>
   )
 }

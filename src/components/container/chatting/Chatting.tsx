@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { ChattingItem } from '@/components/domain/chatting/ChattingItem'
-import { BottomNav } from '@/components/view/BottomNav'
-import { MainHeader } from '@/components/view/MainHeader'
+import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
+import { MainHeader } from '@/components/view/MainHeader'
 import {
   useCarpoolChattingRoomList,
   useTeamChattingRoomList,
@@ -112,7 +112,7 @@ export const Chatting = () => {
         {currentTab === TAB_LABELS[1] && <TeamChattingList />}
       </main>
 
-      <BottomNav />
+      <BottomNavigation />
     </div>
   )
 }

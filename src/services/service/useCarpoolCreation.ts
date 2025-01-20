@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import type { CarpoolForm } from '@/types/carpool'
 
-import { useCreateCarpoolPost } from '../query'
+import { useCreateCarpoolPost } from '../query/useCarpoolQuery'
 
 const formatSubmissionData = (formData: CarpoolForm) => {
   const { hour, minute, trainingDate, ...rest } = formData

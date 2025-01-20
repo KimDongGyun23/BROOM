@@ -2,7 +2,7 @@ import type { AxiosError } from 'axios'
 
 import type { NewPasswordForm } from '@/types/mypage'
 
-import { useUpdatePassword } from '../query'
+import { useUpdatePassword } from '../query/useMypageQuery'
 
 type ReturnType = (onSuccess: (message: string) => void) => {
   handlePasswordUpdate: (formData: NewPasswordForm) => void

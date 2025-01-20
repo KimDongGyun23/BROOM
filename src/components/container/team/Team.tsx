@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
-import { BottomNav } from '@/components/view/BottomNav'
+import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/domain/post/SearchBar'
@@ -80,7 +80,7 @@ export const Team = () => {
       {isLoading ? <Loading /> : <PostList items={teamsToShow} to={`/team/detail`} />}
 
       {session && <PostAdditionButton onClick={handleAddTeamClick} />}
-      <BottomNav />
+      <BottomNavigation />
     </div>
   )
 }

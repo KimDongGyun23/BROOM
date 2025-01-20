@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { useValidateId } from '../query'
+import { useValidateId } from '../query/useAuthQuery'
 
 export const useIdValidation = () => {
   const [isIdValid, setIsIdValid] = useState(false)

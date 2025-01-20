@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 
 import type { TeamForm } from '@/types/team'
 
-import { useTeamCreate } from '../query'
+import { useTeamCreate } from '../query/useTeamQuery'
 
 const formatSubmissionData = (formData: TeamForm) => {
   const { hour, minute, trainingDate, ...rest } = formData

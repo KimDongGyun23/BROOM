@@ -1,14 +1,37 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
-import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
+import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { useIdValidation } from '@/services/service/useIdValidation'
 import { useStepsActions, useTotalStep } from '@/stores/steps'
 import type { StepProps } from '@/types/common'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 ${({ theme }) => theme.gap.lg};
+  margin-top: 65px;
+  margin-bottom: ${({ theme }) => theme.gap.sm};
+  flex-grow: 1;
+  gap: ${({ theme }) => theme.gap.xl};
+  overflow-y: scroll;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.lg};
+`
+
+const StyledButton = styled(Button)`
+  margin: 0 ${({ theme }) => theme.gap.lg};
+  margin-top: ${({ theme }) => theme.gap.sm};
+  margin-bottom: 40px;
+`
 
 export const SignupOneStep = ({ label }: StepProps) => {
   const navigate = useNavigate()

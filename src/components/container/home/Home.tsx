@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 
 import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
-import { BottomNav } from '@/components/view/BottomNav'
-import { MainHeader } from '@/components/view/MainHeader'
+import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
+import { MainHeader } from '@/components/view/MainHeader'
 
 const NOTICE_ARR = [
   '예비군 버스 대절 추첨 인원 선정',
@@ -67,7 +67,7 @@ export const Home = () => {
         <ServiceSection />
       </main>
 
-      <BottomNav />
+      <BottomNavigation />
     </div>
   )
 }

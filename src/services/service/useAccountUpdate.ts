@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import type { MypageUser } from '@/types/mypage'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
-import { useUpdateUserAccount } from '../query'
+import { useUpdateUserAccount } from '../query/useMypageQuery'
 
 type ReturnType = (onSuccess: VoidFunction) => {
   handleAccountUpdate: (formData: MypageUser) => void

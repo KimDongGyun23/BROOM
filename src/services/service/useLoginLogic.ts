@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import type { LoginCredentials } from '@/types/auth'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
-import { api, useLogin } from '../query'
+import { api } from '../query'
+import { useLogin } from '../query/useAuthQuery'
 
 export const useLoginLogic = () => {
   const [isLoginFailed, setIsLoginFailed] = useState(false)
