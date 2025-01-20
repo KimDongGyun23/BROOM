@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 
 type ActiveToggleProps = {
@@ -6,12 +8,30 @@ type ActiveToggleProps = {
 }
 
 export const PostActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
-  <div className="mx-4 border-b border-b-grey-200 py-2">
-    <button type="button" className="flex-align ml-auto gap-1" onClick={onToggle}>
+  <Container>
+    <ToggleButton onClick={onToggle}>
       <CheckBoxIcon active={isChecked} />
-      <p className={`p-900 ${isChecked ? 'text-blue-500' : 'text-black-300'}`}>
-        모집 중인 글만 보기
-      </p>
-    </button>
-  </div>
+      <ToggleText $isChecked={isChecked}>모집 중인 글만 보기</ToggleText>
+    </ToggleButton>
+  </Container>
 )
+
+const Container = styled.div`
+  margin: 0 ${({ theme }) => theme.gap.xl};
+  padding: ${({ theme }) => theme.gap.md} 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
+`
+
+const ToggleButton = styled.button`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: ${({ theme }) => theme.gap.xs};
+`
+
+const ToggleText = styled.p<{ $isChecked: boolean }>`
+  font-size: ${({ theme }) => theme.fontSize[900]};
+  line-height: ${({ theme }) => theme.lineHeight[900]};
+  color: ${({ theme, $isChecked }) =>
+    $isChecked ? theme.colors.blue[500] : theme.colors.black[300]};
+`

@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
-import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { MainHeader } from '@/components/view/MainHeader'
-import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/domain/post/SearchBar'
+import { BottomNavigation } from '@/components/view/BottomNavigation'
+import { Loading } from '@/components/view/Loading'
+import { MainHeader } from '@/components/view/MainHeader'
 import { useToggle } from '@/hooks/useToggle'
 import { useActiveTeamList, useTeamList } from '@/services/query/useTeamQuery'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
@@ -71,7 +72,7 @@ export const Team = () => {
   if (allError || activeError) return <ErrorPage />
 
   return (
-    <div className="flex-column h-full">
+    <Container>
       <MainHeader />
       <SearchBar currentTab="team" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
@@ -81,6 +82,12 @@ export const Team = () => {
 
       {session && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNavigation />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`

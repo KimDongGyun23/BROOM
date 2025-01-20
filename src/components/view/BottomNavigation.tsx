@@ -11,23 +11,6 @@ const NAVIGATION_ITEMS = [
   { Icon: TeamIcon, path: '/team' },
 ]
 
-export const StyledNav = styled.nav`
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
-`
-
-export const NavigationList = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  padding: 9px 16px 19px;
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
-`
-
-export const NavigationItem = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
 export const BottomNavigation = () => {
   const { pathname } = useLocation()
 
@@ -45,3 +28,20 @@ export const BottomNavigation = () => {
     </StyledNav>
   )
 }
+
+export const StyledNav = styled.nav`
+  box-shadow: ${({ theme }) => theme.boxShadow.md};
+`
+
+export const NavigationList = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  padding: 9px 16px 19px;
+  box-shadow: ${({ theme }) => theme.boxShadow.md};
+`
+
+export const NavigationItem = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

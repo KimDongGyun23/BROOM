@@ -12,52 +12,6 @@ import { SEARCH_OPTIONS } from '@/utils/constants'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '../../view/icons/NonActiveIcons'
 import { Kebab } from '../../view/Kebab'
 
-const SearchForm = styled.form`
-  display: flex;
-  align-items: center;
-  margin: 0 ${({ theme }) => theme.gap.xl};
-  gap: ${({ theme }) => theme.gap.md};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  border: 1px solid ${({ theme }) => theme.colors.black[200]};
-  padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};
-`
-
-const FilterButton = styled.button`
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  gap: ${({ theme }) => theme.gap.xs};
-
-  .filter-label {
-    flex-shrink: 0;
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.black[500]};
-  }
-`
-
-const SearchInput = styled.input`
-  flex: 1;
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[500]};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.black[300]};
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
-
-const SearchButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-`
-
 type SearchBarProps = {
   currentTab: 'carpool' | 'team'
 }
@@ -132,3 +86,49 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
     </FormProvider>
   )
 }
+
+const SearchForm = styled.form`
+  display: flex;
+  align-items: center;
+  margin: 0 ${({ theme }) => theme.gap.xl};
+  gap: ${({ theme }) => theme.gap.md};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[200]};
+  padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};
+`
+
+const FilterButton = styled.button`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: ${({ theme }) => theme.gap.xs};
+
+  .filter-label {
+    flex-shrink: 0;
+    font-size: ${({ theme }) => theme.fontSize[800]};
+    line-height: ${({ theme }) => theme.lineHeight[800]};
+    color: ${({ theme }) => theme.colors.black[500]};
+  }
+`
+
+const SearchInput = styled.input`
+  flex: 1;
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const SearchButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+`

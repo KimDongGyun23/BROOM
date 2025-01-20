@@ -6,6 +6,26 @@ import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 import { ProfileImage } from './ProfileImage'
 
+export const MainHeader = () => {
+  const iconType =
+    (getSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN) as MilitaryBranchCode) || null
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+
+  return (
+    <HeaderContainer>
+      <LogoLink to={'/home'}>
+        <LogoText>BROOM</LogoText>
+      </LogoLink>
+
+      {session && iconType && (
+        <ProfileLink to={'/mypage'}>
+          <ProfileImage iconType={iconType} size="md" />
+        </ProfileLink>
+      )}
+    </HeaderContainer>
+  )
+}
+
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
@@ -34,23 +54,3 @@ const LogoText = styled.h1`
 const ProfileLink = styled(Link)`
   cursor: pointer;
 `
-
-export const MainHeader = () => {
-  const iconType =
-    (getSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN) as MilitaryBranchCode) || null
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
-
-  return (
-    <HeaderContainer>
-      <LogoLink to={'/home'}>
-        <LogoText>BROOM</LogoText>
-      </LogoLink>
-
-      {session && iconType && (
-        <ProfileLink to={'/mypage'}>
-          <ProfileImage iconType={iconType} size="md" />
-        </ProfileLink>
-      )}
-    </HeaderContainer>
-  )
-}
