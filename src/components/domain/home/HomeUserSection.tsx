@@ -1,28 +1,75 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { TentIcon } from '@/components/view/icons/NonActiveIcons'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+
+const Section = styled.section`
+  background-color: white;
+  padding: 28px ${({ theme }) => theme.gap.xl};
+  box-shadow: ${({ theme }) => theme.boxShadow.sm};
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+const MainTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: ${({ theme }) => theme.gap.xs};
+`
+
+const Text = styled.p`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.xs};
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[500]};
+`
+
+const Logo = styled.span`
+  font-family: 'jalnan', sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  color: ${({ theme }) => theme.colors.black[600]};
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${({ theme }) => theme.gap.xl};
+  width: 100%;
+  gap: ${({ theme }) => theme.gap.lg};
+`
+
+const StyledButton = styled(Button)`
+  flex-grow: 1;
+`
 
 const LoggedInUserContent = () => {
   const nickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
 
   return (
     <>
-      <p className="p-700 text-black-500">{nickname}님 안녕하세요.</p>
-      <p className="p-700 flex-align gap-1 text-black-500">
-        <span className="font-jalnan text-2xl text-black-600">BROOM</span>에 오신걸 환영합니다.
-      </p>
+      <Text>{nickname}님 안녕하세요.</Text>
+      <Text>
+        <Logo>BROOM</Logo>에 오신걸 환영합니다.
+      </Text>
     </>
   )
 }
 
 const LoggedOutUserContent = () => (
   <>
-    <p className="p-700 flex-align gap-1 text-black-500">
-      <span className="font-jalnan text-2xl text-black-600">BROOM</span>에 가입하고
-    </p>
-    <p className="p-700 text-black-500">다른 사람들을 모아보세요.</p>
+    <Text>
+      <Logo>BROOM</Logo>에 가입하고
+    </Text>
+    <Text>다른 사람들을 모아보세요.</Text>
   </>
 )
 
@@ -34,24 +81,24 @@ export const HomeUserSection = () => {
   const handleSignUp = () => navigate('/sign-up')
 
   return (
-    <section className="bg-white px-4 py-7 shadow-sm">
-      <div className="flex-align">
-        <div className="flex-column grow gap-1">
+    <Section>
+      <ContentContainer>
+        <MainTextContainer>
           {session ? <LoggedInUserContent /> : <LoggedOutUserContent />}
-        </div>
+        </MainTextContainer>
         <TentIcon />
-      </div>
+      </ContentContainer>
 
       {!session && (
-        <div className="flex-align mt-4 w-full gap-3">
-          <Button size="sm" className="grow" onClick={handleLogin}>
+        <ButtonContainer>
+          <StyledButton size="sm" onClick={handleLogin}>
             로그인
-          </Button>
-          <Button size="sm" secondary className="grow" onClick={handleSignUp}>
+          </StyledButton>
+          <StyledButton size="sm" secondary onClick={handleSignUp}>
             회원가입
-          </Button>
-        </div>
+          </StyledButton>
+        </ButtonContainer>
       )}
-    </section>
+    </Section>
   )
 }
