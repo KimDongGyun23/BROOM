@@ -1,6 +1,6 @@
 import { FormProvider } from 'react-hook-form'
 
-import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useTeamCreateForm } from '@/hooks/useForm'
 import { useTeamCreation } from '@/services/service/useTeamCreation'

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNav } from '@/components/view/BottomNav'
-import { MainHeader } from '@/components/view/header/MainHeader'
+import { MainHeader } from '@/components/view/MainHeader'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
 
 const NOTICE_ARR = [

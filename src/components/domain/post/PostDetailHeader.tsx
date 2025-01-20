@@ -1,4 +1,4 @@
-import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { Kebab } from '@/components/view/Kebab'
 import { ModalWithTwoButton } from '@/components/view/Modal'
 import { useBoolean } from '@/hooks/useBoolean'

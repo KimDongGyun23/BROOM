@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { ChattingItem } from '@/components/domain/chatting/ChattingItem'
 import { BottomNav } from '@/components/view/BottomNav'
-import { MainHeader } from '@/components/view/header/MainHeader'
+import { MainHeader } from '@/components/view/MainHeader'
 import { Loading } from '@/components/view/Loading'
 import {
   useCarpoolChattingRoomList,

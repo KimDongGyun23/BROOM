@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { BottomNav } from '@/components/view/BottomNav'
 import { Button } from '@/components/view/Button'
-import { MainHeader } from '@/components/view/header/MainHeader'
+import { MainHeader } from '@/components/view/MainHeader'
 
 const BUS_RESERVE_CONTENT = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },

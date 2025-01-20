@@ -72,6 +72,12 @@ const GlobalStyles = createGlobalStyle`
 		text-decoration: none;
 		color: inherit;
 	}
+	button {
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
 `
 
 export default GlobalStyles

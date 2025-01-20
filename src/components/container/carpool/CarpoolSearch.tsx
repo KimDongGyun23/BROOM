@@ -2,7 +2,7 @@ import { useSearchParams } from 'react-router-dom'
 
 import { PostList } from '@/components/domain/post/PostList'
 import { EmptyMessage } from '@/components/view/Error'
-import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/domain/post/SearchBar'
 import { useSearchCarpoolList } from '@/services/query/useCarpoolQuery'

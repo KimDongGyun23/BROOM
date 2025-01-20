@@ -1,7 +1,37 @@
 import type { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
-import { ArrowLeftIcon, CloseIcon, KebabIcon } from '../icons/NonActiveIcons'
+import { ArrowLeftIcon, CloseIcon, KebabIcon } from './icons/NonActiveIcons'
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: ${({ theme }) => theme.gap.xl};
+
+  .null-icon {
+    width: 24px;
+  }
+`
+
+const Title = styled.h2`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: ${({ theme }) => theme.fontSize[500]};
+  line-height: ${({ theme }) => theme.lineHeight[500]};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.black[700]};
+`
+
+const TextButton = styled.button`
+  padding-right: 2px;
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[400]};
+`
 
 type SubHeaderProps = {
   title?: string
@@ -25,15 +55,13 @@ const BaseHeader = ({
   const handleClickCancel = onClickCancel ? onClickCancel : () => navigate(-1)
 
   return (
-    <div className="flex-between-align relative p-4">
+    <HeaderContainer>
       <button type="button" onClick={handleClickCancel}>
         <ArrowLeftIcon />
       </button>
-      <h2 className="p-500 absolute left-1/2 w-fit -translate-x-1/2 text-center text-black-700">
-        {title}
-      </h2>
+      <Title>{title}</Title>
       {children}
-    </div>
+    </HeaderContainer>
   )
 }
 
@@ -68,11 +96,11 @@ export const SubHeaderWithoutIcon = ({
   return (
     <BaseHeader title={title} onClickCancel={onClickCancel}>
       {type === 'null' ? (
-        <span className="w-6" />
+        <span className="null-icon" />
       ) : (
-        <button type="button" onClick={isEditMode ? onClickEdit : onClickComplete}>
-          <p className="p-700 pr-[2px] text-black-400">{isEditMode ? '수정' : '완료'}</p>
-        </button>
+        <TextButton type="button" onClick={isEditMode ? onClickEdit : onClickComplete}>
+          {isEditMode ? '수정' : '완료'}
+        </TextButton>
       )}
     </BaseHeader>
   )

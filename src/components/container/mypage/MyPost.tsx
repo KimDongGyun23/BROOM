@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { PostList } from '@/components/domain/post/PostList'
 import { PostTabs } from '@/components/domain/post/PostTabs'
-import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { Loading } from '@/components/view/Loading'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query/useMypageQuery'
 import type { TabLabel } from '@/utils/constants'

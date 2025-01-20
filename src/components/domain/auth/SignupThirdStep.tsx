@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@/components/view/Button'
-import { SubHeaderWithIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { AllCheckIcon, CheckIcon } from '@/components/view/icons/ActiveIcons'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { useStepsActions, useTotalStep } from '@/stores/steps'

@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 
-import { SubHeaderWithoutIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useTeamEditForm } from '@/hooks/useForm'
 import { useTeamUpdate } from '@/services/service/useTeamUpdate'

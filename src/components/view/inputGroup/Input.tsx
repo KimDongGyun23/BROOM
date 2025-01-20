@@ -37,10 +37,6 @@ const StyledInput = styled.input`
 
 const VisibilityButton = styled.button`
   flex-shrink: 0;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
 `
 
 const InputLabel = styled.span`

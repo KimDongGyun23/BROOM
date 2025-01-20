@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { Bubble } from '@/components/domain/chatting/Bubble'
-import { SubHeaderWithIcon } from '@/components/view/header/SubHeader'
+import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { AdditionIcon, SendingIcon } from '@/components/view/icons/NonActiveIcons'
 import { Kebab } from '@/components/view/Kebab'
 import { Loading } from '@/components/view/Loading'
