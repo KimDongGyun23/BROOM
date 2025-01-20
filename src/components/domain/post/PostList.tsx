@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
@@ -14,25 +15,25 @@ const PostItem = ({ item, to }: PostItemProps) => {
   const { title, createdAt, trainingDate, place, time, full } = item
 
   return (
-    <Link className="flex-column block gap-[10px] border-b border-b-grey-200 px-3 py-6" to={to}>
-      <div className="flex-between-align gap-3">
-        <p className="p-600 truncate text-black-600">{title}</p>
-        <p className="p-900 text-black-300">{createdAt}</p>
-      </div>
+    <PostItemLink to={to}>
+      <PostItemHeader>
+        <p className="title">{title}</p>
+        <p className="date">{createdAt}</p>
+      </PostItemHeader>
 
-      <div className="flex-between-align gap-3 text-left">
-        <div className="flex-column grow gap-1 overflow-hidden">
-          <p className="p-800 text-black-500">{trainingDate} 훈련</p>
-          <div className="p-900 flex gap-2 text-black-400">
-            <span className="truncate">{place}</span>
+      <PostContent>
+        <PostDetails>
+          <p className="training-date">{trainingDate} 훈련</p>
+          <PostLocationTime>
+            <span className="place">{place}</span>
             <span>|</span>
             <span>{time}</span>
-          </div>
-        </div>
+          </PostLocationTime>
+        </PostDetails>
 
-        <div className="shrink-0">{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
-      </div>
-    </Link>
+        <div>{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
+      </PostContent>
+    </PostItemLink>
   )
 }
 
@@ -45,10 +46,82 @@ export const PostList = ({ items, to }: PostListProps) => {
   if (!items || !items.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
-    <section className="scroll grow px-4">
+    <PostSection>
       {items.map((item) => (
         <PostItem key={item.id} item={item} to={`${to}/${item.id}`} />
       ))}
-    </section>
+    </PostSection>
   )
 }
+
+const PostItemLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
+  padding: 24px ${({ theme }) => theme.gap.lg};
+`
+
+const PostItemHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.lg};
+
+  .title {
+    font-size: ${({ theme }) => theme.fontSize[600]};
+    line-height: ${({ theme }) => theme.lineHeight[600]};
+    color: ${({ theme }) => theme.colors.black[600]};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .date {
+    font-size: ${({ theme }) => theme.fontSize[900]};
+    line-height: ${({ theme }) => theme.lineHeight[900]};
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+`
+
+const PostContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.lg};
+  text-align: left;
+`
+
+const PostDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: ${({ theme }) => theme.gap.xs};
+  overflow: hidden;
+
+  .training-date {
+    font-size: ${({ theme }) => theme.fontSize[800]};
+    line-height: ${({ theme }) => theme.lineHeight[800]};
+    color: ${({ theme }) => theme.colors.black[500]};
+  }
+`
+
+const PostLocationTime = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.md};
+  font-size: ${({ theme }) => theme.fontSize[900]};
+  line-height: ${({ theme }) => theme.lineHeight[900]};
+  color: ${({ theme }) => theme.colors.black[400]};
+
+  .place {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+`
+
+const PostSection = styled.section`
+  flex-grow: 1;
+  padding: 0 ${({ theme }) => theme.gap.xl};
+  overflow-y: scroll;
+`

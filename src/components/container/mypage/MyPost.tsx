@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import styled from 'styled-components'
 
 import { PostList } from '@/components/domain/post/PostList'
 import { PostTabs } from '@/components/domain/post/PostTabs'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { Loading } from '@/components/view/Loading'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query/useMypageQuery'
 import type { TabLabel } from '@/utils/constants'
 import { TAB_LABELS } from '@/utils/constants'
@@ -40,16 +41,27 @@ export const MyPost = () => {
   if (carpoolError || teamError) return <div>error</div>
 
   return (
-    <main className="flex-column h-full">
+    <MainContainer>
       <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
       <PostTabs currentTab={currentTab} onTabClick={handleTabClick} />
 
-      <div className="scroll grow">
+      <ScrollContainer>
         {currentTab === TAB_LABELS[0] && (
           <PostList items={carpoolPostsData} to={`/carpool/detail`} />
         )}
         {currentTab === TAB_LABELS[1] && <PostList items={teamPostsData} to={`/team/detail`} />}
-      </div>
-    </main>
+      </ScrollContainer>
+    </MainContainer>
   )
 }
+
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const ScrollContainer = styled.div`
+  flex-grow: 1;
+  overflow-y: scroll;
+`
