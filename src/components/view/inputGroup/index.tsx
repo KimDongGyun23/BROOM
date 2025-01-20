@@ -1,6 +1,7 @@
 import { createContext, type PropsWithChildren, useContext } from 'react'
+import styled from 'styled-components'
 
-import { Input, TextArea, TimeInput, UnitInput } from './Input'
+import { Input, PasswordInput, TextArea, TimeInput, UnitInput } from './Input'
 import { Label } from './Label'
 import { SortOfArmy } from './Select'
 
@@ -14,6 +15,13 @@ export const useInputGroupContext = () => {
   return context
 }
 
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+`
+
 type ContainerProps = {
   section: string
 }
@@ -21,13 +29,14 @@ type ContainerProps = {
 const Container = ({ section, children }: PropsWithChildren<ContainerProps>) => {
   return (
     <InputGroupContext.Provider value={section}>
-      <section className="flex-column w-full gap-[10px]">{children}</section>
+      <Section>{children}</Section>
     </InputGroupContext.Provider>
   )
 }
 
 export const InputGroup = Object.assign(Container, {
   Input,
+  PasswordInput,
   TextArea,
   UnitInput,
   TimeInput,

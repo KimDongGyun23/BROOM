@@ -1,16 +1,40 @@
+import type { ButtonHTMLAttributes } from 'react'
 import { useCallback, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
+import styled from 'styled-components'
 
 import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils/constants'
 import { MILITARY_BRANCHES } from '@/utils/constants'
 
 import { InputGroupContext } from '.'
 
-type SortOfArmyProps = {
-  disabled?: boolean
-}
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${({ theme }) => theme.gap.md};
+`
 
-export const SortOfArmy = ({ disabled = false }: SortOfArmyProps) => {
+const ArmyButton = styled.button<{ $isSelected: boolean }>`
+  flex-grow: 1;
+  height: 52px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  padding: 0 ${({ theme }) => theme.gap.md};
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors.black[600] : 'white'};
+  border: ${({ theme, $isSelected }) =>
+    $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors.black[100] : theme.colors.black[500]};
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`
+
+export const SortOfArmy = ({ ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { watch, setValue } = useFormContext()
   const section = useContext(InputGroupContext)
   const selectedSort = watch(section) as MilitaryBranchCode | undefined
@@ -23,24 +47,18 @@ export const SortOfArmy = ({ disabled = false }: SortOfArmyProps) => {
   )
 
   return (
-    <div className="flex-between gap-2">
-      {Object.entries(MILITARY_BRANCHES).map(([sort, value]) => {
-        const isSelected = selectedSort === value
-        const buttonStyle = isSelected
-          ? 'bg-black-600 border-none text-black-100'
-          : 'bg-white border-black-300 text-black-500'
-        return (
-          <button
-            key={sort}
-            type="button"
-            disabled={disabled}
-            className={`p-800 h-[52px] grow rounded-xl border px-3 ${buttonStyle}`}
-            onClick={() => handleClickButton(sort as MilitaryBranchName)}
-          >
-            {sort}
-          </button>
-        )
-      })}
-    </div>
+    <ButtonContainer>
+      {Object.entries(MILITARY_BRANCHES).map(([sort, value]) => (
+        <ArmyButton
+          key={sort}
+          type="button"
+          $isSelected={selectedSort === value}
+          onClick={() => handleClickButton(sort as MilitaryBranchName)}
+          {...rest}
+        >
+          {sort}
+        </ArmyButton>
+      ))}
+    </ButtonContainer>
   )
 }

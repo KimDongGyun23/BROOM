@@ -1,5 +1,7 @@
-import { type ChangeEvent, type InputHTMLAttributes, useContext } from 'react'
+import type { ChangeEvent, InputHTMLAttributes } from 'react'
+import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
+import styled from 'styled-components'
 
 import { useToggle } from '@/hooks/useToggle'
 
@@ -7,32 +9,104 @@ import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 
 import { InputGroupContext } from '.'
 
-export const Input = ({
-  type = 'text',
-  readOnly = false,
-  placeholder,
-}: InputHTMLAttributes<HTMLInputElement>) => {
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.lg};
+  width: 100%;
+  padding: ${({ theme }) => theme.gap.lg};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[300]};
+`
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: ${({ theme }) => theme.gap.xs} 0;
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const VisibilityButton = styled.button`
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+`
+
+const InputLabel = styled.span`
+  flex-shrink: 0;
+  padding: ${({ theme }) => theme.gap.xs} 0;
+  color: ${({ theme }) => theme.colors.black[500]};
+`
+
+const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
+  flex-grow: 1;
+  min-width: 0;
+  text-align: ${({ $textAlign }) => $textAlign};
+`
+
+const StyledTextArea = styled.textarea`
+  height: 104px;
+  resize: none;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[300]};
+  padding: 10px ${({ theme }) => theme.gap.xl};
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+export const Input = ({ type = 'text', ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)
-  const isPasswordField = type === 'password'
+
+  return (
+    <InputContainer>
+      <StyledInput
+        type={type}
+        {...register(section)}
+        autoComplete={type === 'id' ? 'username' : 'off'}
+        {...rest}
+      />
+    </InputContainer>
+  )
+}
+
+export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
+  const { register } = useFormContext()
+  const section = useContext(InputGroupContext)
   const [isVisible, toggleVisibility] = useToggle(false)
 
   return (
-    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
-      <input
-        type={isPasswordField && !isVisible ? 'password' : type}
+    <InputContainer>
+      <StyledInput
+        type={isVisible ? 'text' : 'password'}
         {...register(section)}
-        readOnly={readOnly}
-        className="p-700 w-full py-1 text-black-500 placeholder:text-black-300 focus:outline-none"
-        placeholder={placeholder}
-        autoComplete={type === 'id' ? 'username' : isPasswordField ? 'current-password' : 'off'}
+        autoComplete="current-password"
+        {...rest}
       />
-      {isPasswordField && !readOnly && (
-        <button type="button" className="shrink-0" onClick={toggleVisibility}>
-          {isVisible ? <EyeIcon /> : <EyeCloseIcon />}
-        </button>
-      )}
-    </div>
+      <VisibilityButton type="button" onClick={toggleVisibility}>
+        {isVisible ? <EyeIcon /> : <EyeCloseIcon />}
+      </VisibilityButton>
+    </InputContainer>
   )
 }
 
@@ -41,13 +115,7 @@ type UnitInputProps = InputHTMLAttributes<HTMLInputElement> & {
   isPrice?: boolean
 }
 
-export const UnitInput = ({
-  type = 'text',
-  unitLabel,
-  isPrice = false,
-  readOnly = false,
-  placeholder,
-}: UnitInputProps) => {
+export const UnitInput = ({ unitLabel, isPrice = false, ...rest }: UnitInputProps) => {
   const { register, setValue } = useFormContext()
   const section = useContext(InputGroupContext)
 
@@ -59,27 +127,24 @@ export const UnitInput = ({
   }
 
   return (
-    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
-      <input
-        type={type}
+    <InputContainer>
+      <StyledUnitInput
         size={5}
+        $textAlign="right"
         {...register(section, { onChange: isPrice ? handleCurrencyChange : undefined })}
-        readOnly={readOnly}
-        className="p-700 min-w-0 grow text-right text-black-500 placeholder:text-black-300 focus:outline-none"
-        placeholder={placeholder}
+        {...rest}
       />
-      <p className="shrink-0 py-1 text-black-500">{unitLabel}</p>
-    </div>
+      <InputLabel>{unitLabel}</InputLabel>
+    </InputContainer>
   )
 }
 
 type TimeInputProps = InputHTMLAttributes<HTMLInputElement> & {
   hourSection: string
   minuteSection: string
-  readOnly?: boolean
 }
 
-export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: TimeInputProps) => {
+export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProps) => {
   const { register, setValue } = useFormContext()
 
   const handleHourChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -93,41 +158,31 @@ export const TimeInput = ({ readOnly = false, hourSection, minuteSection }: Time
   }
 
   return (
-    <div className="flex-align w-full gap-3 rounded-lg border border-black-300 px-4 py-[10px]">
-      <input
+    <InputContainer>
+      <StyledUnitInput
         type="number"
+        size={2}
+        $textAlign="center"
         {...register(hourSection, { onChange: handleHourChange })}
-        readOnly={readOnly}
-        size={2}
-        className="p-700 w-full grow text-center text-black-500 placeholder:text-black-300 focus:outline-none"
         placeholder="00"
+        {...rest}
       />
-      <span className="shrink-0 py-1 text-black-500">:</span>
-      <input
+      <InputLabel>:</InputLabel>
+      <StyledUnitInput
         type="number"
-        {...register(minuteSection, { onChange: handleMinuteChange })}
-        readOnly={readOnly}
         size={2}
-        className="p-700 w-full grow text-center text-black-500 placeholder:text-black-300 focus:outline-none"
+        $textAlign="center"
+        {...register(hourSection, { onChange: handleMinuteChange })}
         placeholder="00"
+        {...rest}
       />
-    </div>
+    </InputContainer>
   )
 }
 
-export const TextArea = ({
-  readOnly = false,
-  placeholder,
-}: InputHTMLAttributes<HTMLTextAreaElement>) => {
+export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) => {
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)
 
-  return (
-    <textarea
-      {...register(section)}
-      readOnly={readOnly}
-      className="p-700 h-[104px] resize-none rounded-lg border border-black-300 px-4 py-[10px] text-black-500 placeholder:text-black-300 focus:outline-none"
-      placeholder={placeholder}
-    />
-  )
+  return <StyledTextArea {...register(section)} {...rest} />
 }
