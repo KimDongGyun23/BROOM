@@ -33,7 +33,8 @@ const HeaderContainer = styled.header`
   position: relative;
   height: 80px;
   margin: 0 ${({ theme }) => theme.gap.xl};
-  padding: ${({ theme }) => theme.gap.xl} 0;
+  padding: 16px 0;
+  box-sizing: content-box;
 `
 
 const LogoLink = styled(Link)`

@@ -1,11 +1,12 @@
 import { useCallback } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useBusForm } from '@/hooks/useForm'
 import { useBusReservationMutation } from '@/services/query/useBusQuery'
@@ -13,7 +14,7 @@ import type { BusReservationForm } from '@/types/bus'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const ReservationForm = () => (
-  <form className="flex-column scroll mx-4 mb-2 grow gap-7">
+  <StyledForm>
     <InputGroup section={FORM_ATTRIBUTE.NAME.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.NAME.label} />
       <InputGroup.Input {...FORM_ATTRIBUTE.NAME.input} />
@@ -28,7 +29,7 @@ const ReservationForm = () => (
       <InputGroup.Label label={FORM_ATTRIBUTE.PHONE_NUMBER.label} />
       <InputGroup.Input {...FORM_ATTRIBUTE.PHONE_NUMBER.input} />
     </InputGroup>
-  </form>
+  </StyledForm>
 )
 
 export const ReserveCreate = () => {
@@ -58,17 +59,17 @@ export const ReserveCreate = () => {
   }, [reset, closeModal, navigate])
 
   return (
-    <div className="flex-column h-svh">
+    <Container>
       <SubHeaderWithoutIcon type="null" onClickCancel={handleCancel} />
-      <h2 className="mx-4 mb-[65px] mt-6 font-bold text-grey-700">예약 정보 입력</h2>
+      <Title>예약 정보 입력</Title>
 
       <FormProvider {...formMethod}>
         <ReservationForm />
       </FormProvider>
 
-      <Button size="lg" className="mx-4 mb-10 mt-2" onClick={handleSubmit(handleReservation)}>
+      <StyledButton size="lg" className="mx-4 mb-10 mt-2" onClick={handleSubmit(handleReservation)}>
         예약하기
-      </Button>
+      </StyledButton>
 
       <ModalWithOneButton
         isOpen={isModalOpen}
@@ -76,6 +77,30 @@ export const ReserveCreate = () => {
         content="성공적으로 예약되었습니다."
         button={{ onClick: handleModalClose, label: '완료' }}
       />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+`
+
+const Title = styled.h4`
+  margin: 24px 0 65px;
+  color: ${({ theme }) => theme.colors.black[600]};
+`
+
+const StyledForm = styled.form`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin: 0 ${({ theme }) => theme.gap.xl} 2px;
+  overflow-y: scroll;
+`
+
+const StyledButton = styled(Button)`
+  margin: 2px ${({ theme }) => theme.gap.xl} 40px;
+`

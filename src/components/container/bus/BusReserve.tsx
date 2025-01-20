@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Button } from '@/components/view/Button'
@@ -46,20 +47,18 @@ type ContentItemProps = {
 
 const ContentItem = ({ label, contents }: ContentItemProps) => {
   const isSingleItem = contents.length === 1
-  const layoutStyle = isSingleItem ? 'flex-between-align' : 'flex-column gap-3'
-  const dotStyle = isSingleItem ? '' : 'ml-6 list-disc'
 
   return (
-    <div className={layoutStyle}>
-      <h6 className="mr-4 shrink-0 font-medium text-blue-500">{label}</h6>
-      <ul className="flex-column gap-2">
+    <ContentContainer $isSingleItem={isSingleItem}>
+      <h6 className="content-label">{label}</h6>
+      <ContentList $isSingleItem={isSingleItem}>
         {contents.map((content) => (
-          <li key={content} className={`text-grey-600 ${dotStyle}`}>
+          <li key={content} className="content-item">
             {content}
           </li>
         ))}
-      </ul>
-    </div>
+      </ContentList>
+    </ContentContainer>
   )
 }
 
@@ -70,26 +69,83 @@ export const BusReserve = () => {
   const handleCheckClick = () => navigate('/bus-reserve/info')
 
   return (
-    <div className="flex-column h-full">
+    <Container>
       <MainHeader />
 
-      <main className="flex-column scroll mx-4 grow gap-6 pb-8">
-        <h5 className="my-6 font-bold">현재 버스 예약 접수 중입니다.</h5>
+      <MainContent>
+        <h5 className="main-title">현재 버스 예약 접수 중입니다.</h5>
         {BUS_RESERVE_CONTENT.map((item) => (
           <ContentItem key={item.label} {...item} />
         ))}
 
-        <div className="flex-column gap-3">
+        <ButtonContainer>
           <Button size="md" onClick={handleReserveClick}>
             예약하러 가기
           </Button>
           <Button size="md" secondary onClick={handleCheckClick}>
             예약 내역 조회하기
           </Button>
-        </div>
-      </main>
+        </ButtonContainer>
+      </MainContent>
 
       <BottomNavigation />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const MainContent = styled.main`
+  display: flex;
+  flex-direction: column;
+  margin: 0 ${({ theme }) => theme.gap.xl};
+  flex-grow: 1;
+  gap: 24px;
+  padding-bottom: 32px;
+  overflow-y: scroll;
+
+  .main-title {
+    font-size: ${({ theme }) => theme.fontSize[500]};
+    line-height: ${({ theme }) => theme.lineHeight[500]};
+    color: ${({ theme }) => theme.colors.blue[500]};
+  }
+`
+
+const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
+  display: flex;
+  flex-direction: ${({ $isSingleItem }) => ($isSingleItem ? 'row' : 'column')};
+  align-items: ${({ $isSingleItem }) => $isSingleItem && 'center'};
+  gap: ${({ $isSingleItem, theme }) => !$isSingleItem && theme.gap.lg};
+
+  .content-label {
+    margin-right: ${({ theme }) => theme.gap.xl};
+    flex-shrink: 0;
+    font-size: ${({ theme }) => theme.fontSize[600]};
+    line-height: ${({ theme }) => theme.lineHeight[600]};
+    color: ${({ theme }) => theme.colors.black[600]};
+  }
+`
+
+const ContentList = styled.ul<{ $isSingleItem: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.gap.sm};
+  list-style-type: ${({ $isSingleItem }) => ($isSingleItem ? 'none' : 'disc')};
+  margin-left: ${({ $isSingleItem }) => ($isSingleItem ? '0' : '24px')};
+
+  .content-item {
+    font-size: ${({ theme }) => theme.fontSize[800]};
+    line-height: ${({ theme }) => theme.lineHeight[800]};
+    color: ${({ theme }) => theme.colors.black[400]};
+  }
+`
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.gap.lg};
+`
