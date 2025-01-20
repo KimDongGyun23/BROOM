@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
 
@@ -7,7 +9,6 @@ type RecruitmentLabelProps = {
 
 export const RecruitmentLabel = ({ onClick }: RecruitmentLabelProps) => {
   const [isChecked, toggleIsChecked] = useToggle()
-  const textStyle = isChecked ? 'text-blue-500' : 'text-grey-500'
 
   const handleClick = () => {
     onClick()
@@ -15,11 +16,30 @@ export const RecruitmentLabel = ({ onClick }: RecruitmentLabelProps) => {
   }
 
   return (
-    <div className="border-b border-b-grey-200">
-      <button type="button" className="flex-align mx-4 ml-auto gap-1 py-3" onClick={handleClick}>
+    <Container>
+      <ToggleButton type="button" $isChecked={isChecked} onClick={handleClick}>
         <CheckBoxIcon active={isChecked} />
-        <p className={`p-small ${textStyle}`}>모집 중인 글만 보기</p>
-      </button>
-    </div>
+        <p className="toggle-button-text">모집 중인 글만 보기</p>
+      </ToggleButton>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
+`
+
+const ToggleButton = styled.button<{ $isChecked: boolean }>`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: ${({ theme }) => theme.gap.xs};
+  padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`};
+
+  .toggle-button-text {
+    font-size: ${({ theme }) => theme.fontSize[600]};
+    line-height: ${({ theme }) => theme.lineHeight[600]};
+    color: ${({ theme, $isChecked }) =>
+      $isChecked ? theme.colors.blue[500] : theme.colors.black[400]};
+  }
+`

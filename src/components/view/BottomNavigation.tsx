@@ -36,7 +36,7 @@ export const StyledNav = styled.nav`
 export const NavigationList = styled.ul`
   display: flex;
   justify-content: space-between;
-  padding: 9px 16px 19px;
+  padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.xl} ${theme.gap.xxl}`};
   box-shadow: ${({ theme }) => theme.boxShadow.md};
 `
 

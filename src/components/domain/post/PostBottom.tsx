@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 import { Button } from '@/components/view/Button'
 import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
@@ -28,24 +30,46 @@ export const PostBottom = ({
 
   if (!session) return null
   return (
-    <div className="flex-align w-full gap-6 px-4 pb-[27px] pt-[9px] shadow-md">
-      <button
-        type="button"
-        className="flex-column-align shrink-0 gap-1"
-        onClick={handleClickBookmark}
-      >
+    <BottomContainer>
+      <BookmarkButton type="button" onClick={handleClickBookmark}>
         <BookmarkIcon active={isBookmarked} />
-        <p className="p-900 text-black-400">북마크</p>
-      </button>
-      <Button
-        className="grow"
+        <p className="label">북마크</p>
+      </BookmarkButton>
+      <StyledButton
         secondary={isMyPost}
         size="sm"
         onClick={isMyPost ? undefined : onChatStart}
         disabled={disabled}
       >
         {disabled ? '모집 마감' : '채팅하기'}
-      </Button>
-    </div>
+      </StyledButton>
+    </BottomContainer>
   )
 }
+
+const BottomContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 24px;
+  padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.xl} ${theme.gap.xxl}`};
+  box-shadow: ${({ theme }) => theme.boxShadow.md};
+`
+
+const BookmarkButton = styled.button`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: ${({ theme }) => theme.gap.xs};
+
+  .label {
+    font-size: ${({ theme }) => theme.fontSize[900]};
+    line-height: ${({ theme }) => theme.lineHeight[900]};
+    color: ${({ theme }) => theme.colors.black[400]};
+  }
+`
+
+const StyledButton = styled(Button)`
+  flex-grow: 1;
+`
