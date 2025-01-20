@@ -4,6 +4,82 @@ import styled from 'styled-components'
 
 import { Button } from './Button'
 
+const ModalPortal = ({ children }: PropsWithChildren) => {
+  const modalRoot = document.getElementById('modal') as HTMLElement
+  if (!modalRoot) return null
+
+  return ReactDOM.createPortal(children, modalRoot)
+}
+
+type ModalBaseProps = {
+  isOpen: boolean
+  onClose: VoidFunction
+  content: string
+}
+
+const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<ModalBaseProps>) => {
+  if (!isOpen) return null
+
+  return (
+    <ModalPortal>
+      <ModalOverlay>
+        <ModalBackdrop onClick={onClose} aria-label="모달 닫기" />
+        <ModalContent>
+          <ModalText>{content}</ModalText>
+          {children}
+        </ModalContent>
+      </ModalOverlay>
+    </ModalPortal>
+  )
+}
+
+type ModalButtonProps = {
+  label: string
+  onClick: VoidFunction
+  secondary?: boolean
+}
+
+type ModalWithOneButtonProps = ModalBaseProps & {
+  button: ModalButtonProps
+}
+
+export const ModalWithOneButton = ({
+  isOpen,
+  onClose,
+  content,
+  button: { onClick, label, secondary },
+}: ModalWithOneButtonProps) => (
+  <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
+    <Button size="lg" onClick={onClick} secondary={secondary}>
+      {label}
+    </Button>
+  </ModalLayout>
+)
+
+type ModalWithTwoButtonProps = ModalBaseProps & {
+  primaryButton: ModalButtonProps
+  secondaryButton: ModalButtonProps
+}
+
+export const ModalWithTwoButton = ({
+  isOpen,
+  onClose,
+  content,
+  primaryButton,
+  secondaryButton,
+}: ModalWithTwoButtonProps) => (
+  <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
+    <ButtonGrid>
+      <Button size="lg" onClick={secondaryButton.onClick} secondary={secondaryButton.secondary}>
+        {secondaryButton.label}
+      </Button>
+      <Button size="lg" onClick={primaryButton.onClick} secondary={primaryButton.secondary}>
+        {primaryButton.label}
+      </Button>
+    </ButtonGrid>
+  </ModalLayout>
+)
+
 const ModalOverlay = styled.div`
   display: flex;
   justify-content: center;
@@ -47,79 +123,3 @@ const ButtonGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.gap.xl};
 `
-
-const ModalPortal = ({ children }: PropsWithChildren) => {
-  const modalRoot = document.getElementById('modal') as HTMLElement
-  if (!modalRoot) return null
-
-  return ReactDOM.createPortal(children, modalRoot)
-}
-
-type ModalBaseProps = {
-  isOpen: boolean
-  onClose: VoidFunction
-  content: string
-}
-
-type ModalButtonProps = {
-  label: string
-  onClick: VoidFunction
-  secondary?: boolean
-}
-
-const ModalLayout = ({ isOpen, onClose, content, children }: PropsWithChildren<ModalBaseProps>) => {
-  if (!isOpen) return null
-
-  return (
-    <ModalPortal>
-      <ModalOverlay>
-        <ModalBackdrop onClick={onClose} aria-label="모달 닫기" />
-        <ModalContent>
-          <ModalText>{content}</ModalText>
-          {children}
-        </ModalContent>
-      </ModalOverlay>
-    </ModalPortal>
-  )
-}
-
-type ModalWithOneButtonProps = ModalBaseProps & {
-  button: ModalButtonProps
-}
-
-export const ModalWithOneButton = ({
-  isOpen,
-  onClose,
-  content,
-  button: { onClick, label, secondary },
-}: ModalWithOneButtonProps) => (
-  <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
-    <Button size="lg" onClick={onClick} secondary={secondary}>
-      {label}
-    </Button>
-  </ModalLayout>
-)
-
-type ModalWithTwoButtonProps = ModalBaseProps & {
-  primaryButton: ModalButtonProps
-  secondaryButton: ModalButtonProps
-}
-
-export const ModalWithTwoButton = ({
-  isOpen,
-  onClose,
-  content,
-  primaryButton,
-  secondaryButton,
-}: ModalWithTwoButtonProps) => (
-  <ModalLayout isOpen={isOpen} onClose={onClose} content={content}>
-    <ButtonGrid>
-      <Button size="lg" onClick={secondaryButton.onClick} secondary={secondaryButton.secondary}>
-        {secondaryButton.label}
-      </Button>
-      <Button size="lg" onClick={primaryButton.onClick} secondary={primaryButton.secondary}>
-        {primaryButton.label}
-      </Button>
-    </ButtonGrid>
-  </ModalLayout>
-)

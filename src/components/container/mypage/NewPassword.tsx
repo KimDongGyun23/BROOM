@@ -1,31 +1,32 @@
 import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
+import styled from 'styled-components'
 
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useNewPasswordForm } from '@/hooks/useForm'
 import { usePasswordUpdate } from '@/services/service/usePasswordUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const PasswordForm = () => (
-  <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
+  <StyledForm>
     <InputGroup section={FORM_ATTRIBUTE.PREV_PASSWORD.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.PREV_PASSWORD.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.PREV_PASSWORD.input} />
+      <InputGroup.PasswordInput {...FORM_ATTRIBUTE.PREV_PASSWORD.input} />
     </InputGroup>
 
     <InputGroup section={FORM_ATTRIBUTE.NEW_PASSWORD.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.NEW_PASSWORD.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.NEW_PASSWORD.input} />
+      <InputGroup.PasswordInput {...FORM_ATTRIBUTE.NEW_PASSWORD.input} />
     </InputGroup>
 
     <InputGroup section={FORM_ATTRIBUTE.CONFIRM.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.CONFIRM.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.CONFIRM.input} />
+      <InputGroup.PasswordInput {...FORM_ATTRIBUTE.CONFIRM.input} />
     </InputGroup>
-  </form>
+  </StyledForm>
 )
 
 export const NewPassword = () => {
@@ -60,3 +61,12 @@ export const NewPassword = () => {
     </>
   )
 }
+
+const StyledForm = styled.form`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  margin: 28px ${({ theme }) => theme.gap.xl} ${({ theme }) => theme.gap.md};
+  gap: 28px;
+`

@@ -4,35 +4,6 @@ import styled from 'styled-components'
 
 import { ArrowLeftIcon, CloseIcon, KebabIcon } from './icons/NonActiveIcons'
 
-const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  padding: ${({ theme }) => theme.gap.xl};
-
-  .null-icon {
-    width: 24px;
-  }
-`
-
-const Title = styled.h2`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: ${({ theme }) => theme.fontSize[500]};
-  line-height: ${({ theme }) => theme.lineHeight[500]};
-  text-align: center;
-  color: ${({ theme }) => theme.colors.black[700]};
-`
-
-const TextButton = styled.button`
-  padding-right: 2px;
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[400]};
-`
-
 type SubHeaderProps = {
   title?: string
   type: 'close' | 'edit' | 'complete' | 'null' | 'kebab'
@@ -105,3 +76,32 @@ export const SubHeaderWithoutIcon = ({
     </BaseHeader>
   )
 }
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: ${({ theme }) => theme.gap.xl};
+
+  .null-icon {
+    width: 24px;
+  }
+`
+
+const Title = styled.h2`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: ${({ theme }) => theme.fontSize[500]};
+  line-height: ${({ theme }) => theme.lineHeight[500]};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.black[700]};
+`
+
+const TextButton = styled.button`
+  padding-right: 2px;
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[400]};
+`
