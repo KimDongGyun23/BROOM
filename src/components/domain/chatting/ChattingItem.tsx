@@ -3,6 +3,34 @@ import styled from 'styled-components'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
+type ChattingProfileProps = {
+  iconType: MilitaryBranchCode
+  opponent: string
+  title: string
+  lastMessage: string
+  lastMessageDaysAgo: string
+}
+
+export const ChattingItem = ({
+  iconType,
+  opponent,
+  title,
+  lastMessage,
+  lastMessageDaysAgo,
+}: ChattingProfileProps) => (
+  <ChattingProfileContainer>
+    <ProfileImage iconType={iconType} size="lg" />
+    <ChattingProfileInfo>
+      <NameSubtitleContainer>
+        <h6 className="opponent-name">{opponent}</h6>
+        <p className="title">{title}</p>
+      </NameSubtitleContainer>
+      <LastMessage>{lastMessage}</LastMessage>
+    </ChattingProfileInfo>
+    <LastMessageTime>{lastMessageDaysAgo}</LastMessageTime>
+  </ChattingProfileContainer>
+)
+
 const ChattingProfileContainer = styled.div`
   display: flex;
   align-items: center;
@@ -58,31 +86,3 @@ const LastMessageTime = styled.p`
   line-height: ${({ theme }) => theme.lineHeight[900]};
   color: ${({ theme }) => theme.colors.black[500]};
 `
-
-type ChattingProfileProps = {
-  iconType: MilitaryBranchCode
-  opponent: string
-  title: string
-  lastMessage: string
-  lastMessageDaysAgo: string
-}
-
-export const ChattingItem = ({
-  iconType,
-  opponent,
-  title,
-  lastMessage,
-  lastMessageDaysAgo,
-}: ChattingProfileProps) => (
-  <ChattingProfileContainer>
-    <ProfileImage iconType={iconType} size="lg" />
-    <ChattingProfileInfo>
-      <NameSubtitleContainer>
-        <h6 className="opponent-name">{opponent}</h6>
-        <p className="title">{title}</p>
-      </NameSubtitleContainer>
-      <LastMessage>{lastMessage}</LastMessage>
-    </ChattingProfileInfo>
-    <LastMessageTime>{lastMessageDaysAgo}</LastMessageTime>
-  </ChattingProfileContainer>
-)

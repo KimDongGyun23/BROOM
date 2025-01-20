@@ -9,67 +9,6 @@ import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 
 import { InputGroupContext } from '.'
 
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
-  width: 100%;
-  padding: ${({ theme }) => theme.gap.lg};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  border: 1px solid ${({ theme }) => theme.colors.black[300]};
-`
-
-const StyledInput = styled.input`
-  width: 100%;
-  padding: ${({ theme }) => theme.gap.xs} 0;
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[500]};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.black[300]};
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
-
-const VisibilityButton = styled.button`
-  flex-shrink: 0;
-`
-
-const InputLabel = styled.span`
-  flex-shrink: 0;
-  padding: ${({ theme }) => theme.gap.xs} 0;
-  color: ${({ theme }) => theme.colors.black[500]};
-`
-
-const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
-  flex-grow: 1;
-  min-width: 0;
-  text-align: ${({ $textAlign }) => $textAlign};
-`
-
-const StyledTextArea = styled.textarea`
-  height: 104px;
-  resize: none;
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  border: 1px solid ${({ theme }) => theme.colors.black[300]};
-  padding: 10px ${({ theme }) => theme.gap.xl};
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[500]};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.black[300]};
-  }
-
-  &:focus {
-    outline: none;
-  }
-`
-
 export const Input = ({ type = 'text', ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)
@@ -182,3 +121,64 @@ export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) 
 
   return <StyledTextArea {...register(section)} {...rest} />
 }
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.gap.lg};
+  width: 100%;
+  padding: ${({ theme }) => theme.gap.lg};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[300]};
+`
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: ${({ theme }) => theme.gap.xs} 0;
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`
+
+const VisibilityButton = styled.button`
+  flex-shrink: 0;
+`
+
+const InputLabel = styled.span`
+  flex-shrink: 0;
+  padding: ${({ theme }) => theme.gap.xs} 0;
+  color: ${({ theme }) => theme.colors.black[500]};
+`
+
+const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
+  flex-grow: 1;
+  min-width: 0;
+  text-align: ${({ $textAlign }) => $textAlign};
+`
+
+const StyledTextArea = styled.textarea`
+  height: 104px;
+  resize: none;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.black[300]};
+  padding: 10px ${({ theme }) => theme.gap.xl};
+  font-size: ${({ theme }) => theme.fontSize[700]};
+  line-height: ${({ theme }) => theme.lineHeight[700]};
+  color: ${({ theme }) => theme.colors.black[500]};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.black[300]};
+  }
+
+  &:focus {
+    outline: none;
+  }
+`

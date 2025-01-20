@@ -8,7 +8,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query/useMypageQuery'
 import type { TabLabel } from '@/utils/constants'
 import { TAB_LABELS } from '@/utils/constants'
-import { getSessionStorageItem, SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 export const MyPost = () => {
   const [currentTab, setCurrentTab] = useState<TabLabel>(
@@ -32,8 +32,6 @@ export const MyPost = () => {
   const handleTabClick = (tab: TabLabel) => {
     if (tab === TAB_LABELS[0]) refetchCarpoolPosts()
     else refetchTeamPosts()
-
-    setSessionStorageItem(SESSION_KEYS.POST_TAB, tab)
     setCurrentTab(tab)
   }
 

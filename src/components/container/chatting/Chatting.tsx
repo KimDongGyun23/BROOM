@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { ChattingItem } from '@/components/domain/chatting/ChattingItem'
+import { PostTabs } from '@/components/domain/post/PostTabs'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
 import { MainHeader } from '@/components/view/MainHeader'
@@ -13,34 +15,6 @@ import { TAB_KEYS, TAB_LABELS } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 type TabType = (typeof TAB_LABELS)[number]
-
-type ChattingTabProps = {
-  currentTab: TabType
-  onClick: (tab: TabType) => void
-}
-
-const ChattingTab = ({ currentTab, onClick }: ChattingTabProps) => {
-  const getTabStyle = (isActive: boolean) =>
-    isActive
-      ? 'text-blue-600 border-b-[2px] border-b-blue-500'
-      : 'text-grey-600 border-b-[2px] border-b-grey-200'
-
-  return (
-    <div className="p-medium flex px-4 py-3 font-medium">
-      {TAB_LABELS.map((tab) => (
-        <button
-          key={tab}
-          className={`grow pb-3 ${getTabStyle(currentTab === tab)}`}
-          onClick={() => onClick(tab)}
-          aria-selected={currentTab === tab}
-          role="tab"
-        >
-          {tab}
-        </button>
-      ))}
-    </div>
-  )
-}
 
 const CarpoolChattingList = () => {
   const { data: chattingList, isPending, isError } = useCarpoolChattingRoomList()
@@ -103,16 +77,31 @@ export const Chatting = () => {
   }
 
   return (
-    <div className="flex-column h-full">
+    <Container>
       <MainHeader />
-      <ChattingTab currentTab={currentTab} onClick={handleClickTab} />
+      <PostTabs currentTab={currentTab} onTabClick={handleClickTab} />
 
-      <main className="flex-column scroll mb-2 mt-[30px] grow gap-4">
+      <MainContent>
         {currentTab === TAB_LABELS[0] && <CarpoolChattingList />}
         {currentTab === TAB_LABELS[1] && <TeamChattingList />}
-      </main>
+      </MainContent>
 
       <BottomNavigation />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const MainContent = styled.main`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 30px 0 ${({ theme }) => theme.gap.md};
+  overflow-y: scroll;
+  gap: ${({ theme }) => theme.gap.xl};
+`

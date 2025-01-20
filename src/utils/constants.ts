@@ -6,6 +6,7 @@ export const TAB_LABELS = TAB_LIST.map((tab) => tab.label)
 export const TAB_KEYS = TAB_LIST.map((tab) => tab.key)
 
 export type TabLabel = (typeof TAB_LIST)[number]['label']
+export type TabKey = (typeof TAB_LIST)[number]['key']
 
 export const SEARCH_OPTIONS = [
   { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
