@@ -4,10 +4,12 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: ${({ theme }) => `0 ${theme.gap.xl}`};
+  margin: 24px ${({ theme }) => theme.gap.xl} 0;
 `
 
 const Label = styled.h4`
+  font-size: ${({ theme }) => theme.fontSize[400]};
+  line-height: ${({ theme }) => theme.lineHeight[400]};
   color: ${({ theme }) => theme.colors.black[700]};
 `
 
