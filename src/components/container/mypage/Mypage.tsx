@@ -1,13 +1,52 @@
 import { Fragment } from 'react/jsx-runtime'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
 
-import chainImage from '@/assets/chain.svg'
+import { ProfileSection } from '@/components/domain/mypage/ProfileSection'
+import { UserProfile } from '@/components/domain/mypage/UserProfile'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
-import { ProfileImage } from '@/components/view/ProfileImage'
 import { useLogout, useUserDeletion, useUserProfile } from '@/services/query/useMypageQuery'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { clearSessionStorage, getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const ScrollContainer = styled.div`
+  flex-direction: column;
+  overflow-y: scroll;
+`
+
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 ${({ theme }) => theme.gap.xl} 24px;
+  gap: 28px;
+`
+
+const Divider = styled.hr`
+  background-color: ${({ theme }) => theme.colors.black[200]};
+`
+
+const ActionContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 3svh auto 0;
+  padding: 0 ${({ theme }) => theme.gap.xs};
+`
+
+const ActionButton = styled.button<{ $isLogout?: boolean }>`
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  padding: 0 ${({ theme }) => theme.gap.xl};
+  color: ${({ theme, $isLogout }) => ($isLogout ? theme.colors.black[600] : theme.colors.error)};
+  border-right: ${({ theme, $isLogout }) =>
+    $isLogout ? `1px solid ${theme.colors.black[400]}` : 'none'};
+`
 
 const MYPAGE_PROFILE_SECTIONS = [
   {
@@ -32,43 +71,6 @@ const MYPAGE_PROFILE_SECTIONS = [
     ],
   },
 ] as const
-
-type ProfileSectionProps = {
-  title: string
-  items: readonly { name: string; path: string }[]
-}
-
-type UserProfileProps = {
-  username: string
-  serviceYear: number
-  iconType: MilitaryBranchCode | null
-}
-
-const UserProfile = ({ username, serviceYear, iconType }: UserProfileProps) => (
-  <div className="flex-align relative mx-auto mb-[30px] mt-4 w-fit gap-5 rounded-[40px] border-[10px] border-grey-200 py-[14px] pl-[18px] pr-[30px]">
-    <img src={chainImage} className="absolute -left-7 bottom-5" alt="chain" />
-    <ProfileImage iconType={iconType} size="lg" />
-    <div className="flex-column">
-      <p className="p-medium font-medium">{username}</p>
-      <p className="p-xsmall text-blue-700">예비군 {serviceYear}년차</p>
-    </div>
-  </div>
-)
-
-const ProfileSection = ({ title, items }: ProfileSectionProps) => (
-  <section className="flex-column gap-5">
-    <h6 className="font-bold text-grey-700">{title}</h6>
-    <ul className="flex-column gap-3">
-      {items.map(({ name, path }) => (
-        <li key={name}>
-          <Link to={path} className="p-medium text-grey-700">
-            {name}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </section>
-)
 
 export const Mypage = () => {
   const navigate = useNavigate()
@@ -102,33 +104,28 @@ export const Mypage = () => {
   const { nickname, dischargeYear } = userProfileData
 
   return (
-    <div className="flex-column h-full">
-      <div className="flex-column scroll">
+    <Container>
+      <ScrollContainer>
         <UserProfile username={nickname} serviceYear={dischargeYear} iconType={iconType} />
 
-        <div className="flex-column mx-4 mb-6 gap-7">
+        <ContentContainer>
           {MYPAGE_PROFILE_SECTIONS.map(({ title, items }, index) => (
             <Fragment key={title}>
               <ProfileSection title={title} items={items} />
-              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <hr className="bg-grey-200" />}
+              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <Divider />}
             </Fragment>
           ))}
 
-          <div className="flex-align ml-auto mt-[3svh] px-1">
-            <button
-              className="p-small border-r border-r-grey-400 px-4 text-grey-600"
-              onClick={handleLogout}
-            >
+          <ActionContainer>
+            <ActionButton onClick={handleLogout} $isLogout>
               로그아웃
-            </button>
-            <button className="p-small px-4 text-red-200" onClick={handleAccountDeletion}>
-              회원탈퇴
-            </button>
-          </div>
-        </div>
-      </div>
+            </ActionButton>
+            <ActionButton onClick={handleAccountDeletion}>회원탈퇴</ActionButton>
+          </ActionContainer>
+        </ContentContainer>
+      </ScrollContainer>
 
       <BottomNavigation />
-    </div>
+    </Container>
   )
 }
