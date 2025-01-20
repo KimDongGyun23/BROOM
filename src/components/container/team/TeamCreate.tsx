@@ -1,13 +1,14 @@
 import { FormProvider } from 'react-hook-form'
+import styled from 'styled-components'
 
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useTeamCreateForm } from '@/hooks/useForm'
 import { useTeamCreation } from '@/services/service/useTeamCreation'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
 const TeamForm = () => (
-  <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
+  <TeamFormContainer>
     <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
       <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
@@ -23,7 +24,7 @@ const TeamForm = () => (
       <InputGroup.Input {...FORM_ATTRIBUTE.MEETING_PLACE.input} />
     </InputGroup>
 
-    <div className="grid grid-cols-2 gap-5">
+    <GridContainer>
       <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
         <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
@@ -33,13 +34,13 @@ const TeamForm = () => (
         <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
         <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
       </InputGroup>
-    </div>
+    </GridContainer>
 
     <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
       <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
     </InputGroup>
-  </form>
+  </TeamFormContainer>
 )
 
 export const TeamCreate = () => {
@@ -48,7 +49,7 @@ export const TeamCreate = () => {
   const { handleTeamCreation } = useTeamCreation()
 
   return (
-    <div className="flex-column h-svh">
+    <Container>
       <FormProvider {...formMethod}>
         <SubHeaderWithoutIcon
           type="complete"
@@ -58,6 +59,27 @@ export const TeamCreate = () => {
 
         <TeamForm />
       </FormProvider>
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+`
+
+const TeamFormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.lg};
+  padding: ${({ theme }) => theme.gap.xl}
+  gap: ${({ theme }) => theme.gap.xxl};
+  overflow-y: scroll;
+`
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.gap.xxl};
+`
