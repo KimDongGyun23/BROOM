@@ -21,13 +21,13 @@ const SIZE_STYLES = {
   `,
 }
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<{ $secondary?: boolean; $size: ButtonSize }>`
   border-radius: ${theme.borderRadius.lg};
   width: auto;
   flex-shrink: 0;
-  ${({ size }) => SIZE_STYLES[size]}
-  ${({ secondary, disabled }) =>
-    secondary || disabled
+  ${({ $size }) => SIZE_STYLES[$size]}
+  ${({ $secondary, disabled }) =>
+    $secondary || disabled
       ? css`
           background-color: ${theme.colors.black[100]};
           color: ${theme.colors.black[500]};
@@ -54,7 +54,7 @@ export const Button = ({
   ...rest
 }: ButtonProps) => {
   return (
-    <StyledButton type={type} size={size} disabled={disabled} secondary={secondary} {...rest}>
+    <StyledButton type={type} $size={size} disabled={disabled} $secondary={secondary} {...rest}>
       {children}
     </StyledButton>
   )

@@ -1,11 +1,52 @@
 import { FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks/useForm'
 import { useLoginLogic } from '@/services/service/useLoginLogic'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const Logo = styled.h1`
+  margin-top: 20svh;
+  text-align: center;
+  font-family: 'jalnan', sans-serif;
+  font-size: 60px;
+  line-height: 44px;
+  color: ${({ theme }) => theme.colors.black[600]};
+`
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 15svh ${({ theme }) => theme.gap.xl} 0;
+  gap: 22px;
+`
+
+const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
+  margin: 22px ${({ theme }) => theme.gap.xl} 0;
+  display: flex;
+  justify-content: ${({ $isLoginFailed }) => ($isLoginFailed ? 'space-between' : 'flex-end')};
+  align-items: center;
+`
+
+const ErrorMessage = styled.p`
+  font-size: ${({ theme }) => theme.fontSize[900]};
+  line-height: ${({ theme }) => theme.lineHeight[900]};
+  color: ${({ theme }) => theme.colors.error};
+`
+
+const SignUpLink = styled(Link)`
+  display: inline-block;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.black[500]};
+  color: ${({ theme }) => theme.colors.black[500]};
+`
 
 export const LoginPage = () => {
   const formMethod = useLoginForm()
@@ -14,16 +55,11 @@ export const LoginPage = () => {
   const { isLoginFailed, handleLogin } = useLoginLogic()
 
   return (
-    <div className="flex-column">
-      <h1 className="mt-[20svh] text-center font-jalnan text-6xl leading-[44px] text-black-600">
-        BROOM
-      </h1>
+    <Container>
+      <Logo>BROOM</Logo>
 
       <FormProvider {...formMethod}>
-        <form
-          className="flex-column mx-4 mt-[15svh] gap-[22px]"
-          onSubmit={handleSubmit(handleLogin)}
-        >
+        <StyledForm onSubmit={handleSubmit(handleLogin)}>
           <InputGroup section={FORM_ATTRIBUTE.LOGIN_ID.section}>
             <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_ID.label} />
             <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_ID.input} />
@@ -37,22 +73,13 @@ export const LoginPage = () => {
           <Button size="lg" type="submit">
             로그인
           </Button>
-        </form>
+        </StyledForm>
       </FormProvider>
 
-      <div
-        className={`mx-4 mt-[22px] ${isLoginFailed ? 'flex-between-align' : 'flex justify-end'}`}
-      >
-        {isLoginFailed && (
-          <p className="p-900 text-error">* 아이디 또는 비밀번호가 일치하지 않습니다.</p>
-        )}
-        <Link
-          to={'/sign-up'}
-          className="inline-block border-b border-b-black-500 pb-1 text-black-500"
-        >
-          회원가입
-        </Link>
-      </div>
-    </div>
+      <BottomContainer $isLoginFailed={isLoginFailed}>
+        {isLoginFailed && <ErrorMessage>* 아이디 또는 비밀번호가 일치하지 않습니다.</ErrorMessage>}
+        <SignUpLink to={'/sign-up'}>회원가입</SignUpLink>
+      </BottomContainer>
+    </Container>
   )
 }
