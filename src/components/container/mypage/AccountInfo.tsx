@@ -1,13 +1,28 @@
 import { FormProvider } from 'react-hook-form'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useAccountForm } from '@/hooks/useForm'
 import { useAccountUpdate } from '@/services/service/useAccountUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
+
+const FormContainer = styled.form`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 28px ${({ theme }) => `${theme.gap.xl} ${theme.gap.md}`};
+  gap: 28px;
+  overflow-y: scroll;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.xl};
+`
 
 type AccountFormType = {
   isEditMode: boolean
@@ -15,17 +30,17 @@ type AccountFormType = {
 
 const AccountForm = ({ isEditMode }: AccountFormType) => {
   return (
-    <form className="flex-column scroll mx-4 mb-2 mt-7 grow gap-7">
+    <FormContainer>
       <InputGroup section={FORM_ATTRIBUTE.NICKNAME.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.NICKNAME.label} />
-        <div className="flex gap-4">
+        <InputContainer>
           <InputGroup.Input readOnly={!isEditMode} {...FORM_ATTRIBUTE.NICKNAME.input} />
           {isEditMode && (
             <Button size="md" onClick={() => {}}>
               중복 확인
             </Button>
           )}
-        </div>
+        </InputContainer>
       </InputGroup>
 
       <InputGroup section={FORM_ATTRIBUTE.DISCHARGE_YEAR.section}>
@@ -37,7 +52,7 @@ const AccountForm = ({ isEditMode }: AccountFormType) => {
         <InputGroup.Label label={FORM_ATTRIBUTE.SORT.label} />
         <InputGroup.SortOfArmy disabled={!isEditMode} />
       </InputGroup>
-    </form>
+    </FormContainer>
   )
 }
 
