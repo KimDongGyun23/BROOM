@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { PostBottom } from '@/components/domain/post/PostBottom'
 import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
@@ -73,7 +74,7 @@ export const TeamDetail = () => {
 
   return (
     <>
-      <div className="flex-column h-full">
+      <Container>
         <PostDetailHeader
           isMyPost={isMyPost}
           isFull={item.full}
@@ -89,7 +90,13 @@ export const TeamDetail = () => {
           onBookmark={() => {}}
           onChatStart={handleClickChatting}
         />
-      </div>
+      </Container>
     </>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`

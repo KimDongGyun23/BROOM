@@ -1,6 +1,6 @@
-import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { Kebab } from '@/components/view/Kebab'
 import { ModalWithTwoButton } from '@/components/view/Modal'
+import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
@@ -33,7 +33,7 @@ const LoggedInHeader = ({
   return (
     <>
       <SubHeaderWithIcon type="kebab" onClickKebab={isKebabOpen ? closeKebab : openKebab} />
-      {isKebabOpen && <Kebab items={isMyPost ? myKebabMap : kebabMap} position="right-4 top-12" />}
+      {isKebabOpen && <Kebab items={isMyPost ? myKebabMap : kebabMap} position={[48, 16, 0, 0]} />}
       <ModalWithTwoButton
         isOpen={isModalOpen}
         onClose={closeModal}
