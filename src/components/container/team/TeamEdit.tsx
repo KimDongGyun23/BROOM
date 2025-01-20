@@ -1,8 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useTeamEditForm } from '@/hooks/useForm'
 import { useTeamUpdate } from '@/services/service/useTeamUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
@@ -10,7 +11,7 @@ import { FORM_ATTRIBUTE } from '@/utils/constants'
 import { ErrorPage } from '../home/ErrorPage'
 
 const TeamEditForm = () => (
-  <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
+  <TeamFormContainer>
     <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
       <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
@@ -26,7 +27,7 @@ const TeamEditForm = () => (
       <InputGroup.Input {...FORM_ATTRIBUTE.MEETING_PLACE.input} />
     </InputGroup>
 
-    <div className="grid grid-cols-2 gap-5">
+    <GridContainer>
       <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
         <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
@@ -36,13 +37,13 @@ const TeamEditForm = () => (
         <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
         <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
       </InputGroup>
-    </div>
+    </GridContainer>
 
     <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
       <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
     </InputGroup>
-  </form>
+  </TeamFormContainer>
 )
 
 export const TeamEdit = () => {
@@ -55,7 +56,7 @@ export const TeamEdit = () => {
   const { handleSubmitForm } = useTeamUpdate(id as string)
 
   return (
-    <div className="flex-column h-svh">
+    <Container>
       <SubHeaderWithoutIcon
         type="complete"
         title="팀원 모집 수정"
@@ -64,6 +65,27 @@ export const TeamEdit = () => {
       <FormProvider {...formMethod}>
         <TeamEditForm />
       </FormProvider>
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const TeamFormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.xl};
+  padding: ${({ theme }) => theme.gap.xl}
+  gap: ${({ theme }) => theme.gap.xxl};
+  overflow-y: scroll;
+`
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.gap.xxl};
+`
