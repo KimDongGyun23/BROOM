@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { ErrorPage } from '@/components/container/home/ErrorPage'
 import { PostBottom } from '@/components/domain/post/PostBottom'
@@ -71,7 +72,7 @@ export const CarpoolDetail = () => {
   const contents = transformCarpoolData(item)
 
   return (
-    <div className="flex-column h-full">
+    <Container>
       <PostDetailHeader
         isMyPost={isMyPost}
         isFull={item.full}
@@ -87,6 +88,12 @@ export const CarpoolDetail = () => {
         onBookmark={() => {}}
         onChatStart={handleClickChatting}
       />
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`

@@ -1,10 +1,11 @@
 import { useSearchParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { PostList } from '@/components/domain/post/PostList'
-import { EmptyMessage } from '@/components/view/Error'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { Loading } from '@/components/view/Loading'
 import { SearchBar } from '@/components/domain/post/SearchBar'
+import { EmptyMessage } from '@/components/view/Error'
+import { Loading } from '@/components/view/Loading'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useSearchCarpoolList } from '@/services/query/useCarpoolQuery'
 import { ERROR_MESSAGES, SEARCH_OPTIONS } from '@/utils/constants'
 
@@ -41,10 +42,16 @@ export const CarpoolSearch = () => {
   const searchName = searchParams.get('searchName')
 
   return (
-    <main className="flex-column h-full">
+    <Container>
       <SubHeaderWithoutIcon type="null" title="검색" />
       <SearchBar currentTab="carpool" />
       <SearchList filterName={filterName} searchName={searchName} />
-    </main>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`

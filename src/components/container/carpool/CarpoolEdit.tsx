@@ -1,9 +1,10 @@
 import { FormProvider, useFormContext } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { InputGroup } from '@/components/view/inputGroup'
+import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useCarpoolEditForm } from '@/hooks/useForm'
 import { useCarpoolUpdate } from '@/services/service/useCarpoolUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
@@ -14,7 +15,7 @@ const CarpoolEditForm = () => {
   const { setValue } = useFormContext()
 
   return (
-    <form className="flex-column scroll mb-4 mt-5 gap-5 px-4">
+    <CarpoolFormContainer>
       <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
         <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
@@ -30,7 +31,7 @@ const CarpoolEditForm = () => {
         <InputGroup.Input {...FORM_ATTRIBUTE.DEPART_PLACE.input} />
       </InputGroup>
 
-      <div className="grid grid-cols-2 gap-5">
+      <GridContainer>
         <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
           <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
           <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
@@ -40,23 +41,23 @@ const CarpoolEditForm = () => {
           <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
           <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
         </InputGroup>
-      </div>
+      </GridContainer>
 
       <InputGroup section={FORM_ATTRIBUTE.PRICE.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.PRICE.label} />
-        <div className="flex gap-5">
+        <InputContainerWithGap>
           <InputGroup.UnitInput {...FORM_ATTRIBUTE.PRICE.input} isPrice />
           <Button size="md" onClick={() => setValue(FORM_ATTRIBUTE.PRICE.section, 0)}>
             무료로 설정
           </Button>
-        </div>
+        </InputContainerWithGap>
       </InputGroup>
 
       <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
         <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
         <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
       </InputGroup>
-    </form>
+    </CarpoolFormContainer>
   )
 }
 
@@ -70,7 +71,7 @@ export const CarpoolEdit = () => {
   const { handleSubmitForm } = useCarpoolUpdate(id as string)
 
   return (
-    <div className="flex-column h-svh">
+    <Container>
       <SubHeaderWithoutIcon
         type="complete"
         title="승차 공유 수정"
@@ -79,6 +80,32 @@ export const CarpoolEdit = () => {
       <FormProvider {...formMethod}>
         <CarpoolEditForm />
       </FormProvider>
-    </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`
+
+const CarpoolFormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.xl};
+  padding: ${({ theme }) => theme.gap.xl}
+  gap: ${({ theme }) => theme.gap.xxl};
+  overflow-y: scroll;
+`
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.gap.xxl};
+`
+
+const InputContainerWithGap = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.xxl};
+`
