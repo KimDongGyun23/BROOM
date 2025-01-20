@@ -15,7 +15,7 @@ function App() {
   }, [])
   return (
     <div className="flex-center">
-      <div className="scroll relative h-svh w-full min-w-[320px] max-w-[450px] border-x">
+      <div className="scroll relative h-svh w-full min-w-[320px] max-w-[450px] border-x border-x-black-100">
         {showSplash ? <Splash /> : <RouterComponent />}
       </div>
     </div>
