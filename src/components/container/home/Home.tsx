@@ -84,14 +84,14 @@ const Section = styled.section`
   background-color: white;
   padding: ${({ theme }) => theme.gap.xl};
   box-shadow: ${({ theme }) => theme.boxShadow.sm};
-`
-
-const SectionHeader = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
 
   .title {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};
   }
+`
+
+const SectionHeader = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
 `
 
 const ViewAllLink = styled(Link)`

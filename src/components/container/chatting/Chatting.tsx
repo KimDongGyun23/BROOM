@@ -92,16 +92,13 @@ export const Chatting = () => {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 
 const MainContent = styled.main`
-  display: flex;
-  flex-direction: column;
   flex-grow: 1;
-  margin: 30px 0 ${({ theme }) => theme.gap.md};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
+  ${({ theme }) => theme.margin('container', 0, 'container', 0)};
   overflow-y: scroll;
-  gap: ${({ theme }) => theme.gap.xl};
 `

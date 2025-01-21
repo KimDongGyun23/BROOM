@@ -76,8 +76,7 @@ const Container = styled.div`
 
 const TeamFormContainer = styled.form`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
-  margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.xl};
-  padding: ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin('container', 'container', 'container', 'container')};
   overflow-y: scroll;
 `
 

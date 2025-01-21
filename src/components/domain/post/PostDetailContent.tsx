@@ -47,7 +47,7 @@ export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
 }
 
 const ScrollContainer = styled.div`
-  margin-top: 24px;
+  ${({ theme }) => theme.margin('container', 0, 'container', 0)};
   flex-grow: 1;
   overflow-y: scroll;
 `
@@ -57,8 +57,8 @@ const ContentContainer = styled.div`
   padding: 0 ${({ theme }) => theme.gap.xl};
 
   .title {
+    ${({ theme }) => theme.margin(0, 0, 'xxl', 0)};
     ${({ theme }) => theme.font(500, theme.colors.black[600])};
-    margin-bottom: 32px;
   }
 `
 

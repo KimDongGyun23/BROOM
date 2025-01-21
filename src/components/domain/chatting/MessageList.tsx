@@ -34,7 +34,7 @@ export const MessageList = ({ opponent, iconType }: MessageListProps) => {
 const Container = styled.main`
   flex-grow: 1;
   ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
-  margin: 0 ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   padding: ${({ theme }) => theme.gap.xl} 0;
   overflow-y: scroll;
 `

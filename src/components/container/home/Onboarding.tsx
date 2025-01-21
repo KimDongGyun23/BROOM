@@ -26,34 +26,31 @@ const Carousel = styled.div`
 `
 
 const CarouselItem = styled.div`
-  display: flex;
+  ${({ theme }) => theme.flexBox('row', 'flex-end')};
   width: 100%;
   flex-shrink: 0;
-  align-items: flex-end;
 `
 
 const DotContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.gap.md};
-  margin-top: 24px;
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.md)};
+  ${({ theme }) => theme.margin('xxl', 0, 0, 0)};
 `
 
 const Dot = styled.button<{ $isActive: boolean }>`
   width: ${({ $isActive }) => ($isActive ? '24px' : '8px')};
   height: 8px;
-  border-radius: ${({ theme }) => theme.borderRadius.full};
+  border-radius: ${({ theme, $isActive }) =>
+    $isActive ? theme.borderRadius.lg : theme.borderRadius.full};
   opacity: ${({ $isActive }) => ($isActive ? '0.9' : '0.5')};
   background-color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.black[600] : theme.colors.black[200]};
-  cursor: pointer;
 `
 
 const ButtonContainer = styled.div`
   flex-shrink: 0;
   width: 100%;
-  margin: ${({ theme }) => theme.gap.xxl} 0;
-  padding: ${({ theme }) => `40px ${theme.gap.xl}`};
-  padding-top: ${({ theme }) => theme.gap.xs};
+  ${({ theme }) => theme.margin('xs', 0, 'xxl', 0)};
+  padding: 0 ${({ theme }) => theme.gap.xl};
 `
 
 const StyledButton = styled(Button)`

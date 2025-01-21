@@ -72,5 +72,6 @@ const LastMessage = styled.p`
 const LastMessageTime = styled.p`
   flex-shrink: 0;
   margin-left: auto;
+  ${({ theme }) => theme.margin(0, 0, 0, 'auto')};
   ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `

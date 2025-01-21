@@ -68,7 +68,7 @@ const ContentContainer = styled.div`
 `
 
 const MainTextContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
   flex-grow: 1;
 `
 
@@ -86,7 +86,7 @@ const Logo = styled.span`
 
 const ButtonContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
-  margin-top: ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin('container', 0, 0, 0)};
   width: 100%;
 `
 

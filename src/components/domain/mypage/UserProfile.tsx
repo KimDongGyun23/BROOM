@@ -25,7 +25,7 @@ const UserProfileContainer = styled.div`
   position: relative;
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xxl)};
   width: fit-content;
-  margin: ${({ theme }) => theme.gap.xl} auto 30px;
+  ${({ theme }) => theme.margin('container', 'auto', 'xxl', 'auto')};
   padding: ${({ theme }) => theme.gap.lg} 30px ${({ theme }) => theme.gap.lg} 18px;
   border: 10px solid ${({ theme }) => theme.colors.black[200]};
   border-radius: 40px;

@@ -87,17 +87,17 @@ const Container = styled.div`
 `
 
 const Title = styled.h4`
-  margin: 24px ${({ theme }) => theme.gap.xl} 65px;
+  ${({ theme }) => theme.margin('xl', 'container', 'bus-title-bottom', 'container')};
   ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
 const StyledForm = styled.form`
   flex-grow: 1;
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
-  margin: 0 ${({ theme }) => theme.gap.xl} 2px;
+  ${({ theme }) => theme.margin(0, 'container', 'xs', 'container')};
   overflow-y: scroll;
 `
 
 const StyledButton = styled(Button)`
-  margin: 2px ${({ theme }) => theme.gap.xl} 40px;
+  ${({ theme }) => theme.margin('xs', 'container', 'xxl', 'container')};
 `

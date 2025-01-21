@@ -73,10 +73,20 @@ const GlobalStyles = createGlobalStyle`
 		color: inherit;
 	}
 	button {
+		font: inherit;
 		background: none;
 		border: none;
 		padding: 0;
 		cursor: pointer;
+	}
+
+	input, textarea {
+		font: inherit;
+		border: none;
+		outline: none;
+		&:focus {
+			outline: none;
+		}
 	}
 
 	input::-webkit-outer-spin-button,

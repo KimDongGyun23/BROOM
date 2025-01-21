@@ -89,7 +89,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 
 const SearchForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.md)};
-  margin: 0 ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   border: 1px solid ${({ theme }) => theme.colors.black[200]};
   padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};

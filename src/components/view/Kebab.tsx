@@ -58,24 +58,18 @@ const KebabNav = styled.nav<{ $position: Position }>`
 
 const KebabList = styled.ul`
   width: 100%;
-  list-style: none;
-  padding: 0;
-  margin: 0;
 `
 
 const KebabButton = styled.button<{ $isRed?: boolean }>`
   ${({ theme, $isRed }) => theme.font(800, $isRed ? theme.colors.error : theme.colors.black[500])};
   width: 100%;
   text-align: center;
-  background: none;
-  border: none;
-  cursor: pointer;
 `
 
 const KebabDivider = styled.hr`
-  margin: ${({ theme }) => theme.gap.md} 0;
-  height: 1px;
   width: 100%;
+  height: 1px;
+  ${({ theme }) => theme.margin('md', 0, 'md', 0)};
   background-color: ${({ theme }) => theme.colors.black[200]};
   border: none;
 `

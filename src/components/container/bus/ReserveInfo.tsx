@@ -72,11 +72,11 @@ export const ReserveInfo = () => {
 }
 
 const Container = styled.div`
-  margin: 0 ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
 `
 
 const Title = styled.h4`
-  margin: 24px 0 65px;
+  ${({ theme }) => theme.margin('xl', 0, 'bus-title-bottom', 0)};
   ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
@@ -87,7 +87,7 @@ const InputContainer = styled.div`
 const ReservationStateGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: ${({ theme }) => theme.gap.xxl};
+  ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
   border-top: 1px solid ${({ theme }) => theme.colors.black[200]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
   text-align: center;
@@ -116,9 +116,8 @@ const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
 
 const NoticeContainer = styled.div`
   ${({ theme }) => theme.flexBox('column')};
-  margin-top: ${({ theme }) => theme.gap.xxl};
 
   .notice-text {
-    ${({ theme }) => theme.font(900, theme.colors.black[500])}
+    ${({ theme }) => theme.font(900, theme.colors.black[300])}
   }
 `

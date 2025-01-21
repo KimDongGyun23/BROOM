@@ -27,7 +27,7 @@ type SizeKey = keyof typeof fontSize
 export const font = (size: SizeKey, color?: string) => `
     font-size: ${fontSize[size]};
     line-height: ${lineHeight[size]};
-    colors: ${color}
+    color: ${color}
 `
 
 export type FontType = typeof font

@@ -49,7 +49,7 @@ const Container = styled.div`
 `
 
 const Logo = styled.h1`
-  margin-top: 20svh;
+  ${({ theme }) => theme.margin('logo-top-sm', 'container', 'logo-bottom-sm', 'container')};
   text-align: center;
   font-family: 'jalnan', sans-serif;
   font-size: 60px;
@@ -59,11 +59,11 @@ const Logo = styled.h1`
 
 const StyledForm = styled.form`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '22px')};
-  margin: 15svh ${({ theme }) => theme.gap.xl} 0;
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
 `
 
 const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
-  margin: 22px ${({ theme }) => theme.gap.xl} 0;
+  ${({ theme }) => theme.margin('xxl', 'container', 0, 'container')};
   ${({ theme, $isLoginFailed }) =>
     theme.flexBox('row', 'center', $isLoginFailed ? 'space-between' : 'flex-end')};
 `

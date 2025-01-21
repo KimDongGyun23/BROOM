@@ -104,7 +104,7 @@ const ScrollContainer = styled.div`
 
 const ContentContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
-  margin: 0 ${({ theme }) => theme.gap.xl} 24px;
+  ${({ theme }) => theme.margin(0, 'container', 'container', 'container')};
 `
 
 const Divider = styled.hr`
@@ -113,7 +113,7 @@ const Divider = styled.hr`
 
 const ActionContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
-  margin: 3svh auto 0;
+  ${({ theme }) => theme.margin('mypage-button-top', 'auto', 0, 'auto')};
   padding: 0 ${({ theme }) => theme.gap.xs};
 `
 

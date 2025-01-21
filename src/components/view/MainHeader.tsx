@@ -30,7 +30,7 @@ const HeaderContainer = styled.header`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
   position: relative;
   height: 80px;
-  margin: 0 ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   padding: 16px 0;
   box-sizing: content-box;
 `
