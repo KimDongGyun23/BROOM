@@ -21,9 +21,7 @@ export const MessageInputContainer = styled.div`
 export const MessageInput = styled.input`
   flex-grow: 1;
   background: transparent;
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(800, theme.colors.black[500])};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.black[300]};

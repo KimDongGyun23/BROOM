@@ -59,9 +59,7 @@ const BookmarkButton = styled.button`
   flex-shrink: 0;
 
   .label {
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.black[400]};
+    ${({ theme }) => theme.font(900, theme.colors.black[400])};
   }
 `
 

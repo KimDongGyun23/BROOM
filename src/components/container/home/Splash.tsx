@@ -19,9 +19,7 @@ const Logo = styled.h1`
 `
 
 const Subtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[200]};
+  ${({ theme }) => theme.font(700, theme.colors.black[200])};
 `
 
 export const Splash = () => {

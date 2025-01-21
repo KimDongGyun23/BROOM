@@ -19,10 +19,8 @@ const Logo = styled.h1`
 
 const Message = styled.p`
   margin: 30px ${({ theme }) => theme.gap.xl} 0;
-  font-size: ${({ theme }) => theme.fontSize[600]};
-  line-height: ${({ theme }) => theme.lineHeight[600]};
+  ${({ theme }) => theme.font(600, theme.colors.black[500])};
   text-align: center;
-  color: ${({ theme }) => theme.colors.black[500]};
 `
 
 const StyledButton = styled(Button)`

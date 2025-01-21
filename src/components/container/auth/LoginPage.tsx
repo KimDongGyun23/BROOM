@@ -69,9 +69,7 @@ const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
 `
 
 const ErrorMessage = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.error};
+  ${({ theme }) => theme.font(900, theme.colors.error)};
 `
 
 const SignUpLink = styled(Link)`

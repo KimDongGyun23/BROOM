@@ -77,9 +77,7 @@ const Container = styled.div`
 
 const Title = styled.h4`
   margin: 24px 0 65px;
-  font-size: ${({ theme }) => theme.fontSize[400]};
-  line-height: ${({ theme }) => theme.lineHeight[400]};
-  color: ${({ theme }) => theme.colors.black[600]};
+  ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
 const InputContainer = styled.div`
@@ -121,8 +119,6 @@ const NoticeContainer = styled.div`
   margin-top: ${({ theme }) => theme.gap.xxl};
 
   .notice-text {
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.black[500]};
+    ${({ theme }) => theme.font(900, theme.colors.black[500])}
   }
 `

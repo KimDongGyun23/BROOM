@@ -64,11 +64,9 @@ const KebabList = styled.ul`
 `
 
 const KebabButton = styled.button<{ $isRed?: boolean }>`
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
+  ${({ theme, $isRed }) => theme.font(800, $isRed ? theme.colors.error : theme.colors.black[500])};
   width: 100%;
   text-align: center;
-  color: ${({ theme, $isRed }) => ($isRed ? theme.colors.error : theme.colors.black[500])};
   background: none;
   border: none;
   cursor: pointer;

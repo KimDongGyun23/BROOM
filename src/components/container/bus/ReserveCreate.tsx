@@ -88,9 +88,7 @@ const Container = styled.div`
 
 const Title = styled.h4`
   margin: 24px ${({ theme }) => theme.gap.xl} 65px;
-  font-size: ${({ theme }) => theme.fontSize[400]};
-  line-height: ${({ theme }) => theme.lineHeight[400]};
-  color: ${({ theme }) => theme.colors.black[600]};
+  ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
 const StyledForm = styled.form`

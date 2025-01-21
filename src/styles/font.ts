@@ -1,4 +1,4 @@
-export const fontSize = {
+const fontSize = {
   100: '36px',
   200: '32px',
   300: '28px',
@@ -10,7 +10,7 @@ export const fontSize = {
   900: '12px',
 }
 
-export const lineHeight = {
+const lineHeight = {
   100: '44px',
   200: '40px',
   300: '36px',
@@ -22,5 +22,12 @@ export const lineHeight = {
   900: '16px',
 }
 
-export type fontSizeType = typeof fontSize
-export type lineHeightType = typeof lineHeight
+type SizeKey = keyof typeof fontSize
+
+export const font = (size: SizeKey, color?: string) => `
+    font-size: ${fontSize[size]};
+    line-height: ${lineHeight[size]};
+    colors: ${color}
+`
+
+export type FontType = typeof font

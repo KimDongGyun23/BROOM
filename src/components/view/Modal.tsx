@@ -107,10 +107,8 @@ const ModalContent = styled.div`
 
 const ModalText = styled.p`
   padding: 0 36px;
-  font-size: ${({ theme }) => theme.fontSize[600]};
-  line-height: ${({ theme }) => theme.lineHeight[600]};
+  ${({ theme }) => theme.font(600, theme.colors.black[600])};
   text-align: center;
-  color: ${({ theme }) => theme.colors.black[600]};
 `
 
 const ButtonGrid = styled.div`

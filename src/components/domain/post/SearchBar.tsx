@@ -101,17 +101,13 @@ const FilterButton = styled.button`
 
   .filter-label {
     flex-shrink: 0;
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.black[500]};
+    ${({ theme }) => theme.font(800, theme.colors.black[500])};
   }
 `
 
 const SearchInput = styled.input`
   flex: 1;
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(800, theme.colors.black[500])};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.black[300]};

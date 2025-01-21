@@ -57,9 +57,7 @@ const ContentContainer = styled.div`
   padding: 0 ${({ theme }) => theme.gap.xl};
 
   .title {
-    font-size: ${({ theme }) => theme.fontSize[500]};
-    line-height: ${({ theme }) => theme.lineHeight[500]};
-    color: ${({ theme }) => theme.colors.black[600]};
+    ${({ theme }) => theme.font(500, theme.colors.black[600])};
     margin-bottom: 32px;
   }
 `
@@ -77,14 +75,10 @@ const ContentItem = styled.li`
   width: 100%;
 
   .content-item-label {
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.black[600]};
+    ${({ theme }) => theme.font(800, theme.colors.black[600])};
   }
 
   .content-item-text {
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
-    color: ${({ theme }) => theme.colors.black[400]};
+    ${({ theme }) => theme.font(600, theme.colors.black[400])};
   }
 `

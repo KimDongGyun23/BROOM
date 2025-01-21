@@ -91,15 +91,11 @@ const Title = styled.h2`
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-size: ${({ theme }) => theme.fontSize[500]};
-  line-height: ${({ theme }) => theme.lineHeight[500]};
+  ${({ theme }) => theme.font(500, theme.colors.black[700])};
   text-align: center;
-  color: ${({ theme }) => theme.colors.black[700]};
 `
 
 const TextButton = styled.button`
   padding-right: 2px;
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[400]};
+  ${({ theme }) => theme.font(700, theme.colors.black[400])};
 `

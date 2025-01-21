@@ -9,11 +9,9 @@ export const EmptyMessage = ({ label }: EmptyMessageProps) => {
 }
 
 const StyledEmptyMessage = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
   ${({ theme }) => theme.flexBox('row', 'center', 'center')};
   width: 100%;
   height: 100%;
   padding: ${({ theme }) => theme.gap.xxl};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
 `

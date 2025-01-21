@@ -30,7 +30,7 @@ export const Label = ({ successMessage, errorMessage, label }: LabelProps) => {
 
   return (
     <LabelContainer>
-      <LabelText>{label}</LabelText>
+      <p className="label">{label}</p>
       {renderMessage(currentErrorMessage, errorMessage, successMessage)}
     </LabelContainer>
   )
@@ -38,16 +38,13 @@ export const Label = ({ successMessage, errorMessage, label }: LabelProps) => {
 
 const LabelContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
-`
 
-const LabelText = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[600]};
-  line-height: ${({ theme }) => theme.lineHeight[600]};
-  color: ${({ theme }) => theme.colors.black[600]};
+  .label {
+    ${({ theme }) => theme.font(600, theme.colors.black[600])};
+  }
 `
 
 const MessageText = styled.p<{ $type: 'error' | 'success' }>`
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme, $type }) => ($type === 'error' ? theme.colors.error : theme.colors.success)};
+  ${({ theme, $type }) =>
+    theme.font(900, $type === 'error' ? theme.colors.error : theme.colors.success)};
 `

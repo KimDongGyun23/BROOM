@@ -36,8 +36,6 @@ export const PostTabs = ({ currentTab, onTabClick }: PostTabsProps) => {
 const Container = styled.ul`
   display: flex;
   padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`};
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
 `
 
 const TabButton = styled.button<{ $isActive: boolean }>`
@@ -45,6 +43,6 @@ const TabButton = styled.button<{ $isActive: boolean }>`
   padding-bottom: ${({ theme }) => theme.gap.lg};
   border-bottom: 2px solid
     ${({ theme, $isActive }) => ($isActive ? theme.colors.black[500] : theme.colors.black[200])};
-  color: ${({ theme, $isActive }) =>
-    $isActive ? theme.colors.black[600] : theme.colors.black[300]};
+  ${({ theme, $isActive }) =>
+    theme.font(700, $isActive ? theme.colors.black[600] : theme.colors.black[300])};
 `

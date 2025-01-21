@@ -64,18 +64,14 @@ const PostItemHeader = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between', theme.gap.lg)};
 
   .title {
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
-    color: ${({ theme }) => theme.colors.black[600]};
+    ${({ theme }) => theme.font(600, theme.colors.black[600])};
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .date {
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.black[300]};
+    ${({ theme }) => theme.font(900, theme.colors.black[300])};
   }
 `
 
@@ -90,17 +86,13 @@ const PostDetails = styled.div`
   overflow: hidden;
 
   .training-date {
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.black[500]};
+    ${({ theme }) => theme.font(800, theme.colors.black[500])};
   }
 `
 
 const PostLocationTime = styled.div`
   ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.md)};
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.black[400]};
+  ${({ theme }) => theme.font(900, theme.colors.black[400])};
 
   .place {
     overflow: hidden;

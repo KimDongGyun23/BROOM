@@ -50,10 +50,8 @@ const ArmyButton = styled.button<{ $isSelected: boolean }>`
     $isSelected ? theme.colors.black[600] : 'white'};
   border: ${({ theme, $isSelected }) =>
     $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.black[100] : theme.colors.black[500]};
+  ${({ theme, $isSelected }) =>
+    theme.font(800, $isSelected ? theme.colors.black[100] : theme.colors.black[500])};
 
   &:disabled {
     opacity: 0.5;

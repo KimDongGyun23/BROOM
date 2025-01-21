@@ -17,10 +17,10 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
     <ProfileImage iconType={iconType} size="lg" />
     <ProfileInfo>
       <NameSubtitleContainer>
-        <span className="name">{name}</span>
-        <span className="subtitle">{subtitle}</span>
+        <span className="profile-name">{name}</span>
+        <span className="profile-subtitle">{subtitle}</span>
       </NameSubtitleContainer>
-      <Description>{description}</Description>
+      <p className="profile-description">{description}</p>
     </ProfileInfo>
   </ProfileContainer>
 )
@@ -67,26 +67,20 @@ const ProfileContainer = styled.div`
 
 const ProfileInfo = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
+
+  .profile-description {
+    ${({ theme }) => theme.font(800, theme.colors.black[400])};
+  }
 `
 
 const NameSubtitleContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
 
-  .name {
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
-    color: ${({ theme }) => theme.colors.black[600]};
+  .profile-name {
+    ${({ theme }) => theme.font(600, theme.colors.black[600])};
   }
 
-  .subtitle {
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.blue[500]};
+  .profile-subtitle {
+    ${({ theme }) => theme.font(800, theme.colors.blue[500])};
   }
-`
-
-const Description = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[400]};
 `

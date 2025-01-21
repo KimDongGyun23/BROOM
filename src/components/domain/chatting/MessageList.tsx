@@ -46,9 +46,7 @@ const Message = styled.div<{ $isMyMessage: boolean }>`
   .message-time {
     flex-shrink: 0;
     align-self: flex-end;
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.black[500]};
+    ${({ theme }) => theme.font(900, theme.colors.black[500])};
   }
 `
 

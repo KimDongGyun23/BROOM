@@ -23,13 +23,9 @@ const Container = styled.div`
 `
 
 const Label = styled.h4`
-  font-size: ${({ theme }) => theme.fontSize[400]};
-  line-height: ${({ theme }) => theme.lineHeight[400]};
-  color: ${({ theme }) => theme.colors.black[700]};
+  ${({ theme }) => theme.font(400, theme.colors.black[700])};
 `
 
 const StepIndicator = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.blue[500]};
+  ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `

@@ -74,9 +74,7 @@ const MainTextContainer = styled.div`
 
 const Text = styled.p`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
 `
 
 const Logo = styled.span`

@@ -106,9 +106,7 @@ const MainContent = styled.main`
   overflow-y: scroll;
 
   .main-title {
-    font-size: ${({ theme }) => theme.fontSize[500]};
-    line-height: ${({ theme }) => theme.lineHeight[500]};
-    color: ${({ theme }) => theme.colors.blue[500]};
+    ${({ theme }) => theme.font(500, theme.colors.blue[500])};
   }
 `
 
@@ -124,9 +122,7 @@ const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
   .content-label {
     margin-right: ${({ theme }) => theme.gap.xl};
     flex-shrink: 0;
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
-    color: ${({ theme }) => theme.colors.black[600]};
+    ${({ theme }) => theme.font(600, theme.colors.black[600])};
   }
 `
 
@@ -136,9 +132,7 @@ const ContentList = styled.ul<{ $isSingleItem: boolean }>`
   margin-left: ${({ $isSingleItem }) => ($isSingleItem ? '0' : '24px')};
 
   .content-item {
-    font-size: ${({ theme }) => theme.fontSize[800]};
-    line-height: ${({ theme }) => theme.lineHeight[800]};
-    color: ${({ theme }) => theme.colors.black[400]};
+    ${({ theme }) => theme.font(800, theme.colors.black[400])};
   }
 `
 

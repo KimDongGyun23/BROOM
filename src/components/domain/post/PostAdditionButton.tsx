@@ -28,7 +28,5 @@ const AddButton = styled.button`
 `
 
 const ButtonText = styled.p`
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[600]};
+  ${({ theme }) => theme.font(800, theme.colors.black[600])};
 `

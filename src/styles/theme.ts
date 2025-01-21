@@ -1,11 +1,10 @@
 import { borderRadius, boxShadow, gap } from './box'
 import { colors } from './colors'
 import { flexBox } from './flex'
-import { fontSize, lineHeight } from './font'
+import { font } from './font'
 
 const theme = {
-  fontSize,
-  lineHeight,
+  font,
   colors,
   borderRadius,
   boxShadow,

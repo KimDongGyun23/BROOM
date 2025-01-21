@@ -133,9 +133,7 @@ const InputContainer = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: ${({ theme }) => theme.gap.xs} 0;
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.black[300]};
@@ -168,9 +166,8 @@ const StyledTextArea = styled.textarea`
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   border: 1px solid ${({ theme }) => theme.colors.black[300]};
   padding: 10px ${({ theme }) => theme.gap.xl};
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[500]};
+
+  ${({ theme }) => theme.font(700, theme.colors.black[300])};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.black[300]};

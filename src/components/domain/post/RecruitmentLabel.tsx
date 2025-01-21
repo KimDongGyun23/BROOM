@@ -35,9 +35,7 @@ const ToggleButton = styled.button<{ $isChecked: boolean }>`
   padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`};
 
   .toggle-button-text {
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
-    color: ${({ theme, $isChecked }) =>
-      $isChecked ? theme.colors.blue[500] : theme.colors.black[400]};
+    ${({ theme, $isChecked }) =>
+      theme.font(600, $isChecked ? theme.colors.blue[500] : theme.colors.black[400])};
   }
 `

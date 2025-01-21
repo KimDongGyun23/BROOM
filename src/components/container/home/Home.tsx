@@ -90,23 +90,18 @@ const SectionHeader = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
 
   .title {
-    font-size: ${({ theme }) => theme.fontSize[600]};
-    line-height: ${({ theme }) => theme.lineHeight[600]};
+    ${({ theme }) => theme.font(600, theme.colors.black[600])};
   }
 `
 
 const ViewAllLink = styled(Link)`
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[500]};
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `
 
 const NoticeList = styled.ul`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme }) => theme.colors.black[400]};
+  ${({ theme }) => theme.font(800, theme.colors.black[400])};
 `
 
 const ServiceList = styled.ul`
@@ -119,9 +114,7 @@ const ServiceItem = styled(Link)`
   background-color: ${({ theme }) => theme.colors.black[400]};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   box-shadow: ${({ theme }) => theme.boxShadow.sm};
-  font-size: ${({ theme }) => theme.fontSize[700]};
-  line-height: ${({ theme }) => theme.lineHeight[700]};
-  color: ${({ theme }) => theme.colors.black[100]};
+  ${({ theme }) => theme.font(700, theme.colors.black[100])};
   transition: transform 0.2s;
 
   &:hover {

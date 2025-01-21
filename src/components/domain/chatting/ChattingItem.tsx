@@ -55,9 +55,7 @@ const NameSubtitleContainer = styled.div`
   .title {
     min-width: 0;
     overflow: hidden;
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.blue[500]};
+    ${({ theme }) => theme.font(900, theme.colors.blue[500])};
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -66,9 +64,7 @@ const NameSubtitleContainer = styled.div`
 const LastMessage = styled.p`
   min-width: 0;
   overflow: hidden;
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.black[700]};
+  ${({ theme }) => theme.font(900, theme.colors.black[700])};
   text-overflow: ellipsis;
   white-space: nowrap;
 `
@@ -76,7 +72,5 @@ const LastMessage = styled.p`
 const LastMessageTime = styled.p`
   flex-shrink: 0;
   margin-left: auto;
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `

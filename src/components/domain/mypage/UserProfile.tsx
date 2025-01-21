@@ -41,14 +41,10 @@ const UserInfoContainer = styled.div`
   ${({ theme }) => theme.flexBox('column')};
 
   .name {
-    font-size: ${({ theme }) => theme.fontSize[700]};
-    line-height: ${({ theme }) => theme.lineHeight[700]};
-    color: ${({ theme }) => theme.colors.blue[600]};
+    ${({ theme }) => theme.font(700, theme.colors.black[600])};
   }
 
   .year {
-    font-size: ${({ theme }) => theme.fontSize[900]};
-    line-height: ${({ theme }) => theme.lineHeight[900]};
-    color: ${({ theme }) => theme.colors.blue[500]};
+    ${({ theme }) => theme.font(900, theme.colors.black[500])};
   }
 `

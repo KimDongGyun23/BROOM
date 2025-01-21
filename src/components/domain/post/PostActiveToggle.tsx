@@ -28,8 +28,6 @@ const ToggleButton = styled.button`
 `
 
 const ToggleText = styled.p<{ $isChecked: boolean }>`
-  font-size: ${({ theme }) => theme.fontSize[900]};
-  line-height: ${({ theme }) => theme.lineHeight[900]};
-  color: ${({ theme, $isChecked }) =>
-    $isChecked ? theme.colors.blue[500] : theme.colors.black[300]};
+  ${({ theme, $isChecked }) =>
+    theme.font(900, $isChecked ? theme.colors.blue[500] : theme.colors.black[300])};
 `

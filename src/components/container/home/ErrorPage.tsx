@@ -51,11 +51,9 @@ const ContentWrapper = styled.div`
   }
 
   .error-message {
-    font-size: ${({ theme }) => theme.fontSize[700]};
-    line-height: ${({ theme }) => theme.lineHeight[700]};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
     text-align: center;
-    white-space: pre-wrap;
-    color: ${({ theme }) => theme.colors.black[500]};
+    white-space: pre-wrap;=
   }
 `
 
