@@ -1,5 +1,6 @@
 import { borderRadius, boxShadow, gap } from './box'
 import { colors } from './colors'
+import { flexBox } from './flex'
 import { fontSize, lineHeight } from './font'
 
 const theme = {
@@ -9,6 +10,8 @@ const theme = {
   borderRadius,
   boxShadow,
   gap,
-} as const
+  flexBox,
+}
 
 export default theme
+export type Theme = typeof theme
