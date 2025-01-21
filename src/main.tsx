@@ -6,8 +6,6 @@ import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme.ts'
 import App from './App.tsx'
 
-import './index.css'
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
