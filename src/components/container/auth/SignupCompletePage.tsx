@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { Button } from '@/components/view/Button'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 

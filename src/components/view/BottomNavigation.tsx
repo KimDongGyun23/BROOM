@@ -34,14 +34,11 @@ export const StyledNav = styled.nav`
 `
 
 export const NavigationList = styled.ul`
-  display: flex;
-  justify-content: space-between;
+  ${({ theme }) => theme.flexBox('row', undefined, 'space-between')};
   padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.xl} ${theme.gap.xxl}`};
   box-shadow: ${({ theme }) => theme.boxShadow.md};
 `
 
 export const NavigationItem = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
 `

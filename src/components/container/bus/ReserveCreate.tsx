@@ -82,9 +82,8 @@ export const ReserveCreate = () => {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100svh;
+  ${({ theme }) => theme.flexBox('column')};
+  height: 100%;
 `
 
 const Title = styled.h4`
@@ -96,9 +95,7 @@ const Title = styled.h4`
 
 const StyledForm = styled.form`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
   margin: 0 ${({ theme }) => theme.gap.xl} 2px;
   overflow-y: scroll;
 `

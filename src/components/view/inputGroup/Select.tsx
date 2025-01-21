@@ -8,32 +8,6 @@ import { MILITARY_BRANCHES } from '@/utils/constants'
 
 import { InputGroupContext } from '.'
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: ${({ theme }) => theme.gap.md};
-`
-
-const ArmyButton = styled.button<{ $isSelected: boolean }>`
-  flex-grow: 1;
-  height: 52px;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  padding: 0 ${({ theme }) => theme.gap.md};
-  background-color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.black[600] : 'white'};
-  border: ${({ theme, $isSelected }) =>
-    $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  color: ${({ theme, $isSelected }) =>
-    $isSelected ? theme.colors.black[100] : theme.colors.black[500]};
-
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`
-
 export const SortOfArmy = ({ ...rest }: ButtonHTMLAttributes<HTMLButtonElement>) => {
   const { watch, setValue } = useFormContext()
   const section = useContext(InputGroupContext)
@@ -62,3 +36,27 @@ export const SortOfArmy = ({ ...rest }: ButtonHTMLAttributes<HTMLButtonElement>)
     </ButtonContainer>
   )
 }
+
+const ButtonContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', undefined, 'space-between', theme.gap.md)};
+`
+
+const ArmyButton = styled.button<{ $isSelected: boolean }>`
+  flex-grow: 1;
+  height: 52px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  padding: 0 ${({ theme }) => theme.gap.md};
+  background-color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors.black[600] : 'white'};
+  border: ${({ theme, $isSelected }) =>
+    $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  color: ${({ theme, $isSelected }) =>
+    $isSelected ? theme.colors.black[100] : theme.colors.black[500]};
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`

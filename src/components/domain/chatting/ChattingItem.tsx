@@ -32,9 +32,7 @@ export const ChattingItem = ({
 )
 
 const ChattingProfileContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xl)};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
   padding: 0 ${({ theme }) => `${theme.gap.xl} ${theme.gap.lg}`};
   border-bottom-color: ${({ theme }) => theme.colors.black[200]};
@@ -42,17 +40,13 @@ const ChattingProfileContainer = styled.div`
 `
 
 const ChattingProfileInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.gap.sm};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
   min-width: 0;
   flex-grow: 1;
 `
 
 const NameSubtitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
 
   .opponent-name {
     flex-shrink: 0;

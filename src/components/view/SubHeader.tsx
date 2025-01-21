@@ -78,9 +78,7 @@ export const SubHeaderWithoutIcon = ({
 }
 
 const HeaderContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
   position: relative;
   padding: ${({ theme }) => theme.gap.xl};
 

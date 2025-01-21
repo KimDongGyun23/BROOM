@@ -2,10 +2,46 @@ import styled, { css } from 'styled-components'
 
 type Position = [top?: number, right?: number, bottom?: number, left?: number]
 
+type KebabItemProps = {
+  label: string
+  onClick: VoidFunction
+  isRed?: boolean
+}
+
+const KebabItem = ({ label, onClick, isRed, isLast }: KebabItemProps & { isLast: boolean }) => (
+  <li>
+    <KebabButton type="button" onClick={onClick} $isRed={isRed}>
+      {label}
+    </KebabButton>
+    {!isLast && <KebabDivider aria-hidden="true" />}
+  </li>
+)
+
+type KebabProps = {
+  items: KebabItemProps[]
+  position: Position
+}
+
+export const Kebab = ({ items, position }: KebabProps) => {
+  return (
+    <KebabNav $position={position} aria-label="추가 옵션">
+      <KebabList>
+        {items.map((item, index) => (
+          <KebabItem
+            key={item.label}
+            label={item.label}
+            onClick={item.onClick}
+            isRed={item.isRed}
+            isLast={index === items.length - 1}
+          />
+        ))}
+      </KebabList>
+    </KebabNav>
+  )
+}
+
 const KebabNav = styled.nav<{ $position: Position }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('column', 'center')};
   position: absolute;
   width: fit-content;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -45,41 +81,3 @@ const KebabDivider = styled.hr`
   background-color: ${({ theme }) => theme.colors.black[200]};
   border: none;
 `
-
-type KebabItemProps = {
-  label: string
-  onClick: VoidFunction
-  isRed?: boolean
-}
-
-const KebabItem = ({ label, onClick, isRed, isLast }: KebabItemProps & { isLast: boolean }) => (
-  <li>
-    <KebabButton type="button" onClick={onClick} $isRed={isRed}>
-      {label}
-    </KebabButton>
-    {!isLast && <KebabDivider aria-hidden="true" />}
-  </li>
-)
-
-type KebabProps = {
-  items: KebabItemProps[]
-  position: Position
-}
-
-export const Kebab = ({ items, position }: KebabProps) => {
-  return (
-    <KebabNav $position={position} aria-label="추가 옵션">
-      <KebabList>
-        {items.map((item, index) => (
-          <KebabItem
-            key={item.label}
-            label={item.label}
-            onClick={item.onClick}
-            isRed={item.isRed}
-            isLast={index === items.length - 1}
-          />
-        ))}
-      </KebabList>
-    </KebabNav>
-  )
-}

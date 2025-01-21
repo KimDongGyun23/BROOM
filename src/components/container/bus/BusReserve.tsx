@@ -94,17 +94,14 @@ export const BusReserve = () => {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 
 const MainContent = styled.main`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '24px')};
   margin: 0 ${({ theme }) => theme.gap.xl};
   flex-grow: 1;
-  gap: 24px;
   padding-bottom: 32px;
   overflow-y: scroll;
 
@@ -116,10 +113,13 @@ const MainContent = styled.main`
 `
 
 const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
-  display: flex;
-  flex-direction: ${({ $isSingleItem }) => ($isSingleItem ? 'row' : 'column')};
-  align-items: ${({ $isSingleItem }) => $isSingleItem && 'center'};
-  gap: ${({ $isSingleItem, theme }) => !$isSingleItem && theme.gap.lg};
+  ${({ theme, $isSingleItem }) =>
+    theme.flexBox(
+      $isSingleItem ? 'row' : 'column',
+      $isSingleItem ? 'center' : 'stretch',
+      undefined,
+      !$isSingleItem ? theme.gap.lg : undefined,
+    )};
 
   .content-label {
     margin-right: ${({ theme }) => theme.gap.xl};
@@ -131,9 +131,7 @@ const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
 `
 
 const ContentList = styled.ul<{ $isSingleItem: boolean }>`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.gap.sm};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
   list-style-type: ${({ $isSingleItem }) => ($isSingleItem ? 'none' : 'disc')};
   margin-left: ${({ $isSingleItem }) => ($isSingleItem ? '0' : '24px')};
 
@@ -145,7 +143,5 @@ const ContentList = styled.ul<{ $isSingleItem: boolean }>`
 `
 
 const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
 `

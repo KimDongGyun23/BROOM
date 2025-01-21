@@ -30,10 +30,8 @@ const Container = styled.div`
 `
 
 const ToggleButton = styled.button<{ $isChecked: boolean }>`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)}
   margin-left: auto;
-  gap: ${({ theme }) => theme.gap.xs};
   padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`};
 
   .toggle-button-text {

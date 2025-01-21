@@ -20,9 +20,8 @@ const signupMap = {
 } as const
 
 const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  height: 100svh;
+  ${({ theme }) => theme.flexBox('column')};
+  height: 100%;
 `
 
 export const SignupPage = () => {

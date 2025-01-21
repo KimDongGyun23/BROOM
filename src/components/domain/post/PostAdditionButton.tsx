@@ -16,14 +16,11 @@ export const PostAdditionButton = ({ onClick }: PostAdditionButtonProps) => {
 }
 
 const AddButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'center', theme.gap.xs)};
   position: absolute;
   bottom: 88px;
   left: 50%;
   transform: translateX(-50%);
-  gap: ${({ theme }) => theme.gap.xs};
   padding: 2px ${({ theme }) => theme.gap.xl} 2px 10px;
   border-radius: 16px;
   border: 2px solid ${({ theme }) => theme.colors.black[100]};

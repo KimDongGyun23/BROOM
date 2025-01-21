@@ -8,17 +8,12 @@ import { Button } from '@/components/view/Button'
 import { useTouchEvent } from '@/hooks/useTouchEvent'
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('column', 'center')};
   height: 100%;
 `
 
 const CarouselContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('column', 'center', 'center')};
   flex: 1;
 `
 

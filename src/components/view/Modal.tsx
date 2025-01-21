@@ -81,9 +81,7 @@ export const ModalWithTwoButton = ({
 )
 
 const ModalOverlay = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
   position: fixed;
   inset: 0;
   z-index: 20;
@@ -99,11 +97,9 @@ const ModalBackdrop = styled.button`
 `
 
 const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
   position: absolute;
   min-width: 310px;
-  gap: ${({ theme }) => theme.gap.xl};
   border-radius: ${({ theme }) => theme.borderRadius.lg};
   background-color: white;
   padding: 10px ${({ theme }) => theme.gap.xl};

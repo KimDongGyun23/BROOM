@@ -83,8 +83,7 @@ const Title = styled.h4`
 `
 
 const InputContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
 `
 
 const ReservationStateGrid = styled.div`
@@ -118,8 +117,7 @@ const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
 `
 
 const NoticeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   margin-top: ${({ theme }) => theme.gap.xxl};
 
   .notice-text {

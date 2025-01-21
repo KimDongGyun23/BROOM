@@ -33,18 +33,14 @@ export const MessageList = ({ opponent, iconType }: MessageListProps) => {
 
 const Container = styled.main`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
   margin: 0 ${({ theme }) => theme.gap.xl};
-  gap: ${({ theme }) => theme.gap.xl};
   padding: ${({ theme }) => theme.gap.xl} 0;
   overflow-y: scroll;
 `
 
 const Message = styled.div<{ $isMyMessage: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
   flex-direction: ${({ $isMyMessage }) => ($isMyMessage ? 'row-reverse' : 'row')};
 
   .message-time {

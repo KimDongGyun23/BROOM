@@ -9,10 +9,7 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.md};
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, theme.gap.md)};
 `
 
 const Logo = styled.h1`

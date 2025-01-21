@@ -53,8 +53,7 @@ const ScrollContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   padding: 0 ${({ theme }) => theme.gap.xl};
 
   .title {
@@ -66,22 +65,16 @@ const ContentContainer = styled.div`
 `
 
 const ContentList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '24px')};
 `
 
 const ContentItemContainer = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')}
 `
 
 const ContentItem = styled.li`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
   width: 100%;
-  gap: ${({ theme }) => theme.gap.xs};
 
   .content-item-label {
     font-size: ${({ theme }) => theme.fontSize[800]};

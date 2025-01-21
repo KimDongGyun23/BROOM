@@ -70,17 +70,14 @@ export const TeamEdit = () => {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 
 const TeamFormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
   margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.xl};
-  padding: ${({ theme }) => theme.gap.xl}
-  gap: ${({ theme }) => theme.gap.xxl};
+  padding: ${({ theme }) => theme.gap.xl};
   overflow-y: scroll;
 `
 

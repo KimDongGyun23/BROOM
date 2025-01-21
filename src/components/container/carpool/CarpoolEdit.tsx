@@ -85,17 +85,14 @@ export const CarpoolEdit = () => {
 }
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 
 const CarpoolFormContainer = styled.form`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
   margin: ${({ theme }) => theme.gap.xxl} 0 ${({ theme }) => theme.gap.xl};
   padding: ${({ theme }) => theme.gap.xl}
-  gap: ${({ theme }) => theme.gap.xxl};
   overflow-y: scroll;
 `
 
@@ -106,6 +103,5 @@ const GridContainer = styled.div`
 `
 
 const InputContainerWithGap = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.gap.xxl};
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.xxl)};
 `

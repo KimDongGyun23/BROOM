@@ -1,7 +1,7 @@
 export const flexBox = (
   direction = 'row',
-  alignItems = 'center',
-  justifyContent = 'center',
+  alignItems = 'stretch',
+  justifyContent = 'flex-start',
   gap = '0',
 ) => `
     display: flex;

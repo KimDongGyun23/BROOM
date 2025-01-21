@@ -16,10 +16,8 @@ export const useInputGroupContext = () => {
 }
 
 const Section = styled.section`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '10px')};
   width: 100%;
-  gap: 10px;
 `
 
 type ContainerProps = {

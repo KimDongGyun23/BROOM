@@ -54,8 +54,7 @@ export const MyPost = () => {
 }
 
 const MainContainer = styled.main`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   height: 100%;
 `
 

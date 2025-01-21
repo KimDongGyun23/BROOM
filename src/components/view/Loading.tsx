@@ -12,9 +12,7 @@ export const Loading = () => {
 }
 
 const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
   width: 100%;
   height: 100%;
 `

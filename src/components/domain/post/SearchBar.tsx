@@ -88,20 +88,16 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 }
 
 const SearchForm = styled.form`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.md)};
   margin: 0 ${({ theme }) => theme.gap.xl};
-  gap: ${({ theme }) => theme.gap.md};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   border: 1px solid ${({ theme }) => theme.colors.black[200]};
   padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};
 `
 
 const FilterButton = styled.button`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
   flex-shrink: 0;
-  gap: ${({ theme }) => theme.gap.xs};
 
   .filter-label {
     flex-shrink: 0;

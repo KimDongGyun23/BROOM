@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 
 export const MessageBoxForm = styled.form`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.md};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.md)};
   background-color: white;
   padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`} 32px;
 `
 
 export const MessageInputContainer = styled.div`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
   flex-grow: 1;
-  gap: ${({ theme }) => theme.gap.xs};
   background-color: ${({ theme }) => theme.colors.black[100]};
   border-radius: ${({ theme }) => theme.borderRadius.full};
   padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.md} ${theme.gap.md} ${theme.gap.xl}`};

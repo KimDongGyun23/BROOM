@@ -23,10 +23,8 @@ const Container = styled.div`
 `
 
 const ToggleButton = styled.button`
-  display: flex;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
   margin-left: auto;
-  gap: ${({ theme }) => theme.gap.xs};
 `
 
 const ToggleText = styled.p<{ $isChecked: boolean }>`

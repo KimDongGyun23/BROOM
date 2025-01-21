@@ -10,44 +10,6 @@ import { useLogout, useUserDeletion, useUserProfile } from '@/services/query/use
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { clearSessionStorage, getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`
-
-const ScrollContainer = styled.div`
-  flex-direction: column;
-  overflow-y: scroll;
-`
-
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 ${({ theme }) => theme.gap.xl} 24px;
-  gap: 28px;
-`
-
-const Divider = styled.hr`
-  background-color: ${({ theme }) => theme.colors.black[200]};
-`
-
-const ActionContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 3svh auto 0;
-  padding: 0 ${({ theme }) => theme.gap.xs};
-`
-
-const ActionButton = styled.button<{ $isLogout?: boolean }>`
-  font-size: ${({ theme }) => theme.fontSize[800]};
-  line-height: ${({ theme }) => theme.lineHeight[800]};
-  padding: 0 ${({ theme }) => theme.gap.xl};
-  color: ${({ theme, $isLogout }) => ($isLogout ? theme.colors.black[600] : theme.colors.error)};
-  border-right: ${({ theme, $isLogout }) =>
-    $isLogout ? `1px solid ${theme.colors.black[400]}` : 'none'};
-`
-
 const MYPAGE_PROFILE_SECTIONS = [
   {
     title: '내 정보',
@@ -129,3 +91,37 @@ export const Mypage = () => {
     </Container>
   )
 }
+
+const Container = styled.div`
+  ${({ theme }) => theme.flexBox('column')};
+  height: 100%;
+`
+
+const ScrollContainer = styled.div`
+  flex-direction: column;
+  overflow-y: scroll;
+`
+
+const ContentContainer = styled.div`
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
+  margin: 0 ${({ theme }) => theme.gap.xl} 24px;
+`
+
+const Divider = styled.hr`
+  background-color: ${({ theme }) => theme.colors.black[200]};
+`
+
+const ActionContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center')};
+  margin: 3svh auto 0;
+  padding: 0 ${({ theme }) => theme.gap.xs};
+`
+
+const ActionButton = styled.button<{ $isLogout?: boolean }>`
+  font-size: ${({ theme }) => theme.fontSize[800]};
+  line-height: ${({ theme }) => theme.lineHeight[800]};
+  padding: 0 ${({ theme }) => theme.gap.xl};
+  color: ${({ theme, $isLogout }) => ($isLogout ? theme.colors.black[600] : theme.colors.error)};
+  border-right: ${({ theme, $isLogout }) =>
+    $isLogout ? `1px solid ${theme.colors.black[400]}` : 'none'};
+`

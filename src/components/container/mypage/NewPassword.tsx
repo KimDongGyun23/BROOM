@@ -64,9 +64,7 @@ export const NewPassword = () => {
 
 const StyledForm = styled.form`
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
   overflow-y: scroll;
   margin: 28px ${({ theme }) => theme.gap.xl} ${({ theme }) => theme.gap.md};
-  gap: 28px;
 `

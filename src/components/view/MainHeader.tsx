@@ -27,9 +27,7 @@ export const MainHeader = () => {
 }
 
 const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
   position: relative;
   height: 80px;
   margin: 0 ${({ theme }) => theme.gap.xl};

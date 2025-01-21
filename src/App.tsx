@@ -5,9 +5,7 @@ import { Splash } from './components/container/home/Splash'
 import { RouterComponent } from './components/view/RouterComponent'
 
 const AppContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
 `
 
 const ContentWrapper = styled.div`

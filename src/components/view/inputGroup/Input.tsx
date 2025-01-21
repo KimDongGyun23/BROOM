@@ -123,9 +123,7 @@ export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) 
 }
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
   width: 100%;
   padding: ${({ theme }) => theme.gap.lg};
   border-radius: ${({ theme }) => theme.borderRadius.sm};

@@ -10,20 +10,6 @@ import { useAccountForm } from '@/hooks/useForm'
 import { useAccountUpdate } from '@/services/service/useAccountUpdate'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
-const FormContainer = styled.form`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  margin: 28px ${({ theme }) => `${theme.gap.xl} ${theme.gap.md}`};
-  gap: 28px;
-  overflow-y: scroll;
-`
-
-const InputContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.gap.xl};
-`
-
 type AccountFormType = {
   isEditMode: boolean
 }
@@ -91,3 +77,15 @@ export const AccountInfo = () => {
     </>
   )
 }
+
+const FormContainer = styled.form`
+  flex-grow: 1;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
+  margin: 28px ${({ theme }) => `${theme.gap.xl} ${theme.gap.md}`};
+  overflow-y: scroll;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.gap.xl};
+`

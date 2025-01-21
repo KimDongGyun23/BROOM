@@ -55,18 +55,13 @@ export const PostList = ({ items, to }: PostListProps) => {
 }
 
 const PostItemLink = styled(Link)`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '10px')};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
   padding: 24px ${({ theme }) => theme.gap.lg};
 `
 
 const PostItemHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', theme.gap.lg)};
 
   .title {
     font-size: ${({ theme }) => theme.fontSize[600]};
@@ -85,18 +80,13 @@ const PostItemHeader = styled.div`
 `
 
 const PostContent = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', theme.gap.lg)};
   text-align: left;
 `
 
 const PostDetails = styled.div`
-  display: flex;
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
   flex-grow: 1;
-  gap: ${({ theme }) => theme.gap.xs};
   overflow: hidden;
 
   .training-date {
@@ -107,8 +97,7 @@ const PostDetails = styled.div`
 `
 
 const PostLocationTime = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.gap.md};
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.md)};
   font-size: ${({ theme }) => theme.fontSize[900]};
   line-height: ${({ theme }) => theme.lineHeight[900]};
   color: ${({ theme }) => theme.colors.black[400]};
