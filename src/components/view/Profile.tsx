@@ -62,7 +62,7 @@ export const ChattingRoomProfile = ({
 const ProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
+  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
 `
 
 const ProfileInfo = styled.div`

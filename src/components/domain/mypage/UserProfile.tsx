@@ -24,11 +24,10 @@ export const UserProfile = ({ username, serviceYear, iconType }: UserProfileProp
 const UserProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 'auto', 'xxl', 'auto')};
+  ${({ theme }) => theme.border('chain', 'chain', 'chain', 'chain')};
   ${({ theme }) => theme.borderRadius('chain')};
-  ${({ theme }) => theme.margin('md', 'xxl', 'md', 'lg')};
   position: relative;
   width: fit-content;
-  border: 10px solid ${({ theme }) => theme.colors.black[200]};
 `
 
 const ChainImage = styled.img`

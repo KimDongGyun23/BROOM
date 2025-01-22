@@ -17,14 +17,20 @@ export const PostAdditionButton = ({ onClick }: PostAdditionButtonProps) => {
 
 const AddButton = styled.button`
   ${({ theme }) => theme.flexBox('row', 'center', 'center', 'xs')};
+  ${({ theme }) => theme.padding('xs', 'lg', 'xs', 'md')};
   ${({ theme }) => theme.borderRadius('lg')};
   ${({ theme }) => theme.boxShadow('sm')};
+  ${({ theme }) =>
+    theme.border(
+      'post-addition-button',
+      'post-addition-button',
+      'post-addition-button',
+      'post-addition-button',
+    )};
   position: absolute;
   bottom: 88px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 2px ${({ theme }) => theme.gap.xl} 2px 10px;
-  border: 2px solid ${({ theme }) => theme.colors.black[100]};
 `
 
 const ButtonText = styled.p`

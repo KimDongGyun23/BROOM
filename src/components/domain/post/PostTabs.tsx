@@ -40,9 +40,8 @@ const Container = styled.ul`
 
 const TabButton = styled.button<{ $isActive: boolean }>`
   ${({ theme }) => theme.padding(0, 0, 'md', 0)};
-  flex-grow: 1;
-  border-bottom: 2px solid
-    ${({ theme, $isActive }) => ($isActive ? theme.colors.black[500] : theme.colors.black[200])};
+  ${({ theme, $isActive }) => theme.border(0, 0, $isActive ? 'tab-active' : 'tab-nonactive', 0)};
   ${({ theme, $isActive }) =>
     theme.font(700, $isActive ? theme.colors.black[600] : theme.colors.black[300])};
+  flex-grow: 1;
 `

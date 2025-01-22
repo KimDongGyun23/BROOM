@@ -1,4 +1,10 @@
-import type { BorderRadiusType, BoxShadowType, MarginType, PaddingType } from './styles/box'
+import type {
+  BorderRadiusType,
+  BorderType,
+  BoxShadowType,
+  MarginType,
+  PaddingType,
+} from './styles/box'
 import type { ColorsType } from './styles/colors'
 import type { FlexBoxType } from './styles/flex'
 import type { FontType } from './styles/font'
@@ -11,6 +17,7 @@ declare module 'styled-components' {
     boxShadow: BoxShadowType
     padding: PaddingType
     colors: ColorsType
+    border: BorderType
     flexBox: FlexBoxType
     font: FontType
     margin: MarginType

@@ -86,10 +86,9 @@ const InputContainer = styled.div`
 
 const ReservationStateGrid = styled.div`
   ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
+  ${({ theme }) => theme.border('divider', 0, 'divider', 0)};
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px solid ${({ theme }) => theme.colors.black[200]};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
   text-align: center;
 
   .reservation-state-label {

@@ -9,13 +9,12 @@ const AppContainer = styled.div`
 `
 
 const ContentWrapper = styled.div`
+  ${({ theme }) => theme.border(0, 'divider', 0, 'divider')}
   position: relative;
   height: 100svh;
   width: 100%;
   min-width: 320px;
   max-width: 450px;
-  border-left: 1px solid ${({ theme }) => theme.colors.black[100]};
-  border-right: 1px solid ${({ theme }) => theme.colors.black[100]};
   overflow-y: scroll;
 `
 

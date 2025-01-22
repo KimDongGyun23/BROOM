@@ -7,9 +7,9 @@ export const ValidateContainer = styled.div`
 `
 
 export const FormContainer = styled.div`
-  flex-grow: 1;
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('sign-up-form-top', 'container', 'container', 'container')};
+  flex-grow: 1;
   overflow-y: scroll;
 `
 
@@ -41,7 +41,7 @@ export const AgreementToggleButton = styled.button<{ $isChecked: boolean }>`
 `
 
 export const ViewButton = styled.button`
-  margin-left: auto;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[400]};
   ${({ theme }) => theme.font(800, theme.colors.black[400])};
+  ${({ theme }) => theme.margin(0, 0, 0, 'auto')};
+  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
 `

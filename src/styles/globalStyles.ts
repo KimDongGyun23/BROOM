@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
+import { colors } from './colors'
+
 const GlobalStyles = createGlobalStyle`
 	@font-face {
     font-family: Jalnan2;
@@ -84,8 +86,13 @@ const GlobalStyles = createGlobalStyle`
 		font: inherit;
 		border: none;
 		outline: none;
+		
 		&:focus {
 			outline: none;
+		}
+
+		&::placeholder {
+			color: ${colors.black[300]};
 		}
 	}
 

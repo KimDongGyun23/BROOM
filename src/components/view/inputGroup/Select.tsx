@@ -43,6 +43,13 @@ const ButtonContainer = styled.div`
 
 const ArmyButton = styled.button<{ $isSelected: boolean }>`
   ${({ theme }) => theme.padding(0, 'sm', 0, 'sm')};
+  ${({ theme, $isSelected }) =>
+    theme.border(
+      $isSelected ? 0 : 'input',
+      $isSelected ? 0 : 'input',
+      $isSelected ? 0 : 'input',
+      $isSelected ? 0 : 'input',
+    )};
   ${({ theme }) => theme.borderRadius('lg')};
   ${({ theme, $isSelected }) =>
     theme.font(800, $isSelected ? theme.colors.black[100] : theme.colors.black[500])};
@@ -50,8 +57,6 @@ const ArmyButton = styled.button<{ $isSelected: boolean }>`
   height: 52px;
   background-color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.black[600] : 'white'};
-  border: ${({ theme, $isSelected }) =>
-    $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
 
   &:disabled {
     opacity: 0.5;

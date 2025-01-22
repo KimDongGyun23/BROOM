@@ -44,15 +44,15 @@ const Message = styled.div<{ $isMyMessage: boolean }>`
   flex-direction: ${({ $isMyMessage }) => ($isMyMessage ? 'row-reverse' : 'row')};
 
   .message-time {
+    ${({ theme }) => theme.font(900, theme.colors.black[500])};
     flex-shrink: 0;
     align-self: flex-end;
-    ${({ theme }) => theme.font(900, theme.colors.black[500])};
   }
 `
 
 const Bubble = styled.div<{ isMyMessage: boolean }>`
   ${({ theme }) => theme.borderRadius('bubble')};
-  padding: 10px 16px;
+  ${({ theme }) => theme.padding('bubble-y', 'bubble-x', 'bubble-y', 'bubble-x')};
   background-color: ${({ theme, isMyMessage }) =>
     isMyMessage ? theme.colors.black[500] : theme.colors.black[100]};
   color: ${({ theme, isMyMessage }) =>

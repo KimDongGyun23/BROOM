@@ -34,8 +34,7 @@ export const ChattingItem = ({
 const ChattingProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
-  border-bottom-color: ${({ theme }) => theme.colors.black[200]};
+  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
   width: 100%;
 `
 
@@ -62,16 +61,15 @@ const NameSubtitleContainer = styled.div`
 `
 
 const LastMessage = styled.p`
+  ${({ theme }) => theme.font(900, theme.colors.black[700])};
   min-width: 0;
   overflow: hidden;
-  ${({ theme }) => theme.font(900, theme.colors.black[700])};
   text-overflow: ellipsis;
   white-space: nowrap;
 `
 
 const LastMessageTime = styled.p`
-  flex-shrink: 0;
-  margin-left: auto;
   ${({ theme }) => theme.margin(0, 0, 0, 'auto')};
   ${({ theme }) => theme.font(900, theme.colors.black[500])};
+  flex-shrink: 0;
 `

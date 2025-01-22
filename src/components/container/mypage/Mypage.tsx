@@ -98,7 +98,7 @@ const Container = styled.div`
 `
 
 const ScrollContainer = styled.div`
-  flex-direction: column;
+  ${({ theme }) => theme.flexBox('column')};
   overflow-y: scroll;
 `
 
@@ -119,8 +119,7 @@ const ActionContainer = styled.div`
 
 const ActionButton = styled.button<{ $isLogout?: boolean }>`
   ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme, $isLogout }) => theme.border(0, $isLogout ? 'underline' : 0, 0, 0)};
   ${({ theme, $isLogout }) =>
     theme.font(800, $isLogout ? theme.colors.black[600] : theme.colors.error)};
-  border-right: ${({ theme, $isLogout }) =>
-    $isLogout ? `1px solid ${theme.colors.black[400]}` : 'none'};
 `

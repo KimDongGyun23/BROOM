@@ -95,7 +95,7 @@ const SectionHeader = styled.div`
 `
 
 const ViewAllLink = styled(Link)`
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
   ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `
 
@@ -110,10 +110,10 @@ const ServiceList = styled.ul`
 
 const ServiceItem = styled(Link)`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
+  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'xxl')};
   ${({ theme }) => theme.borderRadius('lg')};
   ${({ theme }) => theme.boxShadow('sm')};
   ${({ theme }) => theme.font(700, theme.colors.black[100])};
-  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'xxl')};
   background-color: ${({ theme }) => theme.colors.black[400]};
   transition: transform 0.2s;
 

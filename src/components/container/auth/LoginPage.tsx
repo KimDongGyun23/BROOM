@@ -58,7 +58,7 @@ const Logo = styled.h1`
 `
 
 const StyledForm = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '22px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
 `
 
@@ -73,7 +73,7 @@ const ErrorMessage = styled.p`
 `
 
 const SignUpLink = styled(Link)`
+  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
   display: inline-block;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.black[500]};
   color: ${({ theme }) => theme.colors.black[500]};
 `

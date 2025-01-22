@@ -47,6 +47,7 @@ const KebabNav = styled.nav<{ $position: Position }>`
   ${({ theme }) => theme.padding('sm', 'md', 'sm', 'md')};
   position: absolute;
   width: fit-content;
+  height: fit-content;
   background-color: white;
   ${({ $position: [top, right, bottom, left] }) => css`
     top: ${top}px;
@@ -67,9 +68,8 @@ const KebabButton = styled.button<{ $isRed?: boolean }>`
 `
 
 const KebabDivider = styled.hr`
-  width: 100%;
-  height: 1px;
   ${({ theme }) => theme.margin('md', 0, 'md', 0)};
+  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
+  width: 100%;
   background-color: ${({ theme }) => theme.colors.black[200]};
-  border: none;
 `

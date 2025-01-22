@@ -90,9 +90,9 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 const SearchForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  ${({ theme }) => theme.borderRadius('sm')};
   ${({ theme }) => theme.padding('sm', 'md', 'sm', 'lg')};
-  border: 1px solid ${({ theme }) => theme.colors.black[200]};
+  ${({ theme }) => theme.border('input', 'input', 'input', 'input')};
+  ${({ theme }) => theme.borderRadius('sm')};
 `
 
 const FilterButton = styled.button`
@@ -100,20 +100,12 @@ const FilterButton = styled.button`
   flex-shrink: 0;
 
   .filter-label {
-    flex-shrink: 0;
     ${({ theme }) => theme.font(800, theme.colors.black[500])};
+    flex-shrink: 0;
   }
 `
 
 const SearchInput = styled.input`
-  flex: 1;
   ${({ theme }) => theme.font(800, theme.colors.black[500])};
-
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.black[300]};
-  }
-
-  &:focus {
-    outline: none;
-  }
+  flex: 1;
 `
