@@ -3,13 +3,17 @@ import { Client } from '@stomp/stompjs'
 
 import { api } from '@/services/query'
 import { useMessageActions } from '@/stores/message'
+import { useActiveTab } from '@/stores/postTab'
+import { TAB_LIST } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
 // import { useMessageActions } from 'store/chatData'
 
-export const useWebSocket = (roomId: string | undefined, type: 'carpool' | 'team') => {
+export const useWebSocket = (roomId: string | undefined) => {
   const client = useRef<Client | null>(null)
+  const activeTab = useActiveTab()
+  const pathByActiveTab = TAB_LIST.find((tab) => tab.label === activeTab)?.key
   const { addMessage } = useMessageActions()
 
   const token = api.getAccessToken() as string
@@ -23,7 +27,7 @@ export const useWebSocket = (roomId: string | undefined, type: 'carpool' | 'team
       },
       onConnect: () => {
         client.current?.subscribe(
-          `/exchange/chat.${type}.exchange/chat.${type}.room.${roomId}`,
+          `/exchange/chat.${pathByActiveTab}.exchange/chat.${pathByActiveTab}.room.${roomId}`,
           (message) => {
             addMessage(JSON.parse(message.body))
           },
@@ -42,7 +46,7 @@ export const useWebSocket = (roomId: string | undefined, type: 'carpool' | 'team
   const sendMessage = (content: string) => {
     if (client.current && client.current.connected) {
       client.current.publish({
-        destination: `/pub/chat.${type}.message`,
+        destination: `/pub/chat.${pathByActiveTab}.message`,
         headers: { Authorization: token },
         body: JSON.stringify({
           chatRoomId: roomId,

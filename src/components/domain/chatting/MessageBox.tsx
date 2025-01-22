@@ -4,16 +4,13 @@ import styled from 'styled-components'
 
 import { AdditionIcon, SendingIcon } from '@/components/view/icons/NonActiveIcons'
 import { useWebSocket } from '@/hooks/useWebsocket'
-import type { TabKey } from '@/utils/constants'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 export const MessageBox = () => {
   const { id: roomId } = useParams()
-  const currentTab = getSessionStorageItem(SESSION_KEYS.POST_TAB) as TabKey
 
   const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
   const { register, handleSubmit, reset } = formMethod
-  const { client, sendMessage } = useWebSocket(roomId, currentTab)
+  const { client, sendMessage } = useWebSocket(roomId)
 
   const handleSendMessage = ({ message }: { message: string }) => {
     if (message.length !== 0) {

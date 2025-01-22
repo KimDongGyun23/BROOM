@@ -1,4 +1,4 @@
-const TAB_LIST = [
+export const TAB_LIST = [
   { label: '승차 공유', key: 'carpool' },
   { label: '팀원 모집', key: 'team' },
 ] as const
