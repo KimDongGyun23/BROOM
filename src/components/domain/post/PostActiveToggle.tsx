@@ -18,13 +18,13 @@ export const PostActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => 
 
 const Container = styled.div`
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  padding: ${({ theme }) => theme.gap.md} 0;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
+  ${({ theme }) => theme.padding('sm', 0, 'sm', 0)};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
 `
 
 const ToggleButton = styled.button`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
-  ${({ theme }) => theme.margin(0, 'container', 0, 'auto')};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
+  ${({ theme }) => theme.margin(0, 0, 0, 'auto')};
 `
 
 const ToggleText = styled.p<{ $isChecked: boolean }>`

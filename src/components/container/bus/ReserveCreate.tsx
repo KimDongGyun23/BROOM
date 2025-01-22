@@ -93,7 +93,7 @@ const Title = styled.h4`
 
 const StyledForm = styled.form`
   flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
   ${({ theme }) => theme.margin(0, 'container', 'xs', 'container')};
   overflow-y: scroll;
 `

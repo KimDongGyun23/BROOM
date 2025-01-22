@@ -34,13 +34,13 @@ export const PostTabs = ({ currentTab, onTabClick }: PostTabsProps) => {
 }
 
 const Container = styled.ul`
+  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
   display: flex;
-  padding: ${({ theme }) => `${theme.gap.lg} ${theme.gap.xl}`};
 `
 
 const TabButton = styled.button<{ $isActive: boolean }>`
+  ${({ theme }) => theme.padding(0, 0, 'md', 0)};
   flex-grow: 1;
-  padding-bottom: ${({ theme }) => theme.gap.lg};
   border-bottom: 2px solid
     ${({ theme, $isActive }) => ($isActive ? theme.colors.black[500] : theme.colors.black[200])};
   ${({ theme, $isActive }) =>

@@ -10,8 +10,8 @@ export const EmptyMessage = ({ label }: EmptyMessageProps) => {
 
 const StyledEmptyMessage = styled.p`
   ${({ theme }) => theme.flexBox('row', 'center', 'center')};
+  ${({ theme }) => theme.padding('xxl', 'xxl', 'xxl', 'xxl')};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
   width: 100%;
   height: 100%;
-  padding: ${({ theme }) => theme.gap.xxl};
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
 `

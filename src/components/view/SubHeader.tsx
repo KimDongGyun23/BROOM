@@ -79,8 +79,8 @@ export const SubHeaderWithoutIcon = ({
 
 const HeaderContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
+  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
   position: relative;
-  padding: ${({ theme }) => theme.gap.xl};
 
   .null-icon {
     width: 24px;
@@ -88,14 +88,14 @@ const HeaderContainer = styled.div`
 `
 
 const Title = styled.h2`
+  ${({ theme }) => theme.font(500, theme.colors.black[700])};
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  ${({ theme }) => theme.font(500, theme.colors.black[700])};
   text-align: center;
 `
 
 const TextButton = styled.button`
-  padding-right: 2px;
+  ${({ theme }) => theme.padding(0, 'xs', 0, 0)};
   ${({ theme }) => theme.font(700, theme.colors.black[400])};
 `

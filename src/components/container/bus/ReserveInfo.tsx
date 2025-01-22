@@ -81,25 +81,25 @@ const Title = styled.h4`
 `
 
 const InputContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
 `
 
 const ReservationStateGrid = styled.div`
+  ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
   display: grid;
   grid-template-columns: 1fr 1fr;
-  ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
   border-top: 1px solid ${({ theme }) => theme.colors.black[200]};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
   text-align: center;
 
   .reservation-state-label {
-    padding: 10px ${({ theme }) => `${theme.gap.xl}`};
+    ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
     color: ${({ theme }) => theme.colors.black[600]};
   }
 `
 
 const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
-  padding: 10px ${({ theme }) => `${theme.gap.xl}`};
+  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
   color: ${({ theme, $state }) => {
     switch ($state) {
       case BUS_RESERVATION_STATES.COMPLETED:

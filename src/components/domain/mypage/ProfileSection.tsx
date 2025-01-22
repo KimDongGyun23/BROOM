@@ -20,7 +20,7 @@ export const ProfileSection = ({ title, items }: ProfileSectionProps) => (
 )
 
 const Container = styled.section`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
 `
 
 const SectionTitle = styled.h6`
@@ -28,7 +28,7 @@ const SectionTitle = styled.h6`
 `
 
 const SectionList = styled.ul`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
 `
 
 const SectionLink = styled(Link)`

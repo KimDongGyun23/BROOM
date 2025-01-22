@@ -80,11 +80,11 @@ export const AccountInfo = () => {
 
 const FormContainer = styled.form`
   flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '28px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
   ${({ theme }) => theme.margin('container', 'container', 'container', 'container')};
   overflow-y: scroll;
 `
 
 const InputContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.xl)}
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, 'lg')}
 `

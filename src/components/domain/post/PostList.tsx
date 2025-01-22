@@ -55,13 +55,13 @@ export const PostList = ({ items, to }: PostListProps) => {
 }
 
 const PostItemLink = styled(Link)`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '10px')};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.black[200]};
-  padding: 24px ${({ theme }) => theme.gap.lg};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
+  ${({ theme }) => theme.padding('xl', 'md', 'xl', 'md')};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
 `
 
 const PostItemHeader = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', 'md')};
 
   .title {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};
@@ -76,12 +76,12 @@ const PostItemHeader = styled.div`
 `
 
 const PostContent = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', 'md')};
   text-align: left;
 `
 
 const PostDetails = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
   flex-grow: 1;
   overflow: hidden;
 
@@ -91,7 +91,7 @@ const PostDetails = styled.div`
 `
 
 const PostLocationTime = styled.div`
-  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.md)};
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, 'sm')};
   ${({ theme }) => theme.font(900, theme.colors.black[400])};
 
   .place {
@@ -102,7 +102,7 @@ const PostLocationTime = styled.div`
 `
 
 const PostSection = styled.section`
+  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
   flex-grow: 1;
-  padding: 0 ${({ theme }) => theme.gap.xl};
   overflow-y: scroll;
 `

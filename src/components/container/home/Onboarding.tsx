@@ -32,25 +32,24 @@ const CarouselItem = styled.div`
 `
 
 const DotContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.md)};
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, 'sm')};
   ${({ theme }) => theme.margin('xxl', 0, 0, 0)};
 `
 
 const Dot = styled.button<{ $isActive: boolean }>`
   width: ${({ $isActive }) => ($isActive ? '24px' : '8px')};
   height: 8px;
-  border-radius: ${({ theme, $isActive }) =>
-    $isActive ? theme.borderRadius.lg : theme.borderRadius.full};
   opacity: ${({ $isActive }) => ($isActive ? '0.9' : '0.5')};
   background-color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.black[600] : theme.colors.black[200]};
+  ${({ theme, $isActive }) => theme.borderRadius($isActive ? 'lg' : 'full')};
 `
 
 const ButtonContainer = styled.div`
+  ${({ theme }) => theme.margin('xs', 0, 'xxl', 0)};
+  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
   flex-shrink: 0;
   width: 100%;
-  ${({ theme }) => theme.margin('xs', 0, 'xxl', 0)};
-  padding: 0 ${({ theme }) => theme.gap.xl};
 `
 
 const StyledButton = styled(Button)`

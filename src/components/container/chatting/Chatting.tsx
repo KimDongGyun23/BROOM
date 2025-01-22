@@ -98,7 +98,7 @@ const Container = styled.div`
 
 const MainContent = styled.main`
   flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
   ${({ theme }) => theme.margin('container', 0, 'container', 0)};
   overflow-y: scroll;
 `

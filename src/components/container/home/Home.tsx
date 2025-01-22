@@ -73,17 +73,17 @@ const Container = styled.div`
 `
 
 const Main = styled.main`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '6px')}
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')}
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.black[100]};
   overflow-y: scroll;
 `
 
 const Section = styled.section`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
+  ${({ theme }) => theme.boxShadow('sm')};
+  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
   background-color: white;
-  padding: ${({ theme }) => theme.gap.xl};
-  box-shadow: ${({ theme }) => theme.boxShadow.sm};
 
   .title {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};
@@ -100,21 +100,21 @@ const ViewAllLink = styled(Link)`
 `
 
 const NoticeList = styled.ul`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
   ${({ theme }) => theme.font(800, theme.colors.black[400])};
 `
 
 const ServiceList = styled.ul`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
 `
 
 const ServiceItem = styled(Link)`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
-  padding: 18px ${({ theme }) => theme.gap.lg} 18px 28px;
-  background-color: ${({ theme }) => theme.colors.black[400]};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  box-shadow: ${({ theme }) => theme.boxShadow.sm};
+  ${({ theme }) => theme.borderRadius('lg')};
+  ${({ theme }) => theme.boxShadow('sm')};
   ${({ theme }) => theme.font(700, theme.colors.black[100])};
+  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'xxl')};
+  background-color: ${({ theme }) => theme.colors.black[400]};
   transition: transform 0.2s;
 
   &:hover {

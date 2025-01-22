@@ -48,14 +48,14 @@ export const PostBottom = ({
 }
 
 const BottomContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, '24px')}
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
+  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl', 'lg')};
   width: 100%;
-  padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.xl} ${theme.gap.xxl}`};
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
 `
 
 const BookmarkButton = styled.button`
-  ${({ theme }) => theme.flexBox('column', 'center', undefined, theme.gap.xs)}
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, xs)}
   flex-shrink: 0;
 
   .label {

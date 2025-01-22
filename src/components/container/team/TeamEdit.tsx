@@ -75,7 +75,7 @@ const Container = styled.div`
 `
 
 const TeamFormContainer = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 'container', 'container', 'container')};
   overflow-y: scroll;
 `
@@ -83,5 +83,5 @@ const TeamFormContainer = styled.form`
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.gap.xxl};
+  gap: 20px;
 `

@@ -97,12 +97,12 @@ const ModalBackdrop = styled.button`
 `
 
 const ModalContent = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
+  ${({ theme }) => theme.borderRadius('lg')};
+  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
   position: absolute;
   min-width: 310px;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
   background-color: white;
-  padding: 10px ${({ theme }) => theme.gap.xl};
 `
 
 const ModalText = styled.p`
@@ -115,5 +115,5 @@ const ButtonGrid = styled.div`
   display: grid;
   width: 100%;
   grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.gap.xl};
+  gap: 16px;
 `

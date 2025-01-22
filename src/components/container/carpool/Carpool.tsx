@@ -12,37 +12,35 @@ import { useToggle } from '@/hooks/useToggle'
 import { useActiveCarpoolList, useCarpoolList } from '@/services/query/useCarpoolQuery'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-import { ErrorPage } from '../home/ErrorPage'
-
-// const dummy = [
-//   {
-//     id: 0,
-//     title: '소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
-//     createdAt: '12:43',
-//     trainingDate: '05/21',
-//     place: '종로3가 1번출구소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
-//     time: '07:30',
-//     full: false,
-//   },
-//   {
-//     id: 1,
-//     title: '소프트 카풀 하실 분',
-//     createdAt: '12:43',
-//     trainingDate: '05/21',
-//     place: '종로3가 1번출구',
-//     time: '07:30',
-//     full: false,
-//   },
-//   {
-//     id: 2,
-//     title: '소프트 카풀 하실 분',
-//     createdAt: '12:43',
-//     trainingDate: '05/21',
-//     place: '종로3가 1번출구',
-//     time: '07:30',
-//     full: true,
-//   },
-// ]
+const dummy = [
+  {
+    id: 0,
+    title: '소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
+    time: '07:30',
+    full: false,
+  },
+  {
+    id: 1,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: false,
+  },
+  {
+    id: 2,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: true,
+  },
+]
 
 export const Carpool = () => {
   const navigate = useNavigate()
@@ -67,7 +65,7 @@ export const Carpool = () => {
   const isLoading = allLoading || activeLoading
   const carpoolsToShow = showActiveOnly ? activeCarpools : allCarpools
 
-  if (allError || activeError) return <ErrorPage />
+  // if (allError || activeError) return <ErrorPage />
 
   return (
     <Container>
@@ -78,8 +76,8 @@ export const Carpool = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <PostList items={carpoolsToShow} to={`/carpool/detail`} />
-        // <PostList items={dummy} to={`/carpool/detail`} />
+        // <PostList items={carpoolsToShow} to={`/carpool/detail`} />
+        <PostList items={dummy} to={`/carpool/detail`} />
       )}
       {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNavigation />

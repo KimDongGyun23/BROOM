@@ -32,21 +32,21 @@ export const ChattingItem = ({
 )
 
 const ChattingProfileContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
+  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
-  padding: 0 ${({ theme }) => `${theme.gap.xl} ${theme.gap.lg}`};
   border-bottom-color: ${({ theme }) => theme.colors.black[200]};
   width: 100%;
 `
 
 const ChattingProfileInfo = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
   min-width: 0;
   flex-grow: 1;
 `
 
 const NameSubtitleContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
 
   .opponent-name {
     flex-shrink: 0;

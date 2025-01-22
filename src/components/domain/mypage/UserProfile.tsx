@@ -22,13 +22,13 @@ export const UserProfile = ({ username, serviceYear, iconType }: UserProfileProp
 )
 
 const UserProfileContainer = styled.div`
-  position: relative;
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xxl)};
-  width: fit-content;
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 'auto', 'xxl', 'auto')};
-  padding: ${({ theme }) => theme.gap.lg} 30px ${({ theme }) => theme.gap.lg} 18px;
+  ${({ theme }) => theme.borderRadius('chain')};
+  ${({ theme }) => theme.margin('md', 'xxl', 'md', 'lg')};
+  position: relative;
+  width: fit-content;
   border: 10px solid ${({ theme }) => theme.colors.black[200]};
-  border-radius: 40px;
 `
 
 const ChainImage = styled.img`

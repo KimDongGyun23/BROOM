@@ -25,6 +25,7 @@ export const ErrorPage = () => {
 }
 
 const Container = styled.div`
+  ${({ theme }) => theme.padding(0, 'md', 0, 'md')};
   position: absolute;
   inset: 0;
   z-index: 50;
@@ -34,15 +35,11 @@ const Container = styled.div`
   min-width: 320px;
   max-width: 450px;
   background-color: white;
-  padding: 0 ${({ theme }) => theme.gap.xl};
 `
 
 const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, 'xxl')}
   min-width: 260px;
-  gap: 32px;
 
   .error-title {
     font-family: 'jalnan', sans-serif;

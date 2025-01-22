@@ -90,18 +90,18 @@ const Container = styled.div`
 `
 
 const CarpoolFormContainer = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xxl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 0, 'container', 0)};
-  padding: ${({ theme }) => theme.gap.xl}
+  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
   overflow-y: scroll;
 `
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.gap.xxl};
+  gap: 20px;
 `
 
 const InputContainerWithGap = styled.div`
-  ${({ theme }) => theme.flexBox('row', undefined, undefined, theme.gap.xxl)};
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, 'xl')};
 `

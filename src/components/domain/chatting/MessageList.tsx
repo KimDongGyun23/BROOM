@@ -32,15 +32,15 @@ export const MessageList = ({ opponent, iconType }: MessageListProps) => {
 }
 
 const Container = styled.main`
-  flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  padding: ${({ theme }) => theme.gap.xl} 0;
+  ${({ theme }) => theme.padding('lg', 0, 'lg', 0)};
+  flex-grow: 1;
   overflow-y: scroll;
 `
 
 const Message = styled.div<{ $isMyMessage: boolean }>`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
   flex-direction: ${({ $isMyMessage }) => ($isMyMessage ? 'row-reverse' : 'row')};
 
   .message-time {
@@ -51,8 +51,8 @@ const Message = styled.div<{ $isMyMessage: boolean }>`
 `
 
 const Bubble = styled.div<{ isMyMessage: boolean }>`
+  ${({ theme }) => theme.borderRadius('bubble')};
   padding: 10px 16px;
-  border-radius: 20px;
   background-color: ${({ theme, isMyMessage }) =>
     isMyMessage ? theme.colors.black[500] : theme.colors.black[100]};
   color: ${({ theme, isMyMessage }) =>

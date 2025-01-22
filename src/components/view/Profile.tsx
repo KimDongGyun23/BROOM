@@ -60,13 +60,13 @@ export const ChattingRoomProfile = ({
 )
 
 const ProfileContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xl)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
+  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
   border-bottom: 1px solid ${({ theme }) => theme.colors.black[100]};
-  padding: 0 ${({ theme }) => `${theme.gap.xl} ${theme.gap.lg}`};
 `
 
 const ProfileInfo = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
 
   .profile-description {
     ${({ theme }) => theme.font(800, theme.colors.black[400])};
@@ -74,7 +74,7 @@ const ProfileInfo = styled.div`
 `
 
 const NameSubtitleContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
 
   .profile-name {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};

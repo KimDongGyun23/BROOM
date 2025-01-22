@@ -69,9 +69,9 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           aria-label={`${selectedFilter.label} 검색`}
         />
 
-        <SearchButton type="submit" aria-label="검색">
+        <button type="submit" aria-label="검색">
           <SearchIcon />
-        </SearchButton>
+        </button>
       </SearchForm>
 
       {isFilterVisible && (
@@ -88,15 +88,15 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
 }
 
 const SearchForm = styled.form`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.md)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  ${({ theme }) => theme.borderRadius('sm')};
+  ${({ theme }) => theme.padding('sm', 'md', 'sm', 'lg')};
   border: 1px solid ${({ theme }) => theme.colors.black[200]};
-  padding: 10px 10px 10px ${({ theme }) => theme.gap.xl};
 `
 
 const FilterButton = styled.button`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
   flex-shrink: 0;
 
   .filter-label {
@@ -116,11 +116,4 @@ const SearchInput = styled.input`
   &:focus {
     outline: none;
   }
-`
-
-const SearchButton = styled.button`
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
 `

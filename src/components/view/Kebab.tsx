@@ -42,12 +42,12 @@ export const Kebab = ({ items, position }: KebabProps) => {
 
 const KebabNav = styled.nav<{ $position: Position }>`
   ${({ theme }) => theme.flexBox('column', 'center')};
+  ${({ theme }) => theme.borderRadius('sm')};
+  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.padding('sm', 'md', 'sm', 'md')};
   position: absolute;
   width: fit-content;
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
   background-color: white;
-  padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.lg}`};
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
   ${({ $position: [top, right, bottom, left] }) => css`
     top: ${top}px;
     right: ${right}px;

@@ -37,7 +37,7 @@ export const Label = ({ successMessage, errorMessage, label }: LabelProps) => {
 }
 
 const LabelContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
 
   .label {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};

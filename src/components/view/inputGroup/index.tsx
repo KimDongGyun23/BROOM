@@ -16,7 +16,7 @@ export const useInputGroupContext = () => {
 }
 
 const Section = styled.section`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '10px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
   width: 100%;
 `
 

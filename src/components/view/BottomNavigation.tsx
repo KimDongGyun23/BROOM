@@ -30,13 +30,13 @@ export const BottomNavigation = () => {
 }
 
 export const StyledNav = styled.nav`
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
+  ${({ theme }) => theme.boxShadow('md')};
 `
 
 export const NavigationList = styled.ul`
   ${({ theme }) => theme.flexBox('row', undefined, 'space-between')};
-  padding: ${({ theme }) => `${theme.gap.md} ${theme.gap.xl} ${theme.gap.xxl}`};
-  box-shadow: ${({ theme }) => theme.boxShadow.md};
+  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl', 'lg')};
 `
 
 export const NavigationItem = styled.li`

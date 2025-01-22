@@ -27,24 +27,24 @@ export const Button = ({
 
 const SIZE_STYLES = {
   lg: css`
-    padding: ${theme.gap.xl} ${theme.gap.xxl};
+    ${({ theme }) => theme.padding('lg', 'xl', 'lg', 'xl')};
     ${theme.font(700)};
   `,
   md: css`
-    padding: ${theme.gap.xl} ${theme.gap.xl};
+    ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
     ${theme.font(800)};
   `,
   sm: css`
-    padding: ${theme.gap.lg} ${theme.gap.lg};
+    ${({ theme }) => theme.padding('md', 'md', 'md', 'md')};
     ${theme.font(900)};
   `,
 }
 
 const StyledButton = styled.button<{ $secondary?: boolean; $size: ButtonSize }>`
-  border-radius: ${theme.borderRadius.lg};
   width: auto;
   flex-shrink: 0;
   ${({ $size }) => SIZE_STYLES[$size]}
+  ${({ theme }) => theme.borderRadius('lg')};
   ${({ $secondary, disabled }) =>
     $secondary || disabled
       ? css`

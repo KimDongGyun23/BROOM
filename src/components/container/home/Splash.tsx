@@ -9,7 +9,7 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-  ${({ theme }) => theme.flexBox('column', 'center', undefined, theme.gap.md)};
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, 'sm')};
 `
 
 const Logo = styled.h1`

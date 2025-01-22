@@ -99,10 +99,10 @@ const Container = styled.div`
 `
 
 const MainContent = styled.main`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '24px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
+  ${({ theme }) => theme.padding(0, 0, 'xxl', 0)};
   flex-grow: 1;
-  padding-bottom: 32px;
   overflow-y: scroll;
 
   .main-title {
@@ -127,7 +127,7 @@ const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
 `
 
 const ContentList = styled.ul<{ $isSingleItem: boolean }>`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.sm)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
   ${({ theme, $isSingleItem }) => theme.margin(0, 0, 0, $isSingleItem ? 0 : 'xxl')};
   list-style-type: ${({ $isSingleItem }) => ($isSingleItem ? 'none' : 'disc')};
 
@@ -137,5 +137,5 @@ const ContentList = styled.ul<{ $isSingleItem: boolean }>`
 `
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
 `

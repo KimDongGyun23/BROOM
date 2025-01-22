@@ -38,20 +38,20 @@ export const SortOfArmy = ({ ...rest }: ButtonHTMLAttributes<HTMLButtonElement>)
 }
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', undefined, 'space-between', theme.gap.md)};
+  ${({ theme }) => theme.flexBox('row', undefined, 'space-between', 'sm')};
 `
 
 const ArmyButton = styled.button<{ $isSelected: boolean }>`
+  ${({ theme }) => theme.padding(0, 'sm', 0, 'sm')};
+  ${({ theme }) => theme.borderRadius('lg')};
+  ${({ theme, $isSelected }) =>
+    theme.font(800, $isSelected ? theme.colors.black[100] : theme.colors.black[500])};
   flex-grow: 1;
   height: 52px;
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  padding: 0 ${({ theme }) => theme.gap.md};
   background-color: ${({ theme, $isSelected }) =>
     $isSelected ? theme.colors.black[600] : 'white'};
   border: ${({ theme, $isSelected }) =>
     $isSelected ? 'none' : `1px solid ${theme.colors.black[300]}`};
-  ${({ theme, $isSelected }) =>
-    theme.font(800, $isSelected ? theme.colors.black[100] : theme.colors.black[500])};
 
   &:disabled {
     opacity: 0.5;

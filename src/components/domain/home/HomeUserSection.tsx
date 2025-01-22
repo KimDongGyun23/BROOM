@@ -58,9 +58,9 @@ export const HomeUserSection = () => {
 }
 
 const Section = styled.section`
+  ${({ theme }) => theme.boxShadow('sm')};
+  ${({ theme }) => theme.padding('xxl', 'lg', 'xxl', 'lg')};
   background-color: white;
-  padding: 28px ${({ theme }) => theme.gap.xl};
-  box-shadow: ${({ theme }) => theme.boxShadow.sm};
 `
 
 const ContentContainer = styled.div`
@@ -68,12 +68,12 @@ const ContentContainer = styled.div`
 `
 
 const MainTextContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
   flex-grow: 1;
 `
 
 const Text = styled.p`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
   ${({ theme }) => theme.font(700, theme.colors.black[500])};
 `
 
@@ -85,7 +85,7 @@ const Logo = styled.span`
 `
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, theme.gap.lg)};
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
   ${({ theme }) => theme.margin('container', 0, 0, 0)};
   width: 100%;
 `

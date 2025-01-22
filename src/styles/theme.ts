@@ -1,4 +1,4 @@
-import { borderRadius, boxShadow, gap, margin } from './box'
+import { borderRadius, boxShadow, margin, padding } from './box'
 import { colors } from './colors'
 import { flexBox } from './flex'
 import { font } from './font'
@@ -8,7 +8,7 @@ const theme = {
   colors,
   borderRadius,
   boxShadow,
-  gap,
+  padding,
   flexBox,
   margin,
 }

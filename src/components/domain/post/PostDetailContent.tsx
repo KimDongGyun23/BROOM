@@ -54,7 +54,7 @@ const ScrollContainer = styled.div`
 
 const ContentContainer = styled.div`
   ${({ theme }) => theme.flexBox('column')};
-  padding: 0 ${({ theme }) => theme.gap.xl};
+  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
 
   .title {
     ${({ theme }) => theme.margin(0, 0, 'xxl', 0)};
@@ -63,7 +63,7 @@ const ContentContainer = styled.div`
 `
 
 const ContentList = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '24px')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
 `
 
 const ContentItemContainer = styled.ul`
@@ -71,7 +71,7 @@ const ContentItemContainer = styled.ul`
 `
 
 const ContentItem = styled.li`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, theme.gap.xs)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
   width: 100%;
 
   .content-item-label {
