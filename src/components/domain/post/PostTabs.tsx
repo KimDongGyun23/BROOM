@@ -18,16 +18,15 @@ export const PostTabs = ({ currentTab, onTabClick }: PostTabsProps) => {
   return (
     <Container>
       {TAB_LABELS.map((tab) => (
-        <li key={tab}>
-          <TabButton
-            $isActive={currentTab === tab}
-            onClick={() => handleTabClick(tab)}
-            aria-selected={currentTab === tab}
-            role="tab"
-          >
-            {tab}
-          </TabButton>
-        </li>
+        <TabButton
+          key={tab}
+          $isActive={currentTab === tab}
+          onClick={() => handleTabClick(tab)}
+          aria-selected={currentTab === tab}
+          role="tab"
+        >
+          <li>{tab}</li>
+        </TabButton>
       ))}
     </Container>
   )

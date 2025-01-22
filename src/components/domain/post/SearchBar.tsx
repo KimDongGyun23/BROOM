@@ -69,9 +69,9 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
           aria-label={`${selectedFilter.label} 검색`}
         />
 
-        <button type="submit" aria-label="검색">
+        <SearchButton type="submit" aria-label="검색">
           <SearchIcon />
-        </button>
+        </SearchButton>
       </SearchForm>
 
       {isFilterVisible && (
@@ -108,4 +108,8 @@ const FilterButton = styled.button`
 const SearchInput = styled.input`
   ${({ theme }) => theme.font(800, theme.colors.black[500])};
   flex: 1;
+`
+
+const SearchButton = styled.button`
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
 `

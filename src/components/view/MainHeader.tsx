@@ -32,6 +32,7 @@ const HeaderContainer = styled.header`
   ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
   position: relative;
   height: 80px;
+  flex-shrink: 0;
 `
 
 const LogoLink = styled(Link)`

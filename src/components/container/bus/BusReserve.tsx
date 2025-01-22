@@ -116,7 +116,7 @@ const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
       $isSingleItem ? 'row' : 'column',
       $isSingleItem ? 'center' : 'stretch',
       undefined,
-      !$isSingleItem ? theme.gap.lg : undefined,
+      !$isSingleItem ? 'lg' : undefined,
     )};
 
   .content-label {

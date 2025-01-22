@@ -61,7 +61,8 @@ export const ChattingRoomProfile = ({
 
 const ProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
-  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
+  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
+  ${({ theme }) => theme.padding(0, 0, 'lg', 0)};
   ${({ theme }) => theme.border(0, 0, 'divider', 0)};
 `
 

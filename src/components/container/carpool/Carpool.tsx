@@ -40,6 +40,24 @@ const dummy = [
     time: '07:30',
     full: true,
   },
+  {
+    id: 3,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: true,
+  },
+  {
+    id: 4,
+    title: '소프트 카풀 하실 분',
+    createdAt: '12:43',
+    trainingDate: '05/21',
+    place: '종로3가 1번출구',
+    time: '07:30',
+    full: true,
+  },
 ]
 
 export const Carpool = () => {

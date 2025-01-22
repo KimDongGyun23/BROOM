@@ -53,17 +53,16 @@ const ScrollContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
   ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
 
   .title {
-    ${({ theme }) => theme.margin(0, 0, 'xxl', 0)};
     ${({ theme }) => theme.font(500, theme.colors.black[600])};
   }
 `
 
 const ContentList = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
 `
 
 const ContentItemContainer = styled.ul`

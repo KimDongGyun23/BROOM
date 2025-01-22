@@ -15,6 +15,7 @@ const borderRadiusSize = {
   sm: '8px',
   md: '10px',
   lg: '12px',
+  xl: '16px',
   full: '100%',
   bubble: '20px',
   chain: '40px',
