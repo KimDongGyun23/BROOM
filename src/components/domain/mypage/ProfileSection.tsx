@@ -32,5 +32,5 @@ const SectionList = styled.ul`
 `
 
 const SectionLink = styled(Link)`
-  ${({ theme }) => theme.font(700, theme.colors.black[700])};
+  ${({ theme }) => theme.font(700, theme.colors.black[400])};
 `

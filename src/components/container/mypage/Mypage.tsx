@@ -99,6 +99,7 @@ const Container = styled.div`
 
 const ScrollContainer = styled.div`
   ${({ theme }) => theme.flexBox('column')};
+  flex-grow: 1;
   overflow-y: scroll;
 `
 
@@ -113,7 +114,7 @@ const Divider = styled.hr`
 
 const ActionContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
-  ${({ theme }) => theme.margin('mypage-button-top', 'auto', 0, 'auto')};
+  ${({ theme }) => theme.margin('mypage-button-top', 0, 0, 'auto')};
   ${({ theme }) => theme.padding(0, 'xs', 0, 'xs')};
 `
 
@@ -121,5 +122,5 @@ const ActionButton = styled.button<{ $isLogout?: boolean }>`
   ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
   ${({ theme, $isLogout }) => theme.border(0, $isLogout ? 'underline' : 0, 0, 0)};
   ${({ theme, $isLogout }) =>
-    theme.font(800, $isLogout ? theme.colors.black[600] : theme.colors.error)};
+    theme.font(800, $isLogout ? theme.colors.black[500] : theme.colors.error)};
 `

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
 
 import { PostList } from '@/components/domain/post/PostList'
@@ -6,14 +6,11 @@ import { PostTabs } from '@/components/domain/post/PostTabs'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useMyCarpoolPost, useMyTeamPost } from '@/services/query/useMypageQuery'
-import type { TabLabel } from '@/utils/constants'
+import { PostTabStoreProvider, useActiveTab } from '@/stores/postTab'
 import { TAB_LABELS } from '@/utils/constants'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-export const MyPost = () => {
-  const [currentTab, setCurrentTab] = useState<TabLabel>(
-    (getSessionStorageItem(SESSION_KEYS.POST_TAB) as TabLabel) || TAB_LABELS[0],
-  )
+const PostContent = () => {
+  const activeTab = useActiveTab()
 
   const {
     data: carpoolPostsData,
@@ -29,27 +26,31 @@ export const MyPost = () => {
     error: teamError,
   } = useMyTeamPost()
 
-  const handleTabClick = (tab: TabLabel) => {
-    if (tab === TAB_LABELS[0]) refetchCarpoolPosts()
+  useEffect(() => {
+    if (activeTab === TAB_LABELS[0]) refetchCarpoolPosts()
     else refetchTeamPosts()
-    setCurrentTab(tab)
-  }
+  }, [activeTab, refetchCarpoolPosts, refetchTeamPosts])
 
   if (carpoolLoading || teamLoading) return <Loading />
   if (carpoolError || teamError) return <div>error</div>
 
   return (
-    <MainContainer>
-      <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
-      <PostTabs currentTab={currentTab} onTabClick={handleTabClick} />
+    <ScrollContainer>
+      {activeTab === TAB_LABELS[0] && <PostList items={carpoolPostsData} to={`/carpool/detail`} />}
+      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData} to={`/team/detail`} />}
+    </ScrollContainer>
+  )
+}
 
-      <ScrollContainer>
-        {currentTab === TAB_LABELS[0] && (
-          <PostList items={carpoolPostsData} to={`/carpool/detail`} />
-        )}
-        {currentTab === TAB_LABELS[1] && <PostList items={teamPostsData} to={`/team/detail`} />}
-      </ScrollContainer>
-    </MainContainer>
+export const MyPost = () => {
+  return (
+    <PostTabStoreProvider>
+      <MainContainer>
+        <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
+        <PostTabs />
+        <PostContent />
+      </MainContainer>
+    </PostTabStoreProvider>
   )
 }
 
