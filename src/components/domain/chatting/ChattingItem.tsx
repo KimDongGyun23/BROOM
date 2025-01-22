@@ -18,7 +18,7 @@ export const ChattingItem = ({
   lastMessage,
   lastMessageDaysAgo,
 }: ChattingProfileProps) => (
-  <ChattingProfileContainer>
+  <Container>
     <ProfileImage iconType={iconType} size="lg" />
     <ChattingProfileInfo>
       <NameSubtitleContainer>
@@ -27,11 +27,12 @@ export const ChattingItem = ({
       </NameSubtitleContainer>
       <LastMessage>{lastMessage}</LastMessage>
     </ChattingProfileInfo>
+
     <LastMessageTime>{lastMessageDaysAgo}</LastMessageTime>
-  </ChattingProfileContainer>
+  </Container>
 )
 
-const ChattingProfileContainer = styled.div`
+const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
   ${({ theme }) => theme.border(0, 0, 'divider', 0)};

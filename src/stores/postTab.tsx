@@ -34,7 +34,7 @@ export const PostTabStoreProvider = ({ children, initialTab = '승차 공유' }:
   return <PostTabStoreContext.Provider value={store}>{children}</PostTabStoreContext.Provider>
 }
 
-export const useTabStore = <T,>(selector: (state: PostTabStore) => T): T => {
+export const usePostTabStore = <T,>(selector: (state: PostTabStore) => T): T => {
   const store = useContext(PostTabStoreContext)
   if (!store) {
     throw new Error('PostTabStoreProvider 찾을 수 없음')
@@ -42,5 +42,5 @@ export const useTabStore = <T,>(selector: (state: PostTabStore) => T): T => {
   return useStore(store, selector)
 }
 
-export const useActiveTab = () => useTabStore((state) => state.activeTab)
-export const usePostTabActions = () => useTabStore((state) => state.actions)
+export const useActiveTab = () => usePostTabStore((state) => state.activeTab)
+export const usePostTabActions = () => usePostTabStore((state) => state.actions)
