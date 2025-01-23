@@ -16,6 +16,7 @@ const borderRadiusSize = {
   md: '10px',
   lg: '12px',
   xl: '16px',
+
   full: '100%',
   bubble: '20px',
   chain: '40px',
@@ -75,9 +76,14 @@ export const border = (top: BorderKey, right: BorderKey, bottom: BorderKey, left
   border-bottom: ${borderSize[bottom]};
   border-left: ${borderSize[left]};`
 
-export const borderRadius = (size: BorderRadiusKey) => `
-  border-radius: ${borderRadiusSize[size]};
-`
+export const borderRadius = (...args: BorderRadiusKey[]) => {
+  if (args.length === 0) return ''
+
+  const getValue = (size: BorderRadiusKey) => borderRadiusSize[size] || size
+  const values = args.map(getValue)
+
+  return `border-radius: ${values.join(' ')};`
+}
 
 export const boxShadow = (size: BoxShadowKey) => `
   box-shadow: ${boxShadowSize[size]};
