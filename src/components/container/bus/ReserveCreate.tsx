@@ -87,17 +87,17 @@ const Container = styled.div`
 `
 
 const Title = styled.h4`
-  ${({ theme }) => theme.margin('xl', 'container', 'bus-title-bottom', 'container')};
+  ${({ theme }) => theme.margin('xl', 'container', 'page-label-bottom')};
   ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
 const StyledForm = styled.form`
   flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.margin(0, 'container', 'xs', 'container')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.margin(0, 'container', 'xs')};
   overflow-y: scroll;
 `
 
 const StyledButton = styled(Button)`
-  ${({ theme }) => theme.margin('xs', 'container', 'xxl', 'container')};
+  ${({ theme }) => theme.margin('xs', 'container', 'xl')};
 `

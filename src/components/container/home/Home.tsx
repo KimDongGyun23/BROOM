@@ -81,8 +81,8 @@ const Main = styled.main`
 
 const Section = styled.section`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
+  ${({ theme }) => theme.padding('lg')};
   ${({ theme }) => theme.boxShadow('sm')};
-  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
   background-color: white;
 
   .title {
@@ -110,8 +110,8 @@ const ServiceList = styled.ul`
 
 const ServiceItem = styled(Link)`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
-  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'xxl')};
-  ${({ theme }) => theme.borderRadius('lg')};
+  ${({ theme }) => theme.padding('lg', 'md', 'lg', '3xl')};
+  ${({ theme }) => theme.borderRadius('md')};
   ${({ theme }) => theme.boxShadow('sm')};
   ${({ theme }) => theme.font(700, theme.colors.black[100])};
   background-color: ${({ theme }) => theme.colors.black[400]};

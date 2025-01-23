@@ -72,11 +72,11 @@ export const ReserveInfo = () => {
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
+  ${({ theme }) => theme.margin(0, 'container')};
 `
 
 const Title = styled.h4`
-  ${({ theme }) => theme.margin('xl', 0, 'bus-title-bottom', 0)};
+  ${({ theme }) => theme.margin('xl', 0, 'page-label-bottom')};
   ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 
@@ -86,18 +86,18 @@ const InputContainer = styled.div`
 
 const ReservationStateGrid = styled.div`
   ${({ theme }) => theme.gridBox('1fr 1fr')};
-  ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
+  ${({ theme }) => theme.margin('4xl', 0, 'xl')};
   ${({ theme }) => theme.border('divider', 'top', 'bottom')};
   text-align: center;
 
   .reservation-state-label {
-    ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+    ${({ theme }) => theme.padding('md', 'lg')};
     color: ${({ theme }) => theme.colors.black[600]};
   }
 `
 
 const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
-  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+  ${({ theme }) => theme.padding('md', 'lg')};
   color: ${({ theme, $state }) => {
     switch ($state) {
       case BUS_RESERVATION_STATES.COMPLETED:

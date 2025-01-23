@@ -8,13 +8,13 @@ export const ValidateContainer = styled.div`
 
 export const FormContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('sign-up-form-top', 'container', 'container', 'container')};
+  ${({ theme }) => theme.margin(0, 'container', 'container')};
   flex-grow: 1;
   overflow-y: scroll;
 `
 
 export const StyledButton = styled(Button)`
-  ${({ theme }) => theme.margin('container', 'container', 'sign-up-button-bottom', 'container')};
+  ${({ theme }) => theme.margin('container', 'container', '4xl')};
 `
 
 export const AllAgreementButton = styled.button<{ $isChecked: boolean }>`

@@ -10,7 +10,7 @@ export const EmptyMessage = ({ label }: EmptyMessageProps) => {
 
 const StyledEmptyMessage = styled.p`
   ${({ theme }) => theme.flexBox('row', 'center', 'center')};
-  ${({ theme }) => theme.padding('xxl', 'xxl', 'xxl', 'xxl')};
+  ${({ theme }) => theme.padding('3xl')};
   ${({ theme }) => theme.font(700, theme.colors.black[500])};
   width: 100%;
   height: 100%;

@@ -47,14 +47,14 @@ export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
 }
 
 const ScrollContainer = styled.div`
-  ${({ theme }) => theme.margin('container', 0, 'container', 0)};
+  ${({ theme }) => theme.margin('container', 0)};
   flex-grow: 1;
   overflow-y: scroll;
 `
 
 const ContentContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.padding(0, 'lg')};
 
   .title {
     ${({ theme }) => theme.font(500, theme.colors.black[600])};
@@ -62,7 +62,7 @@ const ContentContainer = styled.div`
 `
 
 const ContentList = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
 `
 
 const ContentItemContainer = styled.ul`

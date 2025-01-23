@@ -104,8 +104,8 @@ const ScrollContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.margin(0, 'container', 'container', 'container')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.margin(0, 'container', 'container')};
 `
 
 const Divider = styled.hr`
@@ -115,11 +115,11 @@ const Divider = styled.hr`
 const ActionContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
   ${({ theme }) => theme.margin('mypage-button-top', 0, 0, 'auto')};
-  ${({ theme }) => theme.padding(0, 'xs', 0, 'xs')};
+  ${({ theme }) => theme.padding(0, 'xs')};
 `
 
 const ActionButton = styled.button<{ $isLogout?: boolean }>`
-  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme }) => theme.padding(0, 'lg')};
   ${({ theme, $isLogout }) => theme.border($isLogout ? 'underline' : 0, 'right')};
   ${({ theme, $isLogout }) =>
     theme.font(800, $isLogout ? theme.colors.black[500] : theme.colors.error)};

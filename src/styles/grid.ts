@@ -5,7 +5,7 @@ const gapSize = {
   md: '12px',
   lg: '16px',
   xl: '20px',
-  xxl: '28px',
+  '2xl': '28px',
 }
 
 type GapKey = keyof typeof gapSize

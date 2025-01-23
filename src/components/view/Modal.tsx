@@ -98,8 +98,8 @@ const ModalBackdrop = styled.button`
 
 const ModalContent = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.borderRadius('lg')};
-  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+  ${({ theme }) => theme.borderRadius('md')};
+  ${({ theme }) => theme.padding('md', 'lg')};
   position: absolute;
   min-width: 310px;
   background-color: white;

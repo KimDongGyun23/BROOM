@@ -56,7 +56,7 @@ export const PostList = ({ items, to }: PostListProps) => {
 
 const PostItemLink = styled(Link)`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
-  ${({ theme }) => theme.padding('xl', 'md', 'xl', 'md')};
+  ${({ theme }) => theme.padding('xl', 'md')};
   ${({ theme }) => theme.border('divider', 'bottom')};
 `
 
@@ -102,7 +102,7 @@ const PostLocationTime = styled.div`
 `
 
 const PostSection = styled.section`
-  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme }) => theme.padding(0, 'lg')};
   flex-grow: 1;
   overflow-y: scroll;
 `

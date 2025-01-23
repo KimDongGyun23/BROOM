@@ -25,12 +25,12 @@ export const PostTabs = () => {
 }
 
 const Container = styled.ul`
-  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+  ${({ theme }) => theme.padding('md', 'lg')};
   display: flex;
 `
 
 const TabButton = styled.button<{ $isActive: boolean }>`
-  ${({ theme }) => theme.padding(0, 0, 'md', 0)};
+  ${({ theme }) => theme.padding(0, 0, 'md')};
   ${({ theme, $isActive }) => theme.border($isActive ? 'tab-active' : 'tab-nonactive', 'bottom')};
   ${({ theme, $isActive }) =>
     theme.font(700, $isActive ? theme.colors.black[600] : theme.colors.black[300])};

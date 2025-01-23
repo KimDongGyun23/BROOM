@@ -49,7 +49,7 @@ const Container = styled.div`
 `
 
 const Logo = styled.h1`
-  ${({ theme }) => theme.margin('logo-top-sm', 'container', 'logo-bottom-sm', 'container')};
+  ${({ theme }) => theme.margin('logo-sm-top', 'container', 'logo-sm-bottom')};
   text-align: center;
   font-family: 'jalnan', sans-serif;
   font-size: 60px;
@@ -58,14 +58,14 @@ const Logo = styled.h1`
 `
 
 const StyledForm = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.margin(0, 'container')};
 `
 
 const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
-  ${({ theme }) => theme.margin('xxl', 'container', 0, 'container')};
   ${({ theme, $isLoginFailed }) =>
     theme.flexBox('row', 'center', $isLoginFailed ? 'space-between' : 'flex-end')};
+  ${({ theme }) => theme.margin('xl', 'container', 0)};
 `
 
 const ErrorMessage = styled.p`

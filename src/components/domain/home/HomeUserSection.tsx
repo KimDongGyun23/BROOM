@@ -59,7 +59,7 @@ export const HomeUserSection = () => {
 
 const Section = styled.section`
   ${({ theme }) => theme.boxShadow('sm')};
-  ${({ theme }) => theme.padding('xxl', 'lg', 'xxl', 'lg')};
+  ${({ theme }) => theme.padding('3xl', 'lg')};
   background-color: white;
 `
 
@@ -86,7 +86,7 @@ const Logo = styled.span`
 
 const ButtonContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
-  ${({ theme }) => theme.margin('container', 0, 0, 0)};
+  ${({ theme }) => theme.margin('container', 0, 0)};
   width: 100%;
 `
 

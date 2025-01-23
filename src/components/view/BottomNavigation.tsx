@@ -36,7 +36,7 @@ export const StyledNav = styled.nav`
 export const NavigationList = styled.ul`
   ${({ theme }) => theme.flexBox('row', undefined, 'space-between')};
   ${({ theme }) => theme.boxShadow('md')};
-  ${({ theme }) => theme.padding('sm', 'lg', 'xl', 'lg')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl')};
 `
 
 export const NavigationItem = styled.li`

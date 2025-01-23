@@ -79,7 +79,7 @@ export const SubHeaderWithoutIcon = ({
 
 const HeaderContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
-  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
+  ${({ theme }) => theme.padding('lg')};
   position: relative;
 
   .null-icon {

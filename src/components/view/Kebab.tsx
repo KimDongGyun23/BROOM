@@ -42,9 +42,9 @@ export const Kebab = ({ items, position }: KebabProps) => {
 
 const KebabNav = styled.nav<{ $position: Position }>`
   ${({ theme }) => theme.flexBox('column', 'center')};
+  ${({ theme }) => theme.padding('sm', 'md')};
   ${({ theme }) => theme.borderRadius('sm')};
   ${({ theme }) => theme.boxShadow('md')};
-  ${({ theme }) => theme.padding('sm', 'md', 'sm', 'md')};
   position: absolute;
   width: fit-content;
   height: fit-content;
@@ -68,7 +68,7 @@ const KebabButton = styled.button<{ $isRed?: boolean }>`
 `
 
 const KebabDivider = styled.hr`
-  ${({ theme }) => theme.margin('md', 0, 'md', 0)};
+  ${({ theme }) => theme.margin('md', 0)};
   ${({ theme }) => theme.border('divider', 'bottom')};
   width: 100%;
   background-color: ${({ theme }) => theme.colors.black[200]};

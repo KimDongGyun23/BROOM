@@ -23,7 +23,7 @@ export const UserProfile = ({ username, serviceYear, iconType }: UserProfileProp
 
 const UserProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
-  ${({ theme }) => theme.margin('container', 'auto', 'xxl', 'auto')};
+  ${({ theme }) => theme.margin('container', 'auto', 'xl')};
   ${({ theme }) => theme.border('chain')};
   ${({ theme }) => theme.borderRadius('chain')};
   position: relative;

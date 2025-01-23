@@ -80,8 +80,8 @@ export const AccountInfo = () => {
 
 const FormContainer = styled.form`
   flex-grow: 1;
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.margin('container', 'container', 'container', 'container')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.margin('container')};
   overflow-y: scroll;
 `
 

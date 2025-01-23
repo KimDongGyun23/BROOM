@@ -19,7 +19,7 @@ export const LabelWithStep = ({ currentStep, totalStep, label }: LabelWithStepPr
 
 const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'flex-end', 'space-between')};
-  ${({ theme }) => theme.margin('xxl', 'container', 0, 'container')};
+  ${({ theme }) => theme.margin('xl', 'container', 'page-label-bottom')};
 `
 
 const Label = styled.h4`

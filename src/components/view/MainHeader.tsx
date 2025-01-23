@@ -28,8 +28,8 @@ export const MainHeader = () => {
 
 const HeaderContainer = styled.header`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
-  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme }) => theme.margin(0, 'container')};
+  ${({ theme }) => theme.padding(0, 'lg')};
   position: relative;
   height: 80px;
   flex-shrink: 0;

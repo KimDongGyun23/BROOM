@@ -33,7 +33,7 @@ const CarouselItem = styled.div`
 
 const DotContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', undefined, undefined, 'sm')};
-  ${({ theme }) => theme.margin('xxl', 0, 0, 0)};
+  ${({ theme }) => theme.margin('xl', 0, 0)};
 `
 
 const Dot = styled.button<{ $isActive: boolean }>`
@@ -42,12 +42,12 @@ const Dot = styled.button<{ $isActive: boolean }>`
   opacity: ${({ $isActive }) => ($isActive ? '0.9' : '0.5')};
   background-color: ${({ theme, $isActive }) =>
     $isActive ? theme.colors.black[600] : theme.colors.black[200]};
-  ${({ theme, $isActive }) => theme.borderRadius($isActive ? 'lg' : 'full')};
+  ${({ theme, $isActive }) => theme.borderRadius($isActive ? 'md' : 'full')};
 `
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.margin('xs', 0, 'xxl', 0)};
-  ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
+  ${({ theme }) => theme.margin('xs', 0, 'xl')};
+  ${({ theme }) => theme.padding(0, 'lg')};
   flex-shrink: 0;
   width: 100%;
 `

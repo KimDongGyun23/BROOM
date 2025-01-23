@@ -19,7 +19,7 @@ const AddButton = styled.button`
   ${({ theme }) => theme.flexBox('row', 'center', 'center', 'xs')};
   ${({ theme }) => theme.padding('sm', 'lg', 'sm', 'md')};
   ${({ theme }) => theme.border('post-addition-button')};
-  ${({ theme }) => theme.borderRadius('xl')};
+  ${({ theme }) => theme.borderRadius('lg')};
   ${({ theme }) => theme.boxShadow('sm')};
   position: absolute;
   bottom: 100px;

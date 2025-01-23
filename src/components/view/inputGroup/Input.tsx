@@ -131,7 +131,7 @@ const InputContainer = styled.div`
 `
 
 const StyledInput = styled.input`
-  ${({ theme }) => theme.padding('xs', 0, 'xs', 0)};
+  ${({ theme }) => theme.padding('xs', 0)};
   ${({ theme }) => theme.font(700, theme.colors.black[500])};
   width: 100%;
 `
@@ -141,7 +141,7 @@ const VisibilityButton = styled.button`
 `
 
 const InputLabel = styled.span`
-  ${({ theme }) => theme.padding('xs', 0, 'xs', 0)};
+  ${({ theme }) => theme.padding('xs', 0)};
   flex-shrink: 0;
   color: ${({ theme }) => theme.colors.black[500]};
 `
@@ -153,7 +153,7 @@ const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
 `
 
 const StyledTextArea = styled.textarea`
-  ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+  ${({ theme }) => theme.padding('md', 'lg')};
   ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
   ${({ theme }) => theme.font(700, theme.colors.black[300])};

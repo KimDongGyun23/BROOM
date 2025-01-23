@@ -99,9 +99,9 @@ const Container = styled.div`
 `
 
 const MainContent = styled.main`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xxl')};
-  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  ${({ theme }) => theme.padding(0, 0, 'xxl', 0)};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.margin(0, 'container')};
+  ${({ theme }) => theme.padding(0, 0, '3xl', 0)};
   flex-grow: 1;
   overflow-y: scroll;
 
@@ -128,7 +128,7 @@ const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
 
 const ContentList = styled.ul<{ $isSingleItem: boolean }>`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
-  ${({ theme, $isSingleItem }) => theme.margin(0, 0, 0, $isSingleItem ? 0 : 'xxl')};
+  ${({ theme, $isSingleItem }) => theme.margin(0, 0, 0, $isSingleItem ? 0 : 'xl')};
   list-style-type: ${({ $isSingleItem }) => ($isSingleItem ? 'none' : 'disc')};
 
   .content-item {

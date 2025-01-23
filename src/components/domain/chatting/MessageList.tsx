@@ -33,8 +33,8 @@ export const MessageList = ({ opponent, iconType }: MessageListProps) => {
 
 const Container = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
-  ${({ theme }) => theme.padding('lg', 0, 'lg', 0)};
+  ${({ theme }) => theme.margin(0, 'container')};
+  ${({ theme }) => theme.padding('lg', 0)};
   flex-grow: 1;
   overflow-y: scroll;
 `
@@ -53,7 +53,7 @@ const Message = styled.div<{ $isMyMessage: boolean }>`
 const Bubble = styled.div<{ isMyMessage: boolean }>`
   ${({ theme, isMyMessage }) =>
     theme.borderRadius(isMyMessage ? 0 : 'bubble', 'bubble', isMyMessage ? 'bubble' : 0, 'bubble')};
-  ${({ theme }) => theme.padding('bubble-y', 'bubble-x', 'bubble-y', 'bubble-x')};
+  ${({ theme }) => theme.padding('bubble-y', 'bubble-x')};
   background-color: ${({ theme, isMyMessage }) =>
     isMyMessage ? theme.colors.black[500] : theme.colors.black[100]};
   color: ${({ theme, isMyMessage }) =>

@@ -50,12 +50,12 @@ export const PostBottom = ({
 const BottomContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
   ${({ theme }) => theme.boxShadow('md')};
-  ${({ theme }) => theme.padding('sm', 'lg', 'xl', 'lg')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl')};
   width: 100%;
 `
 
 const BookmarkButton = styled.button`
-  ${({ theme }) => theme.flexBox('column', 'center', undefined, xs)}
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, 'xs')}
   flex-shrink: 0;
 
   .label {

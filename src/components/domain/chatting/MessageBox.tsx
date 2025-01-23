@@ -41,7 +41,7 @@ export const MessageBox = () => {
 
 const MessageBoxForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
-  ${({ theme }) => theme.padding('md', 'lg', 'xxl', 'lg')};
+  ${({ theme }) => theme.padding('md', 'lg', '3xl')};
   background-color: white;
 `
 

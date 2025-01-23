@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const MessageBoxForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
-  ${({ theme }) => theme.padding('md', 'lg', 'xxl', 'lg')};
+  ${({ theme }) => theme.padding('md', 'lg', '3xl')};
   background-color: white;
 `
 

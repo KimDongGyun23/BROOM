@@ -46,7 +46,7 @@ const Container = styled.div`
 
 const MainContent = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.margin('container', 0, 'container', 0)};
+  ${({ theme }) => theme.margin('container', 0)};
   flex-grow: 1;
   overflow-y: scroll;
 `

@@ -34,7 +34,7 @@ export const ChattingItem = ({
 
 const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
-  ${({ theme }) => theme.padding('lg', 'md', 'lg', 'md')};
+  ${({ theme }) => theme.padding('lg', 'md')};
   ${({ theme }) => theme.border('divider', 'bottom')};
   width: 100%;
 `

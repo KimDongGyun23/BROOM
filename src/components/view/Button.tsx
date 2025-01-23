@@ -27,15 +27,15 @@ export const Button = ({
 
 const SIZE_STYLES = {
   lg: css`
-    ${({ theme }) => theme.padding('lg', 'xl', 'lg', 'xl')};
+    ${({ theme }) => theme.padding('lg', 'xl')};
     ${theme.font(700)};
   `,
   md: css`
-    ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
+    ${({ theme }) => theme.padding('lg')};
     ${theme.font(800)};
   `,
   sm: css`
-    ${({ theme }) => theme.padding('md', 'md', 'md', 'md')};
+    ${({ theme }) => theme.padding('md')};
     ${theme.font(900)};
   `,
 }
@@ -44,7 +44,7 @@ const StyledButton = styled.button<{ $secondary?: boolean; $size: ButtonSize }>`
   width: auto;
   flex-shrink: 0;
   ${({ $size }) => SIZE_STYLES[$size]}
-  ${({ theme }) => theme.borderRadius('lg')};
+  ${({ theme }) => theme.borderRadius('md')};
   ${({ $secondary, disabled }) =>
     $secondary || disabled
       ? css`

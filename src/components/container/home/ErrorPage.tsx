@@ -26,7 +26,7 @@ export const ErrorPage = () => {
 
 const Container = styled.div`
   ${({ theme }) => theme.gridBox(undefined, undefined, 'center', 'center')};
-  ${({ theme }) => theme.padding(0, 'md', 0, 'md')};
+  ${({ theme }) => theme.padding(0, 'md')};
   position: absolute;
   inset: 0;
   z-index: 50;
@@ -37,7 +37,7 @@ const Container = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  ${({ theme }) => theme.flexBox('column', 'center', undefined, 'xxl')}
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, '2xl')}
   min-width: 260px;
 
   .error-title {

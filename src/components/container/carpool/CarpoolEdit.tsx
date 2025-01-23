@@ -91,8 +91,8 @@ const Container = styled.div`
 
 const CarpoolFormContainer = styled.form`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('container', 0, 'container', 0)};
-  ${({ theme }) => theme.padding('lg', 'lg', 'lg', 'lg')};
+  ${({ theme }) => theme.margin('container', 0)};
+  ${({ theme }) => theme.padding('lg')};
   overflow-y: scroll;
 `
 

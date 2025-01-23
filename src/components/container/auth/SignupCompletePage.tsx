@@ -22,7 +22,7 @@ const Container = styled.div`
 `
 
 const Logo = styled.h1`
-  ${({ theme }) => theme.margin('logo-top-lg', 'container', 'logo-bottom-lg', 'container')};
+  ${({ theme }) => theme.margin('logo-lg-top', 'container', 'logo-lg-bottom')};
   text-align: center;
   font-family: 'jalnan', sans-serif;
   font-size: 60px;
@@ -37,5 +37,5 @@ const Message = styled.p`
 `
 
 const StyledButton = styled(Button)`
-  ${({ theme }) => theme.margin('auto', 'container', 'sign-up-button-bottom', 'container')};
+  ${({ theme }) => theme.margin('auto', 'container', '4xl')};
 `
