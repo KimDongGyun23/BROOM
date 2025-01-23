@@ -8,6 +8,7 @@ import type {
 import type { ColorsType } from './styles/colors'
 import type { FlexBoxType } from './styles/flex'
 import type { FontType } from './styles/font'
+import type { GridBoxType } from './styles/grid'
 
 import 'styled-components'
 
@@ -19,6 +20,7 @@ declare module 'styled-components' {
     colors: ColorsType
     border: BorderType
     flexBox: FlexBoxType
+    gridBox: GridBoxType
     font: FontType
     margin: MarginType
   }

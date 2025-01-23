@@ -90,9 +90,7 @@ const CarpoolFormContainer = styled.form`
 `
 
 const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'lg')};
 `
 
 const InputContainerWithGap = styled.div`

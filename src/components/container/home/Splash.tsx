@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 
 const Container = styled.div`
-  display: grid;
+  ${({ theme }) => theme.gridBox(undefined, undefined, 'center', 'center')};
   width: 100%;
   height: 100%;
-  place-items: center;
   background-color: ${({ theme }) => theme.colors.black[600]};
 `
 

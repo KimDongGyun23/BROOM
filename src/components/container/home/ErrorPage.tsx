@@ -25,12 +25,11 @@ export const ErrorPage = () => {
 }
 
 const Container = styled.div`
+  ${({ theme }) => theme.gridBox(undefined, undefined, 'center', 'center')};
   ${({ theme }) => theme.padding(0, 'md', 0, 'md')};
   position: absolute;
   inset: 0;
   z-index: 50;
-  display: grid;
-  place-items: center;
   width: 100%;
   min-width: 320px;
   max-width: 450px;
@@ -48,9 +47,9 @@ const ContentWrapper = styled.div`
   }
 
   .error-message {
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
+    ${({ theme }) => theme.font(700, theme.colors.black[500])};
     text-align: center;
-    white-space: pre-wrap;=
+    white-space: pre-wrap;
   }
 `
 

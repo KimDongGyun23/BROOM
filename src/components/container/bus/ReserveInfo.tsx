@@ -85,10 +85,9 @@ const InputContainer = styled.div`
 `
 
 const ReservationStateGrid = styled.div`
+  ${({ theme }) => theme.gridBox('1fr 1fr')};
   ${({ theme }) => theme.margin('xxxl', 0, 'xxl', 0)};
   ${({ theme }) => theme.border('divider', 0, 'divider', 0)};
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   text-align: center;
 
   .reservation-state-label {

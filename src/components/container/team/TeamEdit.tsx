@@ -81,7 +81,5 @@ const TeamFormContainer = styled.form`
 `
 
 const GridContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'xl')};
 `

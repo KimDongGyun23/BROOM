@@ -106,14 +106,12 @@ const ModalContent = styled.div`
 `
 
 const ModalText = styled.p`
-  padding: 0 36px;
   ${({ theme }) => theme.font(600, theme.colors.black[600])};
+  padding: 0 36px;
   text-align: center;
 `
 
 const ButtonGrid = styled.div`
-  display: grid;
+  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'lg')};
   width: 100%;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
 `
