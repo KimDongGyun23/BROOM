@@ -47,28 +47,15 @@ export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>
 
 type UnitInputProps = InputHTMLAttributes<HTMLInputElement> & {
   unitLabel: string
-  isPrice?: boolean
 }
 
-export const UnitInput = ({ unitLabel, isPrice = false, ...rest }: UnitInputProps) => {
-  const { register, setValue } = useFormContext()
+export const UnitInput = ({ unitLabel, ...rest }: UnitInputProps) => {
+  const { register } = useFormContext()
   const section = useContext(InputGroupContext)
-
-  const handleCurrencyChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let formattedValue = event.target.value.replace(/[^0-9]/g, '')
-    if (formattedValue) formattedValue = parseInt(formattedValue, 10).toLocaleString('ko-KR')
-
-    setValue(section, formattedValue)
-  }
 
   return (
     <InputContainer>
-      <StyledUnitInput
-        size={5}
-        $textAlign="right"
-        {...register(section, { onChange: isPrice ? handleCurrencyChange : undefined })}
-        {...rest}
-      />
+      <StyledUnitInput size={5} $textAlign="right" {...register(section)} {...rest} />
       <InputLabel>{unitLabel}</InputLabel>
     </InputContainer>
   )
