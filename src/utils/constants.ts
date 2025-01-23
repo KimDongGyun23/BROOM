@@ -124,7 +124,6 @@ export const FORM_ATTRIBUTE = {
     input: { placeholder: '0', type: 'number', unitLabel: '명' },
   },
   TIME: { section: 'hour', label: '시간', input: { hourSection: 'hour', minuteSection: 'minute' } },
-  PRICE: { section: 'price', label: '금액', input: { placeholder: '0', unitLabel: '원' } },
   MEMO: {
     section: 'content',
     label: '메모',
