@@ -80,7 +80,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
             ...option,
             onClick: () => handleFilterSelect(option),
           }))}
-          position={[125, 0, 0, 16]}
+          position={[125, undefined, undefined, 16]}
         />
       )}
     </FormProvider>

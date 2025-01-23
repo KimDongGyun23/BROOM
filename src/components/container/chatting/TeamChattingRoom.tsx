@@ -32,7 +32,7 @@ const ChattingKebab = ({ isKebabOpen }: ChattingKebabProps) => {
     { label: '차단하기', onClick: () => console.log('차단하기'), isRed: true },
   ]
 
-  if (isKebabOpen) return <Kebab items={kebabMap} position={[48, 16, 0, 0]} />
+  if (isKebabOpen) return <Kebab items={kebabMap} position={[48, 16]} />
   return null
 }
 
