@@ -1,45 +1,47 @@
+import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-type ContentType = {
-  label: string
-  content: string | string[]
-}
+import type { CustomPostDetailType } from '@/types/post'
 
 type DetailContentProps = {
   title: string
-  contents: ContentType[]
-}
-
-const ContentRow = ({ label, content }: ContentType) => {
-  if (Array.isArray(content)) {
-    return (
-      <ContentItemContainer>
-        {content.map((item, index) => (
-          <ContentItem key={index}>
-            <p className="content-item-label">{label}</p>
-            <p className="content-item-text">{item}</p>
-          </ContentItem>
-        ))}
-      </ContentItemContainer>
-    )
-  }
-  return (
-    <ContentItem>
-      <p className="content-item-label">{label}</p>
-      <p className="content-item-text">{content}</p>
-    </ContentItem>
-  )
+  contents: CustomPostDetailType['item']
 }
 
 export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
+  const { pathname } = useLocation()
+  const isCarpoolPage = pathname.includes('carpool')
+
   return (
     <ScrollContainer>
       <ContentContainer>
         <h3 className="title">{title}</h3>
         <ContentList>
-          {contents.map((content, index) => (
-            <ContentRow key={index} {...content} />
-          ))}
+          <ContentItem>
+            <p className="content-item-label">훈련 날짜</p>
+            <p className="content-item-text">{contents.trainingDate}</p>
+          </ContentItem>
+
+          <ContentItemContainer>
+            <ContentItem>
+              <p className="content-item-label">{isCarpoolPage ? '출발 장소' : '만날 장소'}</p>
+              <p className="content-item-text">{contents.place}</p>
+            </ContentItem>
+            <ContentItem>
+              <p className="content-item-label">{isCarpoolPage ? '출발 시간' : '만날 시간'}</p>
+              <p className="content-item-text">{contents.time}</p>
+            </ContentItem>
+          </ContentItemContainer>
+
+          <ContentItem>
+            <p className="content-item-label">모집 인원</p>
+            <p className="content-item-text">{contents.personnel} 명</p>
+          </ContentItem>
+
+          <ContentItem>
+            <p className="content-item-label">메모</p>
+            <p className="content-item-text">{contents.content}</p>
+          </ContentItem>
         </ContentList>
       </ContentContainer>
     </ScrollContainer>
@@ -61,11 +63,11 @@ const ContentContainer = styled.div`
   }
 `
 
-const ContentList = styled.div`
+const ContentList = styled.ul`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
 `
 
-const ContentItemContainer = styled.ul`
+const ContentItemContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')}
 `
 

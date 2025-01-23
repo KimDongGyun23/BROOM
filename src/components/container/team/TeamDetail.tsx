@@ -8,7 +8,6 @@ import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useTeamDetailPage } from '@/services/query/useTeamQuery'
 import { useTeamDetailActions } from '@/services/service/useTeamDetailActions'
-import type { CustomPostDetailType } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -34,13 +33,6 @@ import { ErrorPage } from '../home/ErrorPage'
 //       '빠르게 조기퇴소 하실 분들 구해여. 현재 3년차 이상 두명 있습니다. 같이 하실 분들 연락주세요.',
 //   },
 // }
-
-const transformTeamData = (item: CustomPostDetailType['item']) => [
-  { label: '훈련 날짜', content: item.trainingDate },
-  { label: '모임 정보', content: [item.place, item.time] },
-  { label: '모집 인원', content: `${item.personnel}명` },
-  { label: '메모', content: item.content },
-]
 
 export const TeamDetail = () => {
   const { id } = useParams()
@@ -70,7 +62,6 @@ export const TeamDetail = () => {
   // const { profile, item } = dummy
 
   const isMyPost = profile.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
-  const contents = transformTeamData(item)
 
   return (
     <>
@@ -83,7 +74,7 @@ export const TeamDetail = () => {
           onEdit={handleEdit}
         />
         <PostProfile profile={profile} />
-        <PostDetailContent title={item.title} contents={contents} />
+        <PostDetailContent title={item.title} contents={item} />
         <PostBottom
           isMyPost={isMyPost}
           disabled={item.full}
