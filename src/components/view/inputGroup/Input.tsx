@@ -125,7 +125,7 @@ export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) 
 const InputContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.padding('md', 'md', 'md', 'md')};
-  ${({ theme }) => theme.border('input', 'input', 'input', 'input')};
+  ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
   width: 100%;
 `
@@ -154,9 +154,9 @@ const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
 
 const StyledTextArea = styled.textarea`
   ${({ theme }) => theme.padding('md', 'lg', 'md', 'lg')};
+  ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
   ${({ theme }) => theme.font(700, theme.colors.black[300])};
-  ${({ theme }) => theme.border('input', 'input', 'input', 'input')};
   height: 104px;
   resize: none;
 `

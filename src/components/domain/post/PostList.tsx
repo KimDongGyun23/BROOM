@@ -57,7 +57,7 @@ export const PostList = ({ items, to }: PostListProps) => {
 const PostItemLink = styled(Link)`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
   ${({ theme }) => theme.padding('xl', 'md', 'xl', 'md')};
-  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
+  ${({ theme }) => theme.border('divider', 'bottom')};
 `
 
 const PostItemHeader = styled.div`

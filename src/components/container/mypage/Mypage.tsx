@@ -120,7 +120,7 @@ const ActionContainer = styled.div`
 
 const ActionButton = styled.button<{ $isLogout?: boolean }>`
   ${({ theme }) => theme.padding(0, 'lg', 0, 'lg')};
-  ${({ theme, $isLogout }) => theme.border(0, $isLogout ? 'underline' : 0, 0, 0)};
+  ${({ theme, $isLogout }) => theme.border($isLogout ? 'underline' : 0, 'right')};
   ${({ theme, $isLogout }) =>
     theme.font(800, $isLogout ? theme.colors.black[500] : theme.colors.error)};
 `

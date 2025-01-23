@@ -63,7 +63,7 @@ const ProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   ${({ theme }) => theme.padding(0, 0, 'lg', 0)};
-  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
+  ${({ theme }) => theme.border('divider', 'bottom')};
 `
 
 const ProfileInfo = styled.div`

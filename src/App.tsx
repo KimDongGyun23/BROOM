@@ -9,7 +9,7 @@ const AppContainer = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  ${({ theme }) => theme.border(0, 'divider', 0, 'divider')}
+  ${({ theme }) => theme.border('divider', 'right', 'left')}
   position: relative;
   height: 100svh;
   width: 100%;

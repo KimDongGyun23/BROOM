@@ -91,7 +91,7 @@ const SearchForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   ${({ theme }) => theme.padding('sm', 'md', 'sm', 'lg')};
-  ${({ theme }) => theme.border('input', 'input', 'input', 'input')};
+  ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
 `
 

@@ -19,7 +19,7 @@ export const PostActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => 
 const Container = styled.div`
   ${({ theme }) => theme.margin(0, 'container', 0, 'container')};
   ${({ theme }) => theme.padding('sm', 0, 'sm', 0)};
-  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
+  ${({ theme }) => theme.border('divider', 'bottom')};
 `
 
 const ToggleButton = styled.button`

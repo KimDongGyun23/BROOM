@@ -12,6 +12,7 @@ const borderSize = {
 }
 
 const borderRadiusSize = {
+  0: '0',
   sm: '8px',
   md: '10px',
   lg: '12px',
@@ -70,11 +71,12 @@ type BoxShadowKey = keyof typeof boxShadowSize
 type PaddingKey = keyof typeof paddingSize
 type MarginKey = keyof typeof marginSize
 
-export const border = (top: BorderKey, right: BorderKey, bottom: BorderKey, left: BorderKey) => `
-  border-top: ${borderSize[top]};
-  border-right: ${borderSize[right]};
-  border-bottom: ${borderSize[bottom]};
-  border-left: ${borderSize[left]};`
+type BorderDirection = 'top' | 'right' | 'bottom' | 'left'
+
+export const border = (size: BorderKey = 0, ...directions: BorderDirection[]) => {
+  if (directions.length === 0) return `border: ${borderSize[size]};`
+  return directions.map((direction) => `border-${direction}: ${borderSize[size]};`).join(' ')
+}
 
 export const borderRadius = (...args: BorderRadiusKey[]) => {
   if (args.length === 0) return ''

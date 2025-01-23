@@ -69,7 +69,7 @@ const KebabButton = styled.button<{ $isRed?: boolean }>`
 
 const KebabDivider = styled.hr`
   ${({ theme }) => theme.margin('md', 0, 'md', 0)};
-  ${({ theme }) => theme.border(0, 0, 'divider', 0)};
+  ${({ theme }) => theme.border('divider', 'bottom')};
   width: 100%;
   background-color: ${({ theme }) => theme.colors.black[200]};
 `

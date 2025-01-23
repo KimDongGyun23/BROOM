@@ -18,15 +18,9 @@ export const PostAdditionButton = ({ onClick }: PostAdditionButtonProps) => {
 const AddButton = styled.button`
   ${({ theme }) => theme.flexBox('row', 'center', 'center', 'xs')};
   ${({ theme }) => theme.padding('sm', 'lg', 'sm', 'md')};
+  ${({ theme }) => theme.border('post-addition-button')};
   ${({ theme }) => theme.borderRadius('xl')};
   ${({ theme }) => theme.boxShadow('sm')};
-  ${({ theme }) =>
-    theme.border(
-      'post-addition-button',
-      'post-addition-button',
-      'post-addition-button',
-      'post-addition-button',
-    )};
   position: absolute;
   bottom: 100px;
   left: 50%;

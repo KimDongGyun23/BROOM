@@ -43,5 +43,5 @@ export const AgreementToggleButton = styled.button<{ $isChecked: boolean }>`
 export const ViewButton = styled.button`
   ${({ theme }) => theme.font(800, theme.colors.black[400])};
   ${({ theme }) => theme.margin(0, 0, 0, 'auto')};
-  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
+  ${({ theme }) => theme.border('underline', 'bottom')};
 `

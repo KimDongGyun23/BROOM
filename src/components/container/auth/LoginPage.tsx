@@ -73,7 +73,7 @@ const ErrorMessage = styled.p`
 `
 
 const SignUpLink = styled(Link)`
-  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
+  ${({ theme }) => theme.border('underline', 'bottom')};
   display: inline-block;
   color: ${({ theme }) => theme.colors.black[500]};
 `

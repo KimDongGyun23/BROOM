@@ -51,12 +51,11 @@ const Message = styled.div<{ $isMyMessage: boolean }>`
 `
 
 const Bubble = styled.div<{ isMyMessage: boolean }>`
-  ${({ theme }) => theme.borderRadius('bubble')};
+  ${({ theme, isMyMessage }) =>
+    theme.borderRadius(isMyMessage ? 0 : 'bubble', 'bubble', isMyMessage ? 'bubble' : 0, 'bubble')};
   ${({ theme }) => theme.padding('bubble-y', 'bubble-x', 'bubble-y', 'bubble-x')};
   background-color: ${({ theme, isMyMessage }) =>
     isMyMessage ? theme.colors.black[500] : theme.colors.black[100]};
   color: ${({ theme, isMyMessage }) =>
     isMyMessage ? theme.colors.black[100] : theme.colors.black[600]};
-  border-top-left-radius: ${({ isMyMessage }) => (isMyMessage ? '0' : '20px')};
-  border-top-right-radius: ${({ isMyMessage }) => (isMyMessage ? '20px' : '0')};
 `

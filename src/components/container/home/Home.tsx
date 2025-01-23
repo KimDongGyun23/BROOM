@@ -95,7 +95,7 @@ const SectionHeader = styled.div`
 `
 
 const ViewAllLink = styled(Link)`
-  ${({ theme }) => theme.border(0, 0, 'underline', 0)};
+  ${({ theme }) => theme.border('underline', 'bottom')};
   ${({ theme }) => theme.font(900, theme.colors.black[500])};
 `
 
