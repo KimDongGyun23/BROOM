@@ -64,7 +64,7 @@ export type PostDetailRequest = {
 export type PostDetailResponse = PostBasicInfo & PostMetadata & PostDetail & Author
 
 export type PostCreateRequest = {
-  body: PostContent
+  body: PostContent & { category: 'CARPOOL' | 'TEAM' }
 }
 
 export type PostEditPageRequest = {

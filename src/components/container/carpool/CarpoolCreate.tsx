@@ -20,7 +20,7 @@ export const CarpoolCreate = () => {
         onClickComplete={handleSubmit(handleCarpoolCreation)}
       />
       <FormProvider {...formMethod}>
-        <CarpoolFormContainer>
+        <FormContainer>
           <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
             <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
             <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
@@ -52,7 +52,7 @@ export const CarpoolCreate = () => {
             <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
             <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
           </InputGroup>
-        </CarpoolFormContainer>
+        </FormContainer>
       </FormProvider>
     </Container>
   )
@@ -63,7 +63,7 @@ const Container = styled.div`
   height: 100%;
 `
 
-const CarpoolFormContainer = styled.form`
+const FormContainer = styled.form`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 0)};
   ${({ theme }) => theme.padding('lg')};
