@@ -1,18 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  CarpoolCreateRequest,
-  CarpoolDeleteRequest,
-  CarpoolDetailRequest,
-  CarpoolDetailResponse,
-  CarpoolEditRequest,
-  CarpoolId,
-  CarpoolIsFullRequest,
-  CarpoolRecruitResponse,
-  CarpoolResponse,
-  CarpoolSearchRequest,
-} from '@/types/carpool'
-import type { CustomPostDetailType, PostItemType } from '@/types/post'
+  CustomPostDetailType,
+  PostCreateRequest,
+  PostDeleteRequest,
+  PostDetailRequest,
+  PostDetailResponse,
+  PostEditRequest,
+  PostId,
+  PostIsFullRequest,
+  PostRecruitResponse,
+  PostResponse,
+  PostSearchRequest,
+} from '@/types/post'
 
 import { api } from '.'
 
@@ -31,57 +31,38 @@ const API_ENDPOINTS = {
 const queryKeys = {
   all: ['carpool'] as const,
   activeCarpool: () => [...queryKeys.all, 'recruit'] as const,
-  detail: (urls: CarpoolDetailRequest['urls']) =>
-    [...queryKeys.all, ...Object.values(urls)] as const,
-  search: (urls: CarpoolSearchRequest['urls']) =>
-    [...queryKeys.all, ...Object.values(urls)] as const,
+  detail: (urls: PostDetailRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
+  search: (urls: PostSearchRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
 export const useCarpoolList = () => {
-  return useQuery<CarpoolResponse, Error, PostItemType[]>({
+  return useQuery<PostResponse>({
     queryKey: queryKeys.all,
     queryFn: async () => await api.get(API_ENDPOINTS.CARPOOL),
     gcTime: 0,
     staleTime: 0,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.carpoolBoardId,
-        place: item.departPlace,
-        time: item.departTime,
-      })),
   })
 }
 
 export const useActiveCarpoolList = () => {
-  return useQuery<CarpoolRecruitResponse, Error, PostItemType[]>({
+  return useQuery<PostRecruitResponse[]>({
     queryKey: queryKeys.activeCarpool(),
     queryFn: async () => await api.get(API_ENDPOINTS.ACTIVE_CARPOOL),
     gcTime: 0,
     staleTime: 0,
     enabled: false,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.carpoolBoardId,
-        place: item.departPlace,
-        time: item.departTime,
-      })),
   })
 }
 
-export const useCarpoolDetail = ({ urls }: CarpoolDetailRequest) => {
-  return useQuery<CarpoolDetailResponse, Error, CustomPostDetailType>({
+export const useCarpoolDetail = ({ urls }: PostDetailRequest) => {
+  return useQuery<PostDetailResponse, Error, CustomPostDetailType>({
     queryKey: queryKeys.detail(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.carpoolBoardId)),
+    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.boardId)),
     select: (data) => {
-      const { author, createdAt, carpoolBoardId, departPlace, departTime, ...rest } = data
+      const { author, createdAt, ...rest } = data
       return {
         profile: { ...author, createdAt },
         item: {
-          id: carpoolBoardId,
-          place: departPlace,
-          time: departTime,
           createdAt: createdAt,
           ...rest,
         },
@@ -90,24 +71,17 @@ export const useCarpoolDetail = ({ urls }: CarpoolDetailRequest) => {
   })
 }
 
-export const useSearchCarpoolList = ({ urls }: CarpoolSearchRequest) => {
-  return useQuery<CarpoolResponse, Error, PostItemType[]>({
+export const useSearchCarpoolList = ({ urls }: PostSearchRequest) => {
+  return useQuery<PostResponse>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.carpoolBoardId,
-        place: item.departPlace,
-        time: item.departTime,
-      })),
   })
 }
 
 export const useCreateCarpoolPost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<CarpoolId, Error, CarpoolCreateRequest>({
+  return useMutation<PostId, Error, PostCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -118,9 +92,9 @@ export const useCreateCarpoolPost = () => {
 export const useMarkCarpoolAsFull = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, CarpoolIsFullRequest>({
+  return useMutation<void, Error, PostIsFullRequest>({
     mutationFn: async ({ body, urls }) =>
-      await api.put(API_ENDPOINTS.CHECK_FULL(urls.carpoolBoardId), body),
+      await api.put(API_ENDPOINTS.CHECK_FULL(urls.boardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -130,8 +104,8 @@ export const useMarkCarpoolAsFull = () => {
 export const useDeleteCarpool = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, CarpoolDeleteRequest>({
-    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.carpoolBoardId)),
+  return useMutation<void, Error, PostDeleteRequest>({
+    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.boardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -141,9 +115,8 @@ export const useDeleteCarpool = () => {
 export const useUpdateCarpool = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, CarpoolEditRequest>({
-    mutationFn: async ({ body, urls }) =>
-      await api.put(API_ENDPOINTS.EDIT(urls.carpoolBoardId), body),
+  return useMutation<void, Error, PostEditRequest>({
+    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.boardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

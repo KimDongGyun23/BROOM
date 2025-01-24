@@ -13,14 +13,14 @@ export const useTeamDetailActions = (id: number, isFull: boolean) => {
   const { mutate: deleteMutation } = useDeleteTeam()
 
   const handleCheckFull = () => {
-    checkFullMutation({ body: { full: !isFull }, urls: { teamBoardId: id } })
+    checkFullMutation({ body: { full: !isFull }, urls: { boardId: id } })
   }
 
   const handleEdit = () => navigate(`/team/edit/${id}`)
 
   const handleDelete = () => {
     deleteMutation(
-      { urls: { teamBoardId: id } },
+      { urls: { boardId: id } },
       {
         onSuccess: () => navigate('/team', { replace: true }),
       },

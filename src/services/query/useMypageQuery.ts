@@ -1,9 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { CarpoolResponse } from '@/types/carpool'
 import type { UpdateAccountRequest, UpdatePasswordRequest, UserProfile } from '@/types/mypage'
-import type { PostItemType } from '@/types/post'
-import type { TeamResponse } from '@/types/team'
+import type { PostResponse } from '@/types/post'
 
 import { api } from '.'
 
@@ -53,34 +51,20 @@ export const useUpdatePassword = () => {
 }
 
 export const useMyTeamPost = () => {
-  return useQuery<TeamResponse, Error, PostItemType[]>({
+  return useQuery<PostResponse, Error>({
     queryKey: queryKeys.myTeamPost(),
     queryFn: async () => await api.get(API_ENDPOINTS.TEAM_POST),
     gcTime: 0,
     staleTime: 0,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.teamBoardId,
-        place: item.meetingPlace,
-        time: item.meetingTime,
-      })),
   })
 }
 
 export const useMyCarpoolPost = () => {
-  return useQuery<CarpoolResponse, Error, PostItemType[]>({
+  return useQuery<PostResponse, Error>({
     queryKey: queryKeys.myCarpoolPost(),
     queryFn: async () => await api.get(API_ENDPOINTS.CARPOOL_POST),
     gcTime: 0,
     staleTime: 0,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.carpoolBoardId,
-        place: item.departPlace,
-        time: item.departTime,
-      })),
   })
 }
 

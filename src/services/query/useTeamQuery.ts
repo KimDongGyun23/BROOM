@@ -1,18 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { CustomPostDetailType, PostItemType } from '@/types/post'
 import type {
-  TeamCreateRequest,
-  TeamDeleteRequest,
-  TeamDetailRequest,
-  TeamDetailResponse,
-  TeamEditRequest,
-  TeamId,
-  TeamIsFullRequest,
-  TeamRecruitResponse,
-  TeamResponse,
-  TeamSearchRequest,
-} from '@/types/team'
+  PostCreateRequest,
+  PostDeleteRequest,
+  PostDetailRequest,
+  PostDetailResponse,
+  PostEditRequest,
+  PostId,
+  PostIsFullRequest,
+  PostRecruitResponse,
+  PostResponse,
+  PostSearchRequest,
+} from '@/types/post'
 
 import { api } from '.'
 
@@ -30,82 +29,48 @@ const API_ENDPOINTS = {
 
 const queryKeys = {
   all: ['team'] as const,
-  search: (urls: TeamSearchRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
-  detail: (urls: TeamDetailRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
+  search: (urls: PostSearchRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
+  detail: (urls: PostDetailRequest['urls']) => [...queryKeys.all, ...Object.values(urls)] as const,
   activeTeam: () => [...queryKeys.all, 'activeTeam'] as const,
 }
 
 export const useTeamList = () => {
-  return useQuery<TeamResponse, Error, PostItemType[]>({
+  return useQuery<PostResponse, Error>({
     queryKey: queryKeys.all,
     queryFn: async () => await api.get(API_ENDPOINTS.TEAMMATE),
     gcTime: 0,
     staleTime: 0,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.teamBoardId,
-        place: item.meetingPlace,
-        time: item.meetingTime,
-      })),
   })
 }
 
 export const useActiveTeamList = () => {
-  return useQuery<TeamRecruitResponse, Error, PostItemType[]>({
+  return useQuery<PostRecruitResponse, Error>({
     queryKey: queryKeys.activeTeam(),
     queryFn: async () => await api.get(API_ENDPOINTS.ACTIVE_TEAMMATE),
     gcTime: 0,
     staleTime: 0,
     enabled: false,
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.teamBoardId,
-        place: item.meetingPlace,
-        time: item.meetingTime,
-      })),
   })
 }
 
-export const useTeamDetailPage = ({ urls }: TeamDetailRequest) => {
-  return useQuery<TeamDetailResponse, Error, CustomPostDetailType>({
+export const useTeamDetailPage = ({ urls }: PostDetailRequest) => {
+  return useQuery<PostDetailResponse, Error>({
     queryKey: queryKeys.detail(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.teamBoardId)),
-    select: (data) => {
-      const { author, createdAt, teamBoardId, meetingPlace, meetingTime, ...rest } = data
-      return {
-        profile: { ...author, createdAt },
-        item: {
-          id: teamBoardId,
-          place: meetingPlace,
-          time: meetingTime,
-          createdAt: createdAt,
-          ...rest,
-        },
-      }
-    },
+    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.boardId)),
   })
 }
 
-export const useTeamSearchList = ({ urls }: TeamSearchRequest) => {
-  return useQuery<TeamResponse, Error, PostItemType[]>({
+export const useTeamSearchList = ({ urls }: PostSearchRequest) => {
+  return useQuery<PostResponse, Error>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
-    select: (data) =>
-      data.result.map((item) => ({
-        ...item,
-        id: item.teamBoardId,
-        place: item.meetingPlace,
-        time: item.meetingTime,
-      })),
   })
 }
 
 export const useTeamCreate = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<TeamId, Error, TeamCreateRequest>({
+  return useMutation<PostId, Error, PostCreateRequest>({
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -116,7 +81,7 @@ export const useTeamCreate = () => {
 export const useDeleteTeam = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeamDeleteRequest>({
+  return useMutation<void, Error, PostDeleteRequest>({
     mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.teamBoardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -127,7 +92,7 @@ export const useDeleteTeam = () => {
 export const useUpdateTeam = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeamEditRequest>({
+  return useMutation<void, Error, PostEditRequest>({
     mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.teamBoardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
@@ -138,9 +103,9 @@ export const useUpdateTeam = () => {
 export const useTeamCheckFull = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, TeamIsFullRequest>({
+  return useMutation<void, Error, PostIsFullRequest>({
     mutationFn: async ({ body, urls }) =>
-      await api.put(API_ENDPOINTS.CHECK_FULL(urls.teamBoardId), body),
+      await api.put(API_ENDPOINTS.CHECK_FULL(urls.boardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

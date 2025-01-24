@@ -5,10 +5,9 @@ import dayjs from 'dayjs'
 import { api } from '@/services/query'
 import type { LoginCredentials, SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
-import type { CarpoolEditPageRequest, CarpoolForm, CarpoolPostContent } from '@/types/carpool'
 import type { SearchType } from '@/types/common'
 import type { MypageUser, NewPasswordForm } from '@/types/mypage'
-import type { TeamEditPageRequest, TeamForm, TeamPostContent } from '@/types/team'
+import type { PostContent, PostEditPageRequest, PostForm } from '@/types/post'
 import {
   accountSchema,
   busReserveInfoSchema,
@@ -61,7 +60,7 @@ export const useAccountForm = () => {
 }
 
 export const useCarpoolCreateForm = () => {
-  const formMethod = useForm<CarpoolForm>({
+  const formMethod = useForm<PostForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(carpoolSchema),
@@ -70,19 +69,19 @@ export const useCarpoolCreateForm = () => {
   return formMethod
 }
 
-export const useCarpoolEditForm = ({ urls }: CarpoolEditPageRequest) => {
+export const useCarpoolEditForm = ({ urls }: PostEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { departTime, trainingDate, ...rest } = await api.get<CarpoolPostContent>(
-      `/carpool/edit/${urls.carpoolBoardId}`,
+    const { time, trainingDate, ...rest } = await api.get<PostContent>(
+      `/carpool/edit/${urls.boardId}`,
     )
-    const hour = parseInt(departTime.split(':')[0], 10)
-    const minute = parseInt(departTime.split(':')[1], 10)
+    const hour = parseInt(time.split(':')[0], 10)
+    const minute = parseInt(time.split(':')[1], 10)
     const date = dayjs(trainingDate).format('YYYYMMDD')
 
     return { hour, minute, trainingDate: date, ...rest }
   }
 
-  const formMethod = useForm<CarpoolForm>({
+  const formMethod = useForm<PostForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(carpoolSchema),
@@ -103,7 +102,7 @@ export const useSearchForm = (defaultValue: SearchType) => {
 }
 
 export const useTeamCreateForm = () => {
-  const formMethod = useForm<TeamForm>({
+  const formMethod = useForm<PostForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(teamSchema),
@@ -112,20 +111,18 @@ export const useTeamCreateForm = () => {
   return formMethod
 }
 
-export const useTeamEditForm = ({ urls }: TeamEditPageRequest) => {
+export const useTeamEditForm = ({ urls }: PostEditPageRequest) => {
   const getDefaultValues = async () => {
-    const { meetingTime, trainingDate, ...rest } = await api.get<TeamPostContent>(
-      `/team/edit/${urls.teamBoardId}`,
-    )
+    const { time, trainingDate, ...rest } = await api.get<PostContent>(`/team/edit/${urls.boardId}`)
 
-    const hour = parseInt(meetingTime.split(':')[0], 10)
-    const minute = parseInt(meetingTime.split(':')[1], 10)
+    const hour = parseInt(time.split(':')[0], 10)
+    const minute = parseInt(time.split(':')[1], 10)
     const date = dayjs(trainingDate).format('YYYYMMDD')
 
     return { hour, minute, trainingDate: date, ...rest }
   }
 
-  const formMethod = useForm<TeamForm>({
+  const formMethod = useForm<PostForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(teamSchema),

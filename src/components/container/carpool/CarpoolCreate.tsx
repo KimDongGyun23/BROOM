@@ -7,7 +7,7 @@ import { useCarpoolCreateForm } from '@/hooks/useForm'
 import { useCarpoolCreation } from '@/services/service/useCarpoolCreation'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
-const CarpoolForm = () => (
+const PostForm = () => (
   <CarpoolFormContainer>
     <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
       <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
@@ -56,7 +56,7 @@ export const CarpoolCreate = () => {
         onClickComplete={handleSubmit(handleCarpoolCreation)}
       />
       <FormProvider {...formMethod}>
-        <CarpoolForm />
+        <PostForm />
       </FormProvider>
     </Container>
   )
