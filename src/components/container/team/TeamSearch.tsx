@@ -36,7 +36,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
     return <p>error</p>
   }
 
-  return <PostList items={searchList} to={`/carpool/detail`} />
+  return <PostList items={searchList.result} currentPage="team" />
 }
 
 export const TeamSearch = () => {

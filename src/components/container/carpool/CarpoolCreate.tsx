@@ -7,42 +7,6 @@ import { useCarpoolCreateForm } from '@/hooks/useForm'
 import { useCarpoolCreation } from '@/services/service/useCarpoolCreation'
 import { FORM_ATTRIBUTE } from '@/utils/constants'
 
-const PostForm = () => (
-  <CarpoolFormContainer>
-    <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
-    </InputGroup>
-
-    <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
-    </InputGroup>
-
-    <InputGroup section={FORM_ATTRIBUTE.DEPART_PLACE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.DEPART_PLACE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.DEPART_PLACE.input} />
-    </InputGroup>
-
-    <GridContainer>
-      <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
-        <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
-      </InputGroup>
-
-      <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
-        <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
-      </InputGroup>
-    </GridContainer>
-
-    <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
-      <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
-    </InputGroup>
-  </CarpoolFormContainer>
-)
-
 export const CarpoolCreate = () => {
   const formMethod = useCarpoolCreateForm()
   const { handleSubmit } = formMethod
@@ -56,7 +20,39 @@ export const CarpoolCreate = () => {
         onClickComplete={handleSubmit(handleCarpoolCreation)}
       />
       <FormProvider {...formMethod}>
-        <PostForm />
+        <CarpoolFormContainer>
+          <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
+          </InputGroup>
+
+          <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
+          </InputGroup>
+
+          <InputGroup section={FORM_ATTRIBUTE.DEPART_PLACE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.DEPART_PLACE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.DEPART_PLACE.input} />
+          </InputGroup>
+
+          <GridContainer>
+            <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
+              <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
+              <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
+            </InputGroup>
+
+            <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
+              <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
+              <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
+            </InputGroup>
+          </GridContainer>
+
+          <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
+            <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
+          </InputGroup>
+        </CarpoolFormContainer>
       </FormProvider>
     </Container>
   )

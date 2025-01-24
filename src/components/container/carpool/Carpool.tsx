@@ -14,7 +14,7 @@ import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const dummy = [
   {
-    id: 0,
+    boardId: 0,
     title: '소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
     createdAt: '12:43',
     trainingDate: '05/21',
@@ -23,7 +23,7 @@ const dummy = [
     full: false,
   },
   {
-    id: 1,
+    boardId: 1,
     title: '소프트 카풀 하실 분',
     createdAt: '12:43',
     trainingDate: '05/21',
@@ -32,7 +32,7 @@ const dummy = [
     full: false,
   },
   {
-    id: 2,
+    boardId: 2,
     title: '소프트 카풀 하실 분',
     createdAt: '12:43',
     trainingDate: '05/21',
@@ -41,7 +41,7 @@ const dummy = [
     full: true,
   },
   {
-    id: 3,
+    boardId: 3,
     title: '소프트 카풀 하실 분',
     createdAt: '12:43',
     trainingDate: '05/21',
@@ -50,7 +50,7 @@ const dummy = [
     full: true,
   },
   {
-    id: 4,
+    boardId: 4,
     title: '소프트 카풀 하실 분',
     createdAt: '12:43',
     trainingDate: '05/21',
@@ -94,8 +94,8 @@ export const Carpool = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        // <PostList items={carpoolsToShow} to={`/carpool/detail`} />
-        <PostList items={dummy} to={`/carpool/detail`} />
+        // <PostList items={carpoolsToShow} currentPage="carpool" />
+        <PostList items={dummy} currentPage="carpool" />
       )}
       {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNavigation />

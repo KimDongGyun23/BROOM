@@ -36,8 +36,10 @@ const PostContent = () => {
 
   return (
     <ScrollContainer>
-      {activeTab === TAB_LABELS[0] && <PostList items={carpoolPostsData} to={`/carpool/detail`} />}
-      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData} to={`/team/detail`} />}
+      {activeTab === TAB_LABELS[0] && (
+        <PostList items={carpoolPostsData?.result} currentPage="carpool" />
+      )}
+      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData?.result} currentPage="team" />}
     </ScrollContainer>
   )
 }

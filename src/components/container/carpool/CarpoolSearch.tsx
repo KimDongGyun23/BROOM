@@ -33,7 +33,7 @@ const SearchList = ({ filterName, searchName }: SearchListProps) => {
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />
 
-  return <PostList items={searchList} to={`/carpool/detail`} />
+  return <PostList items={searchList.result} currentPage="carpool" />
 }
 
 export const CarpoolSearch = () => {

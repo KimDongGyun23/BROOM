@@ -77,8 +77,8 @@ export const Team = () => {
       <SearchBar currentTab="team" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
 
-      {/* {isLoading ? <Loading /> : <PostList items={dummy} to={`/team/detail`} />} */}
-      {isLoading ? <Loading /> : <PostList items={teamsToShow} to={`/team/detail`} />}
+      {/* {isLoading ? <Loading /> : <PostList items={dummy} currentPage='team' />} */}
+      {isLoading ? <Loading /> : <PostList items={teamsToShow?.result} currentPage="team" />}
 
       {session && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNavigation />

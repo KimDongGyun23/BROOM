@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import type { PostSummary } from '@/types/post'
+import type { TabKey } from '@/utils/constants'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
@@ -39,16 +40,16 @@ const PostItem = ({ item, to }: PostItemProps) => {
 
 type PostListProps = {
   items: PostSummary[] | undefined
-  to: string
+  currentPage: TabKey
 }
 
-export const PostList = ({ items, to }: PostListProps) => {
+export const PostList = ({ items, currentPage }: PostListProps) => {
   if (!items || !items.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
     <PostSection>
       {items.map((item) => (
-        <PostItem key={item.boardId} item={item} to={`${to}/${item.boardId}`} />
+        <PostItem key={item.boardId} item={item} to={`/${currentPage}/detail/${item.boardId}`} />
       ))}
     </PostSection>
   )
