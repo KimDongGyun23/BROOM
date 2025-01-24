@@ -82,7 +82,7 @@ export const useDeleteTeam = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostDeleteRequest>({
-    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.teamBoardId)),
+    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.boardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -93,7 +93,7 @@ export const useUpdateTeam = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.teamBoardId), body),
+    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.boardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

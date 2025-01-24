@@ -1,21 +1,20 @@
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import type { CustomPostDetailType } from '@/types/post'
+import type { PostContent } from '@/types/post'
 
 type DetailContentProps = {
-  title: string
-  contents: CustomPostDetailType['item']
+  contents: PostContent
 }
 
-export const PostDetailContent = ({ title, contents }: DetailContentProps) => {
+export const PostDetailContent = ({ contents }: DetailContentProps) => {
   const { pathname } = useLocation()
   const isCarpoolPage = pathname.includes('carpool')
 
   return (
     <ScrollContainer>
       <ContentContainer>
-        <h3 className="title">{title}</h3>
+        <h3 className="title">{contents.title}</h3>
         <ContentList>
           <ContentItem>
             <p className="content-item-label">훈련 날짜</p>

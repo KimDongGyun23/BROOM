@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  CustomPostDetailType,
   PostCreateRequest,
   PostDeleteRequest,
   PostDetailRequest,
@@ -55,19 +54,9 @@ export const useActiveCarpoolList = () => {
 }
 
 export const useCarpoolDetail = ({ urls }: PostDetailRequest) => {
-  return useQuery<PostDetailResponse, Error, CustomPostDetailType>({
+  return useQuery<PostDetailResponse, Error>({
     queryKey: queryKeys.detail(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.boardId)),
-    select: (data) => {
-      const { author, createdAt, ...rest } = data
-      return {
-        profile: { ...author, createdAt },
-        item: {
-          createdAt: createdAt,
-          ...rest,
-        },
-      }
-    },
   })
 }
 

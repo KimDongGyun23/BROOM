@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
-import type { PostItemType } from '@/types/post'
+import type { PostSummary } from '@/types/post'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
-  item: PostItemType
+  item: PostSummary
   to: string
 }
 
@@ -38,7 +38,7 @@ const PostItem = ({ item, to }: PostItemProps) => {
 }
 
 type PostListProps = {
-  items: PostItemType[] | undefined
+  items: PostSummary[] | undefined
   to: string
 }
 
@@ -48,7 +48,7 @@ export const PostList = ({ items, to }: PostListProps) => {
   return (
     <PostSection>
       {items.map((item) => (
-        <PostItem key={item.id} item={item} to={`${to}/${item.id}`} />
+        <PostItem key={item.boardId} item={item} to={`${to}/${item.boardId}`} />
       ))}
     </PostSection>
   )

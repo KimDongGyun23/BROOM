@@ -1,15 +1,5 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-export type PostItemType = {
-  boardId: number
-  title: string
-  createdAt: string
-  trainingDate: string
-  place: string
-  time: string
-  full: boolean
-}
-
 export type PostAuthorType = {
   userId: string
   nickname: string
@@ -17,23 +7,6 @@ export type PostAuthorType = {
   militaryChaplain: MilitaryBranchCode
   createdAt: string
 }
-
-export type PostDetailType = PostItemType & {
-  personnel: number
-  content: string
-}
-
-export type CustomPostDetailType = {
-  profile: PostAuthorType
-  item: PostDetailType
-}
-
-export type PostSearchType = {
-  category: string
-  keyword: string
-}
-
-//////////////////////////////////////
 
 type PostBasicInfo = {
   title: string
@@ -58,8 +31,13 @@ type Form = Omit<PostBasicInfo, 'time'> & {
   minute: number
 }
 
+type PostSearchType = {
+  category: string
+  keyword: string
+}
+
 type Author = { author: PostAuthorType }
-type PostSummary = PostBasicInfo & PostMetadata
+export type PostSummary = PostBasicInfo & PostMetadata
 
 export type PostContent = PostBasicInfo & PostDetail
 export type PostId = Pick<PostMetadata, 'boardId'>

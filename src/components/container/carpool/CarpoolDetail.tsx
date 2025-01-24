@@ -66,7 +66,7 @@ export const CarpoolDetail = () => {
         onEdit={handleEdit}
       />
       <PostProfile profile={profile} />
-      <PostDetailContent title={item.title} contents={item} />
+      <PostDetailContent contents={item} />
       <PostBottom
         isMyPost={isMyPost}
         disabled={item.full}
