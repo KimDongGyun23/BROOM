@@ -18,7 +18,7 @@ import { api } from '.'
 const API_ENDPOINTS = {
   CARPOOL: '/view/carpool',
   ACTIVE_CARPOOL: '/view/carpool/recruiting',
-  CREATE: '/carpool',
+  CREATE: '/board',
   DETAIL: (id: number) => `/view/carpool/${id}`,
   CHECK_FULL: (id: number) => `/carpool/check/${id}`,
   DELETE: (id: number) => `/carpool/${id}`,
