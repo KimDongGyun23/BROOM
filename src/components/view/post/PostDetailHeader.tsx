@@ -2,23 +2,20 @@ import { Kebab } from '@/components/view/Kebab'
 import { ModalWithTwoButton } from '@/components/view/Modal'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
+import { useIsMyPost, usePost } from '@/stores/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostDetailHeaderProps = {
-  isMyPost: boolean
-  isFull: boolean
   onCheckFull: VoidFunction
   onDelete: VoidFunction
   onEdit: VoidFunction
 }
 
-const LoggedInHeader = ({
-  isMyPost,
-  isFull,
-  onCheckFull,
-  onDelete,
-  onEdit,
-}: PostDetailHeaderProps) => {
+const LoggedInHeader = ({ onCheckFull, onDelete, onEdit }: PostDetailHeaderProps) => {
+  const post = usePost()
+  const isMyPost = useIsMyPost()
+  const isFull = post?.full
+
   const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
   const [isModalOpen, openModal, closeModal] = useBoolean(false)
 

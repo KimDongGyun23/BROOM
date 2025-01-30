@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { PostBottom } from '@/components/domain/post/PostBottom'
 import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
-import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
+import { PostDetailHeader } from '@/components/view/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useTeamDetailPage } from '@/services/query/useTeamQuery'
