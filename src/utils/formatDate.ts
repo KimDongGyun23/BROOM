@@ -1,10 +1,16 @@
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import 'dayjs/locale/ko'
+
+dayjs.extend(customParseFormat)
 
 const DATE_FORMAT = {
   default: 'YYYY-MM-DD',
   compact: 'YYYYMMDD',
+  dateTime: 'YYYY/MM/DD HH:mm',
+  fullTime: 'HH:mm:ss',
+  shortTime: 'HH:mm',
 } as const
 
 type DateFormatKey = keyof typeof DATE_FORMAT

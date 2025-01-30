@@ -80,9 +80,13 @@ const NameSubtitleContainer = styled.div`
 
   .profile-name {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .profile-subtitle {
     ${({ theme }) => theme.font(800, theme.colors.blue[500])};
+    flex-shrink: 0;
   }
 `
