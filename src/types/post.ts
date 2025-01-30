@@ -1,11 +1,9 @@
-import type { MilitaryBranchCode } from '@/utils/constants'
+import type { MilitaryBranchCode, TabUpperKey } from '@/utils/constants'
 
 export type PostAuthorType = {
-  userId: string
-  nickname: string
-  dischargeYear: number
-  militaryChaplain: MilitaryBranchCode
-  createdAt: string
+  WriterNickname: string
+  writerDischargeYear: string
+  writerMilitaryChaplain: MilitaryBranchCode
 }
 
 type PostBasicInfo = {
@@ -16,6 +14,7 @@ type PostBasicInfo = {
 }
 
 type PostMetadata = {
+  category?: TabUpperKey
   createdAt: string
   boardId: number
   full: boolean
@@ -36,7 +35,6 @@ type PostSearchType = {
   keyword: string
 }
 
-type Author = { author: PostAuthorType }
 export type PostSummary = PostBasicInfo & PostMetadata
 
 export type PostContent = PostBasicInfo & PostDetail
@@ -45,6 +43,10 @@ export type PostForm = Form & PostDetail
 
 export type PostResponse = {
   result: PostSummary[]
+}
+
+export type PostRequest = {
+  urls: Pick<PostMetadata, 'category'>
 }
 
 export type PostSearchRequest = {
@@ -61,10 +63,10 @@ export type PostRecruitResponse = {
 export type PostDetailRequest = {
   urls: PostId
 }
-export type PostDetailResponse = PostBasicInfo & PostMetadata & PostDetail & Author
+export type PostDetailResponse = PostBasicInfo & PostMetadata & PostDetail & PostAuthorType
 
 export type PostCreateRequest = {
-  body: PostContent & { category: 'CARPOOL' | 'TEAM' }
+  body: PostContent
 }
 
 export type PostEditPageRequest = {
