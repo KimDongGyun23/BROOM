@@ -55,7 +55,7 @@ export const CarpoolDetail = () => {
   return (
     <Container>
       <CarpoolDetailHeader />
-      <PostProfile profile={profile} />
+      <PostProfile />
       <PostDetailContent contents={item} />
       <Bottom isMyPost={isMyPost} isFull={item.full} />
     </Container>

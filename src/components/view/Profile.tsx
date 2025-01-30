@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import type { PostAuthorType } from '@/types/post'
+import { usePost } from '@/stores/post'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ProfileImage } from './ProfileImage'
@@ -25,18 +25,19 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
   </ProfileContainer>
 )
 
-type PostProfileProps = {
-  profile: PostAuthorType
-}
+export const PostProfile = () => {
+  const post = usePost()
+  if (!post) return null
 
-export const PostProfile = ({ profile }: PostProfileProps) => (
-  <BaseProfile
-    iconType={profile.militaryChaplain}
-    name={profile.nickname}
-    subtitle={`예비군 ${profile.dischargeYear}년차`}
-    description={profile.createdAt}
-  />
-)
+  return (
+    <BaseProfile
+      iconType={post.writerMilitaryChaplain}
+      name={post.WriterNickname}
+      subtitle={`예비군 ${post.writerDischargeYear}년차`}
+      description={post.createdAt}
+    />
+  )
+}
 
 type ChattingRoomProfileProps = {
   opponent: string
