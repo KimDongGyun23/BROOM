@@ -1,45 +1,45 @@
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import type { PostContent } from '@/types/post'
+import { usePost } from '@/stores/post'
 
-type DetailContentProps = {
-  contents: PostContent
-}
-
-export const PostDetailContent = ({ contents }: DetailContentProps) => {
+export const PostDetailContent = () => {
+  const post = usePost()
   const { pathname } = useLocation()
+  if (!post) return
+
+  const { title, trainingDate, place, time, personnel, content } = post
   const isCarpoolPage = pathname.includes('carpool')
 
   return (
     <ScrollContainer>
       <ContentContainer>
-        <h3 className="title">{contents.title}</h3>
+        <h3 className="title">{title}</h3>
         <ContentList>
           <ContentItem>
             <p className="content-item-label">훈련 날짜</p>
-            <p className="content-item-text">{contents.trainingDate}</p>
+            <p className="content-item-text">{trainingDate}</p>
           </ContentItem>
 
           <ContentItemContainer>
             <ContentItem>
               <p className="content-item-label">{isCarpoolPage ? '출발 장소' : '만날 장소'}</p>
-              <p className="content-item-text">{contents.place}</p>
+              <p className="content-item-text">{place}</p>
             </ContentItem>
             <ContentItem>
               <p className="content-item-label">{isCarpoolPage ? '출발 시간' : '만날 시간'}</p>
-              <p className="content-item-text">{contents.time}</p>
+              <p className="content-item-text">{time}</p>
             </ContentItem>
           </ContentItemContainer>
 
           <ContentItem>
             <p className="content-item-label">모집 인원</p>
-            <p className="content-item-text">{contents.personnel} 명</p>
+            <p className="content-item-text">{personnel} 명</p>
           </ContentItem>
 
           <ContentItem>
             <p className="content-item-label">메모</p>
-            <p className="content-item-text">{contents.content}</p>
+            <p className="content-item-text">{content}</p>
           </ContentItem>
         </ContentList>
       </ContentContainer>

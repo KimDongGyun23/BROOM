@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import { CarpoolDetailHeader } from '@/components/domain/carpool/CarpoolDetailHeader'
 import { PostBottom } from '@/components/domain/post/PostBottom'
-import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
 import { Loading } from '@/components/view/Loading'
+import { PostDetailContent } from '@/components/view/post/PostDetailContent'
 import { PostProfile } from '@/components/view/Profile'
 import { useParamId } from '@/hooks/useParamId'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
@@ -56,7 +56,7 @@ export const CarpoolDetail = () => {
     <Container>
       <CarpoolDetailHeader />
       <PostProfile />
-      <PostDetailContent contents={item} />
+      <PostDetailContent />
       <Bottom isMyPost={isMyPost} isFull={item.full} />
     </Container>
   )
