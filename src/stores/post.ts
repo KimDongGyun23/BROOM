@@ -10,13 +10,13 @@ type Actions = {
 
 type PostStore = {
   post: PostDetailResponse | null
-  isMyPost: boolean | null
+  isMyPost: boolean
   actions: Actions
 }
 
 export const usePostStore = create<PostStore>((set) => ({
   post: null,
-  isMyPost: null,
+  isMyPost: false,
   actions: {
     setPost: (post: PostDetailResponse) => {
       const isMyPost = post.WriterNickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)

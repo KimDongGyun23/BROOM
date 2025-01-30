@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { PostBottom } from '@/components/domain/post/PostBottom'
+import { PostBottom } from '@/components/view/post/PostBottom'
 import { PostDetailContent } from '@/components/view/post/PostDetailContent'
 import { PostDetailHeader } from '@/components/view/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'

@@ -3,32 +3,29 @@ import styled from 'styled-components'
 import { Button } from '@/components/view/Button'
 import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
+import { useIsMyPost, usePost } from '@/stores/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostBottomProps = {
-  isMyPost?: boolean
-  disabled?: boolean
-  initialIsBookmarked?: boolean
   onBookmark: VoidFunction
   onChatStart: VoidFunction
 }
 
-export const PostBottom = ({
-  isMyPost = false,
-  disabled = false,
-  initialIsBookmarked = false,
-  onBookmark,
-  onChatStart,
-}: PostBottomProps) => {
+export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
+  const post = usePost()
+  const isMyPost = useIsMyPost()
+  const [isBookmarked, setIsBookmarked] = useToggle()
   const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
-  const [isBookmarked, setIsBookmarked] = useToggle(initialIsBookmarked)
+
+  if (!post || !session) return null
+
+  const isFull = post.full
 
   const handleClickBookmark = () => {
     onBookmark()
     setIsBookmarked()
   }
 
-  if (!session) return null
   return (
     <BottomContainer>
       <BookmarkButton type="button" onClick={handleClickBookmark}>
@@ -39,9 +36,9 @@ export const PostBottom = ({
         secondary={isMyPost}
         size="sm"
         onClick={isMyPost ? undefined : onChatStart}
-        disabled={disabled}
+        disabled={isFull}
       >
-        {disabled ? '모집 마감' : '채팅하기'}
+        {isFull ? '모집 마감' : '채팅하기'}
       </StyledButton>
     </BottomContainer>
   )
