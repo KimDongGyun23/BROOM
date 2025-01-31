@@ -74,7 +74,7 @@ export const FORM_ATTRIBUTE = {
     label: '출발 장소',
     input: { placeholder: '출발 장소를 입력해주세요.' },
   },
-  MEETING_PLACE: {
+  TEAM_PLACE: {
     section: 'place',
     label: '만날 장소',
     input: { placeholder: '만날 장소를 입력해주세요.' },
@@ -149,10 +149,10 @@ export const accountSchema = z
     message: '군종을 선택해주세요.',
   })
 
-export const carpoolSchema = z.object({
+export const postSchema = z.object({
   title: z.string().min(1, { message: '제목을 입력해주세요.' }),
   trainingDate: z.string().min(1, { message: '훈련 날짜를 선택해주세요.' }),
-  place: z.string().min(1, { message: '출발 장소를 입력해주세요.' }),
+  place: z.string().min(1, { message: '장소를 입력해주세요.' }),
   personnel: z.string().refine((value) => value !== '' && value !== null && value !== undefined, {
     message: '필수',
   }),
@@ -163,18 +163,6 @@ export const carpoolSchema = z.object({
     message: '필수',
   }),
   content: z.string().optional(),
-})
-
-export const teamSchema = z.object({
-  title: z.string().min(1, { message: '제목을 입력해주세요.' }),
-  trainingDate: z.string().min(1, { message: '훈련 날짜를 입력해주세요.' }),
-  meetingPlace: z.string().min(1, { message: '출발 장소를 입력해주세요.' }),
-  personnel: z
-    .union([z.string(), z.number()])
-    .transform((value) => (typeof value === 'string' ? parseInt(value, 10) : value)),
-  hour: z.union([z.string(), z.number()]),
-  minute: z.union([z.string(), z.number()]),
-  content: z.string(),
 })
 
 export const busSchema = z.object({

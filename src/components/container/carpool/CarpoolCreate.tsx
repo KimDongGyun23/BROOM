@@ -1,25 +1,25 @@
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { InputGroup } from '@/components/view/inputGroup'
+import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useCreatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 import { TAB_UPPER_KEYS } from '@/utils/constants'
-import { carpoolSchema, FORM_ATTRIBUTE } from '@/utils/schema'
+import { FORM_ATTRIBUTE, postSchema } from '@/utils/schema'
 
 export const CarpoolCreate = () => {
   const navigate = useNavigate()
-  const { mutate: createCarpool } = useCreatePost()
-  const formMethod = useCustomForm<PostForm>(carpoolSchema)
+  const { mutate: createPost } = useCreatePost()
+  const formMethod = useCustomForm<PostForm>(postSchema)
   const {
     handleSubmit,
     formState: { errors },
   } = formMethod
 
-  const handleCarpoolCreation = (formData: PostForm) => {
+  const handlePostCreation = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
@@ -28,18 +28,18 @@ export const CarpoolCreate = () => {
       ...rest,
     }
 
-    createCarpool(
+    createPost(
       { body: submissionData },
       { onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
     )
   }
 
   return (
-    <Container>
+    <PostContainer>
       <SubHeaderWithoutIcon
         type="complete"
         title="승차 공유 등록"
-        onClickComplete={handleSubmit(handleCarpoolCreation)}
+        onClickComplete={handleSubmit(handlePostCreation)}
       />
       <FormProvider {...formMethod}>
         <FormContainer>
@@ -79,22 +79,6 @@ export const CarpoolCreate = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-    </Container>
+    </PostContainer>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
-
-const FormContainer = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('container', 0)};
-  ${({ theme }) => theme.padding('lg')};
-  overflow-y: scroll;
-`
-
-const GridContainer = styled.div`
-  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'lg')};
-`

@@ -10,7 +10,7 @@ import { useParamId } from '@/hooks/useParamId'
 import { useFetchUpdatePostData, useUpdatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 import { TAB_UPPER_KEYS } from '@/utils/constants'
-import { carpoolSchema, FORM_ATTRIBUTE } from '@/utils/schema'
+import { FORM_ATTRIBUTE, postSchema } from '@/utils/schema'
 
 import { ErrorPage } from '../home/ErrorPage'
 
@@ -21,7 +21,7 @@ export const CarpoolEdit = () => {
   const { mutate: carpoolUpdate } = useUpdatePost()
 
   let defaultValues = { ...prevData }
-  const formMethod = useCustomForm<PostForm>(carpoolSchema, { defaultValues })
+  const formMethod = useCustomForm<PostForm>(postSchema, { defaultValues })
   const { handleSubmit } = formMethod
 
   const handleSubmitForm = (formData: PostForm) => {

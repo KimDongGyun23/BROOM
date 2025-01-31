@@ -22,9 +22,9 @@ const TeamEditForm = () => (
       <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
     </InputGroup>
 
-    <InputGroup section={FORM_ATTRIBUTE.MEETING_PLACE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.MEETING_PLACE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.MEETING_PLACE.input} />
+    <InputGroup section={FORM_ATTRIBUTE.TEAM_PLACE.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.TEAM_PLACE.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.TEAM_PLACE.input} />
     </InputGroup>
 
     <GridContainer>

@@ -14,8 +14,8 @@ import {
   busSchema,
   loginSchema,
   newPasswordSchema,
+  postSchema,
   signupSchema,
-  teamSchema,
 } from '@/utils/schema'
 
 export const useLoginForm = () => {
@@ -68,16 +68,6 @@ export const useSearchForm = (defaultValue: SearchType) => {
   return formMethod
 }
 
-export const useTeamCreateForm = () => {
-  const formMethod = useForm<PostForm>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(teamSchema),
-  })
-
-  return formMethod
-}
-
 export const useTeamEditForm = ({ urls }: PostEditPageRequest) => {
   const getDefaultValues = async () => {
     const { time, trainingDate, ...rest } = await api.get<PostContent>(`/team/edit/${urls.boardId}`)
@@ -92,7 +82,7 @@ export const useTeamEditForm = ({ urls }: PostEditPageRequest) => {
   const formMethod = useForm<PostForm>({
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
-    resolver: zodResolver(teamSchema),
+    resolver: zodResolver(postSchema),
     defaultValues: getDefaultValues,
   })
 
