@@ -16,7 +16,7 @@ import type {
   TeamExitChattingRoomRequest,
 } from '@/types/chatting'
 
-import { api } from '.'
+import { instance } from '.'
 
 const POST_PAGES = ['carpool', 'team'] as const
 type PostPageType = (typeof POST_PAGES)[number]
@@ -45,7 +45,7 @@ export const useCarpoolChattingRoomList = () => {
 
   return useQuery<CarpoolChattingListResponse, Error, ChattingListProfileType[]>({
     queryKey: queryKeys.roomList(currentPage),
-    queryFn: async () => await api.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
     gcTime: 0,
     staleTime: 0,
     select: (data) =>
@@ -66,7 +66,7 @@ export const useTeamChattingRoomList = () => {
 
   return useQuery<TeamChattingListResponse, Error, ChattingListProfileType[]>({
     queryKey: queryKeys.roomList(currentPage),
-    queryFn: async () => await api.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.ROOM_LIST(currentPage)),
     gcTime: 0,
     staleTime: 0,
     select: (data) =>
@@ -87,7 +87,7 @@ export const useCarpoolChattingInfo = ({ urls }: CarpoolChattingRoomRequest) => 
 
   return useQuery<CarpoolChattingRoomResponse, Error>({
     queryKey: queryKeys.roomInfo(currentPage, urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
   })
 }
 
@@ -96,7 +96,7 @@ export const useTeamChattingInfo = ({ urls }: TeamChattingRoomRequest) => {
 
   return useQuery<TeamChattingRoomResponse, Error>({
     queryKey: queryKeys.roomInfo(currentPage, urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.ROOM_INFO(currentPage, urls.chatRoomId)),
   })
 }
 
@@ -105,7 +105,7 @@ export const useCarpoolChattingId = () => {
 
   return useMutation<CarpoolChattingIdResponse, Error, CarpoolChattingIdRequest>({
     mutationFn: async ({ urls }) =>
-      await api.post(API_ENDPOINTS.CHATTING_ID(currentPage, urls.carpoolBoardId)),
+      await instance.post(API_ENDPOINTS.CHATTING_ID(currentPage, urls.carpoolBoardId)),
   })
 }
 
@@ -114,7 +114,7 @@ export const useTeamChattingId = () => {
 
   return useMutation<TeamChattingIdResponse, Error, TeamChattingIdRequest>({
     mutationFn: async ({ urls }) =>
-      await api.post(API_ENDPOINTS.CHATTING_ID(currentPage, urls.teamBoardId)),
+      await instance.post(API_ENDPOINTS.CHATTING_ID(currentPage, urls.teamBoardId)),
   })
 }
 
@@ -124,7 +124,7 @@ export const useCarpoolExitChattingRoom = () => {
 
   return useMutation<void, Error, CarpoolExitChattingRoomRequest>({
     mutationFn: async ({ urls }) =>
-      await api.post(API_ENDPOINTS.EXIT(currentPage, urls.chatRoomId)),
+      await instance.post(API_ENDPOINTS.EXIT(currentPage, urls.chatRoomId)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
@@ -135,7 +135,7 @@ export const useTeamExitChattingRoom = () => {
 
   return useMutation<void, Error, TeamExitChattingRoomRequest>({
     mutationFn: async ({ urls }) =>
-      await api.post(API_ENDPOINTS.EXIT(currentPage, urls.chatRoomId)),
+      await instance.post(API_ENDPOINTS.EXIT(currentPage, urls.chatRoomId)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }

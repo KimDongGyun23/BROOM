@@ -6,7 +6,7 @@ import type {
   ReservationStatus,
 } from '@/types/bus'
 
-import { api } from '.'
+import { instance } from '.'
 
 const API_ENDPOINTS = {
   RESERVATION: (studentId: string) => `/bus/reservation/${studentId}`,
@@ -21,13 +21,13 @@ const queryKeys = {
 export const useBusReservationQuery = ({ urls }: BusReservationInfoRequest) => {
   return useQuery<ReservationStatus, Error>({
     queryKey: queryKeys.reservation(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.RESERVATION(urls.studentId)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.RESERVATION(urls.studentId)),
     enabled: false,
   })
 }
 
 export const useBusReservationMutation = () => {
   return useMutation<void, Error, BusReservationRequest>({
-    mutationFn: async ({ body }) => await api.post(`/bus/reservation`, body),
+    mutationFn: async ({ body }) => await instance.post(`/bus/reservation`, body),
   })
 }

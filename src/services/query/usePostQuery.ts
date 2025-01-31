@@ -13,7 +13,7 @@ import type {
   PostSetBookmarkRequest,
 } from '@/types/post'
 
-import { api } from '.'
+import { instance } from '.'
 
 const API_ENDPOINTS = {
   create: '/board',
@@ -33,7 +33,7 @@ const queryKeys = {
 export const usePostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse>({
     queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await api.get(API_ENDPOINTS.detail(urls)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.detail(urls)),
   })
 }
 
@@ -41,7 +41,7 @@ export const useCreatePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<PostId, Error, PostCreateRequest>({
-    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.create, body),
+    mutationFn: async ({ body }) => await instance.post(API_ENDPOINTS.create, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -52,7 +52,7 @@ export const useUpdatePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<PostId, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await api.patch(API_ENDPOINTS.edit(urls), body),
+    mutationFn: async ({ body, urls }) => await instance.patch(API_ENDPOINTS.edit(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -62,7 +62,7 @@ export const useUpdatePost = () => {
 export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse, Error, PostForm>({
     queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await api.get(API_ENDPOINTS.detail(urls)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.detail(urls)),
     select: (data): PostForm => {
       const { title, trainingDate, place, time, personnel, content } = data
       const [hour, minute] = time.split(':')
@@ -83,7 +83,7 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostDeleteRequest>({
-    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.delete(urls)),
+    mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.delete(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -94,7 +94,8 @@ export const useMarkPostAsFull = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostIsFullRequest>({
-    mutationFn: async ({ body, urls }) => await api.patch(API_ENDPOINTS.markIsFull(urls), body),
+    mutationFn: async ({ body, urls }) =>
+      await instance.patch(API_ENDPOINTS.markIsFull(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -105,7 +106,7 @@ export const useSetBookmark = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostSetBookmarkRequest>({
-    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.setBookmark, body),
+    mutationFn: async ({ body }) => await instance.post(API_ENDPOINTS.setBookmark, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -116,7 +117,7 @@ export const useDeleteBookmark = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostDeleteBookmarkRequest>({
-    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.deleteBookmark(urls)),
+    mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.deleteBookmark(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

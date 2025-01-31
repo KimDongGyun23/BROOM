@@ -7,7 +7,7 @@ import type {
   PostSearchRequest,
 } from '@/types/post'
 
-import { api } from '.'
+import { instance } from '.'
 
 const API_ENDPOINTS = {
   CARPOOL: '/view/carpool',
@@ -31,7 +31,7 @@ const queryKeys = {
 export const useCarpoolList = () => {
   return useQuery<PostResponse>({
     queryKey: queryKeys.all,
-    queryFn: async () => await api.get(API_ENDPOINTS.CARPOOL),
+    queryFn: async () => await instance.get(API_ENDPOINTS.CARPOOL),
     gcTime: 0,
     staleTime: 0,
   })
@@ -40,7 +40,7 @@ export const useCarpoolList = () => {
 export const useActiveCarpoolList = () => {
   return useQuery<PostRecruitResponse[]>({
     queryKey: queryKeys.activeCarpool(),
-    queryFn: async () => await api.get(API_ENDPOINTS.ACTIVE_CARPOOL),
+    queryFn: async () => await instance.get(API_ENDPOINTS.ACTIVE_CARPOOL),
     gcTime: 0,
     staleTime: 0,
     enabled: false,
@@ -50,6 +50,6 @@ export const useActiveCarpoolList = () => {
 export const useSearchCarpoolList = ({ urls }: PostSearchRequest) => {
   return useQuery<PostResponse>({
     queryKey: queryKeys.search(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
+    queryFn: async () => await instance.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
   })
 }

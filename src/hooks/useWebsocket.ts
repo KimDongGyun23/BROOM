@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
-import { api } from '@/services/query'
+import { instance } from '@/services/query'
 import { useMessageActions } from '@/stores/message'
 import { useActiveTab } from '@/stores/postTab'
 import { TAB_LIST } from '@/utils/constants'
@@ -16,7 +16,7 @@ export const useWebSocket = (roomId: string | undefined) => {
   const pathByActiveTab = TAB_LIST.find((tab) => tab.label === activeTab)?.key
   const { addMessage } = useMessageActions()
 
-  const token = api.getAccessToken() as string
+  const token = instance.getAccessToken() as string
 
   const connectHandler = () => {
     client.current = new Client({

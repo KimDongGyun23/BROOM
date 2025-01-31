@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { api } from '@/services/query'
+import { instance } from '@/services/query'
 import type { LoginCredentials, SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
@@ -41,7 +41,8 @@ export const useSignupForm = () => {
 
 export const useAccountForm = () => {
   const getDefaultValues = async () => {
-    const { nickname, dischargeYear, militaryChaplain } = await api.get<MypageUser>(`/mypage/info`)
+    const { nickname, dischargeYear, militaryChaplain } =
+      await instance.get<MypageUser>(`/mypage/info`)
     return { nickname, dischargeYear, militaryChaplain }
   }
 

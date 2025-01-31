@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import type { LoginCredentials } from '@/types/auth'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
-import { api } from '../query'
+import { instance } from '../query'
 import { useLogin } from '../query/useAuthQuery'
 
 export const useLoginLogic = () => {
@@ -13,7 +13,7 @@ export const useLoginLogic = () => {
   const navigate = useNavigate()
 
   const handleLoginSuccess = (headers, data) => {
-    api.setAccessToken(headers.authorization)
+    instance.setAccessToken(headers.authorization)
     setIsLoginFailed(false)
     setSessionStorageItem(SESSION_KEYS.REFRESH, headers.refresh)
     setSessionStorageItem(SESSION_KEYS.LOGIN, 'true')
