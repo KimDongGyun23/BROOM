@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
 
 import type {
   LoginRequest,
@@ -11,20 +10,18 @@ import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 import { instance, instanceWithoutAuth } from '.'
 
-const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
-
-const API_ENDPOINTS = {
-  SIGN_IN: `${BASE_URL}/signin`,
-  SIGN_UP: `${BASE_URL}/signup`,
-  VALIDATE_ID: `${BASE_URL}/validate-id`,
-  VALIDATE_NICKNAME: `${BASE_URL}/validate-nickname`,
-  REISSUE: `${BASE_URL}/reissue`,
+const ENDPOINTS = {
+  signIn: `/signin`,
+  signUp: `$/signup`,
+  validateId: `$/validate-id`,
+  validateNickname: `$/validate-nickname`,
+  reIssue: `/reissue`,
 } as const
 
 export const useLogin = () => {
   return useMutation<void, Error, LoginRequest>({
     mutationFn: async ({ body }) =>
-      await axios.post(API_ENDPOINTS.SIGN_IN, body, {
+      await instanceWithoutAuth.post(ENDPOINTS.signIn, body, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -34,24 +31,25 @@ export const useLogin = () => {
 
 export const useSignup = () => {
   return useMutation<void, Error, SignupRequest>({
-    mutationFn: async ({ body }) => await axios.post(API_ENDPOINTS.SIGN_UP, body),
+    mutationFn: async ({ body }) => await instanceWithoutAuth.post(ENDPOINTS.signUp, body),
   })
 }
 
 export const useValidateId = () => {
   return useMutation<void, Error, ValidateIdRequest>({
-    mutationFn: async ({ body }) => await axios.post(API_ENDPOINTS.VALIDATE_ID, body),
+    mutationFn: async ({ body }) => await instanceWithoutAuth.post(ENDPOINTS.validateId, body),
   })
 }
 
 export const useValidateNickname = () => {
   return useMutation<void, Error, ValidateNicknameRequest>({
-    mutationFn: async ({ body }) => await axios.post(API_ENDPOINTS.VALIDATE_ID, body),
+    mutationFn: async ({ body }) =>
+      await instanceWithoutAuth.post(ENDPOINTS.validateNickname, body),
   })
 }
 
 export const reIssue = async () => {
-  const response = await instanceWithoutAuth.post(`/reissue`, null, {
+  const response = await instanceWithoutAuth.post(ENDPOINTS.reIssue, null, {
     headers: {
       refresh: getSessionStorageItem(SESSION_KEYS.REFRESH),
     },
