@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom'
 
 import { PostDetailHeader } from '@/components/view/post/PostDetailHeader'
 import { useParamId } from '@/hooks/useParamId'
-import { useDeleteCarpool, useMarkCarpoolAsFull } from '@/services/query/useCarpoolQuery'
+import { useMarkCarpoolAsFull } from '@/services/query/useCarpoolQuery'
+import { useDeletePost } from '@/services/query/usePostQuery'
 import { usePost } from '@/stores/post'
 
 export const CarpoolDetailHeader = () => {
@@ -10,7 +11,7 @@ export const CarpoolDetailHeader = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
   const { mutate: checkFullMutation } = useMarkCarpoolAsFull()
-  const { mutate: deleteMutation } = useDeleteCarpool()
+  const { mutate: deleteMutation } = useDeletePost()
 
   const handleEdit = () => navigate(`/carpool/edit/${boardId}`)
 

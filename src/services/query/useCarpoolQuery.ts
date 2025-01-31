@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  PostDeleteRequest,
   PostDetailRequest,
   PostIsFullRequest,
   PostRecruitResponse,
@@ -62,17 +61,6 @@ export const useMarkCarpoolAsFull = () => {
   return useMutation<void, Error, PostIsFullRequest>({
     mutationFn: async ({ body, urls }) =>
       await api.put(API_ENDPOINTS.CHECK_FULL(urls.boardId), body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
-  })
-}
-
-export const useDeleteCarpool = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<void, Error, PostDeleteRequest>({
-    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.boardId)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

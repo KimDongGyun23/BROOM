@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
   PostCreateRequest,
+  PostDeleteRequest,
   PostDetailRequest,
   PostDetailResponse,
   PostEditRequest,
@@ -15,6 +16,7 @@ const API_ENDPOINTS = {
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
+  delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
 } as const
 
 const queryKeys = {
@@ -67,6 +69,17 @@ export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
         minute,
         personnel: personnel.toString(),
       }
+    },
+  })
+}
+
+export const useDeletePost = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, PostDeleteRequest>({
+    mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.delete(urls)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
   })
 }
