@@ -108,7 +108,6 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
     <InputContainer>
       <StyledUnitInput
         type="number"
-        size={2}
         $textAlign="center"
         {...register(hourSection, { onChange: handleHourChange })}
         placeholder="00"
@@ -117,9 +116,8 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
       <InputLabel>:</InputLabel>
       <StyledUnitInput
         type="number"
-        size={2}
         $textAlign="center"
-        {...register(hourSection, { onChange: handleMinuteChange })}
+        {...register(minuteSection, { onChange: handleMinuteChange })}
         placeholder="00"
         {...rest}
       />

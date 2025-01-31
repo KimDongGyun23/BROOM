@@ -69,8 +69,16 @@ export const carpoolSchema = z.object({
     .refine((value) => value !== '' && value !== null && value !== undefined, {
       message: '필수',
     }),
-  hour: z.union([z.string(), z.number()]),
-  minute: z.union([z.string(), z.number()]),
+  hour: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== '' && value !== null && value !== undefined, {
+      message: '필수',
+    }),
+  minute: z
+    .union([z.string(), z.number()])
+    .refine((value) => value !== '' && value !== null && value !== undefined, {
+      message: '필수',
+    }),
   content: z.string().optional(),
 })
 

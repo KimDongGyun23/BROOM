@@ -1,16 +1,45 @@
 import { FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useCarpoolCreateForm } from '@/hooks/useForm'
-import { useCarpoolCreation } from '@/services/service/useCarpoolCreation'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { useCreatePost } from '@/services/query/usePostQuery'
+import type { PostForm } from '@/types/post'
+import { FORM_ATTRIBUTE, TAB_UPPER_KEYS } from '@/utils/constants'
+import { formatDate } from '@/utils/formatDate'
 
 export const CarpoolCreate = () => {
+  const navigate = useNavigate()
+  const { mutate: createCarpool } = useCreatePost()
+
   const formMethod = useCarpoolCreateForm()
-  const { handleSubmit } = formMethod
-  const { handleCarpoolCreation } = useCarpoolCreation()
+  const {
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = formMethod
+
+  const handleCarpoolCreation = (formData: PostForm) => {
+    const { hour, minute, trainingDate, personnel, ...rest } = formData
+    const submissionData = {
+      trainingDate: formatDate(trainingDate, 'default', 'compact'),
+      time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
+      category: TAB_UPPER_KEYS[0],
+      personnel: Number.isNaN(personnel) ? personnel : 0,
+      ...rest,
+    }
+
+    console.log(submissionData)
+
+    // createCarpool(
+    //   { body: submissionData },
+    //   { onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
+    // )
+  }
+
+  console.log(errors, getValues())
 
   return (
     <Container>
@@ -28,22 +57,25 @@ export const CarpoolCreate = () => {
 
           <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
             <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
-            <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
+            <InputGroup.DateInput {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
           </InputGroup>
 
-          <InputGroup section={FORM_ATTRIBUTE.DEPART_PLACE.section}>
-            <InputGroup.Label label={FORM_ATTRIBUTE.DEPART_PLACE.label} />
-            <InputGroup.Input {...FORM_ATTRIBUTE.DEPART_PLACE.input} />
+          <InputGroup section={FORM_ATTRIBUTE.CARPOOL_PLACE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.CARPOOL_PLACE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.CARPOOL_PLACE.input} />
           </InputGroup>
 
           <GridContainer>
             <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
               <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
-              <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
+              <InputGroup.NumberUnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
             </InputGroup>
 
             <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
-              <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
+              <InputGroup.Label
+                label={FORM_ATTRIBUTE.TIME.label}
+                errorMessage={errors.hour?.message || errors.minute?.message}
+              />
               <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
             </InputGroup>
           </GridContainer>
