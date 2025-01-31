@@ -1,8 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import type {
   PostDetailRequest,
-  PostIsFullRequest,
   PostRecruitResponse,
   PostResponse,
   PostSearchRequest,
@@ -52,17 +51,5 @@ export const useSearchCarpoolList = ({ urls }: PostSearchRequest) => {
   return useQuery<PostResponse>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
-  })
-}
-
-export const useMarkCarpoolAsFull = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<void, Error, PostIsFullRequest>({
-    mutationFn: async ({ body, urls }) =>
-      await api.put(API_ENDPOINTS.CHECK_FULL(urls.boardId), body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
   })
 }

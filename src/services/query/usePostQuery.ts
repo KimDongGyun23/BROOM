@@ -8,6 +8,7 @@ import type {
   PostEditRequest,
   PostForm,
   PostId,
+  PostIsFullRequest,
 } from '@/types/post'
 
 import { api } from '.'
@@ -17,6 +18,7 @@ const API_ENDPOINTS = {
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
   delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
+  markIsFull: (urls: PostIsFullRequest['urls']) => `/board/check/${urls.boardId}`,
 } as const
 
 const queryKeys = {
@@ -46,7 +48,7 @@ export const useUpdatePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<PostId, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.edit(urls), body),
+    mutationFn: async ({ body, urls }) => await api.patch(API_ENDPOINTS.edit(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -78,6 +80,17 @@ export const useDeletePost = () => {
 
   return useMutation<void, Error, PostDeleteRequest>({
     mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.delete(urls)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useMarkPostAsFull = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<void, Error, PostIsFullRequest>({
+    mutationFn: async ({ body, urls }) => await api.patch(API_ENDPOINTS.markIsFull(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
