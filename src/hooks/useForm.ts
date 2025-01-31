@@ -1,20 +1,17 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import dayjs from 'dayjs'
 
 import { api } from '@/services/query'
 import type { LoginCredentials, SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
 import type { MypageUser, NewPasswordForm } from '@/types/mypage'
-import type { PostContent, PostEditPageRequest, PostForm } from '@/types/post'
 import {
   accountSchema,
   busReserveInfoSchema,
   busSchema,
   loginSchema,
   newPasswordSchema,
-  postSchema,
   signupSchema,
 } from '@/utils/schema'
 
@@ -63,27 +60,6 @@ export const useSearchForm = (defaultValue: SearchType) => {
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     defaultValues: defaultValue,
-  })
-
-  return formMethod
-}
-
-export const useTeamEditForm = ({ urls }: PostEditPageRequest) => {
-  const getDefaultValues = async () => {
-    const { time, trainingDate, ...rest } = await api.get<PostContent>(`/team/edit/${urls.boardId}`)
-
-    const hour = parseInt(time.split(':')[0], 10)
-    const minute = parseInt(time.split(':')[1], 10)
-    const date = dayjs(trainingDate).format('YYYYMMDD')
-
-    return { hour, minute, trainingDate: date, ...rest }
-  }
-
-  const formMethod = useForm<PostForm>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(postSchema),
-    defaultValues: getDefaultValues,
   })
 
   return formMethod
