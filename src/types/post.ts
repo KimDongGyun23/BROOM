@@ -39,7 +39,11 @@ export type PostSummary = PostBasicInfo & PostMetadata
 
 export type PostContent = PostBasicInfo & PostDetail
 export type PostId = Pick<PostMetadata, 'boardId'>
-export type PostForm = Form & PostDetail
+export type PostForm = Form &
+  PostDetail &
+  Omit<PostDetail, 'personnel'> & {
+    personnel: string
+  }
 
 export type PostResponse = {
   result: PostSummary[]

@@ -1,11 +1,12 @@
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { PostDetailRequest, PostDetailResponse } from '@/types/post'
+import type { PostCreateRequest, PostDetailRequest, PostDetailResponse, PostId } from '@/types/post'
 
 import { api } from '.'
 
 const API_ENDPOINTS = {
-  DETAIL: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
+  create: '/board',
+  detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
 } as const
 
 const queryKeys = {
@@ -16,6 +17,17 @@ const queryKeys = {
 export const usePostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse>({
     queryKey: queryKeys.detail(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls)),
+    queryFn: async () => await api.get(API_ENDPOINTS.detail(urls)),
+  })
+}
+
+export const useCreatePost = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<PostId, Error, PostCreateRequest>({
+    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.create, body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
   })
 }

@@ -8,7 +8,6 @@ import { useCarpoolCreateForm } from '@/hooks/useForm'
 import { useCreatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 import { FORM_ATTRIBUTE, TAB_UPPER_KEYS } from '@/utils/constants'
-import { formatDate } from '@/utils/formatDate'
 
 export const CarpoolCreate = () => {
   const navigate = useNavigate()
@@ -17,29 +16,23 @@ export const CarpoolCreate = () => {
   const formMethod = useCarpoolCreateForm()
   const {
     handleSubmit,
-    getValues,
     formState: { errors },
   } = formMethod
 
   const handleCarpoolCreation = (formData: PostForm) => {
-    const { hour, minute, trainingDate, personnel, ...rest } = formData
+    const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
-      trainingDate: formatDate(trainingDate, 'default', 'compact'),
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
       category: TAB_UPPER_KEYS[0],
-      personnel: Number.isNaN(personnel) ? personnel : 0,
+      personnel: parseInt(personnel),
       ...rest,
     }
 
-    console.log(submissionData)
-
-    // createCarpool(
-    //   { body: submissionData },
-    //   { onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
-    // )
+    createCarpool(
+      { body: submissionData },
+      { onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
+    )
   }
-
-  console.log(errors, getValues())
 
   return (
     <Container>
