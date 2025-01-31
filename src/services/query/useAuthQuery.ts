@@ -9,6 +9,8 @@ import type {
 } from '@/types/auth'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
+import { instance, instanceWithoutAuth } from '.'
+
 const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
 const API_ENDPOINTS = {
@@ -49,9 +51,15 @@ export const useValidateNickname = () => {
 }
 
 export const reIssue = async () => {
-  return await axios.post(`${BASE_URL}/reissue`, undefined, {
+  const response = await instanceWithoutAuth.post(`/reissue`, null, {
     headers: {
       refresh: getSessionStorageItem(SESSION_KEYS.REFRESH),
     },
   })
+
+  const newToken = response.headers['authorization']
+  if (newToken) instance.setAccessToken(newToken)
+  else console.error('토큰이 존재하지 않습니다.')
+
+  return response
 }

@@ -70,16 +70,15 @@ export class HttpClient {
     const originalRequest = error.config as InternalAxiosRequestConfig
 
     if (isAxiosError(error)) {
-      if (response?.status === 401 || response?.status === 403) {
+      if (response?.status === 403) {
         try {
-          const reIssueResponse = (await reIssue()) as AxiosResponse
-          const newAccessToken = reIssueResponse.headers['authorization']
-
-          this.setAccessToken(newAccessToken)
-          const response = this.client.request(originalRequest)
-
-          return response
-        } catch {
+          const reIssueResponse = await reIssue()
+          if (reIssueResponse.status === 200) {
+            const retryRequest = await this.client.request(originalRequest)
+            return retryRequest
+          }
+        } catch (reIssueError) {
+          console.error('재발급 실패', reIssueError)
           clearSessionStorage()
           window.location.href = '/login'
         }
