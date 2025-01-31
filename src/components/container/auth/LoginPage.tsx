@@ -1,25 +1,62 @@
+import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
-import { useLoginForm } from '@/hooks/useForm'
-import { useLoginLogic } from '@/services/service/useLoginLogic'
-import { FORM_ATTRIBUTE } from '@/utils/schema'
+import { useCustomForm } from '@/hooks/useCustomForm'
+import { instance } from '@/services/query'
+import { useLogin } from '@/services/query/useAuthQuery'
+import { Container, FormContainer } from '@/styles/commonStyles'
+import type { LoginCredentials } from '@/types/auth'
+import { FORM_ATTRIBUTE, loginSchema } from '@/utils/schema'
+import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
+
+const useLoginState = () => {
+  const navigate = useNavigate()
+  const [isLoginFailed, setIsLoginFailed] = useState(false)
+  const { mutate: login } = useLogin()
+
+  const handleLogin = (formData: LoginCredentials) => {
+    login(
+      { body: { ...formData } },
+      {
+        onSuccess: ({ headers, data }) => {
+          if (headers.authorization) {
+            instance.setAccessToken(headers.authorization)
+            setIsLoginFailed(false)
+            setSessionStorageItem(SESSION_KEYS.LOGIN, 'true')
+            setSessionStorageItem(SESSION_KEYS.NICKNAME, data.nickname)
+            setSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN, data.militaryChaplain)
+            navigate('/home', { replace: true })
+          }
+        },
+        onError: () => setIsLoginFailed(true),
+      },
+    )
+  }
+
+  return { isLoginFailed, handleLogin }
+}
 
 export const LoginPage = () => {
-  const formMethod = useLoginForm()
+  const { isLoginFailed, handleLogin } = useLoginState()
+  const formMethod = useCustomForm<LoginCredentials>(loginSchema, {
+    defaultValues: {
+      userId: 'test01',
+      password: 'password',
+    },
+  })
 
   const { handleSubmit } = formMethod
-  const { isLoginFailed, handleLogin } = useLoginLogic()
 
   return (
     <Container>
       <Logo>BROOM</Logo>
 
       <FormProvider {...formMethod}>
-        <StyledForm onSubmit={handleSubmit(handleLogin)}>
+        <FormContainer onSubmit={handleSubmit(handleLogin)}>
           <InputGroup section={FORM_ATTRIBUTE.LOGIN_ID.section}>
             <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_ID.label} />
             <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_ID.input} />
@@ -33,7 +70,7 @@ export const LoginPage = () => {
           <Button size="lg" type="submit">
             로그인
           </Button>
-        </StyledForm>
+        </FormContainer>
       </FormProvider>
 
       <BottomContainer $isLoginFailed={isLoginFailed}>
@@ -44,10 +81,6 @@ export const LoginPage = () => {
   )
 }
 
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-`
-
 const Logo = styled.h1`
   ${({ theme }) => theme.margin('logo-sm-top', 'container', 'logo-sm-bottom')};
   text-align: center;
@@ -55,11 +88,6 @@ const Logo = styled.h1`
   font-size: 60px;
   line-height: 44px;
   color: ${({ theme }) => theme.colors.black[600]};
-`
-
-const StyledForm = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
-  ${({ theme }) => theme.margin(0, 'container')};
 `
 
 const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
@@ -74,6 +102,5 @@ const ErrorMessage = styled.p`
 
 const SignUpLink = styled(Link)`
   ${({ theme }) => theme.border('underline', 'bottom')};
-  display: inline-block;
   color: ${({ theme }) => theme.colors.black[500]};
 `

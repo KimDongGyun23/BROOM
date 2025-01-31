@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { instance } from '@/services/query'
-import type { LoginCredentials, SignupData } from '@/types/auth'
+import type { SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
 import type { MypageUser, NewPasswordForm } from '@/types/mypage'
@@ -10,24 +10,9 @@ import {
   accountSchema,
   busReserveInfoSchema,
   busSchema,
-  loginSchema,
   newPasswordSchema,
   signupSchema,
 } from '@/utils/schema'
-
-export const useLoginForm = () => {
-  const formMethod = useForm<LoginCredentials>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    defaultValues: {
-      userId: 'test01',
-      password: 'password',
-    },
-    resolver: zodResolver(loginSchema),
-  })
-
-  return formMethod
-}
 
 export const useSignupForm = () => {
   const formMethod = useForm<SignupData>({

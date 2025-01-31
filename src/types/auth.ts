@@ -1,3 +1,5 @@
+import type { AxiosResponse } from 'axios'
+
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 type User = {
@@ -10,7 +12,6 @@ type User = {
 
 export type LoginCredentials = Pick<User, 'userId' | 'password'>
 export type SignupData = User & { confirm: string }
-export type SavedUserData = Pick<User, 'nickname' | 'militaryChaplain'>
 
 export type LoginRequest = {
   body: LoginCredentials
@@ -26,4 +27,11 @@ export type ValidateIdRequest = {
 
 export type ValidateNicknameRequest = {
   body: Pick<User, 'nickname'>
+}
+
+export type LoginResponse = AxiosResponse<Pick<User, 'nickname' | 'militaryChaplain'>> & {
+  headers: {
+    authorization?: string
+    refresh?: string
+  }
 }

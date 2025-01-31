@@ -3,7 +3,6 @@ export const SESSION_KEYS = {
   NICKNAME: 'nickname',
   MILITARY_CHAPLAIN: 'chaplain',
   ROOM_TYPE: 'room_type',
-  REFRESH: 'hserfer',
   POST_TAB: 'post-tab',
   BOOKMARK_TAB: 'bookmark-tab',
   CHATTING_TAB: 'chatting-tab',

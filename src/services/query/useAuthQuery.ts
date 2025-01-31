@@ -2,11 +2,11 @@ import { useMutation } from '@tanstack/react-query'
 
 import type {
   LoginRequest,
+  LoginResponse,
   SignupRequest,
   ValidateIdRequest,
   ValidateNicknameRequest,
 } from '@/types/auth'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 import { instance, instanceWithoutAuth } from '.'
 
@@ -19,7 +19,7 @@ const ENDPOINTS = {
 } as const
 
 export const useLogin = () => {
-  return useMutation<void, Error, LoginRequest>({
+  return useMutation<LoginResponse, Error, LoginRequest>({
     mutationFn: async ({ body }) =>
       await instanceWithoutAuth.post(ENDPOINTS.signIn, body, {
         headers: {
@@ -49,11 +49,7 @@ export const useValidateNickname = () => {
 }
 
 export const reIssue = async () => {
-  const response = await instanceWithoutAuth.post(ENDPOINTS.reIssue, null, {
-    headers: {
-      refresh: getSessionStorageItem(SESSION_KEYS.REFRESH),
-    },
-  })
+  const response = await instanceWithoutAuth.post(ENDPOINTS.reIssue, null)
 
   const newToken = response.headers['authorization']
   if (newToken) instance.setAccessToken(newToken)
