@@ -11,7 +11,7 @@ import { useBoolean } from '@/hooks/useBoolean'
 import { useBusForm } from '@/hooks/useForm'
 import { useBusReservationMutation } from '@/services/query/useBusQuery'
 import type { BusReservationForm } from '@/types/bus'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 const ReservationForm = () => (
   <StyledForm>

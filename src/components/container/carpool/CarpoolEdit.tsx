@@ -9,8 +9,8 @@ import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
 import { useFetchUpdatePostData, useUpdatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
-import { FORM_ATTRIBUTE, TAB_UPPER_KEYS } from '@/utils/constants'
-import { carpoolSchema } from '@/utils/schema'
+import { TAB_UPPER_KEYS } from '@/utils/constants'
+import { carpoolSchema, FORM_ATTRIBUTE } from '@/utils/schema'
 
 import { ErrorPage } from '../home/ErrorPage'
 

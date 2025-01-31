@@ -7,8 +7,8 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useCreatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
-import { FORM_ATTRIBUTE, TAB_UPPER_KEYS } from '@/utils/constants'
-import { carpoolSchema } from '@/utils/schema'
+import { TAB_UPPER_KEYS } from '@/utils/constants'
+import { carpoolSchema, FORM_ATTRIBUTE } from '@/utils/schema'
 
 export const CarpoolCreate = () => {
   const navigate = useNavigate()

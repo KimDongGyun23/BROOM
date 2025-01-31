@@ -8,7 +8,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useNewPasswordForm } from '@/hooks/useForm'
 import { usePasswordUpdate } from '@/services/service/usePasswordUpdate'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 const PasswordForm = () => (
   <StyledForm>

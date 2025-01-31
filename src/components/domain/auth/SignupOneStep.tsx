@@ -4,7 +4,7 @@ import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useIdValidation } from '@/services/service/useIdValidation'
 import { useStepsActions } from '@/stores/steps'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 import { FormContainer, StyledButton, ValidateContainer } from './SignupStyle'
 

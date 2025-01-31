@@ -8,7 +8,7 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useAccountForm } from '@/hooks/useForm'
 import { useAccountUpdate } from '@/services/service/useAccountUpdate'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 type AccountFormType = {
   isEditMode: boolean

@@ -5,7 +5,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useTeamCreateForm } from '@/hooks/useForm'
 import { useTeamCreation } from '@/services/service/useTeamCreation'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 const TeamForm = () => (
   <TeamFormContainer>

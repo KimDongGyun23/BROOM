@@ -6,7 +6,7 @@ import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { useLoginForm } from '@/hooks/useForm'
 import { useLoginLogic } from '@/services/service/useLoginLogic'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 export const LoginPage = () => {
   const formMethod = useLoginForm()

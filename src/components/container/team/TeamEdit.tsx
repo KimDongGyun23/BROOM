@@ -6,7 +6,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useTeamEditForm } from '@/hooks/useForm'
 import { useTeamUpdate } from '@/services/service/useTeamUpdate'
-import { FORM_ATTRIBUTE } from '@/utils/constants'
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 import { ErrorPage } from '../home/ErrorPage'
 
