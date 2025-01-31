@@ -93,30 +93,40 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
   const { register, setValue } = useFormContext()
 
   const handleHourChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Math.max(0, Math.min(23, parseInt(event.target.value, 10) || 0))
+    const input = event.target as HTMLInputElement
+    input.value = input.value.replace(/[^0-9]/g, '')
+    const value =
+      event.target.value === ''
+        ? ''
+        : Math.max(0, Math.min(23, parseInt(event.target.value, 10) || 0))
     setValue(hourSection, value)
   }
 
   const handleMinuteChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = Math.max(0, Math.min(59, parseInt(event.target.value, 10) || 0))
+    const input = event.target as HTMLInputElement
+    input.value = input.value.replace(/[^0-9]/g, '')
+    const value =
+      event.target.value === ''
+        ? ''
+        : Math.max(0, Math.min(59, parseInt(event.target.value, 10) || 0))
     setValue(minuteSection, value)
   }
 
   return (
     <InputContainer>
       <StyledUnitInput
-        type="number"
+        type="text"
         $textAlign="center"
-        {...register(hourSection, { onChange: handleHourChange })}
         placeholder="00"
+        {...register(hourSection, { onChange: handleHourChange })}
         {...rest}
       />
       <InputLabel>:</InputLabel>
       <StyledUnitInput
-        type="number"
+        type="text"
         $textAlign="center"
-        {...register(minuteSection, { onChange: handleMinuteChange })}
         placeholder="00"
+        {...register(minuteSection, { onChange: handleMinuteChange })}
         {...rest}
       />
     </InputContainer>
