@@ -1,31 +1,25 @@
-import styled from 'styled-components'
-
-import { CarpoolDetailFooter } from '@/components/domain/carpool/CarpoolDetailFooter'
-import { CarpoolDetailHeader } from '@/components/domain/carpool/CarpoolDetailHeader'
+import { CarpoolDetailFooter } from '@/components/domain/post/CarpoolDetailFooter'
+import { CarpoolDetailHeader } from '@/components/domain/post/CarpoolDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostDetailContent } from '@/components/view/post/PostDetailContent'
+import { PostContainer } from '@/components/view/post/PostStyle'
 import { PostProfile } from '@/components/view/Profile'
-import { useCarpoolInitialize } from '@/services/service/useCarpoolInitialize'
+import { usePostInitialize } from '@/services/service/usePostInitialize'
 
 import { ErrorPage } from '../home/ErrorPage'
 
 export const CarpoolDetail = () => {
-  const { carpoolDetail, isPending, isError } = useCarpoolInitialize()
+  const { postDetail, isPending, isError } = usePostInitialize()
 
   if (isPending) return <Loading />
-  if (isError || !carpoolDetail) return <ErrorPage />
+  if (isError || !postDetail) return <ErrorPage />
 
   return (
-    <Container>
+    <PostContainer>
       <CarpoolDetailHeader />
       <PostProfile />
       <PostDetailContent />
       <CarpoolDetailFooter />
-    </Container>
+    </PostContainer>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
