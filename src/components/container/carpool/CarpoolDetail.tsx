@@ -1,5 +1,5 @@
 import { CarpoolDetailFooter } from '@/components/domain/post/CarpoolDetailFooter'
-import { CarpoolDetailHeader } from '@/components/domain/post/CarpoolDetailHeader'
+import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostDetailContent } from '@/components/view/post/PostDetailContent'
 import { PostContainer } from '@/components/view/post/PostStyle'
@@ -16,7 +16,7 @@ export const CarpoolDetail = () => {
 
   return (
     <PostContainer>
-      <CarpoolDetailHeader />
+      <PostDetailHeader />
       <PostProfile />
       <PostDetailContent />
       <CarpoolDetailFooter />

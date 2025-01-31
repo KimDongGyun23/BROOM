@@ -1,5 +1,5 @@
+import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { TeamDetailFooter } from '@/components/domain/post/TeamDetailFooter'
-import { TeamDetailHeader } from '@/components/domain/post/TeamDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostDetailContent } from '@/components/view/post/PostDetailContent'
 import { PostContainer } from '@/components/view/post/PostStyle'
@@ -17,7 +17,7 @@ export const TeamDetail = () => {
   return (
     <>
       <PostContainer>
-        <TeamDetailHeader />
+        <PostDetailHeader />
         <PostProfile />
         <PostDetailContent />
         <TeamDetailFooter />
