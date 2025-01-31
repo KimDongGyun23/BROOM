@@ -20,6 +20,7 @@ type PostMetadata = {
   boardId: number
   full: boolean
   category?: TabUpperKey
+  isBookmark: boolean
 }
 
 type PostDetail = {
@@ -87,5 +88,13 @@ export type PostDeleteRequest = {
 
 export type PostIsFullRequest = {
   body: Pick<PostMetadata, 'full'>
+  urls: PostId
+}
+
+export type PostSetBookmarkRequest = {
+  body: PostId
+}
+
+export type PostDeleteBookmarkRequest = {
   urls: PostId
 }
