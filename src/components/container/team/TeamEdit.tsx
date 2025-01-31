@@ -1,85 +1,95 @@
 import { FormProvider } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
-import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 import { InputGroup } from '@/components/view/inputGroup'
+import { Loading } from '@/components/view/Loading'
+import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useTeamEditForm } from '@/hooks/useForm'
-import { useTeamUpdate } from '@/services/service/useTeamUpdate'
-import { FORM_ATTRIBUTE } from '@/utils/schema'
+import { useCustomForm } from '@/hooks/useCustomForm'
+import { useParamId } from '@/hooks/useParamId'
+import { useFetchUpdatePostData, useUpdatePost } from '@/services/query/usePostQuery'
+import type { PostForm } from '@/types/post'
+import { TAB_UPPER_KEYS } from '@/utils/constants'
+import { FORM_ATTRIBUTE, postSchema } from '@/utils/schema'
 
 import { ErrorPage } from '../home/ErrorPage'
 
-const TeamEditForm = () => (
-  <TeamFormContainer>
-    <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
-    </InputGroup>
-
-    <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
-    </InputGroup>
-
-    <InputGroup section={FORM_ATTRIBUTE.TEAM_PLACE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.TEAM_PLACE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.TEAM_PLACE.input} />
-    </InputGroup>
-
-    <GridContainer>
-      <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
-        <InputGroup.UnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
-      </InputGroup>
-
-      <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
-        <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
-      </InputGroup>
-    </GridContainer>
-
-    <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
-      <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
-    </InputGroup>
-  </TeamFormContainer>
-)
-
 export const TeamEdit = () => {
-  const { id } = useParams()
-  if (!id) return <ErrorPage />
+  const boardId = useParamId()
+  const navigate = useNavigate()
+  const { data: prevData, isPending, isError } = useFetchUpdatePostData({ urls: { boardId } })
+  const { mutate: postUpdate } = useUpdatePost()
 
-  const formMethod = useTeamEditForm({ urls: { teamBoardId: parseInt(id as string) } })
+  let defaultValues = { ...prevData }
+  const formMethod = useCustomForm<PostForm>(postSchema, { defaultValues })
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = formMethod
 
-  const { handleSubmit } = formMethod
-  const { handleSubmitForm } = useTeamUpdate(id as string)
+  const handleSubmitForm = (formData: PostForm) => {
+    const { hour, minute, personnel, ...rest } = formData
+    const submissionData = {
+      time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
+      category: TAB_UPPER_KEYS[1],
+      personnel: parseInt(personnel as string),
+      ...rest,
+    }
+
+    postUpdate(
+      { urls: { boardId }, body: submissionData },
+      { onSuccess: ({ boardId }) => navigate(`/team/detail/${boardId}`, { replace: true }) },
+    )
+  }
+
+  if (isPending) return <Loading />
+  if (isError || !prevData) return <ErrorPage />
 
   return (
-    <Container>
+    <PostContainer>
       <SubHeaderWithoutIcon
         type="complete"
         title="팀원 모집 수정"
         onClickComplete={handleSubmit(handleSubmitForm)}
       />
       <FormProvider {...formMethod}>
-        <TeamEditForm />
+        <FormContainer>
+          <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
+          </InputGroup>
+
+          <InputGroup section={FORM_ATTRIBUTE.TRAINING_DATE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.TRAINING_DATE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
+          </InputGroup>
+
+          <InputGroup section={FORM_ATTRIBUTE.TEAM_PLACE.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.TEAM_PLACE.label} />
+            <InputGroup.Input {...FORM_ATTRIBUTE.TEAM_PLACE.input} />
+          </InputGroup>
+
+          <GridContainer>
+            <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
+              <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
+              <InputGroup.PersonnelInput />
+            </InputGroup>
+
+            <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
+              <InputGroup.Label
+                label={FORM_ATTRIBUTE.TIME.label}
+                errorMessage={errors.hour?.message || errors.minute?.message}
+              />
+              <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
+            </InputGroup>
+          </GridContainer>
+
+          <InputGroup section={FORM_ATTRIBUTE.MEMO.section}>
+            <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
+            <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
+          </InputGroup>
+        </FormContainer>
       </FormProvider>
-    </Container>
+    </PostContainer>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
-
-const TeamFormContainer = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('container')};
-  overflow-y: scroll;
-`
-
-const GridContainer = styled.div`
-  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'xl')};
-`

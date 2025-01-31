@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
+import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
@@ -18,11 +18,14 @@ export const CarpoolEdit = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
   const { data: prevData, isPending, isError } = useFetchUpdatePostData({ urls: { boardId } })
-  const { mutate: carpoolUpdate } = useUpdatePost()
+  const { mutate: postUpdate } = useUpdatePost()
 
   let defaultValues = { ...prevData }
   const formMethod = useCustomForm<PostForm>(postSchema, { defaultValues })
-  const { handleSubmit } = formMethod
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = formMethod
 
   const handleSubmitForm = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
@@ -33,7 +36,7 @@ export const CarpoolEdit = () => {
       ...rest,
     }
 
-    carpoolUpdate(
+    postUpdate(
       { urls: { boardId }, body: submissionData },
       { onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
     )
@@ -43,14 +46,14 @@ export const CarpoolEdit = () => {
   if (isError || !prevData) return <ErrorPage />
 
   return (
-    <Container>
+    <PostContainer>
       <SubHeaderWithoutIcon
         type="complete"
         title="승차 공유 수정"
         onClickComplete={handleSubmit(handleSubmitForm)}
       />
       <FormProvider {...formMethod}>
-        <StyledForm>
+        <FormContainer>
           <InputGroup section={FORM_ATTRIBUTE.TITLE.section}>
             <InputGroup.Label label={FORM_ATTRIBUTE.TITLE.label} />
             <InputGroup.Input {...FORM_ATTRIBUTE.TITLE.input} />
@@ -73,7 +76,10 @@ export const CarpoolEdit = () => {
             </InputGroup>
 
             <InputGroup section={FORM_ATTRIBUTE.TIME.section}>
-              <InputGroup.Label label={FORM_ATTRIBUTE.TIME.label} />
+              <InputGroup.Label
+                label={FORM_ATTRIBUTE.TIME.label}
+                errorMessage={errors.hour?.message || errors.minute?.message}
+              />
               <InputGroup.TimeInput {...FORM_ATTRIBUTE.TIME.input} />
             </InputGroup>
           </GridContainer>
@@ -82,24 +88,8 @@ export const CarpoolEdit = () => {
             <InputGroup.Label label={FORM_ATTRIBUTE.MEMO.label} />
             <InputGroup.TextArea {...FORM_ATTRIBUTE.MEMO.input} />
           </InputGroup>
-        </StyledForm>
+        </FormContainer>
       </FormProvider>
-    </Container>
+    </PostContainer>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
-
-const StyledForm = styled.form`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('container', 0)};
-  ${({ theme }) => theme.padding('lg')};
-  overflow-y: scroll;
-`
-
-const GridContainer = styled.div`
-  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'xl')};
-`
