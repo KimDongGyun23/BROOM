@@ -1,5 +1,7 @@
 import type { MilitaryBranchCode, TabUpperKey } from '@/utils/constants'
 
+import type { Overwrite } from './common'
+
 export type PostAuthorType = {
   WriterNickname: string
   writerDischargeYear: string
@@ -11,13 +13,13 @@ type PostBasicInfo = {
   trainingDate: string
   place: string
   time: string
-  category?: TabUpperKey
 }
 
 type PostMetadata = {
   createdAt: string
   boardId: number
   full: boolean
+  category?: TabUpperKey
 }
 
 type PostDetail = {
@@ -39,18 +41,15 @@ export type PostSummary = PostBasicInfo & PostMetadata
 
 export type PostContent = PostBasicInfo & PostDetail
 export type PostId = Pick<PostMetadata, 'boardId'>
-export type PostForm = Form &
-  PostDetail &
-  Omit<PostDetail, 'personnel'> & {
-    personnel: string
-  }
+export type PostForm = Overwrite<Form, { hour: number | string; minute: number | string }> &
+  Overwrite<PostDetail, { personnel: number | string }>
 
 export type PostResponse = {
   result: PostSummary[]
 }
 
 export type PostRequest = {
-  urls: Pick<PostBasicInfo, 'category'>
+  urls: Pick<PostMetadata, 'category'>
 }
 
 export type PostSearchRequest = {

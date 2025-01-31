@@ -1,11 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { PostCreateRequest, PostDetailRequest, PostDetailResponse, PostId } from '@/types/post'
+import type {
+  PostCreateRequest,
+  PostDetailRequest,
+  PostDetailResponse,
+  PostEditRequest,
+  PostForm,
+  PostId,
+} from '@/types/post'
 
 import { api } from '.'
 
 const API_ENDPOINTS = {
   create: '/board',
+  edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
 } as const
 
@@ -28,6 +36,37 @@ export const useCreatePost = () => {
     mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.create, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation<PostId, Error, PostEditRequest>({
+    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.edit(urls), body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+    },
+  })
+}
+
+export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
+  return useQuery<PostDetailResponse, Error, PostForm>({
+    queryKey: queryKeys.detail(urls),
+    queryFn: async () => await api.get(API_ENDPOINTS.detail(urls)),
+    select: (data): PostForm => {
+      const { title, trainingDate, place, time, personnel, content } = data
+      const [hour, minute] = time.split(':')
+      return {
+        title,
+        trainingDate,
+        place,
+        content,
+        hour,
+        minute,
+        personnel: personnel.toString(),
+      }
     },
   })
 }

@@ -58,28 +58,6 @@ export const useAccountForm = () => {
   return formMethod
 }
 
-export const useCarpoolEditForm = ({ urls }: PostEditPageRequest) => {
-  const getDefaultValues = async () => {
-    const { time, trainingDate, ...rest } = await api.get<PostContent>(
-      `/carpool/edit/${urls.boardId}`,
-    )
-    const hour = parseInt(time.split(':')[0], 10)
-    const minute = parseInt(time.split(':')[1], 10)
-    const date = dayjs(trainingDate).format('YYYYMMDD')
-
-    return { hour, minute, trainingDate: date, ...rest }
-  }
-
-  const formMethod = useForm<PostForm>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(carpoolSchema),
-    defaultValues: getDefaultValues,
-  })
-
-  return formMethod
-}
-
 export const useSearchForm = (defaultValue: SearchType) => {
   const formMethod = useForm<SearchType>({
     mode: 'onSubmit',

@@ -30,9 +30,9 @@ export const DateInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) =>
   const section = useContext(InputGroupContext)
 
   return (
-    <DateInputContainer>
+    <InputContainer>
       <StyledInput type="date" {...register(section)} required aria-required="true" {...rest} />
-    </DateInputContainer>
+    </InputContainer>
   )
 }
 
@@ -146,14 +146,6 @@ const InputContainer = styled.div`
   ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
   width: 100%;
-`
-
-const DateInputContainer = styled(InputContainer)`
-  input[type='date'] {
-    position: relative;
-    background: url('/src/assets/Calendar.svg') no-repeat right;
-    padding-right: 10px;
-  }
 `
 
 const StyledInput = styled.input`

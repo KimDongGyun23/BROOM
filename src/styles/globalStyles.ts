@@ -106,6 +106,12 @@ const GlobalStyles = createGlobalStyle`
 		-moz-appearance: textfield;
 	}
 
+	input[type='date'] {
+    position: relative;
+    background: url('/src/assets/Calendar.svg') no-repeat right;
+    padding-right: 10px;
+  }
+
   input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     left: 0;

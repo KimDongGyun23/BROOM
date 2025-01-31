@@ -24,7 +24,7 @@ export const CarpoolCreate = () => {
     const submissionData = {
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
       category: TAB_UPPER_KEYS[0],
-      personnel: parseInt(personnel),
+      personnel: parseInt(personnel as string),
       ...rest,
     }
 

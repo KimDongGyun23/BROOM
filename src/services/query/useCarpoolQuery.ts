@@ -1,12 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  PostCreateRequest,
   PostDeleteRequest,
   PostDetailRequest,
-  PostDetailResponse,
-  PostEditRequest,
-  PostId,
   PostIsFullRequest,
   PostRecruitResponse,
   PostResponse,
@@ -53,28 +49,10 @@ export const useActiveCarpoolList = () => {
   })
 }
 
-export const useCarpoolDetail = ({ urls }: PostDetailRequest) => {
-  return useQuery<PostDetailResponse, Error>({
-    queryKey: queryKeys.detail(urls),
-    queryFn: async () => await api.get(API_ENDPOINTS.DETAIL(urls.boardId)),
-  })
-}
-
 export const useSearchCarpoolList = ({ urls }: PostSearchRequest) => {
   return useQuery<PostResponse>({
     queryKey: queryKeys.search(urls),
     queryFn: async () => await api.get(API_ENDPOINTS.SEARCH(urls.category, urls.keyword)),
-  })
-}
-
-export const useCreateCarpoolPost = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<PostId, Error, PostCreateRequest>({
-    mutationFn: async ({ body }) => await api.post(API_ENDPOINTS.CREATE, body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
   })
 }
 
@@ -95,17 +73,6 @@ export const useDeleteCarpool = () => {
 
   return useMutation<void, Error, PostDeleteRequest>({
     mutationFn: async ({ urls }) => await api.delete(API_ENDPOINTS.DELETE(urls.boardId)),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
-  })
-}
-
-export const useUpdateCarpool = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<void, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await api.put(API_ENDPOINTS.EDIT(urls.boardId), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
