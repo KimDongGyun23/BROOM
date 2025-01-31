@@ -12,7 +12,6 @@ import {
   accountSchema,
   busReserveInfoSchema,
   busSchema,
-  carpoolSchema,
   loginSchema,
   newPasswordSchema,
   signupSchema,
@@ -54,16 +53,6 @@ export const useAccountForm = () => {
     reValidateMode: 'onSubmit',
     resolver: zodResolver(accountSchema),
     defaultValues: getDefaultValues,
-  })
-
-  return formMethod
-}
-
-export const useCarpoolCreateForm = () => {
-  const formMethod = useForm<PostForm>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(carpoolSchema),
   })
 
   return formMethod

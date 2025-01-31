@@ -4,16 +4,16 @@ import styled from 'styled-components'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useCarpoolCreateForm } from '@/hooks/useForm'
+import { useCustomForm } from '@/hooks/useCustomForm'
 import { useCreatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 import { FORM_ATTRIBUTE, TAB_UPPER_KEYS } from '@/utils/constants'
+import { carpoolSchema } from '@/utils/schema'
 
 export const CarpoolCreate = () => {
   const navigate = useNavigate()
   const { mutate: createCarpool } = useCreatePost()
-
-  const formMethod = useCarpoolCreateForm()
+  const formMethod = useCustomForm<PostForm>(carpoolSchema)
   const {
     handleSubmit,
     formState: { errors },
