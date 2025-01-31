@@ -4,7 +4,7 @@ export const TAB_LIST = [
 ] as const
 export const TAB_LABELS = TAB_LIST.map((tab) => tab.label)
 export const TAB_KEYS = TAB_LIST.map((tab) => tab.key)
-export const TAB_UPPER_KEYS = TAB_LIST.map((tab) => tab.key)
+export const TAB_UPPER_KEYS = TAB_LIST.map((tab) => tab.upperKey)
 
 export type TabLabel = (typeof TAB_LIST)[number]['label']
 export type TabKey = (typeof TAB_LIST)[number]['key']
@@ -108,22 +108,22 @@ export const FORM_ATTRIBUTE = {
   TRAINING_DATE: {
     section: 'trainingDate',
     label: '훈련 날짜',
-    input: { placeholder: '8자리 숫자만 입력해주세요.', type: 'number' },
+    input: { 'data-placeholder': '훈련 날짜를 선택해주세요.', type: 'date' },
   },
-  DEPART_PLACE: {
-    section: 'departPlace',
+  CARPOOL_PLACE: {
+    section: 'place',
     label: '출발 장소',
     input: { placeholder: '출발 장소를 입력해주세요.' },
   },
   MEETING_PLACE: {
-    section: 'meetingPlace',
+    section: 'place',
     label: '만날 장소',
     input: { placeholder: '만날 장소를 입력해주세요.' },
   },
   PERSONNEL: {
     section: 'personnel',
     label: '모집 인원',
-    input: { placeholder: '0', type: 'number', unitLabel: '명' },
+    input: { placeholder: '0', unitLabel: '명', min: 0, max: 11 },
   },
   TIME: { section: 'hour', label: '시간', input: { hourSection: 'hour', minuteSection: 'minute' } },
   MEMO: {

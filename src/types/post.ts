@@ -11,10 +11,10 @@ type PostBasicInfo = {
   trainingDate: string
   place: string
   time: string
+  category?: TabUpperKey
 }
 
 type PostMetadata = {
-  category?: TabUpperKey
   createdAt: string
   boardId: number
   full: boolean
@@ -46,7 +46,7 @@ export type PostResponse = {
 }
 
 export type PostRequest = {
-  urls: Pick<PostMetadata, 'category'>
+  urls: Pick<PostBasicInfo, 'category'>
 }
 
 export type PostSearchRequest = {

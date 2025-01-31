@@ -22,9 +22,9 @@ const CarpoolEditForm = () => (
       <InputGroup.Input {...FORM_ATTRIBUTE.TRAINING_DATE.input} />
     </InputGroup>
 
-    <InputGroup section={FORM_ATTRIBUTE.DEPART_PLACE.section}>
-      <InputGroup.Label label={FORM_ATTRIBUTE.DEPART_PLACE.label} />
-      <InputGroup.Input {...FORM_ATTRIBUTE.DEPART_PLACE.input} />
+    <InputGroup section={FORM_ATTRIBUTE.CARPOOL_PLACE.section}>
+      <InputGroup.Label label={FORM_ATTRIBUTE.CARPOOL_PLACE.label} />
+      <InputGroup.Input {...FORM_ATTRIBUTE.CARPOOL_PLACE.input} />
     </InputGroup>
 
     <GridContainer>

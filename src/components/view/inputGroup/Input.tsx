@@ -25,6 +25,17 @@ export const Input = ({ type = 'text', ...rest }: InputHTMLAttributes<HTMLInputE
   )
 }
 
+export const DateInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
+  const { register } = useFormContext()
+  const section = useContext(InputGroupContext)
+
+  return (
+    <DateInputContainer>
+      <StyledInput type="date" {...register(section)} required aria-required="true" {...rest} />
+    </DateInputContainer>
+  )
+}
+
 export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)
@@ -49,13 +60,27 @@ type UnitInputProps = InputHTMLAttributes<HTMLInputElement> & {
   unitLabel: string
 }
 
-export const UnitInput = ({ unitLabel, ...rest }: UnitInputProps) => {
-  const { register } = useFormContext()
+export const NumberUnitInput = ({ unitLabel, ...rest }: UnitInputProps) => {
+  const { register, setValue } = useFormContext()
   const section = useContext(InputGroupContext)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value =
+      event.target.value === ''
+        ? ''
+        : Math.max(0, Math.min(11, parseInt(event.target.value, 10) || 0))
+    setValue(section, value)
+  }
 
   return (
     <InputContainer>
-      <StyledUnitInput size={5} $textAlign="right" {...register(section)} {...rest} />
+      <StyledUnitInput
+        type="number"
+        size={5}
+        $textAlign="right"
+        {...register(section, { onChange: handleChange })}
+        {...rest}
+      />
       <InputLabel>{unitLabel}</InputLabel>
     </InputContainer>
   )
@@ -117,6 +142,14 @@ const InputContainer = styled.div`
   width: 100%;
 `
 
+const DateInputContainer = styled(InputContainer)`
+  input[type='date'] {
+    position: relative;
+    background: url('/src/assets/Calendar.svg') no-repeat right;
+    padding-right: 10px;
+  }
+`
+
 const StyledInput = styled.input`
   ${({ theme }) => theme.padding('xs', 0)};
   ${({ theme }) => theme.font(700, theme.colors.black[500])};
@@ -143,7 +176,7 @@ const StyledTextArea = styled.textarea`
   ${({ theme }) => theme.padding('md', 'lg')};
   ${({ theme }) => theme.border('input')};
   ${({ theme }) => theme.borderRadius('sm')};
-  ${({ theme }) => theme.font(700, theme.colors.black[300])};
+  ${({ theme }) => theme.font(700, theme.colors.black[500])};
   height: 104px;
   resize: none;
 `
