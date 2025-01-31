@@ -56,15 +56,13 @@ export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>
   )
 }
 
-type UnitInputProps = InputHTMLAttributes<HTMLInputElement> & {
-  unitLabel: string
-}
-
-export const NumberUnitInput = ({ unitLabel, ...rest }: UnitInputProps) => {
+export const PersonnelInput = () => {
   const { register, setValue } = useFormContext()
   const section = useContext(InputGroupContext)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement
+    input.value = input.value.replace(/[^0-9]/g, '')
     const value =
       event.target.value === ''
         ? ''
@@ -75,13 +73,13 @@ export const NumberUnitInput = ({ unitLabel, ...rest }: UnitInputProps) => {
   return (
     <InputContainer>
       <StyledUnitInput
-        type="number"
+        type="text"
         size={5}
         $textAlign="right"
+        placeholder="0"
         {...register(section, { onChange: handleChange })}
-        {...rest}
       />
-      <InputLabel>{unitLabel}</InputLabel>
+      <InputLabel>명</InputLabel>
     </InputContainer>
   )
 }

@@ -123,7 +123,6 @@ export const FORM_ATTRIBUTE = {
   PERSONNEL: {
     section: 'personnel',
     label: '모집 인원',
-    input: { placeholder: '0', unitLabel: '명', min: 0, max: 11 },
   },
   TIME: { section: 'hour', label: '시간', input: { hourSection: 'hour', minuteSection: 'minute' } },
   MEMO: {

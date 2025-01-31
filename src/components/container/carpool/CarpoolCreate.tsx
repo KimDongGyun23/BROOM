@@ -68,7 +68,7 @@ export const CarpoolCreate = () => {
           <GridContainer>
             <InputGroup section={FORM_ATTRIBUTE.PERSONNEL.section}>
               <InputGroup.Label label={FORM_ATTRIBUTE.PERSONNEL.label} />
-              <InputGroup.NumberUnitInput {...FORM_ATTRIBUTE.PERSONNEL.input} />
+              <InputGroup.PersonnelInput />
             </InputGroup>
 
             <InputGroup section={FORM_ATTRIBUTE.TIME.section}>

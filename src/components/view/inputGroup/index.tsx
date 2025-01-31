@@ -1,7 +1,7 @@
 import { createContext, type PropsWithChildren, useContext } from 'react'
 import styled from 'styled-components'
 
-import { DateInput, Input, NumberUnitInput, PasswordInput, TextArea, TimeInput } from './Input'
+import { DateInput, Input, PasswordInput, PersonnelInput, TextArea, TimeInput } from './Input'
 import { Label } from './Label'
 import { SortOfArmy } from './Select'
 
@@ -36,7 +36,7 @@ export const InputGroup = Object.assign(Container, {
   Input,
   PasswordInput,
   TextArea,
-  NumberUnitInput,
+  PersonnelInput,
   TimeInput,
   DateInput,
   Label,
