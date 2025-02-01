@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 
+import { useCurrentStep, useTotalStep } from '@/stores/steps'
+
 type LabelWithStepProps = {
-  currentStep: number
-  totalStep: number
   label: string
 }
 
-export const LabelWithStep = ({ currentStep, totalStep, label }: LabelWithStepProps) => {
+export const LabelWithStep = ({ label }: LabelWithStepProps) => {
+  const currentStep = useCurrentStep()
+  const totalStep = useTotalStep()
+
   return (
     <Container>
       <Label>{label}</Label>

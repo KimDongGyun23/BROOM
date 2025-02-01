@@ -2,9 +2,9 @@ import { create } from 'zustand'
 
 type Actions = {
   setCurrentStep: (newStep: number) => void
-  setTotalStep: (newStep: number) => void
   goNextStep: () => void
   goPreviousStep: () => void
+  resetStep: (totalStep: number) => void
 }
 
 type StepsStore = {
@@ -13,14 +13,9 @@ type StepsStore = {
   actions: Actions
 }
 
-const defaultValue = {
+export const useStepsStore = create<StepsStore>((set, get) => ({
   currentStep: 1,
   totalStep: 1,
-}
-
-export const useStepsStore = create<StepsStore>((set, get) => ({
-  currentStep: defaultValue.currentStep,
-  totalStep: defaultValue.totalStep,
   actions: {
     setCurrentStep: (newStep) =>
       set(() => {
@@ -28,7 +23,6 @@ export const useStepsStore = create<StepsStore>((set, get) => ({
         const boundedStep = Math.max(1, Math.min(newStep, totalStep))
         return { currentStep: boundedStep }
       }),
-
     goNextStep: () => {
       set(() => {
         const { currentStep, totalStep } = get()
@@ -37,7 +31,6 @@ export const useStepsStore = create<StepsStore>((set, get) => ({
         return { currentStep: boundedStep }
       })
     },
-
     goPreviousStep: () => {
       set(() => {
         const { currentStep } = get()
@@ -46,8 +39,7 @@ export const useStepsStore = create<StepsStore>((set, get) => ({
         return { currentStep: boundedStep }
       })
     },
-
-    setTotalStep: (newStep) => set(() => ({ totalStep: newStep })),
+    resetStep: (totalStep: number) => set(() => ({ currentStep: 1, totalStep })),
   },
 }))
 

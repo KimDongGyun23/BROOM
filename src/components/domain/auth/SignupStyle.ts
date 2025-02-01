@@ -14,7 +14,7 @@ export const FormContainer = styled.div`
 `
 
 export const StyledButton = styled(Button)`
-  ${({ theme }) => theme.margin('container', 'container', '4xl')};
+  ${({ theme }) => theme.margin('auto', 0, '4xl')};
 `
 
 export const AllAgreementButton = styled.button<{ $isChecked: boolean }>`

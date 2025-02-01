@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
 import { SignupOneStep } from '@/components/domain/auth/SignupOneStep'
 import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
-import { useSignupForm } from '@/hooks/useForm'
+import { useCustomForm } from '@/hooks/useCustomForm'
 import { useSignup } from '@/services/query/useAuthQuery'
-import { useCurrentStep, useStepsActions, useTotalStep } from '@/stores/steps'
+import { useCurrentStep, useStepsActions } from '@/stores/steps'
+import { Container, FormContainer } from '@/styles/commonStyles'
 import type { SignupData } from '@/types/auth'
+import { signupSchema } from '@/utils/schema'
 
 const signupMap = {
   1: '계정 정보 기입',
@@ -19,70 +20,61 @@ const signupMap = {
   3: '약관 동의',
 } as const
 
-const StyledForm = styled.form`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
+const CurrentStepForm = () => {
+  const currentStep = useCurrentStep()
+
+  switch (currentStep) {
+    case 1:
+      return <SignupOneStep />
+    case 2:
+      return <SignupTwoStep />
+    case 3:
+      return <SignupThirdStep />
+    default:
+      return null
+  }
+}
+
+const useSignupForm = () => {
+  const navigate = useNavigate()
+  const { mutate: signupMutation } = useSignup()
+  const formMethod = useCustomForm<SignupData>(signupSchema)
+  const { handleSubmit } = formMethod
+
+  const handleSubmitSignupForm = (formData: SignupData) => {
+    const { confirm: _confirm, ...dataWithoutConfirm } = formData
+    signupMutation({ body: dataWithoutConfirm }, { onSuccess: () => navigate('/sign-up/complete') })
+  }
+
+  return { formMethod, onSubmit: handleSubmit(handleSubmitSignupForm) }
+}
 
 export const SignupPage = () => {
   const navigate = useNavigate()
-  const formMethod = useSignupForm()
+  const { formMethod, onSubmit } = useSignupForm()
+
   const currentStep = useCurrentStep()
-  const totalStep = useTotalStep()
+  const { goPreviousStep, resetStep } = useStepsActions()
 
-  const { setCurrentStep, setTotalStep, goPreviousStep } = useStepsActions()
-  const { mutate: signupMutation } = useSignup()
-  const { handleSubmit, reset } = formMethod
-
-  const handleSubmitSignupForm = (formData: SignupData) => {
-    // eslint-disable-next-line unused-imports/no-unused-vars
-    const { confirm, ...dataWithoutConfirm } = formData
-    signupMutation(
-      { body: dataWithoutConfirm },
-      {
-        onSuccess: () => navigate('/sign-up/complete'),
-      },
-    )
-  }
-
-  const handleClose = () => {
-    navigate('/login')
-    reset()
-  }
-
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return <SignupOneStep />
-      case 2:
-        return <SignupTwoStep />
-      case 3:
-        return <SignupThirdStep />
-      default:
-        return null
-    }
-  }
+  const handleClose = () => navigate('/login')
 
   useEffect(() => {
-    setCurrentStep(1)
-    setTotalStep(Object.keys(signupMap).length)
-  }, [])
+    resetStep(Object.keys(signupMap).length)
+  }, [resetStep])
 
   return (
-    <FormProvider {...formMethod}>
-      <StyledForm onSubmit={handleSubmit(handleSubmitSignupForm)}>
-        <SubHeaderWithIcon
-          type="close"
-          onClickCancel={currentStep === 1 ? handleClose : goPreviousStep}
-          onClickClose={handleClose}
-        />
-        <LabelWithStep
-          currentStep={currentStep}
-          totalStep={totalStep}
-          label={signupMap[currentStep as keyof typeof signupMap]}
-        />
-        {renderStep()}
-      </StyledForm>
-    </FormProvider>
+    <Container>
+      <SubHeaderWithIcon
+        type="close"
+        onClickCancel={currentStep === 1 ? handleClose : goPreviousStep}
+        onClickClose={handleClose}
+      />
+      <LabelWithStep label={signupMap[currentStep as keyof typeof signupMap]} />
+      <FormProvider {...formMethod}>
+        <FormContainer onSubmit={onSubmit} $isFull>
+          <CurrentStepForm />
+        </FormContainer>
+      </FormProvider>
+    </Container>
   )
 }

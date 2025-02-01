@@ -12,9 +12,9 @@ import { instance, instanceWithoutAuth } from '.'
 
 const ENDPOINTS = {
   signIn: `/signin`,
-  signUp: `$/signup`,
-  validateId: `$/validate-id`,
-  validateNickname: `$/validate-nickname`,
+  signUp: `/signup`,
+  validateId: `/validate-id`,
+  validateNickname: `/validate-nickname`,
   reIssue: `/reissue`,
 } as const
 

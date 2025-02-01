@@ -2,27 +2,10 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { instance } from '@/services/query'
-import type { SignupData } from '@/types/auth'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
 import type { MypageUser, NewPasswordForm } from '@/types/mypage'
-import {
-  accountSchema,
-  busReserveInfoSchema,
-  busSchema,
-  newPasswordSchema,
-  signupSchema,
-} from '@/utils/schema'
-
-export const useSignupForm = () => {
-  const formMethod = useForm<SignupData>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(signupSchema),
-  })
-
-  return formMethod
-}
+import { accountSchema, busReserveInfoSchema, busSchema, newPasswordSchema } from '@/utils/schema'
 
 export const useAccountForm = () => {
   const getDefaultValues = async () => {
