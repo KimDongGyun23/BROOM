@@ -5,11 +5,11 @@ import type { PostResponse } from '@/types/post'
 
 import { instance } from '.'
 
-const API_ENDPOINTS = {
+const ENDPOINTS = {
   ACCOUNT: `/mypage/info`,
   DELETE_USER: `/exit`,
   FETCH_MYPAGE: `/mypage`,
-  UPDATE_PASSWORD: `/mypage/password`,
+  updatePassword: `/mypage/password`,
   CARPOOL_POST: `/mypage/carpool`,
   TEAM_POST: `/mypage/team`,
   LOG_OUT: `/logout`,
@@ -25,13 +25,13 @@ const queryKeys = {
 export const useUserProfile = () => {
   return useQuery<UserProfile, Error>({
     queryKey: queryKeys.all,
-    queryFn: async () => await instance.get(API_ENDPOINTS.FETCH_MYPAGE),
+    queryFn: async () => await instance.get(ENDPOINTS.FETCH_MYPAGE),
   })
 }
 
 export const useUserDeletion = () => {
   return useMutation<void, Error, void>({
-    mutationFn: async () => instance.delete(API_ENDPOINTS.DELETE_USER),
+    mutationFn: async () => instance.delete(ENDPOINTS.DELETE_USER),
   })
 }
 
@@ -39,21 +39,21 @@ export const useUpdateUserAccount = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, UpdateAccountRequest>({
-    mutationFn: async ({ body }) => await instance.put(API_ENDPOINTS.ACCOUNT, body),
+    mutationFn: async ({ body }) => await instance.put(ENDPOINTS.ACCOUNT, body),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
 
 export const useUpdatePassword = () => {
   return useMutation<string, Error, UpdatePasswordRequest>({
-    mutationFn: async ({ body }) => await instance.post(API_ENDPOINTS.UPDATE_PASSWORD, body),
+    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.updatePassword, body),
   })
 }
 
 export const useMyTeamPost = () => {
   return useQuery<PostResponse, Error>({
     queryKey: queryKeys.myTeamPost(),
-    queryFn: async () => await instance.get(API_ENDPOINTS.TEAM_POST),
+    queryFn: async () => await instance.get(ENDPOINTS.TEAM_POST),
     gcTime: 0,
     staleTime: 0,
   })
@@ -62,7 +62,7 @@ export const useMyTeamPost = () => {
 export const useMyCarpoolPost = () => {
   return useQuery<PostResponse, Error>({
     queryKey: queryKeys.myCarpoolPost(),
-    queryFn: async () => await instance.get(API_ENDPOINTS.CARPOOL_POST),
+    queryFn: async () => await instance.get(ENDPOINTS.CARPOOL_POST),
     gcTime: 0,
     staleTime: 0,
   })
@@ -70,6 +70,6 @@ export const useMyCarpoolPost = () => {
 
 export const useLogout = () => {
   return useMutation({
-    mutationFn: async () => await instance.post(API_ENDPOINTS.LOG_OUT, null),
+    mutationFn: async () => await instance.post(ENDPOINTS.LOG_OUT, null),
   })
 }

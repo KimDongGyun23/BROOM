@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { instance } from '@/services/query'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
-import type { MypageUser, NewPasswordForm } from '@/types/mypage'
-import { accountSchema, busReserveInfoSchema, busSchema, newPasswordSchema } from '@/utils/schema'
+import type { MypageUser } from '@/types/mypage'
+import { accountSchema, busReserveInfoSchema, busSchema } from '@/utils/schema'
 
 export const useAccountForm = () => {
   const getDefaultValues = async () => {
@@ -49,16 +49,6 @@ export const useBusReservedInfoForm = () => {
     mode: 'onSubmit',
     reValidateMode: 'onSubmit',
     resolver: zodResolver(busReserveInfoSchema),
-  })
-
-  return formMethod
-}
-
-export const useNewPasswordForm = () => {
-  const formMethod = useForm<NewPasswordForm>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(newPasswordSchema),
   })
 
   return formMethod

@@ -4,7 +4,7 @@ export type MypageUser = {
   militaryChaplain: string
 }
 
-export type NewPasswordForm = {
+export type PasswordUpdateForm = {
   password: string
   newPassword: string
   confirm: string
@@ -17,5 +17,5 @@ export type UpdateAccountRequest = {
 }
 
 export type UpdatePasswordRequest = {
-  body: Omit<NewPasswordForm, 'confirm'>
+  body: Omit<PasswordUpdateForm, 'confirm'>
 }
