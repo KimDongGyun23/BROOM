@@ -6,21 +6,14 @@ export const ValidateContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', undefined, undefined, 'lg')};
 `
 
-export const FormContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin(0, 'container', 'container')};
-  flex-grow: 1;
-  overflow-y: scroll;
-`
-
 export const StyledButton = styled(Button)`
   ${({ theme }) => theme.margin('auto', 0, '4xl')};
 `
 
 export const AllAgreementButton = styled.button<{ $isChecked: boolean }>`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
-  color: ${({ theme, $isChecked }) =>
-    $isChecked ? theme.colors.blue[500] : theme.colors.black[500]};
+  ${({ theme, $isChecked }) =>
+    theme.font(400, $isChecked ? theme.colors.blue[500] : theme.colors.black[500])};
 `
 
 export const AgreementList = styled.div`

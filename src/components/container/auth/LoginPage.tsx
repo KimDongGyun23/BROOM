@@ -82,7 +82,7 @@ export const LoginPage = () => {
 }
 
 const Logo = styled.h1`
-  ${({ theme }) => theme.margin('logo-sm-top', 'container', 'logo-sm-bottom')};
+  ${({ theme }) => theme.margin('logo-sm', 'container')};
   text-align: center;
   font-family: 'jalnan', sans-serif;
   font-size: 60px;
