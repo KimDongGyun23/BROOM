@@ -7,12 +7,12 @@ import { instance } from '.'
 
 const ENDPOINTS = {
   ACCOUNT: `/mypage/info`,
-  DELETE_USER: `/exit`,
-  FETCH_MYPAGE: `/mypage`,
+  fetchMypage: `/mypage`,
   updatePassword: `/mypage/password`,
   CARPOOL_POST: `/mypage/carpool`,
   TEAM_POST: `/mypage/team`,
-  LOG_OUT: `/logout`,
+  logout: `/logout`,
+  deleteUser: `/exit`,
 } as const
 
 const queryKeys = {
@@ -23,15 +23,9 @@ const queryKeys = {
 }
 
 export const useUserProfile = () => {
-  return useQuery<UserProfile, Error>({
+  return useQuery<UserProfile>({
     queryKey: queryKeys.all,
-    queryFn: async () => await instance.get(ENDPOINTS.FETCH_MYPAGE),
-  })
-}
-
-export const useUserDeletion = () => {
-  return useMutation<void, Error, void>({
-    mutationFn: async () => instance.delete(ENDPOINTS.DELETE_USER),
+    queryFn: async () => await instance.get(ENDPOINTS.fetchMypage),
   })
 }
 
@@ -69,7 +63,13 @@ export const useMyCarpoolPost = () => {
 }
 
 export const useLogout = () => {
-  return useMutation({
-    mutationFn: async () => await instance.post(ENDPOINTS.LOG_OUT, null),
+  return useMutation<string>({
+    mutationFn: async () => await instance.post(ENDPOINTS.logout, null),
+  })
+}
+
+export const useUserDeletion = () => {
+  return useMutation<string>({
+    mutationFn: async () => instance.delete(ENDPOINTS.deleteUser),
   })
 }

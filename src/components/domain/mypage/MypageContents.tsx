@@ -4,10 +4,11 @@ import styled from 'styled-components'
 type ProfileSectionProps = {
   title: string
   items: readonly { name: string; path: string }[]
+  isLast: boolean
 }
 
-export const ProfileSection = ({ title, items }: ProfileSectionProps) => (
-  <Container>
+export const MypageContents = ({ title, items, isLast }: ProfileSectionProps) => (
+  <Container $isLast={isLast}>
     <SectionTitle>{title}</SectionTitle>
     <SectionList>
       {items.map(({ name, path }) => (
@@ -19,8 +20,10 @@ export const ProfileSection = ({ title, items }: ProfileSectionProps) => (
   </Container>
 )
 
-const Container = styled.section`
+const Container = styled.section<{ $isLast: boolean }>`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
+  ${({ theme }) => theme.padding('xl', 0)};
+  ${({ theme, $isLast }) => !$isLast && theme.border('divider', 'bottom')};
 `
 
 const SectionTitle = styled.h6`

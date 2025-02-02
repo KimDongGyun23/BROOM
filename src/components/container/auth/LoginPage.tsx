@@ -28,7 +28,7 @@ const useLoginState = () => {
             setIsLoginFailed(false)
             setSessionStorageItem(SESSION_KEYS.LOGIN, 'true')
             setSessionStorageItem(SESSION_KEYS.NICKNAME, data.nickname)
-            setSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN, data.militaryChaplain)
+            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, data.militaryChaplain)
             navigate('/home', { replace: true })
           }
         },

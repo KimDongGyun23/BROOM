@@ -8,7 +8,7 @@ import { ProfileImage } from './ProfileImage'
 
 export const MainHeader = () => {
   const iconType =
-    (getSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN) as MilitaryBranchCode) || null
+    (getSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES) as MilitaryBranchCode) || null
   const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
 
   return (
@@ -27,7 +27,7 @@ export const MainHeader = () => {
 }
 
 const HeaderContainer = styled.header`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
+  ${({ theme }) => theme.flexBox('row', 'center', 'flex-end')};
   ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding(0, 'lg')};
   position: relative;

@@ -18,7 +18,7 @@ export const useAccountUpdate: ReturnType = (onSuccess) => {
         { body: formData },
         {
           onSuccess: () => {
-            setSessionStorageItem(SESSION_KEYS.MILITARY_CHAPLAIN, formData.militaryChaplain)
+            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, formData.militaryChaplain)
             setSessionStorageItem(SESSION_KEYS.NICKNAME, formData.nickname)
             onSuccess()
           },

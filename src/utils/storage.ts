@@ -1,7 +1,7 @@
 export const SESSION_KEYS = {
   LOGIN: 'login',
   NICKNAME: 'nickname',
-  MILITARY_CHAPLAIN: 'chaplain',
+  MILITARY_BRANCHES: 'military-branches',
   ROOM_TYPE: 'room_type',
   POST_TAB: 'post-tab',
   BOOKMARK_TAB: 'bookmark-tab',

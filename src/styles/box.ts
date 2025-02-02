@@ -21,7 +21,7 @@ const sizeMap = {
     divider: `1px solid ${colors.black[100]}`,
     input: `1px solid ${colors.black[200]}`,
     underline: `1px solid ${colors.black[400]}`,
-    chain: `10px solid ${colors.black[200]}`,
+    chain: `10px solid ${colors.black[100]}`,
     'post-addition-button': `2px solid ${colors.black[100]}`,
     'tab-active': `2px solid ${colors.black[500]}`,
     'tab-nonactive': `2px solid ${colors.black[200]}`,
@@ -34,7 +34,8 @@ const sizeMap = {
   },
   padding: {
     ...gap,
-    chain: '30px',
+    chain: '14px 30px 14px 18px',
+    modal: '36px 0',
     'bubble-x': '16px',
     'bubble-y': '10px',
   },

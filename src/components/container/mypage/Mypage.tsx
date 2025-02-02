@@ -1,14 +1,15 @@
-import { Fragment } from 'react/jsx-runtime'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { ProfileSection } from '@/components/domain/mypage/ProfileSection'
+import { DeleteUserButton } from '@/components/domain/mypage/DeleteUserButton'
+import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
+import { MypageContents } from '@/components/domain/mypage/MypageContents'
 import { UserProfile } from '@/components/domain/mypage/UserProfile'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
-import { useLogout, useUserDeletion, useUserProfile } from '@/services/query/useMypageQuery'
-import type { MilitaryBranchCode } from '@/utils/constants'
-import { clearSessionStorage, getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+import { useUserProfile } from '@/services/query/useMypageQuery'
+import { Container } from '@/styles/commonStyles'
+
+import { ErrorPage } from '../home/ErrorPage'
 
 const MYPAGE_PROFILE_SECTIONS = [
   {
@@ -35,56 +36,31 @@ const MYPAGE_PROFILE_SECTIONS = [
 ] as const
 
 export const Mypage = () => {
-  const navigate = useNavigate()
-  const iconType = getSessionStorageItem(
-    SESSION_KEYS.MILITARY_CHAPLAIN,
-  ) as MilitaryBranchCode | null
-  const { data: userProfileData, isPending, isError } = useUserProfile()
-  const { mutate: logoutMutation } = useLogout()
-  const { mutate: deleteUser } = useUserDeletion()
+  const { data: userProfile, isPending, isError } = useUserProfile()
 
-  const handleLogout = () => {
-    logoutMutation(undefined, {
-      onSuccess: () => {
-        clearSessionStorage()
-        navigate('/login')
-      },
-    })
-  }
-
-  const handleAccountDeletion = () => {
-    deleteUser(undefined, {
-      onSuccess: () => {
-        clearSessionStorage()
-        navigate('/login')
-      },
-    })
-  }
-
-  if (isPending || isError) return <Loading />
-
-  const { nickname, dischargeYear } = userProfileData
+  if (isPending) return <Loading />
+  if (isError || !userProfile) return <ErrorPage />
 
   return (
     <Container>
       <ScrollContainer>
-        <UserProfile username={nickname} serviceYear={dischargeYear} iconType={iconType} />
+        <UserProfile nickname={userProfile.nickname} reserveYear={userProfile.reserveYear} />
 
-        <ContentContainer>
+        <Section>
           {MYPAGE_PROFILE_SECTIONS.map(({ title, items }, index) => (
-            <Fragment key={title}>
-              <ProfileSection title={title} items={items} />
-              {index !== MYPAGE_PROFILE_SECTIONS.length - 1 && <Divider />}
-            </Fragment>
+            <MypageContents
+              key={title}
+              title={title}
+              items={items}
+              isLast={index === MYPAGE_PROFILE_SECTIONS.length - 1}
+            />
           ))}
+        </Section>
 
-          <ActionContainer>
-            <ActionButton onClick={handleLogout} $isLogout>
-              로그아웃
-            </ActionButton>
-            <ActionButton onClick={handleAccountDeletion}>회원탈퇴</ActionButton>
-          </ActionContainer>
-        </ContentContainer>
+        <ActionContainer>
+          <LogoutButton />
+          <DeleteUserButton />
+        </ActionContainer>
       </ScrollContainer>
 
       <BottomNavigation />
@@ -92,35 +68,19 @@ export const Mypage = () => {
   )
 }
 
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
-
 const ScrollContainer = styled.div`
   ${({ theme }) => theme.flexBox('column')};
   flex-grow: 1;
   overflow-y: scroll;
 `
 
-const ContentContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
-  ${({ theme }) => theme.margin(0, 'container', 'container')};
-`
-
-const Divider = styled.hr`
-  background-color: ${({ theme }) => theme.colors.black[200]};
+const Section = styled.section`
+  ${({ theme }) => theme.flexBox('column')};
+  ${({ theme }) => theme.margin(0, 'container')};
 `
 
 const ActionContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
   ${({ theme }) => theme.margin('mypage-button-top', 0, 0, 'auto')};
   ${({ theme }) => theme.padding(0, 'xs')};
-`
-
-const ActionButton = styled.button<{ $isLogout?: boolean }>`
-  ${({ theme }) => theme.padding(0, 'lg')};
-  ${({ theme, $isLogout }) => theme.border($isLogout ? 'underline' : 0, 'right')};
-  ${({ theme, $isLogout }) =>
-    theme.font(800, $isLogout ? theme.colors.black[500] : theme.colors.error)};
 `

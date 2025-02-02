@@ -139,6 +139,9 @@ const GlobalStyles = createGlobalStyle`
 		display: none;
 	}
 
+	::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export default GlobalStyles

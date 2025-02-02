@@ -97,7 +97,7 @@ const ModalBackdrop = styled.button`
 `
 
 const ModalContent = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined)};
   ${({ theme }) => theme.borderRadius('md')};
   ${({ theme }) => theme.padding('md', 'lg')};
   position: absolute;
@@ -107,8 +107,9 @@ const ModalContent = styled.div`
 
 const ModalText = styled.p`
   ${({ theme }) => theme.font(600, theme.colors.black[600])};
-  padding: 0 36px;
+  ${({ theme }) => theme.padding('modal')};
   text-align: center;
+  white-space: pre-wrap;
 `
 
 const ButtonGrid = styled.div`
