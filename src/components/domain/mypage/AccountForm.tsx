@@ -7,7 +7,6 @@ import { accountAttribute } from '@/forms/useAccountForm'
 import { useValidateNickname } from '@/services/query/useAuthQuery'
 import { useAccountActions, useAccountModeState, useNicknameValidation } from '@/stores/account'
 import { FormContainer, ValidateContainer } from '@/styles/commonStyles'
-import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 const useValidation = () => {
   const [nicknameValidationMessage, setNicknameValidationMessage] = useState('')
@@ -16,18 +15,19 @@ const useValidation = () => {
   const { setNicknameValidated } = useAccountActions()
 
   const validateNickname = useCallback(() => {
-    const nickname = getValues(FORM_ATTRIBUTE.NICKNAME.section)
+    const nicknameSection = accountAttribute.NICKNAME.section
+    const nickname = getValues(nicknameSection)
 
     validateNicknameMutation(
       { body: { nickname } },
       {
         onSuccess: () => {
-          clearErrors(accountAttribute.NICKNAME.section)
+          clearErrors(nicknameSection)
           setNicknameValidationMessage('사용 가능한 닉네임입니다.')
           setNicknameValidated(true)
         },
         onError: () => {
-          clearErrors(accountAttribute.NICKNAME.section)
+          clearErrors(nicknameSection)
           setNicknameValidationMessage('이미 사용 중인 닉네임입니다.')
           setNicknameValidated(false)
         },

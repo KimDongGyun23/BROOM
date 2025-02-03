@@ -70,11 +70,13 @@ export const useAccountForm = () => {
   )
 
   const onSubmit = handleSubmit(async (formData) => {
+    const nicknameSection = accountAttribute.NICKNAME.section
+
     if (isNicknameValidated) {
-      clearErrors(accountAttribute.NICKNAME.section)
+      clearErrors(nicknameSection)
       await handleAccountUpdate(formData)
     } else {
-      setError(accountAttribute.NICKNAME.section, {
+      setError(nicknameSection, {
         type: 'manual',
         message: '닉네임 중복 확인을 해주세요.',
       })
