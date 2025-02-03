@@ -2,10 +2,9 @@ import { useCallback, useEffect } from 'react'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
+import { useFetchAccountInfo, useUpdateUserAccount } from '@/services/query/useMypageQuery'
 import { useAccountActions, useNicknameValidation } from '@/stores/account'
 import type { AccountInfoResponse, UserAccount } from '@/types/mypage'
-
-import { useFetchAccountInfo, useUpdateUserAccount } from '../query/useMypageQuery'
 
 const currentYear = new Date().getFullYear()
 

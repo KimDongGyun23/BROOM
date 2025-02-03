@@ -4,7 +4,7 @@ import { AccountForm } from '@/components/domain/mypage/AccountForm'
 import { Loading } from '@/components/view/Loading'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useAccountForm } from '@/services/service/useAccountForm'
+import { useAccountForm } from '@/forms/useAccountForm'
 import { useAccountActions, useAccountModeState, useModalState } from '@/stores/account'
 
 import { ErrorPage } from '../home/ErrorPage'
