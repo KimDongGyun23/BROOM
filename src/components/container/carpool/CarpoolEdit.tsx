@@ -4,7 +4,8 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
 import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { postAttribute, useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
+import { postAttribute } from '@/forms/useCarpoolCreateForm'
+import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
 
 import { ErrorPage } from '../home/ErrorPage'
 

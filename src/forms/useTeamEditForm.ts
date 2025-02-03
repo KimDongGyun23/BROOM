@@ -5,9 +5,9 @@ import { useParamId } from '@/hooks/useParamId'
 import { useFetchUpdatePostData, useUpdatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 
-import { postSchema } from './useCarpoolCreateForm'
+import { postSchema } from './useTeamCreateForm'
 
-export const useCarpoolEditForm = () => {
+export const useTeamEditForm = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
@@ -20,14 +20,14 @@ export const useCarpoolEditForm = () => {
   const handleSubmitForm = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
-      time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
+      time: `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`,
       personnel: parseInt(personnel as string),
       ...rest,
     }
 
     postUpdate(
       { urls: { boardId }, body: submissionData },
-      { onSuccess: () => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
+      { onSuccess: () => navigate(`/team/detail/${boardId}`, { replace: true }) },
     )
   }
 
