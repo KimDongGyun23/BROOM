@@ -1,8 +1,12 @@
-export type MypageUser = {
+type User = {
   nickname: string
   reserveYear: number
-  militaryChaplain: string
+  dischargeYear: number
+  militaryBranch: string
 }
+
+type Profile = Pick<User, 'nickname' | 'reserveYear'>
+export type UserAccount = Omit<User, 'reserveYear'>
 
 export type PasswordUpdateForm = {
   password: string
@@ -10,10 +14,11 @@ export type PasswordUpdateForm = {
   confirm: string
 }
 
-export type UserProfile = Pick<MypageUser, 'nickname' | 'reserveYear'>
+export type ProfileResponse = Profile
 
+export type AccountInfoResponse = UserAccount
 export type UpdateAccountRequest = {
-  body: MypageUser
+  body: UserAccount
 }
 
 export type UpdatePasswordRequest = {

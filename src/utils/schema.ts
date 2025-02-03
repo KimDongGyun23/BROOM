@@ -49,7 +49,7 @@ export const FORM_ATTRIBUTE = {
     label: '전역 연도',
     input: { placeholder: '숫자 4자리를 입력해주세요.', type: 'number' },
   },
-  SORT: { section: 'militaryChaplain', label: '복무했던 군종' },
+  MILITARY_BRANCH: { section: 'militaryBranch', label: '복무했던 군종' },
 
   NAME: { section: 'name', label: '이름', input: { placeholder: '이름을 입력해주세요.' } },
   STUDENT_ID: {
@@ -124,26 +124,6 @@ export const signupSchema = z
     path: ['confirm'],
     message: '비밀번호가 일치하지 않습니다.',
   })
-  .refine((data) => data.militaryChaplain !== undefined, {
-    path: ['militaryChaplain'],
-    message: '군종을 선택해주세요.',
-  })
-
-export const accountSchema = z
-  .object({
-    nickname: z
-      .string()
-      .min(2, { message: '닉네임은 2글자 이상입니다.' })
-      .max(8, { message: '닉네임은 8글자 이하입니다.' }),
-    dischargeYear: z
-      .union([z.string(), z.number()])
-      .transform((value) => (typeof value === 'string' ? parseInt(value, 10) : value))
-      .refine((val) => val >= currentYear - 4 && val <= currentYear, {
-        message: `${currentYear - 4}년부터 현재 연도까지만 입력 가능합니다.`,
-      }),
-    militaryChaplain: z.string(),
-  })
-  .partial()
   .refine((data) => data.militaryChaplain !== undefined, {
     path: ['militaryChaplain'],
     message: '군종을 선택해주세요.',

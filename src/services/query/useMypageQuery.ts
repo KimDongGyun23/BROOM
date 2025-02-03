@@ -1,13 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { UpdateAccountRequest, UpdatePasswordRequest, UserProfile } from '@/types/mypage'
+import type {
+  AccountInfoResponse,
+  ProfileResponse,
+  UpdateAccountRequest,
+  UpdatePasswordRequest,
+} from '@/types/mypage'
 import type { PostResponse } from '@/types/post'
 
 import { instance } from '.'
 
 const ENDPOINTS = {
-  ACCOUNT: `/mypage/info`,
   fetchMypage: `/mypage`,
+  fetchAccountInfo: `/mypage/info`,
+  ACCOUNT: `/mypage/info`,
   updatePassword: `/mypage/password`,
   CARPOOL_POST: `/mypage/carpool`,
   TEAM_POST: `/mypage/team`,
@@ -23,16 +29,23 @@ const queryKeys = {
 }
 
 export const useUserProfile = () => {
-  return useQuery<UserProfile>({
+  return useQuery<ProfileResponse>({
     queryKey: queryKeys.all,
     queryFn: async () => await instance.get(ENDPOINTS.fetchMypage),
+  })
+}
+
+export const useFetchAccountInfo = () => {
+  return useQuery<AccountInfoResponse>({
+    queryKey: queryKeys.account(),
+    queryFn: async () => await instance.get(ENDPOINTS.fetchAccountInfo),
   })
 }
 
 export const useUpdateUserAccount = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, UpdateAccountRequest>({
+  return useMutation<string, Error, UpdateAccountRequest>({
     mutationFn: async ({ body }) => await instance.put(ENDPOINTS.ACCOUNT, body),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })

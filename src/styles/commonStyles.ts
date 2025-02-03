@@ -11,3 +11,7 @@ export const FormContainer = styled.form<{ $isFull?: boolean }>`
   overflow-y: scroll;
   height: ${({ $isFull }) => ($isFull ? '100%' : 'fit-content')};
 `
+
+export const ValidateContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', undefined, undefined, 'lg')};
+`

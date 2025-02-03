@@ -1,28 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { instance } from '@/services/query'
 import type { BusReservationCheck, BusReservationForm } from '@/types/bus'
 import type { SearchType } from '@/types/common'
-import type { MypageUser } from '@/types/mypage'
-import { accountSchema, busReserveInfoSchema, busSchema } from '@/utils/schema'
-
-export const useAccountForm = () => {
-  const getDefaultValues = async () => {
-    const { nickname, dischargeYear, militaryChaplain } =
-      await instance.get<MypageUser>(`/mypage/info`)
-    return { nickname, dischargeYear, militaryChaplain }
-  }
-
-  const formMethod = useForm<MypageUser>({
-    mode: 'onSubmit',
-    reValidateMode: 'onSubmit',
-    resolver: zodResolver(accountSchema),
-    defaultValues: getDefaultValues,
-  })
-
-  return formMethod
-}
+import { busReserveInfoSchema, busSchema } from '@/utils/schema'
 
 export const useSearchForm = (defaultValue: SearchType) => {
   const formMethod = useForm<SearchType>({
