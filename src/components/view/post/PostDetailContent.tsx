@@ -6,9 +6,9 @@ import { usePost } from '@/stores/post'
 export const PostDetailContent = () => {
   const post = usePost()
   const { pathname } = useLocation()
-  if (!post) return
+  if (!post || !post.contentDetail) return
 
-  const { title, trainingDate, place, time, personnel, content } = post
+  const { title, trainingDate, place, time, personnel, content } = post.contentDetail
   const isCarpoolPage = pathname.includes('carpool')
 
   return (

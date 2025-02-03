@@ -27,14 +27,14 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
 
 export const PostProfile = () => {
   const post = usePost()
-  if (!post) return null
+  if (!post || !post.author) return null
 
   return (
     <BaseProfile
-      iconType={post.writerMilitaryChaplain}
-      name={post.WriterNickname}
-      subtitle={`예비군 ${post.writerDischargeYear}년차`}
-      description={post.createdAt}
+      iconType={post.author.militaryBranch}
+      name={post.author.nickname}
+      subtitle={`예비군 ${post.author.reserveYear}년차`}
+      description={post.status.createdAt}
     />
   )
 }

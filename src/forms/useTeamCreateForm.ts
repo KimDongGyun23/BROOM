@@ -22,7 +22,11 @@ export const postAttribute = {
     section: 'personnel',
     label: '모집 인원',
   },
-  TIME: { section: 'hour', label: '시간', input: { hourSection: 'hour', minuteSection: 'minute' } },
+  TIME: {
+    section: 'hour',
+    label: '만날 시간',
+    input: { hourSection: 'hour', minuteSection: 'minute' },
+  },
   CONTENT: {
     section: 'content',
     label: '메모',

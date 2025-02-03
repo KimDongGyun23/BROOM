@@ -32,20 +32,20 @@ export const CarpoolDetailFooter = () => {
   }
 
   const handleBookmark = () => {
-    if (post && post.isBookmark) {
+    if (post && post.status.bookmark) {
       setBookmark(
         { body: { boardId } },
-        { onSuccess: () => setPost({ ...post, isBookmark: false }) },
+        { onSuccess: () => setPost({ ...post, status: { ...post.status, bookmark: false } }) },
       )
-    } else if (post && !post.isBookmark) {
+    } else if (post && !post.status.bookmark) {
       deleteBookmark(
         { urls: { boardId } },
-        { onSuccess: () => setPost({ ...post, isBookmark: true }) },
+        { onSuccess: () => setPost({ ...post, status: { ...post.status, bookmark: true } }) },
       )
     }
   }
 
-  if (!post) return null
+  if (!post || !post.status) return null
 
   return <PostBottom onBookmark={handleBookmark} onChatStart={handleClickChatting} />
 }

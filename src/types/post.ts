@@ -21,8 +21,8 @@ type PostDetail = PostBasicInfo & {
 type PostStatus = {
   createdAt: string
   boardId: string
-  isFull: boolean
-  isBookmark: boolean
+  full: boolean
+  bookmark: boolean
 }
 
 type Category = {
@@ -40,6 +40,11 @@ export type PostCreateRequest = {
   body: PostDetail & Category
 }
 
+export type PostEditRequest = {
+  body: PostDetail
+  urls: PostId
+}
+
 export type PostDetailRequest = {
   urls: PostId
 }
@@ -49,31 +54,14 @@ export type PostDetailResponse = {
   contentDetail: PostDetail
 }
 
-// export type PostAuthorType = {
-//   WriterNickname: string
-//   writerDischargeYear: string
-//   writerMilitaryChaplain: MilitaryBranchCode
-// }
+export type PostDeleteRequest = {
+  urls: PostId
+}
 
-// type PostBasicInfo = {
-//   title: string
-//   trainingDate: string
-//   place: string
-//   time: string
-// }
-
-// type PostMetadata = {
-//   createdAt: string
-//   boardId: number
-//   full: boolean
-//   category?: TabUpperKey
-//   isBookmark: boolean
-// }
-
-// type PostDetail = {
-//   personnel: number
-//   content: string
-// }
+export type PostIsFullRequest = {
+  body: Pick<PostStatus, 'full'>
+  urls: PostId
+}
 
 // type PostSearchType = {
 //   category: string
@@ -104,29 +92,6 @@ export type PostDetailResponse = {
 
 // export type PostRecruitResponse = {
 //   result: PostSummary[]
-// }
-
-// export type PostDetailRequest = {
-//   urls: PostId
-// }
-// export type PostDetailResponse = PostBasicInfo & PostMetadata & PostDetail & PostAuthorType
-
-// export type PostEditPageRequest = {
-//   urls: PostId
-// }
-
-// export type PostEditRequest = {
-//   body: PostContent
-//   urls: PostId
-// }
-
-// export type PostDeleteRequest = {
-//   urls: PostId
-// }
-
-// export type PostIsFullRequest = {
-//   body: Pick<PostMetadata, 'full'>
-//   urls: PostId
 // }
 
 // export type PostSetBookmarkRequest = {

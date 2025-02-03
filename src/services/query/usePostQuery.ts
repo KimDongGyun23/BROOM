@@ -93,7 +93,7 @@ export const useDeletePost = () => {
 export const useMarkPostAsFull = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, PostIsFullRequest>({
+  return useMutation<string, Error, PostIsFullRequest>({
     mutationFn: async ({ body, urls }) =>
       await instance.patch(API_ENDPOINTS.markIsFull(urls), body),
     onSuccess: () => {

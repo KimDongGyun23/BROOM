@@ -23,7 +23,7 @@ export const usePostStore = create<PostStore>((set) => ({
   isMyPost: false,
   actions: {
     setPost: (post: PostDetailResponse) => {
-      const isMyPost = post.WriterNickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
+      const isMyPost = post.author.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
       set({ post, isMyPost })
     },
     setTab: (newTab: TabKey) => set({ currentTab: newTab }),
