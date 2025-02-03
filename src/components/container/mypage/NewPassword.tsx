@@ -1,38 +1,12 @@
-import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { usePasswordUpdateForm } from '@/forms/usePasswordUpdateForm'
 import { useBoolean } from '@/hooks/useBoolean'
-import { useCustomForm } from '@/hooks/useCustomForm'
-import { useUpdatePassword } from '@/services/query/useMypageQuery'
 import { FormContainer } from '@/styles/commonStyles'
-import type { PasswordUpdateForm } from '@/types/mypage'
-import { FORM_ATTRIBUTE, newPasswordSchema } from '@/utils/schema'
-
-const usePasswordUpdateForm = (openModal: VoidFunction) => {
-  const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)
-  const { handleSubmit } = formMethod
-  const { mutate: updatePassword } = useUpdatePassword()
-  const [message, setMessage] = useState<string>('')
-
-  const handleSubmitForm = (formData: PasswordUpdateForm) => {
-    const { confirm: _confirm, ...rest } = formData
-    updatePassword(
-      { body: { ...rest } },
-      {
-        onSuccess: (res) => {
-          setMessage(res)
-          openModal()
-        },
-        onError: (error) => setMessage(error.message),
-      },
-    )
-  }
-
-  return { formMethod, message, onSubmit: handleSubmit(handleSubmitForm) }
-}
+import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 export const NewPassword = () => {
   const [isModalOpen, openModal, closeModal] = useBoolean(false)
