@@ -27,7 +27,7 @@ const API_ENDPOINTS = {
 
 const queryKeys = {
   all: ['post'] as const,
-  detail: (boardId: number) => [...queryKeys.all, 'detail', boardId] as const,
+  detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
 export const usePostDetail = ({ urls }: PostDetailRequest) => {
@@ -64,7 +64,7 @@ export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
     queryKey: queryKeys.detail(urls.boardId),
     queryFn: async () => await instance.get(API_ENDPOINTS.detail(urls)),
     select: (data): PostForm => {
-      const { title, trainingDate, place, time, personnel, content } = data
+      const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
       return {
         title,

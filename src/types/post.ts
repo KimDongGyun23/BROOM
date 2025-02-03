@@ -30,7 +30,7 @@ type Category = {
 }
 export type PostId = Pick<PostStatus, 'boardId'>
 
-export type PostForm = Omit<PostDetail, 'time'> & {
+export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
   personnel: string
   hour: string
   minute: string
@@ -38,6 +38,15 @@ export type PostForm = Omit<PostDetail, 'time'> & {
 
 export type PostCreateRequest = {
   body: PostDetail & Category
+}
+
+export type PostDetailRequest = {
+  urls: PostId
+}
+export type PostDetailResponse = {
+  author: PostAuthor
+  status: PostStatus
+  contentDetail: PostDetail
 }
 
 // export type PostAuthorType = {
