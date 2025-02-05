@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
   PostCreateRequest,
@@ -10,12 +10,18 @@ import type {
   PostForm,
   PostId,
   PostIsFullRequest,
+  PostRequest,
+  PostResponse,
   PostSetBookmarkRequest,
 } from '@/types/post'
 
 import { instance } from '.'
 
 const API_ENDPOINTS = {
+  list: (page: unknown, category: string) => `/board/view/all/${page}?category=${category}`,
+  activeList: (page: unknown, category: string) =>
+    `/board/view/recruiting/${page}?category=${category}`,
+
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
@@ -27,7 +33,35 @@ const API_ENDPOINTS = {
 
 const queryKeys = {
   all: ['post'] as const,
+  list: (page: number, category: string) => [...queryKeys.all, 'list', page, category] as const,
+  activeList: (page: number, category: string) =>
+    [...queryKeys.all, 'active-list', page, category] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
+}
+
+export const usePostList = ({ urls }: PostRequest) => {
+  return useInfiniteQuery<PostResponse, Error>({
+    queryKey: queryKeys.list(0, urls.category),
+    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
+      await instance.get(API_ENDPOINTS.list(pageParam, urls.category)),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
+    },
+  })
+}
+
+export const useActivePostList = ({ urls }: PostRequest) => {
+  return useInfiniteQuery<PostResponse, Error>({
+    queryKey: queryKeys.activeList(0, urls.category),
+    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
+      await instance.get(API_ENDPOINTS.activeList(pageParam, urls.category)),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
+    },
+    enabled: false,
+  })
 }
 
 export const usePostDetail = ({ urls }: PostDetailRequest) => {

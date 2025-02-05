@@ -5,7 +5,6 @@ import { useParamId } from '@/hooks/useParamId'
 import { usePostActions } from '@/stores/post'
 import type { PostDetailResponse } from '@/types/post'
 import { TAB_KEYS } from '@/utils/constants'
-import { formatDate } from '@/utils/formatDate'
 
 const postDetail: PostDetailResponse = {
   author: {
@@ -35,7 +34,6 @@ export const usePostDetailData = () => {
   const { pathname } = useLocation()
   // const { data: postDetail, isPending, isError } = usePostDetail({ urls: { boardId } })
   const { setPost, setTab } = usePostActions()
-  console.log(postDetail.contentDetail.time, formatDate(postDetail.contentDetail.time, 'shortTime'))
 
   useEffect(() => {
     if (postDetail) {

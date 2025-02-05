@@ -1,89 +1,74 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import type { InfiniteData } from '@tanstack/react-query'
 
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
 import { SearchBar } from '@/components/domain/post/SearchBar'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { Loading } from '@/components/view/Loading'
 import { MainHeader } from '@/components/view/MainHeader'
 import { useToggle } from '@/hooks/useToggle'
-import { useActiveCarpoolList, useCarpoolList } from '@/services/query/useCarpoolQuery'
+import { useActivePostList, usePostList } from '@/services/query/usePostQuery'
+import { usePostListActions } from '@/stores/postList'
+import { Container } from '@/styles/commonStyles'
+import type { PostResponse } from '@/types/post'
+import { TAB_UPPER_KEYS } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-const dummy = [
-  {
-    boardId: 0,
-    title: '소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
-    createdAt: '12:43',
-    trainingDate: '05/21',
-    place: '종로3가 1번출구소프트 카풀 하실 분소프트 카풀 하실 분소프트 카풀 하실 분',
-    time: '07:30',
-    full: false,
-  },
-  {
-    boardId: 1,
-    title: '소프트 카풀 하실 분',
-    createdAt: '12:43',
-    trainingDate: '05/21',
-    place: '종로3가 1번출구',
-    time: '07:30',
-    full: false,
-  },
-  {
-    boardId: 2,
-    title: '소프트 카풀 하실 분',
-    createdAt: '12:43',
-    trainingDate: '05/21',
-    place: '종로3가 1번출구',
-    time: '07:30',
-    full: true,
-  },
-  {
-    boardId: 3,
-    title: '소프트 카풀 하실 분',
-    createdAt: '12:43',
-    trainingDate: '05/21',
-    place: '종로3가 1번출구',
-    time: '07:30',
-    full: true,
-  },
-  {
-    boardId: 4,
-    title: '소프트 카풀 하실 분',
-    createdAt: '12:43',
-    trainingDate: '05/21',
-    place: '종로3가 1번출구',
-    time: '07:30',
-    full: true,
-  },
-]
-
-export const Carpool = () => {
-  const navigate = useNavigate()
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
-
+const useCarpoolData = () => {
+  const currentTab = TAB_UPPER_KEYS[0]
+  const { setTab, setPost } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
-  const { data: allCarpools, isLoading: allLoading, isError: allError } = useCarpoolList()
+
+  const {
+    data: allCarpools,
+    isPending: allPending,
+    isError: allError,
+  } = usePostList({ urls: { category: currentTab } })
+
   const {
     data: activeCarpools,
     refetch: refetchActiveCarpools,
-    isLoading: activeLoading,
+    isPending: activePending,
     isError: activeError,
-  } = useActiveCarpoolList()
+  } = useActivePostList({ urls: { category: currentTab } })
+
+  const mapInfiniteDataToPosts = (data: InfiniteData<PostResponse> | undefined) => {
+    if (!data) return []
+    return data.pages.flatMap((page) => page.result)
+  }
 
   const handleRecruitToggle = () => {
     refetchActiveCarpools()
     toggleShowActiveOnly()
   }
 
+  useEffect(() => {
+    if (activeCarpools || allCarpools) {
+      setTab('carpool')
+      setPost(
+        showActiveOnly
+          ? mapInfiniteDataToPosts(activeCarpools)
+          : mapInfiniteDataToPosts(allCarpools),
+      )
+    }
+  }, [activeCarpools, allCarpools, setPost, setTab, showActiveOnly])
+
+  return {
+    showActiveOnly,
+    isPending: allPending || activePending,
+    isError: allError || activeError,
+    handleRecruitToggle,
+  }
+}
+
+export const Carpool = () => {
+  const navigate = useNavigate()
+  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+
+  const { showActiveOnly, isPending, isError, handleRecruitToggle } = useCarpoolData()
   const handleAddCarpoolClick = () => navigate('/carpool/create')
-
-  const isLoading = allLoading || activeLoading
-  const carpoolsToShow = showActiveOnly ? activeCarpools : allCarpools
-
-  // if (allError || activeError) return <ErrorPage />
 
   return (
     <Container>
@@ -91,19 +76,9 @@ export const Carpool = () => {
       <SearchBar currentTab="carpool" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
 
-      {isLoading ? (
-        <Loading />
-      ) : (
-        // <PostList items={carpoolsToShow} currentPage="carpool" />
-        <PostList items={dummy} currentPage="carpool" />
-      )}
+      <PostList isPending={isPending} isError={isError} />
       {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNavigation />
     </Container>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`

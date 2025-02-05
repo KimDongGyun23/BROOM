@@ -63,20 +63,29 @@ export type PostIsFullRequest = {
   urls: PostId
 }
 
+export type PostSetBookmarkRequest = {
+  body: PostId
+}
+
+export type PostDeleteBookmarkRequest = {
+  urls: PostId
+}
+
+export type PostRequest = {
+  urls: Category
+}
+
+export type PostResponse = {
+  result: {
+    status: PostStatus
+    content: PostBasicInfo
+  }[]
+  hasNext: boolean
+}
+
 // type PostSearchType = {
 //   category: string
 //   keyword: string
-// }
-
-// export type PostSummary = PostBasicInfo & PostMetadata
-
-// export type PostContent = PostBasicInfo & PostDetail
-
-// export type PostForm = Overwrite<Form, { hour: number | string; minute: number | string }> &
-//   Overwrite<PostDetail, { personnel: number | string }>
-
-// export type PostResponse = {
-//   result: PostSummary[]
 // }
 
 // export type PostRequest = {
@@ -92,12 +101,4 @@ export type PostIsFullRequest = {
 
 // export type PostRecruitResponse = {
 //   result: PostSummary[]
-// }
-
-// export type PostSetBookmarkRequest = {
-//   body: PostId
-// }
-
-// export type PostDeleteBookmarkRequest = {
-//   urls: PostId
 // }

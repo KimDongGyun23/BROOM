@@ -3,53 +3,45 @@ import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
-import type { PostSummary } from '@/types/post'
-import type { TabKey } from '@/utils/constants'
+import { Loading } from '@/components/view/Loading'
+import { usePostList, usePostListCurrentTab } from '@/stores/postList'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
-type PostItemProps = {
-  item: PostSummary
-  to: string
-}
-
-const PostItem = ({ item, to }: PostItemProps) => {
-  const { title, createdAt, trainingDate, place, time, full } = item
-
-  return (
-    <PostItemLink to={to}>
-      <PostItemHeader>
-        <p className="title">{title}</p>
-        <p className="date">{createdAt}</p>
-      </PostItemHeader>
-
-      <PostContent>
-        <PostDetails>
-          <p className="training-date">{trainingDate} 훈련</p>
-          <PostLocationTime>
-            <span className="place">{place}</span>
-            <span>|</span>
-            <span>{time}</span>
-          </PostLocationTime>
-        </PostDetails>
-
-        <div>{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
-      </PostContent>
-    </PostItemLink>
-  )
-}
-
 type PostListProps = {
-  items: PostSummary[] | undefined
-  currentPage: TabKey
+  isPending: boolean
+  isError: boolean
 }
 
-export const PostList = ({ items, currentPage }: PostListProps) => {
-  if (!items || !items.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
+export const PostList = ({ isPending, isError }: PostListProps) => {
+  const list = usePostList()
+  const currentPage = usePostListCurrentTab()
+
+  if (isPending) return <Loading />
+  if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+  if (!list || !list.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
     <PostSection>
-      {items.map((item) => (
-        <PostItem key={item.boardId} item={item} to={`/${currentPage}/detail/${item.boardId}`} />
+      {list.map(({ content, status }) => (
+        <PostItemLink key={status.boardId} to={`/${currentPage}/detail/${status.boardId}`}>
+          <PostItemHeader>
+            <p className="title">{content.title}</p>
+            <p className="date">{status.createdAt}</p>
+          </PostItemHeader>
+
+          <PostContent>
+            <PostDetails>
+              <p className="training-date">{content.trainingDate} 훈련</p>
+              <PostLocationTime>
+                <span className="place">{content.place}</span>
+                <span>|</span>
+                <span>{content.time}</span>
+              </PostLocationTime>
+            </PostDetails>
+
+            <div>{status.full ? <StopIcon /> : <AdditionCircleIcon />}</div>
+          </PostContent>
+        </PostItemLink>
       ))}
     </PostSection>
   )
