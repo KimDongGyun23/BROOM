@@ -7,7 +7,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBusReservedInfoForm } from '@/hooks/useForm'
 import { useBusReservationStatus } from '@/services/service/useBusReservationStatus'
-import type { BusReservationState } from '@/utils/constants'
+import { BUS_RESERVATION_STATES, type BusReservationState } from '@/utils/constants'
 import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 type ReservationFormType = {

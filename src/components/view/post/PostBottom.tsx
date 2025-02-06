@@ -19,7 +19,7 @@ export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
 
   if (!post || !session) return null
 
-  const isFull = post.full
+  const isFull = post.status.full
 
   const handleClickBookmark = () => {
     onBookmark()

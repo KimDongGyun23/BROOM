@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 
-import { PostList } from '@/components/domain/post/PostList'
 import { PostTabs } from '@/components/domain/post/PostTabs'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
@@ -13,14 +12,14 @@ const PostContent = () => {
   const activeTab = useActiveTab()
 
   const {
-    data: carpoolPostsData,
+    // data: carpoolPostsData,
     refetch: refetchCarpoolPosts,
     isLoading: carpoolLoading,
     error: carpoolError,
   } = useMyCarpoolPost()
 
   const {
-    data: teamPostsData,
+    // data: teamPostsData,
     refetch: refetchTeamPosts,
     isLoading: teamLoading,
     error: teamError,
@@ -36,10 +35,10 @@ const PostContent = () => {
 
   return (
     <ScrollContainer>
-      {activeTab === TAB_LABELS[0] && (
+      {/* {activeTab === TAB_LABELS[0] && (
         <PostList items={carpoolPostsData?.result} currentPage="carpool" />
       )}
-      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData?.result} currentPage="team" />}
+      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData?.result} currentPage="team" />} */}
     </ScrollContainer>
   )
 }

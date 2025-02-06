@@ -45,7 +45,7 @@ export const SignupTwoStep = () => {
     const isValid = await trigger([
       FORM_ATTRIBUTE.NICKNAME.section,
       FORM_ATTRIBUTE.DISCHARGE_YEAR.section,
-      FORM_ATTRIBUTE.SORT.section,
+      FORM_ATTRIBUTE.MILITARY_BRANCH.section,
     ])
 
     if (isValid && isNicknameValid) goNextStep()
@@ -72,8 +72,8 @@ export const SignupTwoStep = () => {
         <InputGroup.Input {...FORM_ATTRIBUTE.DISCHARGE_YEAR.input} />
       </InputGroup>
 
-      <InputGroup section={FORM_ATTRIBUTE.SORT.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.SORT.label} />
+      <InputGroup section={FORM_ATTRIBUTE.MILITARY_BRANCH.section}>
+        <InputGroup.Label label={FORM_ATTRIBUTE.MILITARY_BRANCH.label} />
         <InputGroup.SortOfArmy />
       </InputGroup>
 
