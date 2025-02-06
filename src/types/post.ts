@@ -25,7 +25,7 @@ type PostStatus = {
   bookmark: boolean
 }
 
-type Category = {
+export type Category = {
   category: TabUpperKey
 }
 export type PostId = Pick<PostStatus, 'boardId'>
@@ -83,13 +83,18 @@ export type PostResponse = {
   hasNext: boolean
 }
 
+export type PostSearchRequest = {
+  urls: {
+    pageParam?: unknown
+    category: Category
+    type: string
+    keyword: string
+  }
+}
+
 // type PostSearchType = {
 //   category: string
 //   keyword: string
-// }
-
-// export type PostRequest = {
-//   urls: Pick<PostMetadata, 'category'>
 // }
 
 // export type PostSearchRequest = {

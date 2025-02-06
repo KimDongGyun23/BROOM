@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
+  Category,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -12,6 +13,7 @@ import type {
   PostIsFullRequest,
   PostRequest,
   PostResponse,
+  PostSearchRequest,
   PostSetBookmarkRequest,
 } from '@/types/post'
 
@@ -21,6 +23,8 @@ const API_ENDPOINTS = {
   list: (page: unknown, category: string) => `/board/view/all/${page}?category=${category}`,
   activeList: (page: unknown, category: string) =>
     `/board/view/recruiting/${page}?category=${category}`,
+  search: (urls: PostSearchRequest['urls']) =>
+    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
@@ -36,6 +40,8 @@ const queryKeys = {
   list: (page: number, category: string) => [...queryKeys.all, 'list', page, category] as const,
   activeList: (page: number, category: string) =>
     [...queryKeys.all, 'active-list', page, category] as const,
+  search: (page: unknown, category: Category, type: string, keyword: string) =>
+    [...queryKeys.all, 'search', page, category, type, keyword] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
@@ -56,6 +62,19 @@ export const useActivePostList = ({ urls }: PostRequest) => {
     queryKey: queryKeys.activeList(0, urls.category),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.activeList(pageParam, urls.category)),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
+    },
+    enabled: false,
+  })
+}
+
+export const useSearchPostList = ({ urls }: PostSearchRequest) => {
+  return useInfiniteQuery<PostResponse, Error>({
+    queryKey: queryKeys.search(0, urls.category, urls.type, urls.keyword),
+    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
+      await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.result.length + 1 : undefined
