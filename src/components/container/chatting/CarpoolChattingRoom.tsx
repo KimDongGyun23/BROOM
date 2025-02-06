@@ -54,7 +54,7 @@ export const CarpoolChattingRoom = () => {
 
   useEffect(() => {
     if (carpoolRoomData) initialMessage(carpoolRoomData.previousMessages)
-  }, [carpoolRoomData])
+  }, [carpoolRoomData, initialMessage])
 
   if (isPending) return <Loading />
   if (isError) return <div>error</div>

@@ -63,6 +63,7 @@ export const useWebSocket = (roomId: string | undefined) => {
       client.current?.deactivate()
       console.log('WebSocket 연결 해제')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, token])
 
   return { client, sendMessage }

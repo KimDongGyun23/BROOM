@@ -51,7 +51,7 @@ export const TeamChattingRoom = () => {
 
   useEffect(() => {
     if (teamRoomData) initialMessage(teamRoomData.previousMessages)
-  }, [teamRoomData])
+  }, [initialMessage, teamRoomData])
 
   if (isPending) return <Loading />
   if (isError) return <div>error</div>

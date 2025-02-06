@@ -37,7 +37,7 @@ export const SearchBar = ({ currentTab }: SearchBarProps) => {
         `/${currentTab}/search?filterName=${selectedFilter.label}&searchName=${formData.search}`,
       )
     },
-    [currentTab, selectedFilter.label],
+    [currentTab, navigate, selectedFilter.label],
   )
 
   const handleFilterSelect = useCallback(

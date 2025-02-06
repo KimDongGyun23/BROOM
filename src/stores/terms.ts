@@ -17,7 +17,7 @@ export const AGREEMENTS: { id: AgreementId; text: string }[] = [
   { id: 'serviceConsent', text: '(필수) 서비스 이용 약관 동의' },
 ]
 
-export const useTermsStore = create<TermsStore>((set, get) => ({
+export const useTermsStore = create<TermsStore>((set) => ({
   checkedAgreements: new Set(),
   actions: {
     toggleAgreement: (id) => {
