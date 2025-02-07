@@ -43,13 +43,11 @@ export const useLoginForm = () => {
     login(
       { body: { ...formData } },
       {
-        onSuccess: ({ headers, data }) => {
-          console.log(headers)
-          if (headers.authorization) {
-            instance.setAccessToken(headers.authorization)
+        onSuccess: ({ nickname, militaryBranch }) => {
+          if (instance.hasToken()) {
             setIsLoginFailed(false)
-            setSessionStorageItem(SESSION_KEYS.NICKNAME, data.nickname)
-            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, data.militaryBranch)
+            setSessionStorageItem(SESSION_KEYS.NICKNAME, nickname)
+            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, militaryBranch)
             navigate('/home', { replace: true })
           }
         },

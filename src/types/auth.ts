@@ -1,5 +1,3 @@
-import type { AxiosResponse } from 'axios'
-
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 type User = {
@@ -29,8 +27,4 @@ export type ValidateNicknameRequest = {
   body: Pick<User, 'nickname'>
 }
 
-export type LoginResponse = AxiosResponse<Pick<User, 'nickname' | 'militaryBranch'>> & {
-  headers: {
-    authorization?: string
-  }
-}
+export type LoginResponse = Pick<User, 'nickname' | 'militaryBranch'>
