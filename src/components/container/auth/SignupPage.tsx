@@ -7,12 +7,9 @@ import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
 import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
-import { useCustomForm } from '@/hooks/useCustomForm'
-import { useSignup } from '@/services/query/useAuthQuery'
+import { useSignupForm } from '@/forms/useSignupForm'
 import { useCurrentStep, useStepsActions } from '@/stores/steps'
 import { Container, FormContainer } from '@/styles/commonStyles'
-import type { SignupData } from '@/types/auth'
-import { signupSchema } from '@/utils/schema'
 
 const signupMap = {
   1: '계정 정보 기입',
@@ -33,20 +30,6 @@ const CurrentStepForm = () => {
     default:
       return null
   }
-}
-
-const useSignupForm = () => {
-  const navigate = useNavigate()
-  const { mutate: signupMutation } = useSignup()
-  const formMethod = useCustomForm<SignupData>(signupSchema)
-  const { handleSubmit } = formMethod
-
-  const handleSubmitSignupForm = (formData: SignupData) => {
-    const { confirm: _confirm, ...dataWithoutConfirm } = formData
-    signupMutation({ body: dataWithoutConfirm }, { onSuccess: () => navigate('/sign-up/complete') })
-  }
-
-  return { formMethod, onSubmit: handleSubmit(handleSubmitSignupForm) }
 }
 
 export const SignupPage = () => {

@@ -7,7 +7,7 @@ type User = {
   password: string
   nickname: string
   dischargeYear: number
-  militaryChaplain: MilitaryBranchCode
+  militaryBranch: MilitaryBranchCode
 }
 
 export type LoginCredentials = Pick<User, 'userId' | 'password'>
@@ -29,7 +29,7 @@ export type ValidateNicknameRequest = {
   body: Pick<User, 'nickname'>
 }
 
-export type LoginResponse = AxiosResponse<Pick<User, 'nickname' | 'militaryChaplain'>> & {
+export type LoginResponse = AxiosResponse<Pick<User, 'nickname' | 'militaryBranch'>> & {
   headers: {
     authorization?: string
     refresh?: string

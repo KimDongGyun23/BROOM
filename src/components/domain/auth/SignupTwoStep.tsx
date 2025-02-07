@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
+import { signupAttribute } from '@/forms/useSignupForm'
 import { useValidateNickname } from '@/services/query/useAuthQuery'
 import { useStepsActions } from '@/stores/steps'
 import { FORM_ATTRIBUTE } from '@/utils/schema'
@@ -40,40 +41,48 @@ export const SignupTwoStep = () => {
   const { trigger } = useFormContext()
   const { goNextStep } = useStepsActions()
   const { validateNickname, isNicknameValid, nicknameValidationMessage } = useNicknameValidation()
+  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = signupAttribute
 
   const handleNext = useCallback(async () => {
     const isValid = await trigger([
-      FORM_ATTRIBUTE.NICKNAME.section,
-      FORM_ATTRIBUTE.DISCHARGE_YEAR.section,
-      FORM_ATTRIBUTE.MILITARY_BRANCH.section,
+      NICKNAME.section,
+      DISCHARGE_YEAR.section,
+      MILITARY_BRANCH.section,
     ])
 
     if (isValid && isNicknameValid) goNextStep()
-  }, [trigger, isNicknameValid, goNextStep])
+  }, [
+    trigger,
+    NICKNAME.section,
+    DISCHARGE_YEAR.section,
+    MILITARY_BRANCH.section,
+    isNicknameValid,
+    goNextStep,
+  ])
 
   return (
     <>
-      <InputGroup section={FORM_ATTRIBUTE.NICKNAME.section}>
+      <InputGroup section={NICKNAME.section}>
         <InputGroup.Label
-          label={FORM_ATTRIBUTE.NICKNAME.label}
+          label={NICKNAME.label}
           successMessage={isNicknameValid ? nicknameValidationMessage : null}
           errorMessage={!isNicknameValid ? nicknameValidationMessage : null}
         />
         <ValidateContainer>
-          <InputGroup.Input {...FORM_ATTRIBUTE.NICKNAME.input} />
+          <InputGroup.Input {...NICKNAME.input} />
           <Button size="md" onClick={validateNickname}>
             중복 확인
           </Button>
         </ValidateContainer>
       </InputGroup>
 
-      <InputGroup section={FORM_ATTRIBUTE.DISCHARGE_YEAR.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.DISCHARGE_YEAR.label} />
-        <InputGroup.Input {...FORM_ATTRIBUTE.DISCHARGE_YEAR.input} />
+      <InputGroup section={DISCHARGE_YEAR.section}>
+        <InputGroup.Label label={DISCHARGE_YEAR.label} />
+        <InputGroup.Input {...DISCHARGE_YEAR.input} />
       </InputGroup>
 
-      <InputGroup section={FORM_ATTRIBUTE.MILITARY_BRANCH.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.MILITARY_BRANCH.label} />
+      <InputGroup section={MILITARY_BRANCH.section}>
+        <InputGroup.Label label={MILITARY_BRANCH.label} />
         <InputGroup.SortOfArmy />
       </InputGroup>
 

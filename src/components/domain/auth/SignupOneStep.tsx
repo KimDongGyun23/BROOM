@@ -3,9 +3,9 @@ import { useFormContext } from 'react-hook-form'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
+import { signupAttribute } from '@/forms/useSignupForm'
 import { useValidateId } from '@/services/query/useAuthQuery'
 import { useStepsActions } from '@/stores/steps'
-import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 import { StyledButton, ValidateContainer } from './SignupStyle'
 
@@ -16,7 +16,7 @@ const useIdValidation = () => {
   const { getValues } = useFormContext()
 
   const validateId = useCallback(() => {
-    const userId = getValues(FORM_ATTRIBUTE.SIGNUP_ID.section)
+    const userId = getValues(signupAttribute.ID.section)
     validateIdMutation(
       { body: { userId } },
       {
@@ -39,41 +39,37 @@ export const SignupOneStep = () => {
   const { goNextStep } = useStepsActions()
   const { trigger } = useFormContext()
   const { validateId, isIdValid, idValidationMessage } = useIdValidation()
+  const { ID, PASSWORD, CONFIRM } = signupAttribute
 
   const handleNext = useCallback(async () => {
-    const isValid = await trigger([
-      FORM_ATTRIBUTE.SIGNUP_ID.section,
-      FORM_ATTRIBUTE.SIGNUP_PASSWORD.section,
-      FORM_ATTRIBUTE.CONFIRM.section,
-    ])
-
+    const isValid = await trigger([ID.section, PASSWORD.section, CONFIRM.section])
     if (isValid && isIdValid) goNextStep()
-  }, [trigger, isIdValid, goNextStep])
+  }, [trigger, ID.section, PASSWORD.section, CONFIRM.section, isIdValid, goNextStep])
 
   return (
     <>
-      <InputGroup section={FORM_ATTRIBUTE.SIGNUP_ID.section}>
+      <InputGroup section={ID.section}>
         <InputGroup.Label
-          label={FORM_ATTRIBUTE.SIGNUP_ID.label}
+          label={ID.label}
           successMessage={isIdValid ? idValidationMessage : null}
           errorMessage={!isIdValid ? idValidationMessage : null}
         />
         <ValidateContainer>
-          <InputGroup.Input {...FORM_ATTRIBUTE.SIGNUP_ID.input} />
+          <InputGroup.Input {...ID.input} />
           <Button size="md" onClick={validateId}>
             중복 확인
           </Button>
         </ValidateContainer>
       </InputGroup>
 
-      <InputGroup section={FORM_ATTRIBUTE.SIGNUP_PASSWORD.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.SIGNUP_PASSWORD.label} />
-        <InputGroup.PasswordInput {...FORM_ATTRIBUTE.SIGNUP_PASSWORD.input} />
+      <InputGroup section={PASSWORD.section}>
+        <InputGroup.Label label={PASSWORD.label} />
+        <InputGroup.PasswordInput {...PASSWORD.input} />
       </InputGroup>
 
-      <InputGroup section={FORM_ATTRIBUTE.CONFIRM.section}>
-        <InputGroup.Label label={FORM_ATTRIBUTE.CONFIRM.label} />
-        <InputGroup.PasswordInput {...FORM_ATTRIBUTE.CONFIRM.input} />
+      <InputGroup section={CONFIRM.section}>
+        <InputGroup.Label label={CONFIRM.label} />
+        <InputGroup.PasswordInput {...CONFIRM.input} />
       </InputGroup>
 
       <StyledButton size="lg" onClick={handleNext} disabled={!isIdValid}>
