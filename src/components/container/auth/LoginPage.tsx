@@ -1,70 +1,30 @@
-import { useState } from 'react'
 import { FormProvider } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
-import { useCustomForm } from '@/hooks/useCustomForm'
-import { instance } from '@/services/query'
-import { useLogin } from '@/services/query/useAuthQuery'
+import { loginAttribute, useLoginForm } from '@/forms/useLoginForm'
 import { Container, FormContainer } from '@/styles/commonStyles'
-import type { LoginCredentials } from '@/types/auth'
-import { FORM_ATTRIBUTE, loginSchema } from '@/utils/schema'
-import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
-
-const useLoginState = () => {
-  const navigate = useNavigate()
-  const [isLoginFailed, setIsLoginFailed] = useState(false)
-  const { mutate: login } = useLogin()
-
-  const handleLogin = (formData: LoginCredentials) => {
-    login(
-      { body: { ...formData } },
-      {
-        onSuccess: ({ headers, data }) => {
-          if (headers.authorization) {
-            instance.setAccessToken(headers.authorization)
-            setIsLoginFailed(false)
-            setSessionStorageItem(SESSION_KEYS.LOGIN, 'true')
-            setSessionStorageItem(SESSION_KEYS.NICKNAME, data.nickname)
-            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, data.militaryBranch)
-            navigate('/home', { replace: true })
-          }
-        },
-        onError: () => setIsLoginFailed(true),
-      },
-    )
-  }
-
-  return { isLoginFailed, handleLogin }
-}
 
 export const LoginPage = () => {
-  const { isLoginFailed, handleLogin } = useLoginState()
-  const formMethod = useCustomForm<LoginCredentials>(loginSchema, {
-    defaultValues: {
-      userId: 'test01',
-      password: 'password',
-    },
-  })
-
-  const { handleSubmit } = formMethod
+  const { ID, PASSWORD } = loginAttribute
+  const { formMethod, onSubmit, isLoginFailed } = useLoginForm()
 
   return (
     <Container>
       <Logo>BROOM</Logo>
 
       <FormProvider {...formMethod}>
-        <FormContainer onSubmit={handleSubmit(handleLogin)}>
-          <InputGroup section={FORM_ATTRIBUTE.LOGIN_ID.section}>
-            <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_ID.label} />
-            <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_ID.input} />
+        <FormContainer onSubmit={onSubmit}>
+          <InputGroup section={ID.section}>
+            <InputGroup.Label label={ID.label} />
+            <InputGroup.Input {...ID.input} />
           </InputGroup>
 
-          <InputGroup section={FORM_ATTRIBUTE.LOGIN_PASSWORD.section}>
-            <InputGroup.Label label={FORM_ATTRIBUTE.LOGIN_PASSWORD.label} />
-            <InputGroup.Input {...FORM_ATTRIBUTE.LOGIN_PASSWORD.input} />
+          <InputGroup section={PASSWORD.section}>
+            <InputGroup.Label label={PASSWORD.label} />
+            <InputGroup.Input {...PASSWORD.input} />
           </InputGroup>
 
           <Button size="lg" type="submit">

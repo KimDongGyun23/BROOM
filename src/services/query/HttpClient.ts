@@ -34,6 +34,10 @@ export class HttpClient {
     return this.accessToken
   }
 
+  hasToken() {
+    return !!this.accessToken
+  }
+
   get<T>(...args: Parameters<typeof this.client.get>) {
     return this.client.get<T, T>(...args)
   }

@@ -89,11 +89,6 @@ export const FORM_ATTRIBUTE = {
   },
 } as const
 
-export const loginSchema = z.object({
-  userId: z.string().min(1, { message: '아이디를 입력해주세요.' }),
-  password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
-})
-
 export const postSchema = z.object({
   title: z.string().min(1, { message: '제목을 입력해주세요.' }),
   trainingDate: z.string().min(1, { message: '훈련 날짜를 선택해주세요.' }),

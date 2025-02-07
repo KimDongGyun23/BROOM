@@ -11,7 +11,7 @@ import type {
 import { instance, instanceWithoutAuth } from '.'
 
 const ENDPOINTS = {
-  signIn: `/signin`,
+  signIn: `/login`,
   signUp: `/signup`,
   validateId: `/validate-id`,
   validateNickname: `/validate-nickname`,

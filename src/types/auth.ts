@@ -32,6 +32,5 @@ export type ValidateNicknameRequest = {
 export type LoginResponse = AxiosResponse<Pick<User, 'nickname' | 'militaryBranch'>> & {
   headers: {
     authorization?: string
-    refresh?: string
   }
 }
