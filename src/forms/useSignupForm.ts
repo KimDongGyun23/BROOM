@@ -51,7 +51,7 @@ const signupSchema = z
     nickname: z
       .string()
       .min(2, { message: '닉네임은 2글자 이상입니다.' })
-      .max(16, { message: '닉네임은 8글자 이하입니다.' }),
+      .max(8, { message: '닉네임은 8글자 이하입니다.' }),
     dischargeYear: z
       .string()
       .transform((value) => parseInt(value, 10))
