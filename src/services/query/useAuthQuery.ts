@@ -20,18 +20,17 @@ const ENDPOINTS = {
 
 export const useLogin = () => {
   return useMutation<LoginResponse, Error, LoginRequest>({
-    mutationFn: async ({ body }) => {
-      const response = await instanceWithoutAuth.post(ENDPOINTS.signIn, body, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      })
-
-      const token = response.headers.authorization
-      console.log(response, token)
-      if (token) instance.setAccessToken(token)
-      return response.data
-    },
+    mutationFn: async ({ body }) =>
+      await instanceWithoutAuth
+        .post(ENDPOINTS.signIn, body, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        })
+        .then((res) => {
+          instance.setAccessToken(res.headers['authorization'])
+          return res.data
+        }),
   })
 }
 

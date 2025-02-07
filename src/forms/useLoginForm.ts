@@ -44,7 +44,6 @@ export const useLoginForm = () => {
       { body: { ...formData } },
       {
         onSuccess: ({ nickname, militaryBranch }) => {
-          console.log(instance.getAccessToken())
           if (instance.hasToken()) {
             setIsLoginFailed(false)
             setSessionStorageItem(SESSION_KEYS.NICKNAME, nickname)
