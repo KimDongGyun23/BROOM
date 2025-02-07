@@ -1,3 +1,4 @@
+import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
@@ -27,7 +28,7 @@ export const useCarpoolEditForm = () => {
 
     postUpdate(
       { urls: { boardId }, body: submissionData },
-      { onSuccess: () => navigate(`/carpool/detail/${boardId}`, { replace: true }) },
+      { onSuccess: () => navigate(-1 as To, { replace: true }) },
     )
   }
 
