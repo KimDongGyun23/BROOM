@@ -77,6 +77,7 @@ export class HttpClient {
       if (response?.status === 403) {
         try {
           const reIssueResponse = await reIssue()
+          console.log(reIssueResponse)
           if (reIssueResponse.status === 200) {
             const retryRequest = await this.client.request(originalRequest)
             return retryRequest

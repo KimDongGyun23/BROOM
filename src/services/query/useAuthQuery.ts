@@ -55,7 +55,7 @@ export const useValidateNickname = () => {
 
 export const reIssue = async () => {
   const response = await instanceWithoutAuth.post(ENDPOINTS.reIssue, null)
-
+  console.log(response)
   const newToken = response.headers['authorization']
   if (newToken) instance.setAccessToken(newToken)
   else console.error('토큰이 존재하지 않습니다.')
