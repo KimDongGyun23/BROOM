@@ -20,9 +20,9 @@ import { instance } from '.'
 
 const API_ENDPOINTS = {
   list: (urls: PostRequest['urls']) =>
-    `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isActive}`,
+    `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isAllShow}`,
   search: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isActive}`,
+    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,

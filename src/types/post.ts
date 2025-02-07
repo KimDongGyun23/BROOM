@@ -74,7 +74,7 @@ export type PostDeleteBookmarkRequest = {
 export type PostRequest = {
   urls: Category & {
     pageParam?: number | unknown
-    isActive: boolean
+    isAllShow: boolean
   }
 }
 
@@ -90,7 +90,7 @@ export type PostSearchRequest = {
   urls: {
     pageParam?: number | unknown
     category: Category
-    isActive: boolean
+    isAllShow: boolean
     type: string
     keyword: string
   }

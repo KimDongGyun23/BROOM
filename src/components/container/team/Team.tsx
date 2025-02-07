@@ -23,7 +23,7 @@ const useFetchList = () => {
     data: postList,
     isPending,
     isError,
-  } = usePostList({ urls: { category: currentTab, isActive: showActiveOnly } })
+  } = usePostList({ urls: { category: currentTab, isAllShow: !showActiveOnly } })
 
   useEffect(() => {
     if (postList) {
