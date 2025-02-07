@@ -28,7 +28,6 @@ export const useLogin = () => {
           },
         })
         .then((res) => {
-          console.log(res, res.headers, res.headers['authorization'])
           instance.setAccessToken(res.headers['authorization'])
           return res.data
         }),
