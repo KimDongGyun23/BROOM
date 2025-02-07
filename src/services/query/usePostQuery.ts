@@ -1,7 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  Category,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -20,11 +19,10 @@ import type {
 import { instance } from '.'
 
 const API_ENDPOINTS = {
-  list: (page: unknown, category: string) => `/board/view/all/${page}?category=${category}`,
-  activeList: (page: unknown, category: string) =>
-    `/board/view/recruiting/${page}?category=${category}`,
+  list: (urls: PostRequest['urls']) =>
+    `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isActive}`,
   search: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}`,
+    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isActive}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
@@ -37,49 +35,33 @@ const API_ENDPOINTS = {
 
 const queryKeys = {
   all: ['post'] as const,
-  list: (page: number, category: string) => [...queryKeys.all, 'list', page, category] as const,
-  activeList: (page: number, category: string) =>
-    [...queryKeys.all, 'active-list', page, category] as const,
-  search: (page: unknown, category: Category, type: string, keyword: string) =>
-    [...queryKeys.all, 'search', page, category, type, keyword] as const,
+  list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
+  search: (urls: Omit<PostSearchRequest, 'pageParam'>['urls']) =>
+    [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
 export const usePostList = ({ urls }: PostRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.list(0, urls.category),
+    queryKey: queryKeys.list({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.list(pageParam, urls.category)),
+      await instance.get(API_ENDPOINTS.list({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.result.length + 1 : undefined
     },
-  })
-}
-
-export const useActivePostList = ({ urls }: PostRequest) => {
-  return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.activeList(0, urls.category),
-    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.activeList(pageParam, urls.category)),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => {
-      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
-    },
-    enabled: false,
   })
 }
 
 export const useSearchPostList = ({ urls }: PostSearchRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.search(0, urls.category, urls.type, urls.keyword),
+    queryKey: queryKeys.search({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.hasNext ? lastPage.result.length + 1 : undefined
     },
-    enabled: false,
   })
 }
 

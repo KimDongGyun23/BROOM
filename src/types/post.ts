@@ -72,7 +72,10 @@ export type PostDeleteBookmarkRequest = {
 }
 
 export type PostRequest = {
-  urls: Category
+  urls: Category & {
+    pageParam?: number | unknown
+    isActive: boolean
+  }
 }
 
 export type PostResponse = {
@@ -85,25 +88,10 @@ export type PostResponse = {
 
 export type PostSearchRequest = {
   urls: {
-    pageParam?: unknown
+    pageParam?: number | unknown
     category: Category
+    isActive: boolean
     type: string
     keyword: string
   }
 }
-
-// type PostSearchType = {
-//   category: string
-//   keyword: string
-// }
-
-// export type PostSearchRequest = {
-//   urls: PostSearchType
-// }
-// export type PostSearchResponse = {
-//   result: PostSummary[]
-// }
-
-// export type PostRecruitResponse = {
-//   result: PostSummary[]
-// }

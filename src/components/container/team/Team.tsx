@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { InfiniteData } from '@tanstack/react-query'
 
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
@@ -10,54 +9,34 @@ import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
 import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/services/query'
-import { useActivePostList, usePostList } from '@/services/query/usePostQuery'
+import { usePostList } from '@/services/query/usePostQuery'
 import { usePostListActions } from '@/stores/postList'
 import { Container } from '@/styles/commonStyles'
-import type { PostResponse } from '@/types/post'
-import { TAB_UPPER_KEYS } from '@/utils/constants'
+import { TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
 
-const useTeamData = () => {
+const useFetchList = () => {
   const currentTab = TAB_UPPER_KEYS[1]
   const { setTab, setPost } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
   const {
-    data: allTeams,
-    isLoading: allPending,
-    isError: allError,
-  } = usePostList({ urls: { category: currentTab } })
-
-  const {
-    data: activeTeams,
-    refetch: refetchActiveTeams,
-    isLoading: activePending,
-    isError: activeError,
-  } = useActivePostList({ urls: { category: currentTab } })
-
-  const mapInfiniteDataToPosts = (data: InfiniteData<PostResponse> | undefined) => {
-    if (!data) return []
-    return data.pages.flatMap((page) => page.result)
-  }
-
-  const handleRecruitToggle = () => {
-    refetchActiveTeams()
-    toggleShowActiveOnly()
-  }
+    data: postList,
+    isPending,
+    isError,
+  } = usePostList({ urls: { category: currentTab, isActive: showActiveOnly } })
 
   useEffect(() => {
-    if (activeTeams || allTeams) {
-      setTab('team')
-      setPost(
-        showActiveOnly ? mapInfiniteDataToPosts(activeTeams) : mapInfiniteDataToPosts(allTeams),
-      )
+    if (postList) {
+      setTab(TAB_KEYS[1])
+      setPost(postList.pages.flatMap((page) => page.result) || [])
     }
-  }, [activeTeams, allTeams, setPost, setTab, showActiveOnly])
+  }, [postList, setPost, setTab, showActiveOnly])
 
   return {
     showActiveOnly,
-    isPending: allPending || activePending,
-    isError: allError || activeError,
-    handleRecruitToggle,
+    isPending,
+    isError,
+    toggleShowActiveOnly,
   }
 }
 
@@ -65,17 +44,16 @@ export const Team = () => {
   const navigate = useNavigate()
   const session = instance.hasToken()
 
-  const { showActiveOnly, isPending, isError, handleRecruitToggle } = useTeamData()
+  const { isPending, isError, showActiveOnly, toggleShowActiveOnly } = useFetchList()
   const handleAddTeamClick = () => navigate('/team/create')
 
   return (
     <Container>
       <MainHeader />
       <SearchBar currentTab="team" />
-      <PostActiveToggle isChecked={showActiveOnly} onToggle={handleRecruitToggle} />
+      <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
 
       <PostList isPending={isPending} isError={isError} />
-
       {session && <PostAdditionButton onClick={handleAddTeamClick} />}
       <BottomNavigation />
     </Container>
