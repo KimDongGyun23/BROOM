@@ -5,6 +5,7 @@ type AgreementId = 'personalConsent' | 'serviceConsent'
 type Actions = {
   toggleAgreement: (id: AgreementId) => void
   toggleAllAgreements: () => void
+  resetTerms: VoidFunction
 }
 
 type TermsStore = {
@@ -36,6 +37,7 @@ export const useTermsStore = create<TermsStore>((set) => ({
             : new Set(AGREEMENTS.map((a) => a.id)),
       }))
     },
+    resetTerms: () => set({ checkedAgreements: new Set() }),
   },
 }))
 

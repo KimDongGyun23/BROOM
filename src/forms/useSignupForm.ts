@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useSignup } from '@/services/query/useAuthQuery'
+import { useTermsActions } from '@/stores/terms'
 import type { SignupData } from '@/types/auth'
 
 export const signupAttribute = {
@@ -72,13 +73,23 @@ const signupSchema = z
 
 export const useSignupForm = () => {
   const navigate = useNavigate()
-  const { mutate: signupMutation } = useSignup()
   const formMethod = useCustomForm<SignupData>(signupSchema)
   const { handleSubmit } = formMethod
 
+  const { resetTerms } = useTermsActions()
+  const { mutate: signupMutation } = useSignup()
+
   const handleSubmitForm = (formData: SignupData) => {
     const { confirm: _confirm, ...dataWithoutConfirm } = formData
-    signupMutation({ body: dataWithoutConfirm }, { onSuccess: () => navigate('/sign-up/complete') })
+    signupMutation(
+      { body: dataWithoutConfirm },
+      {
+        onSuccess: () => {
+          navigate('/sign-up/complete')
+          resetTerms()
+        },
+      },
+    )
   }
 
   return { formMethod, onSubmit: handleSubmit(handleSubmitForm) }
