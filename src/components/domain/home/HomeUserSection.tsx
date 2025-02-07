@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { TentIcon } from '@/components/view/icons/NonActiveIcons'
+import { instance } from '@/services/query'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const LoggedInUserContent = () => {
@@ -29,7 +30,7 @@ const LoggedOutUserContent = () => (
 
 export const HomeUserSection = () => {
   const navigate = useNavigate()
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
 
   const handleLogin = () => navigate('/login')
   const handleSignUp = () => navigate('/sign-up')

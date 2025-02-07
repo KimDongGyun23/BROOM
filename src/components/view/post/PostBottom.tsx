@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Button } from '@/components/view/Button'
 import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
+import { instance } from '@/services/query'
 import { useIsMyPost, usePost } from '@/stores/post'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type PostBottomProps = {
   onBookmark: VoidFunction
@@ -15,7 +15,7 @@ export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
   const post = usePost()
   const isMyPost = useIsMyPost()
   const [isBookmarked, setIsBookmarked] = useToggle()
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
 
   if (!post || !session) return null
 

@@ -9,12 +9,12 @@ import { SearchBar } from '@/components/domain/post/SearchBar'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
 import { useToggle } from '@/hooks/useToggle'
+import { instance } from '@/services/query'
 import { useActivePostList, usePostList } from '@/services/query/usePostQuery'
 import { usePostListActions } from '@/stores/postList'
 import { Container } from '@/styles/commonStyles'
 import type { PostResponse } from '@/types/post'
 import { TAB_UPPER_KEYS } from '@/utils/constants'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const useCarpoolData = () => {
   const currentTab = TAB_UPPER_KEYS[0]
@@ -65,7 +65,7 @@ const useCarpoolData = () => {
 
 export const Carpool = () => {
   const navigate = useNavigate()
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
 
   const { showActiveOnly, isPending, isError, handleRecruitToggle } = useCarpoolData()
   const handleAddCarpoolClick = () => navigate('/carpool/create')

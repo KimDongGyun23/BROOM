@@ -28,16 +28,16 @@ import { TeamCreate } from '@/components/container/team/TeamCreate'
 import { TeamDetail } from '@/components/container/team/TeamDetail'
 import { TeamEdit } from '@/components/container/team/TeamEdit'
 import { TeamSearch } from '@/components/container/team/TeamSearch'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+import { instance } from '@/services/query'
 
 const LoginPrivateRoute = () => {
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
   return session ? <Navigate to="/home" /> : <Outlet />
 }
 
 const PrivateRoute = () => {
   const navigate = useNavigate()
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
 
   useEffect(() => {
     if (!session) {

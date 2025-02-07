@@ -5,10 +5,10 @@ import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/Modal'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
+import { instance } from '@/services/query'
 import { useDeletePost, useMarkPostAsFull } from '@/services/query/usePostQuery'
 import { useCurrentTab, useIsMyPost, usePost } from '@/stores/post'
 import { usePostModal, usePostModalActions, usePostModalText } from '@/stores/postModal'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const usePostDetailActions = () => {
   const post = usePost()
@@ -69,7 +69,7 @@ export const PostDetailHeader = () => {
 
   const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
 
-  const isLoggedIn = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const isLoggedIn = instance.hasToken()
 
   const kebabMap = [
     { label: '수정하기', onClick: handleEdit },
