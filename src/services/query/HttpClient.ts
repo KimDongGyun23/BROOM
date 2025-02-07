@@ -74,7 +74,8 @@ export class HttpClient {
     const originalRequest = error.config as InternalAxiosRequestConfig
 
     if (isAxiosError(error)) {
-      if (response?.status === 403) {
+      // 토큰 재발급 임시 처리
+      if (response?.status === 408) {
         try {
           const reIssueResponse = await reIssue()
 
