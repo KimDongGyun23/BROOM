@@ -44,6 +44,7 @@ export const useLoginForm = () => {
       { body: { ...formData } },
       {
         onSuccess: ({ headers, data }) => {
+          console.log(headers)
           if (headers.authorization) {
             instance.setAccessToken(headers.authorization)
             setIsLoginFailed(false)
