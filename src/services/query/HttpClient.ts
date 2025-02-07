@@ -76,13 +76,12 @@ export class HttpClient {
     if (isAxiosError(error)) {
       if (response?.status === 403) {
         try {
-          const response = await reIssue()
-          console.log(response)
+          const reIssueResponse = await reIssue()
 
-          // if (response && response.status === 200) {
-          //   const retry = await this.client.request(originalRequest)
-          //   return retry
-          // }
+          if (reIssueResponse && reIssueResponse.status === 200) {
+            const retry = await this.client.request(originalRequest)
+            return retry
+          }
         } catch (reIssueError) {
           console.error('재발급 실패', reIssueError)
           clearSessionStorage()

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { instance } from '@/services/query'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
@@ -9,7 +10,7 @@ import { ProfileImage } from './ProfileImage'
 export const MainHeader = () => {
   const iconType =
     (getSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES) as MilitaryBranchCode) || null
-  const session = !!getSessionStorageItem(SESSION_KEYS.LOGIN)
+  const session = instance.hasToken()
 
   return (
     <HeaderContainer>
