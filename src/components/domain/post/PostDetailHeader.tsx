@@ -42,11 +42,7 @@ const usePostDetailActions = () => {
     deletePost(
       { urls: { boardId } },
       {
-        onSuccess: () => {
-          setFeedbackMessage('게시글이 삭제되었습니다.')
-          openModal('secondary')
-          navigate(`/${currentTab}`, { replace: true })
-        },
+        onSuccess: () => navigate(`/${currentTab}`, { replace: true }),
         onError: () => {
           setFeedbackMessage('게시글을 삭제하지 못했습니다.')
           openModal('secondary')
