@@ -59,8 +59,8 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => {
-      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.hasNext ? allPages.length + 1 : undefined
     },
   })
 }

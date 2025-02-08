@@ -6,17 +6,19 @@ import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
 import { SearchBar } from '@/components/domain/post/SearchBar'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
+import { EmptyMessage } from '@/components/view/Error'
+import { Loading } from '@/components/view/Loading'
 import { MainHeader } from '@/components/view/MainHeader'
 import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/services/query'
 import { usePostList } from '@/services/query/usePostQuery'
 import { usePostListActions } from '@/stores/postList'
 import { Container } from '@/styles/commonStyles'
-import { TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
+import { ERROR_MESSAGES, TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
 
 const useFetchList = () => {
   const currentTab = TAB_UPPER_KEYS[0]
-  const { setTab, setHasNext, setPost } = usePostListActions()
+  const { setTab, setPost } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
   const {
@@ -31,14 +33,14 @@ const useFetchList = () => {
     if (postList) {
       console.log(postList)
       setTab(TAB_KEYS[0])
-      setHasNext(hasNextPage)
       setPost(postList.pages.flatMap((page) => page.result) || [])
     }
-  }, [hasNextPage, postList, setHasNext, setPost, setTab, showActiveOnly])
+  }, [hasNextPage, postList, setPost, setTab, showActiveOnly])
 
   return {
     isPending,
     isError,
+    hasNextPage,
     fetchNextPage,
     showActiveOnly,
     toggleShowActiveOnly,
@@ -49,7 +51,8 @@ export const Carpool = () => {
   const navigate = useNavigate()
   const session = instance.hasToken()
 
-  const { isPending, isError, fetchNextPage, showActiveOnly, toggleShowActiveOnly } = useFetchList()
+  const { isPending, isError, hasNextPage, fetchNextPage, showActiveOnly, toggleShowActiveOnly } =
+    useFetchList()
   const handleAddCarpoolClick = () => navigate('/carpool/create')
 
   return (
@@ -57,7 +60,15 @@ export const Carpool = () => {
       <MainHeader />
       <SearchBar currentTab="carpool" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
-      <PostList isPending={isPending} isError={isError} fetchNextPage={() => fetchNextPage()} />
+
+      {isPending ? (
+        <Loading />
+      ) : isError ? (
+        <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+      ) : (
+        <PostList hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
+      )}
+
       {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNavigation />
     </Container>
