@@ -1,3 +1,4 @@
+import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -10,9 +11,10 @@ import { ERROR_MESSAGES } from '@/utils/constants'
 type PostListProps = {
   isPending: boolean
   isError: boolean
+  fetchNextPage: VoidFunction
 }
 
-export const PostList = ({ isPending, isError }: PostListProps) => {
+export const PostList = ({ isPending, isError, fetchNextPage }: PostListProps) => {
   const list = usePostList()
   const currentPage = usePostListCurrentTab()
 
@@ -22,27 +24,29 @@ export const PostList = ({ isPending, isError }: PostListProps) => {
 
   return (
     <PostSection>
-      {list.map(({ content, status }) => (
-        <PostItemLink key={status.boardId} to={`/${currentPage}/detail/${status.boardId}`}>
-          <PostItemHeader>
-            <p className="title">{content.title}</p>
-            <p className="date">{status.createdAt}</p>
-          </PostItemHeader>
+      <InfiniteScroll loadMore={fetchNextPage}>
+        {list.map(({ content, status }) => (
+          <PostItemLink key={status.boardId} to={`/${currentPage}/detail/${status.boardId}`}>
+            <PostItemHeader>
+              <p className="title">{content.title}</p>
+              <p className="date">{status.createdAt}</p>
+            </PostItemHeader>
 
-          <PostContent>
-            <PostDetails>
-              <p className="training-date">{content.trainingDate} 훈련</p>
-              <PostLocationTime>
-                <span className="place">{content.place}</span>
-                <span>|</span>
-                <span>{content.time}</span>
-              </PostLocationTime>
-            </PostDetails>
+            <PostContent>
+              <PostDetails>
+                <p className="training-date">{content.trainingDate} 훈련</p>
+                <PostLocationTime>
+                  <span className="place">{content.place}</span>
+                  <span>|</span>
+                  <span>{content.time}</span>
+                </PostLocationTime>
+              </PostDetails>
 
-            <div>{status.full ? <StopIcon /> : <AdditionCircleIcon />}</div>
-          </PostContent>
-        </PostItemLink>
-      ))}
+              <div>{status.full ? <StopIcon /> : <AdditionCircleIcon />}</div>
+            </PostContent>
+          </PostItemLink>
+        ))}
+      </InfiniteScroll>
     </PostSection>
   )
 }
