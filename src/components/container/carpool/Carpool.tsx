@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import InfiniteScroll from 'react-infinite-scroller'
 import { useNavigate } from 'react-router-dom'
 
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
@@ -23,6 +24,7 @@ const useFetchList = () => {
     data: postList,
     isPending,
     isError,
+    fetchNextPage,
   } = usePostList({ urls: { category: currentTab, isAllShow: !showActiveOnly } })
 
   useEffect(() => {
@@ -33,9 +35,10 @@ const useFetchList = () => {
   }, [postList, setPost, setTab, showActiveOnly])
 
   return {
-    showActiveOnly,
     isPending,
     isError,
+    fetchNextPage,
+    showActiveOnly,
     toggleShowActiveOnly,
   }
 }
@@ -44,7 +47,7 @@ export const Carpool = () => {
   const navigate = useNavigate()
   const session = instance.hasToken()
 
-  const { isPending, isError, showActiveOnly, toggleShowActiveOnly } = useFetchList()
+  const { isPending, isError, fetchNextPage, showActiveOnly, toggleShowActiveOnly } = useFetchList()
   const handleAddCarpoolClick = () => navigate('/carpool/create')
 
   return (
@@ -53,7 +56,9 @@ export const Carpool = () => {
       <SearchBar currentTab="carpool" />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
 
-      <PostList isPending={isPending} isError={isError} />
+      <InfiniteScroll loadMore={() => fetchNextPage()}>
+        <PostList isPending={isPending} isError={isError} />
+      </InfiniteScroll>
       {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
       <BottomNavigation />
     </Container>
