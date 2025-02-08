@@ -9,7 +9,6 @@ type Actions = {
   openModal: (key: keyof ModalState) => void
   closeModal: () => void
   setFeedbackMessage: (message: string) => void
-  resetModal: VoidFunction
 }
 
 type PostModalStore = {
@@ -30,9 +29,8 @@ export const usePostModalStore = create<PostModalStore>((set) => ({
   ...initialValues,
   actions: {
     openModal: (key) => set((state) => ({ modalState: { ...state.modalState, [key]: true } })),
-    closeModal: () => set({ modalState: { primary: false, secondary: false } }),
+    closeModal: () => set({ ...initialValues }),
     setFeedbackMessage: (message) => set({ feedbackMessage: message }),
-    resetModal: () => set({ ...initialValues }),
   },
 }))
 
