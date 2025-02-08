@@ -16,22 +16,25 @@ import { TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
 
 const useFetchList = () => {
   const currentTab = TAB_UPPER_KEYS[0]
-  const { setTab, setPost } = usePostListActions()
+  const { setTab, setHasNext, setPost } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
   const {
     data: postList,
     isPending,
     isError,
+    hasNextPage,
     fetchNextPage,
   } = usePostList({ urls: { category: currentTab, isAllShow: !showActiveOnly } })
 
   useEffect(() => {
     if (postList) {
+      console.log(postList)
       setTab(TAB_KEYS[0])
+      setHasNext(hasNextPage)
       setPost(postList.pages.flatMap((page) => page.result) || [])
     }
-  }, [postList, setPost, setTab, showActiveOnly])
+  }, [hasNextPage, postList, setHasNext, setPost, setTab, showActiveOnly])
 
   return {
     isPending,

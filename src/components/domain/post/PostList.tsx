@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import { Loading } from '@/components/view/Loading'
-import { usePostList, usePostListCurrentTab } from '@/stores/postList'
+import { usePostList, usePostListCurrentTab, usePostListHasNext } from '@/stores/postList'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostListProps = {
@@ -17,6 +17,7 @@ type PostListProps = {
 export const PostList = ({ isPending, isError, fetchNextPage }: PostListProps) => {
   const list = usePostList()
   const currentPage = usePostListCurrentTab()
+  const hasNext = usePostListHasNext()
 
   if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
@@ -24,7 +25,7 @@ export const PostList = ({ isPending, isError, fetchNextPage }: PostListProps) =
 
   return (
     <PostSection>
-      <InfiniteScroll loadMore={fetchNextPage}>
+      <InfiniteScroll hasMore={hasNext} loadMore={fetchNextPage}>
         {list.map(({ content, status }) => (
           <PostItemLink key={status.boardId} to={`/${currentPage}/detail/${status.boardId}`}>
             <PostItemHeader>
