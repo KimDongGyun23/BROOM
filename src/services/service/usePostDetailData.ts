@@ -16,7 +16,7 @@ export const usePostDetailData = () => {
   useEffect(() => {
     if (postDetail) {
       setPost({ ...postDetail })
-      setTab(pathname.startsWith(TAB_KEYS[0]) ? 'carpool' : 'team')
+      setTab(pathname.includes(TAB_KEYS[0]) ? 'carpool' : 'team')
     }
   }, [setPost, setTab, pathname, postDetail])
 
