@@ -99,7 +99,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
       event.target.value === ''
         ? ''
         : Math.max(0, Math.min(23, parseInt(event.target.value, 10) || 0))
-    setValue(hourSection, value)
+    setValue(hourSection, value.toString().padStart(2, '0'))
   }
 
   const handleMinuteChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -109,7 +109,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
       event.target.value === ''
         ? ''
         : Math.max(0, Math.min(59, parseInt(event.target.value, 10) || 0))
-    setValue(minuteSection, value)
+    setValue(minuteSection, value.toString().padStart(2, '0'))
   }
 
   return (
