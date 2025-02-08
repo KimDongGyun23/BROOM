@@ -18,7 +18,7 @@ const usePostDetailActions = () => {
 
   const { mutate: markAsFull } = useMarkPostAsFull()
   const { mutate: deletePost } = useDeletePost()
-  const { setFeedbackMessage, openModal } = usePostModalActions()
+  const { setFeedbackMessage, openModal, closeModal } = usePostModalActions()
 
   const handleEdit = () => navigate(`/${currentTab}/edit/${boardId}`)
 
@@ -42,7 +42,10 @@ const usePostDetailActions = () => {
     deletePost(
       { urls: { boardId } },
       {
-        onSuccess: () => navigate(`/${currentTab}`, { replace: true }),
+        onSuccess: () => {
+          navigate(`/${currentTab}`, { replace: true })
+          closeModal()
+        },
         onError: () => {
           setFeedbackMessage('게시글을 삭제하지 못했습니다.')
           openModal('secondary')
