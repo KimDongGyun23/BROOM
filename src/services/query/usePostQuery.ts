@@ -47,8 +47,8 @@ export const usePostList = ({ urls }: PostRequest) => {
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.list({ ...urls, pageParam })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage) => {
-      return lastPage.hasNext ? lastPage.result.length + 1 : undefined
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.hasNext ? allPages.length : undefined
     },
   })
 }
@@ -60,7 +60,7 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
       await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length + 1 : undefined
+      return lastPage.hasNext ? allPages.length : undefined
     },
   })
 }
