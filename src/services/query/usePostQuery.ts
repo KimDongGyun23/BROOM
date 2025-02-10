@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
+  MyPostRequest,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -23,6 +24,8 @@ const API_ENDPOINTS = {
     `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isAllShow}`,
   search: (urls: PostSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
+  myPost: (urls: MyPostRequest['urls']) =>
+    `/mypage/board/${urls.pageParam}?category=${urls.category}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
@@ -37,6 +40,8 @@ const queryKeys = {
   all: ['post'] as const,
   list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   search: (urls: Omit<PostSearchRequest, 'pageParam'>['urls']) =>
+    [...queryKeys.all, 'search', ...Object.values(urls)] as const,
+  myPost: (urls: MyPostRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
@@ -58,6 +63,18 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
     queryKey: queryKeys.search({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.hasNext ? allPages.length : undefined
+    },
+  })
+}
+
+export const useMyPostList = ({ urls }: MyPostRequest) => {
+  return useInfiniteQuery<PostResponse, Error>({
+    queryKey: queryKeys.myPost({ ...urls }),
+    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
+      await instance.get(API_ENDPOINTS.myPost({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined

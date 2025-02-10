@@ -6,7 +6,6 @@ import type {
   UpdateAccountRequest,
   UpdatePasswordRequest,
 } from '@/types/mypage'
-import type { PostResponse } from '@/types/post'
 
 import { instance } from '.'
 
@@ -15,8 +14,6 @@ const ENDPOINTS = {
   fetchAccountInfo: `/mypage/info`,
   ACCOUNT: `/mypage/info`,
   updatePassword: `/mypage/password`,
-  CARPOOL_POST: `/mypage/carpool`,
-  TEAM_POST: `/mypage/team`,
   logout: `/logout`,
   deleteUser: `/exit`,
 } as const
@@ -54,24 +51,6 @@ export const useUpdateUserAccount = () => {
 export const useUpdatePassword = () => {
   return useMutation<string, Error, UpdatePasswordRequest>({
     mutationFn: async ({ body }) => await instance.post(ENDPOINTS.updatePassword, body),
-  })
-}
-
-export const useMyTeamPost = () => {
-  return useQuery<PostResponse, Error>({
-    queryKey: queryKeys.myTeamPost(),
-    queryFn: async () => await instance.get(ENDPOINTS.TEAM_POST),
-    gcTime: 0,
-    staleTime: 0,
-  })
-}
-
-export const useMyCarpoolPost = () => {
-  return useQuery<PostResponse, Error>({
-    queryKey: queryKeys.myCarpoolPost(),
-    queryFn: async () => await instance.get(ENDPOINTS.CARPOOL_POST),
-    gcTime: 0,
-    staleTime: 0,
   })
 }
 

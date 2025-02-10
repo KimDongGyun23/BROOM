@@ -94,3 +94,7 @@ export type PostSearchRequest = {
     keyword: string
   }
 }
+
+export type MyPostRequest = {
+  urls: Category & { pageParam?: number | unknown }
+}

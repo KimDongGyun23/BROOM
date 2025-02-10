@@ -1,66 +1,62 @@
 import { useEffect } from 'react'
-import styled from 'styled-components'
 
+import { PostList } from '@/components/domain/post/PostList'
 import { PostTabs } from '@/components/domain/post/PostTabs'
+import { EmptyMessage } from '@/components/view/Error'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useMyCarpoolPost, useMyTeamPost } from '@/services/query/useMypageQuery'
+import { useMyPostList } from '@/services/query/usePostQuery'
+import { usePostListActions } from '@/stores/postList'
 import { PostTabStoreProvider, useActiveTab } from '@/stores/postTab'
-import { TAB_LABELS } from '@/utils/constants'
+import { Container } from '@/styles/commonStyles'
+import { ERROR_MESSAGES, TAB_KEYS, TAB_LIST, TAB_UPPER_KEYS } from '@/utils/constants'
 
-const PostContent = () => {
+const useMyPostData = () => {
   const activeTab = useActiveTab()
+  const { setTab, setPost } = usePostListActions()
+  const category = TAB_LIST.find((tab) => tab.label === activeTab)?.upperKey || TAB_LIST[0].upperKey
 
   const {
-    // data: carpoolPostsData,
-    refetch: refetchCarpoolPosts,
-    isLoading: carpoolLoading,
-    error: carpoolError,
-  } = useMyCarpoolPost()
-
-  const {
-    // data: teamPostsData,
-    refetch: refetchTeamPosts,
-    isLoading: teamLoading,
-    error: teamError,
-  } = useMyTeamPost()
+    data: postList,
+    isPending,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  } = useMyPostList({ urls: { category } })
 
   useEffect(() => {
-    if (activeTab === TAB_LABELS[0]) refetchCarpoolPosts()
-    else refetchTeamPosts()
-  }, [activeTab, refetchCarpoolPosts, refetchTeamPosts])
+    if (postList) {
+      const tabKey = category === TAB_UPPER_KEYS[0] ? TAB_KEYS[0] : TAB_KEYS[1]
+      setTab(tabKey)
+      setPost(postList.pages.flatMap((page) => page.result) || [])
+    }
+  }, [category, postList, setPost, setTab])
 
-  if (carpoolLoading || teamLoading) return <Loading />
-  if (carpoolError || teamError) return <div>error</div>
-
-  return (
-    <ScrollContainer>
-      {/* {activeTab === TAB_LABELS[0] && (
-        <PostList items={carpoolPostsData?.result} currentPage="carpool" />
-      )}
-      {activeTab === TAB_LABELS[1] && <PostList items={teamPostsData?.result} currentPage="team" />} */}
-    </ScrollContainer>
-  )
+  return {
+    isPending,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  }
 }
 
 export const MyPost = () => {
+  const { isPending, isError, hasNextPage, fetchNextPage } = useMyPostData()
+
   return (
     <PostTabStoreProvider>
-      <MainContainer>
+      <Container>
         <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
         <PostTabs />
-        <PostContent />
-      </MainContainer>
+
+        {isPending ? (
+          <Loading />
+        ) : isError ? (
+          <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+        ) : (
+          <PostList hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
+        )}
+      </Container>
     </PostTabStoreProvider>
   )
 }
-
-const MainContainer = styled.main`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
-
-const ScrollContainer = styled.div`
-  flex-grow: 1;
-  overflow-y: scroll;
-`
