@@ -56,9 +56,11 @@ export const RouterComponent = () => {
 
       <Route path="/carpool" element={<Carpool />} />
       <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
+      <Route path="/carpool/search" element={<CarpoolSearch />} />
 
       <Route path="/team" element={<Team />} />
       <Route path="/team/detail/:id" element={<TeamDetail />} />
+      <Route path="/team/search" element={<TeamSearch />} />
 
       <Route path="/bus-reserve" element={<BusReserve />} />
       <Route path="/bus-reserve/create" element={<ReserveCreate />} />
@@ -73,11 +75,9 @@ export const RouterComponent = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/carpool/create" element={<CarpoolCreate />} />
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
-        <Route path="/carpool/search" element={<CarpoolSearch />} />
 
         <Route path="/team/create" element={<TeamCreate />} />
         <Route path="/team/edit/:id" element={<TeamEdit />} />
-        <Route path="/team/search" element={<TeamSearch />} />
 
         <Route path="/chatting" element={<Chatting />} />
         <Route path="/chatting/chatting-room/carpool/:id" element={<CarpoolChattingRoom />} />
