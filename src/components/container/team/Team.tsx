@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
@@ -9,49 +8,17 @@ import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { EmptyMessage } from '@/components/view/Error'
 import { Loading } from '@/components/view/Loading'
 import { MainHeader } from '@/components/view/MainHeader'
-import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/services/query'
-import { usePostList } from '@/services/query/usePostQuery'
-import { usePostListActions } from '@/stores/postList'
+import { usePostListData } from '@/services/service/usePostListData'
 import { Container } from '@/styles/commonStyles'
-import { ERROR_MESSAGES, TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
-
-const useFetchList = () => {
-  const currentTab = TAB_UPPER_KEYS[1]
-  const { setTab, setPost } = usePostListActions()
-  const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
-
-  const {
-    data: postList,
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-  } = usePostList({ urls: { category: currentTab, isAllShow: !showActiveOnly } })
-
-  useEffect(() => {
-    if (postList) {
-      setTab(TAB_KEYS[1])
-      setPost(postList.pages.flatMap((page) => page.result) || [])
-    }
-  }, [hasNextPage, postList, setPost, setTab, showActiveOnly])
-
-  return {
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-    showActiveOnly,
-    toggleShowActiveOnly,
-  }
-}
+import { ERROR_MESSAGES } from '@/utils/constants'
 
 export const Team = () => {
   const navigate = useNavigate()
   const session = instance.hasToken()
 
   const { isPending, isError, hasNextPage, fetchNextPage, showActiveOnly, toggleShowActiveOnly } =
-    useFetchList()
+    usePostListData()
   const handleAddTeamClick = () => navigate('/team/create')
 
   return (
