@@ -40,23 +40,29 @@ const useMyPostData = () => {
   }
 }
 
-export const MyPost = () => {
+const MyPostContent = () => {
   const { isPending, isError, hasNextPage, fetchNextPage } = useMyPostData()
 
   return (
-    <PostTabStoreProvider>
-      <Container>
-        <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
-        <PostTabs />
+    <Container>
+      <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
+      <PostTabs />
 
-        {isPending ? (
-          <Loading />
-        ) : isError ? (
-          <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-        ) : (
-          <PostList hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
-        )}
-      </Container>
+      {isPending ? (
+        <Loading />
+      ) : isError ? (
+        <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+      ) : (
+        <PostList hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
+      )}
+    </Container>
+  )
+}
+
+export const MyPost = () => {
+  return (
+    <PostTabStoreProvider>
+      <MyPostContent />
     </PostTabStoreProvider>
   )
 }
