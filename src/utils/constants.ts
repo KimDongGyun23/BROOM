@@ -12,7 +12,7 @@ export type TabUpperKey = (typeof TAB_LIST)[number]['upperKey']
 
 export const SEARCH_OPTIONS = [
   { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },
-  { label: '훈련 날짜', key: 'trainingDate', placeholder: '훈련 날짜를 입력해주세요.' },
+  { label: '훈련 날짜', key: 'trainingDate', placeholder: '훈련 날짜를 선택해주세요.' },
   { label: '출발 장소', key: 'place', placeholder: '출발 장소를 입력해주세요.' },
 ] as const
 

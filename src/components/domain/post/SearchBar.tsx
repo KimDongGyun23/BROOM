@@ -45,7 +45,7 @@ const SearchInput = ({ selectedFilter }: SearchInputProps) => {
         {...register('search')}
         required
         aria-required="true"
-        placeholder={selectedFilter.placeholder}
+        data-placeholder={selectedFilter.placeholder}
         aria-label={`${selectedFilter.label} 검색`}
       />
     )
