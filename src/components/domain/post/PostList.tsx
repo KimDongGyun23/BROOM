@@ -4,18 +4,23 @@ import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
+import { Loading } from '@/components/view/Loading'
 import { usePostList, usePostListCurrentTab } from '@/stores/postList'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostListProps = {
+  isPending: boolean
+  isError: boolean
   hasNextPage: boolean
   fetchNextPage: VoidFunction
 }
 
-export const PostList = ({ hasNextPage, fetchNextPage }: PostListProps) => {
+export const PostList = ({ isPending, isError, hasNextPage, fetchNextPage }: PostListProps) => {
   const list = usePostList()
   const currentPage = usePostListCurrentTab()
 
+  if (isPending) return <Loading />
+  if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!list || !list.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
