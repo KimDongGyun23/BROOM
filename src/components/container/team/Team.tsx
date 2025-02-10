@@ -21,7 +21,7 @@ export const Team = () => {
   return (
     <Container>
       <MainHeader />
-      <SearchBar currentTab="team" />
+      <SearchBar />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
       <PostList
         isPending={isPending}

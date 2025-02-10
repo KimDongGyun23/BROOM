@@ -12,7 +12,7 @@ export const TeamSearch = () => {
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="검색" />
-      <SearchBar currentTab="team" />
+      <SearchBar />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
       <PostList
         isPending={isPending}

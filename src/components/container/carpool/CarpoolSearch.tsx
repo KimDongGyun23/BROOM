@@ -12,7 +12,7 @@ export const CarpoolSearch = () => {
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="검색" />
-      <SearchBar currentTab="carpool" />
+      <SearchBar />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
       <PostList
         isPending={isPending}

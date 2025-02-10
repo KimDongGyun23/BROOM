@@ -21,7 +21,7 @@ export const Carpool = () => {
   return (
     <Container>
       <MainHeader />
-      <SearchBar currentTab="carpool" />
+      <SearchBar />
       <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
       <PostList
         isPending={isPending}
