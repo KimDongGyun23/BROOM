@@ -72,8 +72,8 @@ export const RouterComponent = () => {
         <Route path="/sign-up/complete" element={<SignupCompletePage />} />
       </Route>
 
+      <Route path="/carpool/create" element={<CarpoolCreate />} />
       <Route element={<PrivateRoute />}>
-        <Route path="/carpool/create" element={<CarpoolCreate />} />
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
 
         <Route path="/team/create" element={<TeamCreate />} />
