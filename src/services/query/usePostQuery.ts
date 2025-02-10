@@ -1,6 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
+  BookmarkListRequest,
   MyPostRequest,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
@@ -26,6 +27,8 @@ const API_ENDPOINTS = {
     `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
   myPost: (urls: MyPostRequest['urls']) =>
     `/mypage/board/${urls.pageParam}?category=${urls.category}`,
+  bookmark: (urls: BookmarkListRequest['urls']) =>
+    `/mypage/bookmark/${urls.pageParam}?category=${urls.category}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
@@ -39,10 +42,12 @@ const API_ENDPOINTS = {
 const queryKeys = {
   all: ['post'] as const,
   list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
-  search: (urls: Omit<PostSearchRequest, 'pageParam'>['urls']) =>
+  search: (urls: PostSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   myPost: (urls: MyPostRequest['urls']) =>
-    [...queryKeys.all, 'search', ...Object.values(urls)] as const,
+    [...queryKeys.all, 'my-post', ...Object.values(urls)] as const,
+  bookmark: (urls: BookmarkListRequest['urls']) =>
+    [...queryKeys.all, 'bookmark', ...Object.values(urls)] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
@@ -75,6 +80,18 @@ export const useMyPostList = ({ urls }: MyPostRequest) => {
     queryKey: queryKeys.myPost({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
       await instance.get(API_ENDPOINTS.myPost({ ...urls, pageParam })),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.hasNext ? allPages.length : undefined
+    },
+  })
+}
+
+export const useBookmarkList = ({ urls }: BookmarkListRequest) => {
+  return useInfiniteQuery<PostResponse, Error>({
+    queryKey: queryKeys.bookmark({ ...urls }),
+    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
+      await instance.get(API_ENDPOINTS.bookmark({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
