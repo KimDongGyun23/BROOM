@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-import { colors } from './colors'
+import { inputStyle } from './input'
 
 const GlobalStyles = createGlobalStyle`
 	@font-face {
@@ -82,66 +82,14 @@ const GlobalStyles = createGlobalStyle`
 		cursor: pointer;
 	}
 
-	input, textarea {
-		font: inherit;
-		border: none;
-		outline: none;
-		
-		&:focus {
-			outline: none;
-		}
-
-		&::placeholder {
-			color: ${colors.black[300]};
-		}
-	}
-
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
-
-	input[type='date'] {
-    position: relative;
-    background: url('/src/assets/Calendar.svg') no-repeat right;
-    padding-right: 10px;
-  }
-
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent; 
-    color: transparent;
-    cursor: pointer;
-  }
-
-	input[type='date']::before {
-		content: attr(data-placeholder);
-		display: flex;
-		align-items: center;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		background-color: white;
-		color: ${colors.black[300]};
-	}
-
-	input[type='date']:focus::before,
-	input[type='date']:valid::before {
-		display: none;
-	}
-
 	::-webkit-scrollbar {
     display: none;
   }
+
+	${inputStyle.resetStyle}
+	${inputStyle.baseStyle}
+	${inputStyle.numberStyle}
+	${inputStyle.dateStyle}
 `
 
 export default GlobalStyles
