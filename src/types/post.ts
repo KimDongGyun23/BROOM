@@ -87,9 +87,8 @@ export type PostResponse = {
 }
 
 export type PostSearchRequest = {
-  urls: {
+  urls: Category & {
     pageParam?: number | unknown
-    category: Category
     isAllShow: boolean
     type: string
     keyword: string
