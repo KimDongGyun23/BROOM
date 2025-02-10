@@ -14,7 +14,7 @@ type PostBottomProps = {
 export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
   const post = usePost()
   const isMyPost = useIsMyPost()
-  const [isBookmarked, setIsBookmarked] = useToggle()
+  const [isBookmarked, setIsBookmarked] = useToggle(post?.status.bookmark)
   const session = instance.hasToken()
 
   if (!post || !session) return null
