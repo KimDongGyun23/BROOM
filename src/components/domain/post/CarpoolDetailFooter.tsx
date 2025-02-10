@@ -12,6 +12,7 @@ import { PostBottom } from '../../view/post/PostBottom'
 export const CarpoolDetailFooter = () => {
   const boardId = useParamId()
   const post = usePost()
+  console.log(post)
   const navigate = useNavigate()
 
   const { setPost } = usePostActions()
