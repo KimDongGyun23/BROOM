@@ -3,7 +3,7 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 
 import { useToggle } from '@/hooks/useToggle'
 import { usePostListActions } from '@/stores/postList'
-import { TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
+import { SEARCH_OPTIONS, TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
 
 import { useSearchPostList } from '../query/usePostQuery'
 
@@ -13,7 +13,8 @@ export const usePostSearchData = () => {
   const { setTab, setPost } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
-  const filterName = searchParams.get('filterName') || ''
+  const filterNameLabel = searchParams.get('filterName') || ''
+  const filterKey = SEARCH_OPTIONS.find((option) => option.label === filterNameLabel)?.key || ''
   const searchName = searchParams.get('searchName') || ''
 
   const currentTab = useMemo(
@@ -30,7 +31,7 @@ export const usePostSearchData = () => {
   } = useSearchPostList({
     urls: {
       category: currentTab,
-      type: filterName,
+      type: filterKey,
       keyword: searchName,
       isAllShow: !showActiveOnly,
     },
