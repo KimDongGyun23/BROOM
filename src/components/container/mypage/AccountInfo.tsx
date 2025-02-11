@@ -14,7 +14,7 @@ export const AccountInfo = () => {
   const { isSuccessModalOpen, isErrorModalOpen } = useModalState()
   const { toggleEditMode, setModalState } = useAccountActions()
 
-  const { isPending, isError, formMethod, onSubmit } = useAccountForm()
+  const { initialNickname, isPending, isError, formMethod, onSubmit } = useAccountForm()
 
   const handleCloseModal = () =>
     setModalState({ isSuccessModalOpen: false, isErrorModalOpen: false })
@@ -31,7 +31,7 @@ export const AccountInfo = () => {
           onClickEdit={toggleEditMode}
           onClickComplete={onSubmit}
         />
-        <AccountForm />
+        <AccountForm initialNickname={initialNickname} />
       </FormProvider>
 
       <ModalWithOneButton

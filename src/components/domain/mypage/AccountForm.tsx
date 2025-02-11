@@ -8,11 +8,18 @@ import { useValidateNickname } from '@/services/query/useAuthQuery'
 import { useAccountActions, useAccountModeState, useNicknameValidation } from '@/stores/account'
 import { FormContainer, ValidateContainer } from '@/styles/commonStyles'
 
-const useValidation = () => {
+type AccountFormType = {
+  initialNickname: string
+}
+
+const useValidation = ({ initialNickname }: AccountFormType) => {
   const [nicknameValidationMessage, setNicknameValidationMessage] = useState('')
   const { mutate: validateNicknameMutation } = useValidateNickname()
   const { getValues, clearErrors } = useFormContext()
   const { setNicknameValidated } = useAccountActions()
+
+  const { NICKNAME } = accountAttribute
+  const nicknameField = useWatch({ name: NICKNAME.section })
 
   const validateNickname = useCallback(() => {
     const nicknameSection = accountAttribute.NICKNAME.section
@@ -35,22 +42,21 @@ const useValidation = () => {
     )
   }, [clearErrors, getValues, setNicknameValidated, validateNicknameMutation])
 
+  useEffect(() => {
+    if (nicknameField === initialNickname) {
+      setNicknameValidated(true)
+    }
+  }, [initialNickname, nicknameField, setNicknameValidated])
+
   return { validateNickname, nicknameValidationMessage }
 }
 
-export const AccountForm = () => {
-  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
-  const nicknameField = useWatch({ name: NICKNAME.section })
-
+export const AccountForm = ({ initialNickname }: AccountFormType) => {
   const isEditMode = useAccountModeState()
-  const { setNicknameValidated } = useAccountActions()
-
   const isNicknameValidated = useNicknameValidation()
-  const { validateNickname, nicknameValidationMessage } = useValidation()
 
-  useEffect(() => {
-    setNicknameValidated(false)
-  }, [nicknameField, setNicknameValidated])
+  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
+  const { validateNickname, nicknameValidationMessage } = useValidation({ initialNickname })
 
   return (
     <FormContainer $isFull>

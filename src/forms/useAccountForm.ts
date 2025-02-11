@@ -85,5 +85,11 @@ export const useAccountForm = () => {
     }
   })
 
-  return { formMethod, isPending, isError, onSubmit }
+  return {
+    initialNickname: defaultValues?.nickname || '',
+    formMethod,
+    isPending,
+    isError,
+    onSubmit,
+  }
 }
