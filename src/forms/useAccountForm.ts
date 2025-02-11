@@ -1,9 +1,8 @@
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useUpdateUserAccount } from '@/services/query/useMypageQuery'
-import { useModalActions } from '@/stores/modal'
-import type { AccountInfoResponse, UserAccount } from '@/types/mypage'
+import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import type { AccountInfoResponse } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()
 
@@ -41,34 +40,11 @@ const accountSchema = z
     message: '군종을 선택해주세요.',
   })
 
-type useAccountFormProps = {
-  defaultValues: UserAccount | undefined
-  isValidated: boolean
-}
-
-export const useAccountForm = ({ defaultValues, isValidated }: useAccountFormProps) => {
-  const { openModal } = useModalActions()
-  const { mutate: updateAccount } = useUpdateUserAccount()
+export const useAccountForm = () => {
+  const { data: defaultValues } = useFetchAccountInfo()
 
   const formMethod = useCustomForm<AccountInfoResponse>(accountSchema, { defaultValues })
-  const { handleSubmit, setError, clearErrors } = formMethod
+  const { handleSubmit } = formMethod
 
-  const handleAccountUpdate = (formData: UserAccount) => {
-    const nicknameSection = accountAttribute.NICKNAME.section
-
-    if (isValidated) {
-      clearErrors(nicknameSection)
-      updateAccount(
-        { body: formData },
-        {
-          onSuccess: () => openModal('계정 정보가 수정되었습니다.'),
-          onError: () => openModal('계정 정보 업데이트에 실패했습니다.'),
-        },
-      )
-    } else {
-      setError(nicknameSection, { type: 'manual', message: '닉네임 중복 확인을 해주세요.' })
-    }
-  }
-
-  return { formMethod, onSubmit: handleSubmit(handleAccountUpdate) }
+  return { formMethod, handleSubmit }
 }
