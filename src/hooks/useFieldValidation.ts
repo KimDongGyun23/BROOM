@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useFormContext, useWatch } from 'react-hook-form'
 import type { UseMutateFunction } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 type ValidationProps<T> = {
   fieldName: string
   initialValue: string
-  mutate: UseMutateFunction<string, Error, T, unknown>
+  mutate: UseMutateFunction<AxiosResponse, AxiosError, T, unknown>
 }
 
 export const useFieldValidation = <T>({ fieldName, initialValue, mutate }: ValidationProps<T>) => {
@@ -20,9 +21,10 @@ export const useFieldValidation = <T>({ fieldName, initialValue, mutate }: Valid
     const value = getValues(fieldName)
     clearErrors(fieldName)
 
-    mutate({ [fieldName]: value } as T, {
-      onSuccess: (res) => setValidationState({ isValidated: true, message: res }),
-      onError: (error) => setValidationState({ isValidated: false, message: error.message }),
+    mutate({ body: { [fieldName]: value } } as T, {
+      onSuccess: (response) => setValidationState({ isValidated: true, message: response.data }),
+      onError: (error) =>
+        setValidationState({ isValidated: false, message: error.response?.data as string }),
     })
   }, [clearErrors, fieldName, getValues, mutate])
 

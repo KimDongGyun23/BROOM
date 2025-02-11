@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
   LoginRequest,
@@ -41,13 +42,13 @@ export const useSignup = () => {
 }
 
 export const useValidateId = () => {
-  return useMutation<void, Error, ValidateIdRequest>({
+  return useMutation<AxiosResponse, AxiosError, ValidateIdRequest>({
     mutationFn: async ({ body }) => await instanceWithoutAuth.post(ENDPOINTS.validateId, body),
   })
 }
 
 export const useValidateNickname = () => {
-  return useMutation<string, Error, ValidateNicknameRequest>({
+  return useMutation<AxiosResponse, AxiosError, ValidateNicknameRequest>({
     mutationFn: async ({ body }) =>
       await instanceWithoutAuth.post(ENDPOINTS.validateNickname, body),
   })
