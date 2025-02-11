@@ -5,15 +5,17 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { accountAttribute, useAccountForm } from '@/forms/useAccountForm'
+import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
 import { FormContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 
 export const AccountInfo = () => {
   const navigate = useNavigate()
-
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
-  const { isPending, isError, formMethod } = useAccountForm()
+
+  const { isPending, isError } = useFetchAccountInfo()
+  const { formMethod } = useAccountForm()
 
   const handleClickEdit = () => navigate('/mypage/account-info/edit')
 
