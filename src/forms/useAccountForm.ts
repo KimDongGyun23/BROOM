@@ -52,9 +52,11 @@ export const useAccountForm = () => {
   const { handleSubmit, setError, clearErrors, reset } = formMethod
 
   useEffect(() => {
-    reset()
-    resetAccount()
-  }, [reset, resetAccount])
+    if (defaultValues) {
+      reset(defaultValues)
+      resetAccount()
+    }
+  }, [defaultValues, reset, resetAccount])
 
   const handleAccountUpdate = useCallback(
     async (formData: UserAccount) => {
