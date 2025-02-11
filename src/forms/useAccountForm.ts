@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
-import type { AccountInfoResponse } from '@/types/mypage'
+import type { UserAccount } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()
 
@@ -42,9 +42,7 @@ const accountSchema = z
 
 export const useAccountForm = () => {
   const { data: defaultValues } = useFetchAccountInfo()
+  const formMethod = useCustomForm<UserAccount>(accountSchema, { defaultValues })
 
-  const formMethod = useCustomForm<AccountInfoResponse>(accountSchema, { defaultValues })
-  const { handleSubmit } = formMethod
-
-  return { formMethod, handleSubmit }
+  return formMethod
 }

@@ -10,12 +10,35 @@ import { FormContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 
-export const AccountInfo = () => {
-  const navigate = useNavigate()
+const AccountInfoForm = () => {
+  const formMethod = useAccountForm()
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
 
+  return (
+    <FormProvider {...formMethod}>
+      <FormContainer $isFull>
+        <InputGroup section={NICKNAME.section}>
+          <InputGroup.Label label={NICKNAME.label} />
+          <InputGroup.Input readOnly {...NICKNAME.input} />
+        </InputGroup>
+
+        <InputGroup section={DISCHARGE_YEAR.section}>
+          <InputGroup.Label label={DISCHARGE_YEAR.label} />
+          <InputGroup.Input readOnly {...DISCHARGE_YEAR.input} />
+        </InputGroup>
+
+        <InputGroup section={MILITARY_BRANCH.section}>
+          <InputGroup.Label label={MILITARY_BRANCH.label} />
+          <InputGroup.SortOfArmy disabled />
+        </InputGroup>
+      </FormContainer>
+    </FormProvider>
+  )
+}
+
+export const AccountInfo = () => {
+  const navigate = useNavigate()
   const { isPending, isError } = useFetchAccountInfo()
-  const { formMethod } = useAccountForm()
 
   const handleClickEdit = () => navigate('/mypage/account-info/edit')
 
@@ -24,25 +47,8 @@ export const AccountInfo = () => {
 
   return (
     <>
-      <FormProvider {...formMethod}>
-        <SubHeaderWithoutIcon type="edit" title="계정 정보" onClickEdit={handleClickEdit} />
-        <FormContainer $isFull>
-          <InputGroup section={NICKNAME.section}>
-            <InputGroup.Label label={NICKNAME.label} />
-            <InputGroup.Input readOnly {...NICKNAME.input} />
-          </InputGroup>
-
-          <InputGroup section={DISCHARGE_YEAR.section}>
-            <InputGroup.Label label={DISCHARGE_YEAR.label} />
-            <InputGroup.Input readOnly {...DISCHARGE_YEAR.input} />
-          </InputGroup>
-
-          <InputGroup section={MILITARY_BRANCH.section}>
-            <InputGroup.Label label={MILITARY_BRANCH.label} />
-            <InputGroup.SortOfArmy disabled />
-          </InputGroup>
-        </FormContainer>
-      </FormProvider>
+      <SubHeaderWithoutIcon type="edit" title="계정 정보" onClickEdit={handleClickEdit} />
+      <AccountInfoForm />
     </>
   )
 }

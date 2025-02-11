@@ -6,17 +6,9 @@ type ValidationProps<T> = {
   fieldName: string
   initialValue: string
   mutate: UseMutateFunction<string, Error, T, unknown>
-  successMessage?: string
-  errorMessage?: string
 }
 
-export const useFieldValidation = <T>({
-  fieldName,
-  initialValue,
-  mutate,
-  successMessage = '사용 가능한 값입니다.',
-  errorMessage = '이미 사용 중인 값입니다.',
-}: ValidationProps<T>) => {
+export const useFieldValidation = <T>({ fieldName, initialValue, mutate }: ValidationProps<T>) => {
   const { getValues, clearErrors } = useFormContext()
   const fieldValue = useWatch({ name: fieldName })
   const [validationState, setValidationState] = useState({
@@ -26,18 +18,13 @@ export const useFieldValidation = <T>({
 
   const validateField = useCallback(() => {
     const value = getValues(fieldName)
-
-    if (value === initialValue) {
-      setValidationState({ isValidated: true, message: '' })
-      return
-    }
     clearErrors(fieldName)
 
     mutate({ [fieldName]: value } as T, {
-      onSuccess: () => setValidationState({ isValidated: true, message: successMessage }),
-      onError: () => setValidationState({ isValidated: false, message: errorMessage }),
+      onSuccess: (res) => setValidationState({ isValidated: true, message: res }),
+      onError: (error) => setValidationState({ isValidated: false, message: error.message }),
     })
-  }, [clearErrors, errorMessage, fieldName, getValues, initialValue, mutate, successMessage])
+  }, [clearErrors, fieldName, getValues, mutate])
 
   useEffect(() => {
     if (fieldValue === initialValue) {
