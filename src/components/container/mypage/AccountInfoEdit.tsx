@@ -61,7 +61,7 @@ const AccountInfoEditForm = () => {
 
   return (
     <>
-      <SubHeaderWithoutIcon type="edit" title="계정 정보" onClickComplete={onSubmit} />
+      <SubHeaderWithoutIcon type="complete" title="계정 정보" onClickComplete={onSubmit} />
       <FormContainer $isFull>
         <InputGroup section={NICKNAME.section}>
           <InputGroup.Label
