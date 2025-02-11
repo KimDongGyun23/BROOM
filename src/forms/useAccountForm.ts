@@ -1,9 +1,8 @@
-import { useCallback, useEffect } from 'react'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useFetchAccountInfo, useUpdateUserAccount } from '@/services/query/useMypageQuery'
-import { useAccountActions, useNicknameValidation } from '@/stores/account'
+import { useUpdateUserAccount } from '@/services/query/useMypageQuery'
+import { useModalActions } from '@/stores/modal'
 import type { AccountInfoResponse, UserAccount } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()
@@ -42,54 +41,34 @@ const accountSchema = z
     message: '군종을 선택해주세요.',
   })
 
-export const useAccountForm = () => {
-  const isNicknameValidated = useNicknameValidation()
+type useAccountFormProps = {
+  defaultValues: UserAccount | undefined
+  isValidated: boolean
+}
+
+export const useAccountForm = ({ defaultValues, isValidated }: useAccountFormProps) => {
+  const { openModal } = useModalActions()
   const { mutate: updateAccount } = useUpdateUserAccount()
-  const { setModalState, resetAccount } = useAccountActions()
-  const { data: defaultValues, isPending, isError } = useFetchAccountInfo()
 
   const formMethod = useCustomForm<AccountInfoResponse>(accountSchema, { defaultValues })
-  const { handleSubmit, setError, clearErrors, reset } = formMethod
+  const { handleSubmit, setError, clearErrors } = formMethod
 
-  useEffect(() => {
-    if (defaultValues) {
-      reset(defaultValues)
-      resetAccount()
-    }
-  }, [defaultValues, reset, resetAccount])
+  const handleAccountUpdate = (formData: UserAccount) => {
+    const nicknameSection = accountAttribute.NICKNAME.section
 
-  const handleAccountUpdate = useCallback(
-    async (formData: UserAccount) => {
+    if (isValidated) {
+      clearErrors(nicknameSection)
       updateAccount(
         { body: formData },
         {
-          onSuccess: () => setModalState({ isSuccessModalOpen: true }),
-          onError: () => setModalState({ isErrorModalOpen: true }),
+          onSuccess: () => openModal('계정 정보가 수정되었습니다.'),
+          onError: () => openModal('계정 정보 업데이트에 실패했습니다.'),
         },
       )
-    },
-    [updateAccount, setModalState],
-  )
-
-  const onSubmit = handleSubmit(async (formData) => {
-    const nicknameSection = accountAttribute.NICKNAME.section
-
-    if (isNicknameValidated) {
-      clearErrors(nicknameSection)
-      await handleAccountUpdate(formData)
     } else {
-      setError(nicknameSection, {
-        type: 'manual',
-        message: '닉네임 중복 확인을 해주세요.',
-      })
+      setError(nicknameSection, { type: 'manual', message: '닉네임 중복 확인을 해주세요.' })
     }
-  })
-
-  return {
-    initialNickname: defaultValues?.nickname || '',
-    formMethod,
-    isPending,
-    isError,
-    onSubmit,
   }
+
+  return { formMethod, onSubmit: handleSubmit(handleAccountUpdate) }
 }

@@ -30,6 +30,8 @@ import { TeamEdit } from '@/components/container/team/TeamEdit'
 import { TeamSearch } from '@/components/container/team/TeamSearch'
 import { instance } from '@/services/query'
 
+import { AccountInfoEdit } from '../container/mypage/AccountInfoEdit'
+
 const LoginPrivateRoute = () => {
   const session = instance.hasToken()
   return session ? <Navigate to="/home" /> : <Outlet />
@@ -85,6 +87,7 @@ export const RouterComponent = () => {
 
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-info" element={<AccountInfo />} />
+        <Route path="/mypage/account-info/edit" element={<AccountInfoEdit />} />
         <Route path="/mypage/password" element={<NewPassword />} />
         <Route path="/mypage/myboard" element={<MyPost />} />
         <Route path="/mypage/bookmark" element={<Bookmark />} />

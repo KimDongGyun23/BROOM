@@ -47,7 +47,7 @@ export const useValidateId = () => {
 }
 
 export const useValidateNickname = () => {
-  return useMutation<void, Error, ValidateNicknameRequest>({
+  return useMutation<string, Error, ValidateNicknameRequest>({
     mutationFn: async ({ body }) =>
       await instanceWithoutAuth.post(ENDPOINTS.validateNickname, body),
   })
