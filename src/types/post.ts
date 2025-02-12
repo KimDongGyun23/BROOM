@@ -98,6 +98,3 @@ export type PostSearchRequest = {
 export type MyPostRequest = {
   urls: Category & { pageParam?: number | unknown }
 }
-export type BookmarkListRequest = {
-  urls: Category & { pageParam?: number | unknown }
-}
