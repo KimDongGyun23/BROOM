@@ -30,7 +30,7 @@ const CarpoolSearchMain = () => {
   const postList = data?.pages.flatMap((page) => page.result) || []
 
   return (
-    <main>
+    <>
       <PostActiveToggle />
       <PostList
         postList={postList}
@@ -39,7 +39,7 @@ const CarpoolSearchMain = () => {
         hasNextPage={hasNextPage}
         fetchNextPage={fetchNextPage}
       />
-    </main>
+    </>
   )
 }
 

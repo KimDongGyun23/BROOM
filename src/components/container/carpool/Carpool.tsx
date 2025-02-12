@@ -18,7 +18,7 @@ const CarpoolMain = () => {
   const postList = data?.pages.flatMap((page) => page.result) || []
 
   return (
-    <main>
+    <>
       <PostActiveToggle />
       <PostList
         postList={postList}
@@ -27,7 +27,7 @@ const CarpoolMain = () => {
         hasNextPage={hasNextPage}
         fetchNextPage={fetchNextPage}
       />
-    </main>
+    </>
   )
 }
 
