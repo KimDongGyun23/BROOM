@@ -22,7 +22,6 @@ const queryKeys = {
   all: ['mypage'] as const,
   account: () => [...queryKeys.all, 'account'] as const,
   myCarpoolPost: () => [...queryKeys.all, 'carpool'] as const,
-  myTeamPost: () => [...queryKeys.all, 'team'] as const,
 }
 
 export const useUserProfile = () => {

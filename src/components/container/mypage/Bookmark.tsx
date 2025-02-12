@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 
 import { PostList } from '@/components/domain/post/PostList'
-import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBookmarkList } from '@/services/query/usePostQuery'
 import { usePostListActions } from '@/stores/postList'
-import { PostTabStoreProvider, useActiveTab } from '@/stores/postTab'
+import { useActiveTab } from '@/stores/postTab'
 import { Container } from '@/styles/commonStyles'
 import { TAB_KEYS, TAB_LIST, TAB_UPPER_KEYS } from '@/utils/constants'
 
@@ -38,13 +37,12 @@ const useBookmarkData = () => {
   }
 }
 
-const BookmarkContent = () => {
+export const Bookmark = () => {
   const { isPending, isError, hasNextPage, fetchNextPage } = useBookmarkData()
 
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="북마크" />
-      <PostTabs />
       <PostList
         isPending={isPending}
         isError={isError}
@@ -52,13 +50,5 @@ const BookmarkContent = () => {
         fetchNextPage={fetchNextPage}
       />
     </Container>
-  )
-}
-
-export const Bookmark = () => {
-  return (
-    <PostTabStoreProvider>
-      <BookmarkContent />
-    </PostTabStoreProvider>
   )
 }

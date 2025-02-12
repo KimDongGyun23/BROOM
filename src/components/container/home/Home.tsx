@@ -5,6 +5,7 @@ import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
 import { MainHeader } from '@/components/view/MainHeader'
+import { Container } from '@/styles/commonStyles'
 
 const NOTICE_ARR = [
   '예비군 버스 대절 추첨 인원 선정',
@@ -15,7 +16,6 @@ const NOTICE_ARR = [
 
 const SERVICE_ITEMS = [
   { label: '차 타고 같이 갈 사람 없을까?', path: '/carpool' },
-  { label: '나는 조기퇴소가 목표야!', path: '/team' },
   { label: '버스 신청하러 왔어요~', path: '/bus-reserve' },
 ] as const
 
@@ -66,11 +66,6 @@ export const Home = () => {
     </Container>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
 
 const Main = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')}

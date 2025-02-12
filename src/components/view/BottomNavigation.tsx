@@ -1,14 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { BusReservationIcon, CarpoolIcon, ChattingIcon, HomeIcon, TeamIcon } from './icons/NavIcons'
+import { BusReservationIcon, CarpoolIcon, ChattingIcon, HomeIcon } from './icons/NavIcons'
 
 const NAVIGATION_ITEMS = [
   { Icon: BusReservationIcon, path: '/bus-reserve' },
   { Icon: CarpoolIcon, path: '/carpool' },
   { Icon: HomeIcon, path: '/home' },
   { Icon: ChattingIcon, path: '/chatting' },
-  { Icon: TeamIcon, path: '/team' },
 ]
 
 export const BottomNavigation = () => {

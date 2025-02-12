@@ -1,7 +1,4 @@
-export const TAB_LIST = [
-  { label: '승차 공유', key: 'carpool', upperKey: 'CARPOOL' },
-  { label: '팀원 모집', key: 'team', upperKey: 'TEAM' },
-] as const
+export const TAB_LIST = [{ label: '승차 공유', key: 'carpool', upperKey: 'CARPOOL' }] as const
 export const TAB_LABELS = TAB_LIST.map((tab) => tab.label)
 export const TAB_KEYS = TAB_LIST.map((tab) => tab.key)
 export const TAB_UPPER_KEYS = TAB_LIST.map((tab) => tab.upperKey)

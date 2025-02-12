@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
 
 import { PostList } from '@/components/domain/post/PostList'
-import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useMyPostList } from '@/services/query/usePostQuery'
 import { usePostListActions } from '@/stores/postList'
-import { PostTabStoreProvider, useActiveTab } from '@/stores/postTab'
+import { useActiveTab } from '@/stores/postTab'
 import { Container } from '@/styles/commonStyles'
 import { TAB_KEYS, TAB_LIST, TAB_UPPER_KEYS } from '@/utils/constants'
 
@@ -37,14 +36,12 @@ const useMyPostData = () => {
     fetchNextPage,
   }
 }
-
-const MyPostContent = () => {
+export const MyPost = () => {
   const { isPending, isError, hasNextPage, fetchNextPage } = useMyPostData()
 
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
-      <PostTabs />
       <PostList
         isPending={isPending}
         isError={isError}
@@ -52,13 +49,5 @@ const MyPostContent = () => {
         fetchNextPage={fetchNextPage}
       />
     </Container>
-  )
-}
-
-export const MyPost = () => {
-  return (
-    <PostTabStoreProvider>
-      <MyPostContent />
-    </PostTabStoreProvider>
   )
 }

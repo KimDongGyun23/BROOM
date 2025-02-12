@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 
 import { InputGroup } from '@/components/view/inputGroup'
-import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { postAttribute, useCarpoolCreateForm } from '@/forms/useCarpoolCreateForm'
+import { Container, FormContainer, GridContainer } from '@/styles/commonStyles'
 
 export const CarpoolCreate = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
@@ -13,7 +13,7 @@ export const CarpoolCreate = () => {
   } = formMethod
 
   return (
-    <PostContainer>
+    <Container>
       <SubHeaderWithoutIcon type="complete" title="승차 공유 등록" onClickComplete={onSubmit} />
       <FormProvider {...formMethod}>
         <FormContainer>
@@ -53,6 +53,6 @@ export const CarpoolCreate = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-    </PostContainer>
+    </Container>
   )
 }
