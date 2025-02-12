@@ -12,8 +12,7 @@ export const MainHeader = () => {
 }
 
 const HeaderContainer = styled.header`
-  ${({ theme }) => theme.flexBox('row', 'center', 'flex-end')};
-  ${({ theme }) => theme.margin(0, 'container')};
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
   ${({ theme }) => theme.padding(0, 'lg')};
   position: relative;
   height: 80px;
@@ -21,9 +20,8 @@ const HeaderContainer = styled.header`
 `
 
 const LogoText = styled.h1`
-  font-family: 'jalnan', sans-serif;
+  font-family: 'Jalnan2', sans-serif;
   font-size: 32px;
   line-height: 36px;
-  text-align: center;
   color: ${({ theme }) => theme.colors.black[600]};
 `

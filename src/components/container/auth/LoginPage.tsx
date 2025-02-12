@@ -44,7 +44,7 @@ export const LoginPage = () => {
 const Logo = styled.h1`
   ${({ theme }) => theme.margin('logo-sm', 'container')};
   text-align: center;
-  font-family: 'jalnan', sans-serif;
+  font-family: 'Jalnan2', sans-serif;
   font-size: 60px;
   line-height: 44px;
   color: ${({ theme }) => theme.colors.black[600]};
