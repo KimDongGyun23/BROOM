@@ -1,7 +1,6 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import type {
-  MyPostRequest,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -24,8 +23,7 @@ const API_ENDPOINTS = {
     `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isAllShow}`,
   search: (urls: PostSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
-  myPost: (urls: MyPostRequest['urls']) =>
-    `/mypage/board/${urls.pageParam}?category=${urls.category}`,
+  myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
 
   create: '/board',
@@ -42,8 +40,7 @@ const queryKeys = {
   list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   search: (urls: PostSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
-  myPost: (urls: MyPostRequest['urls']) =>
-    [...queryKeys.all, 'my-post', ...Object.values(urls)] as const,
+  myPost: () => [...queryKeys.all, 'my-post'] as const,
   bookmark: () => [...queryKeys.all, 'bookmark'] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
@@ -72,11 +69,11 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
   })
 }
 
-export const useMyPostList = ({ urls }: MyPostRequest) => {
+export const useMyPostList = () => {
   return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.myPost({ ...urls }),
+    queryKey: queryKeys.myPost(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.myPost({ ...urls, pageParam })),
+      await instance.get(API_ENDPOINTS.myPost(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
