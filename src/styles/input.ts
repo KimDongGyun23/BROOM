@@ -8,8 +8,10 @@ const baseStyle = css`
     font: inherit;
     border: none;
     outline: none;
+    background-color: transparent;
 
     &:focus {
+      background-color: transparent;
       outline: none;
     }
 
