@@ -38,24 +38,24 @@ export class HttpClient {
     return !!this.accessToken
   }
 
-  get<T>(...args: Parameters<typeof this.client.get>) {
-    return this.client.get<T, T>(...args)
+  get<T>(...args: Parameters<typeof this.client.get>): Promise<T> {
+    return this.client.get(...args)
   }
 
-  post<T>(...args: Parameters<typeof this.client.post>) {
-    return this.client.post<T, T>(...args)
+  post<T>(...args: Parameters<typeof this.client.post>): Promise<T> {
+    return this.client.post(...args)
   }
 
-  put<T>(...args: Parameters<typeof this.client.put>) {
-    return this.client.put<T, T>(...args)
+  put<T>(...args: Parameters<typeof this.client.put>): Promise<T> {
+    return this.client.put(...args)
   }
 
-  patch<T>(...args: Parameters<typeof this.client.patch>) {
-    return this.client.patch<T, T>(...args)
+  patch<T>(...args: Parameters<typeof this.client.patch>): Promise<T> {
+    return this.client.patch(...args)
   }
 
-  delete<T>(...args: Parameters<typeof this.client.delete>) {
-    return this.client.delete<T, T>(...args)
+  delete<T>(...args: Parameters<typeof this.client.delete>): Promise<T> {
+    return this.client.delete(...args)
   }
 
   private onRequest(config: InternalAxiosRequestConfig) {

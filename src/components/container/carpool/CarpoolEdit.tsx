@@ -2,10 +2,10 @@ import { FormProvider } from 'react-hook-form'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
-import { FormContainer, GridContainer, PostContainer } from '@/components/view/post/PostStyle'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { postAttribute } from '@/forms/useCarpoolCreateForm'
 import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
+import { Container, FormContainer, GridContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 
@@ -20,7 +20,7 @@ export const CarpoolEdit = () => {
   if (isError) return <ErrorPage />
 
   return (
-    <PostContainer>
+    <Container>
       <SubHeaderWithoutIcon type="complete" title="승차 공유 수정" onClickComplete={onSubmit} />
       <FormProvider {...formMethod}>
         <FormContainer>
@@ -60,6 +60,6 @@ export const CarpoolEdit = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-    </PostContainer>
+    </Container>
   )
 }

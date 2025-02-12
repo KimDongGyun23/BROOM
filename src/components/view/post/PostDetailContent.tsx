@@ -1,15 +1,12 @@
-import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { usePost } from '@/stores/post'
+import { usePostDetail } from '@/stores/post'
 
 export const PostDetailContent = () => {
-  const post = usePost()
-  const { pathname } = useLocation()
+  const post = usePostDetail()
   if (!post || !post.contentDetail) return
 
   const { title, trainingDate, place, time, personnel, content } = post.contentDetail
-  const isCarpoolPage = pathname.includes('carpool')
 
   return (
     <ScrollContainer>
@@ -23,11 +20,11 @@ export const PostDetailContent = () => {
 
           <ContentItemContainer>
             <ContentItem>
-              <p className="content-item-label">{isCarpoolPage ? '출발 장소' : '만날 장소'}</p>
+              <p className="content-item-label">출발 장소</p>
               <p className="content-item-text">{place}</p>
             </ContentItem>
             <ContentItem>
-              <p className="content-item-label">{isCarpoolPage ? '출발 시간' : '만날 시간'}</p>
+              <p className="content-item-label">출발 시간</p>
               <p className="content-item-text">{time}</p>
             </ContentItem>
           </ContentItemContainer>

@@ -4,7 +4,6 @@ import { z } from 'zod'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useCreatePost } from '@/services/query/usePostQuery'
 import type { PostForm } from '@/types/post'
-import { TAB_UPPER_KEYS } from '@/utils/constants'
 
 export const postAttribute = {
   TITLE: { section: 'title', label: '제목', input: { placeholder: '제목을 입력해주세요.' } },
@@ -57,7 +56,6 @@ export const useCarpoolCreateForm = () => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`,
-      category: TAB_UPPER_KEYS[0],
       personnel: parseInt(personnel),
       ...rest,
     }

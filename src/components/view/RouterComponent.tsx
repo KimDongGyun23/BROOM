@@ -14,7 +14,6 @@ import { CarpoolEdit } from '@/components/container/carpool/CarpoolEdit'
 import { CarpoolSearch } from '@/components/container/carpool/CarpoolSearch'
 import { CarpoolChattingRoom } from '@/components/container/chatting/CarpoolChattingRoom'
 import { Chatting } from '@/components/container/chatting/Chatting'
-import { TeamChattingRoom } from '@/components/container/chatting/TeamChattingRoom'
 import { ErrorPage } from '@/components/container/home/ErrorPage'
 import { Home } from '@/components/container/home/Home'
 import { Onboarding } from '@/components/container/home/Onboarding'
@@ -23,12 +22,9 @@ import { Bookmark } from '@/components/container/mypage/Bookmark'
 import { Mypage } from '@/components/container/mypage/Mypage'
 import { MyPost } from '@/components/container/mypage/MyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
-import { Team } from '@/components/container/team/Team'
-import { TeamCreate } from '@/components/container/team/TeamCreate'
-import { TeamDetail } from '@/components/container/team/TeamDetail'
-import { TeamEdit } from '@/components/container/team/TeamEdit'
-import { TeamSearch } from '@/components/container/team/TeamSearch'
 import { instance } from '@/services/query'
+
+import { AccountInfoEdit } from '../container/mypage/AccountInfoEdit'
 
 const LoginPrivateRoute = () => {
   const session = instance.hasToken()
@@ -58,10 +54,6 @@ export const RouterComponent = () => {
       <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
       <Route path="/carpool/search" element={<CarpoolSearch />} />
 
-      <Route path="/team" element={<Team />} />
-      <Route path="/team/detail/:id" element={<TeamDetail />} />
-      <Route path="/team/search" element={<TeamSearch />} />
-
       <Route path="/bus-reserve" element={<BusReserve />} />
       <Route path="/bus-reserve/create" element={<ReserveCreate />} />
       <Route path="/bus-reserve/info" element={<ReserveInfo />} />
@@ -76,15 +68,12 @@ export const RouterComponent = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
 
-        <Route path="/team/create" element={<TeamCreate />} />
-        <Route path="/team/edit/:id" element={<TeamEdit />} />
-
         <Route path="/chatting" element={<Chatting />} />
         <Route path="/chatting/chatting-room/carpool/:id" element={<CarpoolChattingRoom />} />
-        <Route path="/chatting/chatting-room/team/:id" element={<TeamChattingRoom />} />
 
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-info" element={<AccountInfo />} />
+        <Route path="/mypage/account-info/edit" element={<AccountInfoEdit />} />
         <Route path="/mypage/password" element={<NewPassword />} />
         <Route path="/mypage/myboard" element={<MyPost />} />
         <Route path="/mypage/bookmark" element={<Bookmark />} />

@@ -1,36 +1,13 @@
-import { useEffect } from 'react'
-
 import { PostList } from '@/components/domain/post/PostList'
-import { PostTabs } from '@/components/domain/post/PostTabs'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useBookmarkList } from '@/services/query/usePostQuery'
-import { usePostListActions } from '@/stores/postList'
-import { PostTabStoreProvider, useActiveTab } from '@/stores/postTab'
+import { useFetchBookmarkList } from '@/services/query/usePostQuery'
 import { Container } from '@/styles/commonStyles'
-import { TAB_KEYS, TAB_LIST, TAB_UPPER_KEYS } from '@/utils/constants'
 
-const useBookmarkData = () => {
-  const activeTab = useActiveTab()
-  const { setTab, setPost } = usePostListActions()
-  const category = TAB_LIST.find((tab) => tab.label === activeTab)?.upperKey || TAB_LIST[0].upperKey
-
-  const {
-    data: postList,
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-  } = useBookmarkList({ urls: { category } })
-
-  useEffect(() => {
-    if (postList) {
-      const tabKey = category === TAB_UPPER_KEYS[0] ? TAB_KEYS[0] : TAB_KEYS[1]
-      setTab(tabKey)
-      setPost(postList.pages.flatMap((page) => page.result) || [])
-    }
-  }, [category, postList, setPost, setTab])
+const useBookmarkList = () => {
+  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchBookmarkList()
 
   return {
+    postList: data?.pages.flatMap((page) => page.result) || [],
     isPending,
     isError,
     hasNextPage,
@@ -38,27 +15,19 @@ const useBookmarkData = () => {
   }
 }
 
-const BookmarkContent = () => {
-  const { isPending, isError, hasNextPage, fetchNextPage } = useBookmarkData()
+export const Bookmark = () => {
+  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useBookmarkList()
 
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="북마크" />
-      <PostTabs />
       <PostList
+        postList={postList}
         isPending={isPending}
         isError={isError}
         hasNextPage={hasNextPage}
         fetchNextPage={fetchNextPage}
       />
     </Container>
-  )
-}
-
-export const Bookmark = () => {
-  return (
-    <PostTabStoreProvider>
-      <BookmarkContent />
-    </PostTabStoreProvider>
   )
 }

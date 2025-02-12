@@ -1,15 +1,15 @@
 import { FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 import { InputGroup } from '@/components/view/inputGroup'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { newPasswordAttribute, usePasswordUpdateForm } from '@/forms/usePasswordUpdateForm'
-import { useBoolean } from '@/hooks/useBoolean'
+import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
 import { FormContainer } from '@/styles/commonStyles'
 
-export const NewPassword = () => {
-  const [isModalOpen, openModal, closeModal] = useBoolean(false)
-  const { formMethod, onSubmit, message } = usePasswordUpdateForm(openModal)
+const NewPasswordForm = () => {
+  const { formMethod, onSubmit } = usePasswordUpdateForm()
   const { PREV_PASSWORD, NEW_PASSWORD, CONFIRM } = newPasswordAttribute
 
   return (
@@ -34,13 +34,35 @@ export const NewPassword = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-
-      <ModalWithOneButton
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        content={message}
-        button={{ onClick: closeModal, label: '완료' }}
-      />
     </>
+  )
+}
+
+const NewPasswordModal = () => {
+  const navigate = useNavigate()
+  const { isModalOpen, label } = useModalState()
+  const { closeModal } = useModalActions()
+
+  const handleClose = () => {
+    navigate('/mypage', { replace: true })
+    closeModal()
+  }
+
+  return (
+    <ModalWithOneButton
+      isOpen={isModalOpen}
+      onClose={closeModal}
+      content={label}
+      button={{ onClick: handleClose, label: '완료' }}
+    />
+  )
+}
+
+export const NewPassword = () => {
+  return (
+    <ModalStoreProvider>
+      <NewPasswordForm />
+      <NewPasswordModal />
+    </ModalStoreProvider>
   )
 }

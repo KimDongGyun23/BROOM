@@ -1,4 +1,4 @@
-import type { MilitaryBranchCode, TabUpperKey } from '@/utils/constants'
+import type { MilitaryBranchCode } from '@/utils/constants'
 
 type PostAuthor = {
   nickname: string
@@ -25,9 +25,6 @@ type PostStatus = {
   bookmark: boolean
 }
 
-export type Category = {
-  category: TabUpperKey
-}
 export type PostId = Pick<PostStatus, 'boardId'>
 
 export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
@@ -37,7 +34,7 @@ export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
 }
 
 export type PostCreateRequest = {
-  body: PostDetail & Category
+  body: PostDetail
 }
 
 export type PostEditRequest = {
@@ -72,7 +69,7 @@ export type PostDeleteBookmarkRequest = {
 }
 
 export type PostRequest = {
-  urls: Category & {
+  urls: {
     pageParam?: number | unknown
     isAllShow: boolean
   }
@@ -87,17 +84,10 @@ export type PostResponse = {
 }
 
 export type PostSearchRequest = {
-  urls: Category & {
+  urls: {
     pageParam?: number | unknown
     isAllShow: boolean
     type: string
     keyword: string
   }
-}
-
-export type MyPostRequest = {
-  urls: Category & { pageParam?: number | unknown }
-}
-export type BookmarkListRequest = {
-  urls: Category & { pageParam?: number | unknown }
 }

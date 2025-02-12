@@ -1,5 +1,3 @@
-import type { AxiosError } from 'axios'
-
 import type { PasswordUpdateForm } from '@/types/mypage'
 
 import { useUpdatePassword } from '../query/useMypageQuery'
@@ -15,16 +13,8 @@ export const usePasswordUpdate: ReturnType = (onSuccess) => {
     updatePassword(
       { body: { password: formData.password, newPassword: formData.newPassword } },
       {
-        onSuccess: (res) => {
-          onSuccess(res)
-        },
-        onError: (error) => {
-          const errorMessage =
-            ((error as AxiosError).response?.data as string) === '기존 비밀번호가 일치하지 않습니다'
-              ? '기존 비밀번호가 일치하지 않습니다.'
-              : '네트워크 오류가 발생했습니다.'
-          onSuccess(errorMessage)
-        },
+        onSuccess: (response) => onSuccess(response.data),
+        onError: (error) => onSuccess(error.response?.data as string),
       },
     )
   }

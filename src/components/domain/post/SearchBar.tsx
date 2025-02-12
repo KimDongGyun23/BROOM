@@ -87,15 +87,14 @@ export const SearchBar = () => {
         </SearchButton>
       </SearchForm>
 
-      {isFilterVisible && (
-        <Kebab
-          items={SEARCH_OPTIONS.map((option) => ({
-            ...option,
-            onClick: () => handleFilterSelect(option),
-          }))}
-          position={[120, undefined, undefined, 16]}
-        />
-      )}
+      <Kebab
+        isOpen={isFilterVisible}
+        items={SEARCH_OPTIONS.map((option) => ({
+          ...option,
+          onClick: () => handleFilterSelect(option),
+        }))}
+        position={[120, undefined, undefined, 16]}
+      />
     </FormProvider>
   )
 }

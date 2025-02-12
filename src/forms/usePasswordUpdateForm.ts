@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useUpdatePassword } from '@/services/query/useMypageQuery'
+import { useModalActions } from '@/stores/modal'
 import type { PasswordUpdateForm } from '@/types/mypage'
 
 export const newPasswordAttribute = {
@@ -44,25 +44,23 @@ export const newPasswordSchema = z
     message: '비밀번호가 일치하지 않습니다.',
   })
 
-export const usePasswordUpdateForm = (openModal: VoidFunction) => {
+export const usePasswordUpdateForm = () => {
   const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)
   const { handleSubmit } = formMethod
+
+  const { openModal } = useModalActions()
   const { mutate: updatePassword } = useUpdatePassword()
-  const [message, setMessage] = useState<string>('')
 
   const handleSubmitForm = (formData: PasswordUpdateForm) => {
     const { confirm: _confirm, ...rest } = formData
     updatePassword(
       { body: { ...rest } },
       {
-        onSuccess: (res) => {
-          setMessage(res)
-          openModal()
-        },
-        onError: (error) => setMessage(error.message),
+        onSuccess: (response) => openModal(response.data, true),
+        onError: (error) => openModal(error.response?.data as string, false),
       },
     )
   }
 
-  return { formMethod, message, onSubmit: handleSubmit(handleSubmitForm) }
+  return { formMethod, onSubmit: handleSubmit(handleSubmitForm) }
 }

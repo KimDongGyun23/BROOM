@@ -1,36 +1,55 @@
-import { useNavigate } from 'react-router-dom'
-
 import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
 import { SearchBar } from '@/components/domain/post/SearchBar'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
-import { instance } from '@/services/query'
-import { usePostListData } from '@/services/service/usePostListData'
+import { useFetchPostList } from '@/services/query/usePostQuery'
+import { ActiveOnlyFilterStoreProvider, useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 import { Container } from '@/styles/commonStyles'
 
-export const Carpool = () => {
-  const navigate = useNavigate()
-  const session = instance.hasToken()
+const useCarpoolList = () => {
+  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
+    urls: { isAllShow: !isFilteringActiveOnly },
+  })
 
-  const { isPending, isError, hasNextPage, fetchNextPage, showActiveOnly, toggleShowActiveOnly } =
-    usePostListData()
-  const handleAddCarpoolClick = () => navigate('/carpool/create')
+  return {
+    postList: data?.pages.flatMap((page) => page.result) || [],
+    isPending,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  }
+}
+
+const CarpoolMain = () => {
+  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useCarpoolList()
 
   return (
-    <Container>
-      <MainHeader />
-      <SearchBar />
-      <PostActiveToggle isChecked={showActiveOnly} onToggle={toggleShowActiveOnly} />
+    <>
+      <PostActiveToggle />
       <PostList
+        postList={postList}
         isPending={isPending}
         isError={isError}
         hasNextPage={hasNextPage}
         fetchNextPage={fetchNextPage}
       />
-      {session && <PostAdditionButton onClick={handleAddCarpoolClick} />}
-      <BottomNavigation />
-    </Container>
+    </>
+  )
+}
+
+export const Carpool = () => {
+  return (
+    <ActiveOnlyFilterStoreProvider>
+      <Container>
+        <MainHeader />
+        <SearchBar />
+        <CarpoolMain />
+        <PostAdditionButton />
+        <BottomNavigation />
+      </Container>
+    </ActiveOnlyFilterStoreProvider>
   )
 }

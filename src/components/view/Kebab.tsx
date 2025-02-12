@@ -17,11 +17,14 @@ const KebabItem = ({ label, onClick, isRed, isLast }: KebabItemProps & { isLast:
 )
 
 type KebabProps = {
+  isOpen: boolean
   items: KebabItemProps[]
   position: Position
 }
 
-export const Kebab = ({ items, position }: KebabProps) => {
+export const Kebab = ({ isOpen, items, position }: KebabProps) => {
+  if (!isOpen) return null
+
   return (
     <KebabNav $position={position} aria-label="추가 옵션">
       <KebabList>

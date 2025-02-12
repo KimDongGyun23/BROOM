@@ -1,10 +1,8 @@
-import { useCallback, useEffect } from 'react'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useFetchAccountInfo, useUpdateUserAccount } from '@/services/query/useMypageQuery'
-import { useAccountActions, useNicknameValidation } from '@/stores/account'
-import type { AccountInfoResponse, UserAccount } from '@/types/mypage'
+import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import type { UserAccount } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()
 
@@ -43,45 +41,8 @@ const accountSchema = z
   })
 
 export const useAccountForm = () => {
-  const isNicknameValidated = useNicknameValidation()
-  const { mutate: updateAccount } = useUpdateUserAccount()
-  const { setModalState, resetAccount } = useAccountActions()
-  const { data: defaultValues, isPending, isError } = useFetchAccountInfo()
+  const { data: defaultValues } = useFetchAccountInfo()
+  const formMethod = useCustomForm<UserAccount>(accountSchema, { defaultValues })
 
-  const formMethod = useCustomForm<AccountInfoResponse>(accountSchema, { defaultValues })
-  const { handleSubmit, setError, clearErrors, reset } = formMethod
-
-  useEffect(() => {
-    reset()
-    resetAccount()
-  }, [reset, resetAccount])
-
-  const handleAccountUpdate = useCallback(
-    async (formData: UserAccount) => {
-      updateAccount(
-        { body: formData },
-        {
-          onSuccess: () => setModalState({ isSuccessModalOpen: true }),
-          onError: () => setModalState({ isErrorModalOpen: true }),
-        },
-      )
-    },
-    [updateAccount, setModalState],
-  )
-
-  const onSubmit = handleSubmit(async (formData) => {
-    const nicknameSection = accountAttribute.NICKNAME.section
-
-    if (isNicknameValidated) {
-      clearErrors(nicknameSection)
-      await handleAccountUpdate(formData)
-    } else {
-      setError(nicknameSection, {
-        type: 'manual',
-        message: '닉네임 중복 확인을 해주세요.',
-      })
-    }
-  })
-
-  return { formMethod, isPending, isError, onSubmit }
+  return formMethod
 }

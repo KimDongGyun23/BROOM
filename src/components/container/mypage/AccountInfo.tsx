@@ -1,52 +1,54 @@
 import { FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import { AccountForm } from '@/components/domain/mypage/AccountForm'
+import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
-import { ModalWithOneButton } from '@/components/view/Modal'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useAccountForm } from '@/forms/useAccountForm'
-import { useAccountActions, useAccountModeState, useModalState } from '@/stores/account'
+import { accountAttribute, useAccountForm } from '@/forms/useAccountForm'
+import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import { FormContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 
+const AccountInfoForm = () => {
+  const formMethod = useAccountForm()
+  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
+
+  return (
+    <FormProvider {...formMethod}>
+      <FormContainer $isFull>
+        <InputGroup section={NICKNAME.section}>
+          <InputGroup.Label label={NICKNAME.label} />
+          <InputGroup.Input readOnly {...NICKNAME.input} />
+        </InputGroup>
+
+        <InputGroup section={DISCHARGE_YEAR.section}>
+          <InputGroup.Label label={DISCHARGE_YEAR.label} />
+          <InputGroup.Input readOnly {...DISCHARGE_YEAR.input} />
+        </InputGroup>
+
+        <InputGroup section={MILITARY_BRANCH.section}>
+          <InputGroup.Label label={MILITARY_BRANCH.label} />
+          <InputGroup.SortOfArmy disabled />
+        </InputGroup>
+      </FormContainer>
+    </FormProvider>
+  )
+}
+
 export const AccountInfo = () => {
-  const isEditMode = useAccountModeState()
-  const { isSuccessModalOpen, isErrorModalOpen } = useModalState()
-  const { toggleEditMode, setModalState } = useAccountActions()
+  const navigate = useNavigate()
+  const { isPending, isError } = useFetchAccountInfo()
 
-  const { isPending, isError, formMethod, onSubmit } = useAccountForm()
-
-  const handleCloseModal = () =>
-    setModalState({ isSuccessModalOpen: false, isErrorModalOpen: false })
+  const handleClickEdit = () => navigate('/mypage/account-info/edit', { replace: true })
 
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />
 
   return (
     <>
-      <FormProvider {...formMethod}>
-        <SubHeaderWithoutIcon
-          type={isEditMode ? 'complete' : 'edit'}
-          title="계정 정보"
-          onClickEdit={toggleEditMode}
-          onClickComplete={onSubmit}
-        />
-        <AccountForm />
-      </FormProvider>
-
-      <ModalWithOneButton
-        isOpen={isSuccessModalOpen}
-        onClose={handleCloseModal}
-        content="계정 정보가 수정되었습니다."
-        button={{ onClick: handleCloseModal, label: '확인' }}
-      />
-
-      <ModalWithOneButton
-        isOpen={isErrorModalOpen}
-        onClose={handleCloseModal}
-        content="계정 정보 업데이트에 실패했습니다."
-        button={{ onClick: handleCloseModal, label: '확인' }}
-      />
+      <SubHeaderWithoutIcon type="edit" title="계정 정보" onClickEdit={handleClickEdit} />
+      <AccountInfoForm />
     </>
   )
 }

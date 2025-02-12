@@ -5,52 +5,69 @@ import styled from 'styled-components'
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import { Loading } from '@/components/view/Loading'
-import { usePostList, usePostListCurrentTab } from '@/stores/postList'
+import type { PostResponse } from '@/types/post'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
+type PostItemProps = {
+  item: PostResponse['result'][number]
+}
+
 type PostListProps = {
+  postList: PostResponse['result']
   isPending: boolean
   isError: boolean
   hasNextPage: boolean
   fetchNextPage: VoidFunction
 }
 
-export const PostList = ({ isPending, isError, hasNextPage, fetchNextPage }: PostListProps) => {
-  const list = usePostList()
-  const currentPage = usePostListCurrentTab()
+const PostItem = ({ item }: PostItemProps) => {
+  const { boardId, createdAt, full } = item.status
+  const { title, trainingDate, place, time } = item.content
 
+  return (
+    <PostItemLink to={`/carpool/detail/${boardId}`}>
+      <PostItemHeader>
+        <p className="title">{title}</p>
+        <p className="date">{createdAt}</p>
+      </PostItemHeader>
+
+      <PostContent>
+        <PostDetails>
+          <p className="training-date">{trainingDate} 훈련</p>
+          <PostLocationTime>
+            <span className="place">{place}</span>
+            <span>|</span>
+            <span>{time}</span>
+          </PostLocationTime>
+        </PostDetails>
+
+        <div>{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
+      </PostContent>
+    </PostItemLink>
+  )
+}
+
+export const PostList = ({
+  postList,
+  isPending,
+  isError,
+  hasNextPage,
+  fetchNextPage,
+}: PostListProps) => {
   if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-  if (!list || !list.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
+  if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
     <PostSection>
       <InfiniteScroll
         hasMore={hasNextPage}
         threshold={200}
-        loadMore={fetchNextPage}
+        loadMore={() => fetchNextPage()}
         useWindow={false}
       >
-        {list.map(({ content, status }) => (
-          <PostItemLink key={status.boardId} to={`/${currentPage}/detail/${status.boardId}`}>
-            <PostItemHeader>
-              <p className="title">{content.title}</p>
-              <p className="date">{status.createdAt}</p>
-            </PostItemHeader>
-
-            <PostContent>
-              <PostDetails>
-                <p className="training-date">{content.trainingDate} 훈련</p>
-                <PostLocationTime>
-                  <span className="place">{content.place}</span>
-                  <span>|</span>
-                  <span>{content.time}</span>
-                </PostLocationTime>
-              </PostDetails>
-
-              <div>{status.full ? <StopIcon /> : <AdditionCircleIcon />}</div>
-            </PostContent>
-          </PostItemLink>
+        {postList.map((item) => (
+          <PostItem key={item.status.boardId} item={item} />
         ))}
       </InfiniteScroll>
     </PostSection>

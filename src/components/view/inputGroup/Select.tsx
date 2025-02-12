@@ -53,7 +53,6 @@ const ArmyButton = styled.button<{ $isSelected: boolean }>`
     $isSelected ? theme.colors.black[600] : 'white'};
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
   }
 `

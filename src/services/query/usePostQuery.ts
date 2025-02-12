@@ -1,8 +1,7 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
-  BookmarkListRequest,
-  MyPostRequest,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -11,7 +10,6 @@ import type {
   PostEditRequest,
   PostForm,
   PostId,
-  PostIsFullRequest,
   PostRequest,
   PostResponse,
   PostSearchRequest,
@@ -21,20 +19,16 @@ import type {
 import { instance } from '.'
 
 const API_ENDPOINTS = {
-  list: (urls: PostRequest['urls']) =>
-    `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isAllShow}`,
+  list: (urls: PostRequest['urls']) => `/board/view/all/${urls.pageParam}?isFull=${urls.isAllShow}`,
   search: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
-  myPost: (urls: MyPostRequest['urls']) =>
-    `/mypage/board/${urls.pageParam}?category=${urls.category}`,
-  bookmark: (urls: BookmarkListRequest['urls']) =>
-    `/mypage/bookmark/${urls.pageParam}?category=${urls.category}`,
+    `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
+  myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
+  bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
 
   create: '/board',
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
   delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
-  markIsFull: (urls: PostIsFullRequest['urls']) => `/board/check/${urls.boardId}`,
   setBookmark: `/mypage/bookmark`,
   deleteBookmark: (urls: PostDeleteBookmarkRequest['urls']) => `/mypage/bookmark/${urls.boardId}`,
 } as const
@@ -44,14 +38,12 @@ const queryKeys = {
   list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   search: (urls: PostSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
-  myPost: (urls: MyPostRequest['urls']) =>
-    [...queryKeys.all, 'my-post', ...Object.values(urls)] as const,
-  bookmark: (urls: BookmarkListRequest['urls']) =>
-    [...queryKeys.all, 'bookmark', ...Object.values(urls)] as const,
+  myPost: () => [...queryKeys.all, 'my-post'] as const,
+  bookmark: () => [...queryKeys.all, 'bookmark'] as const,
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
-export const usePostList = ({ urls }: PostRequest) => {
+export const useFetchPostList = ({ urls }: PostRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.list({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
@@ -63,7 +55,7 @@ export const usePostList = ({ urls }: PostRequest) => {
   })
 }
 
-export const useSearchPostList = ({ urls }: PostSearchRequest) => {
+export const useFetchSearchList = ({ urls }: PostSearchRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.search({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
@@ -75,11 +67,11 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
   })
 }
 
-export const useMyPostList = ({ urls }: MyPostRequest) => {
+export const useFetchMyPostList = () => {
   return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.myPost({ ...urls }),
+    queryKey: queryKeys.myPost(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.myPost({ ...urls, pageParam })),
+      await instance.get(API_ENDPOINTS.myPost(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -87,11 +79,11 @@ export const useMyPostList = ({ urls }: MyPostRequest) => {
   })
 }
 
-export const useBookmarkList = ({ urls }: BookmarkListRequest) => {
+export const useFetchBookmarkList = () => {
   return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.bookmark({ ...urls }),
+    queryKey: queryKeys.bookmark(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.bookmark({ ...urls, pageParam })),
+      await instance.get(API_ENDPOINTS.bookmark(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -151,20 +143,8 @@ export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, PostDeleteRequest>({
+  return useMutation<AxiosResponse<string>, AxiosError<string>, PostDeleteRequest>({
     mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.delete(urls)),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
-  })
-}
-
-export const useMarkPostAsFull = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<string, Error, PostIsFullRequest>({
-    mutationFn: async ({ body, urls }) =>
-      await instance.patch(API_ENDPOINTS.markIsFull(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

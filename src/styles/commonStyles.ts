@@ -15,3 +15,7 @@ export const FormContainer = styled.form<{ $isFull?: boolean }>`
 export const ValidateContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', undefined, undefined, 'lg')};
 `
+
+export const GridContainer = styled.div`
+  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, undefined, undefined, 'lg')};
+`

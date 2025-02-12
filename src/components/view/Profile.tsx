@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { usePost } from '@/stores/post'
+import { usePostDetail } from '@/stores/post'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ProfileImage } from './ProfileImage'
@@ -26,7 +26,7 @@ const BaseProfile = ({ iconType, name, subtitle, description }: BaseProfileProps
 )
 
 export const PostProfile = () => {
-  const post = usePost()
+  const post = usePostDetail()
   if (!post || !post.author) return null
 
   return (

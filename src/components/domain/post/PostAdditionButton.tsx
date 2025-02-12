@@ -1,14 +1,18 @@
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { AdditionIcon } from '@/components/view/icons/NonActiveIcons'
+import { instance } from '@/services/query'
 
-type PostAdditionButtonProps = {
-  onClick: VoidFunction
-}
+export const PostAdditionButton = () => {
+  const navigate = useNavigate()
+  const session = instance.hasToken()
+  const handleButtonClick = () => navigate('/carpool/create')
 
-export const PostAdditionButton = ({ onClick }: PostAdditionButtonProps) => {
+  if (!session) return null
+
   return (
-    <AddButton type="button" onClick={onClick}>
+    <AddButton type="button" onClick={handleButtonClick}>
       <AdditionIcon />
       <ButtonText>글 올리기</ButtonText>
     </AddButton>

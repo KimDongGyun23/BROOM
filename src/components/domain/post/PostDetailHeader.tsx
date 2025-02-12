@@ -6,100 +6,98 @@ import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHe
 import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
 import { instance } from '@/services/query'
-import { useDeletePost, useMarkPostAsFull } from '@/services/query/usePostQuery'
-import { useCurrentTab, useIsMyPost, usePost } from '@/stores/post'
-import { usePostModal, usePostModalActions, usePostModalText } from '@/stores/postModal'
+import { useDeletePost } from '@/services/query/usePostQuery'
+import {
+  useIsSuccessModal,
+  useModalActions,
+  useModalState,
+  useTwoButtonModalState,
+} from '@/stores/modal'
+import { useIsMyPost } from '@/stores/post'
 
-const usePostDetailActions = () => {
-  const post = usePost()
+const useHandlePostDelete = () => {
   const boardId = useParamId()
-  const currentTab = useCurrentTab()
-  const navigate = useNavigate()
 
-  const { mutate: markAsFull } = useMarkPostAsFull()
   const { mutate: deletePost } = useDeletePost()
-  const { setFeedbackMessage, openModal, closeModal } = usePostModalActions()
-
-  const handleEdit = () => navigate(`/${currentTab}/edit/${boardId}`)
-
-  const handleCheckFull = () => {
-    markAsFull(
-      { body: { full: !post?.status.full }, urls: { boardId } },
-      {
-        onSuccess: () => {
-          setFeedbackMessage('모집 상태가 변경되었습니다.')
-          openModal('secondary')
-        },
-        onError: () => {
-          setFeedbackMessage('모집 상태 변경에 실패했습니다.')
-          openModal('secondary')
-        },
-      },
-    )
-  }
+  const { openModal } = useModalActions()
 
   const handleDelete = () => {
     deletePost(
       { urls: { boardId } },
       {
-        onSuccess: () => {
-          navigate(`/${currentTab}`, { replace: true })
-          closeModal()
-        },
-        onError: () => {
-          setFeedbackMessage('게시글을 삭제하지 못했습니다.')
-          openModal('secondary')
-        },
+        onSuccess: (response) => openModal(response.data, true),
+        onError: (error) => openModal(error.response?.data as string, false),
       },
     )
   }
 
-  return { handleEdit, handleCheckFull, handleDelete }
+  return { handleDelete }
 }
 
-export const PostDetailHeader = () => {
-  const post = usePost()
-  const isMyPost = useIsMyPost()
-  const modalText = usePostModalText()
-  const isModalOpen = usePostModal()
+const PostDetailModal = () => {
+  const navigate = useNavigate()
+  const { handleDelete } = useHandlePostDelete()
 
-  const { handleEdit, handleCheckFull, handleDelete } = usePostDetailActions()
-  const { openModal, closeModal } = usePostModalActions()
+  const isSuccessModal = useIsSuccessModal()
+  const { isModalOpen, label } = useModalState()
+  const { isTwoButtonModalOpen, twoButtonLabel } = useTwoButtonModalState()
+  const { closeModal } = useModalActions()
 
-  const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
+  const handlePostDeleteSuccess = () => {
+    navigate(`/carpool`, { replace: true })
+    closeModal()
+  }
 
-  const isLoggedIn = instance.hasToken()
-
-  const kebabMap = [
-    { label: '수정하기', onClick: handleEdit },
-    {
-      label: post?.status.full ? '모집 중으로 변경' : '모집 완료로 변경',
-      onClick: handleCheckFull,
-    },
-    { label: '삭제하기', onClick: () => openModal('primary'), isRed: true },
-  ]
-
-  if (!isLoggedIn || !isMyPost) return <SubHeaderWithoutIcon type="null" />
+  const handlePostDeleteError = () => closeModal()
 
   return (
     <>
-      <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
-      {isKebabOpen && <Kebab items={kebabMap} position={[48, 16]} />}
-
       <ModalWithTwoButton
-        isOpen={isModalOpen.primary}
+        isOpen={isTwoButtonModalOpen}
         onClose={closeModal}
-        content="게시글을 삭제하시겠습니까?"
+        content={twoButtonLabel}
         secondaryButton={{ onClick: closeModal, label: '취소', secondary: true }}
         primaryButton={{ onClick: handleDelete, label: '삭제' }}
       />
 
       <ModalWithOneButton
-        isOpen={isModalOpen.secondary}
+        isOpen={isModalOpen}
         onClose={closeModal}
-        content={modalText}
-        button={{ onClick: closeModal, label: '확인' }}
+        content={label}
+        button={{
+          onClick: isSuccessModal ? handlePostDeleteSuccess : handlePostDeleteError,
+          label: '확인',
+        }}
       />
+    </>
+  )
+}
+
+export const PostDetailHeader = () => {
+  const boardId = useParamId()
+  const navigate = useNavigate()
+  const session = instance.hasToken()
+  const isMyPost = useIsMyPost()
+
+  const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
+  const { openTwoButtonModal } = useModalActions()
+
+  const kebabMap = [
+    { label: '수정하기', onClick: () => navigate(`/carpool/edit/${boardId}`) },
+    {
+      label: '삭제하기',
+      onClick: () => openTwoButtonModal('게시글을 삭제하시겠습니까?'),
+      isRed: true,
+    },
+  ]
+
+  if (!session || !isMyPost) return <SubHeaderWithoutIcon type="null" />
+
+  return (
+    <>
+      <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
+      <Kebab isOpen={isKebabOpen} items={kebabMap} position={[48, 16]} />
+      <PostDetailModal />
     </>
   )
 }
