@@ -3,8 +3,6 @@ import { Client } from '@stomp/stompjs'
 
 import { instance } from '@/services/query'
 import { useMessageActions } from '@/stores/message'
-import { useActiveTab } from '@/stores/postTab'
-import { TAB_LIST } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
@@ -12,8 +10,6 @@ const SERVER = import.meta.env.VITE_PUBLIC_SERVER
 
 export const useWebSocket = (roomId: string | undefined) => {
   const client = useRef<Client | null>(null)
-  const activeTab = useActiveTab()
-  const pathByActiveTab = TAB_LIST.find((tab) => tab.label === activeTab)?.key
   const { addMessage } = useMessageActions()
 
   const token = instance.getAccessToken() as string
@@ -27,7 +23,7 @@ export const useWebSocket = (roomId: string | undefined) => {
       },
       onConnect: () => {
         client.current?.subscribe(
-          `/exchange/chat.${pathByActiveTab}.exchange/chat.${pathByActiveTab}.room.${roomId}`,
+          `/exchange/chat.exchange/chat.room.${roomId}`,
           (message) => {
             addMessage(JSON.parse(message.body))
           },
@@ -46,7 +42,7 @@ export const useWebSocket = (roomId: string | undefined) => {
   const sendMessage = (content: string) => {
     if (client.current && client.current.connected) {
       client.current.publish({
-        destination: `/pub/chat.${pathByActiveTab}.message`,
+        destination: `/pub/chat.message`,
         headers: { Authorization: token },
         body: JSON.stringify({
           chatRoomId: roomId,
