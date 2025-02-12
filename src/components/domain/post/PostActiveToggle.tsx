@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
-import { useActiveOnlyFilterActions, useIsFilteringActiveOnly } from '@/stores/\bactiveOnlyFilter'
+import { useActiveOnlyFilterActions, useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 
 export const PostActiveToggle = () => {
   const isFilteringActiveOnly = useIsFilteringActiveOnly()

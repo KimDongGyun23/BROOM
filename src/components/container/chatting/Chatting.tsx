@@ -3,20 +3,17 @@ import styled from 'styled-components'
 import { CarpoolChattingList } from '@/components/domain/chatting/CarpoolChattingList'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
-import { PostTabStoreProvider } from '@/stores/postTab'
 import { Container } from '@/styles/commonStyles'
 
 export const Chatting = () => {
   return (
-    <PostTabStoreProvider>
-      <Container>
-        <MainHeader />
-        <MainContent>
-          <CarpoolChattingList />
-        </MainContent>
-        <BottomNavigation />
-      </Container>
-    </PostTabStoreProvider>
+    <Container>
+      <MainHeader />
+      <MainContent>
+        <CarpoolChattingList />
+      </MainContent>
+      <BottomNavigation />
+    </Container>
   )
 }
 

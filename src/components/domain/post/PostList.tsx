@@ -5,13 +5,19 @@ import styled from 'styled-components'
 import { EmptyMessage } from '@/components/view/Error'
 import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import { Loading } from '@/components/view/Loading'
-import { useFetchPostList } from '@/services/query/usePostQuery'
-import { useIsFilteringActiveOnly } from '@/stores/\bactiveOnlyFilter'
 import type { PostResponse } from '@/types/post'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
   item: PostResponse['result'][number]
+}
+
+type PostListProps = {
+  postList: PostResponse['result']
+  isPending: boolean
+  isError: boolean
+  hasNextPage: boolean
+  fetchNextPage: VoidFunction
 }
 
 const PostItem = ({ item }: PostItemProps) => {
@@ -41,15 +47,13 @@ const PostItem = ({ item }: PostItemProps) => {
   )
 }
 
-export const PostList = () => {
-  const isFilteringActiveOnly = useIsFilteringActiveOnly()
-
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
-    urls: { isAllShow: !isFilteringActiveOnly },
-  })
-
-  const postList = data?.pages.flatMap((page) => page.result) || []
-
+export const PostList = ({
+  postList,
+  isPending,
+  isError,
+  hasNextPage,
+  fetchNextPage,
+}: PostListProps) => {
   if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />

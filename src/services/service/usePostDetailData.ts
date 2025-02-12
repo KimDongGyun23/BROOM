@@ -8,11 +8,11 @@ import { usePostDetail } from '../query/usePostQuery'
 export const usePostDetailData = () => {
   const boardId = useParamId()
   const { data: postDetail, isPending, isError } = usePostDetail({ urls: { boardId } })
-  const { setPost, setTab } = usePostActions()
+  const { setPost } = usePostActions()
 
   useEffect(() => {
     if (postDetail) setPost({ ...postDetail })
-  }, [setPost, setTab, postDetail])
+  }, [setPost, postDetail])
 
   return { postDetail, isPending, isError }
 }
