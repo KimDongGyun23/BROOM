@@ -44,7 +44,7 @@ const queryKeys = {
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
-export const usePostList = ({ urls }: PostRequest) => {
+export const useFetchPostList = ({ urls }: PostRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.list({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>

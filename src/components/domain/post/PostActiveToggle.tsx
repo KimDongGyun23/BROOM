@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 
 import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
+import { useActiveOnlyFilterActions, useIsFilteringActiveOnly } from '@/stores/\bactiveOnlyFilter'
 
-type ActiveToggleProps = {
-  isChecked: boolean
-  onToggle: VoidFunction
+export const PostActiveToggle = () => {
+  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const { toggleFilterActiveOnly } = useActiveOnlyFilterActions()
+
+  return (
+    <Container>
+      <ToggleButton onClick={toggleFilterActiveOnly}>
+        <CheckBoxIcon active={isFilteringActiveOnly} />
+        <ToggleText $isChecked={isFilteringActiveOnly}>모집 중인 글만 보기</ToggleText>
+      </ToggleButton>
+    </Container>
+  )
 }
-
-export const PostActiveToggle = ({ isChecked, onToggle }: ActiveToggleProps) => (
-  <Container>
-    <ToggleButton onClick={onToggle}>
-      <CheckBoxIcon active={isChecked} />
-      <ToggleText $isChecked={isChecked}>모집 중인 글만 보기</ToggleText>
-    </ToggleButton>
-  </Container>
-)
-
 const Container = styled.div`
   ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding('sm', 0)};
