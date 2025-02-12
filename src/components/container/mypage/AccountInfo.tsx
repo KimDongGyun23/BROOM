@@ -40,7 +40,7 @@ export const AccountInfo = () => {
   const navigate = useNavigate()
   const { isPending, isError } = useFetchAccountInfo()
 
-  const handleClickEdit = () => navigate('/mypage/account-info/edit')
+  const handleClickEdit = () => navigate('/mypage/account-info/edit', { replace: true })
 
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />

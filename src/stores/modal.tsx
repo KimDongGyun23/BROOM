@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from 'react'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState } from 'react'
 import type { StoreApi } from 'zustand'
 import { createStore, useStore } from 'zustand'
 
@@ -26,13 +26,15 @@ const initialValues = {
 const ModalStoreContext = createContext<StoreApi<ModalStore> | null>(null)
 
 export const ModalStoreProvider = ({ children }: PropsWithChildren) => {
-  const store = createStore<ModalStore>((set) => ({
-    ...initialValues,
-    actions: {
-      openModal: (label: string) => set(() => ({ modalState: { isModalOpen: true, label } })),
-      closeModal: () => set(() => ({ ...initialValues })),
-    },
-  }))
+  const [store] = useState(() =>
+    createStore<ModalStore>((set) => ({
+      ...initialValues,
+      actions: {
+        openModal: (label: string) => set({ modalState: { isModalOpen: true, label } }),
+        closeModal: () => set({ modalState: { isModalOpen: false, label: '' } }),
+      },
+    })),
+  )
 
   return <ModalStoreContext.Provider value={store}>{children}</ModalStoreContext.Provider>
 }
