@@ -7,20 +7,19 @@ import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
 import { instance } from '@/services/query'
 import { useDeletePost, useMarkPostAsFull } from '@/services/query/usePostQuery'
-import { useCurrentTab, useIsMyPost, usePost } from '@/stores/post'
+import { useIsMyPost, usePost } from '@/stores/post'
 import { usePostModal, usePostModalActions, usePostModalText } from '@/stores/postModal'
 
 const usePostDetailActions = () => {
   const post = usePost()
   const boardId = useParamId()
-  const currentTab = useCurrentTab()
   const navigate = useNavigate()
 
   const { mutate: markAsFull } = useMarkPostAsFull()
   const { mutate: deletePost } = useDeletePost()
   const { setFeedbackMessage, openModal, closeModal } = usePostModalActions()
 
-  const handleEdit = () => navigate(`/${currentTab}/edit/${boardId}`)
+  const handleEdit = () => navigate(`/carpool/edit/${boardId}`)
 
   const handleCheckFull = () => {
     markAsFull(
@@ -43,7 +42,7 @@ const usePostDetailActions = () => {
       { urls: { boardId } },
       {
         onSuccess: () => {
-          navigate(`/${currentTab}`, { replace: true })
+          navigate(`/carpool`, { replace: true })
           closeModal()
         },
         onError: () => {

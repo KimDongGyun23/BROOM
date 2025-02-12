@@ -1,11 +1,4 @@
 export const POST_INFO = { label: '승차 공유', key: 'carpool', upperKey: 'CARPOOL' } as const
-export const TAB_LABELS = TAB_LIST.map((tab) => tab.label)
-export const TAB_KEYS = TAB_LIST.map((tab) => tab.key)
-export const TAB_UPPER_KEYS = TAB_LIST.map((tab) => tab.upperKey)
-
-export type TabLabel = (typeof TAB_LIST)[number]['label']
-export type TabKey = (typeof TAB_LIST)[number]['key']
-export type TabUpperKey = (typeof TAB_LIST)[number]['upperKey']
 
 export const SEARCH_OPTIONS = [
   { label: '제목', key: 'title', placeholder: '제목을 입력해주세요.' },

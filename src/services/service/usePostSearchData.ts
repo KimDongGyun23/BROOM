@@ -1,26 +1,20 @@
-import { useEffect, useMemo } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 import { useToggle } from '@/hooks/useToggle'
 import { usePostListActions } from '@/stores/postList'
-import { SEARCH_OPTIONS, TAB_KEYS, TAB_UPPER_KEYS } from '@/utils/constants'
+import { SEARCH_OPTIONS } from '@/utils/constants'
 
 import { useSearchPostList } from '../query/usePostQuery'
 
 export const usePostSearchData = () => {
   const [searchParams] = useSearchParams()
-  const { pathname } = useLocation()
-  const { setTab, setPost } = usePostListActions()
+  const { setPostList } = usePostListActions()
   const [showActiveOnly, toggleShowActiveOnly] = useToggle(false)
 
   const filterNameLabel = searchParams.get('filterName') || ''
   const filterKey = SEARCH_OPTIONS.find((option) => option.label === filterNameLabel)?.key || ''
   const searchName = searchParams.get('searchName') || ''
-
-  const currentTab = useMemo(
-    () => (pathname.includes(TAB_KEYS[0]) ? TAB_UPPER_KEYS[0] : TAB_UPPER_KEYS[1]),
-    [pathname],
-  )
 
   const {
     data: postList,
@@ -30,7 +24,6 @@ export const usePostSearchData = () => {
     fetchNextPage,
   } = useSearchPostList({
     urls: {
-      category: currentTab,
       type: filterKey,
       keyword: searchName,
       isAllShow: !showActiveOnly,
@@ -38,12 +31,8 @@ export const usePostSearchData = () => {
   })
 
   useEffect(() => {
-    if (postList) {
-      const tabKey = pathname.includes(TAB_KEYS[0]) ? TAB_KEYS[0] : TAB_KEYS[1]
-      setTab(tabKey)
-      setPost(postList.pages.flatMap((page) => page.result) || [])
-    }
-  }, [postList, pathname, setTab, setPost])
+    if (postList) setPostList(postList.pages.flatMap((page) => page.result) || [])
+  }, [postList, setPostList])
 
   return {
     isPending,

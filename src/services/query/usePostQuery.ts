@@ -19,10 +19,9 @@ import type {
 import { instance } from '.'
 
 const API_ENDPOINTS = {
-  list: (urls: PostRequest['urls']) =>
-    `/board/view/all/${urls.pageParam}?category=${urls.category}&isFull=${urls.isAllShow}`,
+  list: (urls: PostRequest['urls']) => `/board/view/all/${urls.pageParam}?isFull=${urls.isAllShow}`,
   search: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?category=${urls.category}&type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
+    `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
   myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
 
