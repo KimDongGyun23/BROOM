@@ -1,7 +1,5 @@
 import { css } from 'styled-components'
 
-import calendar from '@/assets/Calendar.svg'
-
 import { colors } from './colors'
 
 const baseStyle = css`
@@ -51,7 +49,7 @@ const numberStyle = css`
 const dateStyle = css`
   input[type='date'] {
     position: relative;
-    background: url(${calendar}) no-repeat right;
+    background: url('/assets/Calendar.svg') no-repeat right;
     padding-right: 10px;
   }
 

@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-import chainImage from '@/assets/chain.svg'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import type { ProfileResponse } from '@/types/mypage'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+
+import chainImage from '/assets/chain.svg'
 
 export const UserProfile = ({ nickname, reserveYear }: ProfileResponse) => {
   const iconType = getSessionStorageItem(
