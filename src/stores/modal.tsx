@@ -4,22 +4,33 @@ import type { StoreApi } from 'zustand'
 import { createStore, useStore } from 'zustand'
 
 type Actions = {
-  openModal: (label: string) => void
+  openModal: (label: string, isSuccessModal: boolean) => void
+  openTwoButtonModal: (twoButtonLabel: string) => void
   closeModal: VoidFunction
 }
 
 type ModalStore = {
+  isSuccessModal: boolean
   modalState: {
     isModalOpen: boolean
     label: string
+  }
+  twoButtonModalState: {
+    isTwoButtonModalOpen: boolean
+    twoButtonLabel: string
   }
   actions: Actions
 }
 
 const initialValues = {
+  isSuccessModal: true,
   modalState: {
     isModalOpen: false,
     label: '',
+  },
+  twoButtonModalState: {
+    isTwoButtonModalOpen: false,
+    twoButtonLabel: '',
   },
 }
 
@@ -30,8 +41,11 @@ export const ModalStoreProvider = ({ children }: PropsWithChildren) => {
     createStore<ModalStore>((set) => ({
       ...initialValues,
       actions: {
-        openModal: (label: string) => set({ modalState: { isModalOpen: true, label } }),
-        closeModal: () => set({ modalState: { isModalOpen: false, label: '' } }),
+        openModal: (label, isSuccessModal) =>
+          set({ modalState: { isModalOpen: true, label }, isSuccessModal }),
+        openTwoButtonModal: (twoButtonLabel) =>
+          set({ twoButtonModalState: { isTwoButtonModalOpen: true, twoButtonLabel } }),
+        closeModal: () => set({ ...initialValues }),
       },
     })),
   )
@@ -48,4 +62,6 @@ export const useModalStore = <T,>(selector: (state: ModalStore) => T): T => {
 }
 
 export const useModalState = () => useModalStore((state) => state.modalState)
+export const useTwoButtonModalState = () => useModalStore((state) => state.twoButtonModalState)
+export const useIsSuccessModal = () => useModalStore((state) => state.isSuccessModal)
 export const useModalActions = () => useModalStore((state) => state.actions)

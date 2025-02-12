@@ -3,19 +3,41 @@ import { useNavigate } from 'react-router-dom'
 import { useParamId } from '@/hooks/useParamId'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
 import { useDeleteBookmark, useSetBookmark } from '@/services/query/usePostQuery'
-import { usePost, usePostActions } from '@/stores/post'
+import { usePostDetail, usePostDetailActions } from '@/stores/post'
 
 import { PostBottom } from '../../view/post/PostBottom'
 
-export const CarpoolDetailFooter = () => {
+const useHandleBookmark = () => {
   const boardId = useParamId()
-  const post = usePost()
-  const navigate = useNavigate()
+  const post = usePostDetail()
 
-  const { setPost } = usePostActions()
-  const { mutate: chattingMutation } = useCarpoolChattingId()
+  const { setPostDetail } = usePostDetailActions()
   const { mutate: setBookmark } = useSetBookmark()
   const { mutate: deleteBookmark } = useDeleteBookmark()
+
+  const handleBookmark = () => {
+    if (post && post.status.bookmark) {
+      deleteBookmark(
+        { urls: { boardId } },
+        {
+          onSuccess: () => setPostDetail({ ...post, status: { ...post.status, bookmark: false } }),
+        },
+      )
+    } else if (post && !post.status.bookmark) {
+      setBookmark(
+        { body: { boardId } },
+        { onSuccess: () => setPostDetail({ ...post, status: { ...post.status, bookmark: true } }) },
+      )
+    }
+  }
+  return handleBookmark
+}
+
+const useHandleChatting = () => {
+  const boardId = useParamId()
+  const navigate = useNavigate()
+
+  const { mutate: chattingMutation } = useCarpoolChattingId()
 
   const handleClickChatting = () => {
     chattingMutation(
@@ -26,19 +48,13 @@ export const CarpoolDetailFooter = () => {
     )
   }
 
-  const handleBookmark = () => {
-    if (post && post.status.bookmark) {
-      deleteBookmark(
-        { urls: { boardId } },
-        { onSuccess: () => setPost({ ...post, status: { ...post.status, bookmark: false } }) },
-      )
-    } else if (post && !post.status.bookmark) {
-      setBookmark(
-        { body: { boardId } },
-        { onSuccess: () => setPost({ ...post, status: { ...post.status, bookmark: true } }) },
-      )
-    }
-  }
+  return handleClickChatting
+}
+
+export const CarpoolDetailFooter = () => {
+  const post = usePostDetail()
+  const handleClickChatting = useHandleChatting()
+  const handleBookmark = useHandleBookmark()
 
   if (!post || !post.status) return null
 

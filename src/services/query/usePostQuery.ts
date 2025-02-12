@@ -1,4 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
   PostCreateRequest,
@@ -9,7 +10,6 @@ import type {
   PostEditRequest,
   PostForm,
   PostId,
-  PostIsFullRequest,
   PostRequest,
   PostResponse,
   PostSearchRequest,
@@ -29,7 +29,6 @@ const API_ENDPOINTS = {
   edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
   delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
-  markIsFull: (urls: PostIsFullRequest['urls']) => `/board/check/${urls.boardId}`,
   setBookmark: `/mypage/bookmark`,
   deleteBookmark: (urls: PostDeleteBookmarkRequest['urls']) => `/mypage/bookmark/${urls.boardId}`,
 } as const
@@ -144,20 +143,8 @@ export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
 export const useDeletePost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, PostDeleteRequest>({
+  return useMutation<AxiosResponse<string>, AxiosError<string>, PostDeleteRequest>({
     mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.delete(urls)),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
-  })
-}
-
-export const useMarkPostAsFull = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation<string, Error, PostIsFullRequest>({
-    mutationFn: async ({ body, urls }) =>
-      await instance.patch(API_ENDPOINTS.markIsFull(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

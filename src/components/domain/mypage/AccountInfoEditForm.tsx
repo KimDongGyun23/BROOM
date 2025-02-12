@@ -25,8 +25,8 @@ const useSubmitForm = (isValidated: boolean) => {
       updateAccount(
         { body: formData },
         {
-          onSuccess: (response) => openModal(response),
-          onError: (error) => openModal(error.message),
+          onSuccess: (response) => openModal(response.data, true),
+          onError: (error) => openModal(error.response?.data as string, false),
         },
       )
     } else {

@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
   AccountInfoResponse,
@@ -41,14 +42,14 @@ export const useFetchAccountInfo = () => {
 export const useUpdateUserAccount = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<string, Error, UpdateAccountRequest>({
+  return useMutation<AxiosResponse<string>, AxiosError, UpdateAccountRequest>({
     mutationFn: async ({ body }) => await instance.put(ENDPOINTS.ACCOUNT, body),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
 
 export const useUpdatePassword = () => {
-  return useMutation<string, Error, UpdatePasswordRequest>({
+  return useMutation<AxiosResponse<string>, AxiosError, UpdatePasswordRequest>({
     mutationFn: async ({ body }) => await instance.post(ENDPOINTS.updatePassword, body),
   })
 }

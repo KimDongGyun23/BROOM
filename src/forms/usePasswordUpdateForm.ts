@@ -56,8 +56,8 @@ export const usePasswordUpdateForm = () => {
     updatePassword(
       { body: { ...rest } },
       {
-        onSuccess: (res) => openModal(res),
-        onError: (error) => openModal(error.message),
+        onSuccess: (response) => openModal(response.data, true),
+        onError: (error) => openModal(error.response?.data as string, false),
       },
     )
   }

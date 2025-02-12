@@ -4,7 +4,7 @@ import { Button } from '@/components/view/Button'
 import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/services/query'
-import { useIsMyPost, usePost } from '@/stores/post'
+import { useIsMyPost, usePostDetail } from '@/stores/post'
 
 type PostBottomProps = {
   onBookmark: VoidFunction
@@ -12,7 +12,7 @@ type PostBottomProps = {
 }
 
 export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
-  const post = usePost()
+  const post = usePostDetail()
   const isMyPost = useIsMyPost()
   const [isBookmarked, setIsBookmarked] = useToggle(post?.status.bookmark)
   const session = instance.hasToken()
