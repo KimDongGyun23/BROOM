@@ -8,14 +8,23 @@ import { useFetchPostList } from '@/services/query/usePostQuery'
 import { ActiveOnlyFilterStoreProvider, useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 import { Container } from '@/styles/commonStyles'
 
-const CarpoolMain = () => {
+const useCarpoolList = () => {
   const isFilteringActiveOnly = useIsFilteringActiveOnly()
-
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: { isAllShow: !isFilteringActiveOnly },
   })
 
-  const postList = data?.pages.flatMap((page) => page.result) || []
+  return {
+    postList: data?.pages.flatMap((page) => page.result) || [],
+    isPending,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  }
+}
+
+const CarpoolMain = () => {
+  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useCarpoolList()
 
   return (
     <>

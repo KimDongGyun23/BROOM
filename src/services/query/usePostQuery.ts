@@ -56,7 +56,7 @@ export const useFetchPostList = ({ urls }: PostRequest) => {
   })
 }
 
-export const useSearchPostList = ({ urls }: PostSearchRequest) => {
+export const useFetchSearchList = ({ urls }: PostSearchRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.search({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
@@ -68,7 +68,7 @@ export const useSearchPostList = ({ urls }: PostSearchRequest) => {
   })
 }
 
-export const useMyPostList = () => {
+export const useFetchMyPostList = () => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.myPost(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
@@ -80,7 +80,7 @@ export const useMyPostList = () => {
   })
 }
 
-export const useBookmarkList = () => {
+export const useFetchBookmarkList = () => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.bookmark(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
