@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
 	@font-face {
     font-family: Jalnan2;
     font-weight: 300;
-    src: url('/src/assets/fonts/JALNAN2TTF.TTF') format('truetype');
+    src: url('/assets/fonts/JALNAN2TTF.TTF') format('truetype');
     font-style: normal;
     font-display: swap;
   }
@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: Moneygraphy;
     font-weight: 300;
-    src: url('/src/assets/fonts/Moneygraphy-Rounded.ttf') format('truetype');
+    src: url('/assets/fonts/Moneygraphy.ttf') format('truetype');
     font-style: normal;
     font-display: swap;
   }

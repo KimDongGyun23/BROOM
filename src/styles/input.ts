@@ -49,7 +49,7 @@ const numberStyle = css`
 const dateStyle = css`
   input[type='date'] {
     position: relative;
-    background: url('/src/assets/Calendar.svg') no-repeat right;
+    background: url('/assets/Calendar.svg') no-repeat right;
     padding-right: 10px;
   }
 

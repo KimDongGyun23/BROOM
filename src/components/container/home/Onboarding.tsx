@@ -1,11 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import onboarding_first from '@/assets/onboarding1.svg'
-import onboarding_second from '@/assets/onboarding2.svg'
-import onboarding_third from '@/assets/onboarding3.svg'
 import { Button } from '@/components/view/Button'
 import { useTouchEvent } from '@/hooks/useTouchEvent'
+
+import onboarding_first from '/assets/onboarding1.svg'
+import onboarding_second from '/assets/onboarding2.svg'
+import onboarding_third from '/assets/onboarding3.svg'
 
 const Container = styled.div`
   ${({ theme }) => theme.flexBox('column', 'center')};
