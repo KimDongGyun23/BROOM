@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Button } from '@/components/view/Button'
 import { MainHeader } from '@/components/view/MainHeader'
+import { Container } from '@/styles/commonStyles'
 
 const BUS_RESERVE_CONTENT = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },
@@ -92,11 +93,6 @@ export const BusReserve = () => {
     </Container>
   )
 }
-
-const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-  height: 100%;
-`
 
 const MainContent = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};

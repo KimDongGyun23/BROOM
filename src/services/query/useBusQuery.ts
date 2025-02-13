@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
+import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
   BusReservationInfoRequest,
@@ -27,7 +28,7 @@ export const useBusReservationQuery = ({ urls }: BusReservationInfoRequest) => {
 }
 
 export const useBusReservationMutation = () => {
-  return useMutation<void, Error, BusReservationRequest>({
+  return useMutation<AxiosResponse<string>, AxiosError, BusReservationRequest>({
     mutationFn: async ({ body }) => await instance.post(`/bus/reservation`, body),
   })
 }
