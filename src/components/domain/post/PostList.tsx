@@ -135,5 +135,5 @@ const ParticipantsBox = styled.div<{ $isFull: boolean }>`
   ${({ theme }) => theme.borderRadius('md')};
   ${({ theme }) => theme.font(800, 'white')};
   background-color: ${({ theme, $isFull }) =>
-    $isFull ? theme.colors.blue[500] : theme.colors.black[300]};
+    $isFull ? theme.colors.black[300] : theme.colors.blue[500]};
 `

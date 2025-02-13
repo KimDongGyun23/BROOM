@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom'
+import { styled } from 'styled-components'
 
+import { Button } from '@/components/view/Button'
+import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useParamId } from '@/hooks/useParamId'
+import { useToggle } from '@/hooks/useToggle'
+import { instance } from '@/services/query'
 import { useCarpoolChattingId } from '@/services/query/useChattingQuery'
 import { useDeleteBookmark, useSetBookmark } from '@/services/query/usePostQuery'
 import { usePostDetail, usePostDetailActions } from '@/stores/post'
-
-import { PostBottom } from '../../view/post/PostBottom'
+import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 const useHandleBookmark = () => {
   const boardId = useParamId()
@@ -51,12 +55,70 @@ const useHandleChatting = () => {
   return handleClickChatting
 }
 
+const ChattingButton = ({ isFull }: { isFull: boolean }) => {
+  const handleClickChatting = useHandleChatting()
+
+  return (
+    <ChattingStyledButton
+      secondary={isFull}
+      size="sm"
+      onClick={handleClickChatting}
+      disabled={isFull}
+    >
+      {isFull ? '모집 마감' : '채팅하기'}
+    </ChattingStyledButton>
+  )
+}
+
+const BookmarkButton = ({ initialBookmark }: { initialBookmark: boolean }) => {
+  const handleBookmark = useHandleBookmark()
+  const [isBookmarked, setIsBookmarked] = useToggle(initialBookmark)
+
+  const handleClickBookmark = () => {
+    handleBookmark()
+    setIsBookmarked()
+  }
+
+  return (
+    <BookmarkStyledButton type="button" onClick={handleClickBookmark}>
+      <BookmarkIcon active={isBookmarked} />
+      <p className="label">북마크</p>
+    </BookmarkStyledButton>
+  )
+}
+
 export const CarpoolDetailFooter = () => {
   const post = usePostDetail()
-  const handleClickChatting = useHandleChatting()
-  const handleBookmark = useHandleBookmark()
+  const session = instance.hasToken()
 
-  if (!post || !post.status) return null
+  if (!post || !post.status || !session) return null
 
-  return <PostBottom onBookmark={handleBookmark} onChatStart={handleClickChatting} />
+  return (
+    <Container>
+      <BookmarkButton initialBookmark={post.status.bookmark} />
+      <ChattingButton
+        isFull={!canJoinChatRoom(post.status.currentPersonnel, post.status.totalPersonnel)}
+      />
+    </Container>
+  )
 }
+
+const Container = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
+  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl')};
+  width: 100%;
+`
+
+const BookmarkStyledButton = styled.button`
+  ${({ theme }) => theme.flexBox('column', 'center', undefined, 'xs')}
+  flex-shrink: 0;
+
+  .label {
+    ${({ theme }) => theme.font(900, theme.colors.black[400])};
+  }
+`
+
+const ChattingStyledButton = styled(Button)`
+  flex-grow: 1;
+`
