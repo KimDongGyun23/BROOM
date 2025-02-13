@@ -10,6 +10,8 @@ export const BusReservationCreateModal = () => {
   const { isModalOpen, label } = useModalState()
   const { closeModal } = useModalActions()
 
+  console.log(label)
+
   const handleModalClose = useCallback(() => {
     closeModal()
     navigate(-1 as To, { replace: true })
