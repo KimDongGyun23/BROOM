@@ -41,10 +41,7 @@ export const useBusCreateForm = () => {
       reserveBus(
         { body: formData },
         {
-          onSuccess: (response) => {
-            console.log(response)
-            openModal(response.data, true)
-          },
+          onSuccess: (response) => openModal(response as unknown as string, true),
           onError: (error) => (error.response?.data as string, false),
         },
       )
