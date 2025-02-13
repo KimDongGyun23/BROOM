@@ -1,15 +1,13 @@
 import { FormProvider } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { busReserveInfoAttribute, useBusReserveInfoForm } from '@/forms/useBusReserveInfoForm'
-import { Container } from '@/styles/commonStyles'
-import { BUS_RESERVATION_STATES, type BusReservationState } from '@/utils/constants'
+import type { BusReservationState } from '@/utils/constants'
+import { BUS_RESERVATION_STATES } from '@/utils/constants'
 
-const ReservationForm = () => {
+export const BusReservationCheckForm = () => {
   const { STUDENT_ID } = busReserveInfoAttribute
   const { reservationStatus, formMethod, onSubmit } = useBusReserveInfoForm()
 
@@ -38,32 +36,6 @@ const ReservationForm = () => {
     </>
   )
 }
-
-export const ReserveInfo = () => {
-  const navigate = useNavigate()
-  const handleClose = () => navigate(-1)
-
-  return (
-    <>
-      <SubHeaderWithoutIcon type="null" onClickCancel={handleClose} />
-      <Container>
-        <Title>예약 내역 조회</Title>
-
-        <ReservationForm />
-
-        <NoticeContainer>
-          <p className="notice-text">개인 정보 보호를 위해 신청 여부만 확인 가능합니다.</p>
-          <p className="notice-text">기타 문의사항이 있다면 공지사항의 연락수단을 확인해주세요.</p>
-        </NoticeContainer>
-      </Container>
-    </>
-  )
-}
-
-const Title = styled.h4`
-  ${({ theme }) => theme.margin('xl', 0, 'page-label-bottom')};
-  ${({ theme }) => theme.font(400, theme.colors.black[600])};
-`
 
 const InputContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
@@ -95,12 +67,4 @@ const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
         return theme.colors.black[400]
     }
   }};
-`
-
-const NoticeContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column')};
-
-  .notice-text {
-    ${({ theme }) => theme.font(900, theme.colors.black[300])}
-  }
 `

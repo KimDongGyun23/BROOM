@@ -9,8 +9,8 @@ import type {
 
 import { instance } from '.'
 
-const API_ENDPOINTS = {
-  RESERVATION: (studentId: string) => `/bus/reservation/${studentId}`,
+const ENDPOINTS = {
+  reservation: (studentId: string) => `/bus/reservation/${studentId}`,
 } as const
 
 const queryKeys = {
@@ -22,7 +22,7 @@ const queryKeys = {
 export const useBusReservationQuery = ({ urls }: BusReservationInfoRequest) => {
   return useQuery<ReservationStatus, AxiosError>({
     queryKey: queryKeys.reservation(urls),
-    queryFn: async () => await instance.get(API_ENDPOINTS.RESERVATION(urls.studentId)),
+    queryFn: async () => await instance.get(ENDPOINTS.reservation(urls.studentId)),
     enabled: false,
   })
 }

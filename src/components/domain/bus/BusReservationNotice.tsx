@@ -1,12 +1,6 @@
-import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 
-import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { Button } from '@/components/view/Button'
-import { MainHeader } from '@/components/view/MainHeader'
-import { Container } from '@/styles/commonStyles'
-
-const BUS_RESERVE_CONTENT = [
+const RESERVATION_CONTENTS = [
   { label: '신청 기간', contents: ['05/08 (수) ~ 05/12 (일)'] },
   { label: '신청 대상', contents: ['예비군에 참여하는 광운대학교 재학생'] },
   {
@@ -63,48 +57,15 @@ const ContentItem = ({ label, contents }: ContentItemProps) => {
   )
 }
 
-export const BusReserve = () => {
-  const navigate = useNavigate()
-
-  const handleReserveClick = () => navigate('/bus-reserve/create')
-  const handleCheckClick = () => navigate('/bus-reserve/info')
-
+export const BusReservationNotice = () => {
   return (
-    <Container>
-      <MainHeader />
-
-      <MainContent>
-        <h5 className="main-title">현재 버스 예약 접수 중입니다.</h5>
-        {BUS_RESERVE_CONTENT.map((item) => (
-          <ContentItem key={item.label} {...item} />
-        ))}
-
-        <ButtonContainer>
-          <Button size="md" onClick={handleReserveClick}>
-            예약하러 가기
-          </Button>
-          <Button size="md" secondary onClick={handleCheckClick}>
-            예약 내역 조회하기
-          </Button>
-        </ButtonContainer>
-      </MainContent>
-
-      <BottomNavigation />
-    </Container>
+    <>
+      {RESERVATION_CONTENTS.map((item) => (
+        <ContentItem key={item.label} {...item} />
+      ))}
+    </>
   )
 }
-
-const MainContent = styled.main`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding(0, 0, '3xl', 0)};
-  flex-grow: 1;
-  overflow-y: scroll;
-
-  .main-title {
-    ${({ theme }) => theme.font(500, theme.colors.blue[500])};
-  }
-`
 
 const ContentContainer = styled.div<{ $isSingleItem: boolean }>`
   ${({ theme, $isSingleItem }) =>
@@ -130,8 +91,4 @@ const ContentList = styled.ul<{ $isSingleItem: boolean }>`
   .content-item {
     ${({ theme }) => theme.font(800, theme.colors.black[400])};
   }
-`
-
-const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
 `

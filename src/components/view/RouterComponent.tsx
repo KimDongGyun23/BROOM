@@ -4,9 +4,9 @@ import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 import { LoginPage } from '@/components/container/auth/LoginPage'
 import { SignupCompletePage } from '@/components/container/auth/SignupCompletePage'
 import { SignupPage } from '@/components/container/auth/SignupPage'
-import { BusReserve } from '@/components/container/bus/BusReserve'
-import { ReserveCreate } from '@/components/container/bus/ReserveCreate'
-import { ReserveInfo } from '@/components/container/bus/ReserveInfo'
+import { BusReservation } from '@/components/container/bus/BusReservation'
+import { BusReservationCheck } from '@/components/container/bus/BusReservationCheck'
+import { BusReservationCreate } from '@/components/container/bus/BusReservationCreate'
 import { Carpool } from '@/components/container/carpool/Carpool'
 import { CarpoolCreate } from '@/components/container/carpool/CarpoolCreate'
 import { CarpoolDetail } from '@/components/container/carpool/CarpoolDetail'
@@ -54,9 +54,9 @@ export const RouterComponent = () => {
       <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
       <Route path="/carpool/search" element={<CarpoolSearch />} />
 
-      <Route path="/bus-reserve" element={<BusReserve />} />
-      <Route path="/bus-reserve/create" element={<ReserveCreate />} />
-      <Route path="/bus-reserve/info" element={<ReserveInfo />} />
+      <Route path="/bus-reserve" element={<BusReservation />} />
+      <Route path="/bus-reserve/create" element={<BusReservationCreate />} />
+      <Route path="/bus-reserve/info" element={<BusReservationCheck />} />
 
       <Route element={<LoginPrivateRoute />}>
         <Route path="/login" element={<LoginPage />} />
