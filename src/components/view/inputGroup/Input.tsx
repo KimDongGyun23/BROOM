@@ -25,6 +25,23 @@ export const Input = ({ type = 'text', ...rest }: InputHTMLAttributes<HTMLInputE
   )
 }
 
+export const NumberInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
+  const { register, setValue } = useFormContext()
+  const section = useContext(InputGroupContext)
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement
+    input.value = input.value.replace(/[^0-9]/g, '')
+    setValue(section, input.value)
+  }
+
+  return (
+    <InputContainer>
+      <StyledInput type="text" {...register(section, { onChange: handleChange })} {...rest} />
+    </InputContainer>
+  )
+}
+
 export const DateInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) => {
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)

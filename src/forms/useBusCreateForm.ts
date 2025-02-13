@@ -11,12 +11,12 @@ export const busCreateAttribute = {
   STUDENT_ID: {
     section: 'studentId',
     label: '학번',
-    input: { placeholder: '학번을 입력해주세요.', type: 'number' },
+    input: { placeholder: '학번을 입력해주세요.', maxLength: 10 },
   },
   PHONE_NUMBER: {
     section: 'phoneNumber',
     label: '연락처',
-    input: { placeholder: '-를 제외한 숫자만 입력해주세요.', type: 'number' },
+    input: { placeholder: '-를 제외한 숫자만 입력해주세요.', maxLength: 11 },
   },
 } as const
 
@@ -26,7 +26,7 @@ const busCreateSchema = z.object({
   phoneNumber: z
     .string()
     .min(9, { message: '전화번호를 확인해주세요.' })
-    .max(11, { message: '전화번호는 11자리 이하입니다.' }),
+    .max(11, { message: '전화번호를 확인해주세요.' }),
 })
 
 export const useBusCreateForm = () => {

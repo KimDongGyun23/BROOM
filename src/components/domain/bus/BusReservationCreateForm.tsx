@@ -20,12 +20,12 @@ export const BusReservationCreateForm = () => {
 
           <InputGroup section={STUDENT_ID.section}>
             <InputGroup.Label label={STUDENT_ID.label} />
-            <InputGroup.Input {...STUDENT_ID.input} />
+            <InputGroup.NumberInput {...STUDENT_ID.input} />
           </InputGroup>
 
           <InputGroup section={PHONE_NUMBER.section}>
             <InputGroup.Label label={PHONE_NUMBER.label} />
-            <InputGroup.Input {...PHONE_NUMBER.input} />
+            <InputGroup.NumberInput {...PHONE_NUMBER.input} />
           </InputGroup>
         </StyledForm>
       </FormProvider>

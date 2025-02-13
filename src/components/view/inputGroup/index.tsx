@@ -1,7 +1,15 @@
 import { createContext, type PropsWithChildren, useContext } from 'react'
 import styled from 'styled-components'
 
-import { DateInput, Input, PasswordInput, PersonnelInput, TextArea, TimeInput } from './Input'
+import {
+  DateInput,
+  Input,
+  NumberInput,
+  PasswordInput,
+  PersonnelInput,
+  TextArea,
+  TimeInput,
+} from './Input'
 import { Label } from './Label'
 import { SortOfArmy } from './Select'
 
@@ -34,6 +42,7 @@ const Container = ({ section, children }: PropsWithChildren<ContainerProps>) => 
 
 export const InputGroup = Object.assign(Container, {
   Input,
+  NumberInput,
   PasswordInput,
   TextArea,
   PersonnelInput,
