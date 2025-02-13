@@ -36,12 +36,15 @@ export const useBusCreateForm = () => {
   const formMethod = useCustomForm<BusReservationForm>(busCreateSchema)
   const { handleSubmit } = formMethod
 
-  const handleReservation = useCallback(
+  const handleSubmitForm = useCallback(
     (formData: BusReservationForm) => {
       reserveBus(
         { body: formData },
         {
-          onSuccess: (response) => openModal(response.data, true),
+          onSuccess: (response) => {
+            console.log(response)
+            openModal(response.data, true)
+          },
           onError: (error) => (error.response?.data as string, false),
         },
       )
@@ -49,5 +52,5 @@ export const useBusCreateForm = () => {
     [reserveBus, openModal],
   )
 
-  return { formMethod, onSubmit: handleSubmit(handleReservation) }
+  return { formMethod, onSubmit: handleSubmit(handleSubmitForm) }
 }

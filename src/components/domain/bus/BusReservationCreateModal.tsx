@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
 import { ModalWithOneButton } from '@/components/view/Modal'
@@ -11,7 +12,7 @@ export const BusReservationCreateModal = () => {
 
   const handleModalClose = useCallback(() => {
     closeModal()
-    navigate(-1)
+    navigate(-1 as To, { replace: true })
   }, [closeModal, navigate])
 
   return (
