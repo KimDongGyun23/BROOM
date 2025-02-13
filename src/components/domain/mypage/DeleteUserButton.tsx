@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useBoolean } from '@/hooks/useBoolean'
-import { useUserDeletion } from '@/services/query/useMypageQuery'
+import { useUserDeletion } from '@/query/useMypageQuery'
 import { clearSessionStorage } from '@/utils/storage'
 
 export const DeleteUserButton = () => {

@@ -5,8 +5,8 @@ import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/Modal'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
-import { instance } from '@/services/query'
-import { useDeletePost } from '@/services/query/usePostQuery'
+import { instance } from '@/query'
+import { useDeletePost } from '@/query/usePostQuery'
 import {
   useIsSuccessModal,
   useModalActions,

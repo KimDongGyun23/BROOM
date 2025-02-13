@@ -9,10 +9,7 @@ import { Loading } from '@/components/view/Loading'
 import { ChattingRoomProfile } from '@/components/view/Profile'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
-import {
-  useCarpoolChattingInfo,
-  useCarpoolExitChattingRoom,
-} from '@/services/query/useChattingQuery'
+import { useCarpoolChattingInfo, useCarpoolExitChattingRoom } from '@/query/useChattingQuery'
 import { useMessageActions } from '@/stores/message'
 
 type ChattingKebabProps = {

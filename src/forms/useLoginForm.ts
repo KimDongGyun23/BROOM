@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { instance } from '@/services/query'
-import { useLogin } from '@/services/query/useAuthQuery'
+import { instance } from '@/query'
+import { useLogin } from '@/query/useAuthQuery'
 import type { LoginCredentials } from '@/types/auth'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 

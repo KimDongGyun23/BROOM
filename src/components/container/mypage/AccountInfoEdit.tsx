@@ -5,7 +5,7 @@ import { AccountInfoEditForm } from '@/components/domain/mypage/AccountInfoEditF
 import { Loading } from '@/components/view/Loading'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useAccountForm } from '@/forms/useAccountForm'
-import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import { useFetchAccountInfo } from '@/query/useMypageQuery'
 import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
 
 import { ErrorPage } from '../home/ErrorPage'

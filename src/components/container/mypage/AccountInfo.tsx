@@ -5,7 +5,7 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { accountAttribute, useAccountForm } from '@/forms/useAccountForm'
-import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import { useFetchAccountInfo } from '@/query/useMypageQuery'
 import { FormContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'

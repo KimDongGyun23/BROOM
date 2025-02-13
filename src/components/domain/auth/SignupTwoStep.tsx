@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { signupAttribute } from '@/forms/useSignupForm'
-import { useValidateNickname } from '@/services/query/useAuthQuery'
+import { useValidateNickname } from '@/query/useAuthQuery'
 import { useStepsActions } from '@/stores/steps'
 
 import { StyledButton, ValidateContainer } from './SignupStyle'

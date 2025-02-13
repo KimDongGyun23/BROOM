@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useCreatePost } from '@/services/query/usePostQuery'
+import { useCreatePost } from '@/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 
 export const postAttribute = {

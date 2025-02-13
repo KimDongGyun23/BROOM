@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useFetchAccountInfo } from '@/services/query/useMypageQuery'
+import { useFetchAccountInfo } from '@/query/useMypageQuery'
 import type { UserAccount } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()

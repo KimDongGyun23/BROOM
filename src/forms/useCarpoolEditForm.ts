@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
-import { useFetchUpdatePostData, useUpdatePost } from '@/services/query/usePostQuery'
+import { useFetchUpdatePostData, useUpdatePost } from '@/query/usePostQuery'
 import type { PostForm } from '@/types/post'
 
 import { postSchema } from './useCarpoolCreateForm'

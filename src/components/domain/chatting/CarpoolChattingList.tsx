@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Loading } from '@/components/view/Loading'
-import { useCarpoolChattingRoomList } from '@/services/query/useChattingQuery'
+import { useCarpoolChattingRoomList } from '@/query/useChattingQuery'
 
 import { ChattingItem } from './ChattingItem'
 

@@ -6,7 +6,7 @@ import { MypageContents } from '@/components/domain/mypage/MypageContents'
 import { UserProfile } from '@/components/domain/mypage/UserProfile'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
-import { useUserProfile } from '@/services/query/useMypageQuery'
+import { useUserProfile } from '@/query/useMypageQuery'
 import { Container } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'

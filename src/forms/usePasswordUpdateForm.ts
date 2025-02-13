@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useUpdatePassword } from '@/services/query/useMypageQuery'
+import { useUpdatePassword } from '@/query/useMypageQuery'
 import { useModalActions } from '@/stores/modal'
 import type { PasswordUpdateForm } from '@/types/mypage'
 

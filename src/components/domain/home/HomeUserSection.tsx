@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { Button } from '@/components/view/Button'
 import { TentIcon } from '@/components/view/icons/NonActiveIcons'
-import { instance } from '@/services/query'
+import { instance } from '@/query'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const LoggedInUserContent = () => {

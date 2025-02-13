@@ -22,7 +22,7 @@ import { Bookmark } from '@/components/container/mypage/Bookmark'
 import { Mypage } from '@/components/container/mypage/Mypage'
 import { MyPost } from '@/components/container/mypage/MyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
-import { instance } from '@/services/query'
+import { instance } from '@/query'
 
 import { AccountInfoEdit } from '../container/mypage/AccountInfoEdit'
 

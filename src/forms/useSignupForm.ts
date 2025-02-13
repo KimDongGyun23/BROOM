@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useSignup } from '@/services/query/useAuthQuery'
+import { useSignup } from '@/query/useAuthQuery'
 import { useTermsActions } from '@/stores/terms'
 import type { SignupData } from '@/types/auth'
 

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
-import { instance } from '@/services/query'
+import { instance } from '@/query'
 import { useMessageActions } from '@/stores/message'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
