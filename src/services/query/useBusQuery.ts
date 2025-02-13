@@ -20,7 +20,7 @@ const queryKeys = {
 }
 
 export const useBusReservationQuery = ({ urls }: BusReservationInfoRequest) => {
-  return useQuery<ReservationStatus, Error>({
+  return useQuery<ReservationStatus, AxiosError>({
     queryKey: queryKeys.reservation(urls),
     queryFn: async () => await instance.get(API_ENDPOINTS.RESERVATION(urls.studentId)),
     enabled: false,

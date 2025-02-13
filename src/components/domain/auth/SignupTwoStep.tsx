@@ -6,7 +6,6 @@ import { InputGroup } from '@/components/view/inputGroup'
 import { signupAttribute } from '@/forms/useSignupForm'
 import { useValidateNickname } from '@/services/query/useAuthQuery'
 import { useStepsActions } from '@/stores/steps'
-import { FORM_ATTRIBUTE } from '@/utils/schema'
 
 import { StyledButton, ValidateContainer } from './SignupStyle'
 
@@ -17,7 +16,7 @@ const useNicknameValidation = () => {
   const { getValues } = useFormContext()
 
   const validateNickname = useCallback(() => {
-    const nickname = getValues(FORM_ATTRIBUTE.NICKNAME.section)
+    const nickname = getValues(signupAttribute.NICKNAME.section)
 
     validateNicknameMutation(
       { body: { nickname } },
