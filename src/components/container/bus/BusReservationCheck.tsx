@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { BusReservationCheckForm } from '@/components/domain/bus/BusReservationCheckForm'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { Container } from '@/styles/commonStyles'
 
 export const BusReservationCheck = () => {
   const navigate = useNavigate()
@@ -23,6 +22,10 @@ export const BusReservationCheck = () => {
     </>
   )
 }
+
+const Container = styled.div`
+  ${({ theme }) => theme.margin(0, 'container')};
+`
 
 const Title = styled.h4`
   ${({ theme }) => theme.margin('xl', 0, 'page-label-bottom')};

@@ -18,7 +18,7 @@ export const BusReservationCheckForm = () => {
           <InputGroup section={STUDENT_ID.section}>
             <InputGroup.Label label={STUDENT_ID.label} />
             <InputContainer>
-              <InputGroup.Input {...STUDENT_ID.input} />
+              <InputGroup.NumberInput {...STUDENT_ID.input} />
               <Button size="md" type="submit">
                 조회하기
               </Button>

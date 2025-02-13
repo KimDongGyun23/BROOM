@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
@@ -11,7 +11,7 @@ export const busReserveInfoAttribute = {
   STUDENT_ID: {
     section: 'studentId',
     label: '학번',
-    input: { placeholder: '학번을 입력해주세요.', type: 'number' },
+    input: { placeholder: '학번을 입력해주세요.', maxLength: 10 },
   },
 } as const
 
@@ -21,16 +21,20 @@ const busReserveInfoSchema = z.object({
 
 export const useBusReserveInfoForm = () => {
   const formMethod = useCustomForm<BusReservationCheck>(busReserveInfoSchema)
-  const { handleSubmit, watch } = formMethod
+  const { handleSubmit, getValues } = formMethod
 
-  const studentId = watch(busReserveInfoAttribute.STUDENT_ID.section)
+  const studentIdRef = useRef<string>(getValues(busReserveInfoAttribute.STUDENT_ID.section))
 
   const [reservationStatus, setReservationStatus] = useState<BusReservationState>(
     BUS_RESERVATION_STATES.PENDING,
   )
-  const { refetch: fetchBusReservation } = useBusReservationQuery({ urls: { studentId } })
+
+  const { refetch: fetchBusReservation } = useBusReservationQuery({
+    urls: { studentId: studentIdRef.current },
+  })
 
   const fetchAndUpdateReservationStatus = async () => {
+    studentIdRef.current = getValues(busReserveInfoAttribute.STUDENT_ID.section)
     try {
       const { data, isSuccess } = await fetchBusReservation()
 
