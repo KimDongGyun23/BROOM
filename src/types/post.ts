@@ -21,7 +21,8 @@ type PostDetail = PostBasicInfo & {
 type PostStatus = {
   createdAt: string
   boardId: string
-  full: boolean
+  currentPersonnel: boolean
+  totalPersonnel: boolean
   bookmark: boolean
 }
 
@@ -52,11 +53,6 @@ export type PostDetailResponse = {
 }
 
 export type PostDeleteRequest = {
-  urls: PostId
-}
-
-export type PostIsFullRequest = {
-  body: Pick<PostStatus, 'full'>
   urls: PostId
 }
 
