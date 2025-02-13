@@ -21,8 +21,8 @@ type PostDetail = PostBasicInfo & {
 type PostStatus = {
   createdAt: string
   boardId: string
-  currentPersonnel: boolean
-  totalPersonnel: boolean
+  currentPersonnel: number
+  totalPersonnel: number
   bookmark: boolean
 }
 

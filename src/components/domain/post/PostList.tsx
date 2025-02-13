@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
-import { AdditionCircleIcon, StopIcon } from '@/components/view/icons/NonActiveIcons'
 import { Loading } from '@/components/view/Loading'
 import type { PostResponse } from '@/types/post'
+import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
@@ -21,7 +21,7 @@ type PostListProps = {
 }
 
 const PostItem = ({ item }: PostItemProps) => {
-  const { boardId, createdAt, full } = item.status
+  const { boardId, createdAt, currentPersonnel, totalPersonnel } = item.status
   const { title, trainingDate, place, time } = item.content
 
   return (
@@ -41,7 +41,9 @@ const PostItem = ({ item }: PostItemProps) => {
           </PostLocationTime>
         </PostDetails>
 
-        <div>{full ? <StopIcon /> : <AdditionCircleIcon />}</div>
+        <ParticipantsBox $isFull={canJoinChatRoom(currentPersonnel, totalPersonnel)}>
+          {currentPersonnel} / {totalPersonnel}
+        </ParticipantsBox>
       </PostContent>
     </PostItemLink>
   )
@@ -91,6 +93,7 @@ const PostItemHeader = styled.div`
   }
 
   .date {
+    ${({ theme }) => theme.margin(0, 'xs')};
     ${({ theme }) => theme.font(900, theme.colors.black[300])};
   }
 `
@@ -125,4 +128,12 @@ const PostSection = styled.section`
   ${({ theme }) => theme.padding(0, 'lg')};
   flex-grow: 1;
   overflow-y: scroll;
+`
+
+const ParticipantsBox = styled.div<{ $isFull: boolean }>`
+  ${({ theme }) => theme.padding('sm', 'lg')};
+  ${({ theme }) => theme.borderRadius('md')};
+  ${({ theme }) => theme.font(800, 'white')};
+  background-color: ${({ theme, $isFull }) =>
+    $isFull ? theme.colors.blue[500] : theme.colors.black[300]};
 `

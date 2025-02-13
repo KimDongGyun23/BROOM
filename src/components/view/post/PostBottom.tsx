@@ -5,6 +5,7 @@ import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
 import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/services/query'
 import { useIsMyPost, usePostDetail } from '@/stores/post'
+import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 type PostBottomProps = {
   onBookmark: VoidFunction
@@ -19,7 +20,7 @@ export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
 
   if (!post || !session) return null
 
-  const isFull = post.status.full
+  const isFull = canJoinChatRoom(post.status.currentPersonnel, post.status.totalPersonnel)
 
   const handleClickBookmark = () => {
     onBookmark()
