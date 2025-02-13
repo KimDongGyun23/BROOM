@@ -20,7 +20,7 @@ export const PostBottom = ({ onBookmark, onChatStart }: PostBottomProps) => {
 
   if (!post || !session) return null
 
-  const isFull = canJoinChatRoom(post.status.currentPersonnel, post.status.totalPersonnel)
+  const isFull = !canJoinChatRoom(post.status.currentPersonnel, post.status.totalPersonnel)
 
   const handleClickBookmark = () => {
     onBookmark()

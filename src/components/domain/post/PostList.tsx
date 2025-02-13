@@ -41,7 +41,7 @@ const PostItem = ({ item }: PostItemProps) => {
           </PostLocationTime>
         </PostDetails>
 
-        <ParticipantsBox $isFull={canJoinChatRoom(currentPersonnel, totalPersonnel)}>
+        <ParticipantsBox $isFull={!canJoinChatRoom(currentPersonnel, totalPersonnel)}>
           {currentPersonnel - 1} / {totalPersonnel}
         </ParticipantsBox>
       </PostContent>
