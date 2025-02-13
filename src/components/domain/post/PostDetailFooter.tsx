@@ -87,7 +87,7 @@ const BookmarkButton = ({ initialBookmark }: { initialBookmark: boolean }) => {
   )
 }
 
-export const CarpoolDetailFooter = () => {
+export const PostDetailFooter = () => {
   const post = usePostDetail()
   const session = instance.hasToken()
 

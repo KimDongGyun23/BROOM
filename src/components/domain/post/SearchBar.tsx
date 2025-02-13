@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FormProvider, useFormContext } from 'react-hook-form'
+import { FormProvider } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -31,41 +31,11 @@ const useFilterSelect = () => {
   return { isFilterVisible, selectedFilter, toggleFilterVisibility, handleFilterSelect }
 }
 
-type SearchInputProps = {
-  selectedFilter: SearchOption
-}
-
-const SearchInput = ({ selectedFilter }: SearchInputProps) => {
-  const { register } = useFormContext()
-
-  if (selectedFilter.label === SEARCH_OPTIONS[1].label) {
-    return (
-      <StyledInput
-        type="date"
-        {...register('search')}
-        required
-        aria-required="true"
-        data-placeholder={selectedFilter.placeholder}
-        aria-label={`${selectedFilter.label} 검색`}
-      />
-    )
-  }
-
-  return (
-    <StyledInput
-      type="search"
-      size={7}
-      {...register('search')}
-      placeholder={selectedFilter.placeholder}
-      aria-label={`${selectedFilter.label} 검색`}
-    />
-  )
-}
-
 export const SearchBar = () => {
   const { isFilterVisible, selectedFilter, toggleFilterVisibility, handleFilterSelect } =
     useFilterSelect()
   const { formMethod, onSubmit } = useSearchForm(selectedFilter)
+  const { register } = formMethod
 
   return (
     <FormProvider {...formMethod}>
@@ -80,7 +50,13 @@ export const SearchBar = () => {
           {isFilterVisible ? <ArrowUpIcon /> : <ArrowBottomIcon />}
         </FilterButton>
 
-        <SearchInput selectedFilter={selectedFilter} />
+        <StyledInput
+          type="search"
+          size={7}
+          {...register('search')}
+          placeholder={selectedFilter.placeholder}
+          aria-label={`${selectedFilter.label} 검색`}
+        />
 
         <SearchButton type="submit" aria-label="검색">
           <SearchIcon />

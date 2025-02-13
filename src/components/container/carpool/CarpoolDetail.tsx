@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 
-import { CarpoolDetailFooter } from '@/components/domain/post/CarpoolDetailFooter'
+import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
+import { PostDetailFooter } from '@/components/domain/post/PostDetailFooter'
 import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
 import { Loading } from '@/components/view/Loading'
-import { PostDetailContent } from '@/components/view/post/PostDetailContent'
 import { PostProfile } from '@/components/view/Profile'
 import { useParamId } from '@/hooks/useParamId'
 import { usePostDetail } from '@/services/query/usePostQuery'
@@ -37,7 +37,7 @@ export const CarpoolDetail = () => {
         <PostDetailHeader />
         <PostProfile />
         <PostDetailContent />
-        <CarpoolDetailFooter />
+        <PostDetailFooter />
       </Container>
     </ModalStoreProvider>
   )
