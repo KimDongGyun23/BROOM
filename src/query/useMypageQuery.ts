@@ -55,13 +55,13 @@ export const useUpdatePassword = () => {
 }
 
 export const useLogout = () => {
-  return useMutation<string>({
+  return useMutation<AxiosResponse<string>, AxiosError>({
     mutationFn: async () => await instance.post(ENDPOINTS.logout, null),
   })
 }
 
 export const useUserDeletion = () => {
-  return useMutation<string>({
+  return useMutation<AxiosResponse<string>, AxiosError>({
     mutationFn: async () => instance.delete(ENDPOINTS.deleteUser),
   })
 }

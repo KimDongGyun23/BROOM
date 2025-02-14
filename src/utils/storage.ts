@@ -1,11 +1,5 @@
 export const SESSION_KEYS = {
-  LOGIN: 'login',
   NICKNAME: 'nickname',
-  MILITARY_BRANCHES: 'military-branches',
-  ROOM_TYPE: 'room_type',
-  POST_TAB: 'post-tab',
-  BOOKMARK_TAB: 'bookmark-tab',
-  CHATTING_TAB: 'chatting-tab',
 } as const
 
 export const getSessionStorageItem = (key: string): string | null => {

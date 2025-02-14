@@ -1,11 +1,13 @@
+import type { MilitaryBranchCode } from '@/utils/constants'
+
 type User = {
   nickname: string
   reserveYear: number
   dischargeYear: number
-  militaryBranch: string
+  militaryBranch: MilitaryBranchCode
 }
 
-type Profile = Pick<User, 'nickname' | 'reserveYear'>
+type Profile = Omit<User, 'dischargeYear'>
 export type UserAccount = Omit<User, 'reserveYear'>
 
 export type PasswordUpdateForm = {

@@ -2,23 +2,28 @@ import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { ModalWithOneButton } from '@/components/view/Modal'
-import { useBoolean } from '@/hooks/useBoolean'
 import { useLogout } from '@/query/useMypageQuery'
+import { useModalActions, useModalState } from '@/stores/modal'
 import { clearSessionStorage } from '@/utils/storage'
 
 export const LogoutButton = () => {
   const navigate = useNavigate()
   const { mutate: logout } = useLogout()
-  const [isModalOpen, openModal, closeModal] = useBoolean(false)
+
+  const { isModalOpen, label } = useModalState()
+  const { openModal, closeModal } = useModalActions()
 
   const handleLogout = () => {
     logout(undefined, {
-      onSuccess: () => {
-        clearSessionStorage()
-        navigate('/home')
-      },
-      onError: openModal,
+      onSuccess: (response) => openModal(response as unknown as string, true),
+      onError: (error) => openModal(error.response?.data as string, false),
     })
+  }
+
+  const handleModalClose = () => {
+    closeModal()
+    clearSessionStorage()
+    navigate('/home')
   }
 
   return (
@@ -27,8 +32,8 @@ export const LogoutButton = () => {
       <ModalWithOneButton
         isOpen={isModalOpen}
         onClose={closeModal}
-        content={`로그아웃에 실패했습니다.`}
-        button={{ onClick: closeModal, label: '확인' }}
+        content={label}
+        button={{ onClick: handleModalClose, label: '확인' }}
       />
     </>
   )

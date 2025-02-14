@@ -1,21 +1,14 @@
 import styled from 'styled-components'
 
+import { ChainIcon } from '@/components/view/icons/NonActiveIcons'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import type { ProfileResponse } from '@/types/mypage'
-import type { MilitaryBranchCode } from '@/utils/constants'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-import chainImage from '/assets/chain.svg'
-
-export const UserProfile = ({ nickname, reserveYear }: ProfileResponse) => {
-  const iconType = getSessionStorageItem(
-    SESSION_KEYS.MILITARY_BRANCHES,
-  ) as MilitaryBranchCode | null
-
+export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: ProfileResponse) => {
   return (
     <UserProfileContainer>
-      <ChainImage src={chainImage} alt="chain" />
-      <ProfileImage iconType={iconType} size="lg" />
+      <ChainImage />
+      <ProfileImage iconType={militaryBranch} size="lg" />
       <UserInfoContainer>
         <p className="name">{nickname}</p>
         <p className="year">예비군 {reserveYear}년차</p>
@@ -34,7 +27,7 @@ const UserProfileContainer = styled.div`
   width: fit-content;
 `
 
-const ChainImage = styled.img`
+const ChainImage = styled(ChainIcon)`
   width: fit-content;
   height: fit-content;
   position: absolute;

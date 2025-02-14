@@ -43,11 +43,10 @@ export const useLoginForm = () => {
     login(
       { body: { ...formData } },
       {
-        onSuccess: ({ nickname, militaryBranch }) => {
+        onSuccess: ({ nickname }) => {
           if (instance.hasToken()) {
             setIsLoginFailed(false)
             setSessionStorageItem(SESSION_KEYS.NICKNAME, nickname)
-            setSessionStorageItem(SESSION_KEYS.MILITARY_BRANCHES, militaryBranch)
             navigate('/home', { replace: true })
           }
         },
