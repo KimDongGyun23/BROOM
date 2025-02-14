@@ -84,13 +84,21 @@ export class HttpClient {
             return retry
           }
         } catch (reIssueError) {
-          console.error('재발급 실패', reIssueError)
+          console.error('토큰 재발급 실패', reIssueError)
           clearSessionStorage()
           window.location.href = '/login'
         }
       }
+
+      return Promise.reject({
+        message: response?.data || '알 수 없는 서버 오류가 발생했습니다.',
+        status: response?.status,
+      })
     }
 
-    return Promise.reject(error)
+    return Promise.reject({
+      message: '네트워크 오류가 발생했습니다.',
+      status: null,
+    })
   }
 }
