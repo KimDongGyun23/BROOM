@@ -5,7 +5,7 @@ const MYPAGE_SECTIONS = [
   {
     sectionTitle: '내 정보',
     links: [
-      { name: '계정 정보', path: '/mypage/account-info' },
+      { name: '계정 정보', path: '/mypage/account-information' },
       { name: '비밀번호 재설정', path: '/mypage/password' },
     ],
   },

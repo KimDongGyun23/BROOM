@@ -15,7 +15,7 @@ export const accountInformationAttribute = {
   DISCHARGE_YEAR: {
     section: 'dischargeYear',
     label: '전역 연도',
-    input: { placeholder: '숫자 4자리를 입력해주세요.' },
+    input: { placeholder: '숫자 4자리를 입력해주세요.', maxLength: 4 },
   },
   MILITARY_BRANCH: { section: 'militaryBranch', label: '복무했던 군종' },
 } as const

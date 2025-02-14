@@ -11,7 +11,7 @@ export const AccountInformation = () => {
   const navigate = useNavigate()
   const { isPending, isError } = useFetchAccountInformation()
 
-  const handleClickEdit = () => navigate('/mypage/account-info/edit', { replace: true })
+  const handleClickEdit = () => navigate('/mypage/account-information/edit', { replace: true })
 
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />

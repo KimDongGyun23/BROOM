@@ -63,16 +63,16 @@ export const RouterComponent = () => {
         <Route path="/sign-up/complete" element={<SignupCompletePage />} />
       </Route>
 
-      <Route path="/carpool/create" element={<CarpoolCreate />} />
       <Route element={<PrivateRoute />}>
+        <Route path="/carpool/create" element={<CarpoolCreate />} />
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
 
         <Route path="/chatting" element={<Chatting />} />
         <Route path="/chatting/chatting-room/carpool/:id" element={<CarpoolChattingRoom />} />
 
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/mypage/account-info" element={<AccountInformation />} />
-        <Route path="/mypage/account-info/edit" element={<AccountInformationEdit />} />
+        <Route path="/mypage/account-information" element={<AccountInformation />} />
+        <Route path="/mypage/account-information/edit" element={<AccountInformationEdit />} />
         <Route path="/mypage/password" element={<NewPassword />} />
         <Route path="/mypage/my-post" element={<MypageMyPost />} />
         <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
