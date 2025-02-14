@@ -1,14 +1,14 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-type User = {
+type UserInformation = {
   nickname: string
-  reserveYear: number
-  dischargeYear: number
   militaryBranch: MilitaryBranchCode
 }
 
-type Profile = Omit<User, 'dischargeYear'>
-export type UserAccount = Omit<User, 'reserveYear'>
+type YearOfArmy = {
+  reserveYear: number
+  dischargeYear: number
+}
 
 export type PasswordUpdateForm = {
   password: string
@@ -16,13 +16,15 @@ export type PasswordUpdateForm = {
   confirm: string
 }
 
-export type ProfileResponse = Profile
+export type AccountInformation = UserInformation & Pick<YearOfArmy, 'dischargeYear'>
 
-export type AccountInfoResponse = UserAccount
-export type UpdateAccountRequest = {
-  body: UserAccount
+export type MypageProfileResponse = UserInformation & Pick<YearOfArmy, 'reserveYear'>
+
+export type AccountInformationResponse = AccountInformation
+export type UpdateAccountInformationRequest = {
+  body: AccountInformation
 }
 
-export type UpdatePasswordRequest = {
+export type PasswordUpdateRequest = {
   body: Omit<PasswordUpdateForm, 'confirm'>
 }

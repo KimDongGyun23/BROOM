@@ -27,16 +27,16 @@ export const newPasswordSchema = z
   .object({
     password: z
       .string()
-      .min(8, { message: '비밀번호는 8글자 이상입니다.' })
-      .max(16, { message: '비밀번호는 16글자 이하입니다.' }),
+      .min(8, { message: '비밀번호를 다시 확인해주세요.' })
+      .max(16, { message: '비밀번호를 다시 확인해주세요.' }),
     newPassword: z
       .string()
       .min(8, { message: '비밀번호는 8글자 이상입니다.' })
       .max(16, { message: '비밀번호는 16글자 이하입니다.' }),
     confirm: z
       .string()
-      .min(8, { message: '비밀번호는 8글자 이상입니다.' })
-      .max(16, { message: '비밀번호는 16글자 이하입니다.' }),
+      .min(8, { message: '비밀번호를 다시 확인해주세요.' })
+      .max(16, { message: '비밀번호를 다시 확인해주세요..' }),
   })
   .partial()
   .refine((data) => data.newPassword === data.confirm, {
@@ -56,8 +56,8 @@ export const usePasswordUpdateForm = () => {
     updatePassword(
       { body: { ...rest } },
       {
-        onSuccess: (response) => openModal(response.data, true),
-        onError: (error) => openModal(error.response?.data as string, false),
+        onSuccess: (response) => openModal(response, true),
+        onError: (error) => openModal(error.message, false),
       },
     )
   }

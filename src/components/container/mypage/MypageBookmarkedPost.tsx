@@ -3,26 +3,15 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useFetchBookmarkList } from '@/query/usePostQuery'
 import { Container } from '@/styles/commonStyles'
 
-const useBookmarkList = () => {
+export const MypageBookmarkedPost = () => {
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchBookmarkList()
-
-  return {
-    postList: data?.pages.flatMap((page) => page.result) || [],
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-  }
-}
-
-export const Bookmark = () => {
-  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useBookmarkList()
+  const bookmarkedPostList = data?.pages.flatMap((page) => page.result) || []
 
   return (
     <Container>
       <SubHeaderWithoutIcon type="null" title="북마크" />
       <PostList
-        postList={postList}
+        postList={bookmarkedPostList}
         isPending={isPending}
         isError={isError}
         hasNextPage={hasNextPage}

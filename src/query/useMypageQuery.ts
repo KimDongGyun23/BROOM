@@ -1,67 +1,62 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
-  AccountInfoResponse,
-  ProfileResponse,
-  UpdateAccountRequest,
-  UpdatePasswordRequest,
+  AccountInformationResponse,
+  MypageProfileResponse,
+  PasswordUpdateRequest,
+  UpdateAccountInformationRequest,
 } from '@/types/mypage'
 
 import { instance } from '.'
 
 const ENDPOINTS = {
   fetchMypage: `/mypage`,
-  fetchAccountInfo: `/mypage/info`,
-  ACCOUNT: `/mypage/info`,
+  fetchAccountInformation: `/mypage/info`,
+  updateAccount: `/mypage/info`,
   updatePassword: `/mypage/password`,
   logout: `/logout`,
-  deleteUser: `/exit`,
+  deleteId: `/exit`,
 } as const
 
 const queryKeys = {
   all: ['mypage'] as const,
   account: () => [...queryKeys.all, 'account'] as const,
-  myCarpoolPost: () => [...queryKeys.all, 'carpool'] as const,
 }
 
-export const useUserProfile = () => {
-  return useQuery<ProfileResponse>({
+export const useUserProfile = () =>
+  useQuery({
     queryKey: queryKeys.all,
-    queryFn: async () => await instance.get(ENDPOINTS.fetchMypage),
+    queryFn: () => instance.get<MypageProfileResponse>(ENDPOINTS.fetchMypage),
   })
-}
 
-export const useFetchAccountInfo = () => {
-  return useQuery<AccountInfoResponse>({
+export const useFetchAccountInformation = () =>
+  useQuery({
     queryKey: queryKeys.account(),
-    queryFn: async () => await instance.get(ENDPOINTS.fetchAccountInfo),
+    queryFn: () => instance.get<AccountInformationResponse>(ENDPOINTS.fetchAccountInformation),
   })
-}
 
-export const useUpdateUserAccount = () => {
+export const useUpdateAccountInformation = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<AxiosResponse<string>, AxiosError, UpdateAccountRequest>({
-    mutationFn: async ({ body }) => await instance.put(ENDPOINTS.ACCOUNT, body),
+  return useMutation({
+    mutationFn: ({ body }: UpdateAccountInformationRequest) =>
+      instance.put<string>(ENDPOINTS.updateAccount, body),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }
 
-export const useUpdatePassword = () => {
-  return useMutation<AxiosResponse<string>, AxiosError, UpdatePasswordRequest>({
-    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.updatePassword, body),
+export const useUpdatePassword = () =>
+  useMutation({
+    mutationFn: ({ body }: PasswordUpdateRequest) =>
+      instance.post<string>(ENDPOINTS.updatePassword, body),
   })
-}
 
-export const useLogout = () => {
-  return useMutation<AxiosResponse<string>, AxiosError>({
-    mutationFn: async () => await instance.post(ENDPOINTS.logout, null),
+export const useLogout = () =>
+  useMutation({
+    mutationFn: () => instance.post<string>(ENDPOINTS.logout, null),
   })
-}
 
-export const useUserDeletion = () => {
-  return useMutation<AxiosResponse<string>, AxiosError>({
-    mutationFn: async () => instance.delete(ENDPOINTS.deleteUser),
+export const useDeleteId = () =>
+  useMutation({
+    mutationFn: () => instance.delete<string>(ENDPOINTS.deleteId),
   })
-}

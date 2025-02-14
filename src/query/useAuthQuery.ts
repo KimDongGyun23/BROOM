@@ -47,12 +47,11 @@ export const useValidateId = () => {
   })
 }
 
-export const useValidateNickname = () => {
-  return useMutation<AxiosResponse, AxiosError, ValidateNicknameRequest>({
+export const useValidateNickname = () =>
+  useMutation<AxiosResponse<string>, AxiosError, ValidateNicknameRequest>({
     mutationFn: async ({ body }) =>
       await instanceWithoutAuth.post(ENDPOINTS.validateNickname, body),
   })
-}
 
 export const reIssue = async () => {
   try {

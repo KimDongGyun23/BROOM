@@ -1,24 +1,24 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const MYPAGE_PROFILE_SECTIONS = [
+const MYPAGE_SECTIONS = [
   {
-    title: '내 정보',
-    items: [
+    sectionTitle: '내 정보',
+    links: [
       { name: '계정 정보', path: '/mypage/account-info' },
       { name: '비밀번호 재설정', path: '/mypage/password' },
     ],
   },
   {
-    title: '게시글',
-    items: [
-      { name: '내가 올린 게시글', path: '/mypage/myboard' },
+    sectionTitle: '게시글',
+    links: [
+      { name: '내가 올린 게시글', path: '/mypage/my-post' },
       { name: '북마크', path: '/mypage/bookmark' },
     ],
   },
   {
-    title: '고객 지원',
-    items: [
+    sectionTitle: '고객 지원',
+    links: [
       { name: '문의하기', path: '/mypage' },
       { name: '서비스 정보', path: '/mypage' },
     ],
@@ -26,31 +26,31 @@ const MYPAGE_PROFILE_SECTIONS = [
 ] as const
 
 export const MypageSections = () => (
-  <Section>
-    {MYPAGE_PROFILE_SECTIONS.map(({ title, items }, index) => (
-      <Container key={title} $isLast={index === MYPAGE_PROFILE_SECTIONS.length - 1}>
-        <SectionTitle>{title}</SectionTitle>
+  <Container>
+    {MYPAGE_SECTIONS.map(({ sectionTitle, links }, index) => (
+      <Section key={sectionTitle} $hasBorder={index !== MYPAGE_SECTIONS.length - 1}>
+        <SectionTitle>{sectionTitle}</SectionTitle>
         <SectionList>
-          {items.map(({ name, path }) => (
+          {links.map(({ name, path }) => (
             <li key={name}>
               <SectionLink to={path}>{name}</SectionLink>
             </li>
           ))}
         </SectionList>
-      </Container>
+      </Section>
     ))}
-  </Section>
+  </Container>
 )
 
-const Section = styled.section`
+const Container = styled.section`
   ${({ theme }) => theme.flexBox('column')};
   ${({ theme }) => theme.margin(0, 'container')};
 `
 
-const Container = styled.section<{ $isLast: boolean }>`
+const Section = styled.section<{ $hasBorder: boolean }>`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.padding('xl', 0)};
-  ${({ theme, $isLast }) => !$isLast && theme.border('divider', 'bottom')};
+  ${({ theme, $hasBorder }) => $hasBorder && theme.border('divider', 'bottom')};
 `
 
 const SectionTitle = styled.h6`

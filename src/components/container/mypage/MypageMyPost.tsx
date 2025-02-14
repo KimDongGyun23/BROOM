@@ -3,20 +3,9 @@ import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { useFetchMyPostList } from '@/query/usePostQuery'
 import { Container } from '@/styles/commonStyles'
 
-const useMyPostList = () => {
+export const MypageMyPost = () => {
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchMyPostList()
-
-  return {
-    postList: data?.pages.flatMap((page) => page.result) || [],
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-  }
-}
-
-export const MyPost = () => {
-  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useMyPostList()
+  const postList = data?.pages.flatMap((page) => page.result) || []
 
   return (
     <Container>

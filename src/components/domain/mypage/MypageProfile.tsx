@@ -2,24 +2,26 @@ import styled from 'styled-components'
 
 import { ChainIcon } from '@/components/view/icons/NonActiveIcons'
 import { ProfileImage } from '@/components/view/ProfileImage'
-import type { ProfileResponse } from '@/types/mypage'
+import type { MypageProfileResponse } from '@/types/mypage'
 
-export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: ProfileResponse) => {
+export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: MypageProfileResponse) => {
   return (
-    <UserProfileContainer>
+    <Container>
       <ChainContainer>
         <ChainIcon />
       </ChainContainer>
+
       <ProfileImage iconType={militaryBranch} size="lg" />
+
       <UserInfoContainer>
         <p className="name">{nickname}</p>
         <p className="year">예비군 {reserveYear}년차</p>
       </UserInfoContainer>
-    </UserProfileContainer>
+    </Container>
   )
 }
 
-const UserProfileContainer = styled.div`
+const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
   ${({ theme }) => theme.margin('container', 'auto', 'xl')};
   ${({ theme }) => theme.padding('chain')};

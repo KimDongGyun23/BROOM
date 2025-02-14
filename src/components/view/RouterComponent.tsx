@@ -17,14 +17,13 @@ import { Chatting } from '@/components/container/chatting/Chatting'
 import { ErrorPage } from '@/components/container/home/ErrorPage'
 import { Home } from '@/components/container/home/Home'
 import { Onboarding } from '@/components/container/home/Onboarding'
-import { AccountInfo } from '@/components/container/mypage/AccountInfo'
-import { Bookmark } from '@/components/container/mypage/Bookmark'
+import { AccountInformation } from '@/components/container/mypage/AccountInformation'
+import { AccountInformationEdit } from '@/components/container/mypage/AccountInformationEdit'
 import { Mypage } from '@/components/container/mypage/Mypage'
-import { MyPost } from '@/components/container/mypage/MyPost'
+import { MypageBookmarkedPost } from '@/components/container/mypage/MypageBookmarkedPost'
+import { MypageMyPost } from '@/components/container/mypage/MypageMyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
 import { instance } from '@/query'
-
-import { AccountInfoEdit } from '../container/mypage/AccountInfoEdit'
 
 const LoginPrivateRoute = () => {
   const session = instance.hasToken()
@@ -72,11 +71,11 @@ export const RouterComponent = () => {
         <Route path="/chatting/chatting-room/carpool/:id" element={<CarpoolChattingRoom />} />
 
         <Route path="/mypage" element={<Mypage />} />
-        <Route path="/mypage/account-info" element={<AccountInfo />} />
-        <Route path="/mypage/account-info/edit" element={<AccountInfoEdit />} />
+        <Route path="/mypage/account-info" element={<AccountInformation />} />
+        <Route path="/mypage/account-info/edit" element={<AccountInformationEdit />} />
         <Route path="/mypage/password" element={<NewPassword />} />
-        <Route path="/mypage/myboard" element={<MyPost />} />
-        <Route path="/mypage/bookmark" element={<Bookmark />} />
+        <Route path="/mypage/my-post" element={<MypageMyPost />} />
+        <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
       </Route>
 
       <Route path="*" element={<ErrorPage />} />

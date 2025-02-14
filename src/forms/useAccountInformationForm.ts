@@ -1,12 +1,12 @@
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useFetchAccountInfo } from '@/query/useMypageQuery'
-import type { UserAccount } from '@/types/mypage'
+import { useFetchAccountInformation } from '@/query/useMypageQuery'
+import type { AccountInformation } from '@/types/mypage'
 
 const currentYear = new Date().getFullYear()
 
-export const accountAttribute = {
+export const accountInformationAttribute = {
   NICKNAME: {
     section: 'nickname',
     label: '닉네임',
@@ -15,21 +15,20 @@ export const accountAttribute = {
   DISCHARGE_YEAR: {
     section: 'dischargeYear',
     label: '전역 연도',
-    input: { type: 'number', placeholder: '숫자 4자리를 입력해주세요.' },
+    input: { placeholder: '숫자 4자리를 입력해주세요.' },
   },
   MILITARY_BRANCH: { section: 'militaryBranch', label: '복무했던 군종' },
 } as const
 
-const accountSchema = z
+const accountInformationSchema = z
   .object({
     nickname: z
       .string()
       .min(2, { message: '닉네임은 2글자 이상입니다.' })
       .max(8, { message: '닉네임은 8글자 이하입니다.' }),
     dischargeYear: z
-      .union([z.string(), z.number()])
-      .transform((value) => (typeof value === 'string' ? parseInt(value, 10) : value))
-      .refine((val) => val >= currentYear - 4 && val <= currentYear, {
+      .string()
+      .refine((val) => Number(val) >= currentYear - 4 && Number(val) <= currentYear, {
         message: `${currentYear - 4}년부터 현재 연도까지만 입력 가능합니다.`,
       }),
     militaryBranch: z.string(),
@@ -40,9 +39,9 @@ const accountSchema = z
     message: '군종을 선택해주세요.',
   })
 
-export const useAccountForm = () => {
-  const { data: defaultValues } = useFetchAccountInfo()
-  const formMethod = useCustomForm<UserAccount>(accountSchema, { defaultValues })
+export const useAccountInformationForm = () => {
+  const { data: defaultValues } = useFetchAccountInformation()
+  const formMethod = useCustomForm<AccountInformation>(accountInformationSchema, { defaultValues })
 
   return formMethod
 }

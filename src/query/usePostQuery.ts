@@ -67,29 +67,27 @@ export const useFetchSearchList = ({ urls }: PostSearchRequest) => {
   })
 }
 
-export const useFetchMyPostList = () => {
-  return useInfiniteQuery<PostResponse, Error>({
+export const useFetchMyPostList = () =>
+  useInfiniteQuery({
     queryKey: queryKeys.myPost(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.myPost(pageParam)),
+      await instance.get<PostResponse>(API_ENDPOINTS.myPost(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
   })
-}
 
-export const useFetchBookmarkList = () => {
-  return useInfiniteQuery<PostResponse, Error>({
+export const useFetchBookmarkList = () =>
+  useInfiniteQuery({
     queryKey: queryKeys.bookmark(),
-    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.bookmark(pageParam)),
+    queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
+      instance.get<PostResponse>(API_ENDPOINTS.bookmark(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
   })
-}
 
 export const usePostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse>({

@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 
-import { DeleteUserButton } from '@/components/domain/mypage/DeleteUserButton'
+import { DeleteIdButton } from '@/components/domain/mypage/DeleteIdButton'
+import { DeleteIdModal } from '@/components/domain/mypage/DeleteIdModal'
 import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
+import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
 import { MypageProfile } from '@/components/domain/mypage/MypageProfile'
 import { MypageSections } from '@/components/domain/mypage/MypageSections'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
@@ -24,14 +26,18 @@ export const Mypage = () => {
         <ScrollContainer>
           <MypageProfile {...userProfile} />
           <MypageSections />
-          <ActionButtonContainer>
+
+          <ButtonContainer>
             <LogoutButton />
-            <DeleteUserButton />
-          </ActionButtonContainer>
+            <DeleteIdButton />
+          </ButtonContainer>
         </ScrollContainer>
 
         <BottomNavigation />
       </Container>
+
+      <LogoutModal />
+      <DeleteIdModal />
     </ModalStoreProvider>
   )
 }
@@ -43,7 +49,7 @@ const ScrollContainer = styled.div`
   overflow-y: scroll;
 `
 
-const ActionButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
   ${({ theme }) => theme.margin('mypage-button-top', 0, 0, 'auto')};
   ${({ theme }) => theme.padding(0, 'xs')};
