@@ -7,7 +7,9 @@ import type { ProfileResponse } from '@/types/mypage'
 export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: ProfileResponse) => {
   return (
     <UserProfileContainer>
-      <ChainImage />
+      <ChainContainer>
+        <ChainIcon />
+      </ChainContainer>
       <ProfileImage iconType={militaryBranch} size="lg" />
       <UserInfoContainer>
         <p className="name">{nickname}</p>
@@ -27,7 +29,7 @@ const UserProfileContainer = styled.div`
   width: fit-content;
 `
 
-const ChainImage = styled(ChainIcon)`
+const ChainContainer = styled.div`
   width: fit-content;
   height: fit-content;
   position: absolute;
