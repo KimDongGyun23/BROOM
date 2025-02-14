@@ -1,27 +1,33 @@
 import { useNavigate } from 'react-router-dom'
 
 import { ModalWithOneButton } from '@/components/view/Modal'
-import { useModalActions, useModalState } from '@/stores/modal'
+import { useIsSuccessModal, useModalActions, useModalState } from '@/stores/modal'
 import { clearSessionStorage } from '@/utils/storage'
 
 export const LogoutModal = () => {
   const navigate = useNavigate()
 
   const { isModalOpen, label } = useModalState()
+  const isSuccessModal = useIsSuccessModal()
   const { closeModal } = useModalActions()
 
-  const handleCloseModal = () => {
+  const handleCloseSuccessModal = () => {
     closeModal()
     clearSessionStorage()
     navigate('/home')
   }
+
+  const handleCloseErrorModal = () => closeModal()
 
   return (
     <ModalWithOneButton
       isOpen={isModalOpen}
       onClose={closeModal}
       content={label}
-      button={{ onClick: handleCloseModal, label: '확인' }}
+      button={{
+        onClick: isSuccessModal ? handleCloseSuccessModal : handleCloseErrorModal,
+        label: '확인',
+      }}
     />
   )
 }
