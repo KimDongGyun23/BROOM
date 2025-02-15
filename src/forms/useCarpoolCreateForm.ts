@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
-import { useCreatePost } from '@/query/useCarpoolQuery'
-import type { PostForm } from '@/types/post'
+import { useCreateCarpoolPost } from '@/query/useCarpoolQuery'
+import type { CarpoolForm } from '@/types/post'
 
 export const postAttribute = {
   TITLE: { section: 'title', label: '제목', input: { placeholder: '제목을 입력해주세요.' } },
@@ -47,12 +47,12 @@ export const postSchema = z.object({
 
 export const useCarpoolCreateForm = () => {
   const navigate = useNavigate()
-  const { mutate: createPost } = useCreatePost()
+  const { mutate: createPost } = useCreateCarpoolPost()
 
-  const formMethod = useCustomForm<PostForm>(postSchema)
+  const formMethod = useCustomForm<CarpoolForm>(postSchema)
   const { handleSubmit } = formMethod
 
-  const handlePostCreation = (formData: PostForm) => {
+  const handleCreateCarpoolPost = (formData: CarpoolForm) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`,
@@ -66,5 +66,5 @@ export const useCarpoolCreateForm = () => {
     )
   }
 
-  return { formMethod, onSubmit: handleSubmit(handlePostCreation) }
+  return { formMethod, onSubmit: handleSubmit(handleCreateCarpoolPost) }
 }

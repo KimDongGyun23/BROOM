@@ -28,13 +28,13 @@ type PostStatus = {
 
 export type PostId = Pick<PostStatus, 'boardId'>
 
-export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
+export type CarpoolForm = Omit<PostDetail, 'time' | 'personnel'> & {
   personnel: string
   hour: string
   minute: string
 }
 
-export type PostCreateRequest = {
+export type CarpoolCreateRequest = {
   body: PostDetail
 }
 

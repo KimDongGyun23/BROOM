@@ -2,14 +2,14 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tansta
 import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
+  CarpoolCreateRequest,
+  CarpoolForm,
   CarpoolSearchRequest,
-  PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
   PostDetailRequest,
   PostDetailResponse,
   PostEditRequest,
-  PostForm,
   PostId,
   PostRequest,
   PostResponse,
@@ -95,11 +95,11 @@ export const usePostDetail = ({ urls }: PostDetailRequest) => {
   })
 }
 
-export const useCreatePost = () => {
+export const useCreateCarpoolPost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<PostId, Error, PostCreateRequest>({
-    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.create, body),
+  return useMutation({
+    mutationFn: ({ body }: CarpoolCreateRequest) => instance.post<PostId>(ENDPOINTS.create, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -118,10 +118,10 @@ export const useUpdatePost = () => {
 }
 
 export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
-  return useQuery<PostDetailResponse, Error, PostForm>({
+  return useQuery<PostDetailResponse, Error, CarpoolForm>({
     queryKey: queryKeys.detail(urls.boardId),
     queryFn: async () => await instance.get(ENDPOINTS.detail(urls)),
-    select: (data): PostForm => {
+    select: (data): CarpoolForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
       return {
