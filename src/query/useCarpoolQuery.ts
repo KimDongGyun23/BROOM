@@ -3,13 +3,13 @@ import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
   CarpoolCreateRequest,
+  CarpoolEditRequest,
   CarpoolForm,
   CarpoolSearchRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
   PostDetailRequest,
   PostDetailResponse,
-  PostEditRequest,
   PostId,
   PostRequest,
   PostResponse,
@@ -26,8 +26,8 @@ const ENDPOINTS = {
   myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
 
-  create: '/board',
-  edit: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
+  createCarpoolPost: '/board',
+  editCarpoolPost: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
   delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
   setBookmark: `/mypage/bookmark`,
@@ -35,8 +35,9 @@ const ENDPOINTS = {
 } as const
 
 const queryKeys = {
-  all: ['post'] as const,
-  list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
+  all: ['carpool'] as const,
+  carpoolList: (urls: PostRequest['urls']) =>
+    [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   searchList: (urls: CarpoolSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   myPost: () => [...queryKeys.all, 'my-post'] as const,
@@ -46,7 +47,7 @@ const queryKeys = {
 
 export const useFetchCarpoolList = ({ urls }: PostRequest) =>
   useInfiniteQuery({
-    queryKey: queryKeys.list(urls),
+    queryKey: queryKeys.carpoolList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostResponse>(ENDPOINTS.fetchCarpoolList({ ...urls, pageParam })),
     initialPageParam: 0,
@@ -99,18 +100,20 @@ export const useCreateCarpoolPost = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ body }: CarpoolCreateRequest) => instance.post<PostId>(ENDPOINTS.create, body),
+    mutationFn: ({ body }: CarpoolCreateRequest) =>
+      instance.post<PostId>(ENDPOINTS.createCarpoolPost, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
   })
 }
 
-export const useUpdatePost = () => {
+export const useEditCarpoolPost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<PostId, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await instance.patch(ENDPOINTS.edit(urls), body),
+  return useMutation({
+    mutationFn: ({ body, urls }: CarpoolEditRequest) =>
+      instance.patch<PostId>(ENDPOINTS.editCarpoolPost(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

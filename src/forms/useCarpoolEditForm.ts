@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
-import { useFetchUpdatePostData, useUpdatePost } from '@/query/useCarpoolQuery'
+import { useEditCarpoolPost, useFetchUpdatePostData } from '@/query/useCarpoolQuery'
 import type { CarpoolForm } from '@/types/post'
 
 import { postSchema } from './useCarpoolCreateForm'
@@ -13,12 +13,12 @@ export const useCarpoolEditForm = () => {
   const navigate = useNavigate()
 
   const { data: defaultValues, isPending, isError } = useFetchUpdatePostData({ urls: { boardId } })
-  const { mutate: postUpdate } = useUpdatePost()
+  const { mutate: postUpdate } = useEditCarpoolPost()
 
   const formMethod = useCustomForm<CarpoolForm>(postSchema, { defaultValues })
   const { handleSubmit } = formMethod
 
-  const handleSubmitForm = (formData: CarpoolForm) => {
+  const handleEditCarpoolPost = (formData: CarpoolForm) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
@@ -32,5 +32,5 @@ export const useCarpoolEditForm = () => {
     )
   }
 
-  return { formMethod, isPending, isError, onSubmit: handleSubmit(handleSubmitForm) }
+  return { formMethod, isPending, isError, onSubmit: handleSubmit(handleEditCarpoolPost) }
 }

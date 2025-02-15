@@ -38,7 +38,7 @@ export type CarpoolCreateRequest = {
   body: PostDetail
 }
 
-export type PostEditRequest = {
+export type CarpoolEditRequest = {
   body: PostDetail
   urls: PostId
 }
