@@ -1,44 +1,11 @@
+import { CarpoolMainList } from '@/components/domain/post/CarpoolMainList'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
-import { PostList } from '@/components/domain/post/PostList'
 import { SearchBar } from '@/components/domain/post/SearchBar'
 import { ShowActivePostsButton } from '@/components/domain/post/ShowActivePostsButton'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
-import { useFetchPostList } from '@/query/useCarpoolQuery'
-import { ActiveOnlyFilterStoreProvider, useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
+import { ActiveOnlyFilterStoreProvider } from '@/stores/activeOnlyFilter'
 import { Container } from '@/styles/commonStyles'
-
-const useCarpoolList = () => {
-  const isFilteringActiveOnly = useIsFilteringActiveOnly()
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
-    urls: { isAllShow: !isFilteringActiveOnly },
-  })
-
-  return {
-    postList: data?.pages.flatMap((page) => page.result) || [],
-    isPending,
-    isError,
-    hasNextPage,
-    fetchNextPage,
-  }
-}
-
-const CarpoolMain = () => {
-  const { postList, isPending, isError, hasNextPage, fetchNextPage } = useCarpoolList()
-
-  return (
-    <>
-      <ShowActivePostsButton />
-      <PostList
-        postList={postList}
-        isPending={isPending}
-        isError={isError}
-        hasNextPage={hasNextPage}
-        fetchNextPage={fetchNextPage}
-      />
-    </>
-  )
-}
 
 export const Carpool = () => {
   return (
@@ -46,7 +13,8 @@ export const Carpool = () => {
       <Container>
         <MainHeader />
         <SearchBar />
-        <CarpoolMain />
+        <ShowActivePostsButton />
+        <CarpoolMainList />
         <PostAdditionButton />
         <BottomNavigation />
       </Container>

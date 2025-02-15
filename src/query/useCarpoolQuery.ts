@@ -19,7 +19,8 @@ import type {
 import { instance } from '.'
 
 const ENDPOINTS = {
-  list: (urls: PostRequest['urls']) => `/board/view/all/${urls.pageParam}?isFull=${urls.isAllShow}`,
+  fetchCarpoolList: (urls: PostRequest['urls']) =>
+    `/board/view/all/${urls.pageParam}?recruiting=${urls.isAllShow}`,
   fetchSearchList: (urls: CarpoolSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.isAllShow}`,
   myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
@@ -43,23 +44,22 @@ const queryKeys = {
   detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
 }
 
-export const useFetchPostList = ({ urls }: PostRequest) => {
-  return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.list({ ...urls }),
-    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(ENDPOINTS.list({ ...urls, pageParam })),
+export const useFetchCarpoolList = ({ urls }: PostRequest) =>
+  useInfiniteQuery({
+    queryKey: queryKeys.list(urls),
+    queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
+      instance.get<PostResponse>(ENDPOINTS.fetchCarpoolList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
   })
-}
 
 export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
   useInfiniteQuery({
     queryKey: queryKeys.searchList(urls),
-    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get<PostResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
+    queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
+      instance.get<PostResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -69,8 +69,8 @@ export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
 export const useFetchMyPostList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.myPost(),
-    queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get<PostResponse>(ENDPOINTS.myPost(pageParam)),
+    queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
+      instance.get<PostResponse>(ENDPOINTS.myPost(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
