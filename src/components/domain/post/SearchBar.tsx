@@ -11,60 +11,60 @@ import { SEARCH_OPTIONS } from '@/utils/constants'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '../../view/icons/NonActiveIcons'
 import { Kebab } from '../../view/Kebab'
 
-const useFilterSelect = () => {
+const useFilterSelection = (toggleFilterDropdownVisibility: VoidFunction) => {
   const [searchParams] = useSearchParams()
-  const defaultFilterName = searchParams.get('filterName') || SEARCH_OPTIONS[0].label
+  const initialFilterLabel = searchParams.get('filterName') || SEARCH_OPTIONS[0].label
 
-  const [isFilterVisible, toggleFilterVisibility] = useToggle(false)
-  const [selectedFilter, setSelectedFilter] = useState<SearchOption>(
-    SEARCH_OPTIONS.find((option) => option.label === defaultFilterName) || SEARCH_OPTIONS[0],
+  const [currentFilter, setCurrentFilter] = useState<SearchOption>(
+    SEARCH_OPTIONS.find((option) => option.label === initialFilterLabel) || SEARCH_OPTIONS[0],
   )
 
   const handleFilterSelect = useCallback(
     (filter: SearchOption) => {
-      setSelectedFilter(filter)
-      toggleFilterVisibility()
+      setCurrentFilter(filter)
+      toggleFilterDropdownVisibility()
     },
-    [toggleFilterVisibility],
+    [toggleFilterDropdownVisibility],
   )
 
-  return { isFilterVisible, selectedFilter, toggleFilterVisibility, handleFilterSelect }
+  return { currentFilter, handleFilterSelect }
 }
 
 export const SearchBar = () => {
-  const { isFilterVisible, selectedFilter, toggleFilterVisibility, handleFilterSelect } =
-    useFilterSelect()
-  const { formMethod, onSubmit } = useSearchForm(selectedFilter)
+  const [isFilterDropdownVisible, toggleFilterDropdownVisibility] = useToggle(false)
+  const { currentFilter, handleFilterSelect } = useFilterSelection(toggleFilterDropdownVisibility)
+
+  const { formMethod, onSubmit } = useSearchForm(currentFilter)
   const { register } = formMethod
 
   return (
     <FormProvider {...formMethod}>
-      <SearchForm onSubmit={onSubmit}>
-        <FilterButton
+      <StyledSearchForm onSubmit={onSubmit}>
+        <StyledFilterButton
           type="button"
-          onClick={toggleFilterVisibility}
+          onClick={toggleFilterDropdownVisibility}
           aria-haspopup="true"
-          aria-expanded={isFilterVisible}
+          aria-expanded={isFilterDropdownVisible}
         >
-          <span className="filter-label">{selectedFilter.label}</span>
-          {isFilterVisible ? <ArrowUpIcon /> : <ArrowBottomIcon />}
-        </FilterButton>
+          <span className="filter-label">{currentFilter.label}</span>
+          {isFilterDropdownVisible ? <ArrowUpIcon /> : <ArrowBottomIcon />}
+        </StyledFilterButton>
 
         <StyledInput
           type="search"
           size={7}
           {...register('search')}
-          placeholder={selectedFilter.placeholder}
-          aria-label={`${selectedFilter.label} 검색`}
+          placeholder={currentFilter.placeholder}
+          aria-label={`${currentFilter.label} 검색`}
         />
 
         <SearchButton type="submit" aria-label="검색">
           <SearchIcon />
         </SearchButton>
-      </SearchForm>
+      </StyledSearchForm>
 
       <Kebab
-        isOpen={isFilterVisible}
+        isOpen={isFilterDropdownVisible}
         items={SEARCH_OPTIONS.map((option) => ({
           ...option,
           onClick: () => handleFilterSelect(option),
@@ -75,7 +75,7 @@ export const SearchBar = () => {
   )
 }
 
-const SearchForm = styled.form`
+const StyledSearchForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
   ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding('sm', 'md', 'sm', 'lg')};
@@ -83,7 +83,7 @@ const SearchForm = styled.form`
   ${({ theme }) => theme.borderRadius('sm')};
 `
 
-const FilterButton = styled.button`
+const StyledFilterButton = styled.button`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
   flex-shrink: 0;
 

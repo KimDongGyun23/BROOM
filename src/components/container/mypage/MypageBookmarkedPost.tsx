@@ -1,6 +1,6 @@
 import { PostList } from '@/components/domain/post/PostList'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { useFetchBookmarkList } from '@/query/usePostQuery'
+import { useFetchBookmarkList } from '@/query/useCarpoolQuery'
 import { Container } from '@/styles/commonStyles'
 
 export const MypageBookmarkedPost = () => {

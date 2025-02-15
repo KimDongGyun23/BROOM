@@ -2,6 +2,7 @@ import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tansta
 import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
+  CarpoolSearchRequest,
   PostCreateRequest,
   PostDeleteBookmarkRequest,
   PostDeleteRequest,
@@ -12,16 +13,15 @@ import type {
   PostId,
   PostRequest,
   PostResponse,
-  PostSearchRequest,
   PostSetBookmarkRequest,
 } from '@/types/post'
 
 import { instance } from '.'
 
-const API_ENDPOINTS = {
+const ENDPOINTS = {
   list: (urls: PostRequest['urls']) => `/board/view/all/${urls.pageParam}?isFull=${urls.isAllShow}`,
-  search: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&isFull=${urls.isAllShow}`,
+  fetchSearchList: (urls: CarpoolSearchRequest['urls']) =>
+    `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.isAllShow}`,
   myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
 
@@ -36,7 +36,7 @@ const API_ENDPOINTS = {
 const queryKeys = {
   all: ['post'] as const,
   list: (urls: PostRequest['urls']) => [...queryKeys.all, 'list', ...Object.values(urls)] as const,
-  search: (urls: PostSearchRequest['urls']) =>
+  searchList: (urls: CarpoolSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   myPost: () => [...queryKeys.all, 'my-post'] as const,
   bookmark: () => [...queryKeys.all, 'bookmark'] as const,
@@ -47,7 +47,7 @@ export const useFetchPostList = ({ urls }: PostRequest) => {
   return useInfiniteQuery<PostResponse, Error>({
     queryKey: queryKeys.list({ ...urls }),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.list({ ...urls, pageParam })),
+      await instance.get(ENDPOINTS.list({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -55,23 +55,22 @@ export const useFetchPostList = ({ urls }: PostRequest) => {
   })
 }
 
-export const useFetchSearchList = ({ urls }: PostSearchRequest) => {
-  return useInfiniteQuery<PostResponse, Error>({
-    queryKey: queryKeys.search({ ...urls }),
+export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
+  useInfiniteQuery({
+    queryKey: queryKeys.searchList(urls),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get(API_ENDPOINTS.search({ ...urls, pageParam })),
+      await instance.get<PostResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
   })
-}
 
 export const useFetchMyPostList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.myPost(),
     queryFn: async ({ pageParam = 0 }: { pageParam: unknown }) =>
-      await instance.get<PostResponse>(API_ENDPOINTS.myPost(pageParam)),
+      await instance.get<PostResponse>(ENDPOINTS.myPost(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -82,7 +81,7 @@ export const useFetchBookmarkList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.bookmark(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(API_ENDPOINTS.bookmark(pageParam)),
+      instance.get<PostResponse>(ENDPOINTS.bookmark(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -92,7 +91,7 @@ export const useFetchBookmarkList = () =>
 export const usePostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse>({
     queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await instance.get(API_ENDPOINTS.detail(urls)),
+    queryFn: async () => await instance.get(ENDPOINTS.detail(urls)),
   })
 }
 
@@ -100,7 +99,7 @@ export const useCreatePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<PostId, Error, PostCreateRequest>({
-    mutationFn: async ({ body }) => await instance.post(API_ENDPOINTS.create, body),
+    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.create, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -111,7 +110,7 @@ export const useUpdatePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<PostId, Error, PostEditRequest>({
-    mutationFn: async ({ body, urls }) => await instance.patch(API_ENDPOINTS.edit(urls), body),
+    mutationFn: async ({ body, urls }) => await instance.patch(ENDPOINTS.edit(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -121,7 +120,7 @@ export const useUpdatePost = () => {
 export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
   return useQuery<PostDetailResponse, Error, PostForm>({
     queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await instance.get(API_ENDPOINTS.detail(urls)),
+    queryFn: async () => await instance.get(ENDPOINTS.detail(urls)),
     select: (data): PostForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
@@ -142,7 +141,7 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient()
 
   return useMutation<AxiosResponse<string>, AxiosError<string>, PostDeleteRequest>({
-    mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.delete(urls)),
+    mutationFn: async ({ urls }) => await instance.delete(ENDPOINTS.delete(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -153,7 +152,7 @@ export const useSetBookmark = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostSetBookmarkRequest>({
-    mutationFn: async ({ body }) => await instance.post(API_ENDPOINTS.setBookmark, body),
+    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.setBookmark, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -164,7 +163,7 @@ export const useDeleteBookmark = () => {
   const queryClient = useQueryClient()
 
   return useMutation<void, Error, PostDeleteBookmarkRequest>({
-    mutationFn: async ({ urls }) => await instance.delete(API_ENDPOINTS.deleteBookmark(urls)),
+    mutationFn: async ({ urls }) => await instance.delete(ENDPOINTS.deleteBookmark(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

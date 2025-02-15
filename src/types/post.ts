@@ -79,7 +79,7 @@ export type PostResponse = {
   hasNext: boolean
 }
 
-export type PostSearchRequest = {
+export type CarpoolSearchRequest = {
   urls: {
     pageParam?: number | unknown
     isAllShow: boolean

@@ -7,7 +7,7 @@ import { useParamId } from '@/hooks/useParamId'
 import { useToggle } from '@/hooks/useToggle'
 import { instance } from '@/query'
 import { useCarpoolChattingId } from '@/query/useChattingQuery'
-import { useDeleteBookmark, useSetBookmark } from '@/query/usePostQuery'
+import { useDeleteBookmark, useSetBookmark } from '@/query/useCarpoolQuery'
 import { usePostDetail, usePostDetailActions } from '@/stores/post'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 

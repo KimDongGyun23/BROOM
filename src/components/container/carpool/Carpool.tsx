@@ -1,10 +1,10 @@
-import { PostActiveToggle } from '@/components/domain/post/PostActiveToggle'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { PostList } from '@/components/domain/post/PostList'
 import { SearchBar } from '@/components/domain/post/SearchBar'
+import { ShowActivePostsButton } from '@/components/domain/post/ShowActivePostsButton'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
-import { useFetchPostList } from '@/query/usePostQuery'
+import { useFetchPostList } from '@/query/useCarpoolQuery'
 import { ActiveOnlyFilterStoreProvider, useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 import { Container } from '@/styles/commonStyles'
 
@@ -28,7 +28,7 @@ const CarpoolMain = () => {
 
   return (
     <>
-      <PostActiveToggle />
+      <ShowActivePostsButton />
       <PostList
         postList={postList}
         isPending={isPending}

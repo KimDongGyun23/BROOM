@@ -6,7 +6,7 @@ import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHe
 import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
 import { instance } from '@/query'
-import { useDeletePost } from '@/query/usePostQuery'
+import { useDeletePost } from '@/query/useCarpoolQuery'
 import {
   useIsSuccessModal,
   useModalActions,
