@@ -1,19 +1,18 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import type { AxiosError, AxiosResponse } from 'axios'
 
 import type {
+  CarpoolAddBookmarkRequest,
   CarpoolCreateRequest,
+  CarpoolDeleteRequest,
+  CarpoolDetailRequest,
+  CarpoolDetailResponse,
   CarpoolEditRequest,
   CarpoolForm,
+  CarpoolRemoveBookmarkRequest,
   CarpoolSearchRequest,
-  PostDeleteBookmarkRequest,
-  PostDeleteRequest,
-  PostDetailRequest,
-  PostDetailResponse,
   PostId,
   PostRequest,
   PostResponse,
-  PostSetBookmarkRequest,
 } from '@/types/post'
 
 import { instance } from '.'
@@ -23,15 +22,16 @@ const ENDPOINTS = {
     `/board/view/all/${urls.pageParam}?recruiting=${urls.isAllShow}`,
   fetchSearchList: (urls: CarpoolSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.isAllShow}`,
-  myPost: (pageParam: unknown) => `/mypage/board/${pageParam}`,
-  bookmark: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
+  fetchMyCarpoolList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
+  fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
+  fetchCarpoolDetail: (urls: CarpoolDetailRequest['urls']) => `/board/view/${urls.boardId}`,
 
   createCarpoolPost: '/board',
-  editCarpoolPost: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
-  detail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
-  delete: (urls: PostDeleteRequest['urls']) => `/board/${urls.boardId}`,
-  setBookmark: `/mypage/bookmark`,
-  deleteBookmark: (urls: PostDeleteBookmarkRequest['urls']) => `/mypage/bookmark/${urls.boardId}`,
+  editCarpoolPost: (urls: CarpoolDetailRequest['urls']) => `/board/${urls.boardId}`,
+  deleteCarpoolPost: (urls: CarpoolDeleteRequest['urls']) => `/board/${urls.boardId}`,
+  addBookmark: `/mypage/bookmark`,
+  removeBookmark: (urls: CarpoolRemoveBookmarkRequest['urls']) =>
+    `/mypage/bookmark/${urls.boardId}`,
 } as const
 
 const queryKeys = {
@@ -42,7 +42,8 @@ const queryKeys = {
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   myPost: () => [...queryKeys.all, 'my-post'] as const,
   bookmark: () => [...queryKeys.all, 'bookmark'] as const,
-  detail: (boardId: string) => [...queryKeys.all, 'detail', boardId] as const,
+  carpoolDetail: (urls: CarpoolDetailRequest['urls']) =>
+    [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
 }
 
 export const useFetchCarpoolList = ({ urls }: PostRequest) =>
@@ -71,7 +72,7 @@ export const useFetchMyPostList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.myPost(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.myPost(pageParam)),
+      instance.get<PostResponse>(ENDPOINTS.fetchMyCarpoolList(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -82,17 +83,17 @@ export const useFetchBookmarkList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.bookmark(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.bookmark(pageParam)),
+      instance.get<PostResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
   })
 
-export const usePostDetail = ({ urls }: PostDetailRequest) => {
-  return useQuery<PostDetailResponse>({
-    queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await instance.get(ENDPOINTS.detail(urls)),
+export const useFetchCarpoolDetail = ({ urls }: CarpoolDetailRequest) => {
+  return useQuery({
+    queryKey: queryKeys.carpoolDetail(urls),
+    queryFn: () => instance.get<CarpoolDetailResponse>(ENDPOINTS.fetchCarpoolDetail(urls)),
   })
 }
 
@@ -120,10 +121,10 @@ export const useEditCarpoolPost = () => {
   })
 }
 
-export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
-  return useQuery<PostDetailResponse, Error, CarpoolForm>({
-    queryKey: queryKeys.detail(urls.boardId),
-    queryFn: async () => await instance.get(ENDPOINTS.detail(urls)),
+export const useFetchUpdatePostData = ({ urls }: CarpoolDetailRequest) => {
+  return useQuery({
+    queryKey: queryKeys.carpoolDetail(urls),
+    queryFn: () => instance.get<CarpoolDetailResponse>(ENDPOINTS.fetchCarpoolDetail(urls)),
     select: (data): CarpoolForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
@@ -140,22 +141,23 @@ export const useFetchUpdatePostData = ({ urls }: PostDetailRequest) => {
   })
 }
 
-export const useDeletePost = () => {
+export const useDeleteCarpoolPost = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<AxiosResponse<string>, AxiosError<string>, PostDeleteRequest>({
-    mutationFn: async ({ urls }) => await instance.delete(ENDPOINTS.delete(urls)),
+  return useMutation({
+    mutationFn: ({ urls }: CarpoolDeleteRequest) =>
+      instance.delete<string>(ENDPOINTS.deleteCarpoolPost(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
   })
 }
 
-export const useSetBookmark = () => {
+export const useAddBookmark = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, PostSetBookmarkRequest>({
-    mutationFn: async ({ body }) => await instance.post(ENDPOINTS.setBookmark, body),
+  return useMutation({
+    mutationFn: ({ body }: CarpoolAddBookmarkRequest) => instance.post(ENDPOINTS.addBookmark, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -165,8 +167,9 @@ export const useSetBookmark = () => {
 export const useDeleteBookmark = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, PostDeleteBookmarkRequest>({
-    mutationFn: async ({ urls }) => await instance.delete(ENDPOINTS.deleteBookmark(urls)),
+  return useMutation({
+    mutationFn: ({ urls }: CarpoolRemoveBookmarkRequest) =>
+      instance.delete(ENDPOINTS.removeBookmark(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

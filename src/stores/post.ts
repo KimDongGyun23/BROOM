@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 
-import type { PostDetailResponse } from '@/types/post'
+import type { CarpoolDetailResponse } from '@/types/post'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type Actions = {
-  setPostDetail: (post: PostDetailResponse) => void
+  updatePostDetail: (post: CarpoolDetailResponse) => void
   clearPostDetail: () => void
 }
 
 type PostStore = {
-  postDetail: PostDetailResponse | null
+  postDetail: CarpoolDetailResponse | null
   isMyPost: boolean
   actions: Actions
 }
@@ -18,7 +18,7 @@ export const usePostStore = create<PostStore>((set) => ({
   postDetail: null,
   isMyPost: false,
   actions: {
-    setPostDetail: (post: PostDetailResponse) => {
+    updatePostDetail: (post: CarpoolDetailResponse) => {
       const isMyPost = post.author.nickname === getSessionStorageItem(SESSION_KEYS.NICKNAME)
       set({ postDetail: post, isMyPost })
     },

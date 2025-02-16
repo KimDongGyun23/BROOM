@@ -1,44 +1,68 @@
 import { useEffect } from 'react'
+import { styled } from 'styled-components'
 
-import { PostDetailContent } from '@/components/domain/post/PostDetailContent'
-import { PostDetailFooter } from '@/components/domain/post/PostDetailFooter'
-import { PostDetailHeader } from '@/components/domain/post/PostDetailHeader'
+import { CarpoolBookmarkButton } from '@/components/domain/post/CarpoolBookmarkButton'
+import { CarpoolChattingButton } from '@/components/domain/post/CarpoolChattingButton'
+import { CarpoolDeleteModal } from '@/components/domain/post/CarpoolDeleteModal'
+import { CarpoolDetailContent } from '@/components/domain/post/CarpoolDetailContent'
+import { CarpoolDetailHeader } from '@/components/domain/post/CarpoolDetailHeader'
 import { Loading } from '@/components/view/Loading'
 import { PostProfile } from '@/components/view/Profile'
 import { useParamId } from '@/hooks/useParamId'
-import { usePostDetail } from '@/query/useCarpoolQuery'
+import { instance } from '@/query'
+import { useFetchCarpoolDetail } from '@/query/useCarpoolQuery'
 import { ModalStoreProvider } from '@/stores/modal'
-import { usePostDetailActions } from '@/stores/post'
+import { usePostDetail, usePostDetailActions } from '@/stores/post'
 import { Container } from '@/styles/commonStyles'
+import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 import { ErrorPage } from '../home/ErrorPage'
 
 const usePostDetailData = () => {
   const boardId = useParamId()
-  const { data, isPending, isError } = usePostDetail({ urls: { boardId } })
-  const { setPostDetail } = usePostDetailActions()
+  const { data, isPending, isError } = useFetchCarpoolDetail({ urls: { boardId } })
+  const { updatePostDetail } = usePostDetailActions()
 
   useEffect(() => {
-    if (data) setPostDetail(data)
-  }, [data, setPostDetail])
+    if (data) updatePostDetail(data)
+  }, [data, updatePostDetail])
 
   return { isPending, isError }
 }
 
 export const CarpoolDetail = () => {
+  const post = usePostDetail()
+  const session = instance.hasToken()
   const { isPending, isError } = usePostDetailData()
 
   if (isPending) return <Loading />
-  if (isError) return <ErrorPage />
+  if (isError || !post) return <ErrorPage />
 
   return (
     <ModalStoreProvider>
       <Container>
-        <PostDetailHeader />
+        <CarpoolDetailHeader />
         <PostProfile />
-        <PostDetailContent />
-        <PostDetailFooter />
+        <CarpoolDetailContent />
+
+        {session && (
+          <ButtonContainer>
+            <CarpoolBookmarkButton initialIsBookmarked={post.status.bookmark} />
+            <CarpoolChattingButton
+              isFull={!canJoinChatRoom(post.status.currentPersonnel, post.status.totalPersonnel)}
+            />
+          </ButtonContainer>
+        )}
       </Container>
+
+      <CarpoolDeleteModal />
     </ModalStoreProvider>
   )
 }
+
+const ButtonContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
+  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.padding('sm', 'lg', 'xl')};
+  width: 100%;
+`

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { usePostDetail } from '@/stores/post'
 
-export const PostDetailContent = () => {
+export const CarpoolDetailContent = () => {
   const post = usePostDetail()
   if (!post || !post.contentDetail) return
 
@@ -11,7 +11,7 @@ export const PostDetailContent = () => {
   return (
     <ScrollContainer>
       <ContentContainer>
-        <h3 className="title">{title}</h3>
+        <h3 className="content-detail-title">{title}</h3>
         <ContentList>
           <ContentItem>
             <p className="content-item-label">훈련 날짜</p>
@@ -54,7 +54,7 @@ const ContentContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
   ${({ theme }) => theme.padding(0, 'lg')};
 
-  .title {
+  .content-detail-title {
     ${({ theme }) => theme.font(500, theme.colors.black[600])};
   }
 `

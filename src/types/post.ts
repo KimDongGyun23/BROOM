@@ -43,24 +43,24 @@ export type CarpoolEditRequest = {
   urls: PostId
 }
 
-export type PostDetailRequest = {
+export type CarpoolDetailRequest = {
   urls: PostId
 }
-export type PostDetailResponse = {
+export type CarpoolDetailResponse = {
   author: PostAuthor
   status: PostStatus
   contentDetail: PostDetail
 }
 
-export type PostDeleteRequest = {
+export type CarpoolDeleteRequest = {
   urls: PostId
 }
 
-export type PostSetBookmarkRequest = {
+export type CarpoolAddBookmarkRequest = {
   body: PostId
 }
 
-export type PostDeleteBookmarkRequest = {
+export type CarpoolRemoveBookmarkRequest = {
   urls: PostId
 }
 
