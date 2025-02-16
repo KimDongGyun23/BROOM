@@ -4,16 +4,16 @@ import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { Loading } from '@/components/view/Loading'
-import type { PostResponse } from '@/types/post'
+import type { CarpoolListResponse } from '@/types/post'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
-  item: PostResponse['result'][number]
+  item: CarpoolListResponse['result'][number]
 }
 
 type PostListProps = {
-  postList: PostResponse['result']
+  postList: CarpoolListResponse['result']
   isPending: boolean
   isError: boolean
   hasNextPage: boolean

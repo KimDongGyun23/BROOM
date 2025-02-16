@@ -8,17 +8,17 @@ import type {
   CarpoolDetailResponse,
   CarpoolEditRequest,
   CarpoolForm,
+  CarpoolId,
+  CarpoolListResponse,
+  CarpoolMainRequest,
   CarpoolRemoveBookmarkRequest,
   CarpoolSearchRequest,
-  PostId,
-  PostRequest,
-  PostResponse,
 } from '@/types/post'
 
 import { instance } from '.'
 
 const ENDPOINTS = {
-  fetchCarpoolList: (urls: PostRequest['urls']) =>
+  fetchCarpoolList: (urls: CarpoolMainRequest['urls']) =>
     `/board/view/all/${urls.pageParam}?recruiting=${urls.isAllShow}`,
   fetchSearchList: (urls: CarpoolSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.isAllShow}`,
@@ -36,7 +36,7 @@ const ENDPOINTS = {
 
 const queryKeys = {
   all: ['carpool'] as const,
-  carpoolList: (urls: PostRequest['urls']) =>
+  carpoolList: (urls: CarpoolMainRequest['urls']) =>
     [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   searchList: (urls: CarpoolSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
@@ -46,11 +46,11 @@ const queryKeys = {
     [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
 }
 
-export const useFetchCarpoolList = ({ urls }: PostRequest) =>
+export const useFetchCarpoolList = ({ urls }: CarpoolMainRequest) =>
   useInfiniteQuery({
     queryKey: queryKeys.carpoolList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.fetchCarpoolList({ ...urls, pageParam })),
+      instance.get<CarpoolListResponse>(ENDPOINTS.fetchCarpoolList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -61,7 +61,7 @@ export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
   useInfiniteQuery({
     queryKey: queryKeys.searchList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
+      instance.get<CarpoolListResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -72,7 +72,7 @@ export const useFetchMyPostList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.myPost(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.fetchMyCarpoolList(pageParam)),
+      instance.get<CarpoolListResponse>(ENDPOINTS.fetchMyCarpoolList(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -83,7 +83,7 @@ export const useFetchBookmarkList = () =>
   useInfiniteQuery({
     queryKey: queryKeys.bookmark(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
+      instance.get<CarpoolListResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
@@ -102,7 +102,7 @@ export const useCreateCarpoolPost = () => {
 
   return useMutation({
     mutationFn: ({ body }: CarpoolCreateRequest) =>
-      instance.post<PostId>(ENDPOINTS.createCarpoolPost, body),
+      instance.post<CarpoolId>(ENDPOINTS.createCarpoolPost, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -114,7 +114,7 @@ export const useEditCarpoolPost = () => {
 
   return useMutation({
     mutationFn: ({ body, urls }: CarpoolEditRequest) =>
-      instance.patch<PostId>(ENDPOINTS.editCarpoolPost(urls), body),
+      instance.patch<CarpoolId>(ENDPOINTS.editCarpoolPost(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

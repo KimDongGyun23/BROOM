@@ -1,24 +1,24 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-type PostAuthor = {
+type CarpoolAuthor = {
   nickname: string
   reserveYear: number
   militaryBranch: MilitaryBranchCode
 }
 
-type PostBasicInfo = {
+type CarpoolBasicInfo = {
   title: string
   trainingDate: string
   place: string
   time: string
 }
 
-type PostDetail = PostBasicInfo & {
+type CarpoolDetail = CarpoolBasicInfo & {
   personnel: number
   content: string
 }
 
-type PostStatus = {
+type CarpoolStatus = {
   createdAt: string
   boardId: string
   currentPersonnel: number
@@ -26,55 +26,55 @@ type PostStatus = {
   bookmark: boolean
 }
 
-export type PostId = Pick<PostStatus, 'boardId'>
+export type CarpoolId = Pick<CarpoolStatus, 'boardId'>
 
-export type CarpoolForm = Omit<PostDetail, 'time' | 'personnel'> & {
+export type CarpoolForm = Omit<CarpoolDetail, 'time' | 'personnel'> & {
   personnel: string
   hour: string
   minute: string
 }
 
 export type CarpoolCreateRequest = {
-  body: PostDetail
+  body: CarpoolDetail
 }
 
 export type CarpoolEditRequest = {
-  body: PostDetail
-  urls: PostId
+  body: CarpoolDetail
+  urls: CarpoolId
 }
 
 export type CarpoolDetailRequest = {
-  urls: PostId
+  urls: CarpoolId
 }
 export type CarpoolDetailResponse = {
-  author: PostAuthor
-  status: PostStatus
-  contentDetail: PostDetail
+  author: CarpoolAuthor
+  status: CarpoolStatus
+  contentDetail: CarpoolDetail
 }
 
 export type CarpoolDeleteRequest = {
-  urls: PostId
+  urls: CarpoolId
 }
 
 export type CarpoolAddBookmarkRequest = {
-  body: PostId
+  body: CarpoolId
 }
 
 export type CarpoolRemoveBookmarkRequest = {
-  urls: PostId
+  urls: CarpoolId
 }
 
-export type PostRequest = {
+export type CarpoolMainRequest = {
   urls: {
     pageParam?: number | unknown
     isAllShow: boolean
   }
 }
 
-export type PostResponse = {
+export type CarpoolListResponse = {
   result: {
-    status: PostStatus
-    content: PostBasicInfo
+    status: CarpoolStatus
+    content: CarpoolBasicInfo
   }[]
   hasNext: boolean
 }
