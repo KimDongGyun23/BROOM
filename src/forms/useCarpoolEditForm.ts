@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
-import { useEditCarpoolPost, useFetchUpdatePostData } from '@/query/useCarpoolQuery'
+import { useEditCarpoolPost, useFetchCarpoolEditData } from '@/query/useCarpoolQuery'
 import type { CarpoolForm } from '@/types/post'
 
 import { postSchema } from './useCarpoolCreateForm'
@@ -12,7 +12,7 @@ export const useCarpoolEditForm = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
-  const { data: defaultValues, isPending, isError } = useFetchUpdatePostData({ urls: { boardId } })
+  const { data: defaultValues, isPending, isError } = useFetchCarpoolEditData({ urls: { boardId } })
   const { mutate: postUpdate } = useEditCarpoolPost()
 
   const formMethod = useCustomForm<CarpoolForm>(postSchema, { defaultValues })

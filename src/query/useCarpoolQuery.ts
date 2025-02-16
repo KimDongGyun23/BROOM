@@ -90,6 +90,26 @@ export const useFetchBookmarkList = () =>
     },
   })
 
+export const useFetchCarpoolEditData = ({ urls }: CarpoolDetailRequest) => {
+  return useQuery({
+    queryKey: queryKeys.carpoolDetail(urls),
+    queryFn: () => instance.get<CarpoolDetailResponse>(ENDPOINTS.fetchCarpoolDetail(urls)),
+    select: (data): CarpoolForm => {
+      const { title, trainingDate, place, content, time, personnel } = data.contentDetail
+      const [hour, minute] = time.split(':')
+      return {
+        title,
+        trainingDate,
+        place,
+        content,
+        hour,
+        minute,
+        personnel: personnel.toString(),
+      }
+    },
+  })
+}
+
 export const useFetchCarpoolDetail = ({ urls }: CarpoolDetailRequest) => {
   return useQuery({
     queryKey: queryKeys.carpoolDetail(urls),
@@ -117,26 +137,6 @@ export const useEditCarpoolPost = () => {
       instance.patch<CarpoolId>(ENDPOINTS.editCarpoolPost(urls), body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
-    },
-  })
-}
-
-export const useFetchUpdatePostData = ({ urls }: CarpoolDetailRequest) => {
-  return useQuery({
-    queryKey: queryKeys.carpoolDetail(urls),
-    queryFn: () => instance.get<CarpoolDetailResponse>(ENDPOINTS.fetchCarpoolDetail(urls)),
-    select: (data): CarpoolForm => {
-      const { title, trainingDate, place, content, time, personnel } = data.contentDetail
-      const [hour, minute] = time.split(':')
-      return {
-        title,
-        trainingDate,
-        place,
-        content,
-        hour,
-        minute,
-        personnel: personnel.toString(),
-      }
     },
   })
 }
