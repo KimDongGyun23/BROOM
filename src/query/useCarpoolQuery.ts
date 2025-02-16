@@ -55,6 +55,8 @@ export const useFetchCarpoolList = ({ urls }: CarpoolMainRequest) =>
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
+    gcTime: 0,
+    staleTime: 0,
   })
 
 export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
@@ -66,6 +68,8 @@ export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined
     },
+    gcTime: 0,
+    staleTime: 0,
   })
 
 export const useFetchMyPostList = () =>
