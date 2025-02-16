@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     src: url('/assets/fonts/JALNAN2TTF.TTF') format('truetype');
     font-style: normal;
-    font-display: swap;
+    font-display: block;
   }
 
   @font-face {
@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 300;
     src: url('/assets/fonts/Moneygraphy.ttf') format('truetype');
     font-style: normal;
-    font-display: swap;
+    font-display: block;
   }
 
 	html, body, div, span, applet, object, iframe,
