@@ -40,8 +40,8 @@ const queryKeys = {
     [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   searchList: (urls: CarpoolSearchRequest['urls']) =>
     [...queryKeys.all, 'search', ...Object.values(urls)] as const,
-  myPost: () => [...queryKeys.all, 'my-post'] as const,
-  bookmark: () => [...queryKeys.all, 'bookmark'] as const,
+  myPostList: () => [...queryKeys.all, 'my-post'] as const,
+  bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
   carpoolDetail: (urls: CarpoolDetailRequest['urls']) =>
     [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
 }
@@ -70,7 +70,7 @@ export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
 
 export const useFetchMyPostList = () =>
   useInfiniteQuery({
-    queryKey: queryKeys.myPost(),
+    queryKey: queryKeys.myPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<CarpoolListResponse>(ENDPOINTS.fetchMyCarpoolList(pageParam)),
     initialPageParam: 0,
@@ -81,7 +81,7 @@ export const useFetchMyPostList = () =>
 
 export const useFetchBookmarkList = () =>
   useInfiniteQuery({
-    queryKey: queryKeys.bookmark(),
+    queryKey: queryKeys.bookmarkList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<CarpoolListResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
     initialPageParam: 0,
