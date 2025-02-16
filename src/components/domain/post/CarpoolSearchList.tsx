@@ -18,7 +18,7 @@ export const CarpoolSearchList = () => {
     urls: {
       type: filterKey || '',
       keyword: searchKeyword,
-      isAllShow: !isFilteringActiveOnly,
+      recruiting: isFilteringActiveOnly,
     },
   })
 

@@ -6,7 +6,7 @@ import { PostList } from './PostList'
 export const CarpoolMainList = () => {
   const isFilteringActiveOnly = useIsFilteringActiveOnly()
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchCarpoolList({
-    urls: { isAllShow: !isFilteringActiveOnly },
+    urls: { recruiting: isFilteringActiveOnly },
   })
 
   const postList = data?.pages.flatMap((page) => page.result) || []

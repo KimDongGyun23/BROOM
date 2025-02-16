@@ -1,9 +1,11 @@
+import { useEffect, useRef } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { Loading } from '@/components/view/Loading'
+import { useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 import type { CarpoolListResponse } from '@/types/post'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/utils/constants'
@@ -56,12 +58,24 @@ export const PostList = ({
   hasNextPage,
   fetchNextPage,
 }: PostListProps) => {
+  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const scrollRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    }
+  }, [isFilteringActiveOnly])
+
   if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
-    <PostSection>
+    <PostSection ref={scrollRef}>
       <InfiniteScroll
         hasMore={hasNextPage}
         threshold={200}

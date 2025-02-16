@@ -67,7 +67,7 @@ export type CarpoolRemoveBookmarkRequest = {
 export type CarpoolMainRequest = {
   urls: {
     pageParam?: number | unknown
-    isAllShow: boolean
+    recruiting: boolean
   }
 }
 
@@ -82,7 +82,7 @@ export type CarpoolListResponse = {
 export type CarpoolSearchRequest = {
   urls: {
     pageParam?: number | unknown
-    isAllShow: boolean
+    recruiting: boolean
     type: string
     keyword: string
   }
