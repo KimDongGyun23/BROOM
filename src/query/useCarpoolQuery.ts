@@ -36,10 +36,8 @@ const ENDPOINTS = {
 
 const queryKeys = {
   all: ['carpool'] as const,
-  carpoolList: (urls: CarpoolMainRequest['urls']) =>
-    [...queryKeys.all, 'list', ...Object.values(urls)] as const,
-  searchList: (urls: CarpoolSearchRequest['urls']) =>
-    [...queryKeys.all, 'search', ...Object.values(urls)] as const,
+  carpoolList: () => [...queryKeys.all, 'list'] as const,
+  searchList: () => [...queryKeys.all, 'search'] as const,
   myPostList: () => [...queryKeys.all, 'my-post'] as const,
   bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
   carpoolDetail: (urls: CarpoolDetailRequest['urls']) =>
@@ -48,7 +46,7 @@ const queryKeys = {
 
 export const useFetchCarpoolList = ({ urls }: CarpoolMainRequest) =>
   useInfiniteQuery({
-    queryKey: queryKeys.carpoolList(urls),
+    queryKey: queryKeys.carpoolList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<CarpoolListResponse>(ENDPOINTS.fetchCarpoolList({ ...urls, pageParam })),
     initialPageParam: 0,
@@ -59,7 +57,7 @@ export const useFetchCarpoolList = ({ urls }: CarpoolMainRequest) =>
 
 export const useFetchCarpoolSearchList = ({ urls }: CarpoolSearchRequest) =>
   useInfiniteQuery({
-    queryKey: queryKeys.searchList(urls),
+    queryKey: queryKeys.searchList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<CarpoolListResponse>(ENDPOINTS.fetchSearchList({ ...urls, pageParam })),
     initialPageParam: 0,
