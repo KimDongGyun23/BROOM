@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
@@ -7,12 +8,17 @@ import { MainHeader } from '@/components/view/MainHeader'
 import { ToggleButton } from '@/components/view/ToggleButton'
 import { ModalStoreProvider } from '@/stores/modal'
 
-const NavigationButton = ({ label }: { label: string }) => {
+type NavigationLink = {
+  label: string
+  to: string
+}
+
+const NavigationLink = ({ label, to }: NavigationLink) => {
   return (
-    <StyledButton>
+    <StyledLink to={to}>
       <p className="button-label">{label}</p>
       <ArrowRightIcon active />
-    </StyledButton>
+    </StyledLink>
   )
 }
 
@@ -25,9 +31,9 @@ export const Admin = () => {
           <p className="section-label">버스 신청 활성화</p>
           <ToggleButton />
         </ToggleSection>
-        <NavigationButton label="버스 신청 현황 조회" />
-        <NavigationButton label="예비군 날짜 선택" />
-        <NavigationButton label="게시글 정보" />
+        <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
+        <NavigationLink label="예비군 날짜 선택" to="/kw/broom/bus" />
+        <NavigationLink label="게시글 정보" to="/kw/broom/bus" />
       </PageContent>
 
       <ButtonContainer>
@@ -51,7 +57,7 @@ const ToggleSection = styled.div`
   }
 `
 
-const StyledButton = styled.button`
+const StyledLink = styled(Link)`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
 
   .button-label {
