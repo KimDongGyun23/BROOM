@@ -25,6 +25,10 @@ import { MypageMyPost } from '@/components/container/mypage/MypageMyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
 import { instance } from '@/query'
 
+import { Admin } from '../container/admin/Admin'
+import { AdminBus } from '../container/admin/AdminBus'
+import { AdminTrainingSchedule } from '../container/admin/AdminTrainingSchedule'
+
 const LoginPrivateRoute = () => {
   const session = instance.hasToken()
   return session ? <Navigate to="/home" /> : <Outlet />
@@ -62,6 +66,10 @@ export const RouterComponent = () => {
         <Route path="/sign-up" element={<SignupPage />} />
         <Route path="/sign-up/complete" element={<SignupCompletePage />} />
       </Route>
+
+      <Route path="/kw/broom" element={<Admin />} />
+      <Route path="/kw/broom/bus" element={<AdminBus />} />
+      <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="/carpool/create" element={<CarpoolCreate />} />

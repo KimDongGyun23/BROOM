@@ -169,7 +169,7 @@ const StyledInput = styled.input`
   ${({ theme }) => theme.padding('xs', 0)};
   ${({ theme }) => theme.font(700, theme.colors.black[500])};
   width: 100%;
-  height: 32px;
+  height: 24px;
 `
 
 const VisibilityButton = styled.button`

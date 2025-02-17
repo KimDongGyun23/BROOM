@@ -8,6 +8,7 @@ dayjs.extend(customParseFormat)
 const DATE_FORMAT = {
   default: 'YYYY-MM-DD',
   compact: 'YYYYMMDD',
+  dotDate: 'YYYY.MM.DD',
   dateTime: 'YYYY/MM/DD HH:mm',
   fullTime: 'HH:mm:ss',
   shortTime: 'HH:mm',

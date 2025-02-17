@@ -32,7 +32,7 @@ export const Admin = () => {
           <ToggleButton />
         </ToggleSection>
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
-        <NavigationLink label="예비군 날짜 선택" to="/kw/broom/bus" />
+        <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="게시글 정보" to="/kw/broom/bus" />
       </PageContent>
 
