@@ -29,6 +29,7 @@ export const Mypage = () => {
 
           <ButtonContainer>
             <LogoutButton />
+            <span className="divider" />
             <DeleteIdButton />
           </ButtonContainer>
         </ScrollContainer>
@@ -53,4 +54,9 @@ const ButtonContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center')};
   ${({ theme }) => theme.margin('mypage-button-top', 0, 0, 'auto')};
   ${({ theme }) => theme.padding(0, 'xs')};
+
+  .divider {
+    ${({ theme }) => theme.border('underline', 'right')};
+    height: 100%;
+  }
 `

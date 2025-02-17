@@ -19,6 +19,5 @@ export const LogoutButton = () => {
 
 const ActionButton = styled.button`
   ${({ theme }) => theme.padding(0, 'lg')};
-  ${({ theme }) => theme.border('underline', 'right')};
   ${({ theme }) => theme.font(800, theme.colors.black[500])};
 `
