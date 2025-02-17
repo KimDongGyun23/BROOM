@@ -69,3 +69,18 @@ export const BookmarkIcon = ({ active = false }: SvgIconProps) => {
     </svg>
   )
 }
+
+export const ArrowRightIcon = ({ active = false }: SvgIconProps) => {
+  const fillStyle = active ? '#A09B96' : '#FBFBFB'
+
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M6.70241 16.0059C6.37697 15.6805 6.37697 15.1528 6.70241 14.8274L11.5298 10L6.70241 5.17259C6.37697 4.84715 6.37697 4.31951 6.70241 3.99408C7.02785 3.66864 7.55548 3.66864 7.88092 3.99408L12.7083 8.82149C13.3592 9.47236 13.3592 10.5276 12.7083 11.1785L7.88092 16.0059C7.55548 16.3314 7.02785 16.3314 6.70241 16.0059Z"
+        fill={fillStyle}
+      />
+    </svg>
+  )
+}

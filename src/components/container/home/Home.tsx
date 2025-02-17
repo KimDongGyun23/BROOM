@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { ArrowRightIcon } from '@/components/view/icons/NonActiveIcons'
+import { ArrowRightIcon } from '@/components/view/icons/ActiveIcons'
 import { MainHeader } from '@/components/view/MainHeader'
 import { Container } from '@/styles/commonStyles'
 
