@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import { useToggle } from '@/hooks/useToggle'
 
 type ToggleButtonProps = {
-  initialToggleState: boolean
+  initialToggleState?: boolean
 }
 
 export const ToggleButton = ({ initialToggleState = false }: ToggleButtonProps) => {
