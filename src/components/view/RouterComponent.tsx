@@ -27,6 +27,7 @@ import { instance } from '@/query'
 
 import { Admin } from '../container/admin/Admin'
 import { AdminBus } from '../container/admin/AdminBus'
+import { AdminOverview } from '../container/admin/AdminOverview'
 import { AdminTrainingSchedule } from '../container/admin/AdminTrainingSchedule'
 
 const LoginPrivateRoute = () => {
@@ -70,6 +71,7 @@ export const RouterComponent = () => {
       <Route path="/kw/broom" element={<Admin />} />
       <Route path="/kw/broom/bus" element={<AdminBus />} />
       <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
+      <Route path="/kw/broom/overview" element={<AdminOverview />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="/carpool/create" element={<CarpoolCreate />} />
