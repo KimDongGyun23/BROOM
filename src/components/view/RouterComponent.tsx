@@ -68,11 +68,6 @@ export const RouterComponent = () => {
         <Route path="/sign-up/complete" element={<SignupCompletePage />} />
       </Route>
 
-      <Route path="/kw/broom" element={<Admin />} />
-      <Route path="/kw/broom/bus" element={<AdminBus />} />
-      <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
-      <Route path="/kw/broom/overview" element={<AdminOverview />} />
-
       <Route element={<PrivateRoute />}>
         <Route path="/carpool/create" element={<CarpoolCreate />} />
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
@@ -86,6 +81,11 @@ export const RouterComponent = () => {
         <Route path="/mypage/password" element={<NewPassword />} />
         <Route path="/mypage/my-post" element={<MypageMyPost />} />
         <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
+
+        <Route path="/kw/broom" element={<Admin />} />
+        <Route path="/kw/broom/bus" element={<AdminBus />} />
+        <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
+        <Route path="/kw/broom/overview" element={<AdminOverview />} />
       </Route>
 
       <Route path="*" element={<ErrorPage />} />
