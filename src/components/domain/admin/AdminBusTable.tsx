@@ -41,22 +41,30 @@ const BusTableRow = ({ name, studentId, phone }: BusTableRowType) => {
 
 export const AdminBusTable = () => {
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          <th>이름</th>
-          <th>학번</th>
-          <th>연락처</th>
-        </tr>
-      </thead>
-      <tbody>
-        {dummyData.map((applicant, index) => (
-          <BusTableRow key={index} {...applicant} />
-        ))}
-      </tbody>
-    </StyledTable>
+    <>
+      <TotalApplicant>총인원 수: 32</TotalApplicant>
+      <StyledTable>
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>학번</th>
+            <th>연락처</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dummyData.map((applicant, index) => (
+            <BusTableRow key={index} {...applicant} />
+          ))}
+        </tbody>
+      </StyledTable>
+    </>
   )
 }
+
+const TotalApplicant = styled.p`
+  ${({ theme }) => theme.font(700, theme.colors.black[600])};
+  ${({ theme }) => theme.margin(0, 0, 'sm')};
+`
 
 const StyledTable = styled.table`
   width: 100%;
@@ -65,8 +73,8 @@ const StyledTable = styled.table`
 
   th,
   td {
-    border: 1px solid #ddd;
     ${({ theme }) => theme.padding('sm')};
+    border: 1px solid #ddd;
   }
 
   th {
