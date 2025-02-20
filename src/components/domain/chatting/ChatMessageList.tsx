@@ -71,7 +71,7 @@ export const ChatMessageList = () => {
 }
 
 const Container = styled.main`
-  ${({ theme }) => theme.flexBox('column-reverse', undefined, undefined, 'lg')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
   ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding('lg', 0)};
   flex-grow: 1;
