@@ -20,6 +20,7 @@ export const colors = {
   success: '#78BE7B',
   error: '#F3614E',
   orange: '#FF8E5D',
+  yellow: '#F9D66F',
 }
 
 export type ColorsType = typeof colors

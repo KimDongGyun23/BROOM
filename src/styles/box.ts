@@ -19,6 +19,7 @@ const sizeMap = {
   border: {
     0: 'none',
     divider: `1px solid ${colors.black[100]}`,
+    box: `1px solid ${colors.black[100]}`,
     input: `1px solid ${colors.black[200]}`,
     underline: `1px solid ${colors.black[400]}`,
     chain: `10px solid ${colors.black[100]}`,

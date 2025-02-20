@@ -9,6 +9,7 @@ const sizeMap = {
   lg: '64',
   md: '48',
   sm: '40',
+  xs: '24',
 } as const
 
 const iconMap: Record<MilitaryBranchCode, ElementType> = {
