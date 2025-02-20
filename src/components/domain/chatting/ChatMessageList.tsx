@@ -54,19 +54,19 @@ export const ChatMessageList = () => {
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <InfiniteScroll
-      hasMore={hasNextPage}
-      threshold={200}
-      loadMore={() => fetchNextPage()}
-      useWindow={false}
-      isReverse
-    >
-      <Container ref={scrollRef}>
+    <Container ref={scrollRef}>
+      <InfiniteScroll
+        hasMore={hasNextPage}
+        threshold={200}
+        loadMore={() => fetchNextPage()}
+        useWindow={false}
+        isReverse
+      >
         {messageList?.map((message) => (
           <ChatMessage key={message.messageId} messageData={message} />
         ))}
-      </Container>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </Container>
   )
 }
 

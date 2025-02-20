@@ -1,4 +1,4 @@
-import { ChatMessageList } from '@/components/domain/chatting/ChattingMessageList'
+import { ChatMessageList } from '@/components/domain/chatting/ChatMessageList'
 import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
