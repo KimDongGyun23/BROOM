@@ -30,15 +30,15 @@ const sizeMap = {
   'border-radius': {
     ...gap,
     full: '100%',
-    bubble: '20px',
+    myMessage: '20px 20px 0 20px',
+    opponentsMessage: '0 20px 20px 20px',
     chain: '40px',
   },
   padding: {
     ...gap,
     chain: '14px 30px 14px 18px',
     modal: '36px 0',
-    'bubble-x': '16px',
-    'bubble-y': '10px',
+    bubble: '10px 16px',
   },
   margin: {
     ...gap,

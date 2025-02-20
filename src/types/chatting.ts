@@ -21,9 +21,12 @@ type TeamChattingRoomType = ChattingRoomType & {
 }
 
 export type MessageType = {
-  senderName: string
-  content: string
+  messageId: number
+  message: string
+  senderNickname: string
   createdAt: string
+  militaryBranch: MilitaryBranchCode
+  dischargeYear: number
 }
 
 type ChattingType = {

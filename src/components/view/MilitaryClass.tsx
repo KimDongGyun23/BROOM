@@ -19,7 +19,7 @@ export const MilitaryClass = ({ reserveYear }: MilitaryClassProps) => {
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, 'space-around')};
+  ${({ theme }) => theme.flexBox('column', undefined, 'space-evenly')};
   width: 20px;
   height: 20px;
 `
