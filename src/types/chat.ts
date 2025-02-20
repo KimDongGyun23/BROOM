@@ -35,6 +35,6 @@ export type ChattingRoomInformationResponse = {
   hasNext: boolean
 }
 
-export type ChatRoomInformationRequest = {
+export type EnterChatRoomRequest = {
   urls: Pick<BoardInformation, 'boardId'>
 }

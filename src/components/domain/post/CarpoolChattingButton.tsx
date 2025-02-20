@@ -4,7 +4,7 @@ import { styled } from 'styled-components'
 import { Button } from '@/components/view/Button'
 import { ModalWithOneButton } from '@/components/view/Modal'
 import { useParamId } from '@/hooks/useParamId'
-import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
+import { useEnterChatRoom } from '@/query/useChattingQuery'
 import { useModalActions, useModalState } from '@/stores/modal'
 
 type CarpoolChattingButtonProps = {
@@ -18,7 +18,7 @@ export const CarpoolChattingButton = ({ isFull }: CarpoolChattingButtonProps) =>
   const { isModalOpen, label } = useModalState()
   const { openModal, closeModal } = useModalActions()
 
-  const { refetch } = useFetchChatRoomInformation({ urls: { boardId } })
+  const { refetch } = useEnterChatRoom({ urls: { boardId } })
 
   const handleClickChatButton = async () => {
     const { isSuccess, isError, error } = await refetch()
