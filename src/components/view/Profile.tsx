@@ -39,27 +39,6 @@ export const PostProfile = () => {
   )
 }
 
-type ChattingRoomProfileProps = {
-  opponent: string
-  iconType: MilitaryBranchCode
-  dischargeYear: number
-  title: string
-}
-
-export const ChattingRoomProfile = ({
-  opponent,
-  iconType,
-  dischargeYear,
-  title,
-}: ChattingRoomProfileProps) => (
-  <BaseProfile
-    iconType={iconType}
-    name={opponent}
-    subtitle={`예비군 ${dischargeYear}년차`}
-    description={title}
-  />
-)
-
 const ProfileContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
   ${({ theme }) => theme.margin(0, 'container')};
