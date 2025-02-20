@@ -15,11 +15,11 @@ import type { MilitaryBranchCode } from '@/utils/constants'
 //   dischargeYear: number
 // }
 
-// type BoardInformation = {
-//   boardId: string
-//   boardTitle: string
-//   militaryBranches: MilitaryBranchCode[]
-// }
+type BoardInformation = {
+  boardId: string
+  boardTitle: string
+  militaryBranches: MilitaryBranchCode[]
+}
 
 export type ChatRoom = {
   boardId: string
@@ -33,4 +33,8 @@ export type ChatRoom = {
 export type ChattingRoomInformationResponse = {
   chatRooms: ChatRoom[]
   hasNext: boolean
+}
+
+export type ChatRoomInformationRequest = {
+  urls: Pick<BoardInformation, 'boardId'>
 }

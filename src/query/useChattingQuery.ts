@@ -1,20 +1,17 @@
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import type { ChattingRoomInformationResponse } from '@/types/chat'
+import type { ChatRoomInformationRequest, ChattingRoomInformationResponse } from '@/types/chat'
 import type {
   CarpoolChattingIdRequest,
   CarpoolChattingIdResponse,
-  CarpoolChattingRoomRequest,
-  CarpoolChattingRoomResponse,
   CarpoolExitChattingRoomRequest,
 } from '@/types/chatting'
 
 import { instance } from '.'
 
-type ChattingRoomRequest = CarpoolChattingRoomRequest
-
 const ENDPOINTS = {
   fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,
+  fetchRoomInfo: (urls: ChatRoomInformationRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
 
   CHATTING_ID: (id: string) => `/chat/room/create/${id}`,
   ROOM_INFO: (id: string) => `/chat/list/${id}`,
@@ -24,8 +21,8 @@ const ENDPOINTS = {
 const queryKeys = {
   all: ['chatting'] as const,
   roomList: () => [...queryKeys.all, 'chatting-list'] as const,
-  roomInfo: (urls: ChattingRoomRequest['urls']) =>
-    [...queryKeys.all, ...Object.values(urls)] as const,
+  roomInfo: (urls: ChatRoomInformationRequest['urls']) =>
+    [...queryKeys.all, 'chat-room', ...Object.values(urls)] as const,
 }
 
 export const useChattingRoomList = () => {
@@ -40,12 +37,12 @@ export const useChattingRoomList = () => {
   })
 }
 
-export const useCarpoolChattingInfo = ({ urls }: CarpoolChattingRoomRequest) => {
-  return useQuery<CarpoolChattingRoomResponse, Error>({
+export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest) =>
+  useQuery({
     queryKey: queryKeys.roomInfo(urls),
-    queryFn: async () => await instance.get(ENDPOINTS.ROOM_INFO(urls.chatRoomId)),
+    queryFn: () => instance.get<string>(ENDPOINTS.fetchRoomInfo(urls)),
+    enabled: false,
   })
-}
 
 export const useCarpoolChattingId = () => {
   return useMutation<CarpoolChattingIdResponse, Error, CarpoolChattingIdRequest>({
