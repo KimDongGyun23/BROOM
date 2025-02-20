@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
+import { ChattingInformation, ChattingItemContainer, ChattingPostTitle } from '@/styles/chatting'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 import { ChattingProfileImageBox } from './ChattingProfileImageBox'
@@ -33,7 +34,7 @@ const ChattingItem = ({
   </ChattingItemContainer>
 )
 
-export const CarpoolChattingList = () => {
+export const ChattingList = () => {
   const { data: chattingList, isPending, isError } = useCarpoolChattingRoomList()
 
   if (isPending) return <Loading />
@@ -44,7 +45,7 @@ export const CarpoolChattingList = () => {
       {chattingList.map((chattingRoomInformation) => (
         <Link
           key={chattingRoomInformation.boardId}
-          to={`/chatting/chatting-room/${chattingRoomInformation.boardId}`}
+          to={`/chatting/${chattingRoomInformation.boardId}`}
         >
           <ChattingItem {...chattingRoomInformation} />
         </Link>
@@ -54,31 +55,10 @@ export const CarpoolChattingList = () => {
 }
 
 const ChattingListContainer = styled.main`
-  ${({ theme }) => theme.flexBox('column')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
   ${({ theme }) => theme.margin('container', 0)};
   flex-grow: 1;
   overflow-y: scroll;
-`
-
-const ChattingItemContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
-  ${({ theme }) => theme.padding('lg', 'md')};
-  ${({ theme }) => theme.border('divider', 'bottom')};
-  width: 100%;
-`
-
-const ChattingInformation = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')};
-  min-width: 0;
-  flex-grow: 1;
-`
-
-const ChattingPostTitle = styled.div`
-  ${({ theme }) => theme.font(600, theme.colors.black[600])};
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 `
 
 const LastMessage = styled.p<{ $expelled?: boolean }>`
