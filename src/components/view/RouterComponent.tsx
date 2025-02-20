@@ -12,8 +12,8 @@ import { CarpoolCreate } from '@/components/container/carpool/CarpoolCreate'
 import { CarpoolDetail } from '@/components/container/carpool/CarpoolDetail'
 import { CarpoolEdit } from '@/components/container/carpool/CarpoolEdit'
 import { CarpoolSearch } from '@/components/container/carpool/CarpoolSearch'
-import { Chatting } from '@/components/container/chatting/Chatting'
-import { ChattingRoom } from '@/components/container/chatting/ChattingRoom'
+import { Chat } from '@/components/container/chat/Chat'
+import { ChatRoom } from '@/components/container/chat/ChatRoom'
 import { ErrorPage } from '@/components/container/home/ErrorPage'
 import { Home } from '@/components/container/home/Home'
 import { Onboarding } from '@/components/container/home/Onboarding'
@@ -72,8 +72,8 @@ export const RouterComponent = () => {
         <Route path="/carpool/create" element={<CarpoolCreate />} />
         <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
 
-        <Route path="/chat" element={<Chatting />} />
-        <Route path="/chat/:id" element={<ChattingRoom />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat/:id" element={<ChatRoom />} />
 
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-information" element={<AccountInformation />} />

@@ -2,7 +2,7 @@ import { ChatMessageList } from '@/components/domain/chatting/ChattingMessageLis
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { Container } from '@/styles/commonStyles'
 
-export const ChattingRoom = () => {
+export const ChatRoom = () => {
   // const { id: roomId } = useParams()
   // const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
   // const { setInitialMessage } = useChatMessageActions()

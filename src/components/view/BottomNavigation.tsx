@@ -13,7 +13,7 @@ const NAVIGATION_ITEMS = [
   { Icon: BusReservationIcon, path: '/bus-reserve' },
   { Icon: CarpoolIcon, path: '/carpool' },
   { Icon: HomeIcon, path: '/home' },
-  { Icon: ChattingIcon, path: '/chatting' },
+  { Icon: ChattingIcon, path: '/chat' },
   { Icon: MypageIcon, path: '/mypage' },
 ]
 

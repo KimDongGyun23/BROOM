@@ -3,7 +3,7 @@ import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { MainHeader } from '@/components/view/MainHeader'
 import { Container } from '@/styles/commonStyles'
 
-export const Chatting = () => {
+export const Chat = () => {
   return (
     <Container>
       <MainHeader />
