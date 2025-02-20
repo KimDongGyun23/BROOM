@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { Loading } from '@/components/view/Loading'
-import { useChattingRoomList } from '@/query/useChattingQuery'
+import { useFetchChatRoomList } from '@/query/useChattingQuery'
 import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/styles/chatting'
 import type { ChatRoom } from '@/types/chat'
 
@@ -32,7 +32,7 @@ const ChatItem = ({ chatRoomInformation }: ChatProfileProps) => {
 }
 
 export const ChatList = () => {
-  const { data, isPending, isError } = useChattingRoomList()
+  const { data, isPending, isError } = useFetchChatRoomList()
 
   if (isPending) return <Loading />
   if (isError) return <div>error</div>

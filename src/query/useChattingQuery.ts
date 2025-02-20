@@ -25,7 +25,7 @@ const queryKeys = {
     [...queryKeys.all, 'chat-room', ...Object.values(urls)] as const,
 }
 
-export const useChattingRoomList = () => {
+export const useFetchChatRoomList = () => {
   return useInfiniteQuery({
     queryKey: queryKeys.roomList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
