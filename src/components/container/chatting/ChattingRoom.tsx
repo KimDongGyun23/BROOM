@@ -1,33 +1,31 @@
 import { ChatMessageList } from '@/components/domain/chatting/ChattingMessageList'
-import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
-import { useChatMessageActions } from '@/stores/chatMessage'
 import { Container } from '@/styles/commonStyles'
 
 export const ChattingRoom = () => {
-  const { id: roomId } = useParams()
-  const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
-  const { setInitialMessage } = useChatMessageActions()
+  // const { id: roomId } = useParams()
+  // const [isKebabOpen, openKebab, closeKebab] = useBoolean(false)
+  // const { setInitialMessage } = useChatMessageActions()
 
-  const {
-    data: carpoolRoomData,
-    isPending,
-    isError,
-  } = useCarpoolChattingInfo({
-    urls: { chatRoomId: roomId as string },
-  })
+  // const {
+  //   data: carpoolRoomData,
+  //   isPending,
+  //   isError,
+  // } = useCarpoolChattingInfo({
+  //   urls: { chatRoomId: roomId as string },
+  // })
 
-  if (isPending) return <Loading />
-  if (isError) return <div>error</div>
+  // if (isPending) return <Loading />
+  // if (isError) return <div>error</div>
 
   return (
     <Container>
       <SubHeaderWithIcon type={'kebab'} onClickKebab={() => {}} />
-      <ChattingRoomProfile
+      {/* <ChattingRoomProfile
         profileIconList={carpoolRoomData.militaryBranches}
         ownerNickname={carpoolRoomData.ownerNickname}
         title={carpoolRoomData.boardName}
-      />
+      /> */}
 
       <ChatMessageList />
       {/* <MessageBox /> */}

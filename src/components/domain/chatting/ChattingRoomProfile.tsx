@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 
 import { CrownIcon } from '@/components/view/icons/NonActiveIcons'
-import { ChattingInformation, ChattingItemContainer, ChattingPostTitle } from '@/styles/chatting'
+import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/styles/chatting'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-import { ChattingProfileImageBox } from './ChattingProfileImageBox'
+import { ChatProfileImageBox } from './ChatProfileImageBox'
 
 type ChattingRoomProfileProps = {
   profileIconList: MilitaryBranchCode[]
@@ -17,18 +17,18 @@ export const ChattingRoomProfile = ({
   ownerNickname,
   title,
 }: ChattingRoomProfileProps) => (
-  <ChattingItemContainer>
-    <ChattingProfileImageBox profileIconList={profileIconList} />
+  <ChatItemContainer>
+    <ChatProfileImageBox profileIconList={profileIconList} />
 
-    <ChattingInformation>
-      <ChattingPostTitle>{title}</ChattingPostTitle>
+    <ChatInformation>
+      <ChatPostTitle>{title}</ChatPostTitle>
 
       <ChattingOwnerNickname>
         <span className="profile-name">{ownerNickname}</span>
         <CrownIcon />
       </ChattingOwnerNickname>
-    </ChattingInformation>
-  </ChattingItemContainer>
+    </ChatInformation>
+  </ChatItemContainer>
 )
 
 const ChattingOwnerNickname = styled.div`

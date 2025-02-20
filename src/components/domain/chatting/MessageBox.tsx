@@ -47,7 +47,7 @@ const MessageBoxForm = styled.form`
 
 const MessageInputContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
-  ${({ theme }) => theme.borderRadius('bubble')};
+  ${({ theme }) => theme.borderRadius('xl')};
   ${({ theme }) => theme.padding('sm', 'sm', 'sm', 'lg')};
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.black[100]};

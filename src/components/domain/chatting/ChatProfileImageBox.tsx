@@ -7,7 +7,7 @@ type ChattingProfileImageBoxProps = {
   profileIconList: MilitaryBranchCode[]
 }
 
-export const ChattingProfileImageBox = ({ profileIconList }: ChattingProfileImageBoxProps) => {
+export const ChatProfileImageBox = ({ profileIconList }: ChattingProfileImageBoxProps) => {
   return (
     <Container>
       {profileIconList.slice(0, 4).map((profileIcon, index) => (

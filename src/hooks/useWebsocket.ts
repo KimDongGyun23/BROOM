@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
 import { instance } from '@/query'
-import { useMessageActions } from '@/stores/chatMessage'
+import { useChatMessageActions } from '@/stores/chatMessage'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
@@ -10,7 +10,7 @@ const SERVER = import.meta.env.VITE_PUBLIC_SERVER
 
 export const useWebSocket = (roomId: string | undefined) => {
   const client = useRef<Client | null>(null)
-  const { addMessage } = useMessageActions()
+  const { addMessage } = useChatMessageActions()
 
   const token = instance.getAccessToken() as string
 
