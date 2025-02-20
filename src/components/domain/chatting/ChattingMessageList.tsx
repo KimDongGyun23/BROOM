@@ -1,7 +1,10 @@
+import InfiniteScroll from 'react-infinite-scroller'
 import styled, { css } from 'styled-components'
 
 import { ProfileImage } from '@/components/view/ProfileImage'
+import { useParamId } from '@/hooks/useParamId'
 import { useScrollToBottom } from '@/hooks/useScrollToBottom'
+import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
 import { useChatMessages } from '@/stores/chatMessage'
 import type { MessageType } from '@/types/chatting'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
@@ -30,14 +33,40 @@ const ChatMessage = ({ messageData }: { messageData: MessageType }) => {
   )
 }
 
+{
+  /* <InfiniteScroll
+        hasMore={hasNextPage}
+        threshold={200}
+        loadMore={() => fetchNextPage()}
+        useWindow={false}
+      >
+        {postList.map((item) => (
+          <PostItem key={item.status.boardId} item={item} />
+        ))}
+      </InfiniteScroll> */
+}
+
 export const ChatMessageList = () => {
+  const boardId = useParamId()
   const messageList = useChatMessages()
   const scrollRef = useScrollToBottom(messageList)
 
+  const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
+
   return (
-    <Container ref={scrollRef}>
-      {messageList?.map((message) => <ChatMessage key={message.messageId} messageData={message} />)}
-    </Container>
+    <InfiniteScroll
+      hasMore={hasNextPage}
+      threshold={200}
+      loadMore={() => fetchNextPage()}
+      useWindow={false}
+      isReverse
+    >
+      <Container ref={scrollRef}>
+        {messageList?.map((message) => (
+          <ChatMessage key={message.messageId} messageData={message} />
+        ))}
+      </Container>
+    </InfiniteScroll>
   )
 }
 

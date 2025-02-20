@@ -6,18 +6,18 @@ import type { MilitaryBranchCode } from '@/utils/constants'
 //   militaryBranch: MilitaryBranchCode
 // }
 
-// type Message = {
-//   messageId: number
-//   message: string
-//   senderNickname: string
-//   createdAt: string
-//   militaryBranch: MilitaryBranchCode
-//   dischargeYear: number
-// }
+type Message = {
+  messageId: number
+  message: string
+  senderNickname: string
+  createdAt: string
+  militaryBranch: MilitaryBranchCode
+  dischargeYear: number
+}
 
 type BoardInformation = {
-  boardId: string
   boardTitle: string
+  ownerNickname: string
   militaryBranches: MilitaryBranchCode[]
 }
 
@@ -30,11 +30,21 @@ export type ChatRoom = {
   expelled: boolean
 }
 
-export type ChattingRoomInformationResponse = {
+export type ChatRoomListResponse = {
   chatRooms: ChatRoom[]
   hasNext: boolean
 }
 
+export type ChatRoomInformationRequest = {
+  urls: Pick<ChatRoom, 'boardId'> & {
+    pageParam?: number
+  }
+}
+export type ChatRoomInformationResponse = BoardInformation & {
+  messages: Message[]
+  hasNext: boolean
+}
+
 export type EnterChatRoomRequest = {
-  urls: Pick<BoardInformation, 'boardId'>
+  urls: Pick<ChatRoom, 'boardId'>
 }
