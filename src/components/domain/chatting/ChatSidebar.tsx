@@ -31,7 +31,7 @@ export const ChatSidebar = ({
         </Header>
 
         <ParticipantSection>
-          <p className="participant-title">현재 참여 인원 수 : {participants.length}명</p>
+          <p className="participant-count">현재 참여 인원 수 : {participants.length}명</p>
 
           <ParticipantList>
             {participants.map(({ userId, userNickname, militaryBranch }) => (
