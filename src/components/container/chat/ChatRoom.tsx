@@ -1,10 +1,11 @@
 import { ChatMessageList } from '@/components/domain/chatting/ChatMessageList'
+import { ChatRoomHeader } from '@/components/domain/chatting/ChatRoomHeader'
 import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
 import { Loading } from '@/components/view/Loading'
-import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { useParamId } from '@/hooks/useParamId'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
 import { useChatMessageActions } from '@/stores/chatMessage'
+import { ModalStoreProvider } from '@/stores/modal'
 import { Container } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -27,16 +28,18 @@ export const ChatRoom = () => {
   const { militaryBranches, ownerNickname, boardTitle } = roomInformation
 
   return (
-    <Container>
-      <SubHeaderWithIcon type={'kebab'} onClickKebab={() => {}} />
-      <ChattingRoomProfile
-        profileIconList={militaryBranches}
-        ownerNickname={ownerNickname}
-        title={boardTitle}
-      />
+    <ModalStoreProvider>
+      <Container>
+        <ChatRoomHeader />
+        <ChattingRoomProfile
+          profileIconList={militaryBranches}
+          ownerNickname={ownerNickname}
+          title={boardTitle}
+        />
 
-      <ChatMessageList />
-      {/* <MessageBox /> */}
-    </Container>
+        <ChatMessageList />
+        {/* <MessageBox /> */}
+      </Container>
+    </ModalStoreProvider>
   )
 }

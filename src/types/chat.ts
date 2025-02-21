@@ -1,10 +1,11 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-// type User = {
-//   userId: string
-//   userNickname: string
-//   militaryBranch: MilitaryBranchCode
-// }
+type User = {
+  userId: string
+  userNickname: string
+  militaryBranch: MilitaryBranchCode
+  expelled: boolean
+}
 
 type Message = {
   messageId: number
@@ -43,6 +44,14 @@ export type ChatRoomInformationRequest = {
 export type ChatRoomInformationResponse = BoardInformation & {
   messages: Message[]
   hasNext: boolean
+}
+
+export type ChatSidebarInformationRequest = {
+  urls: Pick<ChatRoom, 'boardId'>
+}
+export type ChatSidebarInformationResponse = Pick<BoardInformation, 'boardTitle'> & {
+  trainingDate: string
+  participants: User[]
 }
 
 export type EnterChatRoomRequest = {

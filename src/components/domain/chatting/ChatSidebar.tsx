@@ -4,102 +4,23 @@ import styled from 'styled-components'
 import { CrownIcon } from '@/components/view/icons/NonActiveIcons'
 import { ModalLayout } from '@/components/view/modal/ModalLayout'
 import { ProfileImage } from '@/components/view/ProfileImage'
+import type { ChatSidebarInformationResponse } from '@/types/chat'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 type ModalBaseProps = {
+  sidebarInformation: ChatSidebarInformationResponse | undefined
   isOpen: boolean
   onClose: VoidFunction
 }
 
-const dummy = {
-  boardTitle: '광운대 택시 출발',
-  trainingDate: '2025/05/21',
-  participants: [
-    {
-      userId: 'test2345',
-      userNickname: 'test2',
-      militaryBranch: 'ARMY',
-      expelled: true,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-    {
-      userId: 'test3456',
-      userNickname: 'test3',
-      militaryBranch: 'ARMY',
-      expelled: false,
-    },
-  ],
-}
+export const ChatSidebar = ({
+  sidebarInformation,
+  isOpen,
+  onClose,
+}: PropsWithChildren<ModalBaseProps>) => {
+  if (!isOpen || !sidebarInformation) return null
 
-export const ChatSidebar = ({ isOpen, onClose }: PropsWithChildren<ModalBaseProps>) => {
-  if (!isOpen) return null
-
-  const { boardTitle, trainingDate, participants } = dummy
+  const { boardTitle, trainingDate, participants } = sidebarInformation
 
   return (
     <ModalLayout id="chat-sidebar" isOpen={isOpen} onClose={onClose}>

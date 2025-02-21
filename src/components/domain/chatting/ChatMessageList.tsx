@@ -33,19 +33,6 @@ const ChatMessage = ({ messageData }: { messageData: MessageType }) => {
   )
 }
 
-{
-  /* <InfiniteScroll
-        hasMore={hasNextPage}
-        threshold={200}
-        loadMore={() => fetchNextPage()}
-        useWindow={false}
-      >
-        {postList.map((item) => (
-          <PostItem key={item.status.boardId} item={item} />
-        ))}
-      </InfiniteScroll> */
-}
-
 export const ChatMessageList = () => {
   const boardId = useParamId()
   const messageList = useChatMessages()
