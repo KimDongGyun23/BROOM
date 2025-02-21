@@ -45,7 +45,7 @@ export const ChatSidebar = ({ sidebarInformation, isOpen, onClose }: ChatSidebar
 
 const ModalContent = styled.div`
   ${({ theme }) => theme.flexBox('column')};
-  ${({ theme }) => theme.padding('md', 'lg')};
+  ${({ theme }) => theme.padding('md', 0)};
   position: absolute;
   right: 0;
   width: 80%;
@@ -55,6 +55,7 @@ const ModalContent = styled.div`
 
 const Header = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
+  ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding(0, 0, '2xl')};
   ${({ theme }) => theme.border('divider', 'bottom')};
 
@@ -69,6 +70,7 @@ const Header = styled.div`
 
 const ParticipantSection = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
+  ${({ theme }) => theme.margin(0, 'container')};
   ${({ theme }) => theme.padding('md', 0, 0)};
   flex-grow: 1;
   overflow: hidden;
@@ -79,7 +81,6 @@ const ParticipantSection = styled.div`
 `
 
 const SidebarFooter = styled.div`
-  ${({ theme }) => theme.padding('md', 'lg')};
   ${({ theme }) => theme.font(800, theme.colors.black[100])};
   background-color: ${({ theme }) => theme.colors.black[500]};
 

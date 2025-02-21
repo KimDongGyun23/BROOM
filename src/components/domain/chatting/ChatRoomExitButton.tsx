@@ -14,7 +14,7 @@ export const ChatRoomExitButton = () => {
 
   const { isModalOpen, label } = useModalState()
   const { isTwoButtonModalOpen, twoButtonLabel } = useTwoButtonModalState()
-  const { openModal, closeModal, openTwoButtonModal } = useModalActions()
+  const { openModal, openTwoButtonModal, closeModal, closeSidebar } = useModalActions()
 
   const handleClickOpenModal = () => openTwoButtonModal('채팅방을 나가시겠습니까?')
 
@@ -22,14 +22,15 @@ export const ChatRoomExitButton = () => {
     exitRoom(
       { urls: { boardId } },
       {
-        onSuccess: (response) => openModal(response),
-        onError: (error) => openModal(error.message),
+        onSuccess: (response) => openModal(response, true),
+        onError: (error) => openModal(error.message, false),
       },
     )
   }
 
   const handleCloseModal = () => {
     closeModal()
+    closeSidebar()
     navigate('/chat')
   }
 
