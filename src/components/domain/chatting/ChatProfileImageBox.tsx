@@ -10,9 +10,9 @@ type ChattingProfileImageBoxProps = {
 export const ChatProfileImageBox = ({ profileIconList }: ChattingProfileImageBoxProps) => {
   return (
     <Container>
-      {profileIconList.slice(0, 4).map((profileIcon, index) => (
-        <ProfileImage key={index} size="xs" iconType={profileIcon} />
-      ))}
+      {profileIconList
+        ?.slice(0, 4)
+        .map((profileIcon, index) => <ProfileImage key={index} size="xs" iconType={profileIcon} />)}
     </Container>
   )
 }
