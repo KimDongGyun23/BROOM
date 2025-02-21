@@ -34,7 +34,7 @@ export const ChatSidebar = ({
           <p className="participant-title">현재 참여 인원 수 : {participants.length}명</p>
 
           <ParticipantList>
-            {participants.map(({ userId, userNickname, militaryBranch, expelled }) => (
+            {participants.map(({ userId, userNickname, militaryBranch }) => (
               <ParticipantItem key={userId}>
                 <ProfileImage size="sm" iconType={militaryBranch as MilitaryBranchCode} />
                 <ProfileInfo>
