@@ -4,7 +4,7 @@ import type { StoreApi } from 'zustand'
 import { createStore, useStore } from 'zustand'
 
 type Actions = {
-  openModal: (label: string, isSuccessModal: boolean) => void
+  openModal: (label: string, isSuccessModal?: boolean) => void
   openTwoButtonModal: (twoButtonLabel: string) => void
   closeModal: VoidFunction
 }

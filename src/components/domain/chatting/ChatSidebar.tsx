@@ -1,11 +1,12 @@
 import type { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 
-import { CrownIcon } from '@/components/view/icons/NonActiveIcons'
 import { ModalLayout } from '@/components/view/modal/ModalLayout'
-import { ProfileImage } from '@/components/view/ProfileImage'
+import { useModalActions } from '@/stores/modal'
 import type { ChatSidebarInformationResponse } from '@/types/chat'
-import type { MilitaryBranchCode } from '@/utils/constants'
+
+import { ChatParticipantList } from './ChatParticipantList'
+import { ChatRoomExitButton } from './ChatRoomExitButton'
 
 type ModalBaseProps = {
   sidebarInformation: ChatSidebarInformationResponse | undefined
@@ -18,6 +19,8 @@ export const ChatSidebar = ({
   isOpen,
   onClose,
 }: PropsWithChildren<ModalBaseProps>) => {
+  const { closeModal } = useModalActions()
+
   if (!isOpen || !sidebarInformation) return null
 
   const { boardTitle, trainingDate, participants } = sidebarInformation
@@ -32,20 +35,14 @@ export const ChatSidebar = ({
 
         <ParticipantSection>
           <p className="participant-count">현재 참여 인원 수 : {participants.length}명</p>
-
-          <ParticipantList>
-            {participants.map(({ userId, userNickname, militaryBranch }) => (
-              <ParticipantItem key={userId}>
-                <ProfileImage size="sm" iconType={militaryBranch as MilitaryBranchCode} />
-                <ProfileInfo>
-                  <p>{userNickname}</p>
-                  <CrownIcon />
-                </ProfileInfo>
-                <ExpelButton>내보내기</ExpelButton>
-              </ParticipantItem>
-            ))}
-          </ParticipantList>
+          <ChatParticipantList participantList={participants} />
         </ParticipantSection>
+
+        <SidebarFooter>
+          <ChatRoomExitButton />
+          <span className="divider" />
+          <CloseButton onClick={closeModal}>닫기</CloseButton>
+        </SidebarFooter>
       </ModalContent>
     </ModalLayout>
   )
@@ -86,26 +83,18 @@ const ParticipantSection = styled.div`
   }
 `
 
-const ParticipantList = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.padding('md', 0)};
-  flex-grow: 1;
-  overflow-y: scroll;
-`
-
-const ParticipantItem = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
-`
-
-const ProfileInfo = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
+const SidebarFooter = styled.div`
+  ${({ theme }) => theme.padding('md', 'lg')};
   ${({ theme }) => theme.font(800, theme.colors.black[100])};
-  flex-grow: 1;
+  background-color: ${({ theme }) => theme.colors.black[500]};
+
+  .divider {
+    ${({ theme }) => theme.border('underline', 'right')};
+    height: 100%;
+  }
 `
 
-const ExpelButton = styled.button`
-  ${({ theme }) => theme.padding('xs', 'sm')};
-  ${({ theme }) => theme.font(900, theme.colors.orange)};
-  ${({ theme }) => theme.borderRadius('md')};
-  background-color: ${({ theme }) => theme.colors.black[100]};
+const CloseButton = styled.button`
+  ${({ theme }) => theme.padding('md', 'lg')};
+  ${({ theme }) => theme.font(800, theme.colors.black[100])};
 `

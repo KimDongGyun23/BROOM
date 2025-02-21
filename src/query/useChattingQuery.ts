@@ -7,8 +7,8 @@ import type {
   ChatSidebarInformationRequest,
   ChatSidebarInformationResponse,
   EnterChatRoomRequest,
+  ExitChatRoomRequest,
 } from '@/types/chat'
-import type { CarpoolExitChattingRoomRequest } from '@/types/chatting'
 
 import { instance } from '.'
 
@@ -20,7 +20,7 @@ const ENDPOINTS = {
     `/chat/list/participant/${urls.boardId}`,
   enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
 
-  EXIT: (id: string) => `/chat/room/list/${id}`,
+  exitRoom: (urls: ExitChatRoomRequest['urls']) => `/chat/list/exit/${urls.boardId}`,
 } as const
 
 const queryKeys = {
@@ -84,11 +84,11 @@ export const useEnterChatRoom = ({ urls }: EnterChatRoomRequest) =>
     enabled: false,
   })
 
-export const useCarpoolExitChattingRoom = () => {
+export const useExitChatRoom = () => {
   const queryClient = useQueryClient()
 
-  return useMutation<void, Error, CarpoolExitChattingRoomRequest>({
-    mutationFn: async ({ urls }) => await instance.post(ENDPOINTS.EXIT(urls.chatRoomId)),
+  return useMutation({
+    mutationFn: ({ urls }: ExitChatRoomRequest) => instance.post<string>(ENDPOINTS.exitRoom(urls)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }

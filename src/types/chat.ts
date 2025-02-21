@@ -1,6 +1,6 @@
 import type { MilitaryBranchCode } from '@/utils/constants'
 
-type User = {
+export type User = {
   userId: string
   userNickname: string
   militaryBranch: MilitaryBranchCode
@@ -55,5 +55,9 @@ export type ChatSidebarInformationResponse = Pick<BoardInformation, 'boardTitle'
 }
 
 export type EnterChatRoomRequest = {
+  urls: Pick<ChatRoom, 'boardId'>
+}
+
+export type ExitChatRoomRequest = {
   urls: Pick<ChatRoom, 'boardId'>
 }
