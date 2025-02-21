@@ -21,13 +21,11 @@ export const ChatRoom = () => {
   } = useFetchChatRoomInformation({ urls: { boardId } })
 
   if (isPending) return <Loading />
-
-  console.log('roomInformation:', roomInformation)
   if (isError || !roomInformation) return <ErrorPage />
 
-  if (roomInformation) setInitialMessage(roomInformation.messages)
+  const { militaryBranches, ownerNickname, boardTitle, messages } = roomInformation
 
-  const { militaryBranches, ownerNickname, boardTitle } = roomInformation
+  setInitialMessage(messages)
 
   return (
     <ModalStoreProvider>

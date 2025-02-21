@@ -57,8 +57,7 @@ export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest
       return lastPage.hasNext ? allPages.length : undefined
     },
     select: (data) => {
-      console.log('select:', data)
-      if (data.pages[0]) return null
+      if (!data.pages[0]) return null
       const { boardTitle, ownerNickname, militaryBranches } = data.pages[0]
 
       return {
