@@ -24,16 +24,14 @@ export const ChatRoomHeader = () => {
   return (
     <>
       <SubHeaderWithIcon type={'kebab'} onClickKebab={handleClickKebab} />
-      {isModalOpen ? (
-        <ChatSidebar sidebarInformation={data} isOpen={isSidebarOpen} onClose={closeSidebar} />
-      ) : (
-        <ModalWithOneButton
-          content={label}
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          button={{ onClick: closeModal, label: '확인' }}
-        />
-      )}
+
+      <ChatSidebar sidebarInformation={data} isOpen={isSidebarOpen} onClose={closeSidebar} />
+      <ModalWithOneButton
+        content={label}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        button={{ onClick: closeModal, label: '확인' }}
+      />
     </>
   )
 }
