@@ -42,7 +42,7 @@ export const ChatRoomExitButton = () => {
         onClose={closeModal}
         content={twoButtonLabel}
         primaryButton={{ onClick: handleClickExitRoom, label: '확인' }}
-        secondaryButton={{ onClick: closeModal, label: '취소' }}
+        secondaryButton={{ onClick: closeModal, label: '취소', secondary: true }}
       />
       <ModalWithOneButton
         isOpen={isModalOpen}
