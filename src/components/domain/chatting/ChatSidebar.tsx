@@ -1,4 +1,3 @@
-import type { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 
 import { ModalLayout } from '@/components/view/modal/ModalLayout'
@@ -8,29 +7,25 @@ import type { ChatSidebarInformationResponse } from '@/types/chat'
 import { ChatParticipantList } from './ChatParticipantList'
 import { ChatRoomExitButton } from './ChatRoomExitButton'
 
-type ModalBaseProps = {
+type ChatSidebarProps = {
   sidebarInformation: ChatSidebarInformationResponse | undefined
   isOpen: boolean
   onClose: VoidFunction
 }
 
-export const ChatSidebar = ({
-  sidebarInformation,
-  isOpen,
-  onClose,
-}: PropsWithChildren<ModalBaseProps>) => {
+export const ChatSidebar = ({ sidebarInformation, isOpen, onClose }: ChatSidebarProps) => {
   const { closeModal } = useModalActions()
 
   if (!isOpen || !sidebarInformation) return null
 
-  const { boardTitle, trainingDate, participants } = sidebarInformation
+  const participants = [sidebarInformation.author, ...sidebarInformation.participants]
 
   return (
     <ModalLayout id="chat-sidebar" isOpen={isOpen} onClose={onClose}>
       <ModalContent>
         <Header>
-          <h5 className="title">{boardTitle}</h5>
-          <p className="training-date">훈련 날짜: {trainingDate}</p>
+          <h5 className="title">{sidebarInformation.boardTitle}</h5>
+          <p className="training-date">훈련 날짜: {sidebarInformation.trainingDate}</p>
         </Header>
 
         <ParticipantSection>

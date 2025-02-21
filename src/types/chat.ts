@@ -4,7 +4,6 @@ export type User = {
   userId: string
   userNickname: string
   militaryBranch: MilitaryBranchCode
-  expelled: boolean
 }
 
 type Message = {
@@ -51,6 +50,7 @@ export type ChatSidebarInformationRequest = {
 }
 export type ChatSidebarInformationResponse = Pick<BoardInformation, 'boardTitle'> & {
   trainingDate: string
+  author: User
   participants: User[]
 }
 

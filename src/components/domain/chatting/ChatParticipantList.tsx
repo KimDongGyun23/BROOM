@@ -4,31 +4,50 @@ import { CrownIcon } from '@/components/view/icons/NonActiveIcons'
 import { ProfileImage } from '@/components/view/ProfileImage'
 import type { User } from '@/types/chat'
 import type { MilitaryBranchCode } from '@/utils/constants'
+import { getSessionStorageItem } from '@/utils/storage'
 
 type ChatParticipantListProps = {
   participantList: User[]
 }
 
-const ChatParticipantItem = (participant: User) => {
-  const { militaryBranch, userNickname } = participant
+type ChatParticipantItemProps = {
+  militaryBranch: MilitaryBranchCode
+  userNickname: string
+  isAuthor: boolean
+  isChatRoomMine: boolean
+}
 
+const ChatParticipantItem = ({
+  isAuthor,
+  isChatRoomMine,
+  militaryBranch,
+  userNickname,
+}: ChatParticipantItemProps) => {
   return (
     <ParticipantItem>
       <ProfileImage size="sm" iconType={militaryBranch as MilitaryBranchCode} />
       <ProfileInfo>
         <p>{userNickname}</p>
-        <CrownIcon />
+        {isAuthor && <CrownIcon />}
       </ProfileInfo>
-      <ExpelButton>내보내기</ExpelButton>
+      {isChatRoomMine && <ExpelButton>내보내기</ExpelButton>}
     </ParticipantItem>
   )
 }
 
 export const ChatParticipantList = ({ participantList }: ChatParticipantListProps) => {
+  const myNickname = getSessionStorageItem('nickname')
+  const isChatRoomMine = myNickname === participantList[0].userNickname
+
   return (
     <Container>
-      {participantList.map((participant) => (
-        <ChatParticipantItem key={participant.userId} {...participant} />
+      {participantList.map((participant, index) => (
+        <ChatParticipantItem
+          key={participant.userId}
+          isAuthor={index === 0}
+          isChatRoomMine={isChatRoomMine}
+          {...participant}
+        />
       ))}
     </Container>
   )
