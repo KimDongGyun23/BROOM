@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/Modal'
+import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
 import { useDeleteCarpoolPost } from '@/query/useCarpoolQuery'
 import {
