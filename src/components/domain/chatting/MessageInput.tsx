@@ -10,6 +10,7 @@ export const MessageInput = () => {
   const { client, sendMessage } = useWebSocket()
 
   const handleSendMessage = ({ message }: { message: string }) => {
+    console.log('message 보내기. connected: ', client.current?.connected)
     if (message.length !== 0) {
       if (client.current && client.current.connected) {
         sendMessage(message)
@@ -24,9 +25,14 @@ export const MessageInput = () => {
     <FormProvider {...formMethod}>
       <Container>
         <MessageBoxForm onSubmit={handleSubmit(handleSendMessage)}>
-          <Input type="text" size={8} {...register} placeholder="메세지를 입력해주세요." />
+          <Input
+            type="text"
+            size={8}
+            {...register('message')}
+            placeholder="메세지를 입력해주세요."
+          />
 
-          <SendingButton type="submit" className="message-button">
+          <SendingButton type="submit">
             <SendingIcon />
           </SendingButton>
         </MessageBoxForm>
