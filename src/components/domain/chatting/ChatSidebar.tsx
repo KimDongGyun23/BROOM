@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { ModalLayout } from '@/components/view/modal/ModalLayout'
-import { useModalActions } from '@/stores/modal'
+import { useSidebarActions } from '@/stores/\bsidebar'
 import type { ChatSidebarInformationResponse } from '@/types/chat'
 
 import { ChatParticipantList } from './ChatParticipantList'
@@ -14,7 +14,7 @@ type ChatSidebarProps = {
 }
 
 export const ChatSidebar = ({ sidebarInformation, isOpen, onClose }: ChatSidebarProps) => {
-  const { closeSidebar } = useModalActions()
+  const { closeSidebar } = useSidebarActions()
 
   if (!isOpen || !sidebarInformation) return null
 

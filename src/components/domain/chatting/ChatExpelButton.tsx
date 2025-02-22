@@ -4,6 +4,7 @@ import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
 import { useExpelUser } from '@/query/useChattingQuery'
 import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
+import { useSidebarActions } from '@/stores/\bsidebar'
 
 type ChatExpelButtonProps = {
   userId: string
@@ -31,7 +32,8 @@ const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
 
 const ExpelModal = () => {
   const { isModalOpen, label } = useModalState()
-  const { closeModal, closeSidebar } = useModalActions()
+  const { closeModal } = useModalActions()
+  const { closeSidebar } = useSidebarActions()
 
   const handleCloseModal = () => {
     closeModal()

@@ -5,6 +5,7 @@ import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/modal/
 import { useParamId } from '@/hooks/useParamId'
 import { useExitChatRoom } from '@/query/useChattingQuery'
 import { useModalActions, useModalState, useTwoButtonModalState } from '@/stores/modal'
+import { useSidebarActions } from '@/stores/\bsidebar'
 
 export const ChatRoomExitButton = () => {
   const boardId = useParamId()
@@ -14,7 +15,8 @@ export const ChatRoomExitButton = () => {
 
   const { isModalOpen, label } = useModalState()
   const { isTwoButtonModalOpen, twoButtonLabel } = useTwoButtonModalState()
-  const { openModal, openTwoButtonModal, closeModal, closeSidebar } = useModalActions()
+  const { openModal, openTwoButtonModal, closeModal } = useModalActions()
+  const { closeSidebar } = useSidebarActions()
 
   const handleClickOpenModal = () => openTwoButtonModal('채팅방을 나가시겠습니까?')
 

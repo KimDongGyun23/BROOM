@@ -2,16 +2,18 @@ import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { useParamId } from '@/hooks/useParamId'
 import { useFetchChatSidebarInformation } from '@/query/useChattingQuery'
-import { useModalActions, useModalState, useSidebarState } from '@/stores/modal'
+import { useModalActions, useModalState } from '@/stores/modal'
+import { useIsSidebarOpen, useSidebarActions } from '@/stores/\bsidebar'
 
 import { ChatSidebar } from './ChatSidebar'
 
 export const ChatRoomHeader = () => {
   const boardId = useParamId()
 
-  const isSidebarOpen = useSidebarState()
+  const isSidebarOpen = useIsSidebarOpen()
   const { isModalOpen, label } = useModalState()
-  const { openSidebar, openModal, closeSidebar, closeModal } = useModalActions()
+  const { openModal, closeModal } = useModalActions()
+  const { openSidebar, closeSidebar } = useSidebarActions()
 
   const { data, refetch } = useFetchChatSidebarInformation({ urls: { boardId } })
 

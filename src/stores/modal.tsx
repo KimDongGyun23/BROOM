@@ -7,8 +7,6 @@ type Actions = {
   openModal: (label: string, isSuccessModal?: boolean) => void
   openTwoButtonModal: (twoButtonLabel: string) => void
   closeModal: VoidFunction
-  openSidebar: VoidFunction
-  closeSidebar: VoidFunction
 }
 
 type ModalStore = {
@@ -21,7 +19,6 @@ type ModalStore = {
     isTwoButtonModalOpen: boolean
     twoButtonLabel: string
   }
-  isSidebarOpen: boolean
   actions: Actions
 }
 
@@ -35,7 +32,6 @@ const initialValues = {
     isTwoButtonModalOpen: false,
     twoButtonLabel: '',
   },
-  isSidebarOpen: false,
 }
 
 const ModalStoreContext = createContext<StoreApi<ModalStore> | null>(null)
@@ -49,10 +45,7 @@ export const ModalStoreProvider = ({ children }: PropsWithChildren) => {
           set({ modalState: { isModalOpen: true, label }, isSuccessModal }),
         openTwoButtonModal: (twoButtonLabel) =>
           set({ twoButtonModalState: { isTwoButtonModalOpen: true, twoButtonLabel } }),
-        closeModal: () =>
-          set((state) => ({ ...initialValues, isSidebarOpen: state.isSidebarOpen })),
-        openSidebar: () => set({ isSidebarOpen: true }),
-        closeSidebar: () => set({ isSidebarOpen: false }),
+        closeModal: () => set({ ...initialValues }),
       },
     })),
   )
@@ -71,5 +64,4 @@ export const useModalStore = <T,>(selector: (state: ModalStore) => T): T => {
 export const useModalState = () => useModalStore((state) => state.modalState)
 export const useTwoButtonModalState = () => useModalStore((state) => state.twoButtonModalState)
 export const useIsSuccessModal = () => useModalStore((state) => state.isSuccessModal)
-export const useSidebarState = () => useModalStore((state) => state.isSidebarOpen)
 export const useModalActions = () => useModalStore((state) => state.actions)

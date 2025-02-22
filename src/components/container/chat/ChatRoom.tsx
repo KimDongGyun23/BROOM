@@ -6,6 +6,7 @@ import { useParamId } from '@/hooks/useParamId'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
 import { useChatMessageActions } from '@/stores/chatMessage'
 import { ModalStoreProvider } from '@/stores/modal'
+import { SidebarStoreProvider } from '@/stores/\bsidebar'
 import { Container } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -28,18 +29,20 @@ export const ChatRoom = () => {
   setInitialMessage(messages)
 
   return (
-    <ModalStoreProvider>
-      <Container>
-        <ChatRoomHeader />
-        <ChattingRoomProfile
-          profileIconList={militaryBranches}
-          ownerNickname={ownerNickname}
-          title={boardTitle}
-        />
+    <SidebarStoreProvider>
+      <ModalStoreProvider>
+        <Container>
+          <ChatRoomHeader />
+          <ChattingRoomProfile
+            profileIconList={militaryBranches}
+            ownerNickname={ownerNickname}
+            title={boardTitle}
+          />
 
-        <ChatMessageList />
-        {/* <MessageBox /> */}
-      </Container>
-    </ModalStoreProvider>
+          <ChatMessageList />
+          {/* <MessageBox /> */}
+        </Container>
+      </ModalStoreProvider>
+    </SidebarStoreProvider>
   )
 }
