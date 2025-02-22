@@ -6,7 +6,7 @@ import { useChatMessageActions } from '@/stores/chatMessage'
 
 import { useParamId } from './useParamId'
 
-const SERVER = import.meta.env.VITE_PUBLIC_SERVER
+const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
 export const useWebSocket = () => {
   const roomId = useParamId()
