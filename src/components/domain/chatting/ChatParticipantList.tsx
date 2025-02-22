@@ -32,7 +32,7 @@ const ChatParticipantItem = ({
         <p>{userNickname}</p>
         {isAuthor && <CrownIcon />}
       </ProfileInfo>
-      {isChatRoomMine && <ChatExpelButton userId={userId} />}
+      {isChatRoomMine && !isAuthor && <ChatExpelButton userId={userId} />}
     </ParticipantItem>
   )
 }

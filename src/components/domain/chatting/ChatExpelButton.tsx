@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
-import { useExpelUser } from '@/query/useChattingQuery'
+import { useExpelUser, useFetchChatSidebarInformation } from '@/query/useChattingQuery'
 import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
 
 type ChatExpelButtonProps = {
@@ -13,13 +13,19 @@ const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
   const boardId = useParamId()
 
   const { mutate: expelUser } = useExpelUser()
+  const { refetch } = useFetchChatSidebarInformation({ urls: { boardId } })
+
   const { openModal } = useModalActions()
 
   const handleClickExpelButton = () => {
     expelUser(
       { body: { expellId: userId, boardId } },
       {
-        onSuccess: (response) => openModal(response),
+        onSuccess: (response) => {
+          // refetch 에러처리 필요
+          refetch()
+          openModal(response)
+        },
         onError: (error) => openModal(error.message),
       },
     )
