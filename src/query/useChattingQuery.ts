@@ -90,6 +90,6 @@ export const useExitChatRoom = () => {
   return useMutation({
     mutationFn: ({ urls }: ExitChatRoomRequest) =>
       instance.delete<string>(ENDPOINTS.exitRoom(urls)),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.roomList }),
   })
 }
