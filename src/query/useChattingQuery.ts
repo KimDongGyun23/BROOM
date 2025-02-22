@@ -8,6 +8,7 @@ import type {
   ChatSidebarInformationResponse,
   EnterChatRoomRequest,
   ExitChatRoomRequest,
+  ExpelUserRequest,
 } from '@/types/chat'
 
 import { instance } from '.'
@@ -21,6 +22,7 @@ const ENDPOINTS = {
   enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
 
   exitRoom: (urls: ExitChatRoomRequest['urls']) => `/chat/list/exit/${urls.boardId}`,
+  expelUser: `/chat/list/expell/request`,
 } as const
 
 const queryKeys = {
@@ -91,5 +93,14 @@ export const useExitChatRoom = () => {
     mutationFn: ({ urls }: ExitChatRoomRequest) =>
       instance.delete<string>(ENDPOINTS.exitRoom(urls)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.roomList }),
+  })
+}
+
+export const useExpelUser = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ body }: ExpelUserRequest) => instance.patch<string>(ENDPOINTS.expelUser, body),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
   })
 }

@@ -61,3 +61,9 @@ export type EnterChatRoomRequest = {
 export type ExitChatRoomRequest = {
   urls: Pick<ChatRoom, 'boardId'>
 }
+
+export type ExpelUserRequest = {
+  body: Pick<ChatRoom, 'boardId'> & {
+    expellId: string
+  }
+}

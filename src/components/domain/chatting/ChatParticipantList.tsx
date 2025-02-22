@@ -6,23 +6,25 @@ import type { User } from '@/types/chat'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { getSessionStorageItem } from '@/utils/storage'
 
+import { ChatExpelButton } from './ChatExpelButton'
+
 type ChatParticipantListProps = {
   participantList: User[]
 }
 
 type ChatParticipantItemProps = {
-  militaryBranch: MilitaryBranchCode
-  userNickname: string
   isAuthor: boolean
   isChatRoomMine: boolean
+  participant: User
 }
 
 const ChatParticipantItem = ({
   isAuthor,
   isChatRoomMine,
-  militaryBranch,
-  userNickname,
+  participant,
 }: ChatParticipantItemProps) => {
+  const { userId, userNickname, militaryBranch } = participant
+
   return (
     <ParticipantItem>
       <ProfileImage size="sm" iconType={militaryBranch as MilitaryBranchCode} />
@@ -30,7 +32,7 @@ const ChatParticipantItem = ({
         <p>{userNickname}</p>
         {isAuthor && <CrownIcon />}
       </ProfileInfo>
-      {isChatRoomMine && <ExpelButton>내보내기</ExpelButton>}
+      {isChatRoomMine && <ChatExpelButton userId={userId} />}
     </ParticipantItem>
   )
 }
@@ -46,7 +48,7 @@ export const ChatParticipantList = ({ participantList }: ChatParticipantListProp
           key={participant.userId}
           isAuthor={index === 0}
           isChatRoomMine={isChatRoomMine}
-          {...participant}
+          participant={participant}
         />
       ))}
     </Container>
@@ -68,11 +70,4 @@ const ProfileInfo = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
   ${({ theme }) => theme.font(800, theme.colors.black[100])};
   flex-grow: 1;
-`
-
-const ExpelButton = styled.button`
-  ${({ theme }) => theme.padding('xs', 'sm')};
-  ${({ theme }) => theme.font(900, theme.colors.orange)};
-  ${({ theme }) => theme.borderRadius('md')};
-  background-color: ${({ theme }) => theme.colors.black[100]};
 `
