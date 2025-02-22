@@ -1,6 +1,7 @@
 import { ChatMessageList } from '@/components/domain/chatting/ChatMessageList'
 import { ChatRoomHeader } from '@/components/domain/chatting/ChatRoomHeader'
 import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
+import { MessageInput } from '@/components/domain/chatting/MessageInput'
 import { Loading } from '@/components/view/Loading'
 import { useParamId } from '@/hooks/useParamId'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
@@ -40,7 +41,7 @@ export const ChatRoom = () => {
           />
 
           <ChatMessageList />
-          {/* <MessageBox /> */}
+          <MessageInput />
         </Container>
       </ModalStoreProvider>
     </SidebarStoreProvider>

@@ -1,16 +1,13 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { AdditionIcon, SendingIcon } from '@/components/view/icons/NonActiveIcons'
+import { SendingIcon } from '@/components/view/icons/NonActiveIcons'
 import { useWebSocket } from '@/hooks/useWebsocket'
 
-export const MessageBox = () => {
-  const { id: roomId } = useParams()
-
+export const MessageInput = () => {
   const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
   const { register, handleSubmit, reset } = formMethod
-  const { client, sendMessage } = useWebSocket(roomId)
+  const { client, sendMessage } = useWebSocket()
 
   const handleSendMessage = ({ message }: { message: string }) => {
     if (message.length !== 0) {
@@ -25,39 +22,37 @@ export const MessageBox = () => {
 
   return (
     <FormProvider {...formMethod}>
-      <MessageBoxForm onSubmit={handleSubmit(handleSendMessage)}>
-        <AdditionIcon />
-        <MessageInputContainer>
-          <MessageInput type="text" size={8} {...register} placeholder="메세지를 입력해주세요." />
+      <Container>
+        <MessageBoxForm onSubmit={handleSubmit(handleSendMessage)}>
+          <Input type="text" size={8} {...register} placeholder="메세지를 입력해주세요." />
 
-          <button type="submit" className="message-button">
+          <SendingButton type="submit" className="message-button">
             <SendingIcon />
-          </button>
-        </MessageInputContainer>
-      </MessageBoxForm>
+          </SendingButton>
+        </MessageBoxForm>
+      </Container>
     </FormProvider>
   )
 }
 
-const MessageBoxForm = styled.form`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
-  ${({ theme }) => theme.padding('md', 'lg', '3xl')};
-  background-color: white;
+const Container = styled.div`
+  ${({ theme }) => theme.padding('sm', 'sm', '4xl')};
 `
 
-const MessageInputContainer = styled.div`
+const MessageBoxForm = styled.form`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
   ${({ theme }) => theme.borderRadius('xl')};
-  ${({ theme }) => theme.padding('sm', 'sm', 'sm', 'lg')};
+  ${({ theme }) => theme.padding('messageInput')};
   flex-grow: 1;
+  max-height: 40px;
   background-color: ${({ theme }) => theme.colors.black[100]};
-
-  .message-button {
-    flex-shrink: 0;
-  }
 `
 
-const MessageInput = styled.input`
+const SendingButton = styled.button`
+  flex-shrink: 0;
+`
+
+const Input = styled.input`
   ${({ theme }) => theme.font(800, theme.colors.black[500])};
   flex-grow: 1;
   background: transparent;

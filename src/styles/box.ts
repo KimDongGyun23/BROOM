@@ -9,6 +9,7 @@ const gap = {
   xl: '20px',
   '2xl': '24px',
   '3xl': '28px',
+  '4xl': '32px',
 }
 
 const sizeMap = {
@@ -39,6 +40,7 @@ const sizeMap = {
     chain: '14px 30px 14px 18px',
     modal: '36px 0',
     bubble: '10px 16px',
+    messageInput: '10px 8px 10px 16px',
   },
   margin: {
     ...gap,

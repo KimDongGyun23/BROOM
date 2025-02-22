@@ -3,12 +3,13 @@ import { Client } from '@stomp/stompjs'
 
 import { instance } from '@/query'
 import { useChatMessageActions } from '@/stores/chatMessage'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
+
+import { useParamId } from './useParamId'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER
-// import { useMessageActions } from 'store/chatData'
 
-export const useWebSocket = (roomId: string | undefined) => {
+export const useWebSocket = () => {
+  const roomId = useParamId()
   const client = useRef<Client | null>(null)
   const { addMessage } = useChatMessageActions()
 
@@ -16,16 +17,18 @@ export const useWebSocket = (roomId: string | undefined) => {
 
   const connectHandler = () => {
     client.current = new Client({
-      brokerURL: `wss://${SERVER}/chat`,
+      brokerURL: `${SERVER}/chat`,
       connectHeaders: {
         host: '/',
         Authorization: token,
       },
       onConnect: () => {
         client.current?.subscribe(
-          `/exchange/chat.exchange/chat.room.${roomId}`,
+          `/exchange/broom.chat.exchange/broom.chat.room.${roomId}`,
           (message) => {
-            addMessage(JSON.parse(message.body))
+            const parsedMessage = JSON.parse(message.body)
+            console.log(parsedMessage)
+            addMessage(parsedMessage)
           },
           { 'Content-Type': 'application/json' },
         )
@@ -45,9 +48,8 @@ export const useWebSocket = (roomId: string | undefined) => {
         destination: `/pub/chat.message`,
         headers: { Authorization: token },
         body: JSON.stringify({
-          chatRoomId: roomId,
-          content: content,
-          senderId: getSessionStorageItem(SESSION_KEYS.NICKNAME),
+          boardId: roomId,
+          message: content,
         }),
       })
     }
