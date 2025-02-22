@@ -16,6 +16,11 @@ export const useWebSocket = () => {
   const token = instance.getAccessToken() as string
 
   const connectHandler = () => {
+    if (client.current?.connected) {
+      console.log('WebSocket already connected')
+      return
+    }
+
     client.current = new Client({
       brokerURL: `${SERVER}/chat`,
       connectHeaders: {
@@ -53,14 +58,19 @@ export const useWebSocket = () => {
           message: content,
         }),
       })
+    } else {
+      console.error('WebSocket is not connected')
     }
   }
 
   useEffect(() => {
     connectHandler()
     return () => {
-      client.current?.deactivate()
-      console.log('WebSocket 연결 해제')
+      if (client.current) {
+        client.current.deactivate().then(() => {
+          console.log('WebSocket 연결 해제 완료')
+        })
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, token])
