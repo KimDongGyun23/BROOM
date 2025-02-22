@@ -22,16 +22,14 @@ export const ChatRoomExitButton = () => {
     exitRoom(
       { urls: { boardId } },
       {
-        onSuccess: (response) => openModal(response, true),
+        onSuccess: () => {
+          closeModal()
+          closeSidebar()
+          navigate('/chat')
+        },
         onError: (error) => openModal(error.message, false),
       },
     )
-  }
-
-  const handleCloseModal = () => {
-    closeModal()
-    closeSidebar()
-    navigate('/chat')
   }
 
   return (
@@ -48,7 +46,7 @@ export const ChatRoomExitButton = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         content={label}
-        button={{ onClick: handleCloseModal, label: '확인' }}
+        button={{ onClick: closeModal, label: '확인' }}
       />
     </>
   )
