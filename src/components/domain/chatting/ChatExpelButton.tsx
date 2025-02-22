@@ -2,13 +2,8 @@ import { styled } from 'styled-components'
 
 import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
-import { useExpelUser, useFetchChatSidebarInformation } from '@/query/useChattingQuery'
-import {
-  ModalStoreProvider,
-  useIsSuccessModal,
-  useModalActions,
-  useModalState,
-} from '@/stores/modal'
+import { useExpelUser } from '@/query/useChattingQuery'
+import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
 
 type ChatExpelButtonProps = {
   userId: string
@@ -35,18 +30,12 @@ const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
 }
 
 const ExpelModal = () => {
-  const boardId = useParamId()
-
-  const isSuccessModal = useIsSuccessModal()
   const { isModalOpen, label } = useModalState()
-  const { closeModal } = useModalActions()
-
-  const { refetch } = useFetchChatSidebarInformation({ urls: { boardId } })
+  const { closeModal, closeSidebar } = useModalActions()
 
   const handleCloseModal = () => {
     closeModal()
-    // refetch 에러처리 필요
-    refetch()
+    closeSidebar()
   }
 
   return (
@@ -54,7 +43,7 @@ const ExpelModal = () => {
       isOpen={isModalOpen}
       content={label}
       onClose={closeModal}
-      button={{ onClick: isSuccessModal ? handleCloseModal : closeModal, label: '확인' }}
+      button={{ onClick: handleCloseModal, label: '확인' }}
     />
   )
 }
