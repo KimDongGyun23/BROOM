@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 
-import { instance } from '@/query'
+import { instance } from '@/app/api'
 
 import type { BusReservationRequest } from '../model/bus.type'
 

@@ -7,7 +7,7 @@ import type {
   UpdateAccountInformationRequest,
 } from '@/types/mypage'
 
-import { instance } from '.'
+import { instance } from '../app/api'
 
 const ENDPOINTS = {
   fetchMypage: `/mypage`,

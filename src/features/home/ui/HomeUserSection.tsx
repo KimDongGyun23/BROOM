@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { instance } from '@/query'
+import { instance } from '@/app/api'
 import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
 import { Button } from '@/shared/ui/Button'
 import { TentIcon } from '@/shared/ui/icons/NonActiveIcons'

@@ -1,11 +1,12 @@
 import { useCallback, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { signupAttribute } from '@/forms/useSignupForm'
-import { useValidateNickname } from '@/query/useAuthQuery'
 import { useStepsActions } from '@/shared/model/steps'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
+
+import { useValidateNickname } from '../api/useAuth.mutation'
+import { signupAttribute } from '../config/auth.schema'
 
 import { StyledButton, ValidateContainer } from './SignupStyle'
 

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
 import { useChatMessageActions } from '@/features/chat/model/chatMessage.store'
-import { instance } from '@/query'
+import { instance } from '@/app/api'
 
 import { useParamId } from '../../../shared/hook/useParamId'
 

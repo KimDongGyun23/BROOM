@@ -7,9 +7,8 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
+import { reIssue } from '@/features/auth/api/useAuth.mutation'
 import { clearSessionStorage } from '@/shared/lib/storage'
-
-import { reIssue } from './useAuthQuery'
 
 export class HttpClient {
   private readonly client: AxiosInstance

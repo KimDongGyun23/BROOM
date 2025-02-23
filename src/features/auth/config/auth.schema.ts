@@ -1,10 +1,17 @@
-import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import { useSignup } from '@/query/useAuthQuery'
-import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useTermsActions } from '@/shared/model/terms'
-import type { SignupData } from '@/types/auth'
+export const loginAttribute = {
+  ID: {
+    section: 'userId',
+    label: '아이디',
+    input: { placeholder: '아이디를 입력해주세요.' },
+  },
+  PASSWORD: {
+    section: 'password',
+    label: '비밀번호',
+    input: { placeholder: '비밀번호를 입력해주세요.' },
+  },
+}
 
 export const signupAttribute = {
   ID: {
@@ -38,7 +45,12 @@ export const signupAttribute = {
 
 const currentYear = new Date().getFullYear()
 
-const signupSchema = z
+export const loginSchema = z.object({
+  userId: z.string().min(1, { message: '아이디를 입력해주세요.' }),
+  password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
+})
+
+export const signupSchema = z
   .object({
     userId: z
       .string()
@@ -70,27 +82,3 @@ const signupSchema = z
     path: ['militaryBranch'],
     message: '군종을 선택해주세요.',
   })
-
-export const useSignupForm = () => {
-  const navigate = useNavigate()
-  const formMethod = useCustomForm<SignupData>(signupSchema)
-  const { handleSubmit } = formMethod
-
-  const { resetTerms } = useTermsActions()
-  const { mutate: signupMutation } = useSignup()
-
-  const handleSubmitForm = (formData: SignupData) => {
-    const { confirm: _confirm, ...dataWithoutConfirm } = formData
-    signupMutation(
-      { body: dataWithoutConfirm },
-      {
-        onSuccess: () => {
-          navigate('/sign-up/complete')
-          resetTerms()
-        },
-      },
-    )
-  }
-
-  return { formMethod, onSubmit: handleSubmit(handleSubmitForm) }
-}

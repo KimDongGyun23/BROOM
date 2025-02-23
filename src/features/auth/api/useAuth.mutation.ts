@@ -1,15 +1,14 @@
 import { useMutation } from '@tanstack/react-query'
 import type { AxiosError, AxiosResponse } from 'axios'
 
+import { instance, instanceWithoutAuth } from '@/app/api'
 import type {
   LoginRequest,
   LoginResponse,
   SignupRequest,
   ValidateIdRequest,
   ValidateNicknameRequest,
-} from '@/types/auth'
-
-import { instance, instanceWithoutAuth } from '.'
+} from '@/features/auth/model/auth.type'
 
 const ENDPOINTS = {
   signIn: `/login`,

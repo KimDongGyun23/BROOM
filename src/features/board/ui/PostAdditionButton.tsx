@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { instance } from '@/query'
+import { instance } from '@/app/api'
 import { AdditionIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const PostAdditionButton = () => {

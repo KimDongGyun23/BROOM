@@ -9,7 +9,7 @@ import { useModalActions } from '@/shared/model/modal'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import type { ValidateNicknameRequest } from '@/types/auth'
+import type { ValidateNicknameRequest } from '@/features/auth/model/auth.type'
 import type { AccountInformation } from '@/types/mypage'
 
 const useAccountInformationSubmit = (isNicknameValidated: boolean) => {

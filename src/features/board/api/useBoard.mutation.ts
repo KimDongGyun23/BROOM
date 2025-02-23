@@ -10,7 +10,7 @@ import type {
   RemoveBookmarkRequest,
 } from '@/features/board/model/post.type'
 
-import { instance } from '../../../query'
+import { instance } from '../../../app/api'
 
 import { queryKeys } from './useBoard.query'
 

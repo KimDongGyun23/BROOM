@@ -1,30 +1,13 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { z } from 'zod'
 
-import { instance } from '@/query'
-import { useLogin } from '@/query/useAuthQuery'
+import { instance } from '@/app/api'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { SESSION_KEYS, setSessionStorageItem } from '@/shared/lib/storage'
-import type { LoginCredentials } from '@/types/auth'
+import type { LoginCredentials } from '@/features/auth/model/auth.type'
 
-export const loginAttribute = {
-  ID: {
-    section: 'userId',
-    label: '아이디',
-    input: { placeholder: '아이디를 입력해주세요.' },
-  },
-  PASSWORD: {
-    section: 'password',
-    label: '비밀번호',
-    input: { placeholder: '비밀번호를 입력해주세요.' },
-  },
-}
-
-const loginSchema = z.object({
-  userId: z.string().min(1, { message: '아이디를 입력해주세요.' }),
-  password: z.string().min(1, { message: '비밀번호를 입력해주세요.' }),
-})
+import { useLogin } from '../api/useAuth.mutation'
+import { loginSchema } from '../config/auth.schema'
 
 export const useLoginForm = () => {
   const navigate = useNavigate()
