@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
 import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
+import { ModalStoreProvider } from '@/shared/model/modal'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { ToggleButton } from '@/shared/ui/ToggleButton'
-import { ModalStoreProvider } from '@/stores/modal'
 
 type NavigationLink = {
   label: string

@@ -8,9 +8,9 @@ import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
 import { MypageProfile } from '@/components/domain/mypage/MypageProfile'
 import { MypageSections } from '@/components/domain/mypage/MypageSections'
 import { useUserProfile } from '@/query/useMypageQuery'
+import { ModalStoreProvider } from '@/shared/model/modal'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
-import { ModalStoreProvider } from '@/stores/modal'
 
 import { ErrorPage } from '../../../pages/home/ErrorPage'
 

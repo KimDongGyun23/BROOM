@@ -4,8 +4,8 @@ import { AccountInformationEditForm } from '@/components/domain/mypage/AccountIn
 import { AccountInformationEditModal } from '@/components/domain/mypage/AccountInformationEditModal'
 import { useAccountInformationForm } from '@/forms/useAccountInformationForm'
 import { useFetchAccountInformation } from '@/query/useMypageQuery'
+import { ModalStoreProvider } from '@/shared/model/modal'
 import { Loading } from '@/shared/ui/Loading'
-import { ModalStoreProvider } from '@/stores/modal'
 
 import { ErrorPage } from '../../../pages/home/ErrorPage'
 

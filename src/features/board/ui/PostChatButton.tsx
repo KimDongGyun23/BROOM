@@ -4,9 +4,9 @@ import { styled } from 'styled-components'
 import { useIsMyPost, usePostDetail } from '@/features/board/model/postDetail.store'
 import { useEnterChatRoom } from '@/query/useChattingQuery'
 import { useParamId } from '@/shared/hook/useParamId'
+import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal'
 import { Button } from '@/shared/ui/Button'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 const ChatButton = () => {

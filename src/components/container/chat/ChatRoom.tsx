@@ -5,10 +5,10 @@ import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomPr
 import { MessageInput } from '@/components/domain/chatting/MessageInput'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
 import { useParamId } from '@/shared/hook/useParamId'
+import { useChatMessageActions } from '@/shared/model/chatMessage'
+import { ModalStoreProvider } from '@/shared/model/modal'
+import { SidebarStoreProvider } from '@/shared/model/sidebar'
 import { Loading } from '@/shared/ui/Loading'
-import { useChatMessageActions } from '@/stores/chatMessage'
-import { ModalStoreProvider } from '@/stores/modal'
-import { SidebarStoreProvider } from '@/stores/\bsidebar'
 
 import { ErrorPage } from '../../../pages/home/ErrorPage'
 

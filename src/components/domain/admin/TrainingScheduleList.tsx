@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useTrainingScheduleActions } from '@/stores/trainingSchedule'
+import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule'
 import { formatDate } from '@/utils/formatDate'
 
 export const TrainingScheduleList = () => {

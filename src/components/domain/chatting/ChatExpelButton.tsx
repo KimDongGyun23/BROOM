@@ -2,9 +2,9 @@ import { styled } from 'styled-components'
 
 import { useExpelUser } from '@/query/useChattingQuery'
 import { useParamId } from '@/shared/hook/useParamId'
+import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal'
+import { useSidebarActions } from '@/shared/model/sidebar'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'
-import { useSidebarActions } from '@/stores/\bsidebar'
 
 type ChatExpelButtonProps = {
   userId: string

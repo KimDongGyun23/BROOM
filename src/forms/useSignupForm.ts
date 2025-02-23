@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import { useSignup } from '@/query/useAuthQuery'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useTermsActions } from '@/stores/terms'
+import { useTermsActions } from '@/shared/model/terms'
 import type { SignupData } from '@/types/auth'
 
 export const signupAttribute = {

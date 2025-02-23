@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
+import { useModalActions, useModalState } from '@/shared/model/modal'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { useModalActions, useModalState } from '@/stores/modal'
 
 export const BusReservationCreateModal = () => {
   const navigate = useNavigate()

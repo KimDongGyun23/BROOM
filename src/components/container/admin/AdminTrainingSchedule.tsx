@@ -3,8 +3,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Container } from '@/app/style/commonStyles'
 import { TrainingScheduleInput } from '@/components/domain/admin/TrainingScheduleInput'
 import { TrainingScheduleList } from '@/components/domain/admin/TrainingScheduleList'
+import { useTrainingScheduleList } from '@/shared/model/trainingSchedule'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { useTrainingScheduleList } from '@/stores/trainingSchedule'
 
 type DateFormType = {
   dateInput: string

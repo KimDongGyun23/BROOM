@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import { useSidebarActions } from '@/shared/model/sidebar'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
-import { useSidebarActions } from '@/stores/\bsidebar'
 import type { ChatSidebarInformationResponse } from '@/types/chat'
 
 import { ChatParticipantList } from './ChatParticipantList'

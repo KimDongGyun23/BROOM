@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import { useBusReservationMutation } from '@/query/useBusQuery'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useModalActions } from '@/stores/modal'
+import { useModalActions } from '@/shared/model/modal'
 import type { BusReservationForm } from '@/types/bus'
 
 export const busCreateAttribute = {

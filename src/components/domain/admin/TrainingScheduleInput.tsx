@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 import { styled } from 'styled-components'
 
+import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { useTrainingScheduleActions } from '@/stores/trainingSchedule'
 
 export const TrainingScheduleInput = () => {
   const { getValues, resetField } = useFormContext()

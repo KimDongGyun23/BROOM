@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useCurrentStep, useTotalStep } from '@/stores/steps'
+import { useCurrentStep, useTotalStep } from '@/shared/model/steps'
 
 type LabelWithStepProps = {
   label: string

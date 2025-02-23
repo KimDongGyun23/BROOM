@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { useUpdatePassword } from '@/query/useMypageQuery'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useModalActions } from '@/stores/modal'
+import { useModalActions } from '@/shared/model/modal'
 import type { PasswordUpdateForm } from '@/types/mypage'
 
 export const newPasswordAttribute = {

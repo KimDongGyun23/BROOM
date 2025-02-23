@@ -5,9 +5,9 @@ import { PostDeleteModal } from '@/features/board/ui/PostDeleteModal'
 import { instance } from '@/query'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
+import { ModalStoreProvider, useModalActions } from '@/shared/model/modal'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { ModalStoreProvider, useModalActions } from '@/stores/modal'
 
 const AuthenticatedHeader = () => {
   const boardId = useParamId()

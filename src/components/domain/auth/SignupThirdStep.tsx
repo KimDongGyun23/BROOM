@@ -1,5 +1,10 @@
+import {
+  AGREEMENTS,
+  useCheckedAgreements,
+  useIsAllChecked,
+  useTermsActions,
+} from '@/shared/model/terms'
 import { AllCheckIcon, CheckIcon } from '@/shared/ui/icons/ActiveIcons'
-import { AGREEMENTS, useCheckedAgreements, useIsAllChecked, useTermsActions } from '@/stores/terms'
 
 import {
   AgreementItemContainer,

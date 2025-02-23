@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import { BusReservationCreateForm } from '@/components/domain/bus/BusReservationCreateForm'
 import { BusReservationCreateModal } from '@/components/domain/bus/BusReservationCreateModal'
+import { ModalStoreProvider } from '@/shared/model/modal'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { ModalStoreProvider } from '@/stores/modal'
 
 export const BusReservationCreate = () => {
   const navigate = useNavigate()

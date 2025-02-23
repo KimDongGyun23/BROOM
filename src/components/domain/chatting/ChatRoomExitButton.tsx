@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { useExitChatRoom } from '@/query/useChattingQuery'
 import { useParamId } from '@/shared/hook/useParamId'
+import { useModalActions, useModalState, useTwoButtonModalState } from '@/shared/model/modal'
+import { useSidebarActions } from '@/shared/model/sidebar'
 import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
-import { useModalActions, useModalState, useTwoButtonModalState } from '@/stores/modal'
-import { useSidebarActions } from '@/stores/\bsidebar'
 
 export const ChatRoomExitButton = () => {
   const boardId = useParamId()

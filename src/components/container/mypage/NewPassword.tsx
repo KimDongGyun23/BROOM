@@ -1,6 +1,6 @@
 import { NewPasswordForm } from '@/components/domain/mypage/NewPasswordForm'
 import { NewPasswordModal } from '@/components/domain/mypage/NewPasswordModal'
-import { ModalStoreProvider } from '@/stores/modal'
+import { ModalStoreProvider } from '@/shared/model/modal'
 
 export const NewPassword = () => {
   return (

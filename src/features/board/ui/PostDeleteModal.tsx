@@ -2,13 +2,13 @@ import { useNavigate } from 'react-router-dom'
 
 import { useDeletePost } from '@/features/board/api/useBoard.mutation'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 import {
   useIsSuccessModal,
   useModalActions,
   useModalState,
   useTwoButtonModalState,
-} from '@/stores/modal'
+} from '@/shared/model/modal'
+import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const DeleteConfirmationModal = () => {
   const boardId = useParamId()

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
+import { useIsSuccessModal, useModalActions, useModalState } from '@/shared/model/modal'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { useIsSuccessModal, useModalActions, useModalState } from '@/stores/modal'
 
 export const NewPasswordModal = () => {
   const navigate = useNavigate()

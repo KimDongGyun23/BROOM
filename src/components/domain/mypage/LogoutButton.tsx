@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 import { useLogout } from '@/query/useMypageQuery'
-import { useModalActions } from '@/stores/modal'
+import { useModalActions } from '@/shared/model/modal'
 
 export const LogoutButton = () => {
   const { mutate: logout } = useLogout()
