@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 
+import { FormContainer } from '@/app/style/commonStyles'
 import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { newPasswordAttribute, usePasswordUpdateForm } from '@/forms/usePasswordUpdateForm'
-import { FormContainer } from '@/styles/commonStyles'
 
 export const NewPasswordForm = () => {
   const { formMethod, onSubmit } = usePasswordUpdateForm()

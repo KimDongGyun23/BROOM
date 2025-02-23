@@ -2,10 +2,10 @@ import { FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Container, FormContainer } from '@/app/style/commonStyles'
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { loginAttribute, useLoginForm } from '@/forms/useLoginForm'
-import { Container, FormContainer } from '@/styles/commonStyles'
 
 export const LoginPage = () => {
   const { ID, PASSWORD } = loginAttribute

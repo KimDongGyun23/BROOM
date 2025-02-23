@@ -1,5 +1,5 @@
+import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter'
 import { useFetchCarpoolList } from '@/query/useCarpoolQuery'
-import { useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 
 import { PostList } from './PostList'
 

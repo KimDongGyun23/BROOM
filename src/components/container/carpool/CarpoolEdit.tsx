@@ -1,11 +1,11 @@
 import { FormProvider } from 'react-hook-form'
 
+import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
 import { InputGroup } from '@/components/view/inputGroup'
 import { Loading } from '@/components/view/Loading'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { postAttribute } from '@/forms/useCarpoolCreateForm'
 import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
-import { Container, FormContainer, GridContainer } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { Container } from '@/app/style/commonStyles'
 import { DeleteIdButton } from '@/components/domain/mypage/DeleteIdButton'
 import { DeleteIdModal } from '@/components/domain/mypage/DeleteIdModal'
 import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
@@ -10,7 +11,6 @@ import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Loading } from '@/components/view/Loading'
 import { useUserProfile } from '@/query/useMypageQuery'
 import { ModalStoreProvider } from '@/stores/modal'
-import { Container } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 

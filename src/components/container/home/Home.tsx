@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Container } from '@/app/style/commonStyles'
 import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { ArrowRightIcon } from '@/components/view/icons/ActiveIcons'
 import { MainHeader } from '@/components/view/MainHeader'
-import { Container } from '@/styles/commonStyles'
 
 const NOTICE_ARR = [
   '예비군 버스 대절 추첨 인원 선정',

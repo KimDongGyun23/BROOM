@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { Container, FormContainer } from '@/app/style/commonStyles'
 import { SignupOneStep } from '@/components/domain/auth/SignupOneStep'
 import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
@@ -9,7 +10,6 @@ import { LabelWithStep } from '@/components/view/LabelWithStep'
 import { SubHeaderWithIcon } from '@/components/view/SubHeader'
 import { useSignupForm } from '@/forms/useSignupForm'
 import { useCurrentStep, useStepsActions } from '@/stores/steps'
-import { Container, FormContainer } from '@/styles/commonStyles'
 
 const signupMap = {
   1: '계정 정보 기입',

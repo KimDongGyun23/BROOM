@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Container } from '@/app/style/commonStyles'
 import { BusReservationNotice } from '@/components/domain/bus/BusReservationNotice'
 import { BottomNavigation } from '@/components/view/BottomNavigation'
 import { Button } from '@/components/view/Button'
 import { MainHeader } from '@/components/view/MainHeader'
-import { Container } from '@/styles/commonStyles'
 
 export const BusReservation = () => {
   const navigate = useNavigate()

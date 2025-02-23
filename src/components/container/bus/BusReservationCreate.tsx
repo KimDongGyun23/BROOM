@@ -2,11 +2,11 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { Container } from '@/app/style/commonStyles'
 import { BusReservationCreateForm } from '@/components/domain/bus/BusReservationCreateForm'
 import { BusReservationCreateModal } from '@/components/domain/bus/BusReservationCreateModal'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { ModalStoreProvider } from '@/stores/modal'
-import { Container } from '@/styles/commonStyles'
 
 export const BusReservationCreate = () => {
   const navigate = useNavigate()

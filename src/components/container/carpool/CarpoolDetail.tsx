@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
+import { Container } from '@/app/style/commonStyles'
 import { CarpoolBookmarkButton } from '@/components/domain/post/CarpoolBookmarkButton'
 import { CarpoolChattingButton } from '@/components/domain/post/CarpoolChattingButton'
 import { CarpoolDeleteModal } from '@/components/domain/post/CarpoolDeleteModal'
@@ -13,7 +14,6 @@ import { instance } from '@/query'
 import { useFetchCarpoolDetail } from '@/query/useCarpoolQuery'
 import { ModalStoreProvider } from '@/stores/modal'
 import { usePostDetail, usePostDetailActions } from '@/stores/post'
-import { Container } from '@/styles/commonStyles'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 import { ErrorPage } from '../home/ErrorPage'

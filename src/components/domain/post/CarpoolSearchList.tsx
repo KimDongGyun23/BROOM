@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 
+import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter'
 import { useFetchCarpoolSearchList } from '@/query/useCarpoolQuery'
-import { useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
 import { SEARCH_OPTIONS } from '@/utils/constants'
 
 import { PostList } from './PostList'

@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 
+import { FormContainer, ValidateContainer } from '@/app/style/commonStyles'
 import { Button } from '@/components/view/Button'
 import { InputGroup } from '@/components/view/inputGroup'
 import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
@@ -8,7 +9,6 @@ import { useFieldValidation } from '@/hooks/useFieldValidation'
 import { useValidateNickname } from '@/query/useAuthQuery'
 import { useFetchAccountInformation, useUpdateAccountInformation } from '@/query/useMypageQuery'
 import { useModalActions } from '@/stores/modal'
-import { FormContainer, ValidateContainer } from '@/styles/commonStyles'
 import type { ValidateNicknameRequest } from '@/types/auth'
 import type { AccountInformation } from '@/types/mypage'
 

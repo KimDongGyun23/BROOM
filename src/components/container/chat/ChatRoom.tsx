@@ -1,3 +1,4 @@
+import { Container } from '@/app/style/commonStyles'
 import { ChatMessageList } from '@/components/domain/chatting/ChatMessageList'
 import { ChatRoomHeader } from '@/components/domain/chatting/ChatRoomHeader'
 import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
@@ -8,7 +9,6 @@ import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
 import { useChatMessageActions } from '@/stores/chatMessage'
 import { ModalStoreProvider } from '@/stores/modal'
 import { SidebarStoreProvider } from '@/stores/\bsidebar'
-import { Container } from '@/styles/commonStyles'
 
 import { ErrorPage } from '../home/ErrorPage'
 

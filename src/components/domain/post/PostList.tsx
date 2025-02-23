@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { EmptyMessage } from '@/components/view/Error'
 import { Loading } from '@/components/view/Loading'
-import { useIsFilteringActiveOnly } from '@/stores/activeOnlyFilter'
+import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter'
 import type { CarpoolListResponse } from '@/types/post'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/utils/constants'

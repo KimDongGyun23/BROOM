@@ -7,7 +7,6 @@ import { SignupPage } from '@/components/container/auth/SignupPage'
 import { BusReservation } from '@/components/container/bus/BusReservation'
 import { BusReservationCheck } from '@/components/container/bus/BusReservationCheck'
 import { BusReservationCreate } from '@/components/container/bus/BusReservationCreate'
-import { Carpool } from '@/components/container/carpool/Carpool'
 import { CarpoolCreate } from '@/components/container/carpool/CarpoolCreate'
 import { CarpoolDetail } from '@/components/container/carpool/CarpoolDetail'
 import { CarpoolEdit } from '@/components/container/carpool/CarpoolEdit'
@@ -23,6 +22,7 @@ import { Mypage } from '@/components/container/mypage/Mypage'
 import { MypageBookmarkedPost } from '@/components/container/mypage/MypageBookmarkedPost'
 import { MypageMyPost } from '@/components/container/mypage/MypageMyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
+import { CarpoolBoard } from '@/pages/board/CarpoolBoard'
 import { instance } from '@/query'
 
 import { Admin } from '../container/admin/Admin'
@@ -54,7 +54,7 @@ export const RouterComponent = () => {
       <Route path="/" element={<Onboarding />} />
       <Route path="/home" element={<Home />} />
 
-      <Route path="/carpool" element={<Carpool />} />
+      <Route path="/carpool" element={<CarpoolBoard />} />
       <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
       <Route path="/carpool/search" element={<CarpoolSearch />} />
 
