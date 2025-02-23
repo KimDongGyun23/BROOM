@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container, FormContainer } from '@/app/style/commonStyles'
-import { loginAttribute, useLoginForm } from '@/features/auth/hook/useLoginForm'
+import { loginAttribute } from '@/features/auth/config/auth.schema'
+import { useLoginForm } from '@/features/auth/hook/useLoginForm'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 

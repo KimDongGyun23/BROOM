@@ -1,13 +1,13 @@
 import { FormProvider } from 'react-hook-form'
 
-import { AccountInformationEditForm } from '@/components/domain/mypage/AccountInformationEditForm'
-import { AccountInformationEditModal } from '@/components/domain/mypage/AccountInformationEditModal'
-import { useAccountInformationForm } from '@/forms/useAccountInformationForm'
-import { useFetchAccountInformation } from '@/query/useMypageQuery'
+import { useFetchAccountInformation } from '@/features/mypage/api/useMypage.query'
+import { useAccountInformationForm } from '@/features/mypage/hook/useAccountInformationForm'
+import { AccountInformationEditForm } from '@/features/mypage/ui/AccountInformationEditForm'
+import { AccountInformationEditModal } from '@/features/mypage/ui/AccountInformationEditModal'
 import { ModalStoreProvider } from '@/shared/model/modal'
 import { Loading } from '@/shared/ui/Loading'
 
-import { ErrorPage } from '../../../pages/home/ErrorPage'
+import { ErrorPage } from '../home/ErrorPage'
 
 export const AccountInformationEdit = () => {
   const { isPending, isError } = useFetchAccountInformation()

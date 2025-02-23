@@ -1,11 +1,10 @@
 import { FormProvider } from 'react-hook-form'
 
 import { FormContainer } from '@/app/style/commonStyles'
-import {
-  accountInformationAttribute,
-  useAccountInformationForm,
-} from '@/forms/useAccountInformationForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
+
+import { useAccountInformationForm } from '../hook/useAccountInformationForm'
+import { accountInformationAttribute } from '../model/mypage.schema'
 
 export const AccountInformationForm = () => {
   const formMethod = useAccountInformationForm()

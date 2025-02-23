@@ -1,16 +1,18 @@
 import { useFormContext } from 'react-hook-form'
 
 import { FormContainer, ValidateContainer } from '@/app/style/commonStyles'
-import { accountInformationAttribute } from '@/forms/useAccountInformationForm'
-import { useValidateNickname } from '@/query/useAuthQuery'
-import { useFetchAccountInformation, useUpdateAccountInformation } from '@/query/useMypageQuery'
+import { useValidateNickname } from '@/features/auth/api/useAuth.mutation'
+import type { ValidateNicknameRequest } from '@/features/auth/model/auth.type'
+import type { AccountInformation } from '@/features/mypage/model/mypage.type'
 import { useFieldValidation } from '@/shared/hook/useFieldValidation'
 import { useModalActions } from '@/shared/model/modal'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import type { ValidateNicknameRequest } from '@/features/auth/model/auth.type'
-import type { AccountInformation } from '@/types/mypage'
+
+import { useUpdateAccountInformation } from '../api/useMypage.mutation'
+import { useFetchAccountInformation } from '../api/useMypage.query'
+import { accountInformationAttribute } from '../model/mypage.schema'
 
 const useAccountInformationSubmit = (isNicknameValidated: boolean) => {
   const nicknameField = accountInformationAttribute.NICKNAME.section

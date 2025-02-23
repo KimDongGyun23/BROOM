@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
+import type { MypageProfileResponse } from '@/features/mypage/model/mypage.type'
 import { ChainIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-import type { MypageProfileResponse } from '@/types/mypage'
 
 export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: MypageProfileResponse) => {
   return (

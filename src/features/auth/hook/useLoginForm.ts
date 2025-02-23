@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { instance } from '@/app/api'
+import type { LoginCredentials } from '@/features/auth/model/auth.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { SESSION_KEYS, setSessionStorageItem } from '@/shared/lib/storage'
-import type { LoginCredentials } from '@/features/auth/model/auth.type'
 
 import { useLogin } from '../api/useAuth.mutation'
 import { loginSchema } from '../config/auth.schema'

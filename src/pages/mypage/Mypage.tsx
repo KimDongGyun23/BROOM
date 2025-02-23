@@ -1,18 +1,18 @@
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { DeleteIdButton } from '@/components/domain/mypage/DeleteIdButton'
-import { DeleteIdModal } from '@/components/domain/mypage/DeleteIdModal'
-import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
-import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
-import { MypageProfile } from '@/components/domain/mypage/MypageProfile'
-import { MypageSections } from '@/components/domain/mypage/MypageSections'
-import { useUserProfile } from '@/query/useMypageQuery'
+import { useUserProfile } from '@/features/mypage/api/useMypage.query'
+import { DeleteIdButton } from '@/features/mypage/ui/DeleteIdButton'
+import { DeleteIdModal } from '@/features/mypage/ui/DeleteIdModal'
+import { LogoutButton } from '@/features/mypage/ui/LogoutButton'
+import { LogoutModal } from '@/features/mypage/ui/LogoutModal'
+import { MypageProfile } from '@/features/mypage/ui/MypageProfile'
+import { MypageSections } from '@/features/mypage/ui/MypageSections'
 import { ModalStoreProvider } from '@/shared/model/modal'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
 
-import { ErrorPage } from '../../../pages/home/ErrorPage'
+import { ErrorPage } from '../home/ErrorPage'
 
 export const Mypage = () => {
   const { data: userProfile, isPending, isError } = useUserProfile()

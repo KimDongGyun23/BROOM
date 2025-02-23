@@ -1,5 +1,6 @@
 import { styled } from 'styled-components'
 
+import { instance } from '@/app/api'
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { useFetchPostDetail } from '@/features/board/api/useBoard.query'
 import { useBookmarkActions } from '@/features/board/model/bookmark.store'
@@ -9,7 +10,6 @@ import { PostChatButton } from '@/features/board/ui/PostChatButton'
 import { PostDetailContent } from '@/features/board/ui/PostDetailContent'
 import { PostDetailHeader } from '@/features/board/ui/PostDetailHeader'
 import { PostProfile } from '@/features/board/ui/PostProfile'
-import { instance } from '@/app/api'
 import { useParamId } from '@/shared/hook/useParamId'
 import { Loading } from '@/shared/ui/Loading'
 

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import type { ExitChatRoomRequest, ExpelUserRequest } from '@/features/chat/model/chat.type'
 import { instance } from '@/app/api'
+import type { ExitChatRoomRequest, ExpelUserRequest } from '@/features/chat/model/chat.type'
 
 import { queryKeys } from './useChat.query'
 

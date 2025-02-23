@@ -1,39 +1,19 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { instance } from '@/app/api'
 import type {
-  AccountInformationResponse,
-  MypageProfileResponse,
   PasswordUpdateRequest,
   UpdateAccountInformationRequest,
-} from '@/types/mypage'
+} from '@/features/mypage/model/mypage.type'
 
-import { instance } from '../app/api'
+import { queryKeys } from './useMypage.query'
 
 const ENDPOINTS = {
-  fetchMypage: `/mypage`,
-  fetchAccountInformation: `/mypage/info`,
   updateAccount: `/mypage/info`,
   updatePassword: `/mypage/password`,
   logout: `/logout`,
   deleteId: `/exit`,
 } as const
-
-const queryKeys = {
-  all: ['mypage'] as const,
-  account: () => [...queryKeys.all, 'account'] as const,
-}
-
-export const useUserProfile = () =>
-  useQuery({
-    queryKey: queryKeys.all,
-    queryFn: () => instance.get<MypageProfileResponse>(ENDPOINTS.fetchMypage),
-  })
-
-export const useFetchAccountInformation = () =>
-  useQuery({
-    queryKey: queryKeys.account(),
-    queryFn: () => instance.get<AccountInformationResponse>(ENDPOINTS.fetchAccountInformation),
-  })
 
 export const useUpdateAccountInformation = () => {
   const queryClient = useQueryClient()

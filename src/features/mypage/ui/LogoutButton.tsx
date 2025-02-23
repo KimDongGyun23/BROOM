@@ -1,23 +1,24 @@
 import { styled } from 'styled-components'
 
-import { useDeleteId } from '@/query/useMypageQuery'
 import { useModalActions } from '@/shared/model/modal'
 
-export const DeleteIdButton = () => {
-  const { mutate: deleteId } = useDeleteId()
+import { useLogout } from '../api/useMypage.mutation'
+
+export const LogoutButton = () => {
+  const { mutate: logout } = useLogout()
   const { openModal } = useModalActions()
 
-  const handleDeleteId = () => {
-    deleteId(undefined, {
+  const handleLogout = () => {
+    logout(undefined, {
       onSuccess: (response) => openModal(response, true),
       onError: (error) => openModal(error.message, false),
     })
   }
 
-  return <ActionButton onClick={handleDeleteId}>회원탈퇴</ActionButton>
+  return <ActionButton onClick={handleLogout}>로그아웃</ActionButton>
 }
 
 const ActionButton = styled.button`
   ${({ theme }) => theme.padding(0, 'lg')};
-  ${({ theme }) => theme.font(800, theme.colors.error)};
+  ${({ theme }) => theme.font(800, theme.colors.black[500])};
 `

@@ -1,5 +1,6 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
+import { instance } from '@/app/api'
 import type {
   ChatRoomInformationRequest,
   ChatRoomInformationResponse,
@@ -8,7 +9,6 @@ import type {
   ChatSidebarInformationResponse,
   EnterChatRoomRequest,
 } from '@/features/chat/model/chat.type'
-import { instance } from '@/app/api'
 
 const ENDPOINTS = {
   fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,

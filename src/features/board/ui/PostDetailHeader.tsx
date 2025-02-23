@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
+import { instance } from '@/app/api'
 import { useIsMyPost } from '@/features/board/model/postDetail.store'
 import { PostDeleteModal } from '@/features/board/ui/PostDeleteModal'
-import { instance } from '@/app/api'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ModalStoreProvider, useModalActions } from '@/shared/model/modal'
