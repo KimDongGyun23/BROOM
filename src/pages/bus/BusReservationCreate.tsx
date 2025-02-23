@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { BusReservationCreateForm } from '@/components/domain/bus/BusReservationCreateForm'
-import { BusReservationCreateModal } from '@/components/domain/bus/BusReservationCreateModal'
+import { BusReservationCreateForm } from '@/features/bus/ui/BusReservationCreateForm'
+import { BusReservationCreateModal } from '@/features/bus/ui/BusReservationCreateModal'
 import { ModalStoreProvider } from '@/shared/model/modal'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 

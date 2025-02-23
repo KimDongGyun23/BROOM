@@ -1,11 +1,13 @@
 import { FormProvider } from 'react-hook-form'
 import { styled } from 'styled-components'
 
-import { busReserveInfoAttribute, useBusReserveInfoForm } from '@/forms/useBusReserveInfoForm'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import type { BusReservationState } from '@/utils/constants'
-import { BUS_RESERVATION_STATES } from '@/utils/constants'
+
+import type { BusReservationState } from '../config/bus.constant'
+import { BUS_RESERVATION_STATES } from '../config/bus.constant'
+import { busReserveInfoAttribute } from '../config/bus.schema'
+import { useBusReserveInfoForm } from '../hook/useBusReserveInfoForm'
 
 export const BusReservationCheckForm = () => {
   const { STUDENT_ID } = busReserveInfoAttribute

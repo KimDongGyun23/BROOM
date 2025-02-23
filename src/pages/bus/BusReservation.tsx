@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { BusReservationNotice } from '@/components/domain/bus/BusReservationNotice'
+import { BusReservationNotice } from '@/features/bus/ui/BusReservationNotice'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
 import { MainHeader } from '@/shared/ui/MainHeader'

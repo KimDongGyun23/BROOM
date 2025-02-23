@@ -1,23 +1,12 @@
 import { useState } from 'react'
-import { z } from 'zod'
 
-import { useBusReservationQuery } from '@/query/useBusQuery'
+import { useBusReservationQuery } from '@/features/bus/api/useBus.query'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import type { BusReservationCheck } from '@/types/bus'
-import type { BusReservationState } from '@/utils/constants'
-import { BUS_RESERVATION_STATES } from '@/utils/constants'
 
-export const busReserveInfoAttribute = {
-  STUDENT_ID: {
-    section: 'studentId',
-    label: '학번',
-    input: { placeholder: '학번을 입력해주세요.', maxLength: 10 },
-  },
-} as const
-
-const busReserveInfoSchema = z.object({
-  studentId: z.string().length(10, { message: '학번은 10자리 숫자여야 합니다.' }),
-})
+import type { BusReservationState } from '../config/bus.constant'
+import { BUS_RESERVATION_STATES } from '../config/bus.constant'
+import { busReserveInfoAttribute, busReserveInfoSchema } from '../config/bus.schema'
+import type { BusReservationCheck } from '../model/bus.type'
 
 export const useBusReserveInfoForm = () => {
   const formMethod = useCustomForm<BusReservationCheck>(busReserveInfoSchema)
