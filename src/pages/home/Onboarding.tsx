@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useTouchEvent } from '@/shared/hook/useTouchEvent'
+import { useTouchEvent } from '@/features/home/hook/useTouchEvent'
 import { Button } from '@/shared/ui/Button'
 
 import onboarding_first from '/assets/onboarding1.svg'

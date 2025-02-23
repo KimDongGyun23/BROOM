@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { Splash } from './components/container/home/Splash'
+import { Splash } from './pages/home/Splash'
 import { RouterComponent } from './shared/ui/RouterComponent'
 
 function App() {

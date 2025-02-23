@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { HomeUserSection } from '@/components/domain/home/HomeUserSection'
+import { HomeUserSection } from '@/features/home/ui/HomeUserSection'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
