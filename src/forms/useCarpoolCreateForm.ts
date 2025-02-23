@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useCreateCarpoolPost } from '@/query/useCarpoolQuery'
-import type { CarpoolForm } from '@/types/post'
+import type { CarpoolForm } from '@/features/board/model/post.type'
 
 export const postAttribute = {
   TITLE: { section: 'title', label: '제목', input: { placeholder: '제목을 입력해주세요.' } },

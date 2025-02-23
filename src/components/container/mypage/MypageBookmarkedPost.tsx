@@ -1,7 +1,7 @@
 import { Container } from '@/app/style/commonStyles'
-import { PostList } from '@/components/domain/post/PostList'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter'
+import { PostList } from '@/features/board/ui/PostList'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
+import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
 import { useFetchBookmarkList } from '@/query/useCarpoolQuery'
 
 export const MypageBookmarkedPost = () => {

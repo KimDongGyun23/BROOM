@@ -5,6 +5,11 @@ export const Container = styled.div`
   height: 100%;
 `
 
+export const FlexColumnContainer = styled.div`
+  ${({ theme }) => theme.flexBox('column')};
+  height: 100%;
+`
+
 export const FormContainer = styled.form<{ $isFull?: boolean }>`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container')};

@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { InputGroup } from '@/components/view/inputGroup'
-import { Loading } from '@/components/view/Loading'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { InputGroup } from '@/shared/ui/inputGroup'
+import { Loading } from '@/shared/ui/Loading'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { postAttribute } from '@/forms/useCarpoolCreateForm'
 import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
 

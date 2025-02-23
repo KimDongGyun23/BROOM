@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { BookmarkIcon } from '@/components/view/icons/ActiveIcons'
+import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
 import { useParamId } from '@/hooks/useParamId'
 import { useToggle } from '@/hooks/useToggle'
 import { useAddBookmark, useDeleteBookmark } from '@/query/useCarpoolQuery'

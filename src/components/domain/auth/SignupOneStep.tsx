@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button } from '@/components/view/Button'
-import { InputGroup } from '@/components/view/inputGroup'
+import { Button } from '@/shared/ui/Button'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import { signupAttribute } from '@/forms/useSignupForm'
 import { useValidateId } from '@/query/useAuthQuery'
 import { useStepsActions } from '@/stores/steps'

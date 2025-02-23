@@ -2,8 +2,8 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
+import type { SearchOption } from '@/features/board/config/post.constant'
 import type { SearchType } from '@/types/common'
-import type { SearchOption } from '@/utils/constants'
 
 export const useSearchForm = (selectedFilter: SearchOption) => {
   const navigate = useNavigate()

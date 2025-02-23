@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import { BusReservationCreateForm } from '@/components/domain/bus/BusReservationCreateForm'
 import { BusReservationCreateModal } from '@/components/domain/bus/BusReservationCreateModal'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { ModalStoreProvider } from '@/stores/modal'
 
 export const BusReservationCreate = () => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 const dummy = [
   { label: '총 게시글 수', key: 'post', number: 32 },

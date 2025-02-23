@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-import { Kebab } from '@/components/view/Kebab'
-import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { Kebab } from '@/shared/ui/Kebab'
+import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { useBoolean } from '@/hooks/useBoolean'
 import { useParamId } from '@/hooks/useParamId'
 import { instance } from '@/query'

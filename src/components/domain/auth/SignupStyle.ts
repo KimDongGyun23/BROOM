@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Button } from '@/components/view/Button'
+import { Button } from '@/shared/ui/Button'
 
 export const ValidateContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', undefined, undefined, 'lg')};

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/hooks/useParamId'
 import { useEditCarpoolPost, useFetchCarpoolEditData } from '@/query/useCarpoolQuery'
-import type { CarpoolForm } from '@/types/post'
+import type { CarpoolForm } from '@/features/board/model/post.type'
 
 import { postSchema } from './useCarpoolCreateForm'
 

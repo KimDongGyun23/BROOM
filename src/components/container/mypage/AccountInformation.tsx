@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
 import { AccountInformationForm } from '@/components/domain/mypage/AccountInformationForm'
-import { Loading } from '@/components/view/Loading'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { Loading } from '@/shared/ui/Loading'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { useFetchAccountInformation } from '@/query/useMypageQuery'
 
 import { ErrorPage } from '../home/ErrorPage'

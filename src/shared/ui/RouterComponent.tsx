@@ -25,10 +25,10 @@ import { NewPassword } from '@/components/container/mypage/NewPassword'
 import { CarpoolBoard } from '@/pages/board/CarpoolBoard'
 import { instance } from '@/query'
 
-import { Admin } from '../container/admin/Admin'
-import { AdminBus } from '../container/admin/AdminBus'
-import { AdminOverview } from '../container/admin/AdminOverview'
-import { AdminTrainingSchedule } from '../container/admin/AdminTrainingSchedule'
+import { Admin } from '../../components/container/admin/Admin'
+import { AdminBus } from '../../components/container/admin/AdminBus'
+import { AdminOverview } from '../../components/container/admin/AdminOverview'
+import { AdminTrainingSchedule } from '../../components/container/admin/AdminTrainingSchedule'
 
 const LoginPrivateRoute = () => {
   const session = instance.hasToken()

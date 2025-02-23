@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { AdditionIcon } from '@/components/view/icons/NonActiveIcons'
 import { instance } from '@/query'
+import { AdditionIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const PostAdditionButton = () => {
   const navigate = useNavigate()

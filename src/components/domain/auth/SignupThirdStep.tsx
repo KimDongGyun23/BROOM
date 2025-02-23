@@ -1,4 +1,4 @@
-import { AllCheckIcon, CheckIcon } from '@/components/view/icons/ActiveIcons'
+import { AllCheckIcon, CheckIcon } from '@/shared/ui/icons/ActiveIcons'
 import { AGREEMENTS, useCheckedAgreements, useIsAllChecked, useTermsActions } from '@/stores/terms'
 
 import {

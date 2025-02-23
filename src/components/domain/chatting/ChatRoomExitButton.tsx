@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { ModalWithOneButton, ModalWithTwoButton } from '@/components/view/modal/ButtonModal'
+import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
 import { useExitChatRoom } from '@/query/useChattingQuery'
 import { useModalActions, useModalState, useTwoButtonModalState } from '@/stores/modal'

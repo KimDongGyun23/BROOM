@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { useIsSuccessModal, useModalActions, useModalState } from '@/stores/modal'
 
 export const AccountInformationEditModal = () => {

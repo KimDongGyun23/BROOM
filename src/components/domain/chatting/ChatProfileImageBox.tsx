@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { ProfileImage } from '@/components/view/ProfileImage'
+import { ProfileImage } from '@/shared/ui/ProfileImage'
 import type { MilitaryBranchCode } from '@/utils/constants'
 
 type ChattingProfileImageBoxProps = {

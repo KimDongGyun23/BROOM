@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { CarpoolDetailResponse } from '@/types/post'
+import type { CarpoolDetailResponse } from '@/features/board/model/post.type'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 type Actions = {

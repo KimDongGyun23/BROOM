@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
 import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
-import { ArrowRightIcon } from '@/components/view/icons/ActiveIcons'
-import { MainHeader } from '@/components/view/MainHeader'
-import { ToggleButton } from '@/components/view/ToggleButton'
+import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
+import { MainHeader } from '@/shared/ui/MainHeader'
+import { ToggleButton } from '@/shared/ui/ToggleButton'
 import { ModalStoreProvider } from '@/stores/modal'
 
 type NavigationLink = {

@@ -4,11 +4,11 @@ import type {
   BoxShadowType,
   MarginType,
   PaddingType,
-} from './styles/box'
-import type { ColorsType } from './styles/colors'
-import type { FlexBoxType } from './styles/flex'
-import type { FontType } from './styles/font'
-import type { GridBoxType } from './styles/grid'
+} from './app/style/box'
+import type { ColorsType } from './app/style/colors'
+import type { FlexBoxType } from './app/style/flex'
+import type { FontType } from './app/style/font'
+import type { GridBoxType } from './app/style/grid'
 
 import 'styled-components'
 

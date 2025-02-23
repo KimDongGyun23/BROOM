@@ -1,9 +1,9 @@
 import { Container } from '@/app/style/commonStyles'
 import { CarpoolSearchList } from '@/components/domain/post/CarpoolSearchList'
-import { SearchBar } from '@/components/domain/post/SearchBar'
-import { ShowActivePostsButton } from '@/components/domain/post/ShowActivePostsButton'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter'
+import { SearchBar } from '@/features/board/ui/SearchBar'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
+import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
+import { ShowActivePostsButton } from '@/features/board/ui/ShowActivePostsButton'
 
 export const CarpoolSearch = () => {
   return (

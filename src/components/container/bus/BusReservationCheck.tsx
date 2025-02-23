@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { BusReservationCheckForm } from '@/components/domain/bus/BusReservationCheckForm'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const BusReservationCheck = () => {
   const navigate = useNavigate()

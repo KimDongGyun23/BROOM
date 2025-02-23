@@ -13,7 +13,7 @@ import type {
   CarpoolMainRequest,
   CarpoolRemoveBookmarkRequest,
   CarpoolSearchRequest,
-} from '@/types/post'
+} from '@/features/board/model/post.type'
 
 import { instance } from '.'
 

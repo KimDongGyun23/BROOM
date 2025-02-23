@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 
 import { FormContainer } from '@/app/style/commonStyles'
-import { InputGroup } from '@/components/view/inputGroup'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import {
   accountInformationAttribute,
   useAccountInformationForm,

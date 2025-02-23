@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
-import { CrownIcon } from '@/components/view/icons/NonActiveIcons'
-import { ProfileImage } from '@/components/view/ProfileImage'
+import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
+import { ProfileImage } from '@/shared/ui/ProfileImage'
 import type { User } from '@/types/chat'
 import type { MilitaryBranchCode } from '@/utils/constants'
 import { getSessionStorageItem } from '@/utils/storage'

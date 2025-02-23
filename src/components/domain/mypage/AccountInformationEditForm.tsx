@@ -1,9 +1,9 @@
 import { useFormContext } from 'react-hook-form'
 
 import { FormContainer, ValidateContainer } from '@/app/style/commonStyles'
-import { Button } from '@/components/view/Button'
-import { InputGroup } from '@/components/view/inputGroup'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
+import { Button } from '@/shared/ui/Button'
+import { InputGroup } from '@/shared/ui/inputGroup'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { accountInformationAttribute } from '@/forms/useAccountInformationForm'
 import { useFieldValidation } from '@/hooks/useFieldValidation'
 import { useValidateNickname } from '@/query/useAuthQuery'

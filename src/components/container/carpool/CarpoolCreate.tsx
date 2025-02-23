@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { InputGroup } from '@/components/view/inputGroup'
-import { SubHeaderWithoutIcon } from '@/components/view/SubHeader'
 import { postAttribute, useCarpoolCreateForm } from '@/forms/useCarpoolCreateForm'
+import { InputGroup } from '@/shared/ui/inputGroup'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const CarpoolCreate = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import { Button } from '@/components/view/Button'
-import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
+import { Button } from '@/shared/ui/Button'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
 import { useEnterChatRoom } from '@/query/useChattingQuery'
 import { useModalActions, useModalState } from '@/stores/modal'

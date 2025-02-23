@@ -7,7 +7,7 @@ import {
   ChattingIcon,
   HomeIcon,
   MypageIcon,
-} from './icons/NavIcons'
+} from '@/shared/ui/icons/NavIcons'
 
 const NAVIGATION_ITEMS = [
   { Icon: BusReservationIcon, path: '/bus-reserve' },

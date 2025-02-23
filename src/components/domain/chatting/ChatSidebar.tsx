@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { ModalLayout } from '@/components/view/modal/ModalLayout'
+import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
 import { useSidebarActions } from '@/stores/\bsidebar'
 import type { ChatSidebarInformationResponse } from '@/types/chat'
 

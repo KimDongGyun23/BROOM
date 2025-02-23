@@ -1,10 +1,10 @@
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, { css } from 'styled-components'
 
-import { ProfileImage } from '@/components/view/ProfileImage'
 import { useParamId } from '@/hooks/useParamId'
 import { useScrollToBottom } from '@/hooks/useScrollToBottom'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
+import { ProfileImage } from '@/shared/ui/ProfileImage'
 import { useChatMessages } from '@/stores/chatMessage'
 import type { MessageType } from '@/types/chatting'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'

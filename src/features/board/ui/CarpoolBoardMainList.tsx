@@ -1,9 +1,9 @@
-import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter'
+import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
 import { useFetchCarpoolList } from '@/query/useCarpoolQuery'
 
 import { PostList } from './PostList'
 
-export const CarpoolMainList = () => {
+export const CarpoolBoardMainList = () => {
   const isFilteringActiveOnly = useIsFilteringActiveOnly()
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchCarpoolList({
     urls: { recruiting: isFilteringActiveOnly },

@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { BusReservationNotice } from '@/components/domain/bus/BusReservationNotice'
-import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { Button } from '@/components/view/Button'
-import { MainHeader } from '@/components/view/MainHeader'
+import { BottomNavigation } from '@/shared/ui/BottomNavigation'
+import { Button } from '@/shared/ui/Button'
+import { MainHeader } from '@/shared/ui/MainHeader'
 
 export const BusReservation = () => {
   const navigate = useNavigate()

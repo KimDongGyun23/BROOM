@@ -1,23 +1,23 @@
-import { Container } from '@/app/style/commonStyles'
-import { CarpoolMainList } from '@/components/domain/post/CarpoolMainList'
+import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
-import { SearchBar } from '@/components/domain/post/SearchBar'
-import { ShowActivePostsButton } from '@/components/domain/post/ShowActivePostsButton'
-import { BottomNavigation } from '@/components/view/BottomNavigation'
-import { MainHeader } from '@/components/view/MainHeader'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter'
+import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
+import { CarpoolBoardMainList } from '@/features/board/ui/CarpoolBoardMainList'
+import { SearchBar } from '@/features/board/ui/SearchBar'
+import { ShowActivePostsButton } from '@/features/board/ui/ShowActivePostsButton'
+import { BottomNavigation } from '@/shared/ui/BottomNavigation'
+import { MainHeader } from '@/shared/ui/MainHeader'
 
 export const CarpoolBoard = () => {
   return (
     <ActiveOnlyFilterStoreProvider>
-      <Container>
-        <MainHeader />
+      <FlexColumnContainer>
+        <MainHeader secondary title="승차 공유" />
         <SearchBar />
         <ShowActivePostsButton />
-        <CarpoolMainList />
+        <CarpoolBoardMainList />
         <PostAdditionButton />
         <BottomNavigation />
-      </Container>
+      </FlexColumnContainer>
     </ActiveOnlyFilterStoreProvider>
   )
 }

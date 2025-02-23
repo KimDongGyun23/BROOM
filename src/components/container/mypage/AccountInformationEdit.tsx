@@ -2,7 +2,7 @@ import { FormProvider } from 'react-hook-form'
 
 import { AccountInformationEditForm } from '@/components/domain/mypage/AccountInformationEditForm'
 import { AccountInformationEditModal } from '@/components/domain/mypage/AccountInformationEditModal'
-import { Loading } from '@/components/view/Loading'
+import { Loading } from '@/shared/ui/Loading'
 import { useAccountInformationForm } from '@/forms/useAccountInformationForm'
 import { useFetchAccountInformation } from '@/query/useMypageQuery'
 import { ModalStoreProvider } from '@/stores/modal'

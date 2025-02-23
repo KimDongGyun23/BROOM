@@ -1,5 +1,5 @@
-import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
-import { SubHeaderWithIcon } from '@/components/view/SubHeader'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
+import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 import { useParamId } from '@/hooks/useParamId'
 import { useFetchChatSidebarInformation } from '@/query/useChattingQuery'
 import { useModalActions, useModalState } from '@/stores/modal'

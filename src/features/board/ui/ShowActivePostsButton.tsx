@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import { CheckBoxIcon } from '@/components/view/icons/ActiveIcons'
 import {
   useActiveOnlyFilterActions,
   useIsFilteringActiveOnly,
-} from '@/features/board/model/activeOnlyFilter'
+} from '@/features/board/model/activeOnlyFilter.store'
+import { CheckBoxIcon } from '@/shared/ui/icons/ActiveIcons'
 
 export const ShowActivePostsButton = () => {
   const isFilteringActiveOnly = useIsFilteringActiveOnly()

@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { ModalWithOneButton } from '@/components/view/modal/ButtonModal'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { useParamId } from '@/hooks/useParamId'
 import { useExpelUser } from '@/query/useChattingQuery'
 import { ModalStoreProvider, useModalActions, useModalState } from '@/stores/modal'

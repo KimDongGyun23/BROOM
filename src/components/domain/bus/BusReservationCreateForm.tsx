@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 import { styled } from 'styled-components'
 
-import { Button } from '@/components/view/Button'
-import { InputGroup } from '@/components/view/inputGroup'
+import { Button } from '@/shared/ui/Button'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import { busCreateAttribute, useBusCreateForm } from '@/forms/useBusCreateForm'
 
 export const BusReservationCreateForm = () => {
