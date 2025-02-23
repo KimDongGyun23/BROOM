@@ -1,19 +1,20 @@
 import { FormProvider } from 'react-hook-form'
 
-import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { postAttribute, useCarpoolCreateForm } from '@/forms/useCarpoolCreateForm'
+import { FlexColumnContainer, FormContainer, GridContainer } from '@/app/style/commonStyles'
+import { postAttribute } from '@/features/board/config/post.schema'
+import { useCreatePostForm } from '@/features/board/hook/useCreatePostForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const PostCreate = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
-  const { formMethod, onSubmit } = useCarpoolCreateForm()
+  const { formMethod, onSubmit } = useCreatePostForm()
   const {
     formState: { errors },
   } = formMethod
 
   return (
-    <Container>
+    <FlexColumnContainer>
       <SubHeaderWithoutIcon type="complete" title="승차 공유 등록" onClickComplete={onSubmit} />
       <FormProvider {...formMethod}>
         <FormContainer>
@@ -53,6 +54,6 @@ export const PostCreate = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-    </Container>
+    </FlexColumnContainer>
   )
 }

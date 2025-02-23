@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { postAttribute } from '@/forms/useCarpoolCreateForm'
-import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
+import { postAttribute } from '@/features/board/config/post.schema'
+import { useEditPostForm } from '@/features/board/hook/useEditPostForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { Loading } from '@/shared/ui/Loading'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
@@ -10,7 +10,7 @@ import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { ErrorPage } from '../home/ErrorPage'
 
 export const PostEdit = () => {
-  const { formMethod, isPending, isError, onSubmit } = useCarpoolEditForm()
+  const { formMethod, isPending, isError, onSubmit } = useEditPostForm()
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
   const {
     formState: { errors },

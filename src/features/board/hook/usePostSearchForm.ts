@@ -2,12 +2,15 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import type { SearchOption } from '@/features/board/config/post.constant'
 import type { SearchType } from '@/types/common'
 
-export const useSearchForm = (selectedFilter: SearchOption) => {
+import { useSearchFilter } from './useSearchFilter'
+
+export const useSearchForm = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+
+  const { currentFilter } = useSearchFilter()
   const defaultSearchName = searchParams.get('searchName') || ''
 
   const formMethod = useForm<SearchType>({
@@ -19,10 +22,10 @@ export const useSearchForm = (selectedFilter: SearchOption) => {
   const { handleSubmit } = formMethod
 
   const handleSearch = useCallback(
-    (formData: SearchType) => {
-      navigate(`/carpool/search?filterName=${selectedFilter.label}&searchName=${formData.search}`)
+    ({ search }: SearchType) => {
+      navigate(`/carpool/search?filterName=${currentFilter.label}&searchName=${search}`)
     },
-    [navigate, selectedFilter.label],
+    [navigate, currentFilter.label],
   )
 
   return { formMethod, onSubmit: handleSubmit(handleSearch) }

@@ -1,7 +1,7 @@
 import { FlexColumnContainer } from '@/app/style/commonStyles'
-import { PostAdditionButton } from '@/components/domain/post/PostAdditionButton'
 import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
 import { BoardMainList } from '@/features/board/ui/BoardMainList'
+import { PostAdditionButton } from '@/features/board/ui/PostAdditionButton'
 import { SearchBar } from '@/features/board/ui/SearchBar'
 import { ShowActivePostsButton } from '@/features/board/ui/ShowActivePostsButton'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'

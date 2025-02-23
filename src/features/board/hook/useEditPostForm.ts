@@ -7,9 +7,9 @@ import type { PostForm } from '@/features/board/model/post.type'
 import { useCustomForm } from '@/hooks/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
 
-import { postSchema } from './useCarpoolCreateForm'
+import { postSchema } from '../config/post.schema'
 
-export const useCarpoolEditForm = () => {
+export const useEditPostForm = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 

@@ -5,7 +5,7 @@ import { SEARCH_OPTIONS } from '@/features/board/config/post.constant'
 import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
 import { PostList } from '@/features/board/ui/PostList'
 
-export const CarpoolSearchList = () => {
+export const PostSearchList = () => {
   const [searchParams] = useSearchParams()
   const filterLabel = searchParams.get('filterName') || ''
   const searchKeyword = searchParams.get('searchName') || ''

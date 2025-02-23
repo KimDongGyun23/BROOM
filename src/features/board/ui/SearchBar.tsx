@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useSearchForm } from '@/forms/usePostSearchForm'
+import { useSearchForm } from '@/features/board/hook/usePostSearchForm'
 import { useToggle } from '@/hooks/useToggle'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { Kebab } from '@/shared/ui/Kebab'
@@ -13,7 +13,7 @@ const SearchBarContent = () => {
   const [isDropdownOpen, toggleDropdown] = useToggle(false)
   const { currentFilter } = useSearchFilter()
 
-  const { formMethod, onSubmit } = useSearchForm(currentFilter)
+  const { formMethod, onSubmit } = useSearchForm()
   const { register } = formMethod
 
   return (
