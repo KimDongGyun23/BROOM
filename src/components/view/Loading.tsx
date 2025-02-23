@@ -1,7 +1,7 @@
 import { SyncLoader } from 'react-spinners'
 import styled from 'styled-components'
 
-import theme from '@/styles/theme'
+import theme from '@/app/style/theme'
 
 export const Loading = () => {
   return (

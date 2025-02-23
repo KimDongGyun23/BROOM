@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { ThemeProvider } from 'styled-components'
 
-import GlobalStyle from './styles/globalStyles.ts'
-import theme from './styles/theme.ts'
+import GlobalStyles from './app/style/globalStyles.ts'
+import theme from './app/style/theme.ts'
 import App from './App.tsx'
 
 const queryClient = new QueryClient({
@@ -24,7 +24,7 @@ createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
+        <GlobalStyles />
         <App />
         <Analytics />
         <SpeedInsights />

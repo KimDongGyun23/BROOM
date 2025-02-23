@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
+import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/app/style/chatting'
 import { Loading } from '@/components/view/Loading'
 import { useFetchChatRoomList } from '@/query/useChattingQuery'
-import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/styles/chatting'
 import type { ChatRoom } from '@/types/chat'
 
 import { ChatProfileImageBox } from './ChatProfileImageBox'
