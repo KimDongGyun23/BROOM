@@ -5,7 +5,7 @@ import { SearchBar } from '@/features/board/ui/SearchBar'
 import { ShowActivePostsButton } from '@/features/board/ui/ShowActivePostsButton'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-export const CarpoolSearch = () => {
+export const PostSearch = () => {
   return (
     <ActiveOnlyFilterStoreProvider>
       <Container>

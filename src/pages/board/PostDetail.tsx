@@ -15,7 +15,7 @@ import { Loading } from '@/shared/ui/Loading'
 
 import { ErrorPage } from '../home/ErrorPage'
 
-export const BoardDetail = () => {
+export const PostDetail = () => {
   const boardId = useParamId()
   const post = usePostDetail()
   const session = instance.hasToken()

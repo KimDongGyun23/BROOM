@@ -7,9 +7,6 @@ import { SignupPage } from '@/components/container/auth/SignupPage'
 import { BusReservation } from '@/components/container/bus/BusReservation'
 import { BusReservationCheck } from '@/components/container/bus/BusReservationCheck'
 import { BusReservationCreate } from '@/components/container/bus/BusReservationCreate'
-import { CarpoolCreate } from '@/components/container/carpool/CarpoolCreate'
-import { CarpoolEdit } from '@/components/container/carpool/CarpoolEdit'
-import { CarpoolSearch } from '@/components/container/carpool/CarpoolSearch'
 import { Chat } from '@/components/container/chat/Chat'
 import { ChatRoom } from '@/components/container/chat/ChatRoom'
 import { Home } from '@/components/container/home/Home'
@@ -21,7 +18,10 @@ import { MypageBookmarkedPost } from '@/components/container/mypage/MypageBookma
 import { MypageMyPost } from '@/components/container/mypage/MypageMyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
 import { Board } from '@/pages/board/Board'
-import { BoardDetail } from '@/pages/board/BoardDetail'
+import { PostCreate } from '@/pages/board/PostCreate'
+import { PostDetail } from '@/pages/board/PostDetail'
+import { PostEdit } from '@/pages/board/PostEdit'
+import { PostSearch } from '@/pages/board/PostSearch'
 import { ErrorPage } from '@/pages/home/ErrorPage'
 import { instance } from '@/query'
 
@@ -55,8 +55,8 @@ export const RouterComponent = () => {
       <Route path="/home" element={<Home />} />
 
       <Route path="/carpool" element={<Board />} />
-      <Route path="/carpool/detail/:id" element={<BoardDetail />} />
-      <Route path="/carpool/search" element={<CarpoolSearch />} />
+      <Route path="/carpool/detail/:id" element={<PostDetail />} />
+      <Route path="/carpool/search" element={<PostSearch />} />
 
       <Route path="/bus-reserve" element={<BusReservation />} />
       <Route path="/bus-reserve/create" element={<BusReservationCreate />} />
@@ -69,8 +69,8 @@ export const RouterComponent = () => {
       </Route>
 
       <Route element={<PrivateRoute />}>
-        <Route path="/carpool/create" element={<CarpoolCreate />} />
-        <Route path="/carpool/edit/:id" element={<CarpoolEdit />} />
+        <Route path="/carpool/create" element={<PostCreate />} />
+        <Route path="/carpool/edit/:id" element={<PostEdit />} />
 
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<ChatRoom />} />

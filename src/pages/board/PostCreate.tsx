@@ -1,27 +1,20 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { postAttribute } from '@/forms/useCarpoolCreateForm'
-import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
+import { postAttribute, useCarpoolCreateForm } from '@/forms/useCarpoolCreateForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { Loading } from '@/shared/ui/Loading'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-import { ErrorPage } from '../../../pages/home/ErrorPage'
-
-export const CarpoolEdit = () => {
-  const { formMethod, isPending, isError, onSubmit } = useCarpoolEditForm()
+export const PostCreate = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
+  const { formMethod, onSubmit } = useCarpoolCreateForm()
   const {
     formState: { errors },
   } = formMethod
 
-  if (isPending) return <Loading />
-  if (isError) return <ErrorPage />
-
   return (
     <Container>
-      <SubHeaderWithoutIcon type="complete" title="승차 공유 수정" onClickComplete={onSubmit} />
+      <SubHeaderWithoutIcon type="complete" title="승차 공유 등록" onClickComplete={onSubmit} />
       <FormProvider {...formMethod}>
         <FormContainer>
           <InputGroup section={TITLE.section}>
@@ -31,7 +24,7 @@ export const CarpoolEdit = () => {
 
           <InputGroup section={TRAINING_DATE.section}>
             <InputGroup.Label label={TRAINING_DATE.label} />
-            <InputGroup.Input {...TRAINING_DATE.input} />
+            <InputGroup.DateInput {...TRAINING_DATE.input} />
           </InputGroup>
 
           <InputGroup section={PLACE.section}>
