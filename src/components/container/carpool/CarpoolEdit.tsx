@@ -1,13 +1,13 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
+import { postAttribute } from '@/forms/useCarpoolCreateForm'
+import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { Loading } from '@/shared/ui/Loading'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { postAttribute } from '@/forms/useCarpoolCreateForm'
-import { useCarpoolEditForm } from '@/forms/useCarpoolEditForm'
 
-import { ErrorPage } from '../home/ErrorPage'
+import { ErrorPage } from '../../../pages/home/ErrorPage'
 
 export const CarpoolEdit = () => {
   const { formMethod, isPending, isError, onSubmit } = useCarpoolEditForm()

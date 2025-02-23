@@ -1,7 +1,7 @@
+import { useFetchChatSidebarInformation } from '@/query/useChattingQuery'
+import { useParamId } from '@/shared/hook/useParamId'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
-import { useParamId } from '@/hooks/useParamId'
-import { useFetchChatSidebarInformation } from '@/query/useChattingQuery'
 import { useModalActions, useModalState } from '@/stores/modal'
 import { useIsSidebarOpen, useSidebarActions } from '@/stores/\bsidebar'
 

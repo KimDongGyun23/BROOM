@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { instance } from '@/query'
 import { Button } from '@/shared/ui/Button'
 import { TentIcon } from '@/shared/ui/icons/NonActiveIcons'
-import { instance } from '@/query'
 import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
 const LoggedInUserContent = () => {

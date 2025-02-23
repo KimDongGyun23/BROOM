@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 import { styled } from 'styled-components'
 
+import { busReserveInfoAttribute, useBusReserveInfoForm } from '@/forms/useBusReserveInfoForm'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { busReserveInfoAttribute, useBusReserveInfoForm } from '@/forms/useBusReserveInfoForm'
 import type { BusReservationState } from '@/utils/constants'
 import { BUS_RESERVATION_STATES } from '@/utils/constants'
 

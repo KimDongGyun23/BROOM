@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useParamId } from '@/hooks/useParamId'
-import { useDeleteCarpoolPost } from '@/query/useCarpoolQuery'
+import { useDeletePost } from '@/features/board/api/useBoard.mutation'
+import { useParamId } from '@/shared/hook/useParamId'
 import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 import {
   useIsSuccessModal,
@@ -12,12 +12,12 @@ import {
 
 const DeleteConfirmationModal = () => {
   const boardId = useParamId()
-  const { mutate: deletePost } = useDeleteCarpoolPost()
+  const { mutate: deletePost } = useDeletePost()
 
   const { isTwoButtonModalOpen, twoButtonLabel } = useTwoButtonModalState()
   const { openModal, closeModal } = useModalActions()
 
-  const handleDeleteCarpoolPost = () => {
+  const handleDeletePost = () => {
     deletePost(
       { urls: { boardId } },
       {
@@ -33,7 +33,7 @@ const DeleteConfirmationModal = () => {
       onClose={closeModal}
       content={twoButtonLabel}
       secondaryButton={{ onClick: closeModal, label: '취소', secondary: true }}
-      primaryButton={{ onClick: handleDeleteCarpoolPost, label: '삭제' }}
+      primaryButton={{ onClick: handleDeletePost, label: '삭제' }}
     />
   )
 }
@@ -44,12 +44,10 @@ const DeleteResultModal = () => {
   const { isModalOpen, label } = useModalState()
   const { closeModal } = useModalActions()
 
-  const handleCarpoolDeleteSuccess = () => {
+  const handleDeleteSuccessModal = () => {
     closeModal()
     navigate(`/carpool`, { replace: true })
   }
-
-  const handleCarpoolDeleteError = () => closeModal()
 
   return (
     <ModalWithOneButton
@@ -57,14 +55,14 @@ const DeleteResultModal = () => {
       onClose={closeModal}
       content={label}
       button={{
-        onClick: isSuccessModal ? handleCarpoolDeleteSuccess : handleCarpoolDeleteError,
+        onClick: isSuccessModal ? handleDeleteSuccessModal : closeModal,
         label: '확인',
       }}
     />
   )
 }
 
-export const CarpoolDeleteModal = () => (
+export const PostDeleteModal = () => (
   <>
     <DeleteConfirmationModal />
     <DeleteResultModal />

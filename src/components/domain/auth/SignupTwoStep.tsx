@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { Button } from '@/shared/ui/Button'
-import { InputGroup } from '@/shared/ui/inputGroup'
 import { signupAttribute } from '@/forms/useSignupForm'
 import { useValidateNickname } from '@/query/useAuthQuery'
+import { Button } from '@/shared/ui/Button'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import { useStepsActions } from '@/stores/steps'
 
 import { StyledButton, ValidateContainer } from './SignupStyle'

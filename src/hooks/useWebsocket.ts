@@ -4,7 +4,7 @@ import { Client } from '@stomp/stompjs'
 import { instance } from '@/query'
 import { useChatMessageActions } from '@/stores/chatMessage'
 
-import { useParamId } from './useParamId'
+import { useParamId } from '../shared/hook/useParamId'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 

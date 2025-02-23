@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
 
+import { useFetchPostSearchList } from '@/features/board/api/useBoard.query'
 import { SEARCH_OPTIONS } from '@/features/board/config/post.constant'
 import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
 import { PostList } from '@/features/board/ui/PostList'
-import { useFetchCarpoolSearchList } from '@/query/useCarpoolQuery'
 
 export const CarpoolSearchList = () => {
   const [searchParams] = useSearchParams()
@@ -13,7 +13,7 @@ export const CarpoolSearchList = () => {
 
   const isFilteringActiveOnly = useIsFilteringActiveOnly()
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchCarpoolSearchList({
+  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostSearchList({
     urls: {
       type: filterKey || '',
       keyword: searchKeyword,

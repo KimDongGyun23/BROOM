@@ -3,19 +3,19 @@ import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
+import type { PostListResponse } from '@/features/board/model/post.type'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { Loading } from '@/shared/ui/Loading'
-import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
-import type { CarpoolListResponse } from '@/features/board/model/post.type'
 import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
-  item: CarpoolListResponse['result'][number]
+  item: PostListResponse['result'][number]
 }
 
 type PostListProps = {
-  postList: CarpoolListResponse['result']
+  postList: PostListResponse['result']
   isPending: boolean
   isError: boolean
   hasNextPage: boolean

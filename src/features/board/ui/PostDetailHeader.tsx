@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 
+import { useIsMyPost } from '@/features/board/model/postDetail.store'
+import { PostDeleteModal } from '@/features/board/ui/PostDeleteModal'
+import { useBoolean } from '@/hooks/useBoolean'
+import { instance } from '@/query'
+import { useParamId } from '@/shared/hook/useParamId'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { useBoolean } from '@/hooks/useBoolean'
-import { useParamId } from '@/hooks/useParamId'
-import { instance } from '@/query'
-import { useModalActions } from '@/stores/modal'
-import { useIsMyPost } from '@/stores/post'
+import { ModalStoreProvider, useModalActions } from '@/stores/modal'
 
 const AuthenticatedHeader = () => {
   const boardId = useParamId()
@@ -25,14 +26,16 @@ const AuthenticatedHeader = () => {
   ]
 
   return (
-    <>
+    <ModalStoreProvider>
       <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
       <Kebab isOpen={isKebabOpen} items={kebabMap} position={[48, 16]} />
-    </>
+
+      <PostDeleteModal />
+    </ModalStoreProvider>
   )
 }
 
-export const CarpoolDetailHeader = () => {
+export const PostDetailHeader = () => {
   const session = instance.hasToken()
   const isMyPost = useIsMyPost()
 

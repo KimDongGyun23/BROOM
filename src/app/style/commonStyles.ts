@@ -10,6 +10,12 @@ export const FlexColumnContainer = styled.div`
   height: 100%;
 `
 
+export const ScrollContainer = styled.div`
+  ${({ theme }) => theme.margin('container', 0)};
+  flex-grow: 1;
+  overflow-y: scroll;
+`
+
 export const FormContainer = styled.form<{ $isFull?: boolean }>`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container')};

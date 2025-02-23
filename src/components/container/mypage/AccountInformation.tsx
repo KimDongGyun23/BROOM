@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
 import { AccountInformationForm } from '@/components/domain/mypage/AccountInformationForm'
+import { useFetchAccountInformation } from '@/query/useMypageQuery'
 import { Loading } from '@/shared/ui/Loading'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { useFetchAccountInformation } from '@/query/useMypageQuery'
 
-import { ErrorPage } from '../home/ErrorPage'
+import { ErrorPage } from '../../../pages/home/ErrorPage'
 
 export const AccountInformation = () => {
   const navigate = useNavigate()

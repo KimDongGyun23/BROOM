@@ -8,12 +8,10 @@ import { BusReservation } from '@/components/container/bus/BusReservation'
 import { BusReservationCheck } from '@/components/container/bus/BusReservationCheck'
 import { BusReservationCreate } from '@/components/container/bus/BusReservationCreate'
 import { CarpoolCreate } from '@/components/container/carpool/CarpoolCreate'
-import { CarpoolDetail } from '@/components/container/carpool/CarpoolDetail'
 import { CarpoolEdit } from '@/components/container/carpool/CarpoolEdit'
 import { CarpoolSearch } from '@/components/container/carpool/CarpoolSearch'
 import { Chat } from '@/components/container/chat/Chat'
 import { ChatRoom } from '@/components/container/chat/ChatRoom'
-import { ErrorPage } from '@/components/container/home/ErrorPage'
 import { Home } from '@/components/container/home/Home'
 import { Onboarding } from '@/components/container/home/Onboarding'
 import { AccountInformation } from '@/components/container/mypage/AccountInformation'
@@ -22,7 +20,9 @@ import { Mypage } from '@/components/container/mypage/Mypage'
 import { MypageBookmarkedPost } from '@/components/container/mypage/MypageBookmarkedPost'
 import { MypageMyPost } from '@/components/container/mypage/MypageMyPost'
 import { NewPassword } from '@/components/container/mypage/NewPassword'
-import { CarpoolBoard } from '@/pages/board/CarpoolBoard'
+import { Board } from '@/pages/board/Board'
+import { BoardDetail } from '@/pages/board/BoardDetail'
+import { ErrorPage } from '@/pages/home/ErrorPage'
 import { instance } from '@/query'
 
 import { Admin } from '../../components/container/admin/Admin'
@@ -54,8 +54,8 @@ export const RouterComponent = () => {
       <Route path="/" element={<Onboarding />} />
       <Route path="/home" element={<Home />} />
 
-      <Route path="/carpool" element={<CarpoolBoard />} />
-      <Route path="/carpool/detail/:id" element={<CarpoolDetail />} />
+      <Route path="/carpool" element={<Board />} />
+      <Route path="/carpool/detail/:id" element={<BoardDetail />} />
       <Route path="/carpool/search" element={<CarpoolSearch />} />
 
       <Route path="/bus-reserve" element={<BusReservation />} />

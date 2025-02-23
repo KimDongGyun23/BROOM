@@ -7,12 +7,12 @@ import { LogoutButton } from '@/components/domain/mypage/LogoutButton'
 import { LogoutModal } from '@/components/domain/mypage/LogoutModal'
 import { MypageProfile } from '@/components/domain/mypage/MypageProfile'
 import { MypageSections } from '@/components/domain/mypage/MypageSections'
+import { useUserProfile } from '@/query/useMypageQuery'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
-import { useUserProfile } from '@/query/useMypageQuery'
 import { ModalStoreProvider } from '@/stores/modal'
 
-import { ErrorPage } from '../home/ErrorPage'
+import { ErrorPage } from '../../../pages/home/ErrorPage'
 
 export const Mypage = () => {
   const { data: userProfile, isPending, isError } = useUserProfile()

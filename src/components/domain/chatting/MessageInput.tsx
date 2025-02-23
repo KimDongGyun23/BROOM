@@ -1,8 +1,8 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { useWebSocket } from '@/hooks/useWebsocket'
+import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const MessageInput = () => {
   const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })

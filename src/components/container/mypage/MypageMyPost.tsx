@@ -1,8 +1,8 @@
 import { Container } from '@/app/style/commonStyles'
+import { useFetchMyPostList } from '@/features/board/api/useBoard.query'
+import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
 import { PostList } from '@/features/board/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
-import { useFetchMyPostList } from '@/query/useCarpoolQuery'
 
 export const MypageMyPost = () => {
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchMyPostList()

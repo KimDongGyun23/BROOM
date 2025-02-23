@@ -1,9 +1,9 @@
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, { css } from 'styled-components'
 
-import { useParamId } from '@/hooks/useParamId'
 import { useScrollToBottom } from '@/hooks/useScrollToBottom'
 import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
+import { useParamId } from '@/shared/hook/useParamId'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 import { useChatMessages } from '@/stores/chatMessage'
 import type { MessageType } from '@/types/chatting'

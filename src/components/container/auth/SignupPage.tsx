@@ -6,9 +6,9 @@ import { Container, FormContainer } from '@/app/style/commonStyles'
 import { SignupOneStep } from '@/components/domain/auth/SignupOneStep'
 import { SignupThirdStep } from '@/components/domain/auth/SignupThirdStep'
 import { SignupTwoStep } from '@/components/domain/auth/SignupTwoStep'
+import { useSignupForm } from '@/forms/useSignupForm'
 import { LabelWithStep } from '@/shared/ui/LabelWithStep'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
-import { useSignupForm } from '@/forms/useSignupForm'
 import { useCurrentStep, useStepsActions } from '@/stores/steps'
 
 const signupMap = {
