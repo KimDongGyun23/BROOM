@@ -1,7 +1,7 @@
 import type { ElementType } from 'react'
 import styled from 'styled-components'
 
-import type { MilitaryBranchCode } from '@/utils/constants'
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
 
 import { AirforceIcon, ArmyIcon, EtcIcon, MarineIcon, NavyIcon } from './icons/ProfileIcons'
 

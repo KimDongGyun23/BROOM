@@ -2,12 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { useIsMyPost, usePostDetail } from '@/features/board/model/postDetail.store'
-import { useEnterChatRoom } from '@/query/useChattingQuery'
+import { useEnterChatRoom } from '@/features/chat/api/useChat.query'
 import { useParamId } from '@/shared/hook/useParamId'
+import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
 import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal'
 import { Button } from '@/shared/ui/Button'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
 
 const ChatButton = () => {
   const post = usePostDetail()

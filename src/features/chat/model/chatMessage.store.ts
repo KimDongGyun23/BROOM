@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 
-import type { MessageType } from '@/types/chatting'
+import type { Message } from '@/features/chat/model/chat.type'
 
 type Actions = {
-  setInitialMessage: (messages: MessageType[]) => void
-  addMessage: (message: MessageType) => void
-  sendMessage: (message: MessageType) => void
+  setInitialMessage: (messages: Message[]) => void
+  addMessage: (message: Message) => void
+  sendMessage: (message: Message) => void
 }
 
 type ChatMessageStore = {
-  messages: MessageType[]
+  messages: Message[]
   actions: Actions
 }
 

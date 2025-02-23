@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 
+import type { User } from '@/features/chat/model/chat.type'
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
+import { getSessionStorageItem } from '@/shared/lib/storage'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-import type { User } from '@/types/chat'
-import type { MilitaryBranchCode } from '@/utils/constants'
-import { getSessionStorageItem } from '@/utils/storage'
 
 import { ChatExpelButton } from './ChatExpelButton'
 

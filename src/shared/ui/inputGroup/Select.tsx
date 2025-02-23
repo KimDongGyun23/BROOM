@@ -3,8 +3,8 @@ import { useCallback, useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
-import type { MilitaryBranchCode, MilitaryBranchName } from '@/utils/constants'
-import { MILITARY_BRANCHES } from '@/utils/constants'
+import type { MilitaryBranchCode, MilitaryBranchName } from '@/shared/lib/constants'
+import { MILITARY_BRANCHES } from '@/shared/lib/constants'
 
 import { InputGroupContext } from '.'
 

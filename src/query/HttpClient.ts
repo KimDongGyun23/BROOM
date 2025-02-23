@@ -7,7 +7,7 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
-import { clearSessionStorage } from '@/utils/storage'
+import { clearSessionStorage } from '@/shared/lib/storage'
 
 import { reIssue } from './useAuthQuery'
 

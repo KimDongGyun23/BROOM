@@ -5,8 +5,8 @@ import { z } from 'zod'
 import { instance } from '@/query'
 import { useLogin } from '@/query/useAuthQuery'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
+import { SESSION_KEYS, setSessionStorageItem } from '@/shared/lib/storage'
 import type { LoginCredentials } from '@/types/auth'
-import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 
 export const loginAttribute = {
   ID: {

@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
+import { clearSessionStorage } from '@/shared/lib/storage'
 import { useIsSuccessModal, useModalActions, useModalState } from '@/shared/model/modal'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
-import { clearSessionStorage } from '@/utils/storage'
 
 export const DeleteIdModal = () => {
   const navigate = useNavigate()

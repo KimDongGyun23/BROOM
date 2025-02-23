@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 import type {
   ChatRoomInformationRequest,
@@ -7,11 +7,8 @@ import type {
   ChatSidebarInformationRequest,
   ChatSidebarInformationResponse,
   EnterChatRoomRequest,
-  ExitChatRoomRequest,
-  ExpelUserRequest,
-} from '@/types/chat'
-
-import { instance } from '.'
+} from '@/features/chat/model/chat.type'
+import { instance } from '@/query'
 
 const ENDPOINTS = {
   fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,
@@ -20,12 +17,9 @@ const ENDPOINTS = {
   fetchSidebarInformation: (urls: ChatSidebarInformationRequest['urls']) =>
     `/chat/list/participant/${urls.boardId}`,
   enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
-
-  exitRoom: (urls: ExitChatRoomRequest['urls']) => `/chat/list/exit/${urls.boardId}`,
-  expelUser: `/chat/list/expell/request`,
 } as const
 
-const queryKeys = {
+export const queryKeys = {
   all: ['chat'] as const,
   roomList: () => [...queryKeys.all, 'list'] as const,
   roomInformation: (urls: ChatRoomInformationRequest['urls']) =>
@@ -85,22 +79,3 @@ export const useEnterChatRoom = ({ urls }: EnterChatRoomRequest) =>
     queryFn: () => instance.get<string>(ENDPOINTS.enterRoom(urls)),
     enabled: false,
   })
-
-export const useExitChatRoom = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: ({ urls }: ExitChatRoomRequest) =>
-      instance.delete<string>(ENDPOINTS.exitRoom(urls)),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.roomList }),
-  })
-}
-
-export const useExpelUser = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: ({ body }: ExpelUserRequest) => instance.patch<string>(ENDPOINTS.expelUser, body),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
-  })
-}

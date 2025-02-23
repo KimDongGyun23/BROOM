@@ -1,15 +1,16 @@
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, { css } from 'styled-components'
 
-import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
+import { useChatMessages } from '@/features/chat/model/chatMessage.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useScrollToBottom } from '@/shared/hook/useScrollToBottom'
-import { useChatMessages } from '@/shared/model/chatMessage'
+import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-import type { MessageType } from '@/types/chatting'
-import { getSessionStorageItem, SESSION_KEYS } from '@/utils/storage'
 
-const ChatMessage = ({ messageData }: { messageData: MessageType }) => {
+import { useFetchChatRoomInformation } from '../api/useChat.query'
+import type { Message } from '../model/chat.type'
+
+const ChatMessage = ({ messageData }: { messageData: Message }) => {
   const myNickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
   const { militaryBranch, senderNickname, message, createdAt } = messageData
 

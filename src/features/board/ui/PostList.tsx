@@ -5,10 +5,10 @@ import styled from 'styled-components'
 
 import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
 import type { PostListResponse } from '@/features/board/model/post.type'
+import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
+import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { Loading } from '@/shared/ui/Loading'
-import { canJoinChatRoom } from '@/utils/canJoinChatRoom'
-import { ERROR_MESSAGES } from '@/utils/constants'
 
 type PostItemProps = {
   item: PostListResponse['result'][number]

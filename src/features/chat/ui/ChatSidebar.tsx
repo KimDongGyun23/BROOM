@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-import { useSidebarActions } from '@/shared/model/sidebar'
+import type { ChatSidebarInformationResponse } from '@/features/chat/model/chat.type'
+import { useSidebarActions } from '@/features/chat/model/sidebar.store'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
-import type { ChatSidebarInformationResponse } from '@/types/chat'
 
 import { ChatParticipantList } from './ChatParticipantList'
 import { ChatRoomExitButton } from './ChatRoomExitButton'

@@ -1,16 +1,16 @@
 import { Container } from '@/app/style/commonStyles'
-import { ChatMessageList } from '@/components/domain/chatting/ChatMessageList'
-import { ChatRoomHeader } from '@/components/domain/chatting/ChatRoomHeader'
-import { ChattingRoomProfile } from '@/components/domain/chatting/ChattingRoomProfile'
-import { MessageInput } from '@/components/domain/chatting/MessageInput'
-import { useFetchChatRoomInformation } from '@/query/useChattingQuery'
+import { useFetchChatRoomInformation } from '@/features/chat/api/useChat.query'
+import { useChatMessageActions } from '@/features/chat/model/chatMessage.store'
+import { SidebarStoreProvider } from '@/features/chat/model/sidebar.store'
+import { ChatMessageList } from '@/features/chat/ui/ChatMessageList'
+import { ChatRoomHeader } from '@/features/chat/ui/ChatRoomHeader'
+import { ChattingRoomProfile } from '@/features/chat/ui/ChattingRoomProfile'
+import { MessageInput } from '@/features/chat/ui/MessageInput'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useChatMessageActions } from '@/shared/model/chatMessage'
 import { ModalStoreProvider } from '@/shared/model/modal'
-import { SidebarStoreProvider } from '@/shared/model/sidebar'
 import { Loading } from '@/shared/ui/Loading'
 
-import { ErrorPage } from '../../../pages/home/ErrorPage'
+import { ErrorPage } from '../home/ErrorPage'
 
 export const ChatRoom = () => {
   const boardId = useParamId()

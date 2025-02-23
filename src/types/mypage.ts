@@ -1,4 +1,4 @@
-import type { MilitaryBranchCode } from '@/utils/constants'
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
 
 type UserInformation = {
   nickname: string

@@ -1,4 +1,4 @@
-import type { MilitaryBranchCode } from '@/utils/constants'
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
 
 export type User = {
   userId: string
@@ -6,7 +6,7 @@ export type User = {
   militaryBranch: MilitaryBranchCode
 }
 
-type Message = {
+export type Message = {
   messageId: number
   message: string
   senderNickname: string

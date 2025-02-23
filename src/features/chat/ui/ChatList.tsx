@@ -2,9 +2,10 @@ import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/app/style/chatting'
-import { useFetchChatRoomList } from '@/query/useChattingQuery'
+import type { ChatRoom } from '@/features/chat/model/chat.type'
 import { Loading } from '@/shared/ui/Loading'
-import type { ChatRoom } from '@/types/chat'
+
+import { useFetchChatRoomList } from '../api/useChat.query'
 
 import { ChatProfileImageBox } from './ChatProfileImageBox'
 

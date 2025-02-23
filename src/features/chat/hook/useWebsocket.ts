@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Client } from '@stomp/stompjs'
 
+import { useChatMessageActions } from '@/features/chat/model/chatMessage.store'
 import { instance } from '@/query'
-import { useChatMessageActions } from '@/shared/model/chatMessage'
 
-import { useParamId } from './useParamId'
+import { useParamId } from '../../../shared/hook/useParamId'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 

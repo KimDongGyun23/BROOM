@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-import type { MilitaryBranchCode } from '@/utils/constants'
 
 type ChattingProfileImageBoxProps = {
   profileIconList: MilitaryBranchCode[]
