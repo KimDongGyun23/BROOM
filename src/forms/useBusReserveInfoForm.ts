@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { z } from 'zod'
 
-import { useCustomForm } from '@/hooks/useCustomForm'
 import { useBusReservationQuery } from '@/query/useBusQuery'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 import type { BusReservationCheck } from '@/types/bus'
 import type { BusReservationState } from '@/utils/constants'
 import { BUS_RESERVATION_STATES } from '@/utils/constants'

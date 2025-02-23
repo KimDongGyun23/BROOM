@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEditPost } from '@/features/board/api/useBoard.mutation'
 import { useFetchPostEditData } from '@/features/board/api/useBoard.query'
 import type { PostForm } from '@/features/board/model/post.type'
-import { useCustomForm } from '@/hooks/useCustomForm'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
 
 import { postSchema } from '../config/post.schema'

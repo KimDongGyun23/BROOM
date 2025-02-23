@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useToggle } from '@/hooks/useToggle'
+import { useToggle } from '@/shared/hook/useToggle'
 
 type ToggleButtonProps = {
   initialToggleState?: boolean

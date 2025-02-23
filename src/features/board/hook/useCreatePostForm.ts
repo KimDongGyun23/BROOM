@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useCreatePost } from '@/features/board/api/useBoard.mutation'
 import type { PostForm } from '@/features/board/model/post.type'
-import { useCustomForm } from '@/hooks/useCustomForm'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 
 import { postSchema } from '../config/post.schema'
 

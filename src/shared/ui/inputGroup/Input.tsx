@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useToggle } from '@/hooks/useToggle'
+import { useToggle } from '@/shared/hook/useToggle'
 
 import { EyeCloseIcon, EyeIcon } from '../icons/NonActiveIcons'
 

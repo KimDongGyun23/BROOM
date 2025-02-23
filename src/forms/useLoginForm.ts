@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
-import { useCustomForm } from '@/hooks/useCustomForm'
 import { instance } from '@/query'
 import { useLogin } from '@/query/useAuthQuery'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 import type { LoginCredentials } from '@/types/auth'
 import { SESSION_KEYS, setSessionStorageItem } from '@/utils/storage'
 

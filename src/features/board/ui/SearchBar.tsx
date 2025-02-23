@@ -2,7 +2,7 @@ import { FormProvider } from 'react-hook-form'
 import styled from 'styled-components'
 
 import { useSearchForm } from '@/features/board/hook/usePostSearchForm'
-import { useToggle } from '@/hooks/useToggle'
+import { useToggle } from '@/shared/hook/useToggle'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { Kebab } from '@/shared/ui/Kebab'
 

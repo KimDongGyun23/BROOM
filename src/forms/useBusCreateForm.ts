@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { z } from 'zod'
 
-import { useCustomForm } from '@/hooks/useCustomForm'
 import { useBusReservationMutation } from '@/query/useBusQuery'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useModalActions } from '@/stores/modal'
 import type { BusReservationForm } from '@/types/bus'
 
