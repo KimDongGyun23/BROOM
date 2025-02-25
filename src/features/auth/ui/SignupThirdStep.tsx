@@ -3,7 +3,7 @@ import {
   useCheckedAgreements,
   useIsAllChecked,
   useTermsActions,
-} from '@/shared/model/terms'
+} from '@/shared/model/terms.type'
 import { AllCheckIcon, CheckIcon } from '@/shared/ui/icons/ActiveIcons'
 
 import {

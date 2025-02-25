@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useModalActions } from '@/shared/model/modal'
+import { useModalActions } from '@/shared/model/modal.type'
 
 import { useDeleteId } from '../api/useMypage.mutation'
 

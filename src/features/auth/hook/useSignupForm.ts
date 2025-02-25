@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import type { SignupData } from '@/features/auth/model/auth.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useTermsActions } from '@/shared/model/terms'
+import { useTermsActions } from '@/shared/model/terms.type'
 
 import { useSignup } from '../api/useAuth.mutation'
 import { signupSchema } from '../config/auth.schema'

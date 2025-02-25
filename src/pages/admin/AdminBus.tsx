@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { AdminBusTable } from '@/features/admin/ui/AdminBusTable'
-import { ModalStoreProvider } from '@/shared/model/modal'
+import { ModalStoreProvider } from '@/shared/model/modal.type'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const AdminBus = () => {

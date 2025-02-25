@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { useSidebarActions } from '@/features/chat/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions, useModalState, useTwoButtonModalState } from '@/shared/model/modal'
+import { useModalActions, useModalState, useTwoButtonModalState } from '@/shared/model/modal.type'
 import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 import { useExitChatRoom } from '../api/useChat.mutation'

@@ -8,7 +8,7 @@ import { LogoutButton } from '@/features/mypage/ui/LogoutButton'
 import { LogoutModal } from '@/features/mypage/ui/LogoutModal'
 import { MypageProfile } from '@/features/mypage/ui/MypageProfile'
 import { MypageSections } from '@/features/mypage/ui/MypageSections'
-import { ModalStoreProvider } from '@/shared/model/modal'
+import { ModalStoreProvider } from '@/shared/model/modal.type'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
 

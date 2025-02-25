@@ -7,7 +7,7 @@ import { ChatRoomHeader } from '@/features/chat/ui/ChatRoomHeader'
 import { ChattingRoomProfile } from '@/features/chat/ui/ChattingRoomProfile'
 import { MessageInput } from '@/features/chat/ui/MessageInput'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalStoreProvider } from '@/shared/model/modal'
+import { ModalStoreProvider } from '@/shared/model/modal.type'
 import { Loading } from '@/shared/ui/Loading'
 
 import { ErrorPage } from '../home/ErrorPage'

@@ -5,7 +5,7 @@ import { useIsMyPost, usePostDetail } from '@/features/board/model/postDetail.st
 import { useEnterChatRoom } from '@/features/chat/api/useChat.query'
 import { useParamId } from '@/shared/hook/useParamId'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
-import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal'
+import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal.type'
 import { Button } from '@/shared/ui/Button'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 

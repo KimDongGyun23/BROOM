@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { useStepsActions } from '@/shared/model/steps'
+import { useStepsActions } from '@/shared/model/steps.type'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { LogoutButton } from '@/features/mypage/ui/LogoutButton'
 import { LogoutModal } from '@/features/mypage/ui/LogoutModal'
-import { ModalStoreProvider } from '@/shared/model/modal'
+import { ModalStoreProvider } from '@/shared/model/modal.type'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { ToggleButton } from '@/shared/ui/ToggleButton'

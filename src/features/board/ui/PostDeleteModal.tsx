@@ -7,7 +7,7 @@ import {
   useModalActions,
   useModalState,
   useTwoButtonModalState,
-} from '@/shared/model/modal'
+} from '@/shared/model/modal.type'
 import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const DeleteConfirmationModal = () => {
