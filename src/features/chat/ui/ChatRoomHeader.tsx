@@ -1,6 +1,6 @@
 import { useIsSidebarOpen, useSidebarActions } from '@/features/chat/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions, useModalState } from '@/shared/model/modal.type'
+import { useModalActions, useModalState } from '@/shared/model/modal.store'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 

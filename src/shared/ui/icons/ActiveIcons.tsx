@@ -1,4 +1,4 @@
-import type { SvgIconProps } from '@/app/model/common.type'
+import type { SvgIconProps } from '@/shared/model/common.type'
 
 const colorStyle = (active: boolean) => (active ? '#5BA2F8' : '#D2D0CD')
 

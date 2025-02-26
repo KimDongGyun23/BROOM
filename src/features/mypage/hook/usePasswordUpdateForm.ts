@@ -1,5 +1,5 @@
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useModalActions } from '@/shared/model/modal.type'
+import { useModalActions } from '@/shared/model/modal.store'
 
 import { useUpdatePassword } from '../api/useMypage.mutation'
 import { newPasswordSchema } from '../model/mypage.schema'

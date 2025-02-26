@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useModalActions } from '@/shared/model/modal.type'
+import { useModalActions } from '@/shared/model/modal.store'
 
 import { useLogout } from '../api/useMypage.mutation'
 

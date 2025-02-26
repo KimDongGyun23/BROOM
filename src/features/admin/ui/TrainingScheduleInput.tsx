@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 import { styled } from 'styled-components'
 
-import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule.type'
+import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule.store'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 

@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import type { SearchType } from '@/app/model/common.type'
+import type { SearchType } from '@/shared/model/common.type'
 
 import { useSearchFilter } from './useSearchFilter'
 

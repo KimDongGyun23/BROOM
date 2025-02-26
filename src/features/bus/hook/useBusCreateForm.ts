@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { useModalActions } from '@/shared/model/modal.type'
+import { useModalActions } from '@/shared/model/modal.store'
 
 import { useBusReservationMutation } from '../api/useBus.mutation'
 import { busCreateSchema } from '../config/bus.schema'

@@ -7,7 +7,7 @@ import { useSignupForm } from '@/features/auth/hook/useSignupForm'
 import { SignupOneStep } from '@/features/auth/ui/SignupOneStep'
 import { SignupThirdStep } from '@/features/auth/ui/SignupThirdStep'
 import { SignupTwoStep } from '@/features/auth/ui/SignupTwoStep'
-import { useCurrentStep, useStepsActions } from '@/shared/model/steps.type'
+import { useCurrentStep, useStepsActions } from '@/shared/model/steps.store'
 import { LabelWithStep } from '@/shared/ui/LabelWithStep'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 

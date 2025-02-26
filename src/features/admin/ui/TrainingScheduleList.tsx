@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 import { formatDate } from '@/shared/lib/formatDate'
-import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule.type'
+import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule.store'
 
 export const TrainingScheduleList = () => {
   const { removeTrainingDate, sortedDates } = useTrainingScheduleActions()

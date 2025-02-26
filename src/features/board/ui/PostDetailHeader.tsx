@@ -5,7 +5,7 @@ import { useIsMyPost } from '@/features/board/model/postDetail.store'
 import { PostDeleteModal } from '@/features/board/ui/PostDeleteModal'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.type'
+import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
