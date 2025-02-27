@@ -41,6 +41,7 @@ const sizeMap = {
     modal: '36px 0',
     bubble: '10px 16px',
     messageInput: '10px 8px 10px 16px',
+    tag: '2px 6px',
   },
   margin: {
     ...gap,
