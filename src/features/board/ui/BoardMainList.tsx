@@ -1,12 +1,26 @@
-import { useFetchPostList } from '@/features/board/api/useBoard.query'
+import { useFetchPostSearchList } from '@/features/board/api/useBoard.query'
 import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
+import { formatDate } from '@/shared/lib/formatDate'
+
+import { useDateFilter } from '../model/dateFilter.store'
 
 import { PostList } from './PostList'
 
 export const BoardMainList = () => {
+  const dateFilter = useDateFilter()
   const isFilteringActiveOnly = useIsFilteringActiveOnly()
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
-    urls: { recruiting: isFilteringActiveOnly },
+
+  const formattedDate = dateFilter
+    ? formatDate(`${new Date().getFullYear()}.${dateFilter}`, 'default')
+    : null
+
+  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostSearchList({
+    urls: {
+      type: 'trainingDate',
+      trainingDate: formattedDate,
+      recruiting: isFilteringActiveOnly,
+      keyword: null,
+    },
   })
 
   const postList = data?.pages.flatMap((page) => page.result) || []

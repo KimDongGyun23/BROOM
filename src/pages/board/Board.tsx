@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
 import { DateFilterStoreProvider } from '@/features/board/model/dateFilter.store'
+import { BoardMainList } from '@/features/board/ui/BoardMainList'
 import { PostAdditionButton } from '@/features/board/ui/PostAdditionButton'
 import { PostDateFilter } from '@/features/board/ui/PostDateFilter'
 import { SearchBar } from '@/features/board/ui/SearchBar'
@@ -23,7 +24,7 @@ export const Board = () => {
             <ShowActivePostsButton />
           </FilterContainer>
 
-          {/* <BoardMainList /> */}
+          <BoardMainList />
           <PostAdditionButton />
           <BottomNavigation />
         </FlexColumnContainer>

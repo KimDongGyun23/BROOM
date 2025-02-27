@@ -82,9 +82,10 @@ export type PostListResponse = {
 export type PostSearchRequest = {
   urls: {
     pageParam?: number | unknown
+    trainingDate: string | null
     recruiting: boolean
     type: string
-    keyword: string
+    keyword: string | null
   }
 }
 

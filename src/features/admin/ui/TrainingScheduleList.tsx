@@ -10,7 +10,7 @@ export const TrainingScheduleList = () => {
     <Container>
       {sortedDates().map((date) => (
         <DateListContainer key={date}>
-          <span>{formatDate(date, 'dotDate')}</span>
+          <span>{formatDate(date, 'dotFullDate')}</span>
           <button
             type="button"
             className="date-remove-button"

@@ -15,7 +15,7 @@ import { instance } from '../../../app/api'
 const ENDPOINTS = {
   fetchPostList: (urls: BoardMainRequest['urls']) =>
     `/board/view/all/${urls.pageParam}?recruiting=${urls.recruiting}`,
-  fetchSearchPostList: (urls: PostSearchRequest['urls']) =>
+  searchPostList: (urls: PostSearchRequest['urls']) =>
     `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.recruiting}`,
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
@@ -53,7 +53,7 @@ export const useFetchPostSearchList = ({ urls }: PostSearchRequest) =>
   useInfiniteQuery({
     queryKey: queryKeys.searchList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(ENDPOINTS.fetchSearchPostList({ ...urls, pageParam })),
+      instance.get<PostListResponse>(ENDPOINTS.searchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined

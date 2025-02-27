@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { formatDate } from '@/shared/lib/formatDate'
+
 import { useFetchDateFilter } from '../api/useBoard.query'
 import { useDateFilter, useDateFilterActions } from '../model/dateFilter.store'
 
@@ -32,7 +34,7 @@ export const PostDateFilter = () => {
   return (
     <Container>
       {data.dates.map(({ id, trainingDate }) => (
-        <Tag key={id} date={trainingDate} />
+        <Tag key={id} date={formatDate(trainingDate, 'dotDate')} />
       ))}
     </Container>
   )
