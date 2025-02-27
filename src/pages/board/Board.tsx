@@ -4,7 +4,7 @@ import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
 import { DateFilterStoreProvider } from '@/features/board/model/dateFilter.store'
 import { PostAdditionButton } from '@/features/board/ui/PostAdditionButton'
-import { PostDateFilterTag } from '@/features/board/ui/PostDateFilterTag'
+import { PostDateFilter } from '@/features/board/ui/PostDateFilter'
 import { SearchBar } from '@/features/board/ui/SearchBar'
 import { ShowActivePostsButton } from '@/features/board/ui/ShowActivePostsButton'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
@@ -19,7 +19,7 @@ export const Board = () => {
           <SearchBar />
 
           <FilterContainer>
-            <PostDateFilterTag />
+            <PostDateFilter />
             <ShowActivePostsButton />
           </FilterContainer>
 

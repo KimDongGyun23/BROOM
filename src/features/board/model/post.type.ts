@@ -87,3 +87,10 @@ export type PostSearchRequest = {
     keyword: string
   }
 }
+
+export type DateFilterResponse = {
+  dates: {
+    id: number
+    trainingDate: string
+  }[]
+}

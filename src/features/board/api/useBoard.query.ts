@@ -2,6 +2,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 import type {
   BoardMainRequest,
+  DateFilterResponse,
   PostDetailRequest,
   PostDetailResponse,
   PostForm,
@@ -19,6 +20,7 @@ const ENDPOINTS = {
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
   fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
+  dateFilter: `/date-tag`,
 } as const
 
 export const queryKeys = {
@@ -31,6 +33,7 @@ export const queryKeys = {
   bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
   carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
     [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
+  dateFilter: () => [...queryKeys.all, 'date-filter'] as const,
 }
 
 export const useFetchPostList = ({ urls }: BoardMainRequest) =>
@@ -105,5 +108,12 @@ export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery({
     queryKey: queryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
+  })
+}
+
+export const useFetchDateFilter = () => {
+  return useQuery({
+    queryKey: queryKeys.dateFilter(),
+    queryFn: () => instance.get<DateFilterResponse>(ENDPOINTS.dateFilter),
   })
 }

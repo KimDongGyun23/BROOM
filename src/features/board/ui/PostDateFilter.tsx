@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
+import { useFetchDateFilter } from '../api/useBoard.query'
 import { useDateFilter, useDateFilterActions } from '../model/dateFilter.store'
 
 type TagProps = {
@@ -23,13 +24,15 @@ const Tag = ({ date }: TagProps) => {
   )
 }
 
-export const PostDateFilterTag = () => {
-  const list = ['05/21', '05/22']
+export const PostDateFilter = () => {
+  const { data, isPending, isError } = useFetchDateFilter()
+
+  if (!data || isPending || isError) return null
 
   return (
     <Container>
-      {list.map((date) => (
-        <Tag key={date} date={date} />
+      {data.dates.map(({ id, trainingDate }) => (
+        <Tag key={id} date={trainingDate} />
       ))}
     </Container>
   )
