@@ -1,7 +1,7 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchBookmarkList } from '@/features/board/api/useBoard.query'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
-import { PostList } from '@/features/board/ui/PostList'
+import { PostList } from '@/widgets/post-list/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const MypageBookmarkedPost = () => {

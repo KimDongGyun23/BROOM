@@ -5,5 +5,5 @@ export const canJoinChatRoom: CanJoinChatRoomType = (currentParticipants, maxPar
     throw new Error('입력 값은 숫자여야 합니다.')
   }
 
-  return currentParticipants - 1 < maxParticipants
+  return currentParticipants < maxParticipants
 }

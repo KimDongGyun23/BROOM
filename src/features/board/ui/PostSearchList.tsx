@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { SEARCH_OPTIONS } from '@/features/board/config/post.constant'
-import { PostList } from '@/features/board/ui/PostList'
+import { PostList } from '@/widgets/post-list/ui/PostList'
 import { useDateTag } from '@/features/filter/model/dateTag.store'
 import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 
