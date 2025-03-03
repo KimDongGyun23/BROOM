@@ -4,7 +4,7 @@ import { DateFilterStoreProvider } from '@/features/board/model/dateFilter.store
 import { FilterContainer } from '@/features/board/ui/PostCommonStyle'
 import { PostDateFilter } from '@/features/board/ui/PostDateFilter'
 import { PostSearchList } from '@/features/board/ui/PostSearchList'
-import { SearchBar } from '@/features/board/ui/SearchBar'
+import { SearchBar } from '@/features/search/ui/SearchBar'
 import { RecruitingButton } from '@/features/filter/ui/RecruitingButton'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 

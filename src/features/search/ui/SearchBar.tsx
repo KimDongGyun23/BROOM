@@ -2,15 +2,15 @@ import { FormProvider } from 'react-hook-form'
 import styled from 'styled-components'
 
 import { useSearchForm } from '@/features/board/hook/usePostSearchForm'
-import { useToggle } from '@/shared/hook/useToggle'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
-import { Kebab } from '@/shared/ui/Kebab'
 
 import { useSearchFilter } from '../hook/useSearchFilter'
-import { useIsFilterDropdownOpen } from '../model/filterDropdown.store'
+import { useFilterDropDownActions, useIsFilterDropdownOpen } from '../model/filterDropdown.store'
 
-const SearchBarContent = () => {
-  const [isDropdownOpen, toggleDropdown] = useToggle(false)
+export const SearchBar = () => {
+  const isDropdownOpen = useIsFilterDropdownOpen()
+  const { toggleDropdown } = useFilterDropDownActions()
+
   const { currentFilter } = useSearchFilter()
 
   const { formMethod, onSubmit } = useSearchForm()
@@ -44,23 +44,6 @@ const SearchBarContent = () => {
         </FormContainer>
       </FormProvider>
     </Container>
-  )
-}
-
-export const SearchBar = () => {
-  const isDropdownOpen = useIsFilterDropdownOpen()
-  const { dropdownItems } = useSearchFilter()
-
-  return (
-    <>
-      <SearchBarContent />
-
-      <Kebab
-        isOpen={isDropdownOpen}
-        items={dropdownItems}
-        position={[120, undefined, undefined, 16]}
-      />
-    </>
   )
 }
 
