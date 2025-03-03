@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 
-import { SEARCH_OPTIONS, type SearchOption } from '../../board/config/post.constant'
+import type { SearchOption } from '@/entities/board/config/post.constant'
+import { SEARCH_OPTIONS } from '@/entities/board/config/post.constant'
 
 const getInitialFilter = (filterLabel: string | null): SearchOption =>
   SEARCH_OPTIONS.find((option) => option.label === filterLabel) || SEARCH_OPTIONS[0]
@@ -13,21 +14,6 @@ export const useSearchFilter = () => {
   const [currentFilter, setCurrentFilter] = useState<SearchOption>(
     getInitialFilter(initialFilterLabel),
   )
-
-  // const { toggleDropdown } = useFilterDropDownActions()
-
-  // const selectFilter = useCallback(
-  //   (filter: SearchOption) => {
-  //     setCurrentFilter(filter)
-  //     toggleDropdown()
-  //   },
-  //   [toggleDropdown],
-  // )
-
-  // const dropdownItems = SEARCH_OPTIONS.map((option) => ({
-  //   ...option,
-  //   onClick: () => selectFilter(option),
-  // }))
 
   return { currentFilter, setCurrentFilter }
 }

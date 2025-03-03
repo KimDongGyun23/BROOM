@@ -1,7 +1,7 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container, FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { postAttribute } from '@/features/board/config/post.schema'
+import { postAttribute } from '@/entities/board/config/post.schema'
 import { useEditPostForm } from '@/features/board/hook/useEditPostForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { Loading } from '@/shared/ui/Loading'
