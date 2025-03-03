@@ -13,7 +13,7 @@ import { instance } from '../../../app/api'
 
 const ENDPOINTS = {
   fetchPostList: (urls: PostListRequest['urls']) =>
-    `/board/view/${urls.pageParam}?title=${urls.title}&place=${urls.place}&trainingDate=${urls.trainingDate}&recruiting=${urls.recruiting}`,
+    `/board/view/${urls.pageParam}?title=${urls.title}&place=${urls.place}${urls.trainingDate && `&trainingDate=${urls.trainingDate}`}&recruiting=${urls.recruiting}`,
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
   fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/detail/${urls.boardId}`,
