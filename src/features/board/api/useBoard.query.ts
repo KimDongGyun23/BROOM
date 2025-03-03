@@ -27,7 +27,7 @@ const ENDPOINTS = {
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
   fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/detail/${urls.boardId}`,
-  dateFilter: `/date-tag`,
+  dateTag: `/date-tag`,
 } as const
 
 export const queryKeys = {
@@ -38,7 +38,7 @@ export const queryKeys = {
   bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
   carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
     [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
-  dateFilter: () => [...queryKeys.all, 'date-filter'] as const,
+  dateTag: () => [...queryKeys.all, 'date-filter'] as const,
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
@@ -105,7 +105,7 @@ export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
 
 export const useFetchDateFilter = () => {
   return useQuery({
-    queryKey: queryKeys.dateFilter(),
-    queryFn: () => instance.get<DateFilterResponse>(ENDPOINTS.dateFilter),
+    queryKey: queryKeys.dateTag(),
+    queryFn: () => instance.get<DateFilterResponse>(ENDPOINTS.dateTag),
   })
 }

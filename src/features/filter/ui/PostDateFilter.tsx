@@ -1,22 +1,22 @@
 import styled from 'styled-components'
 
+import { useFetchDateFilter } from '@/features/board/api/useBoard.query'
 import { formatDate } from '@/shared/lib/formatDate'
 
-import { useFetchDateFilter } from '../api/useBoard.query'
-import { useDateFilter, useDateFilterActions } from '../model/dateFilter.store'
+import { useDateTag, useDateTagActions } from '../model/dateTag.store'
 
 type TagProps = {
   date: string
 }
 
 const Tag = ({ date }: TagProps) => {
-  const selectedDate = useDateFilter()
-  const { setDateFilter } = useDateFilterActions()
+  const selectedDate = useDateTag()
+  const { setDateTag } = useDateTagActions()
 
   const isSelected = selectedDate === date
 
   const handleClick = () => {
-    setDateFilter(isSelected ? null : date)
+    setDateTag(isSelected ? null : date)
   }
 
   return (

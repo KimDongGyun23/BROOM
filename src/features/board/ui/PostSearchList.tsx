@@ -6,7 +6,7 @@ import { PostList } from '@/features/board/ui/PostList'
 import { formatDate } from '@/shared/lib/formatDate'
 
 import { useFetchPostList } from '../api/useBoard.query'
-import { useDateFilter } from '../model/dateFilter.store'
+import { useDateTag } from '../../filter/model/dateTag.store'
 
 export const PostSearchList = () => {
   const [searchParams] = useSearchParams()
@@ -14,11 +14,11 @@ export const PostSearchList = () => {
   const searchKeyword = searchParams.get('searchName') || ''
   const filterKey = SEARCH_OPTIONS.find((option) => option.label === filterLabel)?.key
 
-  const dateFilter = useDateFilter()
+  const dateTag = useDateTag()
   const isRecruiting = useIsRecruiting()
 
-  const formattedDate = dateFilter
-    ? formatDate(`${new Date().getFullYear()}.${dateFilter}`, 'default')
+  const formattedDate = dateTag
+    ? formatDate(`${new Date().getFullYear()}.${dateTag}`, 'default')
     : null
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({

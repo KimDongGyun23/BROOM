@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { PostDateFilter } from '@/features/board/ui/PostDateFilter'
+import { PostDateFilter } from '@/features/filter/ui/PostDateFilter'
 import { RecruitingButton } from '@/features/filter/ui/RecruitingButton'
 
 export const PostFilter = () => (
