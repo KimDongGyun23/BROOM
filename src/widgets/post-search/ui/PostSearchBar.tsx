@@ -29,7 +29,7 @@ export const PostSearchBar = () => {
 
   const handleSearch = useCallback(
     ({ search }: SearchType) => {
-      navigate(`/carpool/search?filterName=${currentFilter.label}&searchName=${search}`)
+      navigate(`/board/search?filterName=${currentFilter.label}&searchName=${search}`)
     },
     [navigate, currentFilter.label],
   )

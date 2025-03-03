@@ -54,9 +54,9 @@ export const RouterComponent = () => {
       <Route path="/" element={<Onboarding />} />
       <Route path="/home" element={<Home />} />
 
-      <Route path="/carpool" element={<Board />} />
-      <Route path="/carpool/detail/:id" element={<PostDetail />} />
-      <Route path="/carpool/search" element={<PostSearch />} />
+      <Route path="/board" element={<Board />} />
+      <Route path="/board/detail/:id" element={<PostDetail />} />
+      <Route path="/board/search" element={<PostSearch />} />
 
       <Route path="/bus-reserve" element={<BusReservation />} />
       <Route path="/bus-reserve/create" element={<BusReservationCreate />} />
@@ -69,8 +69,8 @@ export const RouterComponent = () => {
       </Route>
 
       <Route element={<PrivateRoute />}>
-        <Route path="/carpool/create" element={<PostCreate />} />
-        <Route path="/carpool/edit/:id" element={<PostEdit />} />
+        <Route path="/board/create" element={<PostCreate />} />
+        <Route path="/board/edit/:id" element={<PostEdit />} />
 
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<ChatRoom />} />

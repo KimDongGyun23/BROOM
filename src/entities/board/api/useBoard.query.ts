@@ -31,7 +31,7 @@ const ENDPOINTS = {
 } as const
 
 export const queryKeys = {
-  all: ['carpool'] as const,
+  all: ['board'] as const,
   carpoolList: (urls: PostListRequest['urls']) =>
     [...queryKeys.all, 'list', ...Object.values(urls)] as const,
   myPostList: () => [...queryKeys.all, 'my-post'] as const,

@@ -1,5 +1,3 @@
-export const POST_INFO = { label: '승차 공유', key: 'carpool', upperKey: 'CARPOOL' } as const
-
 export const MILITARY_BRANCHES = {
   육군: 'ARMY',
   해군: 'NAVY',

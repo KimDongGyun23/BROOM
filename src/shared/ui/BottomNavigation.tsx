@@ -11,7 +11,7 @@ import {
 
 const NAVIGATION_ITEMS = [
   { Icon: BusReservationIcon, path: '/bus-reserve' },
-  { Icon: CarpoolIcon, path: '/carpool' },
+  { Icon: CarpoolIcon, path: '/board' },
   { Icon: HomeIcon, path: '/home' },
   { Icon: ChattingIcon, path: '/chat' },
   { Icon: MypageIcon, path: '/mypage' },

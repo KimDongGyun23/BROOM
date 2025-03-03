@@ -25,7 +25,7 @@ export const PostCreateHeader = () => {
     createPost(
       { body: submissionData },
       {
-        onSuccess: ({ boardId }) => navigate(`/carpool/detail/${boardId}`, { replace: true }),
+        onSuccess: ({ boardId }) => navigate(`/board/detail/${boardId}`, { replace: true }),
         onError: (error) => openOneButtonModal(error.message),
       },
     )

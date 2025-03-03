@@ -11,7 +11,7 @@ export const DeleteResultModal = () => {
   const { closeModal } = useModalActions()
 
   const handleDeleteSuccessModal = () => {
-    navigate(`/carpool`, { replace: true })
+    navigate(`/board`, { replace: true })
   }
 
   return (

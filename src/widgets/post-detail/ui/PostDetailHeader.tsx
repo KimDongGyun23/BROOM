@@ -18,7 +18,7 @@ const AuthenticatedHeader = () => {
   const { openTwoButtonModal } = useModalActions()
 
   const kebabMap = [
-    { label: '수정하기', onClick: () => navigate(`/carpool/edit/${boardId}`) },
+    { label: '수정하기', onClick: () => navigate(`/board/edit/${boardId}`) },
     {
       label: '삭제하기',
       onClick: () => openTwoButtonModal('게시글을 삭제하시겠습니까?'),

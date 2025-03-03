@@ -8,7 +8,7 @@ export const PostAdditionButton = () => {
   const navigate = useNavigate()
   const isLoggedIn = useIsLoggedIn()
 
-  const handleButtonClick = () => navigate('/carpool/create')
+  const handleButtonClick = () => navigate('/board/create')
 
   if (!isLoggedIn) return null
 

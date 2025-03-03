@@ -15,7 +15,7 @@ const NOTICE_ARR = [
 ] as const
 
 const SERVICE_ITEMS = [
-  { label: '차 타고 같이 갈 사람 없을까?', path: '/carpool' },
+  { label: '차 타고 같이 갈 사람 없을까?', path: '/board' },
   { label: '버스 신청하러 왔어요~', path: '/bus-reserve' },
 ] as const
 

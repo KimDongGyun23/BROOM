@@ -13,7 +13,7 @@ export const PostItem = ({ item }: PostItemProps) => {
   const { title, trainingDate, place, time } = item.content
 
   return (
-    <PostItemLink to={`/carpool/detail/${boardId}`}>
+    <PostItemLink to={`/board/detail/${boardId}`}>
       <PostItemHeader>
         <p className="title">{title}</p>
         <p className="date">{createdAt}</p>
