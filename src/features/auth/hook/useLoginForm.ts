@@ -5,6 +5,7 @@ import { instance } from '@/app/api'
 import type { LoginCredentials } from '@/features/auth/model/auth.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { SESSION_KEYS, setSessionStorageItem } from '@/shared/lib/storage'
+import { useAuthActions } from '@/shared/model/auth.store'
 
 import { useLogin } from '../api/useAuth.mutation'
 import { loginSchema } from '../config/auth.schema'
@@ -12,7 +13,9 @@ import { loginSchema } from '../config/auth.schema'
 export const useLoginForm = () => {
   const navigate = useNavigate()
   const [isLoginFailed, setIsLoginFailed] = useState(false)
-  const { mutate: login } = useLogin()
+
+  const { mutate: loginMutation } = useLogin()
+  const { login } = useAuthActions()
 
   const formMethod = useCustomForm<LoginCredentials>(loginSchema, {
     defaultValues: {
@@ -23,14 +26,15 @@ export const useLoginForm = () => {
   const { handleSubmit } = formMethod
 
   const handleLogin = (formData: LoginCredentials) => {
-    login(
+    loginMutation(
       { body: { ...formData } },
       {
-        onSuccess: ({ nickname }) => {
+        onSuccess: ({ militaryBranch, nickname }) => {
           if (instance.hasToken()) {
             setIsLoginFailed(false)
             setSessionStorageItem(SESSION_KEYS.NICKNAME, nickname)
             navigate('/home', { replace: true })
+            login({ militaryBranch, nickname })
           }
         },
         onError: () => setIsLoginFailed(true),
