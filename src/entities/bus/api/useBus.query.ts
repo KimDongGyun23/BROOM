@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
-import type { BusApplicationInfoRequest, ReservationStatus } from '@/features/bus/model/bus.type'
-
 import { instance } from '../../../app/api'
+import type { BusApplicationInfoRequest, ReservationStatus } from '../model/bus.type'
 
 const ENDPOINTS = {
   reservation: (studentId: string) => `/bus/reservation/${studentId}`,

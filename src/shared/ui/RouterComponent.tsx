@@ -12,7 +12,7 @@ import { PostEdit } from '@/pages/board/PostEdit'
 import { PostSearch } from '@/pages/board/PostSearch'
 import { BusApplication } from '@/pages/bus/BusApplication'
 import { BusApplicationCreate } from '@/pages/bus/BusApplicationCreate'
-import { BusApplicationCheck } from '@/pages/bus/BusReservationCheck'
+import { BusApplicationStatus } from '@/pages/bus/BusApplicationStatus'
 import { Chat } from '@/pages/chat/Chat'
 import { ChatRoom } from '@/pages/chat/ChatRoom'
 import { ErrorPage } from '@/pages/home/ErrorPage'
@@ -60,7 +60,7 @@ export const RouterComponent = () => {
 
       <Route path="/bus-application" element={<BusApplication />} />
       <Route path="/bus-application/create" element={<BusApplicationCreate />} />
-      <Route path="/bus-application/status" element={<BusApplicationCheck />} />
+      <Route path="/bus-application/status" element={<BusApplicationStatus />} />
 
       <Route element={<LoginPrivateRoute />}>
         <Route path="/login" element={<LoginPage />} />
