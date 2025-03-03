@@ -11,12 +11,10 @@ export const ShowActivePostsButton = () => {
   const { toggleFilterActiveOnly } = useActiveOnlyFilterActions()
 
   return (
-    <div>
-      <ToggleButton onClick={toggleFilterActiveOnly}>
-        <CheckBoxIcon active={isFilteringActiveOnly} />
-        <ToggleText $isChecked={isFilteringActiveOnly}>모집 중인 글만 보기</ToggleText>
-      </ToggleButton>
-    </div>
+    <ToggleButton onClick={toggleFilterActiveOnly}>
+      <CheckBoxIcon active={isFilteringActiveOnly} />
+      <ToggleText $isChecked={isFilteringActiveOnly}>모집 중인 글만 보기</ToggleText>
+    </ToggleButton>
   )
 }
 
