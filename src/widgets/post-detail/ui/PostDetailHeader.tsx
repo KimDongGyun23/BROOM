@@ -1,10 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-import { instance } from '@/app/api'
 import { useIsMyPost } from '@/features/board/model/postDetail.store'
-import { PostDeleteModal } from '@/features/board/ui/PostDeleteModal'
+import { DeleteConfirmationModal } from '@/features/delete-post/ui/DeleteConfirmationModal'
+import { DeleteResultModal } from '@/features/delete-post/ui/DeleteResultModal'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
+import { useIsLoggedIn } from '@/shared/model/auth.store'
 import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
@@ -29,17 +30,18 @@ const AuthenticatedHeader = () => {
     <>
       <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
       <Kebab isOpen={isKebabOpen} items={kebabMap} position={[48, 16]} />
-
-      <PostDeleteModal />
+      <DeleteConfirmationModal />
+      <DeleteResultModal />
     </>
   )
 }
 
 export const PostDetailHeader = () => {
-  const session = instance.hasToken()
+  const isLoggedIn = useIsLoggedIn()
   const isMyPost = useIsMyPost()
 
-  if (!session || !isMyPost) return <SubHeaderWithoutIcon type="null" />
+  if (!isLoggedIn || !isMyPost) return <SubHeaderWithoutIcon type="null" />
+
   return (
     <ModalStoreProvider>
       <AuthenticatedHeader />
