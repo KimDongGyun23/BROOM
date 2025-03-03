@@ -32,7 +32,7 @@ export const SearchBar = () => {
 
   const handleSearch = useCallback(
     ({ search }: SearchType) => {
-      navigate(`/board/search?filterName=${currentFilter}&searchName=${search}`)
+      navigate(`/board/search?filterName=${currentFilter.label}&searchName=${search}`)
     },
     [navigate, currentFilter],
   )
