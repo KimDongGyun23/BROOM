@@ -44,7 +44,7 @@ const PostItem = ({ item }: PostItemProps) => {
         </PostDetails>
 
         <ParticipantsBox $isFull={!canJoinChatRoom(currentPersonnel, totalPersonnel)}>
-          {currentPersonnel - 1} / {totalPersonnel}
+          {currentPersonnel} / {totalPersonnel}
         </ParticipantsBox>
       </PostContent>
     </PostItemLink>
