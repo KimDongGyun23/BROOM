@@ -19,7 +19,7 @@ const ENDPOINTS = {
     if (urls.title) searchParams.append('title', urls.title)
     if (urls.place) searchParams.append('place', urls.place)
     if (urls.trainingDate) searchParams.append('trainingDate', urls.trainingDate)
-    if (urls.recruiting) searchParams.append('recruiting', urls.recruiting.valueOf.toString())
+    if (urls.recruiting !== undefined) searchParams.append('recruiting', urls.recruiting.toString())
 
     const queryString = searchParams.toString()
     return queryString ? `${baseUrl}?${queryString}` : baseUrl
