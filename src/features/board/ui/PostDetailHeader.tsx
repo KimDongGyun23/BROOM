@@ -26,12 +26,12 @@ const AuthenticatedHeader = () => {
   ]
 
   return (
-    <ModalStoreProvider>
+    <>
       <SubHeaderWithIcon type={'kebab'} onClickKebab={isKebabOpen ? closeKebab : openKebab} />
       <Kebab isOpen={isKebabOpen} items={kebabMap} position={[48, 16]} />
 
       <PostDeleteModal />
-    </ModalStoreProvider>
+    </>
   )
 }
 
@@ -40,5 +40,9 @@ export const PostDetailHeader = () => {
   const isMyPost = useIsMyPost()
 
   if (!session || !isMyPost) return <SubHeaderWithoutIcon type="null" />
-  return <AuthenticatedHeader />
+  return (
+    <ModalStoreProvider>
+      <AuthenticatedHeader />
+    </ModalStoreProvider>
+  )
 }
