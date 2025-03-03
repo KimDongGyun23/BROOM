@@ -1,50 +1,70 @@
-import { useFormContext } from 'react-hook-form'
+import { useCallback } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 import type { SearchType } from '@/shared/model/common.type'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
 
-import { useSearchFilter } from '../hook/useSearchFilter'
-import { useFilterDropDownActions, useIsFilterDropdownOpen } from '../model/filterDropdown.store'
+import {
+  useFilterDropDownActions,
+  useFilterLabel,
+  useIsFilterDropdownOpen,
+} from '../model/filterDropdown.store'
 
-type SearchBarProps = {
-  onSubmit: VoidFunction
-}
-
-export const SearchBar = ({ onSubmit }: SearchBarProps) => {
+export const SearchBar = () => {
+  const navigate = useNavigate()
   const isDropdownOpen = useIsFilterDropdownOpen()
   const { toggleDropdown } = useFilterDropDownActions()
 
-  const { currentFilter } = useSearchFilter()
+  const [searchParams] = useSearchParams()
+  const defaultSearchName = searchParams.get('searchName') || ''
 
-  const { register } = useFormContext<SearchType>()
+  const currentFilter = useFilterLabel()
+
+  const formMethod = useForm<SearchType>({
+    mode: 'onSubmit',
+    reValidateMode: 'onSubmit',
+    defaultValues: { search: defaultSearchName },
+  })
+
+  const { handleSubmit, register } = formMethod
+
+  const handleSearch = useCallback(
+    ({ search }: SearchType) => {
+      navigate(`/board/search?filterName=${currentFilter}&searchName=${search}`)
+    },
+    [navigate, currentFilter],
+  )
 
   return (
-    <Container>
-      <FilterButton
-        type="button"
-        onClick={toggleDropdown}
-        aria-haspopup="true"
-        aria-expanded={isDropdownOpen}
-      >
-        <span>{currentFilter.label}</span>
-        {isDropdownOpen ? <ArrowUpIcon /> : <ArrowBottomIcon />}
-      </FilterButton>
+    <FormProvider {...formMethod}>
+      <Container>
+        <FilterButton
+          type="button"
+          onClick={toggleDropdown}
+          aria-haspopup="true"
+          aria-expanded={isDropdownOpen}
+        >
+          <span>{currentFilter.label}</span>
+          {isDropdownOpen ? <ArrowUpIcon /> : <ArrowBottomIcon />}
+        </FilterButton>
 
-      <FormContainer onSubmit={onSubmit}>
-        <StyledInput
-          type="search"
-          size={7}
-          {...register('search')}
-          placeholder={currentFilter.placeholder}
-          aria-label={`${currentFilter.label} 검색`}
-        />
+        <FormContainer onSubmit={handleSubmit(handleSearch)}>
+          <StyledInput
+            type="search"
+            size={7}
+            {...register('search')}
+            placeholder={currentFilter.placeholder}
+            aria-label={`${currentFilter.label} 검색`}
+          />
 
-        <SearchButton type="submit" aria-label="검색">
-          <SearchIcon />
-        </SearchButton>
-      </FormContainer>
-    </Container>
+          <SearchButton type="submit" aria-label="검색">
+            <SearchIcon />
+          </SearchButton>
+        </FormContainer>
+      </Container>
+    </FormProvider>
   )
 }
 
