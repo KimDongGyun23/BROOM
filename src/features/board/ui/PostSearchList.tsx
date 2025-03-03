@@ -1,12 +1,11 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { SEARCH_OPTIONS } from '@/features/board/config/post.constant'
-import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { PostList } from '@/features/board/ui/PostList'
-import { formatDate } from '@/shared/lib/formatDate'
+import { useDateTag } from '@/features/filter/model/dateTag.store'
+import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 
 import { useFetchPostList } from '../api/useBoard.query'
-import { useDateTag } from '../../filter/model/dateTag.store'
 
 export const PostSearchList = () => {
   const [searchParams] = useSearchParams()
@@ -17,15 +16,11 @@ export const PostSearchList = () => {
   const dateTag = useDateTag()
   const isRecruiting = useIsRecruiting()
 
-  const formattedDate = dateTag
-    ? formatDate(`${new Date().getFullYear()}.${dateTag}`, 'default')
-    : null
-
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: filterKey === 'title' ? searchKeyword : null,
       place: filterKey === 'place' ? searchKeyword : null,
-      trainingDate: formattedDate || null,
+      trainingDate: dateTag || null,
       recruiting: isRecruiting,
     },
   })

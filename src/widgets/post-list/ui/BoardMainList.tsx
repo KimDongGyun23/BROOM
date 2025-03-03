@@ -1,23 +1,17 @@
 import { useFetchPostList } from '@/features/board/api/useBoard.query'
+import { PostList } from '@/features/board/ui/PostList'
 import { useDateTag } from '@/features/filter/model/dateTag.store'
 import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
-import { formatDate } from '@/shared/lib/formatDate'
-
-import { PostList } from './PostList'
 
 export const BoardMainList = () => {
   const dateTag = useDateTag()
   const isRecruiting = useIsRecruiting()
 
-  const formattedDate = dateTag
-    ? formatDate(`${new Date().getFullYear()}.${dateTag}`, 'default')
-    : null
-
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: null,
       place: null,
-      trainingDate: formattedDate || null,
+      trainingDate: dateTag || null,
       recruiting: isRecruiting,
     },
   })

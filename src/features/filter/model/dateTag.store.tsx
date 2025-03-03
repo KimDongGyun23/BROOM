@@ -3,6 +3,8 @@ import { createContext, useContext, useState } from 'react'
 import type { StoreApi } from 'zustand'
 import { createStore, useStore } from 'zustand'
 
+import { formatDate } from '@/shared/lib/formatDate'
+
 type Actions = {
   setDateTag: (date: string | null) => void
 }
@@ -19,7 +21,12 @@ export const DateTagStoreProvider = ({ children }: PropsWithChildren) => {
     createStore<DateTagStore>((set) => ({
       dateTag: null,
       actions: {
-        setDateTag: (date) => set({ dateTag: date }),
+        setDateTag: (date) => {
+          const formattedDate = date
+            ? formatDate(`${new Date().getFullYear()}.${date}`, 'default')
+            : null
+          set({ dateTag: formattedDate })
+        },
       },
     })),
   )
