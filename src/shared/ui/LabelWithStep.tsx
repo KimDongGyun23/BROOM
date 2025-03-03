@@ -22,7 +22,7 @@ export const LabelWithStep = ({ label }: LabelWithStepProps) => {
 
 const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'flex-end', 'space-between')};
-  ${({ theme }) => theme.margin('xl', 'container', 'page-label-bottom')};
+  ${({ theme }) => theme.margin('page-label')};
 `
 
 const Label = styled.h4`
