@@ -8,7 +8,7 @@ import { busCreateSchema } from '../config/bus.schema'
 import type { BusReservationForm } from '../model/bus.type'
 
 export const useBusCreateForm = () => {
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
   const { mutate: reserveBus } = useBusReservationMutation()
 
   const formMethod = useCustomForm<BusReservationForm>(busCreateSchema)
@@ -19,12 +19,12 @@ export const useBusCreateForm = () => {
       reserveBus(
         { body: formData },
         {
-          onSuccess: (response) => openModal(response, true),
+          onSuccess: (response) => openOneButtonModal(response, true),
           onError: (error) => (error.message, false),
         },
       )
     },
-    [reserveBus, openModal],
+    [reserveBus, openOneButtonModal],
   )
 
   return { formMethod, onSubmit: handleSubmit(handleSubmitForm) }

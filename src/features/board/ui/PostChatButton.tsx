@@ -5,7 +5,7 @@ import { useIsMyPost, usePostDetail } from '@/features/board/model/postDetail.st
 import { useEnterChatRoom } from '@/features/chat/api/useChat.query'
 import { useParamId } from '@/shared/hook/useParamId'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
-import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal.store'
+import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { Button } from '@/shared/ui/Button'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
@@ -15,13 +15,13 @@ const ChatButton = () => {
   const isMyPost = useIsMyPost()
   const navigate = useNavigate()
 
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
   const { refetch } = useEnterChatRoom({ urls: { boardId } })
 
   const handleClickChatButton = async () => {
     const { isSuccess, isError, error } = await refetch()
     if (isSuccess) navigate(`/chat/${boardId}`)
-    else if (isError) openModal(error.message, true)
+    else if (isError) openOneButtonModal(error.message, true)
   }
 
   if (!post) return null
@@ -42,17 +42,7 @@ const ChatButton = () => {
 }
 
 const ChatButtonModal = () => {
-  const { isModalOpen, label } = useModalState()
-  const { closeModal } = useModalActions()
-
-  return (
-    <ModalWithOneButton
-      isOpen={isModalOpen}
-      onClose={closeModal}
-      content={label}
-      button={{ onClick: closeModal, label: '확인' }}
-    />
-  )
+  return <ModalWithOneButton />
 }
 
 export const PostChatButton = () => {

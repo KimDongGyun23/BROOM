@@ -1,70 +1,71 @@
 import styled from 'styled-components'
 
+import { useModalActions, useOneButtonModalState } from '@/shared/model/modal.store'
+
 import { Button } from '../Button'
 
 import { ModalLayout } from './ModalLayout'
 
-type ModalBaseProps = {
-  isOpen: boolean
-  onClose: VoidFunction
-  content: string
-}
-
 type ModalButtonProps = {
-  label: string
-  onClick: VoidFunction
-  secondary?: boolean
+  buttonLabel?: string
+  onClickButton?: VoidFunction
 }
 
-type ModalWithOneButtonProps = ModalBaseProps & {
-  isOpen: boolean
-  onClose: VoidFunction
-  content: string
-  button: ModalButtonProps
+export const ModalWithOneButton = ({ buttonLabel = '확인', onClickButton }: ModalButtonProps) => {
+  const { isModalOpen, label } = useOneButtonModalState()
+  const { closeModal } = useModalActions()
+
+  const handleCloseButton = () => {
+    if (onClickButton) onClickButton()
+    closeModal()
+  }
+
+  return (
+    <ModalLayout id="modal" isOpen={isModalOpen} onClose={closeModal}>
+      <ModalContent>
+        <ModalText>{label}</ModalText>
+        <Button size="lg" onClick={handleCloseButton}>
+          {buttonLabel}
+        </Button>
+      </ModalContent>
+    </ModalLayout>
+  )
 }
 
-export const ModalWithOneButton = ({
-  isOpen,
-  onClose,
-  content,
-  button: { onClick, label, secondary },
-}: ModalWithOneButtonProps) => (
-  <ModalLayout id="modal" isOpen={isOpen} onClose={onClose}>
-    <ModalContent>
-      <ModalText>{content}</ModalText>
-      <Button size="lg" onClick={onClick} secondary={secondary}>
-        {label}
-      </Button>
-    </ModalContent>
-  </ModalLayout>
-)
-
-type ModalWithTwoButtonProps = ModalBaseProps & {
+type ModalWithTwoButtonProps = {
   primaryButton: ModalButtonProps
-  secondaryButton: ModalButtonProps
+  secondaryButton?: ModalButtonProps
 }
 
-export const ModalWithTwoButton = ({
-  isOpen,
-  onClose,
-  content,
-  primaryButton,
-  secondaryButton,
-}: ModalWithTwoButtonProps) => (
-  <ModalLayout id="modal" isOpen={isOpen} onClose={onClose}>
-    <ModalContent>
-      <ModalText>{content}</ModalText>
-      <ButtonGrid>
-        <Button size="lg" onClick={secondaryButton.onClick} secondary={secondaryButton.secondary}>
-          {secondaryButton.label}
-        </Button>
-        <Button size="lg" onClick={primaryButton.onClick} secondary={primaryButton.secondary}>
-          {primaryButton.label}
-        </Button>
-      </ButtonGrid>
-    </ModalContent>
-  </ModalLayout>
-)
+export const ModalWithTwoButton = ({ primaryButton, secondaryButton }: ModalWithTwoButtonProps) => {
+  const { isModalOpen, label } = useOneButtonModalState()
+  const { closeModal } = useModalActions()
+
+  const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
+  const { buttonLabel: secondaryButtonLabel, onClickButton: onClickSecondaryButton } =
+    secondaryButton || {}
+
+  const handleClickButton = (onClickButton?: VoidFunction) => {
+    if (onClickButton) onClickButton()
+    closeModal()
+  }
+
+  return (
+    <ModalLayout id="modal" isOpen={isModalOpen} onClose={closeModal}>
+      <ModalContent>
+        <ModalText>{label}</ModalText>
+        <ButtonGrid>
+          <Button size="lg" onClick={() => handleClickButton(onClickSecondaryButton)} secondary>
+            {secondaryButtonLabel ? secondaryButtonLabel : '취소'}
+          </Button>
+          <Button size="lg" onClick={onClickPrimaryButton}>
+            {primaryButtonLabel}
+          </Button>
+        </ButtonGrid>
+      </ModalContent>
+    </ModalLayout>
+  )
+}
 
 const ModalContent = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined)};

@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 import { useSidebarActions } from '@/features/chat/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalStoreProvider, useModalActions, useModalState } from '@/shared/model/modal.store'
+import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 import { useExpelUser } from '../api/useChat.mutation'
@@ -14,7 +14,7 @@ type ChatExpelButtonProps = {
 const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
   const boardId = useParamId()
 
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
 
   const { mutate: expelUser } = useExpelUser()
 
@@ -22,8 +22,8 @@ const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
     expelUser(
       { body: { expellId: userId, boardId } },
       {
-        onSuccess: (response) => openModal(response, true),
-        onError: (error) => openModal(error.message, false),
+        onSuccess: (response) => openOneButtonModal(response, true),
+        onError: (error) => openOneButtonModal(error.message, false),
       },
     )
   }
@@ -32,23 +32,9 @@ const ExpelButton = ({ userId }: ChatExpelButtonProps) => {
 }
 
 const ExpelModal = () => {
-  const { isModalOpen, label } = useModalState()
-  const { closeModal } = useModalActions()
   const { closeSidebar } = useSidebarActions()
 
-  const handleCloseModal = () => {
-    closeModal()
-    closeSidebar()
-  }
-
-  return (
-    <ModalWithOneButton
-      isOpen={isModalOpen}
-      content={label}
-      onClose={closeModal}
-      button={{ onClick: handleCloseModal, label: '확인' }}
-    />
-  )
+  return <ModalWithOneButton onClickButton={closeSidebar} />
 }
 
 export const ChatExpelButton = ({ userId }: ChatExpelButtonProps) => (

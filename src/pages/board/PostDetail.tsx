@@ -1,33 +1,30 @@
 import { styled } from 'styled-components'
 
-import { instance } from '@/app/api'
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { useFetchPostDetail } from '@/features/board/api/useBoard.query'
-import { useBookmarkActions } from '@/features/board/model/bookmark.store'
 import { usePostDetailActions } from '@/features/board/model/postDetail.store'
-import { PostBookmarkButton } from '@/features/board/ui/PostBookmarkButton'
 import { PostChatButton } from '@/features/board/ui/PostChatButton'
 import { PostDetailContent } from '@/features/board/ui/PostDetailContent'
-import { PostDetailHeader } from '@/features/board/ui/PostDetailHeader'
 import { PostProfile } from '@/features/board/ui/PostProfile'
+import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
 import { useParamId } from '@/shared/hook/useParamId'
+import { useIsLoggedIn } from '@/shared/model/auth.store'
 import { Loading } from '@/shared/ui/Loading'
+import { PostDetailHeader } from '@/widgets/post-detail/ui/PostDetailHeader'
 
 import { ErrorPage } from '../home/ErrorPage'
 
 export const PostDetail = () => {
   const boardId = useParamId()
-  const session = instance.hasToken()
+  const isLoggedIn = useIsLoggedIn()
 
   const { data, isPending, isError } = useFetchPostDetail({ urls: { boardId } })
   const { updatePostDetail } = usePostDetailActions()
-  const { initializeBookmarkState } = useBookmarkActions()
 
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />
 
   updatePostDetail(data)
-  initializeBookmarkState(data.status.bookmark)
 
   return (
     <FlexColumnContainer>
@@ -35,9 +32,9 @@ export const PostDetail = () => {
       <PostProfile />
       <PostDetailContent />
 
-      {session && (
+      {isLoggedIn && (
         <ButtonContainer>
-          <PostBookmarkButton />
+          <BookmarkButton />
           <PostChatButton />
         </ButtonContainer>
       )}

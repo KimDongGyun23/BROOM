@@ -6,12 +6,12 @@ import { useLogout } from '../api/useMypage.mutation'
 
 export const LogoutButton = () => {
   const { mutate: logout } = useLogout()
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
 
   const handleLogout = () => {
     logout(undefined, {
-      onSuccess: (response) => openModal(response, true),
-      onError: (error) => openModal(error.message, false),
+      onSuccess: (response) => openOneButtonModal(response, true),
+      onError: (error) => openOneButtonModal(error.message, false),
     })
   }
 

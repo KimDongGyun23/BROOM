@@ -9,7 +9,7 @@ export const usePasswordUpdateForm = () => {
   const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)
   const { handleSubmit } = formMethod
 
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
   const { mutate: updatePassword } = useUpdatePassword()
 
   const handleSubmitForm = (formData: PasswordUpdateForm) => {
@@ -17,8 +17,8 @@ export const usePasswordUpdateForm = () => {
     updatePassword(
       { body: { ...rest } },
       {
-        onSuccess: (response) => openModal(response, true),
-        onError: (error) => openModal(error.message, false),
+        onSuccess: (response) => openOneButtonModal(response, true),
+        onError: (error) => openOneButtonModal(error.message, false),
       },
     )
   }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { useSidebarActions } from '@/features/chat/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions, useModalState, useTwoButtonModalState } from '@/shared/model/modal.store'
+import { useModalActions } from '@/shared/model/modal.store'
 import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 import { useExitChatRoom } from '../api/useChat.mutation'
@@ -14,9 +14,7 @@ export const ChatRoomExitButton = () => {
 
   const { mutate: exitRoom } = useExitChatRoom()
 
-  const { isModalOpen, label } = useModalState()
-  const { isTwoButtonModalOpen, twoButtonLabel } = useTwoButtonModalState()
-  const { openModal, openTwoButtonModal, closeModal } = useModalActions()
+  const { openOneButtonModal, openTwoButtonModal, closeModal } = useModalActions()
   const { closeSidebar } = useSidebarActions()
 
   const handleClickOpenModal = () => openTwoButtonModal('채팅방을 나가시겠습니까?')
@@ -30,7 +28,7 @@ export const ChatRoomExitButton = () => {
           closeSidebar()
           navigate('/chat')
         },
-        onError: (error) => openModal(error.message, false),
+        onError: (error) => openOneButtonModal(error.message, false),
       },
     )
   }
@@ -39,18 +37,9 @@ export const ChatRoomExitButton = () => {
     <>
       <ExitButton onClick={handleClickOpenModal}>채팅방 나가기</ExitButton>
       <ModalWithTwoButton
-        isOpen={isTwoButtonModalOpen}
-        onClose={closeModal}
-        content={twoButtonLabel}
-        primaryButton={{ onClick: handleClickExitRoom, label: '확인' }}
-        secondaryButton={{ onClick: closeModal, label: '취소', secondary: true }}
+        primaryButton={{ onClickButton: handleClickExitRoom, buttonLabel: '확인' }}
       />
-      <ModalWithOneButton
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        content={label}
-        button={{ onClick: closeModal, label: '확인' }}
-      />
+      <ModalWithOneButton />
     </>
   )
 }

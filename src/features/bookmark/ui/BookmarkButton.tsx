@@ -2,15 +2,13 @@ import { styled } from 'styled-components'
 
 import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
 
-import { useHandleBookmark } from '../hook/useHandleBookmark'
-import { useIsBookmarked } from '../model/bookmark.store'
+import { useBookmark } from '../hook/useBookmark'
 
-export const PostBookmarkButton = () => {
-  const isBookmarked = useIsBookmarked()
-  const handleToggleBookmark = useHandleBookmark()
+export const BookmarkButton = () => {
+  const { isBookmarked, toggleBookmark } = useBookmark()
 
   return (
-    <BookmarkStyledButton type="button" onClick={handleToggleBookmark}>
+    <BookmarkStyledButton type="button" onClick={toggleBookmark}>
       <BookmarkIcon active={isBookmarked} />
       <p className="label">북마크</p>
     </BookmarkStyledButton>

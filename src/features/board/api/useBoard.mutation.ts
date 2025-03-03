@@ -61,7 +61,8 @@ export const useAddBookmark = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: ({ body }: AddBookmarkRequest) => instance.post(ENDPOINTS.addBookmark, body),
+    mutationFn: ({ body }: AddBookmarkRequest) =>
+      instance.post<string>(ENDPOINTS.addBookmark, body),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },
@@ -73,7 +74,7 @@ export const useDeleteBookmark = () => {
 
   return useMutation({
     mutationFn: ({ urls }: RemoveBookmarkRequest) =>
-      instance.delete(ENDPOINTS.removeBookmark(urls)),
+      instance.delete<string>(ENDPOINTS.removeBookmark(urls)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: queryKeys.all })
     },

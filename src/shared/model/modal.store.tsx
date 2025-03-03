@@ -4,33 +4,33 @@ import type { StoreApi } from 'zustand'
 import { createStore, useStore } from 'zustand'
 
 type Actions = {
-  openModal: (label: string, isSuccessModal?: boolean) => void
-  openTwoButtonModal: (twoButtonLabel: string) => void
+  openOneButtonModal: (label: string, isSuccessModal?: boolean) => void
+  openTwoButtonModal: (label: string) => void
   closeModal: VoidFunction
 }
 
 type ModalStore = {
   isSuccessModal: boolean
-  modalState: {
+  oneButtonModalState: {
     isModalOpen: boolean
     label: string
   }
   twoButtonModalState: {
-    isTwoButtonModalOpen: boolean
-    twoButtonLabel: string
+    isModalOpen: boolean
+    label: string
   }
   actions: Actions
 }
 
 const initialValues = {
   isSuccessModal: true,
-  modalState: {
+  oneButtonModalState: {
     isModalOpen: false,
     label: '',
   },
   twoButtonModalState: {
-    isTwoButtonModalOpen: false,
-    twoButtonLabel: '',
+    isModalOpen: false,
+    label: '',
   },
 }
 
@@ -41,10 +41,9 @@ export const ModalStoreProvider = ({ children }: PropsWithChildren) => {
     createStore<ModalStore>((set) => ({
       ...initialValues,
       actions: {
-        openModal: (label, isSuccessModal) =>
-          set({ modalState: { isModalOpen: true, label }, isSuccessModal }),
-        openTwoButtonModal: (twoButtonLabel) =>
-          set({ twoButtonModalState: { isTwoButtonModalOpen: true, twoButtonLabel } }),
+        openOneButtonModal: (label, isSuccessModal) =>
+          set({ oneButtonModalState: { isModalOpen: true, label }, isSuccessModal }),
+        openTwoButtonModal: (label) => set({ twoButtonModalState: { isModalOpen: true, label } }),
         closeModal: () => set({ ...initialValues }),
       },
     })),
@@ -61,7 +60,7 @@ export const useModalStore = <T,>(selector: (state: ModalStore) => T): T => {
   return useStore(store, selector)
 }
 
-export const useModalState = () => useModalStore((state) => state.modalState)
+export const useOneButtonModalState = () => useModalStore((state) => state.oneButtonModalState)
 export const useTwoButtonModalState = () => useModalStore((state) => state.twoButtonModalState)
 export const useIsSuccessModal = () => useModalStore((state) => state.isSuccessModal)
 export const useModalActions = () => useModalStore((state) => state.actions)

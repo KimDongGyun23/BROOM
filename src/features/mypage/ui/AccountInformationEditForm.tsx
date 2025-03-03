@@ -18,7 +18,7 @@ const useAccountInformationSubmit = (isNicknameValidated: boolean) => {
   const nicknameField = accountInformationAttribute.NICKNAME.section
   const { handleSubmit, setError, clearErrors } = useFormContext<AccountInformation>()
 
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
   const { mutate: updateAccountInformation } = useUpdateAccountInformation()
 
   const handleSubmitForm = (formData: AccountInformation) => {
@@ -27,8 +27,8 @@ const useAccountInformationSubmit = (isNicknameValidated: boolean) => {
       updateAccountInformation(
         { body: formData },
         {
-          onSuccess: (response) => openModal(response, true),
-          onError: (error) => openModal(error.message, false),
+          onSuccess: (response) => openOneButtonModal(response, true),
+          onError: (error) => openOneButtonModal(error.message, false),
         },
       )
     } else {

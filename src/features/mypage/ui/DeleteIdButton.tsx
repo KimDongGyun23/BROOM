@@ -6,12 +6,12 @@ import { useDeleteId } from '../api/useMypage.mutation'
 
 export const DeleteIdButton = () => {
   const { mutate: deleteId } = useDeleteId()
-  const { openModal } = useModalActions()
+  const { openOneButtonModal } = useModalActions()
 
   const handleDeleteId = () => {
     deleteId(undefined, {
-      onSuccess: (response) => openModal(response, true),
-      onError: (error) => openModal(error.message, false),
+      onSuccess: (response) => openOneButtonModal(response, true),
+      onError: (error) => openOneButtonModal(error.message, false),
     })
   }
 
