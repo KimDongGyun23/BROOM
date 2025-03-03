@@ -1,15 +1,17 @@
 import { FormProvider } from 'react-hook-form'
 import { styled } from 'styled-components'
 
+import {
+  BUS_RESERVATION_STATES,
+  type BusApplicationState,
+} from '@/entities/bus/config/bus.constant'
+import { busReserveInfoAttribute } from '@/entities/bus/config/bus.schema'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-import type { BusReservationState } from '../config/bus.constant'
-import { BUS_RESERVATION_STATES } from '../config/bus.constant'
-import { busReserveInfoAttribute } from '../config/bus.schema'
 import { useBusReserveInfoForm } from '../hook/useBusReserveInfoForm'
 
-export const BusReservationCheckForm = () => {
+export const BusApplicationCheckForm = () => {
   const { STUDENT_ID } = busReserveInfoAttribute
   const { reservationStatus, formMethod, onSubmit } = useBusReserveInfoForm()
 
@@ -55,7 +57,7 @@ const ReservationStateGrid = styled.div`
   }
 `
 
-const ReservationStateValue = styled.p<{ $state: BusReservationState }>`
+const ReservationStateValue = styled.p<{ $state: BusApplicationState }>`
   ${({ theme }) => theme.padding('md', 'lg')};
   color: ${({ theme, $state }) => {
     switch ($state) {

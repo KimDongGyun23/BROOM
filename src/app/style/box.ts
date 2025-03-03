@@ -51,7 +51,7 @@ const sizeMap = {
     'logo-sm': '15svh',
     'logo-lg-top': '30svh',
     'logo-lg-bottom': '30px',
-    'page-label-bottom': '48px',
+    'page-label': '20px 16px 48px',
     'mypage-button-top': '3svh',
   },
 }

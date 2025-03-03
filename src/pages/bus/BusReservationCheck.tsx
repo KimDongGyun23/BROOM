@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { BusReservationCheckForm } from '@/features/bus/ui/BusReservationCheckForm'
+import { BusApplicationCheckForm } from '@/features/bus/ui/BusReservationCheckForm'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-export const BusReservationCheck = () => {
+export const BusApplicationCheck = () => {
   const navigate = useNavigate()
   const handleClose = () => navigate(-1)
 
@@ -13,7 +13,7 @@ export const BusReservationCheck = () => {
       <SubHeaderWithoutIcon type="null" onClickCancel={handleClose} />
       <Container>
         <Title>예약 내역 조회</Title>
-        <BusReservationCheckForm />
+        <BusApplicationCheckForm />
         <NoticeContainer>
           <p className="notice-text">개인 정보 보호를 위해 신청 여부만 확인 가능합니다.</p>
           <p className="notice-text">기타 문의사항이 있다면 공지사항의 연락수단을 확인해주세요.</p>
@@ -28,7 +28,7 @@ const Container = styled.div`
 `
 
 const Title = styled.h4`
-  ${({ theme }) => theme.margin('xl', 0, 'page-label-bottom')};
+  ${({ theme }) => theme.margin('page-label')};
   ${({ theme }) => theme.font(400, theme.colors.black[600])};
 `
 

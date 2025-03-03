@@ -3,19 +3,19 @@ import { useCallback } from 'react'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useModalActions } from '@/shared/model/modal.store'
 
-import { useBusReservationMutation } from '../api/useBus.mutation'
+import { useBusApplicationMutation } from '../api/useBus.mutation'
 import { busCreateSchema } from '../config/bus.schema'
-import type { BusReservationForm } from '../model/bus.type'
+import type { BusApplicationForm } from '../model/bus.type'
 
 export const useBusCreateForm = () => {
   const { openOneButtonModal } = useModalActions()
-  const { mutate: reserveBus } = useBusReservationMutation()
+  const { mutate: reserveBus } = useBusApplicationMutation()
 
-  const formMethod = useCustomForm<BusReservationForm>(busCreateSchema)
+  const formMethod = useCustomForm<BusApplicationForm>(busCreateSchema)
   const { handleSubmit } = formMethod
 
   const handleSubmitForm = useCallback(
-    (formData: BusReservationForm) => {
+    (formData: BusApplicationForm) => {
       reserveBus(
         { body: formData },
         {

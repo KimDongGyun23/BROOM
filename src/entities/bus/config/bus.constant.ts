@@ -4,5 +4,5 @@ export const BUS_RESERVATION_STATES = {
   PENDING: '조회 전',
 } as const
 
-export type BusReservationState =
+export type BusApplicationState =
   (typeof BUS_RESERVATION_STATES)[keyof typeof BUS_RESERVATION_STATES]

@@ -18,10 +18,10 @@ export const BusApplication = () => {
         <BusNoticeSection />
 
         <ButtonContainer>
-          <Button size="md" onClick={() => navigate('/bus-reserve/create')}>
+          <Button size="md" onClick={() => navigate('/bus-application/create')}>
             예약하러 가기
           </Button>
-          <Button size="md" secondary onClick={() => navigate('/bus-reserve/status')}>
+          <Button size="md" secondary onClick={() => navigate('/bus-application/status')}>
             예약 내역 조회하기
           </Button>
         </ButtonContainer>
