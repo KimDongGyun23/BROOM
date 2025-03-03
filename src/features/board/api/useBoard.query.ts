@@ -16,7 +16,7 @@ const ENDPOINTS = {
     `/board/view/all/${urls.pageParam}?recruiting=${urls.recruiting}`,
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
-  fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
+  fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/detail/${urls.boardId}`,
   dateFilter: `/date-tag`,
 } as const
 
