@@ -1,6 +1,6 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchBookmarkList } from '@/features/board/api/useBoard.query'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
+import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
 import { PostList } from '@/features/board/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
@@ -9,7 +9,7 @@ export const MypageBookmarkedPost = () => {
   const bookmarkedPostList = data?.pages.flatMap((page) => page.result) || []
 
   return (
-    <ActiveOnlyFilterStoreProvider>
+    <RecruitingStoreProvider>
       <Container>
         <SubHeaderWithoutIcon type="null" title="북마크" />
         <PostList
@@ -20,6 +20,6 @@ export const MypageBookmarkedPost = () => {
           fetchNextPage={fetchNextPage}
         />
       </Container>
-    </ActiveOnlyFilterStoreProvider>
+    </RecruitingStoreProvider>
   )
 }

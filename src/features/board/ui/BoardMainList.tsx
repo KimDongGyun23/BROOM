@@ -1,5 +1,5 @@
 import { useFetchPostList } from '@/features/board/api/useBoard.query'
-import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
+import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { formatDate } from '@/shared/lib/formatDate'
 
 import { useDateFilter } from '../model/dateFilter.store'
@@ -8,7 +8,7 @@ import { PostList } from './PostList'
 
 export const BoardMainList = () => {
   const dateFilter = useDateFilter()
-  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const isRecruiting = useIsRecruiting()
 
   const formattedDate = dateFilter
     ? formatDate(`${new Date().getFullYear()}.${dateFilter}`, 'default')
@@ -19,7 +19,7 @@ export const BoardMainList = () => {
       title: null,
       place: null,
       trainingDate: formattedDate || null,
-      recruiting: isFilteringActiveOnly,
+      recruiting: isRecruiting,
     },
   })
 

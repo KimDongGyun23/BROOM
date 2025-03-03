@@ -1,6 +1,6 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchMyPostList } from '@/features/board/api/useBoard.query'
-import { ActiveOnlyFilterStoreProvider } from '@/features/board/model/activeOnlyFilter.store'
+import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
 import { PostList } from '@/features/board/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
@@ -9,7 +9,7 @@ export const MypageMyPost = () => {
   const postList = data?.pages.flatMap((page) => page.result) || []
 
   return (
-    <ActiveOnlyFilterStoreProvider>
+    <RecruitingStoreProvider>
       <Container>
         <SubHeaderWithoutIcon type="null" title="내가 올린 게시물" />
         <PostList
@@ -20,6 +20,6 @@ export const MypageMyPost = () => {
           fetchNextPage={fetchNextPage}
         />
       </Container>
-    </ActiveOnlyFilterStoreProvider>
+    </RecruitingStoreProvider>
   )
 }

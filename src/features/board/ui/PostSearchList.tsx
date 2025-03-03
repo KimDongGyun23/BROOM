@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { SEARCH_OPTIONS } from '@/features/board/config/post.constant'
-import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
+import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { PostList } from '@/features/board/ui/PostList'
 import { formatDate } from '@/shared/lib/formatDate'
 
@@ -15,7 +15,7 @@ export const PostSearchList = () => {
   const filterKey = SEARCH_OPTIONS.find((option) => option.label === filterLabel)?.key
 
   const dateFilter = useDateFilter()
-  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const isRecruiting = useIsRecruiting()
 
   const formattedDate = dateFilter
     ? formatDate(`${new Date().getFullYear()}.${dateFilter}`, 'default')
@@ -26,7 +26,7 @@ export const PostSearchList = () => {
       title: filterKey === 'title' ? searchKeyword : null,
       place: filterKey === 'place' ? searchKeyword : null,
       trainingDate: formattedDate || null,
-      recruiting: isFilteringActiveOnly,
+      recruiting: isRecruiting,
     },
   })
 

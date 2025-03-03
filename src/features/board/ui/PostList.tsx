@@ -3,7 +3,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useIsFilteringActiveOnly } from '@/features/board/model/activeOnlyFilter.store'
+import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import type { PostListResponse } from '@/features/board/model/post.type'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
@@ -58,7 +58,7 @@ export const PostList = ({
   hasNextPage,
   fetchNextPage,
 }: PostListProps) => {
-  const isFilteringActiveOnly = useIsFilteringActiveOnly()
+  const isRecruiting = useIsRecruiting()
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -68,7 +68,7 @@ export const PostList = ({
         behavior: 'smooth',
       })
     }
-  }, [isFilteringActiveOnly])
+  }, [isRecruiting])
 
   if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
