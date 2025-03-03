@@ -1,5 +1,5 @@
 import { FlexColumnContainer } from '@/app/style/commonStyles'
-import { PostAdditionButton } from '@/features/board/ui/PostAdditionButton'
+import { PostAdditionButton } from '@/features/create-post/ui/PostAdditionButton'
 import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'

@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { instance } from '@/app/api'
+import { useIsLoggedIn } from '@/shared/model/auth.store'
 import { AdditionIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const PostAdditionButton = () => {
   const navigate = useNavigate()
-  const session = instance.hasToken()
+  const isLoggedIn = useIsLoggedIn()
+
   const handleButtonClick = () => navigate('/carpool/create')
 
-  if (!session) return null
+  if (!isLoggedIn) return null
 
   return (
     <AddButton type="button" onClick={handleButtonClick}>
@@ -20,11 +21,14 @@ export const PostAdditionButton = () => {
 }
 
 const AddButton = styled.button`
-  ${({ theme }) => theme.flexBox('row', 'center', 'center', 'xs')};
-  ${({ theme }) => theme.padding('sm', 'lg', 'sm', 'md')};
-  ${({ theme }) => theme.border('post-addition-button')};
-  ${({ theme }) => theme.borderRadius('lg')};
-  ${({ theme }) => theme.boxShadow('sm')};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', 'center', 'xs')}
+    ${theme.padding('sm', 'lg', 'sm', 'md')}
+    ${theme.border('post-addition-button')}
+    ${theme.borderRadius('lg')}
+    ${theme.boxShadow('sm')}
+      
+  `}
   position: absolute;
   bottom: 100px;
   left: 50%;
