@@ -4,7 +4,7 @@ import { BUS_NOTICE } from '../config/busNotice.constant'
 
 export const BusNoticeSection = () => {
   return (
-    <>
+    <Container>
       {BUS_NOTICE.map(({ label, contents }, index) => {
         const isSingleItem = contents.length === 1
 
@@ -19,9 +19,13 @@ export const BusNoticeSection = () => {
           </BusNoticeItem>
         )
       })}
-    </>
+    </Container>
   )
 }
+
+const Container = styled.section`
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
+`
 
 const BusNoticeItem = styled.div<{ $isSingleItem: boolean }>`
   ${({ theme, $isSingleItem }) =>

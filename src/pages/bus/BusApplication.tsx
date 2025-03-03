@@ -33,14 +33,14 @@ export const BusApplication = () => {
 }
 
 const MainContent = styled.main`
-  ${({ theme }) => `
-    ${theme.margin('container')}
-    ${theme.padding(0, 0, '3xl', 0)}
-  `}
+  ${({ theme }) => theme.margin('container')}
   flex-grow: 1;
   overflow-y: scroll;
 `
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'md')};
+  ${({ theme }) => `
+    ${theme.flexBox('column', undefined, undefined, 'md')}
+    ${theme.margin('xl', 0, 0)}
+  `}
 `
