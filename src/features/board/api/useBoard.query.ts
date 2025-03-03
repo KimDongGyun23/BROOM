@@ -1,22 +1,19 @@
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
 
 import type {
-  BoardMainRequest,
   DateFilterResponse,
   PostDetailRequest,
   PostDetailResponse,
   PostForm,
+  PostListRequest,
   PostListResponse,
-  PostSearchRequest,
 } from '@/features/board/model/post.type'
 
 import { instance } from '../../../app/api'
 
 const ENDPOINTS = {
-  fetchPostList: (urls: BoardMainRequest['urls']) =>
+  fetchPostList: (urls: PostListRequest['urls']) =>
     `/board/view/all/${urls.pageParam}?recruiting=${urls.recruiting}`,
-  searchPostList: (urls: PostSearchRequest['urls']) =>
-    `/board/search/${urls.pageParam}?type=${urls.type}&keyword=${urls.keyword}&recruiting=${urls.recruiting}`,
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
   fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/${urls.boardId}`,
@@ -25,10 +22,8 @@ const ENDPOINTS = {
 
 export const queryKeys = {
   all: ['carpool'] as const,
-  carpoolList: (urls: BoardMainRequest['urls']) =>
+  carpoolList: (urls: PostListRequest['urls']) =>
     [...queryKeys.all, 'list', ...Object.values(urls)] as const,
-  searchList: (urls: PostSearchRequest['urls']) =>
-    [...queryKeys.all, 'search', ...Object.values(urls)] as const,
   myPostList: () => [...queryKeys.all, 'my-post'] as const,
   bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
   carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
@@ -36,24 +31,11 @@ export const queryKeys = {
   dateFilter: () => [...queryKeys.all, 'date-filter'] as const,
 }
 
-export const useFetchPostList = ({ urls }: BoardMainRequest) =>
+export const useFetchPostList = ({ urls }: PostListRequest) =>
   useInfiniteQuery({
     queryKey: queryKeys.carpoolList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
-    gcTime: 0,
-    staleTime: 0,
-  })
-
-export const useFetchPostSearchList = ({ urls }: PostSearchRequest) =>
-  useInfiniteQuery({
-    queryKey: queryKeys.searchList(urls),
-    queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(ENDPOINTS.searchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.hasNext ? allPages.length : undefined

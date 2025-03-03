@@ -64,9 +64,12 @@ export type RemoveBookmarkRequest = {
   urls: PostId
 }
 
-export type BoardMainRequest = {
+export type PostListRequest = {
   urls: {
     pageParam?: number | unknown
+    title: string | null
+    place: string | null
+    trainingDate: string | null
     recruiting: boolean
   }
 }
@@ -77,16 +80,6 @@ export type PostListResponse = {
     content: PostBasicInfo
   }[]
   hasNext: boolean
-}
-
-export type PostSearchRequest = {
-  urls: {
-    pageParam?: number | unknown
-    trainingDate: string | null
-    recruiting: boolean
-    type: string
-    keyword: string | null
-  }
 }
 
 export type DateFilterResponse = {

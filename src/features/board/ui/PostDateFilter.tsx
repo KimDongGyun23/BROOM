@@ -29,7 +29,7 @@ const Tag = ({ date }: TagProps) => {
 export const PostDateFilter = () => {
   const { data, isPending, isError } = useFetchDateFilter()
 
-  if (!data || isPending || isError) return null
+  if (isPending || isError || !data || !data.dates?.length) return null
 
   return (
     <Container>
