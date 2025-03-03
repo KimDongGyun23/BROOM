@@ -23,8 +23,8 @@ export const PostSearchList = () => {
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
-      title: filterKey === 'title' ? searchKeyword : '',
-      place: filterKey === 'place' ? searchKeyword : '',
+      title: filterKey === 'title' ? searchKeyword : null,
+      place: filterKey === 'place' ? searchKeyword : null,
       trainingDate: formattedDate || null,
       recruiting: isFilteringActiveOnly,
     },

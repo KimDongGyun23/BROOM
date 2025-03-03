@@ -12,8 +12,18 @@ import type {
 import { instance } from '../../../app/api'
 
 const ENDPOINTS = {
-  fetchPostList: (urls: PostListRequest['urls']) =>
-    `/board/view/${urls.pageParam}?title=${urls.title}&place=${urls.place}${urls.trainingDate && `&trainingDate=${urls.trainingDate}`}&recruiting=${urls.recruiting}`,
+  fetchPostList: (urls: PostListRequest['urls']) => {
+    const baseUrl = `/board/view/${urls.pageParam}`
+    const searchParams = new URLSearchParams()
+
+    if (urls.title) searchParams.append('title', urls.title)
+    if (urls.place) searchParams.append('place', urls.place)
+    if (urls.trainingDate) searchParams.append('trainingDate', urls.trainingDate)
+    if (urls.recruiting) searchParams.append('recruiting', urls.recruiting.valueOf.toString())
+
+    const queryString = searchParams.toString()
+    return queryString ? `${baseUrl}?${queryString}` : baseUrl
+  },
   fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
   fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
   fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/detail/${urls.boardId}`,

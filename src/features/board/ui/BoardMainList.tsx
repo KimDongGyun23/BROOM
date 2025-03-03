@@ -16,8 +16,8 @@ export const BoardMainList = () => {
 
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
-      title: '',
-      place: '',
+      title: null,
+      place: null,
       trainingDate: formattedDate || null,
       recruiting: isFilteringActiveOnly,
     },
