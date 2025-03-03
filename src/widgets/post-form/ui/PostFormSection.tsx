@@ -5,7 +5,7 @@ import { postAttribute } from '@/entities/board/config/post.schema'
 import type { PostForm } from '@/entities/board/model/post.type'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-export const PostCreateForm = () => {
+export const PostFormSection = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
   const {
     formState: { errors },

@@ -1,8 +1,8 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchMyPostList } from '@/features/board/api/useBoard.query'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
-import { PostList } from '@/widgets/post-list/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
+import { PostList } from '@/widgets/post-list/ui/PostList'
 
 export const MypageMyPost = () => {
   const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchMyPostList()

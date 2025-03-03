@@ -1,24 +1,23 @@
+import { useFormContext } from 'react-hook-form'
 import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-import { postSchema } from '@/entities/board/config/post.schema'
 import type { PostForm } from '@/entities/board/model/post.type'
 import { useEditPost } from '@/features/board/api/useBoard.mutation'
-import { useFetchPostEditData } from '@/features/board/api/useBoard.query'
-import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
+import { useModalActions } from '@/shared/model/modal.store'
+import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-export const useEditPostForm = () => {
+export const PostEditHeader = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
-  const { data: defaultValues, isPending, isError } = useFetchPostEditData({ urls: { boardId } })
+  const { openOneButtonModal } = useModalActions()
   const { mutate: postUpdate } = useEditPost()
 
-  const formMethod = useCustomForm<PostForm>(postSchema, { defaultValues })
-  const { handleSubmit } = formMethod
+  const { handleSubmit } = useFormContext<PostForm>()
 
-  const handleEditCarpoolPost = (formData: PostForm) => {
+  const handleEditPost = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,
@@ -28,9 +27,18 @@ export const useEditPostForm = () => {
 
     postUpdate(
       { urls: { boardId }, body: submissionData },
-      { onSuccess: () => navigate(-1 as To, { replace: true }) },
+      {
+        onSuccess: () => navigate(-1 as To, { replace: true }),
+        onError: (error) => openOneButtonModal(error.message),
+      },
     )
   }
 
-  return { formMethod, isPending, isError, onSubmit: handleSubmit(handleEditCarpoolPost) }
+  return (
+    <SubHeaderWithoutIcon
+      type="complete"
+      title="승차 공유 수정"
+      onClickComplete={handleSubmit(handleEditPost)}
+    />
+  )
 }
