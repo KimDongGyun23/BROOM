@@ -4,7 +4,7 @@ import { instance } from '@/app/api'
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { useFetchPostDetail } from '@/features/board/api/useBoard.query'
 import { useBookmarkActions } from '@/features/board/model/bookmark.store'
-import { usePostDetail, usePostDetailActions } from '@/features/board/model/postDetail.store'
+import { usePostDetailActions } from '@/features/board/model/postDetail.store'
 import { PostBookmarkButton } from '@/features/board/ui/PostBookmarkButton'
 import { PostChatButton } from '@/features/board/ui/PostChatButton'
 import { PostDetailContent } from '@/features/board/ui/PostDetailContent'
@@ -17,7 +17,6 @@ import { ErrorPage } from '../home/ErrorPage'
 
 export const PostDetail = () => {
   const boardId = useParamId()
-  const post = usePostDetail()
   const session = instance.hasToken()
 
   const { data, isPending, isError } = useFetchPostDetail({ urls: { boardId } })
@@ -25,7 +24,7 @@ export const PostDetail = () => {
   const { initializeBookmarkState } = useBookmarkActions()
 
   if (isPending) return <Loading />
-  if (isError || !post) return <ErrorPage />
+  if (isError) return <ErrorPage />
 
   updatePostDetail(data)
   initializeBookmarkState(data.status.bookmark)
