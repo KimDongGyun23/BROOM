@@ -10,7 +10,7 @@ import {
 } from '@/shared/ui/icons/NavIcons'
 
 const NAVIGATION_ITEMS = [
-  { Icon: BusReservationIcon, path: '/bus-reserve' },
+  { Icon: BusReservationIcon, path: '/bus-application' },
   { Icon: CarpoolIcon, path: '/board' },
   { Icon: HomeIcon, path: '/home' },
   { Icon: ChattingIcon, path: '/chat' },

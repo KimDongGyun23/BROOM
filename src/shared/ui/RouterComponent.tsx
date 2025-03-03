@@ -10,7 +10,7 @@ import { PostCreate } from '@/pages/board/PostCreate'
 import { PostDetail } from '@/pages/board/PostDetail'
 import { PostEdit } from '@/pages/board/PostEdit'
 import { PostSearch } from '@/pages/board/PostSearch'
-import { BusReservation } from '@/pages/bus/BusReservation'
+import { BusApplication } from '@/pages/bus/BusApplication'
 import { BusReservationCheck } from '@/pages/bus/BusReservationCheck'
 import { BusReservationCreate } from '@/pages/bus/BusReservationCreate'
 import { Chat } from '@/pages/chat/Chat'
@@ -58,9 +58,9 @@ export const RouterComponent = () => {
       <Route path="/board/detail/:id" element={<PostDetail />} />
       <Route path="/board/search" element={<PostSearch />} />
 
-      <Route path="/bus-reserve" element={<BusReservation />} />
-      <Route path="/bus-reserve/create" element={<BusReservationCreate />} />
-      <Route path="/bus-reserve/info" element={<BusReservationCheck />} />
+      <Route path="/bus-application" element={<BusApplication />} />
+      <Route path="/bus-application/create" element={<BusReservationCreate />} />
+      <Route path="/bus-application/status" element={<BusReservationCheck />} />
 
       <Route element={<LoginPrivateRoute />}>
         <Route path="/login" element={<LoginPage />} />

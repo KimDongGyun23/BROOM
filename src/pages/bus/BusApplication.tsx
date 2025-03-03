@@ -2,30 +2,26 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { BusReservationNotice } from '@/features/bus/ui/BusReservationNotice'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
 import { MainHeader } from '@/shared/ui/MainHeader'
+import { BusNoticeSection } from '@/widgets/bus-notice/ui/BusNoticeSection'
 
-export const BusReservation = () => {
+export const BusApplication = () => {
   const navigate = useNavigate()
-
-  const handleReserveClick = () => navigate('/bus-reserve/create')
-  const handleCheckClick = () => navigate('/bus-reserve/info')
 
   return (
     <Container>
-      <MainHeader />
+      <MainHeader title="버스 신청" />
 
       <MainContent>
-        <h5 className="main-title">현재 버스 예약 접수 중입니다.</h5>
-        <BusReservationNotice />
+        <BusNoticeSection />
 
         <ButtonContainer>
-          <Button size="md" onClick={handleReserveClick}>
+          <Button size="md" onClick={() => navigate('/bus-reserve/create')}>
             예약하러 가기
           </Button>
-          <Button size="md" secondary onClick={handleCheckClick}>
+          <Button size="md" secondary onClick={() => navigate('/bus-reserve/status')}>
             예약 내역 조회하기
           </Button>
         </ButtonContainer>
@@ -37,15 +33,12 @@ export const BusReservation = () => {
 }
 
 const MainContent = styled.main`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding(0, 0, '3xl', 0)};
+  ${({ theme }) => `
+    ${theme.margin('container')}
+    ${theme.padding(0, 0, '3xl', 0)}
+  `}
   flex-grow: 1;
   overflow-y: scroll;
-
-  .main-title {
-    ${({ theme }) => theme.font(500, theme.colors.blue[500])};
-  }
 `
 
 const ButtonContainer = styled.div`
