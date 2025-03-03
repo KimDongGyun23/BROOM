@@ -73,7 +73,7 @@ export const useFetchChatSidebarInformation = ({ urls }: ChatSidebarInformationR
     enabled: false,
   })
 
-export const useEnterChatRoom = ({ urls }: EnterChatRoomRequest) =>
+export const useFetchEnteredChatRoom = ({ urls }: EnterChatRoomRequest) =>
   useQuery({
     queryKey: queryKeys.enterRoom(urls),
     queryFn: () => instance.get<string>(ENDPOINTS.enterRoom(urls)),
