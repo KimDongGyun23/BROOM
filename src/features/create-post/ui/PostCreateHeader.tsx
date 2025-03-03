@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import { useCreatePost } from '@/entities/board/api/useBoard.mutation'
 import type { PostForm } from '@/entities/board/model/post.type'
-import { useCreatePost } from '@/features/board/api/useBoard.mutation'
 import { useModalActions } from '@/shared/model/modal.store'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 

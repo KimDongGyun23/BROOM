@@ -1,9 +1,9 @@
 import { FormProvider } from 'react-hook-form'
 
 import { Container } from '@/app/style/commonStyles'
+import { useFetchPostEditData } from '@/entities/board/api/useBoard.query'
 import { postSchema } from '@/entities/board/config/post.schema'
 import type { PostForm } from '@/entities/board/model/post.type'
-import { useFetchPostEditData } from '@/features/board/api/useBoard.query'
 import { PostEditHeader } from '@/features/edit-post/ui/PostEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'

@@ -1,4 +1,4 @@
-import { useDeletePost } from '@/features/board/api/useBoard.mutation'
+import { useDeletePost } from '@/entities/board/api/useBoard.mutation'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useModalActions } from '@/shared/model/modal.store'
 import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'

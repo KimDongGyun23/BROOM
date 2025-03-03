@@ -1,4 +1,4 @@
-import { useFetchPostList } from '@/features/board/api/useBoard.query'
+import { useFetchPostList } from '@/entities/board/api/useBoard.query'
 import { useDateTag } from '@/features/filter/model/dateTag.store'
 import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { PostList } from '@/widgets/post-list/ui/PostList'

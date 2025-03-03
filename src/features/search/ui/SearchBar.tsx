@@ -1,20 +1,23 @@
-import { FormProvider } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useSearchForm } from '@/features/board/hook/usePostSearchForm'
+import type { SearchType } from '@/shared/model/common.type'
 import { ArrowBottomIcon, ArrowUpIcon, SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 import { useSearchFilter } from '../hook/useSearchFilter'
 import { useFilterDropDownActions, useIsFilterDropdownOpen } from '../model/filterDropdown.store'
 
-export const SearchBar = () => {
+type SearchBarProps = {
+  onSubmit: VoidFunction
+}
+
+export const SearchBar = ({ onSubmit }: SearchBarProps) => {
   const isDropdownOpen = useIsFilterDropdownOpen()
   const { toggleDropdown } = useFilterDropDownActions()
 
   const { currentFilter } = useSearchFilter()
 
-  const { formMethod, onSubmit } = useSearchForm()
-  const { register } = formMethod
+  const { register } = useFormContext<SearchType>()
 
   return (
     <Container>
@@ -28,21 +31,19 @@ export const SearchBar = () => {
         {isDropdownOpen ? <ArrowUpIcon /> : <ArrowBottomIcon />}
       </FilterButton>
 
-      <FormProvider {...formMethod}>
-        <FormContainer onSubmit={onSubmit}>
-          <StyledInput
-            type="search"
-            size={7}
-            {...register('search')}
-            placeholder={currentFilter.placeholder}
-            aria-label={`${currentFilter.label} 검색`}
-          />
+      <FormContainer onSubmit={onSubmit}>
+        <StyledInput
+          type="search"
+          size={7}
+          {...register('search')}
+          placeholder={currentFilter.placeholder}
+          aria-label={`${currentFilter.label} 검색`}
+        />
 
-          <SearchButton type="submit" aria-label="검색">
-            <SearchIcon />
-          </SearchButton>
-        </FormContainer>
-      </FormProvider>
+        <SearchButton type="submit" aria-label="검색">
+          <SearchIcon />
+        </SearchButton>
+      </FormContainer>
     </Container>
   )
 }

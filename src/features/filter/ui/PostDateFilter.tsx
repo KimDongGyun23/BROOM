@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useFetchDateFilter } from '@/features/board/api/useBoard.query'
+import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
 import { formatDate } from '@/shared/lib/formatDate'
 
 import { useDateTag, useDateTagActions } from '../model/dateTag.store'
