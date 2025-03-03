@@ -1,10 +1,10 @@
 import { Container } from '@/app/style/commonStyles'
-import { PostSearchList } from '@/features/board/ui/PostSearchList'
 import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
-import { SearchBar } from '@/features/search/ui/SearchBar'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { PostFilter } from '@/widgets/post-filter/ui/PostFilter'
+import { PostSearchList } from '@/widgets/post-list/ui/PostSearchList'
+import { PostSearchBar } from '@/widgets/post-search/ui/PostSearchBar'
 
 export const PostSearch = () => {
   return (
@@ -12,8 +12,9 @@ export const PostSearch = () => {
       <RecruitingStoreProvider>
         <Container>
           <SubHeaderWithoutIcon type="null" title="검색" />
-          <SearchBar />
+          <PostSearchBar />
           <PostFilter />
+
           <PostSearchList />
         </Container>
       </RecruitingStoreProvider>
