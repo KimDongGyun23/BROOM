@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { GridContainer, ScrollContainer } from '@/app/style/commonStyles'
-import { usePostDetail } from '@/features/board/model/postDetail.store'
+import { usePostDetail } from '@/entities/board/model/postDetail.store'
 
 export const PostDetailContent = () => {
   const post = usePostDetail()

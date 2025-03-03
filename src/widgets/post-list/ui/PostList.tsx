@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import styled from 'styled-components'
 
-import type { PostListResponse } from '@/features/board/model/post.type'
+import type { PostListResponse } from '@/entities/board/model/post.type'
 import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import type { PostListResponse } from '@/features/board/model/post.type'
+import type { PostListResponse } from '@/entities/board/model/post.type'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
 
 type PostItemProps = {

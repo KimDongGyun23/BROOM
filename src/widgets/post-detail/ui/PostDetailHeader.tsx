@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useIsMyPost } from '@/features/board/model/postDetail.store'
+import { useIsMyPost } from '@/entities/board/model/postDetail.store'
 import { DeleteConfirmationModal } from '@/features/delete-post/ui/DeleteConfirmationModal'
 import { DeleteResultModal } from '@/features/delete-post/ui/DeleteResultModal'
 import { useBoolean } from '@/shared/hook/useBoolean'

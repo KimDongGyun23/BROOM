@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useIsMyPost, usePostDetail } from '@/features/board/model/postDetail.store'
+import { useIsMyPost, usePostDetail } from '@/entities/board/model/postDetail.store'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
 import { Button } from '@/shared/ui/Button'
 

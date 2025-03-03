@@ -7,7 +7,7 @@ import type {
   PostForm,
   PostListRequest,
   PostListResponse,
-} from '@/features/board/model/post.type'
+} from '@/entities/board/model/post.type'
 
 import { instance } from '../../../app/api'
 

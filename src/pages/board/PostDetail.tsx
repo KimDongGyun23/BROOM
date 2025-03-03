@@ -1,6 +1,6 @@
 import { FlexColumnContainer } from '@/app/style/commonStyles'
+import { usePostDetailActions } from '@/entities/board/model/postDetail.store'
 import { useFetchPostDetail } from '@/features/board/api/useBoard.query'
-import { usePostDetailActions } from '@/features/board/model/postDetail.store'
 import { PostDetailContent } from '@/features/board/ui/PostDetailContent'
 import { PostProfile } from '@/features/board/ui/PostProfile'
 import { useParamId } from '@/shared/hook/useParamId'

@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { PostDetailResponse } from '@/features/board/model/post.type'
+import type { PostDetailResponse } from '@/entities/board/model/post.type'
 import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
 
 type Actions = {

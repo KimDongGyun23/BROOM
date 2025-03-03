@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { usePostDetail } from '@/features/board/model/postDetail.store'
+import { usePostDetail } from '@/entities/board/model/postDetail.store'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
 export const PostProfile = () => {

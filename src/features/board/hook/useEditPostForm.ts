@@ -1,9 +1,9 @@
 import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
+import type { PostForm } from '@/entities/board/model/post.type'
 import { useEditPost } from '@/features/board/api/useBoard.mutation'
 import { useFetchPostEditData } from '@/features/board/api/useBoard.query'
-import type { PostForm } from '@/features/board/model/post.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
 

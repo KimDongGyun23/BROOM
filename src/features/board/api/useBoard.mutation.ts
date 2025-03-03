@@ -8,7 +8,7 @@ import type {
   PostEditRequest,
   PostId,
   RemoveBookmarkRequest,
-} from '@/features/board/model/post.type'
+} from '@/entities/board/model/post.type'
 
 import { instance } from '../../../app/api'
 

@@ -1,5 +1,5 @@
+import { usePostDetail } from '@/entities/board/model/postDetail.store'
 import { useAddBookmark, useDeleteBookmark } from '@/features/board/api/useBoard.mutation'
-import { usePostDetail } from '@/features/board/model/postDetail.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useModalActions } from '@/shared/model/modal.store'
 
