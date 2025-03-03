@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { usePostDetail } from '@/entities/board/model/postDetail.store'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
-export const PostProfile = () => {
+export const PostDetailProfile = () => {
   const post = usePostDetail()
   if (!post || !post.author) return null
 

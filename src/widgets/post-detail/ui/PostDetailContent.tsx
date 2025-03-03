@@ -46,27 +46,29 @@ export const PostDetailContent = () => {
 }
 
 const ContentContainer = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
-  ${({ theme }) => theme.padding(0, 'lg')};
+  ${({ theme }) => `
+    ${theme.flexBox('column', undefined, undefined, '2xl')}
+    ${theme.padding(0, 'lg')}
+  `}
 
   .content-detail-title {
-    ${({ theme }) => theme.font(500, theme.colors.black[600])};
+    ${({ theme }) => theme.font(500, theme.colors.black[600])}
   }
 `
 
 const ContentList = styled.ul`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, '2xl')}
 `
 
 const ContentItem = styled.li`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')}
   width: 100%;
 
   .content-item-label {
-    ${({ theme }) => theme.font(800, theme.colors.black[600])};
+    ${({ theme }) => theme.font(800, theme.colors.black[600])}
   }
 
   .content-item-text {
-    ${({ theme }) => theme.font(600, theme.colors.black[400])};
+    ${({ theme }) => theme.font(600, theme.colors.black[400])}
   }
 `
