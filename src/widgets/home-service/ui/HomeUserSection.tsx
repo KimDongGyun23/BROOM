@@ -1,17 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { instance } from '@/app/api'
-import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
+import { useIsLoggedIn, useUserData } from '@/shared/model/auth.store'
 import { Button } from '@/shared/ui/Button'
 import { TentIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 const LoggedInUserContent = () => {
-  const nickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
+  const user = useUserData()
 
   return (
     <>
-      <Text>{nickname}님 안녕하세요.</Text>
+      <Text>{user?.nickname}님 안녕하세요.</Text>
       <Text>
         <Logo>BROOM</Logo>에 오신걸 환영합니다.
       </Text>
@@ -28,39 +27,46 @@ const LoggedOutUserContent = () => (
   </>
 )
 
-export const HomeUserSection = () => {
+const AuthButtonContainer = () => {
   const navigate = useNavigate()
-  const session = instance.hasToken()
+  const isLoggedIn = useIsLoggedIn()
 
-  const handleLogin = () => navigate('/login')
-  const handleSignUp = () => navigate('/sign-up')
+  if (isLoggedIn) return null
+
+  return (
+    <ButtonContainer>
+      <StyledButton size="sm" onClick={() => navigate('/login')}>
+        로그인
+      </StyledButton>
+      <StyledButton size="sm" secondary onClick={() => navigate('/sign-up')}>
+        회원가입
+      </StyledButton>
+    </ButtonContainer>
+  )
+}
+
+export const HomeUserSection = () => {
+  const isLoggedIn = useIsLoggedIn()
 
   return (
     <Section>
       <ContentContainer>
         <MainTextContainer>
-          {session ? <LoggedInUserContent /> : <LoggedOutUserContent />}
+          {isLoggedIn ? <LoggedInUserContent /> : <LoggedOutUserContent />}
         </MainTextContainer>
         <TentIcon />
       </ContentContainer>
 
-      {!session && (
-        <ButtonContainer>
-          <StyledButton size="sm" onClick={handleLogin}>
-            로그인
-          </StyledButton>
-          <StyledButton size="sm" secondary onClick={handleSignUp}>
-            회원가입
-          </StyledButton>
-        </ButtonContainer>
-      )}
+      <AuthButtonContainer />
     </Section>
   )
 }
 
 const Section = styled.section`
-  ${({ theme }) => theme.boxShadow('sm')};
-  ${({ theme }) => theme.padding('3xl', 'lg')};
+  ${({ theme }) => `
+    ${theme.boxShadow('sm')}
+    ${theme.padding('3xl', 'lg')}
+  `}
   background-color: white;
 `
 
@@ -74,8 +80,10 @@ const MainTextContainer = styled.div`
 `
 
 const Text = styled.p`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'xs')}
+    ${theme.font(700, theme.colors.black[500])}
+  `}
 `
 
 const Logo = styled.span`
@@ -86,8 +94,10 @@ const Logo = styled.span`
 `
 
 const ButtonContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
-  ${({ theme }) => theme.margin('container', 0, 0)};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'md')}
+    ${theme.margin('container', 0, 0)}
+  `}
   width: 100%;
 `
 
