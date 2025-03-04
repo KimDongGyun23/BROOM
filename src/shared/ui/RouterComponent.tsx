@@ -23,7 +23,7 @@ import { AccountInformationEdit } from '@/pages/mypage/AccountInformationEdit'
 import { Mypage } from '@/pages/mypage/Mypage'
 import { MypageBookmarkedPost } from '@/pages/mypage/MypageBookmarkedPost'
 import { MypageMyPost } from '@/pages/mypage/MypageMyPost'
-import { NewPassword } from '@/pages/mypage/NewPassword'
+import { PasswordEdit } from '@/pages/mypage/PasswordEdit'
 
 import { Admin } from '../../pages/admin/Admin'
 import { AdminBus } from '../../pages/admin/AdminBus'
@@ -78,7 +78,7 @@ export const RouterComponent = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-information" element={<AccountInformation />} />
         <Route path="/mypage/account-information/edit" element={<AccountInformationEdit />} />
-        <Route path="/mypage/password" element={<NewPassword />} />
+        <Route path="/mypage/password" element={<PasswordEdit />} />
         <Route path="/mypage/my-post" element={<MypageMyPost />} />
         <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
 

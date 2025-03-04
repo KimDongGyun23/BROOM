@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useIsSuccessModal } from '@/shared/model/modal.store'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
-export const NewPasswordModal = () => {
+export const PasswordEditModal = () => {
   const navigate = useNavigate()
 
   const isSuccessModal = useIsSuccessModal()

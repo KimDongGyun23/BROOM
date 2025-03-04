@@ -1,21 +1,22 @@
 import { FormProvider } from 'react-hook-form'
 
 import { FormContainer } from '@/app/style/commonStyles'
+import { newPasswordAttribute, newPasswordSchema } from '@/entities/mypage/model/mypage.schema'
+import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
+import { PasswordEditHeader } from '@/features/edit-password/ui/PasswordEditHeader'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
+import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-import { usePasswordUpdateForm } from '../hook/usePasswordUpdateForm'
-import { newPasswordAttribute } from '../model/mypage.schema'
+export const PasswordEdit = () => {
+  const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)
 
-export const NewPasswordForm = () => {
-  const { formMethod, onSubmit } = usePasswordUpdateForm()
   const { PREV_PASSWORD, NEW_PASSWORD, CONFIRM } = newPasswordAttribute
 
   return (
-    <>
-      <SubHeaderWithoutIcon type="complete" title="비밀번호 재설정" onClickComplete={onSubmit} />
-
+    <ModalStoreProvider>
       <FormProvider {...formMethod}>
+        <PasswordEditHeader />
         <FormContainer>
           <InputGroup section={PREV_PASSWORD.section}>
             <InputGroup.Label label={PREV_PASSWORD.label} />
@@ -33,6 +34,6 @@ export const NewPasswordForm = () => {
           </InputGroup>
         </FormContainer>
       </FormProvider>
-    </>
+    </ModalStoreProvider>
   )
 }

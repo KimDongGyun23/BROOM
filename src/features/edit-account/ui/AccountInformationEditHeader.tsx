@@ -5,7 +5,7 @@ import { useEditAccountInformation } from '../hook/useEditAccountInformation'
 
 import { AccountInformationEditModal } from './AccountInformationEditModal'
 
-export const SubmitHeader = () => {
+const SubmitHeader = () => {
   const { onSubmit } = useEditAccountInformation()
   return <SubHeaderWithoutIcon type="complete" title="계정 정보 수정" onClickComplete={onSubmit} />
 }
