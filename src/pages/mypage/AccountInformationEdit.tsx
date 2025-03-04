@@ -1,6 +1,6 @@
 import { FormProvider } from 'react-hook-form'
 
-import { useFetchAccountInformation } from '@/features/mypage/api/useMypage.query'
+import { useFetchAccountInformation } from '@/entities/mypage/api/useMypage.query'
 import { useAccountInformationForm } from '@/features/mypage/hook/useAccountInformationForm'
 import { AccountInformationEditForm } from '@/features/mypage/ui/AccountInformationEditForm'
 import { AccountInformationEditModal } from '@/features/mypage/ui/AccountInformationEditModal'

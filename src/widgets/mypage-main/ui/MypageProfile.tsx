@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import type { MypageProfileResponse } from '@/features/mypage/model/mypage.type'
+import type { MypageProfileResponse } from '@/entities/mypage/model/mypage.type'
 import { ChainIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 

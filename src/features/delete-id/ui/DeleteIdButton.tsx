@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useDeleteId } from '@/features/mypage/api/useMypage.mutation'
+import { useDeleteId } from '@/entities/mypage/api/useMypage.mutation'
 import { useModalActions } from '@/shared/model/modal.store'
 
 export const DeleteIdButton = () => {

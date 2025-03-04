@@ -4,7 +4,7 @@ import { instance } from '@/app/api'
 import type {
   AccountInformationResponse,
   MypageProfileResponse,
-} from '@/features/mypage/model/mypage.type'
+} from '@/entities/mypage/model/mypage.type'
 
 const ENDPOINTS = {
   fetchMypage: `/mypage`,

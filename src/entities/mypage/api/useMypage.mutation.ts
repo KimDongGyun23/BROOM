@@ -4,7 +4,7 @@ import { instance } from '@/app/api'
 import type {
   PasswordUpdateRequest,
   UpdateAccountInformationRequest,
-} from '@/features/mypage/model/mypage.type'
+} from '@/entities/mypage/model/mypage.type'
 
 import { queryKeys } from './useMypage.query'
 

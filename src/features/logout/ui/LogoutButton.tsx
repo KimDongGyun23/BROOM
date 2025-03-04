@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useLogout } from '@/features/mypage/api/useMypage.mutation'
+import { useLogout } from '@/entities/mypage/api/useMypage.mutation'
 import { useModalActions } from '@/shared/model/modal.store'
 
 export const LogoutButton = () => {
