@@ -5,9 +5,6 @@ import { Button } from '@/shared/ui/Button'
 
 export const ErrorPage = () => {
   const navigate = useNavigate()
-  const goToHome = () => {
-    navigate('/home', { replace: true })
-  }
 
   return (
     <Container>
@@ -15,7 +12,7 @@ export const ErrorPage = () => {
         <h2 className="error-title">404</h2>
         <p className="error-message">{`현재 페이지가 존재하지 않아요...\n재시도 부탁드립니다.`}</p>
         <ButtonContainer>
-          <StyledButton size="lg" onClick={goToHome}>
+          <StyledButton size="lg" onClick={() => navigate('/home', { replace: true })}>
             홈으로 이동하기
           </StyledButton>
         </ButtonContainer>

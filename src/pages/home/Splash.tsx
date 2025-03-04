@@ -1,5 +1,16 @@
 import styled from 'styled-components'
 
+export const Splash = () => {
+  return (
+    <Container>
+      <Content>
+        <Logo>BROOM</Logo>
+        <Subtitle>광운대학교 예비군 종합 서비스</Subtitle>
+      </Content>
+    </Container>
+  )
+}
+
 const Container = styled.div`
   ${({ theme }) => theme.gridBox(undefined, undefined, 'center', 'center')};
   width: 100%;
@@ -20,14 +31,3 @@ const Logo = styled.h1`
 const Subtitle = styled.p`
   ${({ theme }) => theme.font(700, theme.colors.black[200])};
 `
-
-export const Splash = () => {
-  return (
-    <Container>
-      <Content>
-        <Logo>BROOM</Logo>
-        <Subtitle>광운대학교 예비군 종합 서비스</Subtitle>
-      </Content>
-    </Container>
-  )
-}
