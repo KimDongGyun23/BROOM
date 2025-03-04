@@ -1,15 +1,18 @@
 import { FormProvider } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { Container } from '@/app/style/commonStyles'
-import { busReserveInfoSchema } from '@/entities/bus/config/bus.schema'
+import { Container, FormContainer, ValidateContainer } from '@/app/style/commonStyles'
+import { busReserveInfoAttribute, busReserveInfoSchema } from '@/entities/bus/config/bus.schema'
 import type { StudentId } from '@/entities/bus/model/bus.type'
 import { BusApplicationStatusTable } from '@/features/check-bus-application/ui/BusApplicationStatusTable'
+import { CheckBusApplicationButton } from '@/features/check-bus-application/ui/CheckBusApplicationButton'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { BusApplicationStatusForm } from '@/widgets/bus-form/ui/BusApplicationStatusForm'
 
 export const BusApplicationStatus = () => {
+  const { STUDENT_ID } = busReserveInfoAttribute
+
   const formMethod = useCustomForm<StudentId>(busReserveInfoSchema)
 
   return (
@@ -18,7 +21,15 @@ export const BusApplicationStatus = () => {
       <Container>
         <FormProvider {...formMethod}>
           <Title>신청 내역 조회</Title>
-          <BusApplicationStatusForm />
+          <FormContainer>
+            <InputGroup section={STUDENT_ID.section}>
+              <InputGroup.Label label={STUDENT_ID.label} />
+              <ValidateContainer>
+                <InputGroup.NumberInput {...STUDENT_ID.input} />
+                <CheckBusApplicationButton />
+              </ValidateContainer>
+            </InputGroup>
+          </FormContainer>
         </FormProvider>
 
         <BusApplicationStatusTable />
