@@ -52,7 +52,7 @@ const sizeMap = {
     'logo-lg-top': '30svh',
     'logo-lg-bottom': '30px',
     'page-label': '20px 16px 48px',
-    'mypage-button-top': '3svh',
+    'mypage-button': '3svh 0 0 auto',
   },
 }
 

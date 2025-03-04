@@ -43,14 +43,18 @@ export const MypageSections = () => (
 )
 
 const Container = styled.section`
-  ${({ theme }) => theme.flexBox('column')};
-  ${({ theme }) => theme.margin(0, 'container')};
+  ${({ theme }) => `
+    ${theme.flexBox('column')}
+    ${theme.margin(0, 'container')}
+  `}
 `
 
 const Section = styled.section<{ $hasBorder: boolean }>`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.padding('xl', 0)};
-  ${({ theme, $hasBorder }) => $hasBorder && theme.border('divider', 'bottom')};
+  ${({ theme, $hasBorder }) => `
+    ${theme.flexBox('column', undefined, undefined, 'xl')}
+    ${theme.padding('xl', 0)}
+    ${$hasBorder && theme.border('divider', 'bottom')}
+  `}
 `
 
 const SectionTitle = styled.h6`

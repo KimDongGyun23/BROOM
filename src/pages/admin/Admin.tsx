@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { LogoutButton } from '@/features/mypage/ui/LogoutButton'
-import { LogoutModal } from '@/features/mypage/ui/LogoutModal'
+import { LogoutButton } from '@/features/logout/ui/LogoutButton'
+import { LogoutModal } from '@/features/logout/ui/LogoutModal'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'

@@ -22,11 +22,13 @@ export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: MypageP
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xl')};
-  ${({ theme }) => theme.margin('container', 'auto', 'xl')};
-  ${({ theme }) => theme.padding('chain')};
-  ${({ theme }) => theme.border('chain')};
-  ${({ theme }) => theme.borderRadius('chain')};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'xl')}
+    ${theme.margin('container', 'auto', 'xl')}
+    ${theme.padding('chain')}
+    ${theme.border('chain')}
+    ${theme.borderRadius('chain')}
+  `}
   position: relative;
   width: fit-content;
 `
