@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { useUserProfile } from '@/features/mypage/api/useMypage.query'
-import { MypageSections } from '@/features/mypage/ui/MypageSections'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
 import { MypageAuthSection } from '@/widgets/mypage-auth/ui/MypageAuthSection'
-import { MypageProfile } from '@/widgets/mypage-profile/ui/MypageProfile'
+import { MypageProfile } from '@/widgets/mypage-main/ui/MypageProfile'
+import { MypageSections } from '@/widgets/mypage-main/ui/MypageSections'
 
 import { ErrorPage } from '../home/ErrorPage'
 
