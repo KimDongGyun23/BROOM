@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/app/style/chatting'
+import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/entities/chat/ui/ChatStyle'
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 

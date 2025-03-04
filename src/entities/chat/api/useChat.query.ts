@@ -8,7 +8,7 @@ import type {
   ChatSidebarInformationRequest,
   ChatSidebarInformationResponse,
   EnterChatRoomRequest,
-} from '@/features/chat/model/chat.type'
+} from '@/entities/chat/model/chat.type'
 
 const ENDPOINTS = {
   fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,

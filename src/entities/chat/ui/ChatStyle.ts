@@ -9,10 +9,12 @@ export const ChatPostTitle = styled.div`
 `
 
 export const ChatItemContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding(0, 0, 'lg')};
-  ${({ theme }) => theme.border('divider', 'bottom')};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'lg')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding(0, 0, 'lg')}
+    ${theme.border('divider', 'bottom')}
+  `}
 `
 
 export const ChatInformation = styled.div`
