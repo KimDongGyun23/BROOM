@@ -15,7 +15,7 @@ export const HomeServiceSection = () => {
           <img src={carWhite} alt="car-white" />
         </LinkContainer>
 
-        <LinkContainer to={'/board'} $primary>
+        <LinkContainer to={'/bus-application'} $primary>
           <Label $primary>{`버스 신청하러\n왔습니다!`}</Label>
           <img src={carBlack} alt="car-black" />
         </LinkContainer>
