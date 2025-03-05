@@ -13,13 +13,13 @@ const ChatRoomExitButtonWithModal = () => {
   const handleClickOpenModal = () => openTwoButtonModal('채팅방을 나가시겠습니까?')
 
   return (
-    <ModalStoreProvider>
+    <>
       <ExitButton onClick={handleClickOpenModal}>채팅방 나가기</ExitButton>
       <ModalWithTwoButton
         primaryButton={{ onClickButton: handleClickExitRoom, buttonLabel: '확인' }}
       />
       <ModalWithOneButton />
-    </ModalStoreProvider>
+    </>
   )
 }
 
