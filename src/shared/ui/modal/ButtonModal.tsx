@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
-import { useModalActions, useOneButtonModalState } from '@/shared/model/modal.store'
+import {
+  useModalActions,
+  useOneButtonModalState,
+  useTwoButtonModalState,
+} from '@/shared/model/modal.store'
 
 import { Button } from '../Button'
 
@@ -38,7 +42,7 @@ type ModalWithTwoButtonProps = {
 }
 
 export const ModalWithTwoButton = ({ primaryButton, secondaryButton }: ModalWithTwoButtonProps) => {
-  const { isModalOpen, label } = useOneButtonModalState()
+  const { isModalOpen, label } = useTwoButtonModalState()
   const { closeModal } = useModalActions()
 
   const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
