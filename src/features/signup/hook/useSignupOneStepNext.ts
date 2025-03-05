@@ -5,10 +5,7 @@ import { useIdUniqueState } from '@/features/check-id-duplication/model/idDuplic
 import { useStepsActions } from '@/shared/model/steps.store'
 
 export const useSignupOneStepNext = () => {
-  const {
-    trigger,
-    formState: { errors },
-  } = useFormContext()
+  const { trigger } = useFormContext()
 
   const { goNextStep } = useStepsActions()
 
@@ -16,10 +13,9 @@ export const useSignupOneStepNext = () => {
 
   const { ID, PASSWORD, CONFIRM } = signupAttribute
 
-  console.log(errors)
-
   const handleNextStep = async () => {
     const isValid = await trigger([ID.section, PASSWORD.section, CONFIRM.section])
+    console.log(isValid, isIdUnique)
     if (isValid && isIdUnique) goNextStep()
   }
 
