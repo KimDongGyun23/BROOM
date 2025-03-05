@@ -5,7 +5,7 @@ import { DeleteConfirmationModal } from '@/features/delete-post/ui/DeleteConfirm
 import { DeleteResultModal } from '@/features/delete-post/ui/DeleteResultModal'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useIsLoggedIn } from '@/shared/model/auth.store'
+import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'

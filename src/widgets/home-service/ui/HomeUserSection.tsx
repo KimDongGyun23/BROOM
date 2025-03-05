@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useIsLoggedIn, useUserData } from '@/shared/model/auth.store'
+import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Button } from '@/shared/ui/Button'
 import { TentIcon } from '@/shared/ui/icons/NonActiveIcons'
 

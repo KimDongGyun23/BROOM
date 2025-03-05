@@ -3,21 +3,28 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container, FormContainer } from '@/app/style/commonStyles'
-import { loginAttribute } from '@/features/auth/config/auth.schema'
-import { useLoginForm } from '@/features/auth/hook/useLoginForm'
-import { Button } from '@/shared/ui/Button'
+import { loginAttribute, loginSchema } from '@/entities/auth/config/auth.schema'
+import type { LoginCredentials } from '@/entities/auth/model/auth.type'
+import { LoginButton } from '@/features/login/ui/LoginButton'
+import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
 export const LoginPage = () => {
+  const formMethod = useCustomForm<LoginCredentials>(loginSchema, {
+    defaultValues: {
+      userId: 'test01',
+      password: 'password',
+    },
+  })
+
   const { ID, PASSWORD } = loginAttribute
-  const { formMethod, onSubmit, isLoginFailed } = useLoginForm()
 
   return (
     <Container>
       <Logo>BROOM</Logo>
 
       <FormProvider {...formMethod}>
-        <FormContainer onSubmit={onSubmit}>
+        <FormContainer>
           <InputGroup section={ID.section}>
             <InputGroup.Label label={ID.label} />
             <InputGroup.Input {...ID.input} />
@@ -28,40 +35,31 @@ export const LoginPage = () => {
             <InputGroup.Input {...PASSWORD.input} />
           </InputGroup>
 
-          <Button size="lg" type="submit">
-            로그인
-          </Button>
+          <LoginButton />
         </FormContainer>
       </FormProvider>
 
-      <BottomContainer $isLoginFailed={isLoginFailed}>
-        {isLoginFailed && <ErrorMessage>* 아이디 또는 비밀번호가 일치하지 않습니다.</ErrorMessage>}
-        <SignUpLink to={'/sign-up'}>회원가입</SignUpLink>
-      </BottomContainer>
+      <SignUpLink to={'/sign-up'}>회원가입</SignUpLink>
     </Container>
   )
 }
 
 const Logo = styled.h1`
-  ${({ theme }) => theme.margin('logo-sm', 'container')};
+  ${({ theme }) => `
+    ${theme.margin('logo-sm', 'container')}
+    color: ${theme.colors.black[600]};
+  `}
   text-align: center;
   font-family: 'Jalnan2', sans-serif;
   font-size: 60px;
   line-height: 44px;
-  color: ${({ theme }) => theme.colors.black[600]};
-`
-
-const BottomContainer = styled.div<{ $isLoginFailed: boolean }>`
-  ${({ theme, $isLoginFailed }) =>
-    theme.flexBox('row', 'center', $isLoginFailed ? 'space-between' : 'flex-end')};
-  ${({ theme }) => theme.margin('xl', 'container', 0)};
-`
-
-const ErrorMessage = styled.p`
-  ${({ theme }) => theme.font(900, theme.colors.error)};
 `
 
 const SignUpLink = styled(Link)`
-  ${({ theme }) => theme.border('underline', 'bottom')};
-  color: ${({ theme }) => theme.colors.black[500]};
+  ${({ theme }) => `
+    ${theme.margin(0, 'lg', 0, 0)}
+    ${theme.border('underline', 'bottom')}
+    ${theme.font(800, theme.colors.black[500])}
+  `}
+  align-self: flex-end;
 `

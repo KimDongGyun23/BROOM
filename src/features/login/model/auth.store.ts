@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { LoginResponse } from '@/features/auth/model/auth.type'
+import type { LoginResponse } from '@/entities/auth/model/auth.type'
 
 type Actions = {
   login: (user: LoginResponse) => void

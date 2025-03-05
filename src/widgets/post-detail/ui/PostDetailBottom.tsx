@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
 import { EnterChatButton } from '@/features/enter-chat/ui/EnterChatButton'
-import { useIsLoggedIn } from '@/shared/model/auth.store'
+import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 

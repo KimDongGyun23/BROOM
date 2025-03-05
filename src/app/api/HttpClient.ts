@@ -7,7 +7,7 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
-import { reIssue } from '@/features/auth/api/useAuth.mutation'
+import { reIssue } from '@/entities/auth/api/useAuth.mutation'
 import { clearSessionStorage } from '@/shared/lib/storage'
 
 export class HttpClient {

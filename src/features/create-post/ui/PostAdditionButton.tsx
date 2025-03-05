@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useIsLoggedIn } from '@/shared/model/auth.store'
+import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { AdditionIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const PostAdditionButton = () => {

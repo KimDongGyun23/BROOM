@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 import type { User } from '@/entities/chat/model/chat.type'
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
-import { useUserData } from '@/shared/model/auth.store'
+import { useUserData } from '@/features/login/model/auth.store'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
