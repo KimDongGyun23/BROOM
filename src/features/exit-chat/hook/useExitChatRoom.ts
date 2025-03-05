@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useSidebarActions } from '@/entities/chat/model/sidebar.store'
+import { useSidebarActions } from '@/features/chat-sidebar/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useModalActions } from '@/shared/model/modal.store'
 

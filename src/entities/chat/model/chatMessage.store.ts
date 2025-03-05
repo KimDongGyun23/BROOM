@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { Message } from '@/features/chat/model/chat.type'
+import type { Message } from './chat.type'
 
 type Actions = {
   setInitialMessage: (messages: Message[]) => void

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useFetchEnteredChatRoom } from '@/features/chat/api/useChat.query'
+import { useFetchEnteredChatRoom } from '@/entities/chat/api/useChat.query'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useModalActions } from '@/shared/model/modal.store'
 

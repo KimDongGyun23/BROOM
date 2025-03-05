@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-import type { Message } from '@/features/chat/model/chat.type'
+import type { Message } from '@/entities/chat/model/chat.type'
 
 export const useScrollToBottom = (messages: Message[]) => {
   const ref = useRef<HTMLDivElement | null>(null)

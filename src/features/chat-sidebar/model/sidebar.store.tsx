@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import type { ChatSidebarInformationResponse } from './chat.type'
+import type { ChatSidebarInformationResponse } from '@/entities/chat/model/chat.type'
 
 type Actions = {
   openSidebar: VoidFunction
