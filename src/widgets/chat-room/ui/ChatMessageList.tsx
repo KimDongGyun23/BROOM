@@ -39,25 +39,34 @@ export const ChatMessageList = () => {
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <Container
-      hasMore={hasNextPage}
-      threshold={200}
-      loadMore={() => fetchNextPage()}
-      useWindow={false}
-      isReverse
-    >
-      {messageList?.map((message) => <ChatMessage key={message.messageId} messageData={message} />)}
+    <Container>
+      <InfiniteScrollContainer
+        hasMore={hasNextPage}
+        threshold={200}
+        loadMore={() => fetchNextPage()}
+        useWindow={false}
+        isReverse
+      >
+        {messageList?.map((message) => (
+          <ChatMessage key={message.messageId} messageData={message} />
+        ))}
+      </InfiniteScrollContainer>
     </Container>
   )
 }
 
-const Container = styled(InfiniteScroll)`
+const Container = styled.main`
   ${({ theme }) => `
-    ${theme.flexBox('column', undefined, undefined, 'lg')}
+    ${theme.flexBox('column-reverse')}
     ${theme.margin(0, 'container')}
     ${theme.padding('lg', 0)}
   `}
   flex-grow: 1;
+  overflow-y: scroll;
+`
+
+const InfiniteScrollContainer = styled(InfiniteScroll)`
+  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')}
 `
 
 const BubbleContainer = styled.div`
