@@ -5,7 +5,7 @@ import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 import { useSendMessage } from '../hook/useSendMessage'
 
-export const MessageInput = () => {
+const MessageInputForm = () => {
   const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
 
   const { onSubmit } = useSendMessage()
@@ -13,21 +13,24 @@ export const MessageInput = () => {
   const { register } = formMethod
 
   return (
-    <FormProvider {...formMethod}>
-      <Container>
-        <MessageBoxForm onSubmit={onSubmit}>
-          <Input
-            type="text"
-            size={8}
-            {...register('message')}
-            placeholder="메세지를 입력해주세요."
-          />
+    <Container>
+      <MessageBoxForm onSubmit={onSubmit}>
+        <Input type="text" size={8} {...register('message')} placeholder="메세지를 입력해주세요." />
 
-          <SendingButton type="submit">
-            <SendingIcon />
-          </SendingButton>
-        </MessageBoxForm>
-      </Container>
+        <SendingButton type="submit">
+          <SendingIcon />
+        </SendingButton>
+      </MessageBoxForm>
+    </Container>
+  )
+}
+
+export const MessageInput = () => {
+  const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
+
+  return (
+    <FormProvider {...formMethod}>
+      <MessageInputForm />
     </FormProvider>
   )
 }
