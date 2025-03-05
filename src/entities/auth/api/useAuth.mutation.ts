@@ -5,15 +5,11 @@ import { instance, instanceWithoutAuth } from '@/app/api'
 import type {
   LoginRequest,
   LoginResponse,
-  SignupRequest,
-  ValidateIdRequest,
   ValidateNicknameRequest,
-} from '@/features/auth/model/auth.type'
+} from '@/entities/auth/model/auth.type'
 
 const ENDPOINTS = {
   signIn: `/login`,
-  signUp: `/signup`,
-  validateId: `/validate-id`,
   validateNickname: `/validate-nickname`,
   reIssue: `/reissue`,
 } as const
@@ -31,18 +27,6 @@ export const useLogin = () => {
           instance.setAccessToken(res.headers['authorization'])
           return res.data
         }),
-  })
-}
-
-export const useSignup = () => {
-  return useMutation<void, Error, SignupRequest>({
-    mutationFn: async ({ body }) => await instanceWithoutAuth.post(ENDPOINTS.signUp, body),
-  })
-}
-
-export const useValidateId = () => {
-  return useMutation<AxiosResponse, AxiosError, ValidateIdRequest>({
-    mutationFn: async ({ body }) => await instanceWithoutAuth.post(ENDPOINTS.validateId, body),
   })
 }
 

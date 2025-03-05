@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type AgreementId = 'personalConsent' | 'serviceConsent'
+export type AgreementId = 'personalConsent' | 'serviceConsent'
 
 type Actions = {
   toggleAgreement: (id: AgreementId) => void
