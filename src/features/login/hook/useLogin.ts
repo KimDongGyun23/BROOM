@@ -23,11 +23,9 @@ export const useLogin = () => {
       { body: { ...formData } },
       {
         onSuccess: (response) => {
-          if (instance.hasToken()) {
-            instance.setAccessToken(response.headers['authorization'])
-            navigate('/home', { replace: true })
-            login(response.data)
-          }
+          instance.setAccessToken(response.headers['authorization'])
+          login(response.data)
+          navigate('/home', { replace: true })
         },
         onError: (error) => openOneButtonModal(error.message),
       },
