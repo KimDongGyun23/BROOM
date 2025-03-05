@@ -1,10 +1,16 @@
 import { create } from 'zustand'
 
+export const signupMap = {
+  1: '계정 정보 기입',
+  2: '회원 정보 기입',
+  3: '약관 동의',
+} as const
+
 type Actions = {
   setCurrentStep: (newStep: number) => void
   goNextStep: () => void
   goPreviousStep: () => void
-  resetStep: (totalStep: number) => void
+  setTotalStep: (totalStep: number) => void
 }
 
 type StepsStore = {
@@ -15,7 +21,7 @@ type StepsStore = {
 
 export const useStepsStore = create<StepsStore>((set, get) => ({
   currentStep: 1,
-  totalStep: 1,
+  totalStep: Object.keys(signupMap).length,
   actions: {
     setCurrentStep: (newStep) =>
       set(() => {
@@ -39,7 +45,7 @@ export const useStepsStore = create<StepsStore>((set, get) => ({
         return { currentStep: boundedStep }
       })
     },
-    resetStep: (totalStep: number) => set(() => ({ currentStep: 1, totalStep })),
+    setTotalStep: (totalStep: number) => set(() => ({ currentStep: 1, totalStep })),
   },
 }))
 

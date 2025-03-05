@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useCurrentStep, useStepsActions } from '@/shared/model/steps.store'
+import { useCurrentStep, useStepsActions } from '@/features/signup/model/steps.store'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 
 export const SignupHeader = () => {

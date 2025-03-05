@@ -1,7 +1,7 @@
 import { FormContainer } from '@/app/style/commonStyles'
 import { useSignup } from '@/features/signup/hook/useSignupForm'
+import { useCurrentStep } from '@/features/signup/model/steps.store'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
-import { useCurrentStep } from '@/shared/model/steps.store'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 import { SignupOneStep } from './SignupOneStep'
