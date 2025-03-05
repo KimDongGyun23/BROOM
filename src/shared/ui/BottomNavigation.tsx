@@ -36,7 +36,8 @@ export const BottomNavigation = () => {
 }
 
 export const StyledNav = styled.nav`
-  ${({ theme }) => theme.boxShadow('md')};
+  ${({ theme }) => theme.boxShadow('md')}
+  z-index: 10;
 `
 
 export const NavigationList = styled.ul`
@@ -48,5 +49,5 @@ export const NavigationList = styled.ul`
 `
 
 export const NavigationItem = styled.li`
-  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')}
 `
