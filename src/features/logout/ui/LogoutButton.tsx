@@ -1,18 +1,9 @@
 import { styled } from 'styled-components'
 
-import { useLogout } from '@/entities/mypage/api/useMypage.mutation'
-import { useModalActions } from '@/shared/model/modal.store'
+import { useLogout } from '../hook/useLogout'
 
 export const LogoutButton = () => {
-  const { mutate: logout } = useLogout()
-  const { openOneButtonModal } = useModalActions()
-
-  const handleLogout = () => {
-    logout(undefined, {
-      onSuccess: (response) => openOneButtonModal(response, true),
-      onError: (error) => openOneButtonModal(error.message, false),
-    })
-  }
+  const { handleLogout } = useLogout()
 
   return <ActionButton onClick={handleLogout}>로그아웃</ActionButton>
 }

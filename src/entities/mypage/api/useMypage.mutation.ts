@@ -11,7 +11,6 @@ import { queryKeys } from './useMypage.query'
 const ENDPOINTS = {
   updateAccount: `/mypage/info`,
   updatePassword: `/mypage/password`,
-  logout: `/logout`,
   deleteId: `/exit`,
 } as const
 
@@ -29,11 +28,6 @@ export const useUpdatePassword = () =>
   useMutation({
     mutationFn: ({ body }: PasswordUpdateRequest) =>
       instance.post<string>(ENDPOINTS.updatePassword, body),
-  })
-
-export const useLogout = () =>
-  useMutation({
-    mutationFn: () => instance.post<string>(ENDPOINTS.logout, null),
   })
 
 export const useDeleteId = () =>
