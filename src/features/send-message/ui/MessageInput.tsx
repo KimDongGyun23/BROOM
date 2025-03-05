@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from 'react-hook-form'
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
@@ -6,11 +6,9 @@ import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { useSendMessage } from '../hook/useSendMessage'
 
 const MessageInputForm = () => {
-  const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
-
   const { onSubmit } = useSendMessage()
 
-  const { register } = formMethod
+  const { register } = useFormContext()
 
   return (
     <Container>
