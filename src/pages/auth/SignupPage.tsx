@@ -3,11 +3,11 @@ import { FormProvider } from 'react-hook-form'
 import { Container } from '@/app/style/commonStyles'
 import { signupSchema } from '@/entities/auth/config/auth.schema'
 import type { SignupData } from '@/entities/auth/model/auth.type'
-import { SignupHeader } from '@/features/signup/ui/SignupHeader'
+import { SignupForm } from '@/features/signup/ui/SignupForm'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useCurrentStep } from '@/shared/model/steps.store'
 import { LabelWithStep } from '@/shared/ui/LabelWithStep'
-import { SignupForm } from '@/widgets/signup-step/ui/SignupForm'
+import { SignupHeader } from '@/widgets/signup-header/ui/SignupHeader'
 
 const signupMap = {
   1: '계정 정보 기입',
