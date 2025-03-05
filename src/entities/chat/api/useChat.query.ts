@@ -19,20 +19,20 @@ const ENDPOINTS = {
   enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
 } as const
 
-export const queryKeys = {
+export const chatQueryKeys = {
   all: ['chat'] as const,
-  roomList: () => [...queryKeys.all, 'list'] as const,
+  roomList: () => [...chatQueryKeys.all, 'list'] as const,
   roomInformation: (urls: ChatRoomInformationRequest['urls']) =>
-    [...queryKeys.all, 'room-information', ...Object.values(urls)] as const,
+    [...chatQueryKeys.all, 'room-information', ...Object.values(urls)] as const,
   sidebarInformation: (urls: ChatSidebarInformationRequest['urls']) =>
-    [...queryKeys.all, 'sidebar-information', ...Object.values(urls)] as const,
+    [...chatQueryKeys.all, 'sidebar-information', ...Object.values(urls)] as const,
   enterRoom: (urls: EnterChatRoomRequest['urls']) =>
-    [...queryKeys.all, 'enter-room', ...Object.values(urls)] as const,
+    [...chatQueryKeys.all, 'enter-room', ...Object.values(urls)] as const,
 }
 
 export const useFetchChatRoomList = () =>
   useInfiniteQuery({
-    queryKey: queryKeys.roomList(),
+    queryKey: chatQueryKeys.roomList(),
     queryFn: ({ pageParam = 0 }) =>
       instance.get<ChatRoomListResponse>(ENDPOINTS.fetchRoomList(pageParam)),
     initialPageParam: 0,
@@ -43,7 +43,7 @@ export const useFetchChatRoomList = () =>
 
 export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest) =>
   useInfiniteQuery({
-    queryKey: queryKeys.roomInformation(urls),
+    queryKey: chatQueryKeys.roomInformation(urls),
     queryFn: ({ pageParam = 0 }) =>
       instance.get<ChatRoomInformationResponse>(
         ENDPOINTS.fetchRoomInformation({ ...urls, pageParam }),
@@ -67,7 +67,7 @@ export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest
 
 export const useFetchChatSidebarInformation = ({ urls }: ChatSidebarInformationRequest) =>
   useQuery({
-    queryKey: queryKeys.sidebarInformation(urls),
+    queryKey: chatQueryKeys.sidebarInformation(urls),
     queryFn: () =>
       instance.get<ChatSidebarInformationResponse>(ENDPOINTS.fetchSidebarInformation(urls)),
     enabled: false,
@@ -75,7 +75,7 @@ export const useFetchChatSidebarInformation = ({ urls }: ChatSidebarInformationR
 
 export const useFetchEnteredChatRoom = ({ urls }: EnterChatRoomRequest) =>
   useQuery({
-    queryKey: queryKeys.enterRoom(urls),
+    queryKey: chatQueryKeys.enterRoom(urls),
     queryFn: () => instance.get<string>(ENDPOINTS.enterRoom(urls)),
     enabled: false,
   })

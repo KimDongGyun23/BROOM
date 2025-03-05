@@ -1,14 +1,12 @@
 import { Container } from '@/app/style/commonStyles'
-import { useFetchChatRoomInformation } from '@/features/chat/api/useChat.query'
-import { useChatMessageActions } from '@/features/chat/model/chatMessage.store'
-import { SidebarStoreProvider } from '@/features/chat/model/sidebar.store'
-import { ChatMessageList } from '@/features/chat/ui/ChatMessageList'
-import { ChatRoomHeader } from '@/features/chat/ui/ChatRoomHeader'
-import { ChattingRoomProfile } from '@/features/chat/ui/ChattingRoomProfile'
-import { MessageInput } from '@/features/chat/ui/MessageInput'
+import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
+import { useChatMessageActions } from '@/entities/chat/model/chatMessage.store'
+import { MessageInput } from '@/features/send-message/ui/MessageInput'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { Loading } from '@/shared/ui/Loading'
+import { ChatMessageList } from '@/widgets/chat-room/ui/ChatMessageList'
+import { ChatRoomHeader } from '@/widgets/chat-room/ui/ChatRoomHeader'
+import { ChattingRoomProfile } from '@/widgets/chat-room/ui/ChattingRoomProfile'
 
 import { ErrorPage } from '../home/ErrorPage'
 
@@ -30,20 +28,17 @@ export const ChatRoom = () => {
   setInitialMessage(messages)
 
   return (
-    <SidebarStoreProvider>
-      <ModalStoreProvider>
-        <Container>
-          <ChatRoomHeader />
-          <ChattingRoomProfile
-            profileIconList={militaryBranches}
-            ownerNickname={ownerNickname}
-            title={boardTitle}
-          />
+    <Container>
+      <ChatRoomHeader />
 
-          <ChatMessageList />
-          <MessageInput />
-        </Container>
-      </ModalStoreProvider>
-    </SidebarStoreProvider>
+      <ChattingRoomProfile
+        profileIconList={militaryBranches}
+        ownerNickname={ownerNickname}
+        title={boardTitle}
+      />
+
+      <ChatMessageList />
+      <MessageInput />
+    </Container>
   )
 }

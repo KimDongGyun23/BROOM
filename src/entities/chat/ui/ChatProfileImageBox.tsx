@@ -18,9 +18,11 @@ export const ChatProfileImageBox = ({ profileIconList }: ChattingProfileImageBox
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.gridBox('1fr 1fr', '1fr 1fr', 'center', 'center')};
-  ${({ theme }) => theme.border('box')};
-  ${({ theme }) => theme.borderRadius('md')};
+  ${({ theme }) => `
+    ${theme.gridBox('1fr 1fr', '1fr 1fr', 'center', 'center')}
+    ${theme.border('box')}
+    ${theme.borderRadius('md')}
+  `}
   width: 60px;
   height: 60px;
   padding: 2.4px;

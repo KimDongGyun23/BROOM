@@ -1,14 +1,13 @@
 import InfiniteScroll from 'react-infinite-scroller'
 import styled, { css } from 'styled-components'
 
-import { useChatMessages } from '@/features/chat/model/chatMessage.store'
+import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
+import type { Message } from '@/entities/chat/model/chat.type'
+import { useChatMessages } from '@/entities/chat/model/chatMessage.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { useScrollToBottom } from '@/shared/hook/useScrollToBottom'
 import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-
-import { useFetchChatRoomInformation } from '../api/useChat.query'
-import type { Message } from '../model/chat.type'
 
 const ChatMessage = ({ messageData }: { messageData: Message }) => {
   const myNickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
@@ -59,9 +58,11 @@ export const ChatMessageList = () => {
 }
 
 const Container = styled.main`
-  ${({ theme }) => theme.flexBox('column-reverse', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding('lg', 0)};
+  ${({ theme }) => `
+    ${theme.flexBox('column-reverse', undefined, undefined, 'lg')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding('lg', 0)}
+  `}
   flex-grow: 1;
   overflow-y: scroll;
 `

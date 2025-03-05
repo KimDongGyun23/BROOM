@@ -1,27 +1,23 @@
 import styled from 'styled-components'
 
-import type { ChatSidebarInformationResponse } from '@/features/chat/model/chat.type'
-import { useSidebarActions } from '@/features/chat/model/sidebar.store'
+import { ChatParticipantList } from '@/features/chat-sidebar/ui/ChatParticipantList'
+import { ChatRoomExitButton } from '@/features/exit-chat/ui/ChatRoomExitButton'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
 
-import { ChatParticipantList } from './ChatParticipantList'
-import { ChatRoomExitButton } from './ChatRoomExitButton'
+import { useIsSidebarOpen, useSidebarActions, useSidebarInformation } from '../model/sidebar.store'
 
-type ChatSidebarProps = {
-  sidebarInformation: ChatSidebarInformationResponse | undefined
-  isOpen: boolean
-  onClose: VoidFunction
-}
+export const ChatSidebar = () => {
+  const isSidebarOpen = useIsSidebarOpen()
+  const sidebarInformation = useSidebarInformation()
 
-export const ChatSidebar = ({ sidebarInformation, isOpen, onClose }: ChatSidebarProps) => {
   const { closeSidebar } = useSidebarActions()
 
-  if (!isOpen || !sidebarInformation) return null
+  if (!isSidebarOpen || !sidebarInformation) return null
 
   const participants = [sidebarInformation.author, ...sidebarInformation.participants]
 
   return (
-    <ModalLayout id="chat-sidebar" isOpen={isOpen} onClose={onClose}>
+    <ModalLayout id="chat-sidebar" isOpen={isSidebarOpen} onClose={closeSidebar}>
       <ModalContent>
         <Header>
           <h5 className="title">{sidebarInformation.boardTitle}</h5>
@@ -53,10 +49,12 @@ const ModalContent = styled.div`
 `
 
 const Header = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xs')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding(0, 0, '2xl')};
-  ${({ theme }) => theme.border('divider', 'bottom')};
+  ${({ theme }) => `
+    ${theme.flexBox('column', undefined, undefined, 'xs')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding(0, 0, '2xl')}
+    ${theme.border('divider', 'bottom')}
+  `}
 
   .title {
     ${({ theme }) => theme.font(400, theme.colors.black[100])};
@@ -68,9 +66,11 @@ const Header = styled.div`
 `
 
 const ParticipantSection = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
-  ${({ theme }) => theme.margin(0, 'container')};
-  ${({ theme }) => theme.padding('md', 0, 0)};
+  ${({ theme }) => `
+    ${theme.flexBox('column', undefined, undefined, 'lg')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding('md', 0, 0)}
+  `}
   flex-grow: 1;
   overflow: hidden;
 
@@ -80,13 +80,17 @@ const ParticipantSection = styled.div`
 `
 
 const SidebarFooter = styled.div`
-  ${({ theme }) => theme.gridBox('1fr 1fr', undefined, 'center')};
-  ${({ theme }) => theme.font(800, theme.colors.black[100])};
+  ${({ theme }) => `
+    ${theme.gridBox('1fr 1fr', undefined, 'center')}
+    ${theme.font(800, theme.colors.black[100])}
+  `}
   background-color: ${({ theme }) => theme.colors.black[500]};
 `
 
 const CloseButton = styled.button`
-  ${({ theme }) => theme.padding('md', 'lg')};
-  ${({ theme }) => theme.font(800, theme.colors.black[100])};
-  ${({ theme }) => theme.border('divider', 'left')};
+  ${({ theme }) => `
+    ${theme.padding('md', 'lg')};
+    ${theme.font(800, theme.colors.black[100])}
+    ${theme.border('divider', 'left')}
+  `}
 `

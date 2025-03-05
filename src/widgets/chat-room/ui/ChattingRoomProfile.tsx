@@ -4,7 +4,7 @@ import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/entities/ch
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 
-import { ChatProfileImageBox } from './ChatProfileImageBox'
+import { ChatProfileImageBox } from '../../../entities/chat/ui/ChatProfileImageBox'
 
 type ChattingRoomProfileProps = {
   profileIconList: MilitaryBranchCode[]

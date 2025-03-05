@@ -1,12 +1,12 @@
 import { styled } from 'styled-components'
 
-import type { User } from '@/features/chat/model/chat.type'
+import type { User } from '@/entities/chat/model/chat.type'
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
-import { getSessionStorageItem } from '@/shared/lib/storage'
+import { useUserData } from '@/shared/model/auth.store'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
-import { ChatExpelButton } from './ChatExpelButton'
+import { ChatExpelButton } from '../../expel-user/ui/ChatExpelButton'
 
 type ChatParticipantListProps = {
   participantList: User[]
@@ -38,8 +38,8 @@ const ChatParticipantItem = ({
 }
 
 export const ChatParticipantList = ({ participantList }: ChatParticipantListProps) => {
-  const myNickname = getSessionStorageItem('nickname')
-  const isChatRoomMine = myNickname === participantList[0].userNickname
+  const user = useUserData()
+  const isChatRoomMine = user?.nickname === participantList[0].userNickname
 
   return (
     <Container>

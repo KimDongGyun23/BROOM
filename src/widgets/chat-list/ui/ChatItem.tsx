@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 import type { ChatRoom } from '@/entities/chat/model/chat.type'
+import { ChatProfileImageBox } from '@/entities/chat/ui/ChatProfileImageBox'
 import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/entities/chat/ui/ChatStyle'
-import { ChatProfileImageBox } from '@/features/chat/ui/ChatProfileImageBox'
 
 export const ChatItem = ({
   boardName,

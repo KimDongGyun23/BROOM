@@ -1,30 +1,21 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useWebSocket } from '@/features/chat/hook/useWebsocket'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
+
+import { useSendMessage } from '../hook/useSendMessage'
 
 export const MessageInput = () => {
   const formMethod = useForm<{ message: string }>({ defaultValues: { message: '' } })
-  const { register, handleSubmit, reset } = formMethod
-  const { client, sendMessage } = useWebSocket()
 
-  const handleSendMessage = ({ message }: { message: string }) => {
-    console.log('message 보내기. connected: ', client.current?.connected)
-    if (message.length !== 0) {
-      if (client.current && client.current.connected) {
-        sendMessage(message)
-        reset()
-      } else {
-        console.log('WebSocket is not connected')
-      }
-    }
-  }
+  const { onSubmit } = useSendMessage()
+
+  const { register } = formMethod
 
   return (
     <FormProvider {...formMethod}>
       <Container>
-        <MessageBoxForm onSubmit={handleSubmit(handleSendMessage)}>
+        <MessageBoxForm onSubmit={onSubmit}>
           <Input
             type="text"
             size={8}
@@ -46,9 +37,11 @@ const Container = styled.div`
 `
 
 const MessageBoxForm = styled.form`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
-  ${({ theme }) => theme.borderRadius('xl')};
-  ${({ theme }) => theme.padding('messageInput')};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'xs')}
+    ${theme.borderRadius('xl')}
+    ${theme.padding('messageInput')}
+  `}
   flex-grow: 1;
   max-height: 40px;
   background-color: ${({ theme }) => theme.colors.black[100]};
