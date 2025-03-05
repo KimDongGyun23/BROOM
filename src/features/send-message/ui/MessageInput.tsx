@@ -34,7 +34,10 @@ export const MessageInput = () => {
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.padding('sm', 'lg', '4xl')};
+  ${({ theme }) => `
+    ${theme.padding('sm', 'lg', 'xl')}
+    ${theme.boxShadow('md')}
+  `}
 `
 
 const MessageBoxForm = styled.form`
