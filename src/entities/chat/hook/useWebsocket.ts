@@ -30,7 +30,7 @@ export const useWebSocket = () => {
       onConnect: () => {
         console.log('WebSocket 연결 성공')
         client.current?.subscribe(
-          `/exchange/broom.chat.exchange/broom.chat.room.${roomId}`,
+          `/topic/broom.chat.room.${roomId}`,
           (message) => {
             const parsedMessage = JSON.parse(message.body)
             console.log(parsedMessage)
