@@ -1,45 +1,35 @@
 import { FormProvider, useForm } from 'react-hook-form'
+import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { TrainingScheduleInput } from '@/features/admin/ui/TrainingScheduleInput'
-import { TrainingScheduleList } from '@/features/admin/ui/TrainingScheduleList'
-import { useTrainingScheduleList } from '@/shared/model/trainingSchedule.store'
+import type { TrainingSchedule } from '@/entities/admin/model/admin.type'
+import { CreateTrainingScheduleButton } from '@/features/create-training-schedule/ui/CreateTrainingScheduleButton'
+import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-
-type DateFormType = {
-  dateInput: string
-}
+import { TrainingScheduleList } from '@/widgets/training-schedule-list/ui/TrainingScheduleList'
 
 export const AdminTrainingSchedule = () => {
-  const selectedDates = useTrainingScheduleList()
-
-  const formMethods = useForm<DateFormType>()
-  const { handleSubmit } = formMethods
-
-  const handleSubmitDates = () => {
-    if (selectedDates.size === 0) {
-      // 날짜 선택 에러? 모달? 중 하나
-      return
-    }
-
-    const submissionData = [...selectedDates]
-    console.log('제출된 날짜:', submissionData)
-
-    // 폼 제출
-  }
+  const formMethods = useForm<TrainingSchedule>()
 
   return (
     <Container>
-      <SubHeaderWithoutIcon
-        type="complete"
-        title="예비군 날짜 선택"
-        onClickComplete={handleSubmit(handleSubmitDates)}
-      />
+      <SubHeaderWithoutIcon type="null" title="예비군 날짜 선택" />
       <FormProvider {...formMethods}>
-        <TrainingScheduleInput />
+        <InputContainer>
+          <InputGroup section="trainingDate">
+            <InputGroup.DateInput />
+          </InputGroup>
+
+          <CreateTrainingScheduleButton />
+        </InputContainer>
       </FormProvider>
 
       <TrainingScheduleList />
     </Container>
   )
 }
+
+const InputContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between', 'md')};
+  ${({ theme }) => theme.margin('container')};
+`

@@ -1,14 +1,16 @@
 import { styled } from 'styled-components'
 
+import { useTrainingScheduleActions } from '@/features/create-training-schedule/model/trainingSchedule.store'
 import { formatDate } from '@/shared/lib/formatDate'
-import { useTrainingScheduleActions } from '@/shared/model/trainingSchedule.store'
 
 export const TrainingScheduleList = () => {
   const { removeTrainingDate, sortedDates } = useTrainingScheduleActions()
 
+  const scheduleList = sortedDates()
+
   return (
     <Container>
-      {sortedDates().map((date) => (
+      {scheduleList.map((date) => (
         <DateListContainer key={date}>
           <span>{formatDate(date, 'dotFullDate')}</span>
           <button
