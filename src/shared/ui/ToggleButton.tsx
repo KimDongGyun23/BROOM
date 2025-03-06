@@ -4,10 +4,16 @@ import { useToggle } from '@/shared/hook/useToggle'
 
 type ToggleButtonProps = {
   initialToggleState?: boolean
+  onClick: VoidFunction
 }
 
-export const ToggleButton = ({ initialToggleState = false }: ToggleButtonProps) => {
-  const [isToggled, handleToggle] = useToggle(initialToggleState)
+export const ToggleButton = ({ initialToggleState = false, onClick }: ToggleButtonProps) => {
+  const [isToggled, toggleFunction] = useToggle(initialToggleState)
+
+  const handleToggle = () => {
+    onClick()
+    toggleFunction()
+  }
 
   return (
     <Container type="button" $isToggle={isToggled} onClick={handleToggle}>
@@ -33,7 +39,7 @@ const Circle = styled.div<{ $isToggle: boolean }>`
   width: 16px;
   height: 16px;
   transform: ${({ $isToggle }) =>
-    `translateY(-50%) ${$isToggle ? 'translateX(0)' : 'translateX(100%)'}`};
+    `translateY(-50%) ${$isToggle ? 'translateX(100%)' : 'translateX(0)'}`};
 
   background-color: white;
   transition: transform 0.2s ease;

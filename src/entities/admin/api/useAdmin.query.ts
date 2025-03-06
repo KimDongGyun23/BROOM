@@ -9,6 +9,7 @@ import type {
 
 const ENDPOINTS = {
   fetchDateTag: `/date-tag`,
+  fetchBusApplicantToggleState: `/admin/bus/activate`,
   fetchBusApplicantList: `/admin/bus/reservation`,
   fetchBusTotalApplicantCont: `/admin/bus/reservation/count`,
 } as const
@@ -16,6 +17,7 @@ const ENDPOINTS = {
 export const queryKeys = {
   all: ['admin'] as const,
   dateTag: () => [...queryKeys.all, 'date-filter'] as const,
+  busApplicantToggleState: () => [...queryKeys.all, 'bus-applicant-toggle-state'] as const,
   busApplicantList: () => [...queryKeys.all, 'bus-applicant-list'] as const,
   busTotalApplicantCount: () => [...queryKeys.all, 'bus-applicant-count'] as const,
 }
@@ -26,6 +28,12 @@ export const useFetchDateFilter = () => {
     queryFn: () => instance.get<TrainingScheduleListResponse>(ENDPOINTS.fetchDateTag),
   })
 }
+
+export const useFetchBusApplicantToggleState = () =>
+  useQuery({
+    queryKey: queryKeys.busApplicantToggleState(),
+    queryFn: () => instance.get<boolean>(ENDPOINTS.fetchBusApplicantToggleState),
+  })
 
 export const useFetchBusApplicantList = () =>
   useQuery({

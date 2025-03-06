@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { LogoutModal } from '@/features/logout/ui/LogoutModal'
+import { ToggleBusApplication } from '@/features/toggle-bus-application/ui/ToggleBusApplication'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
+import { Loading } from '@/shared/ui/Loading'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { ToggleButton } from '@/shared/ui/ToggleButton'
+
+import { ErrorPage } from '../home/ErrorPage'
 
 type NavigationLink = {
   label: string
@@ -23,14 +27,16 @@ const NavigationLink = ({ label, to }: NavigationLink) => {
 }
 
 export const Admin = () => {
+  const { data: toggleState, isPending, isError } = useFetchBusApplicantToggleState()
+
+  if (isPending) return <Loading />
+  if (isError) return <ErrorPage />
+
   return (
     <ModalStoreProvider>
       <MainHeader />
       <PageContent>
-        <ToggleSection>
-          <p className="section-label">버스 신청 활성화</p>
-          <ToggleButton />
-        </ToggleSection>
+        <ToggleBusApplication initialToggleState={toggleState} />
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />
@@ -47,14 +53,6 @@ export const Admin = () => {
 const PageContent = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container')};
-`
-
-const ToggleSection = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
-
-  .section-label {
-    ${({ theme }) => theme.font(700, theme.colors.black[600])};
-  }
 `
 
 const StyledLink = styled(Link)`
