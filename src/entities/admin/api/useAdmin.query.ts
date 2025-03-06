@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { instance } from '../../../app/api'
 import type {
   BusApplicantListResponse,
+  BusApplicationToggleResponse,
   BusTotalApplicantCountResponse,
   TrainingScheduleListResponse,
 } from '../model/admin.type'
@@ -32,7 +33,8 @@ export const useFetchDateFilter = () => {
 export const useFetchBusApplicantToggleState = () =>
   useQuery({
     queryKey: queryKeys.busApplicantToggleState(),
-    queryFn: () => instance.get<boolean>(ENDPOINTS.fetchBusApplicantToggleState),
+    queryFn: () =>
+      instance.get<BusApplicationToggleResponse>(ENDPOINTS.fetchBusApplicantToggleState),
   })
 
 export const useFetchBusApplicantList = () =>

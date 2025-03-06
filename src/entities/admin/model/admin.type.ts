@@ -30,3 +30,7 @@ export type BusApplicantListResponse = {
 export type BusTotalApplicantCountResponse = {
   reservationCount: number
 }
+
+export type BusApplicationToggleResponse = {
+  activated: boolean
+}

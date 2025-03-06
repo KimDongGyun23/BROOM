@@ -5,7 +5,6 @@ import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.q
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { LogoutModal } from '@/features/logout/ui/LogoutModal'
 import { ToggleBusApplication } from '@/features/toggle-bus-application/ui/ToggleBusApplication'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { Loading } from '@/shared/ui/Loading'
 import { MainHeader } from '@/shared/ui/MainHeader'
@@ -33,10 +32,10 @@ export const Admin = () => {
   if (isError) return <ErrorPage />
 
   return (
-    <ModalStoreProvider>
+    <>
       <MainHeader />
       <PageContent>
-        <ToggleBusApplication initialToggleState={toggleState} />
+        <ToggleBusApplication initialToggleState={toggleState.activated} />
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />
@@ -46,7 +45,7 @@ export const Admin = () => {
         <LogoutButton />
       </ButtonContainer>
       <LogoutModal />
-    </ModalStoreProvider>
+    </>
   )
 }
 
