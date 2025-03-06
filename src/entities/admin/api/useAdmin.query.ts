@@ -10,6 +10,7 @@ import type {
 const ENDPOINTS = {
   fetchDateTag: `/date-tag`,
   fetchBusApplicantList: `/admin/bus/reservation`,
+  fetchBusTotalApplicantCont: `/admin/bus/reservation/count`,
 } as const
 
 export const queryKeys = {
@@ -35,5 +36,6 @@ export const useFetchBusApplicantList = () =>
 export const useFetchBusTotalApplicantCount = () =>
   useQuery({
     queryKey: queryKeys.busTotalApplicantCount(),
-    queryFn: () => instance.get<BusTotalApplicantCountResponse>(ENDPOINTS.fetchBusApplicantList),
+    queryFn: () =>
+      instance.get<BusTotalApplicantCountResponse>(ENDPOINTS.fetchBusTotalApplicantCont),
   })
