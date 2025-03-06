@@ -1,7 +1,10 @@
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
-import { useTrainingScheduleActions } from '@/entities/admin/model/trainingSchedule.store'
+import {
+  useTrainingScheduleActions,
+  useTrainingScheduleList,
+} from '@/entities/admin/model/trainingSchedule.store'
 import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
 import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedule/ui/DeleteTrainingScheduleButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
@@ -10,26 +13,26 @@ import { EmptyMessage } from '@/shared/ui/Error'
 import { Loading } from '@/shared/ui/Loading'
 
 export const TrainingScheduleList = () => {
-  const { data: scheduleList, isLoading, isError } = useFetchDateFilter()
+  const { data: fetchedScheduleList, isLoading, isError } = useFetchDateFilter()
 
+  const scheduleList = useTrainingScheduleList()
   const { sortedDates, initializeSchedules } = useTrainingScheduleActions()
 
   useEffect(() => {
-    if (scheduleList && scheduleList.dates.length) {
-      initializeSchedules(scheduleList.dates)
+    if (fetchedScheduleList && fetchedScheduleList.dates.length) {
+      initializeSchedules(fetchedScheduleList.dates)
+      sortedDates()
     }
-  }, [scheduleList, initializeSchedules])
+  }, [scheduleList, initializeSchedules, fetchedScheduleList, sortedDates])
 
   if (isLoading) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-  if (!scheduleList || !scheduleList.dates.length)
+  if (!fetchedScheduleList || !fetchedScheduleList.dates.length)
     return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />
-
-  const sortedSchedules = sortedDates()
 
   return (
     <Container>
-      {sortedSchedules.map((schedule) => (
+      {scheduleList.map((schedule) => (
         <DateListContainer key={schedule.trainingDate}>
           <span>{formatDate(schedule.trainingDate, 'dotFullDate')}</span>
           <DeleteTrainingScheduleButton schedule={schedule} />
