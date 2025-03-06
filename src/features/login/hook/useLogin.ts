@@ -12,7 +12,7 @@ export const useLogin = () => {
   const navigate = useNavigate()
 
   const { mutate: loginMutation } = useLoginMutation()
-  const { login } = useAuthActions()
+  const { login, logout } = useAuthActions()
 
   const { openOneButtonModal } = useModalActions()
 
@@ -25,7 +25,12 @@ export const useLogin = () => {
         onSuccess: (response) => {
           instance.setAccessToken(response.headers['authorization'])
           login(response.data)
-          navigate('/home', { replace: true })
+          if (response.data.role === 'ROLE_MEMBER') navigate('/home', { replace: true })
+          else if (response.data.role === 'ROLE_ADMIN') navigate('/kw/broom', { replace: true })
+          else {
+            logout()
+            navigate('/404', { replace: true })
+          }
         },
         onError: (error) => openOneButtonModal(error.message),
       },

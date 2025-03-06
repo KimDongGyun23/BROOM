@@ -27,4 +27,6 @@ export type ValidateNicknameRequest = {
   body: Pick<User, 'nickname'>
 }
 
-export type LoginResponse = Pick<User, 'nickname' | 'militaryBranch'>
+export type LoginResponse = Pick<User, 'nickname' | 'militaryBranch'> & {
+  role: 'ROLE_ADMIN' | 'ROLE_MEMBER'
+}
