@@ -53,6 +53,3 @@ const DateListContainer = styled.div`
     flex-grow: 1;
   }
 `
-function initializeSchedules(dates: { id: number; trainingDate: string }[]) {
-  throw new Error('Function not implemented.')
-}
