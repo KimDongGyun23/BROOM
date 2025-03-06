@@ -13,6 +13,8 @@ const Tag = ({ date }: TagProps) => {
   const selectedDate = useDateTag()
   const { setDateTag } = useDateTagActions()
 
+  console.log(selectedDate)
+
   const isSelected = selectedDate === date
 
   const handleClick = () => {
