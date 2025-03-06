@@ -1,38 +1,24 @@
-import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
-import {
-  useTrainingScheduleActions,
-  useTrainingScheduleList,
-} from '@/entities/admin/model/trainingSchedule.store'
-import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
 import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedule/ui/DeleteTrainingScheduleButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { Loading } from '@/shared/ui/Loading'
 
+import { useTrainingSchedule } from '../hook/useTrainingSchedule'
+
 export const TrainingScheduleList = () => {
-  const { data: fetchedScheduleList, isLoading, isError } = useFetchDateFilter()
+  const { sortedScheduleList, isPending, isError, fetchedScheduleList } = useTrainingSchedule()
 
-  const scheduleList = useTrainingScheduleList()
-  const { sortedDates, initializeSchedules } = useTrainingScheduleActions()
-
-  useEffect(() => {
-    if (fetchedScheduleList && fetchedScheduleList.dates.length) {
-      initializeSchedules(fetchedScheduleList.dates)
-      sortedDates()
-    }
-  }, [scheduleList, initializeSchedules, fetchedScheduleList, sortedDates])
-
-  if (isLoading) return <Loading />
+  if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!fetchedScheduleList || !fetchedScheduleList.dates.length)
     return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />
 
   return (
     <Container>
-      {scheduleList.map((schedule) => (
+      {sortedScheduleList.map((schedule) => (
         <DateListContainer key={schedule.trainingDate}>
           <span>{formatDate(schedule.trainingDate, 'dotFullDate')}</span>
           <DeleteTrainingScheduleButton schedule={schedule} />
