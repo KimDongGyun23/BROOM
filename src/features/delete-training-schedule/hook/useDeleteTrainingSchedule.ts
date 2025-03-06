@@ -1,5 +1,3 @@
-import { useFormContext } from 'react-hook-form'
-
 import type { TrainingSchedule } from '@/entities/admin/model/admin.type'
 import { useModalActions } from '@/shared/model/modal.store'
 
@@ -10,13 +8,10 @@ export const useDeleteTrainingSchedule = () => {
 
   const { openOneButtonModal } = useModalActions()
 
-  const { resetField } = useFormContext()
-
   const handleDeleteTrainingSchedule = (id: TrainingSchedule['id']) => {
     deleteTrainingSchedule(
       { urls: { id } },
       {
-        onSuccess: () => resetField('trainingDate'),
         onError: (error) => openOneButtonModal(error.message),
       },
     )
