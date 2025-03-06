@@ -4,7 +4,6 @@ import { formatDate } from '@/shared/lib/formatDate'
 import { useModalActions } from '@/shared/model/modal.store'
 
 import { useCreateTrainingScheduleMutation } from '../api/useCreateTrainingSchedule.mutation'
-import { useTrainingScheduleActions } from '../model/trainingSchedule.store'
 
 export const useCreateTrainingSchedule = () => {
   const { mutate: createTrainingSchedule } = useCreateTrainingScheduleMutation()
@@ -12,7 +11,6 @@ export const useCreateTrainingSchedule = () => {
   const { openOneButtonModal } = useModalActions()
 
   const { getValues, resetField } = useFormContext()
-  const { addTrainingDate } = useTrainingScheduleActions()
 
   const handleCreateTrainingSchedule = () => {
     const inputDate = getValues('trainingDate')
@@ -20,10 +18,7 @@ export const useCreateTrainingSchedule = () => {
     createTrainingSchedule(
       { body: { trainingDate: formatDate(inputDate, 'default') } },
       {
-        onSuccess: () => {
-          addTrainingDate(inputDate)
-          resetField('trainingDate')
-        },
+        onSuccess: () => resetField('trainingDate'),
         onError: (error) => openOneButtonModal(error.message),
       },
     )

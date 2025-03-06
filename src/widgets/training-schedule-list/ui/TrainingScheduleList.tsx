@@ -1,25 +1,26 @@
 import { styled } from 'styled-components'
 
-import { useTrainingScheduleActions } from '@/features/create-training-schedule/model/trainingSchedule.store'
+import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
+import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedule/ui/DeleteTrainingScheduleButton'
+import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
+import { EmptyMessage } from '@/shared/ui/Error'
+import { Loading } from '@/shared/ui/Loading'
 
 export const TrainingScheduleList = () => {
-  const { removeTrainingDate, sortedDates } = useTrainingScheduleActions()
+  const { data: scheduleList, isLoading, isError } = useFetchDateFilter()
 
-  const scheduleList = sortedDates()
+  if (isLoading) return <Loading />
+  if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+  if (!scheduleList || !scheduleList.dates.length)
+    return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />
 
   return (
     <Container>
-      {scheduleList.map((date) => (
-        <DateListContainer key={date}>
-          <span>{formatDate(date, 'dotFullDate')}</span>
-          <button
-            type="button"
-            className="date-remove-button"
-            onClick={() => removeTrainingDate(date)}
-          >
-            삭제
-          </button>
+      {scheduleList.dates.map((schedule) => (
+        <DateListContainer key={schedule.trainingDate}>
+          <span>{formatDate(schedule.trainingDate, 'dotFullDate')}</span>
+          <DeleteTrainingScheduleButton schedule={schedule} />
         </DateListContainer>
       ))}
     </Container>
@@ -34,12 +35,6 @@ const Container = styled.div`
 
 const DateListContainer = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', 'space-between', 'md')};
-
-  .date-remove-button {
-    ${({ theme }) => theme.font(800, theme.colors.error)};
-    color: ${({ theme }) => theme.colors.error};
-    flex-shrink: 0;
-  }
 
   span {
     ${({ theme }) => theme.font(700, theme.colors.black[600])};
