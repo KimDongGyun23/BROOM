@@ -1,21 +1,22 @@
 import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { AdminBusTable } from '@/widgets/admin/ui/AdminBusTable'
+import { BusApplicantTable } from '@/widgets/bus-table/ui/BusApplicantTable'
+import { TotalApplicantCount } from '@/widgets/bus-table/ui/TotalApplicantCount'
 
 export const AdminBus = () => {
   return (
-    <ModalStoreProvider>
+    <>
       <Container>
         <SubHeaderWithoutIcon type="null" title="버스 신청 현황" />
 
         <MainContent>
-          <AdminBusTable />
+          <TotalApplicantCount />
+          <BusApplicantTable />
         </MainContent>
       </Container>
-    </ModalStoreProvider>
+    </>
   )
 }
 

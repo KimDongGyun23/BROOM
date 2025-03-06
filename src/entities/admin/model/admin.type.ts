@@ -15,3 +15,18 @@ export type CreateTrainingScheduleResponse = TrainingSchedule
 export type DeleteTrainingScheduleRequest = {
   urls: Pick<TrainingSchedule, 'id'>
 }
+
+export type BusApplicant = {
+  reservationId: number
+  name: string
+  studentId: string
+  phoneNumber: string
+}
+
+export type BusApplicantListResponse = {
+  result: BusApplicant[]
+}
+
+export type BusTotalApplicantCountResponse = {
+  reservationCount: number
+}
