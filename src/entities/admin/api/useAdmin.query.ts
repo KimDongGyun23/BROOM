@@ -34,6 +34,6 @@ export const useFetchBusApplicantList = () =>
 
 export const useFetchBusTotalApplicantCount = () =>
   useQuery({
-    queryKey: queryKeys.busApplicantList(),
+    queryKey: queryKeys.busTotalApplicantCount(),
     queryFn: () => instance.get<BusTotalApplicantCountResponse>(ENDPOINTS.fetchBusApplicantList),
   })
