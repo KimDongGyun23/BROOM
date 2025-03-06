@@ -21,7 +21,7 @@ const Tag = ({ date }: TagProps) => {
 
   return (
     <TagButton onClick={handleClick} $isSelected={isSelected}>
-      {date}
+      {formatDate(date, 'dotDate')}
     </TagButton>
   )
 }
@@ -34,7 +34,7 @@ export const PostDateFilter = () => {
   return (
     <Container>
       {data.dates.map(({ id, trainingDate }) => (
-        <Tag key={id} date={formatDate(trainingDate, 'dotDate')} />
+        <Tag key={id} date={trainingDate} />
       ))}
     </Container>
   )
