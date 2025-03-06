@@ -22,9 +22,7 @@ export const DateTagStoreProvider = ({ children }: PropsWithChildren) => {
       dateTag: null,
       actions: {
         setDateTag: (date) => {
-          const formattedDate = date
-            ? formatDate(`${new Date().getFullYear()}.${date}`, 'default')
-            : null
+          const formattedDate = date ? formatDate(date, 'default') : null
           set({ dateTag: formattedDate })
         },
       },
