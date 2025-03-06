@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 
+import { useTrainingScheduleActions } from '@/entities/admin/model/trainingSchedule.store'
 import { formatDate } from '@/shared/lib/formatDate'
 import { useModalActions } from '@/shared/model/modal.store'
 
@@ -10,6 +11,8 @@ export const useCreateTrainingSchedule = () => {
 
   const { openOneButtonModal } = useModalActions()
 
+  const { addTrainingDate } = useTrainingScheduleActions()
+
   const { getValues, resetField } = useFormContext()
 
   const handleCreateTrainingSchedule = () => {
@@ -18,7 +21,10 @@ export const useCreateTrainingSchedule = () => {
     createTrainingSchedule(
       { body: { trainingDate: formatDate(inputDate, 'default') } },
       {
-        onSuccess: () => resetField('trainingDate'),
+        onSuccess: (response) => {
+          resetField('trainingDate')
+          addTrainingDate(response)
+        },
         onError: (error) => openOneButtonModal(error.message),
       },
     )

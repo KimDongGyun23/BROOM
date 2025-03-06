@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
+import { useTrainingScheduleActions } from '@/entities/admin/model/trainingSchedule.store'
 import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
 import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedule/ui/DeleteTrainingScheduleButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
@@ -10,14 +12,24 @@ import { Loading } from '@/shared/ui/Loading'
 export const TrainingScheduleList = () => {
   const { data: scheduleList, isLoading, isError } = useFetchDateFilter()
 
+  const { sortedDates, initializeSchedules } = useTrainingScheduleActions()
+
+  useEffect(() => {
+    if (scheduleList && scheduleList.dates.length) {
+      initializeSchedules(scheduleList.dates)
+    }
+  }, [scheduleList, initializeSchedules])
+
   if (isLoading) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!scheduleList || !scheduleList.dates.length)
     return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />
 
+  const sortedSchedules = sortedDates()
+
   return (
     <Container>
-      {scheduleList.dates.map((schedule) => (
+      {sortedSchedules.map((schedule) => (
         <DateListContainer key={schedule.trainingDate}>
           <span>{formatDate(schedule.trainingDate, 'dotFullDate')}</span>
           <DeleteTrainingScheduleButton schedule={schedule} />
@@ -41,3 +53,6 @@ const DateListContainer = styled.div`
     flex-grow: 1;
   }
 `
+function initializeSchedules(dates: { id: number; trainingDate: string }[]) {
+  throw new Error('Function not implemented.')
+}
