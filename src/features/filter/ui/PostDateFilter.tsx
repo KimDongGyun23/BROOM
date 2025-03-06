@@ -13,12 +13,9 @@ const Tag = ({ date }: TagProps) => {
   const selectedDate = useDateTag()
   const { setDateTag } = useDateTagActions()
 
-  console.log(selectedDate, date)
-
   const isSelected = selectedDate === date
 
   const handleClick = () => {
-    console.log('clicked')
     setDateTag(isSelected ? null : date)
   }
 
@@ -37,7 +34,7 @@ export const PostDateFilter = () => {
   return (
     <Container>
       {data.dates.map(({ id, trainingDate }) => (
-        <Tag key={id} date={trainingDate} />
+        <Tag key={id} date={formatDate(trainingDate, 'default')} />
       ))}
     </Container>
   )
