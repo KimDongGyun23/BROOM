@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
+import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { LogoutModal } from '@/features/logout/ui/LogoutModal'
+import { ToggleBusApplication } from '@/features/toggle-bus-application/ui/ToggleBusApplication'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { Loading } from '@/shared/ui/Loading'
 import { MainHeader } from '@/shared/ui/MainHeader'
@@ -24,7 +26,7 @@ const NavigationLink = ({ label, to }: NavigationLink) => {
 }
 
 export const Admin = () => {
-  const { isPending, isError } = useFetchBusApplicantToggleState()
+  const { data: toggleState, isPending, isError } = useFetchBusApplicantToggleState()
 
   if (isPending) return <Loading />
   if (isError) return <ErrorPage />
@@ -33,13 +35,15 @@ export const Admin = () => {
     <>
       <MainHeader />
       <PageContent>
-        {/* <ToggleBusApplication initialToggleState={toggleState.activated} /> */}
+        <ToggleBusApplication initialToggleState={toggleState.activated} />
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />
       </PageContent>
 
-      <ButtonContainer>{/* <LogoutButton /> */}</ButtonContainer>
+      <ButtonContainer>
+        <LogoutButton />
+      </ButtonContainer>
       <LogoutModal />
     </>
   )

@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
 import { ModalStoreProvider } from '@/shared/model/modal.store'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { ToggleButton } from '@/shared/ui/ToggleButton'
 
 import { useToggleBusApplication } from '../hook/useToggleBusApplication'
@@ -16,6 +17,7 @@ const ToggleWithModal = ({ initialToggleState }: ToggleBusApplicationProps) => {
     <Container>
       <Label>버스 신청 활성화</Label>
       <ToggleButton initialToggleState={initialToggleState} onClick={handleToggleBusApplication} />
+      <ModalWithOneButton />
     </Container>
   )
 }

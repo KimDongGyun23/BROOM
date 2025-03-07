@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 
-import { instance } from '@/app/api'
+import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { SignupCompletePage } from '@/pages/auth/SignupCompletePage'
 import { SignupPage } from '@/pages/auth/SignupPage'
@@ -31,21 +31,21 @@ import { AdminOverview } from '../../pages/admin/AdminOverview'
 import { AdminTrainingSchedule } from '../../pages/admin/AdminTrainingSchedule'
 
 const LoginPrivateRoute = () => {
-  const session = instance.hasToken()
-  return session ? <Navigate to="/home" /> : <Outlet />
+  const isLoggedIn = useIsLoggedIn()
+  return isLoggedIn ? <Navigate to="/home" /> : <Outlet />
 }
 
 const PrivateRoute = () => {
   const navigate = useNavigate()
-  const session = instance.hasToken()
+  const isLoggedIn = useIsLoggedIn()
 
   useEffect(() => {
-    if (!session) {
+    if (!isLoggedIn) {
       navigate('/login', { replace: true })
     }
-  }, [session, navigate])
+  }, [isLoggedIn, navigate])
 
-  return session ? <Outlet /> : null
+  return isLoggedIn ? <Outlet /> : null
 }
 
 export const RouterComponent = () => {

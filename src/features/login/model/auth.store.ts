@@ -4,7 +4,7 @@ import type { LoginResponse } from '@/entities/auth/model/auth.type'
 
 type Actions = {
   login: (user: LoginResponse) => void
-  logout: () => void
+  logout: VoidFunction
 }
 
 type AuthStore = {
@@ -13,12 +13,16 @@ type AuthStore = {
   actions: Actions
 }
 
-export const useAuthStore = create<AuthStore>((set) => ({
+const initialStates = {
   isLoggedIn: false,
   user: null,
+}
+
+export const useAuthStore = create<AuthStore>((set) => ({
+  ...initialStates,
   actions: {
     login: (user) => set({ isLoggedIn: true, user }),
-    logout: () => set({ isLoggedIn: false, user: null }),
+    logout: () => set({ ...initialStates }),
   },
 }))
 
