@@ -8,11 +8,11 @@ type ToggleButtonProps = {
 }
 
 export const ToggleButton = ({ initialToggleState = false, onClick }: ToggleButtonProps) => {
-  const [isToggled, _] = useToggle(initialToggleState)
+  const [isToggled, toggleFunction] = useToggle(initialToggleState)
 
   const handleToggle = () => {
     onClick()
-    // toggleFunction()
+    toggleFunction()
   }
 
   return (

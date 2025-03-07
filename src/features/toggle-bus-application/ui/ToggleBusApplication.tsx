@@ -16,7 +16,10 @@ const ToggleWithModal = ({ initialToggleState }: ToggleBusApplicationProps) => {
   return (
     <Container>
       <Label>버스 신청 활성화</Label>
-      <ToggleButton initialToggleState={initialToggleState} onClick={handleToggleBusApplication} />
+      <ToggleButton
+        initialToggleState={initialToggleState}
+        onClick={() => handleToggleBusApplication()}
+      />
       <ModalWithOneButton />
     </Container>
   )
