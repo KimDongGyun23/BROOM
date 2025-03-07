@@ -14,7 +14,7 @@ export const BusApplicantCountSection = () => {
       setCount(totalApplicantCount.reservationCount)
   }, [totalApplicantCount])
 
-  if (isError) return setCount('조회 불가')
+  if (isError) setCount('조회 불가')
 
   return (
     <InformationContainer>

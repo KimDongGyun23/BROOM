@@ -13,7 +13,7 @@ export const TotalPostCountSection = () => {
     if (totalPostCount && totalPostCount.boardCount) setCount(totalPostCount.boardCount)
   }, [totalPostCount])
 
-  if (isError) return setCount('조회 불가')
+  if (isError) setCount('조회 불가')
 
   return (
     <InformationContainer>

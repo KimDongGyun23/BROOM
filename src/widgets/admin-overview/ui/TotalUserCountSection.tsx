@@ -13,7 +13,7 @@ export const TotalUserCountSection = () => {
     if (totalUserCount && totalUserCount.userCount) setCount(totalUserCount.userCount)
   }, [totalUserCount])
 
-  if (isError) return setCount('조회 불가')
+  if (isError) setCount('조회 불가')
 
   return (
     <InformationContainer>
