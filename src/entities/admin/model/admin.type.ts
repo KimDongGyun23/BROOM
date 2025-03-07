@@ -40,5 +40,5 @@ export type TotalPostCountResponse = {
 }
 
 export type TotalUserCountResponse = {
-  count: number
+  userCount: number
 }

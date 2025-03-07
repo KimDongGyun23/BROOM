@@ -1,16 +1,24 @@
+import { useEffect, useState } from 'react'
+
 import { useFetchTotalPostCount } from '@/entities/admin/api/useAdmin.query'
 
 import { Count, InformationContainer, Label } from './SectionStyle'
 
 export const TotalPostCountSection = () => {
-  const { data: totalPostCount, isPending } = useFetchTotalPostCount()
+  const [count, setCount] = useState<number | string>('')
 
-  if (isPending) return null
+  const { data: totalPostCount, isError } = useFetchTotalPostCount()
+
+  useEffect(() => {
+    if (totalPostCount && totalPostCount.boardCount) setCount(totalPostCount.boardCount)
+  }, [totalPostCount])
+
+  if (isError) return setCount('조회 불가')
 
   return (
     <InformationContainer>
       <Label>총 게시글 수</Label>
-      <Count>{totalPostCount?.boardCount || '조회 불가'}</Count>
+      <Count>{count}</Count>
     </InformationContainer>
   )
 }
