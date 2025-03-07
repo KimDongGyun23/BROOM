@@ -9,13 +9,17 @@ import { LogoutModal } from './LogoutModal'
 const ButtonWithModal = () => {
   const { handleLogout } = useLogout()
 
-  return <ActionButton onClick={handleLogout}>로그아웃</ActionButton>
+  return (
+    <>
+      <ActionButton onClick={handleLogout}>로그아웃</ActionButton>
+      <LogoutModal />
+    </>
+  )
 }
 
 export const LogoutButton = () => (
   <ModalStoreProvider>
     <ButtonWithModal />
-    <LogoutModal />
   </ModalStoreProvider>
 )
 
