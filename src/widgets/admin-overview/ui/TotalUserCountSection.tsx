@@ -10,7 +10,7 @@ export const TotalUserCountSection = () => {
   const { data: totalUserCount, isError } = useFetchTotalUserCount()
 
   useEffect(() => {
-    if (totalUserCount && totalUserCount.userCount) setCount(totalUserCount.userCount)
+    if (totalUserCount && totalUserCount.userCount !== undefined) setCount(totalUserCount.userCount)
   }, [totalUserCount])
 
   if (isError) setCount('조회 불가')

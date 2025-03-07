@@ -10,7 +10,8 @@ export const TotalPostCountSection = () => {
   const { data: totalPostCount, isError } = useFetchTotalPostCount()
 
   useEffect(() => {
-    if (totalPostCount && totalPostCount.boardCount) setCount(totalPostCount.boardCount)
+    if (totalPostCount && totalPostCount.boardCount !== undefined)
+      setCount(totalPostCount.boardCount)
   }, [totalPostCount])
 
   if (isError) setCount('조회 불가')

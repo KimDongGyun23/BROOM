@@ -10,7 +10,7 @@ export const BusApplicantCountSection = () => {
   const { data: totalApplicantCount, isError } = useFetchBusTotalApplicantCount()
 
   useEffect(() => {
-    if (totalApplicantCount && totalApplicantCount.reservationCount)
+    if (totalApplicantCount && totalApplicantCount.reservationCount !== undefined)
       setCount(totalApplicantCount.reservationCount)
   }, [totalApplicantCount])
 
