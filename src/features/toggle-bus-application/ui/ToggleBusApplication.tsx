@@ -7,27 +7,24 @@ import { ToggleButton } from '@/shared/ui/ToggleButton'
 import { useToggleBusApplication } from '../hook/useToggleBusApplication'
 
 type ToggleBusApplicationProps = {
-  initialToggleState: boolean
+  isToggled: boolean
 }
 
-const ToggleWithModal = ({ initialToggleState }: ToggleBusApplicationProps) => {
+const ToggleWithModal = ({ isToggled }: ToggleBusApplicationProps) => {
   const { handleToggleBusApplication } = useToggleBusApplication()
 
   return (
     <Container>
       <Label>버스 신청 활성화</Label>
-      <ToggleButton
-        initialToggleState={initialToggleState}
-        onClick={() => handleToggleBusApplication()}
-      />
+      <ToggleButton isToggled={isToggled} onClick={handleToggleBusApplication} />
       <ModalWithOneButton />
     </Container>
   )
 }
 
-export const ToggleBusApplication = ({ initialToggleState }: ToggleBusApplicationProps) => (
+export const ToggleBusApplication = ({ isToggled }: ToggleBusApplicationProps) => (
   <ModalStoreProvider>
-    <ToggleWithModal initialToggleState={initialToggleState} />
+    <ToggleWithModal isToggled={isToggled} />
   </ModalStoreProvider>
 )
 

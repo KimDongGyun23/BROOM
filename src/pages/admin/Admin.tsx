@@ -34,7 +34,7 @@ export const Admin = () => {
     <>
       <MainHeader />
       <PageContent>
-        <ToggleBusApplication initialToggleState={toggleState.activated} />
+        <ToggleBusApplication isToggled={toggleState.activated} />
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />

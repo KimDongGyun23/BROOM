@@ -1,22 +1,13 @@
 import { styled } from 'styled-components'
 
-import { useToggle } from '@/shared/hook/useToggle'
-
 type ToggleButtonProps = {
-  initialToggleState?: boolean
+  isToggled?: boolean
   onClick: VoidFunction
 }
 
-export const ToggleButton = ({ initialToggleState = false, onClick }: ToggleButtonProps) => {
-  const [isToggled, toggleFunction] = useToggle(initialToggleState)
-
-  const handleToggle = () => {
-    onClick()
-    toggleFunction()
-  }
-
+export const ToggleButton = ({ isToggled = false, onClick }: ToggleButtonProps) => {
   return (
-    <Container type="button" $isToggle={isToggled} onClick={handleToggle}>
+    <Container type="button" $isToggle={isToggled} onClick={onClick}>
       <Circle $isToggle={isToggled} />
     </Container>
   )
