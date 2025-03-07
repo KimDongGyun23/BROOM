@@ -8,7 +8,6 @@ import axios, {
 } from 'axios'
 
 import { reIssue } from '@/entities/auth/api/useAuth.mutation'
-import { clearSessionStorage } from '@/shared/lib/storage'
 
 export class HttpClient {
   private readonly client: AxiosInstance
@@ -84,7 +83,7 @@ export class HttpClient {
           }
         } catch (reIssueError) {
           console.error('토큰 재발급 실패', reIssueError)
-          clearSessionStorage()
+          // clearSessionStorage()
           window.location.href = '/login'
         }
       }
