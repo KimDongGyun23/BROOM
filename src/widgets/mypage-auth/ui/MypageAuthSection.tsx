@@ -3,16 +3,12 @@ import { styled } from 'styled-components'
 import { DeleteIdButton } from '@/features/delete-id/ui/DeleteIdButton'
 import { DeleteIdModal } from '@/features/delete-id/ui/DeleteIdModal'
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
-import { LogoutModal } from '@/features/logout/ui/LogoutModal'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 
 export const MypageAuthSection = () => {
   return (
     <ButtonContainer>
-      <ModalStoreProvider>
-        <LogoutButton />
-        <LogoutModal />
-      </ModalStoreProvider>
+      <LogoutButton />
 
       <span className="divider" />
 
