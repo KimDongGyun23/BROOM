@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 import { instance } from '@/app/api'
 import type { LoginCredentials } from '@/entities/auth/model/auth.type'
@@ -32,7 +33,13 @@ export const useLogin = () => {
             navigate('/404', { replace: true })
           }
         },
-        onError: (error) => openOneButtonModal(error.message),
+        onError: (error: Error) => {
+          if (axios.isAxiosError(error)) {
+            openOneButtonModal(error.response?.data || '알 수 없는 서버 오류가 발생했습니다.')
+          } else {
+            openOneButtonModal('알 수 없는 오류가 발생했습니다.')
+          }
+        },
       },
     )
   }
