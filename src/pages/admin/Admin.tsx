@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
-import { LogoutModal } from '@/features/logout/ui/LogoutModal'
 import { ToggleBusApplication } from '@/features/toggle-bus-application/ui/ToggleBusApplication'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { Loading } from '@/shared/ui/Loading'
@@ -44,7 +43,6 @@ export const Admin = () => {
       <ButtonContainer>
         <LogoutButton />
       </ButtonContainer>
-      <LogoutModal />
     </>
   )
 }

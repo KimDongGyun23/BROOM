@@ -1,10 +1,9 @@
 import { styled } from 'styled-components'
 
 import { ModalStoreProvider } from '@/shared/model/modal.store'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 import { useLogout } from '../hook/useLogout'
-
-import { LogoutModal } from './LogoutModal'
 
 const ButtonWithModal = () => {
   const { handleLogout } = useLogout()
@@ -12,7 +11,7 @@ const ButtonWithModal = () => {
   return (
     <>
       <ActionButton onClick={handleLogout}>로그아웃</ActionButton>
-      <LogoutModal />
+      <ModalWithOneButton />
     </>
   )
 }
