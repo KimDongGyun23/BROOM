@@ -34,3 +34,11 @@ export type BusTotalApplicantCountResponse = {
 export type BusApplicationToggleResponse = {
   activated: boolean
 }
+
+export type TotalPostCountResponse = {
+  count: number
+}
+
+export type TotalUserCountResponse = {
+  count: number
+}

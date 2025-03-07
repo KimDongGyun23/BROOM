@@ -5,6 +5,8 @@ import type {
   BusApplicantListResponse,
   BusApplicationToggleResponse,
   BusTotalApplicantCountResponse,
+  TotalPostCountResponse,
+  TotalUserCountResponse,
   TrainingScheduleListResponse,
 } from '../model/admin.type'
 
@@ -13,6 +15,8 @@ const ENDPOINTS = {
   fetchBusApplicantToggleState: `/admin/bus/activate`,
   fetchBusApplicantList: `/admin/bus/reservation`,
   fetchBusTotalApplicantCont: `/admin/bus/reservation/count`,
+  fetchTotalPostCont: `/admin/board-count`,
+  fetchTotalUserCont: `/admin/user-count`,
 } as const
 
 export const queryKeys = {
@@ -21,6 +25,8 @@ export const queryKeys = {
   busApplicantToggleState: () => [...queryKeys.all, 'bus-applicant-toggle-state'] as const,
   busApplicantList: () => [...queryKeys.all, 'bus-applicant-list'] as const,
   busTotalApplicantCount: () => [...queryKeys.all, 'bus-applicant-count'] as const,
+  totalPostCount: () => [...queryKeys.all, 'post-count'] as const,
+  totalUserCount: () => [...queryKeys.all, 'user-count'] as const,
 }
 
 export const useFetchDateFilter = () => {
@@ -48,4 +54,16 @@ export const useFetchBusTotalApplicantCount = () =>
     queryKey: queryKeys.busTotalApplicantCount(),
     queryFn: () =>
       instance.get<BusTotalApplicantCountResponse>(ENDPOINTS.fetchBusTotalApplicantCont),
+  })
+
+export const useFetchTotalPostCount = () =>
+  useQuery({
+    queryKey: queryKeys.totalPostCount(),
+    queryFn: () => instance.get<TotalPostCountResponse>(ENDPOINTS.fetchTotalPostCont),
+  })
+
+export const useFetchTotalUserCount = () =>
+  useQuery({
+    queryKey: queryKeys.totalUserCount(),
+    queryFn: () => instance.get<TotalUserCountResponse>(ENDPOINTS.fetchTotalPostCont),
   })
