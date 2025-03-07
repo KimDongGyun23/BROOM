@@ -33,6 +33,10 @@ export class HttpClient {
     return this.accessToken
   }
 
+  resetAccessToken() {
+    this.accessToken = null
+  }
+
   get<T>(...args: Parameters<typeof this.client.get>): Promise<T> {
     return this.client.get(...args)
   }

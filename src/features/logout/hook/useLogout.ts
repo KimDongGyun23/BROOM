@@ -1,3 +1,4 @@
+import { instance } from '@/app/api'
 import { useAuthActions } from '@/features/login/model/auth.store'
 import { useModalActions } from '@/shared/model/modal.store'
 
@@ -13,6 +14,7 @@ export const useLogout = () => {
       onSuccess: (response) => {
         openOneButtonModal(response, true)
         logout()
+        instance.resetAccessToken()
       },
       onError: (error) => openOneButtonModal(error.message, false),
     })
