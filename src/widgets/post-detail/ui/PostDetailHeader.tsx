@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-import { useIsMyPost } from '@/entities/board/model/postDetail.store'
+import { usePostDetail } from '@/entities/board/model/postDetail.store'
 import { DeleteConfirmationModal } from '@/features/delete-post/ui/DeleteConfirmationModal'
 import { DeleteResultModal } from '@/features/delete-post/ui/DeleteResultModal'
+import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
@@ -38,7 +38,10 @@ const AuthenticatedHeader = () => {
 
 export const PostDetailHeader = () => {
   const isLoggedIn = useIsLoggedIn()
-  const isMyPost = useIsMyPost()
+  const user = useUserData()
+  const post = usePostDetail()
+
+  const isMyPost = user?.nickname === post?.author.nickname
 
   if (!isLoggedIn || !isMyPost) return <SubHeaderWithoutIcon type="null" />
 

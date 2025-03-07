@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
-import { useIsMyPost, usePostDetail } from '@/entities/board/model/postDetail.store'
+import { usePostDetail } from '@/entities/board/model/postDetail.store'
+import { useUserData } from '@/features/login/model/auth.store'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'
 import { Button } from '@/shared/ui/Button'
 
@@ -8,13 +9,16 @@ import { useEnterChatRoom } from '../hook/useEnterChatRoom'
 
 export const EnterChatButton = () => {
   const post = usePostDetail()
-  const isMyPost = useIsMyPost()
+  const user = useUserData()
+
   const { enterChatRoom } = useEnterChatRoom()
 
   if (!post) return null
 
   const { currentPersonnel, totalPersonnel } = post.status
+
   const isFull = !canJoinChatRoom(currentPersonnel, totalPersonnel)
+  const isMyPost = user?.nickname === post.author.nickname
 
   return (
     <StyledButton
