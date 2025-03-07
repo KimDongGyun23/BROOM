@@ -36,7 +36,7 @@ export type BusApplicationToggleResponse = {
 }
 
 export type TotalPostCountResponse = {
-  count: number
+  boardCount: number
 }
 
 export type TotalUserCountResponse = {

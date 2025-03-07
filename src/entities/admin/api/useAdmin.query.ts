@@ -65,5 +65,5 @@ export const useFetchTotalPostCount = () =>
 export const useFetchTotalUserCount = () =>
   useQuery({
     queryKey: queryKeys.totalUserCount(),
-    queryFn: () => instance.get<TotalUserCountResponse>(ENDPOINTS.fetchTotalPostCont),
+    queryFn: () => instance.get<TotalUserCountResponse>(ENDPOINTS.fetchTotalUserCont),
   })
