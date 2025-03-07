@@ -4,15 +4,15 @@ import styled, { css } from 'styled-components'
 import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
 import type { Message } from '@/entities/chat/model/chat.type'
 import { useChatMessages } from '@/entities/chat/model/chatMessage.store'
+import { useUserData } from '@/features/login/model/auth.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { getSessionStorageItem, SESSION_KEYS } from '@/shared/lib/storage'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
 const ChatMessage = ({ messageData }: { messageData: Message }) => {
-  const myNickname = getSessionStorageItem(SESSION_KEYS.NICKNAME)
+  const user = useUserData()
   const { militaryBranch, senderNickname, message, createdAt } = messageData
 
-  const isMyMessage = senderNickname === myNickname
+  const isMyMessage = senderNickname === user?.nickname
 
   return (
     <MessageContainer $isMyMessage={isMyMessage}>
