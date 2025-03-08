@@ -1,9 +1,12 @@
 import { styled } from 'styled-components'
 
+import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { CheckIcon } from '@/shared/ui/icons/ActiveIcons'
 
 import type { AgreementId } from '../model/terms.store'
 import { useTermsActions } from '../model/terms.store'
+
+import { TermViewButton } from './TermViewButton'
 
 type AgreementItemProps = {
   id: AgreementId
@@ -15,17 +18,19 @@ export const AgreementItem = ({ id, text, isChecked }: AgreementItemProps) => {
   const { toggleAgreement } = useTermsActions()
 
   return (
-    <Container>
-      <AgreementToggleButton
-        type="button"
-        onClick={() => toggleAgreement(id)}
-        $isChecked={isChecked}
-      >
-        <CheckIcon active={isChecked} />
-        <p className="label">{text}</p>
-      </AgreementToggleButton>
-      <ViewButton type="button">보기</ViewButton>
-    </Container>
+    <ModalStoreProvider>
+      <Container>
+        <AgreementToggleButton
+          type="button"
+          onClick={() => toggleAgreement(id)}
+          $isChecked={isChecked}
+        >
+          <CheckIcon active={isChecked} />
+          <p className="label">{text}</p>
+        </AgreementToggleButton>
+        <TermViewButton id={id} />
+      </Container>
+    </ModalStoreProvider>
   )
 }
 
@@ -40,12 +45,4 @@ const AgreementToggleButton = styled.button<{ $isChecked: boolean }>`
     ${({ theme, $isChecked }) =>
       theme.font(600, $isChecked ? theme.colors.blue[500] : theme.colors.black[400])};
   }
-`
-
-const ViewButton = styled.button`
-  ${({ theme }) => `
-    ${theme.font(800, theme.colors.black[400])};
-    ${theme.margin(0, 0, 0, 'auto')};
-    ${theme.border('underline', 'bottom')};
-  `}
 `
