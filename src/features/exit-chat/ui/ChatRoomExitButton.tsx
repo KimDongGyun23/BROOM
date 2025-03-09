@@ -1,12 +1,9 @@
 import styled from 'styled-components'
 
 import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
-import { ModalWithOneButton, ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
-
-import { useExitChatRoom } from '../hook/useExitChatRoom'
 
 const ChatRoomExitButtonWithModal = () => {
-  const handleClickExitRoom = useExitChatRoom()
+  // const handleClickExitRoom = useExitChatRoom()
 
   const { openTwoButtonModal } = useModalActions()
 
@@ -15,10 +12,10 @@ const ChatRoomExitButtonWithModal = () => {
   return (
     <>
       <ExitButton onClick={handleClickOpenModal}>채팅방 나가기</ExitButton>
-      <ModalWithTwoButton
+      {/* <ModalWithTwoButton
         primaryButton={{ onClickButton: handleClickExitRoom, buttonLabel: '확인' }}
-      />
-      <ModalWithOneButton />
+      /> */}
+      {/* <ModalWithOneButton /> */}
     </>
   )
 }

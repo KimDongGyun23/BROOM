@@ -26,14 +26,14 @@ export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
           },
         },
       }),
-    [],
+    [openModal],
   )
 
   return (
     <QueryClientProvider client={queryClient}>
       {children}
       <ModalWithOneButton
-        label={modalLabel(MODAL_KEYS.error)}
+        label={`${modalLabel(MODAL_KEYS.error)} 전역 에러 처리`}
         isModalOpen={isModalOpen(MODAL_KEYS.error)}
         closeModal={closeModal}
         button={{ onClickButton: closeModal }}

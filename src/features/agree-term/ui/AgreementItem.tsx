@@ -1,6 +1,5 @@
 import { styled } from 'styled-components'
 
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { CheckIcon } from '@/shared/ui/icons/ActiveIcons'
 
 import type { AgreementId } from '../model/terms.store'
@@ -18,19 +17,17 @@ export const AgreementItem = ({ id, text, isChecked }: AgreementItemProps) => {
   const { toggleAgreement } = useTermsActions()
 
   return (
-    <ModalStoreProvider>
-      <Container>
-        <AgreementToggleButton
-          type="button"
-          onClick={() => toggleAgreement(id)}
-          $isChecked={isChecked}
-        >
-          <CheckIcon active={isChecked} />
-          <p className="label">{text}</p>
-        </AgreementToggleButton>
-        <TermViewButton id={id} />
-      </Container>
-    </ModalStoreProvider>
+    <Container>
+      <AgreementToggleButton
+        type="button"
+        onClick={() => toggleAgreement(id)}
+        $isChecked={isChecked}
+      >
+        <CheckIcon active={isChecked} />
+        <p className="label">{text}</p>
+      </AgreementToggleButton>
+      <TermViewButton id={id} />
+    </Container>
   )
 }
 

@@ -7,9 +7,7 @@ import type { PostForm } from '@/entities/board/model/post.type'
 import { PostEditHeader } from '@/features/edit-post/ui/PostEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { Loading } from '@/shared/ui/Loading'
-import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { PostFormSection } from '@/widgets/post-form/ui/PostFormSection'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -24,15 +22,11 @@ export const PostEdit = () => {
   if (isError || !defaultValues) return <ErrorPage />
 
   return (
-    <ModalStoreProvider>
-      <FormProvider {...formMethod}>
-        <Container>
-          <PostEditHeader />
-          <PostFormSection />
-        </Container>
-      </FormProvider>
-
-      <ModalWithOneButton />
-    </ModalStoreProvider>
+    <FormProvider {...formMethod}>
+      <Container>
+        <PostEditHeader />
+        <PostFormSection />
+      </Container>
+    </FormProvider>
   )
 }

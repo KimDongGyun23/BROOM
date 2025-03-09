@@ -4,7 +4,6 @@ import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
 import { EnterChatButton } from '@/features/enter-chat/ui/EnterChatButton'
 import { useIsLoggedIn } from '@/features/login/model/auth.store'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
-import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 export const PostDetailBottom = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -17,7 +16,7 @@ export const PostDetailBottom = () => {
 
       <ModalStoreProvider>
         <EnterChatButton />
-        <ModalWithOneButton />
+        {/* <ModalWithOneButton /> */}
       </ModalStoreProvider>
     </Container>
   )
