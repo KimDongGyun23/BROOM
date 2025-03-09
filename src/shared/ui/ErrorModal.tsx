@@ -15,7 +15,6 @@ export const ErrorModal = ({ error, resetErrorBoundary }: FallbackProps) => {
 
   useEffect(() => {
     openModal(MODAL_KEYS.error, response?.data || '알 수 없는 오류입니다.')
-    resetErrorBoundary()
   }, [openModal, resetErrorBoundary, response?.data])
 
   return (
@@ -23,7 +22,7 @@ export const ErrorModal = ({ error, resetErrorBoundary }: FallbackProps) => {
       label={modalLabel(MODAL_KEYS.error)}
       isModalOpen={isModalOpen(MODAL_KEYS.error)}
       closeModal={closeModal}
-      button={{ onClickButton: closeModal }}
+      button={{ onClickButton: resetErrorBoundary }}
     />
   )
 }
