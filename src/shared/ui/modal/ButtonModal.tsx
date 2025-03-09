@@ -1,11 +1,5 @@
 import styled from 'styled-components'
 
-import {
-  useModalActions,
-  useOneButtonModalState,
-  useTwoButtonModalState,
-} from '@/shared/model/modal.store'
-
 import { Button } from '../Button'
 
 import { ModalLayout } from './ModalLayout'
@@ -15,10 +9,22 @@ type ModalButtonProps = {
   onClickButton?: VoidFunction
 }
 
-export const ModalWithOneButton = ({ buttonLabel = '확인', onClickButton }: ModalButtonProps) => {
-  const { isModalOpen, label } = useOneButtonModalState()
-  const { closeModal } = useModalActions()
+type ModalProps = {
+  label: string
+  isModalOpen: boolean
+  closeModal: VoidFunction
+}
 
+export type ModalWithOneButtonProps = ModalProps & {
+  button: ModalButtonProps
+}
+
+export const ModalWithOneButton = ({
+  label,
+  isModalOpen,
+  closeModal,
+  button: { buttonLabel = '확인', onClickButton },
+}: ModalWithOneButtonProps) => {
   const handleCloseButton = () => {
     if (onClickButton) onClickButton()
     closeModal()
@@ -36,15 +42,18 @@ export const ModalWithOneButton = ({ buttonLabel = '확인', onClickButton }: Mo
   )
 }
 
-type ModalWithTwoButtonProps = {
+export type ModalWithTwoButtonProps = ModalProps & {
   primaryButton: ModalButtonProps
   secondaryButton?: ModalButtonProps
 }
 
-export const ModalWithTwoButton = ({ primaryButton, secondaryButton }: ModalWithTwoButtonProps) => {
-  const { isModalOpen, label } = useTwoButtonModalState()
-  const { closeModal } = useModalActions()
-
+export const ModalWithTwoButton = ({
+  label,
+  isModalOpen,
+  closeModal,
+  primaryButton,
+  secondaryButton,
+}: ModalWithTwoButtonProps) => {
   const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
   const { buttonLabel: secondaryButtonLabel, onClickButton: onClickSecondaryButton } =
     secondaryButton || {}

@@ -16,3 +16,5 @@ export const ERROR_MESSAGES = {
   NO_CHAT: '채팅 목록이 존재하지 않습니다.',
   NO_DATE_TAG: '날짜 태그 목록이 존재하지 않습니다.',
 }
+
+export const MODAL_KEYS = { confirm: 'confirm', success: 'success', error: 'error' } as const

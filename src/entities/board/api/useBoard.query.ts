@@ -30,20 +30,20 @@ const ENDPOINTS = {
   dateTag: `/date-tag`,
 } as const
 
-export const queryKeys = {
+export const boardQueryKeys = {
   all: ['board'] as const,
   carpoolList: (urls: PostListRequest['urls']) =>
-    [...queryKeys.all, 'list', ...Object.values(urls)] as const,
-  myPostList: () => [...queryKeys.all, 'my-post'] as const,
-  bookmarkList: () => [...queryKeys.all, 'bookmark'] as const,
+    [...boardQueryKeys.all, 'list', ...Object.values(urls)] as const,
+  myPostList: () => [...boardQueryKeys.all, 'my-post'] as const,
+  bookmarkList: () => [...boardQueryKeys.all, 'bookmark'] as const,
   carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
-    [...queryKeys.all, 'detail', ...Object.values(urls)] as const,
-  dateTag: () => [...queryKeys.all, 'date-filter'] as const,
+    [...boardQueryKeys.all, 'detail', ...Object.values(urls)] as const,
+  dateTag: () => [...boardQueryKeys.all, 'date-filter'] as const,
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
   useInfiniteQuery({
-    queryKey: queryKeys.carpoolList(urls),
+    queryKey: boardQueryKeys.carpoolList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
@@ -56,7 +56,7 @@ export const useFetchPostList = ({ urls }: PostListRequest) =>
 
 export const useFetchMyPostList = () =>
   useInfiniteQuery({
-    queryKey: queryKeys.myPostList(),
+    queryKey: boardQueryKeys.myPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchMyPostList(pageParam)),
     initialPageParam: 0,
@@ -67,7 +67,7 @@ export const useFetchMyPostList = () =>
 
 export const useFetchBookmarkList = () =>
   useInfiniteQuery({
-    queryKey: queryKeys.bookmarkList(),
+    queryKey: boardQueryKeys.bookmarkList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
     initialPageParam: 0,
@@ -78,7 +78,7 @@ export const useFetchBookmarkList = () =>
 
 export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
   return useQuery({
-    queryKey: queryKeys.carpoolPostDetail(urls),
+    queryKey: boardQueryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
     select: (data): PostForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
@@ -98,14 +98,14 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
 
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useQuery({
-    queryKey: queryKeys.carpoolPostDetail(urls),
+    queryKey: boardQueryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
   })
 }
 
 export const useFetchDateFilter = () => {
   return useQuery({
-    queryKey: queryKeys.dateTag(),
+    queryKey: boardQueryKeys.dateTag(),
     queryFn: () => instance.get<DateFilterResponse>(ENDPOINTS.dateTag),
   })
 }

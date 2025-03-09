@@ -8,11 +8,13 @@ type Labels = {
   [key: string]: string
 }
 
+export type OpenModal = (key: string, label: string) => void
+
 const useModal = () => {
   const [modals, setModals] = useState<Modals>({})
   const [labels, setLabels] = useState<Labels>({})
 
-  const openModal = (key: string, label: string) => {
+  const openModal: OpenModal = (key, label) => {
     setModals(() => ({ [key]: true }))
     setLabels(() => ({ [key]: label }))
   }
