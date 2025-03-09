@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import type {
   AddBookmarkRequest,
-  PostCreateRequest,
   PostDetailRequest,
   PostEditRequest,
   PostId,
@@ -14,22 +13,10 @@ import { instance } from '../../../app/api'
 import { boardQueryKeys } from './useBoard.query'
 
 const ENDPOINTS = {
-  createPost: '/board',
   editPost: (urls: PostDetailRequest['urls']) => `/board/${urls.boardId}`,
   addBookmark: `/mypage/bookmark`,
   removeBookmark: (urls: RemoveBookmarkRequest['urls']) => `/mypage/bookmark/${urls.boardId}`,
 } as const
-
-export const useCreatePost = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: ({ body }: PostCreateRequest) => instance.post<PostId>(ENDPOINTS.createPost, body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: boardQueryKeys.all })
-    },
-  })
-}
 
 export const useEditPost = () => {
   const queryClient = useQueryClient()

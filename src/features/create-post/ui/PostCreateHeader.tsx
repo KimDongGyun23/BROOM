@@ -1,41 +1,23 @@
-import { useFormContext } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
-import { useCreatePost } from '@/entities/board/api/useBoard.mutation'
-import type { PostForm } from '@/entities/board/model/post.type'
-import { useModalActions } from '@/shared/model/modal.store'
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
+import { useCreatePost } from '../hook/useCreatePost'
+
 export const PostCreateHeader = () => {
-  const navigate = useNavigate()
-
-  const { openOneButtonModal } = useModalActions()
-  const { mutate: createPost } = useCreatePost()
-
-  const { handleSubmit } = useFormContext<PostForm>()
-
-  const handleCreatePost = (formData: PostForm) => {
-    const { hour, minute, personnel, ...rest } = formData
-    const submissionData = {
-      time: `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`,
-      personnel: parseInt(personnel),
-      ...rest,
-    }
-
-    createPost(
-      { body: submissionData },
-      {
-        onSuccess: ({ boardId }) => navigate(`/board/detail/${boardId}`, { replace: true }),
-        onError: (error) => openOneButtonModal(error.message),
-      },
-    )
-  }
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
+  const { onSubmit } = useCreatePost(openModal)
 
   return (
-    <SubHeaderWithoutIcon
-      type="complete"
-      title="승차 공유 등록"
-      onClickComplete={handleSubmit(handleCreatePost)}
-    />
+    <>
+      <SubHeaderWithoutIcon type="complete" title="승차 공유 등록" onClickComplete={onSubmit} />
+      <ModalWithOneButton
+        label={modalLabel(MODAL_KEYS.error)}
+        isModalOpen={isModalOpen(MODAL_KEYS.error)}
+        closeModal={closeModal}
+        button={{ onClickButton: closeModal }}
+      />
+    </>
   )
 }
