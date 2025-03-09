@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
-import { ToggleBusApplication } from '@/features/toggle-bus-application/ui/ToggleBusApplication'
+import { BusApplicationToggle } from '@/features/toggle-bus-application/ui/BusApplicationToggle'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { Loading } from '@/shared/ui/Loading'
 import { MainHeader } from '@/shared/ui/MainHeader'
@@ -34,7 +34,11 @@ export const Admin = () => {
     <>
       <MainHeader />
       <PageContent>
-        <ToggleBusApplication isToggled={toggleState.activated} />
+        <ToggleContainer>
+          <BusApplicationLabel>버스 신청 활성화</BusApplicationLabel>
+          <BusApplicationToggle isToggled={toggleState.activated} />
+        </ToggleContainer>
+
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />
@@ -50,6 +54,14 @@ export const Admin = () => {
 const PageContent = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
   ${({ theme }) => theme.margin('container')};
+`
+
+const ToggleContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')};
+`
+
+const BusApplicationLabel = styled.div`
+  ${({ theme }) => theme.font(700, theme.colors.black[600])};
 `
 
 const StyledLink = styled(Link)`

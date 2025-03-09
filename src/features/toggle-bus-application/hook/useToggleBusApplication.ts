@@ -1,16 +1,15 @@
-import { useModalActions } from '@/shared/model/modal.store'
+import type { OpenModal } from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
 import { useToggleBusApplicationMutation } from '../api/useToggleBusApplication.mutation'
 
-export const useToggleBusApplication = () => {
+export const useToggleBusApplication = (openModal: OpenModal) => {
   const { mutate: toggleBusApplication } = useToggleBusApplicationMutation()
-
-  const { openOneButtonModal } = useModalActions()
 
   const handleToggleBusApplication = () => {
     toggleBusApplication(undefined, {
-      onSuccess: (response) => openOneButtonModal(response),
-      onError: (error) => openOneButtonModal(error.message),
+      onSuccess: (response) => openModal(MODAL_KEYS.success, response),
+      onError: (error) => openModal(MODAL_KEYS.error, error.message),
     })
   }
 
