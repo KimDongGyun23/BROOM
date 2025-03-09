@@ -2,16 +2,15 @@ import { useNavigate } from 'react-router-dom'
 
 import { instance } from '@/app/api'
 import { useAuthActions } from '@/features/login/model/auth.store'
-import { useModalActions } from '@/shared/model/modal.store'
+import type { OpenModal } from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
 import { useLogoutMutation } from '../api/useLogout.mutation'
 
-export const useLogout = () => {
+export const useLogout = (openModal: OpenModal) => {
   const navigate = useNavigate()
 
   const { mutate: logoutMutation } = useLogoutMutation()
-
-  const { openOneButtonModal } = useModalActions()
 
   const { logout } = useAuthActions()
 
@@ -22,7 +21,7 @@ export const useLogout = () => {
         instance.resetAccessToken()
         navigate('/home')
       },
-      onError: (error) => openOneButtonModal(error.message, false),
+      onError: (error) => openModal(MODAL_KEYS.error, error.message),
     })
   }
 
