@@ -1,20 +1,34 @@
 import { styled } from 'styled-components'
 
-import { useDeleteId } from '@/entities/mypage/api/useMypage.mutation'
-import { useModalActions } from '@/shared/model/modal.store'
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
+
+import { useDeleteId } from '../hook/useDeleteId'
+
+import { DeleteIdErrorModal } from './DeleteIdErrorModal'
+import { DeleteIdSuccessModal } from './DeleteIdSuccessModal'
 
 export const DeleteIdButton = () => {
-  const { mutate: deleteId } = useDeleteId()
-  const { openOneButtonModal } = useModalActions()
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
+  const { handleDeleteId } = useDeleteId(openModal)
 
-  const handleDeleteId = () => {
-    deleteId(undefined, {
-      onSuccess: (response) => openOneButtonModal(response, true),
-      onError: (error) => openOneButtonModal(error.message, false),
-    })
-  }
+  return (
+    <>
+      <ActionButton onClick={handleDeleteId}>회원탈퇴</ActionButton>
 
-  return <ActionButton onClick={handleDeleteId}>회원탈퇴</ActionButton>
+      <DeleteIdSuccessModal
+        label={modalLabel(MODAL_KEYS.success)}
+        isModalOpen={isModalOpen(MODAL_KEYS.success)}
+        closeModal={closeModal}
+      />
+
+      <DeleteIdErrorModal
+        label={modalLabel(MODAL_KEYS.error)}
+        isModalOpen={isModalOpen(MODAL_KEYS.success)}
+        closeModal={closeModal}
+      />
+    </>
+  )
 }
 
 const ActionButton = styled.button`

@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { useUserProfile } from '@/entities/mypage/api/useMypage.query'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Loading } from '@/shared/ui/Loading'
 import { MypageAuthSection } from '@/widgets/mypage-auth/ui/MypageAuthSection'
@@ -18,17 +17,15 @@ export const Mypage = () => {
   if (isError || !userProfile) return <ErrorPage />
 
   return (
-    <ModalStoreProvider>
-      <Container>
-        <ScrollContainer>
-          <MypageProfile {...userProfile} />
-          <MypageSections />
-          <MypageAuthSection />
-        </ScrollContainer>
+    <Container>
+      <ScrollContainer>
+        <MypageProfile {...userProfile} />
+        <MypageSections />
+        <MypageAuthSection />
+      </ScrollContainer>
 
-        <BottomNavigation />
-      </Container>
-    </ModalStoreProvider>
+      <BottomNavigation />
+    </Container>
   )
 }
 
