@@ -1,5 +1,4 @@
 import { FormProvider } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container, FormContainer } from '@/app/style/commonStyles'
@@ -12,7 +11,7 @@ import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const BusApplicationCreate = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const { NAME, STUDENT_ID, PHONE_NUMBER } = busCreateAttribute
 
@@ -43,9 +42,9 @@ export const BusApplicationCreate = () => {
           </FormContainer>
 
           <BusApplicationButton />
-          <ModalWithOne14Button
+          {/* <ModalWithOneButton
             onClickButton={() => navigate('/bus-application', { replace: true })}
-          />
+          /> */}
         </FormProvider>
       </Container>
     </ModalStoreProvider>
