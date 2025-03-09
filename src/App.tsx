@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { useQueryErrorResetBoundary } from '@tanstack/react-query'
 import styled from 'styled-components'
 
 import { Splash } from './pages/home/Splash'
+import { ErrorModal } from './shared/ui/ErrorModal'
 import { RouterComponent } from './shared/ui/RouterComponent'
 
 function App() {
   const [showSplash, setShowSplash] = useState<boolean>(true)
+  const { reset } = useQueryErrorResetBoundary()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -16,7 +20,9 @@ function App() {
   }, [])
   return (
     <AppContainer>
-      <ContentWrapper>{showSplash ? <Splash /> : <RouterComponent />}</ContentWrapper>
+      <ErrorBoundary FallbackComponent={ErrorModal} onReset={reset}>
+        <ContentWrapper>{showSplash ? <Splash /> : <RouterComponent />}</ContentWrapper>
+      </ErrorBoundary>
     </AppContainer>
   )
 }
