@@ -2,12 +2,12 @@ import { useFormContext } from 'react-hook-form'
 
 import { useUpdatePassword } from '@/entities/mypage/api/useMypage.mutation'
 import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
-import { useModalActions } from '@/shared/model/modal.store'
+import type { OpenModal } from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
-export const useEditPassword = () => {
+export const useEditPassword = (openModal: OpenModal) => {
   const { handleSubmit } = useFormContext<PasswordUpdateForm>()
 
-  const { openOneButtonModal } = useModalActions()
   const { mutate: updatePassword } = useUpdatePassword()
 
   const handleEditPassword = (formData: PasswordUpdateForm) => {
@@ -15,8 +15,8 @@ export const useEditPassword = () => {
     updatePassword(
       { body: { ...rest } },
       {
-        onSuccess: (response) => openOneButtonModal(response, true),
-        onError: (error) => openOneButtonModal(error.message, false),
+        onSuccess: (response) => openModal(MODAL_KEYS.success, response),
+        onError: (error) => openModal(MODAL_KEYS.error, error.message),
       },
     )
   }
