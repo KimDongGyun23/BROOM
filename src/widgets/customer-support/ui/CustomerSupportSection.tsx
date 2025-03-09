@@ -1,3 +1,4 @@
+import React from 'react'
 import { styled } from 'styled-components'
 
 import { TermModal } from '@/features/agree-term/ui/TermViewButton'
@@ -15,13 +16,13 @@ const CUSTOMER_SUPPORT = {
 
 const SectionModal = ({ index }: { index: number }) => {
   switch (index) {
+    case 0:
+      return null
     case 1:
       return null
     case 2:
-      return null
-    case 3:
       return <TermModal id="personalConsent" />
-    case 4:
+    case 3:
       return <TermModal id="serviceConsent" />
     default:
       return null
@@ -33,17 +34,19 @@ export const CustomerSupportSection = () => {
   const { openOneButtonModal } = useModalActions()
 
   return (
-    <Section key={sectionTitle}>
+    <Section>
       <SectionTitle>{sectionTitle}</SectionTitle>
       <SectionList>
-        {links.map(({ name }, index) => (
-          <ModalStoreProvider key={name}>
-            <li>
-              <SectionItemButton onClick={() => openOneButtonModal('')}>{name}</SectionItemButton>
-            </li>
-            <SectionModal index={index} />
-          </ModalStoreProvider>
-        ))}
+        <ModalStoreProvider>
+          {links.map(({ name }, index) => (
+            <React.Fragment key="name">
+              <li>
+                <SectionItemButton onClick={() => openOneButtonModal('')}>{name}</SectionItemButton>
+              </li>
+              <SectionModal index={index} />
+            </React.Fragment>
+          ))}
+        </ModalStoreProvider>
       </SectionList>
     </Section>
   )
