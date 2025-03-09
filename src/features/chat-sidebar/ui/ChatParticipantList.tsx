@@ -1,12 +1,12 @@
 import { styled } from 'styled-components'
 
 import type { User } from '@/entities/chat/model/chat.type'
-import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { useUserData } from '@/features/login/model/auth.store'
+import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
-import { ChatExpelButton } from '../../expel-user/ui/ChatExpelButton'
+import { ExpelChatButton } from '../../expel-user/ui/ExpelChatButton'
 
 type ChatParticipantListProps = {
   participantList: User[]
@@ -32,7 +32,7 @@ const ChatParticipantItem = ({
         <p>{userNickname}</p>
         {isAuthor && <CrownIcon />}
       </ProfileInfo>
-      {isChatRoomMine && !isAuthor && <ChatExpelButton userId={userId} />}
+      {isChatRoomMine && !isAuthor && <ExpelChatButton userId={userId} />}
     </ParticipantItem>
   )
 }
