@@ -1,32 +1,34 @@
-import { useAddBookmark, useDeleteBookmark } from '@/entities/board/api/useBoard.mutation'
 import { usePostDetail } from '@/entities/board/model/postDetail.store'
+import type { OpenModal } from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions } from '@/shared/model/modal.store'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
-export const useBookmark = () => {
+import { useAddBookmarkMutation, useDeleteBookmarkMutation } from '../api/useBookmark.mutation'
+
+export const useBookmark = (openModal: OpenModal) => {
   const boardId = useParamId()
   const postDetail = usePostDetail()
-  const isBookmarked = postDetail?.status.bookmark
-  const { openOneButtonModal } = useModalActions()
 
-  const { mutate: addBookmark } = useAddBookmark()
-  const { mutate: removeBookmark } = useDeleteBookmark()
+  const isBookmarked = postDetail?.status.bookmark
+
+  const { mutate: addBookmark } = useAddBookmarkMutation()
+  const { mutate: removeBookmark } = useDeleteBookmarkMutation()
 
   const toggleBookmark = () => {
     if (isBookmarked)
       removeBookmark(
         { urls: { boardId } },
         {
-          onSuccess: (response) => openOneButtonModal(response, true),
-          onError: (error) => openOneButtonModal(error.message, false),
+          onSuccess: (response) => openModal(MODAL_KEYS.success, response),
+          onError: (error) => openModal(MODAL_KEYS.error, error.message),
         },
       )
     else
       addBookmark(
         { body: { boardId } },
         {
-          onSuccess: (response) => openOneButtonModal(response, true),
-          onError: (error) => openOneButtonModal(error.message, false),
+          onSuccess: (response) => openModal(MODAL_KEYS.success, response),
+          onError: (error) => openModal(MODAL_KEYS.error, error.message),
         },
       )
   }

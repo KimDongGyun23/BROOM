@@ -1,17 +1,37 @@
 import { styled } from 'styled-components'
 
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
 
 import { useBookmark } from '../hook/useBookmark'
 
+import { BookmarkErrorModal } from './BookmarkErrorModal'
+import { BookmarkSuccessModal } from './BookmarkSuccessModal'
+
 export const BookmarkButton = () => {
-  const { isBookmarked, toggleBookmark } = useBookmark()
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
+  const { isBookmarked, toggleBookmark } = useBookmark(openModal)
 
   return (
-    <BookmarkStyledButton type="button" onClick={toggleBookmark}>
-      <BookmarkIcon active={isBookmarked} />
-      <p className="label">북마크</p>
-    </BookmarkStyledButton>
+    <>
+      <BookmarkStyledButton type="button" onClick={toggleBookmark}>
+        <BookmarkIcon active={isBookmarked} />
+        <p className="label">북마크</p>
+      </BookmarkStyledButton>
+
+      <BookmarkSuccessModal
+        label={modalLabel(MODAL_KEYS.success)}
+        isModalOpen={isModalOpen(MODAL_KEYS.success)}
+        closeModal={closeModal}
+      />
+
+      <BookmarkErrorModal
+        label={modalLabel(MODAL_KEYS.error)}
+        isModalOpen={isModalOpen(MODAL_KEYS.success)}
+        closeModal={closeModal}
+      />
+    </>
   )
 }
 

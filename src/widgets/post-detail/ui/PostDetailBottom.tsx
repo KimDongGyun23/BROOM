@@ -13,10 +13,7 @@ export const PostDetailBottom = () => {
 
   return (
     <Container>
-      <ModalStoreProvider>
-        <BookmarkButton />
-        <ModalWithOneButton />
-      </ModalStoreProvider>
+      <BookmarkButton />
 
       <ModalStoreProvider>
         <EnterChatButton />
