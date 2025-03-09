@@ -13,15 +13,8 @@ const useModal = () => {
   const [labels, setLabels] = useState<Labels>({})
 
   const openModal = (key: string, label: string) => {
-    setModals((prev) => ({
-      ...prev,
-      [key]: true,
-    }))
-
-    setLabels((prev) => ({
-      ...prev,
-      [key]: label,
-    }))
+    setModals(() => ({ [key]: true }))
+    setLabels(() => ({ [key]: label }))
   }
 
   const closeModal = () => {
