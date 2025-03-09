@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { CustomerSupportSection } from '@/widgets/customer-support/ui/CustomerSupportSection'
+
 const MYPAGE_SECTIONS = [
   {
     sectionTitle: '내 정보',
@@ -16,13 +18,6 @@ const MYPAGE_SECTIONS = [
       { name: '북마크', path: '/mypage/bookmark' },
     ],
   },
-  {
-    sectionTitle: '고객 지원',
-    links: [
-      { name: '문의하기', path: '/mypage' },
-      { name: '서비스 정보', path: '/mypage' },
-    ],
-  },
 ] as const
 
 export const MypageSections = () => (
@@ -36,6 +31,7 @@ export const MypageSections = () => (
               <SectionLink to={path}>{name}</SectionLink>
             </li>
           ))}
+          <CustomerSupportSection />
         </SectionList>
       </Section>
     ))}

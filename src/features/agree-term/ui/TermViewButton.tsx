@@ -11,7 +11,7 @@ type TermViewButton = {
   id: AgreementId
 }
 
-const TermModal = ({ id }: TermViewButton) => {
+export const TermModal = ({ id }: TermViewButton) => {
   const { isModalOpen } = useOneButtonModalState()
   const { closeModal } = useModalActions()
 
