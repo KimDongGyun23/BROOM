@@ -9,7 +9,6 @@ import { BusApplicationButton } from '@/features/create-bus/ui/BusApplicationBut
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const BusApplicationCreate = () => {
@@ -44,7 +43,7 @@ export const BusApplicationCreate = () => {
           </FormContainer>
 
           <BusApplicationButton />
-          <ModalWithOneButton
+          <ModalWithOne14Button
             onClickButton={() => navigate('/bus-application', { replace: true })}
           />
         </FormProvider>
