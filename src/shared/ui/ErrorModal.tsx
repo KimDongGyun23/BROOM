@@ -1,24 +1,29 @@
+import { useEffect } from 'react'
+import type { FallbackProps } from 'react-error-boundary'
+
+import useModal from '../hook/useModal'
+import { MODAL_KEYS } from '../lib/constants'
+
 import { ModalWithOneButton } from './modal/ButtonModal'
 
-export const ErrorModal = ({
-  error,
-  resetErrorBoundary,
-}: {
-  error: unknown
-  resetErrorBoundary: VoidFunction
-}) => {
-  // const { status } = error.response
-  // const navigate = useNavigate()
+export const ErrorModal = ({ error }: FallbackProps) => {
+  const { response } = error
+
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
+
   // const isNotAuthorized = status === 401 || status === 403
 
-  console.log(error)
+  useEffect(
+    () => openModal(MODAL_KEYS.error, response?.data || '알 수 없는 오류입니다.'),
+    [openModal, response?.data],
+  )
 
   return (
     <ModalWithOneButton
-      label={`전역 에러 처리`}
-      isModalOpen={true}
-      closeModal={() => {}}
-      button={{ onClickButton: resetErrorBoundary }}
+      label={modalLabel(MODAL_KEYS.error)}
+      isModalOpen={isModalOpen(MODAL_KEYS.error)}
+      closeModal={closeModal}
+      button={{ onClickButton: closeModal }}
     />
   )
 }
