@@ -31,10 +31,10 @@ export const MypageSections = () => (
               <SectionLink to={path}>{name}</SectionLink>
             </li>
           ))}
-          <CustomerSupportSection />
         </SectionList>
       </Section>
     ))}
+    <CustomerSupportSection />
   </Container>
 )
 
