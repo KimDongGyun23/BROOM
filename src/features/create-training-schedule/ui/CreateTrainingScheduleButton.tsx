@@ -1,23 +1,13 @@
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { Button } from '@/shared/ui/Button'
 
 import { useCreateTrainingSchedule } from '../hook/useCreateTrainingSchedule'
 
-const ButtonWithModal = () => {
+export const CreateTrainingScheduleButton = () => {
   const { handleCreateTrainingSchedule } = useCreateTrainingSchedule()
 
   return (
-    <>
-      <Button size="lg" onClick={handleCreateTrainingSchedule}>
-        추가
-      </Button>
-      {/* <ModalWithOneButton /> */}
-    </>
+    <Button size="lg" onClick={handleCreateTrainingSchedule}>
+      추가
+    </Button>
   )
 }
-
-export const CreateTrainingScheduleButton = () => (
-  <ModalStoreProvider>
-    <ButtonWithModal />
-  </ModalStoreProvider>
-)

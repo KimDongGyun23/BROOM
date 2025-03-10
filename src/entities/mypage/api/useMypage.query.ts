@@ -11,19 +11,19 @@ const ENDPOINTS = {
   fetchAccountInformation: `/mypage/info`,
 } as const
 
-export const queryKeys = {
+export const mypageQueryKeys = {
   all: ['mypage'] as const,
-  account: () => [...queryKeys.all, 'account'] as const,
+  account: () => [...mypageQueryKeys.all, 'account'] as const,
 }
 
 export const useUserProfile = () =>
   useQuery({
-    queryKey: queryKeys.all,
+    queryKey: mypageQueryKeys.all,
     queryFn: () => instance.get<MypageProfileResponse>(ENDPOINTS.fetchMypage),
   })
 
 export const useFetchAccountInformation = () =>
   useQuery({
-    queryKey: queryKeys.account(),
+    queryKey: mypageQueryKeys.account(),
     queryFn: () => instance.get<AccountInformationResponse>(ENDPOINTS.fetchAccountInformation),
   })

@@ -1,27 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import { instance } from '@/app/api'
-import type {
-  PasswordUpdateRequest,
-  UpdateAccountInformationRequest,
-} from '@/entities/mypage/model/mypage.type'
-
-import { queryKeys } from './useMypage.query'
+import type { PasswordUpdateRequest } from '@/entities/mypage/model/mypage.type'
 
 const ENDPOINTS = {
-  updateAccount: `/mypage/info`,
   updatePassword: `/mypage/password`,
 } as const
-
-export const useUpdateAccountInformation = () => {
-  const queryClient = useQueryClient()
-
-  return useMutation({
-    mutationFn: ({ body }: UpdateAccountInformationRequest) =>
-      instance.put<string>(ENDPOINTS.updateAccount, body),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: queryKeys.all }),
-  })
-}
 
 export const useUpdatePassword = () =>
   useMutation({
