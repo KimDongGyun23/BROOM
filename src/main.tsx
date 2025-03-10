@@ -11,13 +11,13 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
-    <CustomQueryClientProvider>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <CustomQueryClientProvider>
         <GlobalStyles />
         <App />
         <Analytics />
         <SpeedInsights />
-      </ThemeProvider>
-    </CustomQueryClientProvider>
+      </CustomQueryClientProvider>
+    </ThemeProvider>
   </BrowserRouter>,
 )
