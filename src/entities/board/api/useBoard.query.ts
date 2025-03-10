@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query'
 
 import type {
   DateFilterResponse,
@@ -42,7 +42,7 @@ export const boardQueryKeys = {
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
-  useInfiniteQuery({
+  useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.carpoolList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
@@ -55,7 +55,7 @@ export const useFetchPostList = ({ urls }: PostListRequest) =>
   })
 
 export const useFetchMyPostList = () =>
-  useInfiniteQuery({
+  useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.myPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchMyPostList(pageParam)),
@@ -66,7 +66,7 @@ export const useFetchMyPostList = () =>
   })
 
 export const useFetchBookmarkList = () =>
-  useInfiniteQuery({
+  useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.bookmarkList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
