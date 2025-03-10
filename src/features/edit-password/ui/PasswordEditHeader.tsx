@@ -4,7 +4,6 @@ import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 import { useEditPassword } from '../hook/useEditPassword'
 
-import { EditPasswordErrorModal } from './EditPasswordErrorModal'
 import { EditPasswordSuccessModal } from './EditPasswordSuccessModal'
 
 export const PasswordEditHeader = () => {
@@ -18,12 +17,6 @@ export const PasswordEditHeader = () => {
       <EditPasswordSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={closeModal}
-      />
-
-      <EditPasswordErrorModal
-        label={modalLabel(MODAL_KEYS.error)}
-        isModalOpen={isModalOpen(MODAL_KEYS.error)}
         closeModal={closeModal}
       />
     </>

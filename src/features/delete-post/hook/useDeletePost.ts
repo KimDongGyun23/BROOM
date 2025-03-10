@@ -12,10 +12,7 @@ export const useDeletePost = (openModal: OpenModal) => {
   const handleDeletePost = () => {
     deletePost(
       { urls: { boardId } },
-      {
-        onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-        onError: (error) => openModal(MODAL_KEYS.error, error.message),
-      },
+      { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
     )
   }
 

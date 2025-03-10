@@ -12,10 +12,7 @@ export const useExpelUser = (userId: string, openModal: OpenModal) => {
   const handleExpelUser = () => {
     expelUser(
       { body: { expellId: userId, boardId } },
-      {
-        onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-        onError: (error) => openModal(MODAL_KEYS.error, error.message),
-      },
+      { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
     )
   }
 

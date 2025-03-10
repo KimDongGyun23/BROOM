@@ -5,7 +5,6 @@ import { MODAL_KEYS } from '@/shared/lib/constants'
 
 import { useExpelUser } from '../hook/useExpelUser'
 
-import { ExpelChatErrorModal } from './ExpelChatErrorModal'
 import { ExpelChatSuccessModal } from './ExpelChatSuccessModal'
 
 type ExpelChatButtonProps = {
@@ -23,12 +22,6 @@ export const ExpelChatButton = ({ userId }: ExpelChatButtonProps) => {
 
       <ExpelChatSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
-        isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={closeModal}
-      />
-
-      <ExpelChatErrorModal
-        label={modalLabel(MODAL_KEYS.error)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}
       />

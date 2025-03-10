@@ -5,7 +5,6 @@ import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 import { useDeletePost } from '../hook/useDeletePost'
 
-import { DeletePostErrorModal } from './DeletePostErrorModal'
 import { DeletePostSuccessModal } from './DeletePostSuccessModal'
 
 export const DeleteConfirmationModal = ({
@@ -27,11 +26,6 @@ export const DeleteConfirmationModal = ({
       <DeletePostSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={closeModal}
-      />
-      <DeletePostErrorModal
-        label={modalLabel(MODAL_KEYS.error)}
-        isModalOpen={isModalOpen(MODAL_KEYS.error)}
         closeModal={closeModal}
       />
     </>

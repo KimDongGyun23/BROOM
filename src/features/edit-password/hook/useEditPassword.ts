@@ -14,10 +14,7 @@ export const useEditPassword = (openModal: OpenModal) => {
     const { confirm: _confirm, ...rest } = formData
     updatePassword(
       { body: { ...rest } },
-      {
-        onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-        onError: (error) => openModal(MODAL_KEYS.error, error.message),
-      },
+      { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
     )
   }
 

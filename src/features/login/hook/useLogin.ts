@@ -8,7 +8,6 @@ import { useLoginMutation } from '../api/useLogin.mutation'
 import { useAuthActions } from '../model/auth.store'
 
 export const useLogin = () => {
-  // export const useLogin = (openModal: OpenModal) => {
   const navigate = useNavigate()
 
   const { mutate: loginMutation } = useLoginMutation()
@@ -30,16 +29,6 @@ export const useLogin = () => {
             navigate('/404', { replace: true })
           }
         },
-        // onError: (error: Error) => {
-        //   if (axios.isAxiosError(error)) {
-        //     openModal(
-        //       MODAL_KEYS.error,
-        //       error.response?.data || '알 수 없는 서버 오류가 발생했습니다.',
-        //     )
-        //   } else {
-        //     openModal(MODAL_KEYS.error, '알 수 없는 오류가 발생했습니다.')
-        //   }
-        // },
       },
     )
   }

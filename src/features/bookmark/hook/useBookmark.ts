@@ -18,18 +18,12 @@ export const useBookmark = (openModal: OpenModal) => {
     if (isBookmarked)
       removeBookmark(
         { urls: { boardId } },
-        {
-          onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-          onError: (error) => openModal(MODAL_KEYS.error, error.message),
-        },
+        { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
       )
     else
       addBookmark(
         { body: { boardId } },
-        {
-          onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-          onError: (error) => openModal(MODAL_KEYS.error, error.message),
-        },
+        { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
       )
   }
 

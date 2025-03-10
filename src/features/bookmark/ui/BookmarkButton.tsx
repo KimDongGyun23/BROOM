@@ -6,7 +6,6 @@ import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
 
 import { useBookmark } from '../hook/useBookmark'
 
-import { BookmarkErrorModal } from './BookmarkErrorModal'
 import { BookmarkSuccessModal } from './BookmarkSuccessModal'
 
 export const BookmarkButton = () => {
@@ -22,12 +21,6 @@ export const BookmarkButton = () => {
 
       <BookmarkSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
-        isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={closeModal}
-      />
-
-      <BookmarkErrorModal
-        label={modalLabel(MODAL_KEYS.error)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}
       />

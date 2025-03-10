@@ -9,7 +9,6 @@ export const useToggleBusApplication = (openModal: OpenModal) => {
   const handleToggleBusApplication = () => {
     toggleBusApplication(undefined, {
       onSuccess: (response) => openModal(MODAL_KEYS.success, response),
-      onError: (error) => openModal(MODAL_KEYS.error, error.message),
     })
   }
 

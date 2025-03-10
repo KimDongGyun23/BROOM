@@ -2,12 +2,10 @@ import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import type { PostForm } from '@/entities/board/model/post.type'
-import type { OpenModal } from '@/shared/hook/useModal'
-import { MODAL_KEYS } from '@/shared/lib/constants'
 
 import { useCreatePostMutation } from '../api/useCreatePost.mutation'
 
-export const useCreatePost = (openModal: OpenModal) => {
+export const useCreatePost = () => {
   const navigate = useNavigate()
 
   const { mutate: createPost } = useCreatePostMutation()
@@ -24,10 +22,7 @@ export const useCreatePost = (openModal: OpenModal) => {
 
     createPost(
       { body: submissionData },
-      {
-        onSuccess: ({ boardId }) => navigate(`/board/detail/${boardId}`, { replace: true }),
-        onError: (error) => openModal(MODAL_KEYS.error, error.message),
-      },
+      { onSuccess: ({ boardId }) => navigate(`/board/detail/${boardId}`, { replace: true }) },
     )
   }
 

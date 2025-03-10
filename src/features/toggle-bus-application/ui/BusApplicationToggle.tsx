@@ -4,7 +4,6 @@ import { ToggleButton } from '@/shared/ui/ToggleButton'
 
 import { useToggleBusApplication } from '../hook/useToggleBusApplication'
 
-import { ToggleBusApplicationErrorModal } from './ToggleBusApplicationErrorModal'
 import { ToggleBusApplicationSuccessModal } from './ToggleBusApplicationSuccessModal'
 
 type BusApplicationToggleProps = {
@@ -21,12 +20,6 @@ export const BusApplicationToggle = ({ isToggled }: BusApplicationToggleProps) =
 
       <ToggleBusApplicationSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
-        isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={closeModal}
-      />
-
-      <ToggleBusApplicationErrorModal
-        label={modalLabel(MODAL_KEYS.error)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}
       />
