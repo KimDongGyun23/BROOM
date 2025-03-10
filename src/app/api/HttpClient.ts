@@ -7,8 +7,6 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
-import { getHttpError } from '../lib/getError'
-
 export class HttpClient {
   private readonly client: AxiosInstance
   private accessToken: string | null = null
@@ -68,15 +66,14 @@ export class HttpClient {
   }
 
   private async onError(error: AxiosError) {
-    if (isAxiosError<string>(error)) {
-      const statusCode = error.response?.status
-      const errorDetail = error.response?.data
+    const response = error.response as AxiosResponse
 
-      console.log('isAxiosError', statusCode, errorDetail)
-
-      return Promise.reject(getHttpError(errorDetail, statusCode))
+    if (isAxiosError(error)) {
+      return Promise.reject({
+        message: response?.data || '알 수 없는 서버 오류가 발생했습니다.',
+        status: response?.status,
+      })
     }
-    console.log('isNotAxiosError', error)
 
     return Promise.reject(error)
   }

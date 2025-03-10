@@ -6,8 +6,6 @@ import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
-import { isHttpError } from '../lib/getError'
-
 export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
@@ -25,14 +23,7 @@ export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
           mutations: {
             onError(error) {
               console.error(error)
-              console.error(isHttpError(error))
-
-              if (isHttpError(error)) {
-                error.printAll()
-                openModal(MODAL_KEYS.error, error.message || '예상치 못한 에러가 발생했습니다.')
-              } else {
-                openModal(MODAL_KEYS.error, error.message)
-              }
+              openModal(MODAL_KEYS.error, error.message)
             },
           },
         },
