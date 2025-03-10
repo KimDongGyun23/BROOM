@@ -7,7 +7,7 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
-import { reIssue } from '@/entities/auth/api/useAuth.mutation'
+import { getHttpError } from '../lib/getError'
 
 export class HttpClient {
   private readonly client: AxiosInstance
@@ -68,35 +68,13 @@ export class HttpClient {
   }
 
   private async onError(error: AxiosError) {
-    const response = error.response as AxiosResponse
-    const originalRequest = error.config as InternalAxiosRequestConfig
+    if (isAxiosError<string>(error)) {
+      const statusCode = error.response?.status
+      const errorDetail = error.response?.data
 
-    if (isAxiosError(error)) {
-      // 토큰 재발급 임시 처리
-      if (response?.status === 408) {
-        try {
-          const reIssueResponse = await reIssue()
-
-          if (reIssueResponse && reIssueResponse.status === 200) {
-            const retry = await this.client.request(originalRequest)
-            return retry
-          }
-        } catch (reIssueError) {
-          console.error('토큰 재발급 실패', reIssueError)
-          // clearSessionStorage()
-          window.location.href = '/login'
-        }
-      }
-
-      return Promise.reject({
-        message: response?.data || '알 수 없는 서버 오류가 발생했습니다.',
-        status: response?.status,
-      })
+      return Promise.reject(getHttpError(errorDetail, statusCode))
     }
 
-    return Promise.reject({
-      message: '네트워크 오류가 발생했습니다.',
-      status: null,
-    })
+    return Promise.reject(error)
   }
 }
