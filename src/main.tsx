@@ -15,7 +15,7 @@ createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
       <CustomQueryClientProvider>
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<Loading isFull />}>
           <GlobalStyles />
           <App />
           <Analytics />

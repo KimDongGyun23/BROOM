@@ -3,12 +3,10 @@ import { styled } from 'styled-components'
 import { useFetchBusApplicantList } from '@/entities/admin/api/useAdmin.query'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { Loading } from '@/shared/ui/Loading'
 
 export const BusApplicantTable = () => {
-  const { data, isPending, isError } = useFetchBusApplicantList()
+  const { data, isError } = useFetchBusApplicantList()
 
-  if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
   return (

@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
 
 import type {
   DateFilterResponse,
@@ -77,7 +77,7 @@ export const useFetchBookmarkList = () =>
   })
 
 export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: boardQueryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
     select: (data): PostForm => {
@@ -97,7 +97,7 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
 }
 
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: boardQueryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
   })

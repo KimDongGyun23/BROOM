@@ -5,7 +5,6 @@ import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.q
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { BusApplicationToggle } from '@/features/toggle-bus-application/ui/BusApplicationToggle'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
-import { Loading } from '@/shared/ui/Loading'
 import { MainHeader } from '@/shared/ui/MainHeader'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -25,9 +24,8 @@ const NavigationLink = ({ label, to }: NavigationLink) => {
 }
 
 export const Admin = () => {
-  const { data: toggleState, isPending, isError } = useFetchBusApplicantToggleState()
+  const { data: toggleState, isError } = useFetchBusApplicantToggleState()
 
-  if (isPending) return <Loading />
   if (isError) return <ErrorPage />
 
   return (

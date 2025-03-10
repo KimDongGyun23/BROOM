@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
 
 import { instance } from '../../../app/api'
 import type {
@@ -37,14 +37,14 @@ export const useFetchDateFilter = () => {
 }
 
 export const useFetchBusApplicantToggleState = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: queryKeys.busApplicantToggleState(),
     queryFn: () =>
       instance.get<BusApplicationToggleResponse>(ENDPOINTS.fetchBusApplicantToggleState),
   })
 
 export const useFetchBusApplicantList = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: queryKeys.busApplicantList(),
     queryFn: () => instance.get<BusApplicantListResponse>(ENDPOINTS.fetchBusApplicantList),
   })

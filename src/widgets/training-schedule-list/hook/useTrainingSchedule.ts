@@ -7,7 +7,7 @@ import {
 import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
 
 export const useTrainingSchedule = () => {
-  const { data: fetchedScheduleList, isPending, isError } = useFetchDateFilter()
+  const { data: fetchedScheduleList, isError } = useFetchDateFilter()
   const scheduleList = useTrainingScheduleList()
   const { initializeSchedules } = useTrainingScheduleActions()
 
@@ -21,5 +21,5 @@ export const useTrainingSchedule = () => {
     (a, b) => new Date(a.trainingDate).getTime() - new Date(b.trainingDate).getTime(),
   )
 
-  return { sortedScheduleList, isPending, isError, fetchedScheduleList }
+  return { sortedScheduleList, isError, fetchedScheduleList }
 }

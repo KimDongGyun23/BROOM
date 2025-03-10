@@ -11,18 +11,16 @@ import { NicknameDuplicationCheckField } from '@/features/check-nickname-duplica
 import { AccountInformationEditHeader } from '@/features/edit-account/ui/AccountInformationEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { Loading } from '@/shared/ui/Loading'
 
 import { ErrorPage } from '../home/ErrorPage'
 
 export const AccountInformationEdit = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
 
-  const { data: defaultValues, isPending, isError } = useFetchAccountInformation()
+  const { data: defaultValues, isError } = useFetchAccountInformation()
 
   const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
 
-  if (isPending) return <Loading />
   if (isError || !defaultValues) return <ErrorPage />
 
   return (

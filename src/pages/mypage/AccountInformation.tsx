@@ -10,7 +10,6 @@ import {
 import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/mypage.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { Loading } from '@/shared/ui/Loading'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 import { ErrorPage } from '../home/ErrorPage'
@@ -20,11 +19,10 @@ export const AccountInformation = () => {
 
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
 
-  const { data: defaultValues, isPending, isError } = useFetchAccountInformation()
+  const { data: defaultValues, isError } = useFetchAccountInformation()
 
   const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
 
-  if (isPending) return <Loading />
   if (isError || !defaultValues) return <ErrorPage />
 
   return (

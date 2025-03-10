@@ -4,14 +4,12 @@ import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedul
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { Loading } from '@/shared/ui/Loading'
 
 import { useTrainingSchedule } from '../hook/useTrainingSchedule'
 
 export const TrainingScheduleList = () => {
-  const { sortedScheduleList, isPending, isError, fetchedScheduleList } = useTrainingSchedule()
+  const { sortedScheduleList, isError, fetchedScheduleList } = useTrainingSchedule()
 
-  if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!fetchedScheduleList || !fetchedScheduleList.dates.length)
     return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />

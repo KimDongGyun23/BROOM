@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 import { instance } from '@/app/api'
 import type {
@@ -17,13 +17,13 @@ export const mypageQueryKeys = {
 }
 
 export const useUserProfile = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: mypageQueryKeys.all,
     queryFn: () => instance.get<MypageProfileResponse>(ENDPOINTS.fetchMypage),
   })
 
 export const useFetchAccountInformation = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: mypageQueryKeys.account(),
     queryFn: () => instance.get<AccountInformationResponse>(ENDPOINTS.fetchAccountInformation),
   })

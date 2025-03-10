@@ -1,4 +1,4 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query'
 
 import { instance } from '@/app/api'
 import type {
@@ -31,7 +31,7 @@ export const chatQueryKeys = {
 }
 
 export const useFetchChatRoomList = () =>
-  useInfiniteQuery({
+  useSuspenseInfiniteQuery({
     queryKey: chatQueryKeys.roomList(),
     queryFn: ({ pageParam = 0 }) =>
       instance.get<ChatRoomListResponse>(ENDPOINTS.fetchRoomList(pageParam)),
@@ -42,7 +42,7 @@ export const useFetchChatRoomList = () =>
   })
 
 export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest) =>
-  useInfiniteQuery({
+  useSuspenseInfiniteQuery({
     queryKey: chatQueryKeys.roomInformation(urls),
     queryFn: ({ pageParam = 0 }) =>
       instance.get<ChatRoomInformationResponse>(

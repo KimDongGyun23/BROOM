@@ -3,16 +3,22 @@ import styled from 'styled-components'
 
 import theme from '@/app/style/theme'
 
-export const Loading = () => {
+type LoadingProps = {
+  isFull?: boolean
+}
+
+export const Loading = ({ isFull = false }: LoadingProps) => {
   return (
-    <LoadingContainer>
+    <LoadingContainer $isFull={isFull}>
       <SyncLoader color={theme.colors.black[600]} />
     </LoadingContainer>
   )
 }
 
-const LoadingContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
+const LoadingContainer = styled.div<{ $isFull: boolean }>`
+  ${({ theme, $isFull }) => `
+    ${theme.flexBox('row', 'center', 'center')}
+    height: ${$isFull ? '100svh' : '100%'};
+  `}
   width: 100%;
-  height: 100%;
 `
