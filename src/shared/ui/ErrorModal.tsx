@@ -19,7 +19,7 @@ export const ErrorModal = ({ error, resetErrorBoundary }: FallbackProps) => {
 
   return (
     <ModalWithOneButton
-      label={modalLabel(MODAL_KEYS.error)}
+      label={`${modalLabel(MODAL_KEYS.error)} 전역`}
       isModalOpen={isModalOpen(MODAL_KEYS.error)}
       closeModal={closeModal}
       button={{ onClickButton: resetErrorBoundary }}
