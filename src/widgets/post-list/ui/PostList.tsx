@@ -6,7 +6,6 @@ import type { PostListResponse } from '@/entities/board/model/post.type'
 import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { Loading } from '@/shared/ui/Loading'
 
 import { PostItem } from './PostItem'
 
@@ -18,13 +17,7 @@ type PostListProps = {
   fetchNextPage: VoidFunction
 }
 
-export const PostList = ({
-  postList,
-  isPending,
-  isError,
-  hasNextPage,
-  fetchNextPage,
-}: PostListProps) => {
+export const PostList = ({ postList, isError, hasNextPage, fetchNextPage }: PostListProps) => {
   const isRecruiting = useIsRecruiting()
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
@@ -37,7 +30,6 @@ export const PostList = ({
     }
   }, [isRecruiting])
 
-  if (isPending) return <Loading />
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
