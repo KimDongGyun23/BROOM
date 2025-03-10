@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 
 import { useFetchEnteredChatRoom } from '@/entities/chat/api/useChat.query'
+import type { OpenModal } from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions } from '@/shared/model/modal.store'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
-export const useEnterChatRoom = () => {
+export const useEnterChatRoom = (openModal: OpenModal) => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
-  const { openOneButtonModal } = useModalActions()
   const { refetch } = useFetchEnteredChatRoom({ urls: { boardId } })
 
   const enterChatRoom = async () => {
@@ -16,7 +16,7 @@ export const useEnterChatRoom = () => {
     if (isSuccess) {
       navigate(`/chat/${boardId}`)
     } else if (isError) {
-      openOneButtonModal(error.message)
+      openModal(MODAL_KEYS.error, error.message)
     }
   }
 
