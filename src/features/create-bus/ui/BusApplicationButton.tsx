@@ -1,25 +1,36 @@
-import { useFormContext } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import { useBusApplicationMutation } from '@/entities/bus/api/useBus.mutation'
-import type { BusApplication } from '@/entities/bus/model/bus.type'
-import { useModalActions } from '@/shared/model/modal.store'
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/Button'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
+
+import { useCreateBusApplication } from '../hook/useCreateBusApplication'
 
 export const BusApplicationButton = () => {
-  const { openOneButtonModal } = useModalActions()
-  const { mutate: reserveBus } = useBusApplicationMutation()
+  const navigate = useNavigate()
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
-  const { handleSubmit } = useFormContext<BusApplication>()
+  const { onSubmit } = useCreateBusApplication(openModal)
 
-  const handleCreateBusApplication = (formData: BusApplication) => {
-    reserveBus({ body: formData }, { onSuccess: (response) => openOneButtonModal(response) })
+  const handleClickModal = () => {
+    closeModal()
+    navigate('/bus-application', { replace: true })
   }
 
   return (
-    <StyledButton size="lg" onClick={handleSubmit(handleCreateBusApplication)}>
-      예약하기
-    </StyledButton>
+    <>
+      <StyledButton size="lg" onClick={onSubmit}>
+        신청하기
+      </StyledButton>
+      <ModalWithOneButton
+        label={modalLabel(MODAL_KEYS.success)}
+        isModalOpen={isModalOpen(MODAL_KEYS.success)}
+        closeModal={handleClickModal}
+        button={{ onClickButton: handleClickModal }}
+      />
+    </>
   )
 }
 
