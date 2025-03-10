@@ -13,13 +13,7 @@ export const BusApplicationButton = () => {
   const { handleSubmit } = useFormContext<BusApplication>()
 
   const handleCreateBusApplication = (formData: BusApplication) => {
-    reserveBus(
-      { body: formData },
-      {
-        onSuccess: (response) => openOneButtonModal(response),
-        onError: (error) => openOneButtonModal(error.message),
-      },
-    )
+    reserveBus({ body: formData }, { onSuccess: (response) => openOneButtonModal(response) })
   }
 
   return (
