@@ -7,15 +7,11 @@ import { PostDetailContent } from '@/widgets/post-detail/ui/PostDetailContent'
 import { PostDetailHeader } from '@/widgets/post-detail/ui/PostDetailHeader'
 import { PostDetailProfile } from '@/widgets/post-detail/ui/PostDetailProfile'
 
-import { ErrorPage } from '../home/ErrorPage'
-
 export const PostDetail = () => {
   const boardId = useParamId()
 
-  const { data, isError } = useFetchPostDetail({ urls: { boardId } })
+  const { data } = useFetchPostDetail({ urls: { boardId } })
   const { updatePostDetail } = usePostDetailActions()
-
-  if (isError) return <ErrorPage />
 
   updatePostDetail(data)
 

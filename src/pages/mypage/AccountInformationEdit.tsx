@@ -10,18 +10,18 @@ import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/
 import { NicknameDuplicationCheckField } from '@/features/check-nickname-duplication/ui/NicknameDuplicationCheckField'
 import { AccountInformationEditHeader } from '@/features/edit-account/ui/AccountInformationEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
+import { ERROR_MESSAGES } from '@/shared/lib/constants'
+import { EmptyMessage } from '@/shared/ui/Error'
 import { InputGroup } from '@/shared/ui/inputGroup'
-
-import { ErrorPage } from '../home/ErrorPage'
 
 export const AccountInformationEdit = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
 
-  const { data: defaultValues, isError } = useFetchAccountInformation()
+  const { data: defaultValues } = useFetchAccountInformation()
 
   const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
 
-  if (isError || !defaultValues) return <ErrorPage />
+  if (!defaultValues) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
   return (
     <FormProvider {...formMethod}>

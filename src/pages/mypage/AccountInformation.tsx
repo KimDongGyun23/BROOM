@@ -12,18 +12,14 @@ import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-import { ErrorPage } from '../home/ErrorPage'
-
 export const AccountInformation = () => {
   const navigate = useNavigate()
 
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
 
-  const { data: defaultValues, isError } = useFetchAccountInformation()
+  const { data: defaultValues } = useFetchAccountInformation()
 
   const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
-
-  if (isError || !defaultValues) return <ErrorPage />
 
   return (
     <FormProvider {...formMethod}>

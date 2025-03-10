@@ -7,17 +7,17 @@ import type { PostForm } from '@/entities/board/model/post.type'
 import { PostEditHeader } from '@/features/edit-post/ui/PostEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
+import { ERROR_MESSAGES } from '@/shared/lib/constants'
+import { EmptyMessage } from '@/shared/ui/Error'
 import { PostFormSection } from '@/widgets/post-form/ui/PostFormSection'
-
-import { ErrorPage } from '../home/ErrorPage'
 
 export const PostEdit = () => {
   const boardId = useParamId()
 
-  const { data: defaultValues, isError } = useFetchPostEditData({ urls: { boardId } })
+  const { data: defaultValues } = useFetchPostEditData({ urls: { boardId } })
   const formMethod = useCustomForm<PostForm>(postSchema, { defaultValues })
 
-  if (isError || !defaultValues) return <ErrorPage />
+  if (!defaultValues) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
   return (
     <FormProvider {...formMethod}>

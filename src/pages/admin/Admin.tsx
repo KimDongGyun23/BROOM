@@ -7,8 +7,6 @@ import { BusApplicationToggle } from '@/features/toggle-bus-application/ui/BusAp
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
 
-import { ErrorPage } from '../home/ErrorPage'
-
 type NavigationLink = {
   label: string
   to: string
@@ -24,9 +22,7 @@ const NavigationLink = ({ label, to }: NavigationLink) => {
 }
 
 export const Admin = () => {
-  const { data: toggleState, isError } = useFetchBusApplicantToggleState()
-
-  if (isError) return <ErrorPage />
+  const { data: toggleState } = useFetchBusApplicantToggleState()
 
   return (
     <>
