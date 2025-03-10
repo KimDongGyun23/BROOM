@@ -25,6 +25,8 @@ export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
           mutations: {
             onError(error) {
               console.error(error)
+              console.error(isHttpError(error))
+
               if (isHttpError(error)) {
                 error.printAll()
                 openModal(MODAL_KEYS.error, error.message || '예상치 못한 에러가 발생했습니다.')

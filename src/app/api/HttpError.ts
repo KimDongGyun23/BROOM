@@ -21,7 +21,7 @@ export class HttpError<E = unknown> extends Error {
   private _meta: unknown
 
   constructor({ type, statusCode, detail, meta }: HttpErrorInfo<E>) {
-    const generalMessage = `${type}`
+    const generalMessage = type
     super(generalMessage)
 
     this._type = type

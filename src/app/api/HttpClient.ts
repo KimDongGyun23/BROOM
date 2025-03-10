@@ -72,8 +72,11 @@ export class HttpClient {
       const statusCode = error.response?.status
       const errorDetail = error.response?.data
 
+      console.log('isAxiosError', statusCode, errorDetail)
+
       return Promise.reject(getHttpError(errorDetail, statusCode))
     }
+    console.log('isNotAxiosError', error)
 
     return Promise.reject(error)
   }
