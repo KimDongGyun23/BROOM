@@ -8,13 +8,17 @@ import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
 import { PRIVACY_TERM, SERVICE_TERM } from '../config/term.constant'
 import type { AgreementId } from '../model/terms.store'
 
-type TermViewButton = {
+type TermModalProps = {
   id: AgreementId
   isModalOpen: boolean
   closeModal: VoidFunction
 }
 
-export const TermModal = ({ id, isModalOpen, closeModal }: TermViewButton) => {
+type TermViewButtonProps = {
+  id: AgreementId
+}
+
+export const TermModal = ({ id, isModalOpen, closeModal }: TermModalProps) => {
   const term = id === 'personalConsent' ? PRIVACY_TERM : SERVICE_TERM
 
   return (
@@ -36,7 +40,7 @@ export const TermModal = ({ id, isModalOpen, closeModal }: TermViewButton) => {
   )
 }
 
-export const TermViewButton = ({ id }: TermViewButton) => {
+export const TermViewButton = ({ id }: TermViewButtonProps) => {
   const { isModalOpen, openModal, closeModal } = useModal()
 
   return (
