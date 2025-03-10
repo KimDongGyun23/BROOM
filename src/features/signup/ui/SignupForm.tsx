@@ -22,21 +22,14 @@ const CurrentStepForm = () => {
   }
 }
 
-const SignupFormWithModal = () => {
+export const SignupForm = () => {
   const { onSubmit } = useSignup()
 
   return (
-    <>
+    <ModalStoreProvider>
       <FormContainer onSubmit={onSubmit} $isFull>
         <CurrentStepForm />
       </FormContainer>
-      {/* <ModalWithOneButton /> */}
-    </>
+    </ModalStoreProvider>
   )
 }
-
-export const SignupForm = () => (
-  <ModalStoreProvider>
-    <SignupFormWithModal />
-  </ModalStoreProvider>
-)

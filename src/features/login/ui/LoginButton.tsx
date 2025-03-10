@@ -6,17 +6,8 @@ export const LoginButton = () => {
   const { onSubmit } = useLogin()
 
   return (
-    <>
-      <Button size="lg" onClick={onSubmit}>
-        로그인
-      </Button>
-
-      {/* <ModalWithOneButton
-        label={modalLabel(MODAL_KEYS.error)}
-        isModalOpen={isModalOpen(MODAL_KEYS.error)}
-        closeModal={closeModal}
-        button={{ onClickButton: closeModal }}
-      /> */}
-    </>
+    <Button size="lg" onClick={onSubmit}>
+      로그인
+    </Button>
   )
 }
