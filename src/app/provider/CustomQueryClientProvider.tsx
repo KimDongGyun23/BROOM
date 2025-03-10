@@ -23,6 +23,7 @@ export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
           mutations: {
             // throwOnError: true,
             onError(error) {
+              console.error(error)
               openModal(MODAL_KEYS.error, error.message)
             },
           },
