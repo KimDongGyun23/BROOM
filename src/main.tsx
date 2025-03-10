@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { ThemeProvider } from 'styled-components'
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
           <Analytics />
           <SpeedInsights />
         </Suspense>
+        <ReactQueryDevtools />
       </CustomQueryClientProvider>
     </ThemeProvider>
   </BrowserRouter>,
