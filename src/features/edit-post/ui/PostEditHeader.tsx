@@ -11,7 +11,6 @@ export const PostEditHeader = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
-  // const { openOneButtonModal } = useModalActions()
   const { mutate: postUpdate } = useEditPost()
 
   const { handleSubmit } = useFormContext<PostForm>()
@@ -26,10 +25,7 @@ export const PostEditHeader = () => {
 
     postUpdate(
       { urls: { boardId }, body: submissionData },
-      {
-        onSuccess: () => navigate(-1 as To, { replace: true }),
-        // onError: (error) => openOneButtonModal(error.message),
-      },
+      { onSuccess: () => navigate(-1 as To, { replace: true }) },
     )
   }
 

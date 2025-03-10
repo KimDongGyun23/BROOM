@@ -8,7 +8,7 @@ import { useExitChatRoom } from '../hook/useExitChatRoom'
 
 export const ChatRoomExitButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
-  const handleClickExitRoom = useExitChatRoom()
+  const handleClickExitRoom = useExitChatRoom(closeModal)
 
   const handleClickOpenModal = () => openModal(MODAL_KEYS.confirm, '채팅방을 나가시겠습니까?')
 

@@ -2,7 +2,8 @@ import React from 'react'
 import { styled } from 'styled-components'
 
 import { TermModal } from '@/features/agree-term/ui/TermViewButton'
-import { ModalStoreProvider, useModalActions } from '@/shared/model/modal.store'
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
 const CUSTOMER_SUPPORT = {
   sectionTitle: '고객 지원',
@@ -14,16 +15,22 @@ const CUSTOMER_SUPPORT = {
   ],
 } as const
 
-const SectionModal = ({ index }: { index: number }) => {
+type SectionModalType = {
+  index: number
+  isModalOpen: boolean
+  closeModal: VoidFunction
+}
+
+const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
   switch (index) {
     case 0:
       return null
     case 1:
       return null
     case 2:
-      return <TermModal id="personalConsent" />
+      return <TermModal id="personalConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
     case 3:
-      return <TermModal id="serviceConsent" />
+      return <TermModal id="serviceConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
     default:
       return null
   }
@@ -31,22 +38,26 @@ const SectionModal = ({ index }: { index: number }) => {
 
 export const CustomerSupportSection = () => {
   const { sectionTitle, links } = CUSTOMER_SUPPORT
-  const { openOneButtonModal } = useModalActions()
+  const { isModalOpen, openModal, closeModal } = useModal()
 
   return (
     <Section>
       <SectionTitle>{sectionTitle}</SectionTitle>
       <SectionList>
-        <ModalStoreProvider>
-          {links.map(({ name }, index) => (
-            <React.Fragment key="name">
-              <li>
-                <SectionItemButton onClick={() => openOneButtonModal('')}>{name}</SectionItemButton>
-              </li>
-              <SectionModal index={index} />
-            </React.Fragment>
-          ))}
-        </ModalStoreProvider>
+        {links.map(({ name }, index) => (
+          <React.Fragment key="name">
+            <li>
+              <SectionItemButton onClick={() => openModal(MODAL_KEYS.confirm, '')}>
+                {name}
+              </SectionItemButton>
+            </li>
+            <SectionModal
+              index={index}
+              isModalOpen={isModalOpen(MODAL_KEYS.confirm)}
+              closeModal={closeModal}
+            />
+          </React.Fragment>
+        ))}
       </SectionList>
     </Section>
   )

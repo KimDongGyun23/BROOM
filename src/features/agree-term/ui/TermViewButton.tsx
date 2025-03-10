@@ -1,6 +1,7 @@
 import { styled } from 'styled-components'
 
-import { useModalActions, useOneButtonModalState } from '@/shared/model/modal.store'
+import useModal from '@/shared/hook/useModal'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/Button'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
 
@@ -9,12 +10,11 @@ import type { AgreementId } from '../model/terms.store'
 
 type TermViewButton = {
   id: AgreementId
+  isModalOpen: boolean
+  closeModal: VoidFunction
 }
 
-export const TermModal = ({ id }: TermViewButton) => {
-  const { isModalOpen } = useOneButtonModalState()
-  const { closeModal } = useModalActions()
-
+export const TermModal = ({ id, isModalOpen, closeModal }: TermViewButton) => {
   const term = id === 'personalConsent' ? PRIVACY_TERM : SERVICE_TERM
 
   return (
@@ -37,13 +37,14 @@ export const TermModal = ({ id }: TermViewButton) => {
 }
 
 export const TermViewButton = ({ id }: TermViewButton) => {
-  const { openOneButtonModal } = useModalActions()
+  const { isModalOpen, openModal, closeModal } = useModal()
+
   return (
     <>
-      <ViewButton type="button" onClick={() => openOneButtonModal('')}>
+      <ViewButton type="button" onClick={() => openModal(MODAL_KEYS.confirm, '')}>
         보기
       </ViewButton>
-      <TermModal id={id} />
+      <TermModal id={id} isModalOpen={isModalOpen(MODAL_KEYS.confirm)} closeModal={closeModal} />
     </>
   )
 }

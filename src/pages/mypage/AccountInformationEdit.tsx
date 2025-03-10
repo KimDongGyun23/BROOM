@@ -10,7 +10,6 @@ import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/
 import { NicknameDuplicationCheckField } from '@/features/check-nickname-duplication/ui/NicknameDuplicationCheckField'
 import { AccountInformationEditHeader } from '@/features/edit-account/ui/AccountInformationEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { Loading } from '@/shared/ui/Loading'
 
@@ -27,23 +26,21 @@ export const AccountInformationEdit = () => {
   if (isError || !defaultValues) return <ErrorPage />
 
   return (
-    <ModalStoreProvider>
-      <FormProvider {...formMethod}>
-        <AccountInformationEditHeader />
-        <FormContainer $isFull>
-          <NicknameDuplicationCheckField {...NICKNAME} />
+    <FormProvider {...formMethod}>
+      <AccountInformationEditHeader />
+      <FormContainer $isFull>
+        <NicknameDuplicationCheckField {...NICKNAME} />
 
-          <InputGroup section={DISCHARGE_YEAR.section}>
-            <InputGroup.Label label={DISCHARGE_YEAR.label} />
-            <InputGroup.NumberInput {...DISCHARGE_YEAR.input} />
-          </InputGroup>
+        <InputGroup section={DISCHARGE_YEAR.section}>
+          <InputGroup.Label label={DISCHARGE_YEAR.label} />
+          <InputGroup.NumberInput {...DISCHARGE_YEAR.input} />
+        </InputGroup>
 
-          <InputGroup section={MILITARY_BRANCH.section}>
-            <InputGroup.Label label={MILITARY_BRANCH.label} />
-            <InputGroup.SortOfArmy />
-          </InputGroup>
-        </FormContainer>
-      </FormProvider>
-    </ModalStoreProvider>
+        <InputGroup section={MILITARY_BRANCH.section}>
+          <InputGroup.Label label={MILITARY_BRANCH.label} />
+          <InputGroup.SortOfArmy />
+        </InputGroup>
+      </FormContainer>
+    </FormProvider>
   )
 }

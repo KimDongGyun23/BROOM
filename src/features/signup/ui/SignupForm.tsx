@@ -1,7 +1,6 @@
 import { FormContainer } from '@/app/style/commonStyles'
 import { useSignup } from '@/features/signup/hook/useSignupForm'
 import { useCurrentStep } from '@/features/signup/model/steps.store'
-import { ModalStoreProvider } from '@/shared/model/modal.store'
 
 import { SignupOneStep } from './SignupOneStep'
 import { SignupThirdStep } from './SignupThirdStep'
@@ -26,10 +25,8 @@ export const SignupForm = () => {
   const { onSubmit } = useSignup()
 
   return (
-    <ModalStoreProvider>
-      <FormContainer onSubmit={onSubmit} $isFull>
-        <CurrentStepForm />
-      </FormContainer>
-    </ModalStoreProvider>
+    <FormContainer onSubmit={onSubmit} $isFull>
+      <CurrentStepForm />
+    </FormContainer>
   )
 }

@@ -2,17 +2,15 @@ import { useNavigate } from 'react-router-dom'
 
 import { useSidebarActions } from '@/features/chat-sidebar/model/sidebar.store'
 import { useParamId } from '@/shared/hook/useParamId'
-import { useModalActions } from '@/shared/model/modal.store'
 
 import { useExitChatRoomMutation } from '../api/exitChatRoom.mutation'
 
-export const useExitChatRoom = () => {
+export const useExitChatRoom = (closeModal: VoidFunction) => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
   const { mutate: exitRoom } = useExitChatRoomMutation()
 
-  const { openOneButtonModal, closeModal } = useModalActions()
   const { closeSidebar } = useSidebarActions()
 
   const handleClickExitRoom = () => {
@@ -24,7 +22,6 @@ export const useExitChatRoom = () => {
           closeSidebar()
           navigate('/chat')
         },
-        onError: (error) => openOneButtonModal(error.message, false),
       },
     )
   }
