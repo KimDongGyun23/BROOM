@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useDeleteId } from '../hook/useDeleteId'
+import { useDeleteId } from '@/features/delete-id/hook/useDeleteId'
 
 export const DeleteIdButton = () => {
   const { handleDeleteId } = useDeleteId()
