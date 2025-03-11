@@ -1,8 +1,7 @@
+import { useToggleBusApplication } from '@/features/toggle-bus-application/hook/useToggleBusApplication'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { ToggleButton } from '@/shared/ui/ToggleButton'
-
-import { useToggleBusApplication } from '../hook/useToggleBusApplication'
 
 import { ToggleBusApplicationSuccessModal } from './ToggleBusApplicationSuccessModal'
 

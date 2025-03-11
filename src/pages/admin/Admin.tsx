@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
 import { LogoutButton } from '@/features/logout/ui/LogoutButton'
-import { BusApplicationToggle } from '@/features/toggle-bus-application/ui/BusApplicationToggle'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
+import { BusApplicationToggle } from '@/widgets/bus-application-toggle/BusApplicationToggle'
 
 type NavigationLink = {
   label: string
