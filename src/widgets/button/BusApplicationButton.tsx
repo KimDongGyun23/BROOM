@@ -1,34 +1,31 @@
-import { useNavigate } from 'react-router-dom'
+import { useFormContext } from 'react-hook-form'
 import { styled } from 'styled-components'
 
+import type { BusApplication } from '@/entities/bus/model/bus.type'
+import { useCreateBusApplication } from '@/features/create-bus/hook/useCreateBusApplication'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/Button'
-import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
-import { useCreateBusApplication } from '../hook/useCreateBusApplication'
+import { ApplyBusSuccessModal } from './ApplyBusSuccessModal'
 
 export const BusApplicationButton = () => {
-  const navigate = useNavigate()
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
-  const { onSubmit } = useCreateBusApplication(openModal)
+  const { handleSubmit } = useFormContext<BusApplication>()
 
-  const handleClickModal = () => {
-    closeModal()
-    navigate('/bus-application', { replace: true })
-  }
+  const { handleCreateBusApplication } = useCreateBusApplication(openModal)
 
   return (
     <>
-      <StyledButton size="lg" onClick={onSubmit}>
+      <StyledButton size="lg" onClick={handleSubmit(handleCreateBusApplication)}>
         신청하기
       </StyledButton>
-      <ModalWithOneButton
+
+      <ApplyBusSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
-        closeModal={handleClickModal}
-        button={{ onClickButton: handleClickModal }}
+        closeModal={closeModal}
       />
     </>
   )
