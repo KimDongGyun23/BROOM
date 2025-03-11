@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 import { DeleteIdButton } from '@/features/delete-id/ui/DeleteIdButton'
-import { LogoutButton } from '@/features/logout/ui/LogoutButton'
+import { LogoutButton } from '@/widgets/logout-button/LogoutButton'
 
 export const MypageAuthSection = () => {
   return (
