@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Container, FormContainer } from '@/app/style/commonStyles'
 import { loginAttribute, loginSchema } from '@/entities/auth/config/auth.schema'
 import type { LoginCredentials } from '@/entities/auth/model/auth.type'
-import { LoginButton } from '@/features/login/ui/LoginButton'
+import { LoginButton } from '@/widgets/button/LoginButton'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 

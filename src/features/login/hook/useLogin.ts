@@ -1,4 +1,3 @@
-import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { instance } from '@/app/api'
@@ -12,8 +11,6 @@ export const useLogin = () => {
 
   const { mutate: loginMutation } = useLoginMutation()
   const { login, logout } = useAuthActions()
-
-  const { handleSubmit } = useFormContext<LoginCredentials>()
 
   const handleLogin = (formData: LoginCredentials) => {
     loginMutation(
@@ -33,5 +30,5 @@ export const useLogin = () => {
     )
   }
 
-  return { onSubmit: handleSubmit(handleLogin) }
+  return { handleLogin }
 }
