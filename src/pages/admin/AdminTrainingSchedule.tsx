@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import type { TrainingSchedule } from '@/entities/admin/model/admin.type'
-import { CreateTrainingScheduleButton } from '@/features/create-training-schedule/ui/CreateTrainingScheduleButton'
+import { CreateTrainingScheduleButton } from '@/widgets/button/CreateTrainingScheduleButton'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { TrainingScheduleList } from '@/widgets/training-schedule-list/ui/TrainingScheduleList'

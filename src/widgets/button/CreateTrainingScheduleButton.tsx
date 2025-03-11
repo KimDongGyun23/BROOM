@@ -1,6 +1,5 @@
+import { useCreateTrainingSchedule } from '@/features/create-training-schedule/hook/useCreateTrainingSchedule'
 import { Button } from '@/shared/ui/Button'
-
-import { useCreateTrainingSchedule } from '../hook/useCreateTrainingSchedule'
 
 export const CreateTrainingScheduleButton = () => {
   const { handleCreateTrainingSchedule } = useCreateTrainingSchedule()
