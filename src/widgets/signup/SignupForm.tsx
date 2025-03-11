@@ -1,4 +1,7 @@
+import { useFormContext } from 'react-hook-form'
+
 import { FormContainer } from '@/app/style/commonStyles'
+import type { SignupData } from '@/entities/auth/model/auth.type'
 import { useSignup } from '@/features/signup/hook/useSignupForm'
 import { useCurrentStep } from '@/features/signup/model/steps.store'
 
@@ -22,10 +25,12 @@ const CurrentStepForm = () => {
 }
 
 export const SignupForm = () => {
-  const { onSubmit } = useSignup()
+  const { handleSignup } = useSignup()
+
+  const { handleSubmit } = useFormContext<SignupData>()
 
   return (
-    <FormContainer onSubmit={onSubmit} $isFull>
+    <FormContainer onSubmit={handleSubmit(handleSignup)} $isFull>
       <CurrentStepForm />
     </FormContainer>
   )
