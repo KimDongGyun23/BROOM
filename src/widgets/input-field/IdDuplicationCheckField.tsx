@@ -1,10 +1,12 @@
 import { ValidateContainer } from '@/app/style/commonStyles'
+import { useIdDuplicationCheck } from '@/features/check-id-duplication/hook/useIdDuplicationCheck'
+import {
+  useIdDuplicationResultMessage,
+  useIdUniqueState,
+} from '@/features/check-id-duplication/model/idDuplicationCheck.store'
+import type { FieldType } from '@/features/check-nickname-duplication/model/field.type'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
-
-import { useIdDuplicationCheck } from '../hook/useIdDuplicationCheck'
-import type { FieldType } from '../model/field.type'
-import { useIdDuplicationResultMessage, useIdUniqueState } from '../model/idDuplicationCheck.store'
 
 export const IdDuplicationCheckField = ({ section, label, input }: FieldType) => {
   const isIdUnique = useIdUniqueState()

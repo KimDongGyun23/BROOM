@@ -4,8 +4,7 @@ import {
   BUS_APPLICATION_STATUS,
   type BusApplicationStatus,
 } from '@/entities/bus/config/bus.constant'
-
-import { useBusApplicationStatus } from '../model/busApplication'
+import { useBusApplicationStatus } from '@/features/check-bus-application/model/busApplication'
 
 export const BusApplicationStatusTable = () => {
   const applicationStatus = useBusApplicationStatus()

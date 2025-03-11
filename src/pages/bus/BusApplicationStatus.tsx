@@ -5,7 +5,7 @@ import { Container, FormContainer, ValidateContainer } from '@/app/style/commonS
 import { busReserveInfoAttribute, busReserveInfoSchema } from '@/entities/bus/config/bus.schema'
 import type { StudentId } from '@/entities/bus/model/bus.type'
 import { BusApplicationStatusTable } from '@/features/check-bus-application/ui/BusApplicationStatusTable'
-import { CheckBusApplicationButton } from '@/features/check-bus-application/ui/CheckBusApplicationButton'
+import { CheckBusApplicationButton } from '@/widgets/button/CheckBusApplicationButton'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
