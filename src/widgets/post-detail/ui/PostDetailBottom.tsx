@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
+import { BookmarkButton } from '@/widgets/button/BookmarkButton'
 import { EnterChatButton } from '@/widgets/button/EnterChatButton'
 import { useIsLoggedIn } from '@/features/login/model/auth.store'
 

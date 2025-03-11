@@ -3,9 +3,8 @@ import { MODAL_KEYS } from '@/shared/lib/constants'
 import type { ModalWithOneButtonProps } from '@/shared/ui/modal/ButtonModal'
 import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
-import { useDeletePost } from '../hook/useDeletePost'
-
-import { DeletePostSuccessModal } from './DeletePostSuccessModal'
+import { useDeletePost } from '../../features/delete-post/hook/useDeletePost'
+import { DeletePostSuccessModal } from '../../features/delete-post/ui/DeletePostSuccessModal'
 
 export const DeleteConfirmationModal = ({
   label: confirmModalLabel,

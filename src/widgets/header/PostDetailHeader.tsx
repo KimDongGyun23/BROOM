@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
 import { usePostDetail } from '@/entities/board/model/postDetail.store'
-import { DeleteConfirmationModal } from '@/features/delete-post/ui/DeleteConfirmationModal'
 import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { useBoolean } from '@/shared/hook/useBoolean'
 import useModal from '@/shared/hook/useModal'
@@ -9,6 +8,7 @@ import { useParamId } from '@/shared/hook/useParamId'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
+import { DeleteConfirmationModal } from '@/widgets/header/DeleteConfirmationModal'
 
 const AuthenticatedHeader = () => {
   const boardId = useParamId()

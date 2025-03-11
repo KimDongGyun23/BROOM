@@ -1,10 +1,9 @@
 import { styled } from 'styled-components'
 
+import { useBookmark } from '@/features/bookmark/hook/useBookmark'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
-
-import { useBookmark } from '../hook/useBookmark'
 
 import { BookmarkSuccessModal } from './BookmarkSuccessModal'
 
