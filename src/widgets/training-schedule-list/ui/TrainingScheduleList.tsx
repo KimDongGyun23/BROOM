@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { DeleteTrainingScheduleButton } from '@/features/delete-training-schedule/ui/DeleteTrainingScheduleButton'
+import { DeleteTrainingScheduleButton } from '@/widgets/button/DeleteTrainingScheduleButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'

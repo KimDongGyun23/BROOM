@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 import type { TrainingSchedule } from '@/entities/admin/model/admin.type'
-
-import { useDeleteTrainingSchedule } from '../hook/useDeleteTrainingSchedule'
+import { useDeleteTrainingSchedule } from '@/features/delete-training-schedule/hook/useDeleteTrainingSchedule'
 
 type DeleteTrainingScheduleButtonProps = {
   schedule: TrainingSchedule
