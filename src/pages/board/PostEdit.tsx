@@ -8,8 +8,8 @@ import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { PostFormSection } from '@/widgets/post-form/PostFormSection'
-import { PostEditHeader } from '@/widgets/post-header/PostEditHeader'
+import { PostEditHeader } from '@/widgets/header/PostEditHeader'
+import { PostFormSection } from '@/widgets/section/PostFormSection'
 
 export const PostEdit = () => {
   const boardId = useParamId()

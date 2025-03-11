@@ -6,7 +6,7 @@ import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-import { EditPasswordSuccessModal } from './EditPasswordSuccessModal'
+import { EditPasswordSuccessModal } from './modal/EditPasswordSuccessModal'
 
 export const PasswordEditHeader = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()

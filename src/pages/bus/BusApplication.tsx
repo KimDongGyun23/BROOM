@@ -5,7 +5,7 @@ import { Container } from '@/app/style/commonStyles'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { BusNoticeSection } from '@/widgets/bus-notice/ui/BusNoticeSection'
+import { BusNoticeSection } from '@/widgets/section/BusNoticeSection'
 
 export const BusApplication = () => {
   const navigate = useNavigate()

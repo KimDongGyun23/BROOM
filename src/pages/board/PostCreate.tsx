@@ -5,7 +5,7 @@ import { postSchema } from '@/entities/board/config/post.schema'
 import type { PostForm } from '@/entities/board/model/post.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { PostCreateHeader } from '@/widgets/header/PostCreateHeader'
-import { PostFormSection } from '@/widgets/post-form/PostFormSection'
+import { PostFormSection } from '@/widgets/section/PostFormSection'
 
 export const PostCreate = () => {
   const formMethod = useCustomForm<PostForm>(postSchema)

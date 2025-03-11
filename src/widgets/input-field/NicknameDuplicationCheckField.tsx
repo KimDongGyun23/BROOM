@@ -1,13 +1,12 @@
 import { ValidateContainer } from '@/app/style/commonStyles'
-import { Button } from '@/shared/ui/Button'
-import { InputGroup } from '@/shared/ui/inputGroup'
-
-import { useNicknameDuplicationCheck } from '../hook/useNicknameDuplicationCheck'
-import type { FieldType } from '../model/field.type'
+import type { FieldType } from '@/features/check-id-duplication/model/field.type'
+import { useNicknameDuplicationCheck } from '@/features/check-nickname-duplication/hook/useNicknameDuplicationCheck'
 import {
   useNicknameDuplicationResultMessage,
   useNicknameUniqueState,
-} from '../model/nicknameDuplicationCheck.store'
+} from '@/features/check-nickname-duplication/model/nicknameDuplicationCheck.store'
+import { Button } from '@/shared/ui/Button'
+import { InputGroup } from '@/shared/ui/inputGroup'
 
 export const NicknameDuplicationCheckField = ({ section, label, input }: FieldType) => {
   const validationState = useNicknameUniqueState()

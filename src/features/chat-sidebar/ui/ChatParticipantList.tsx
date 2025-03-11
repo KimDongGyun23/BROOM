@@ -5,8 +5,7 @@ import { useUserData } from '@/features/login/model/auth.store'
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
-
-import { ExpelChatButton } from '../../expel-user/ui/ExpelChatButton'
+import { ExpelChatButton } from '@/widgets/button/ExpelChatButton'
 
 type ChatParticipantListProps = {
   participantList: User[]

@@ -3,9 +3,9 @@ import { FormProvider } from 'react-hook-form'
 import { FormContainer } from '@/app/style/commonStyles'
 import { newPasswordAttribute, newPasswordSchema } from '@/entities/mypage/model/mypage.schema'
 import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
-import { PasswordEditHeader } from '@/widgets/post-header/PasswordEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
+import { PasswordEditHeader } from '@/widgets/header/PasswordEditHeader'
 
 export const PasswordEdit = () => {
   const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)

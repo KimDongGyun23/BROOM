@@ -7,7 +7,7 @@ import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 import { useEditAccountInformation } from '../../features/edit-account/hook/useEditAccountInformation'
 
-import { EditAccountInformationSuccessModal } from './EditAccountInformationSuccessModal'
+import { EditAccountInformationSuccessModal } from './modal/EditAccountInformationSuccessModal'
 
 export const AccountInformationEditHeader = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()

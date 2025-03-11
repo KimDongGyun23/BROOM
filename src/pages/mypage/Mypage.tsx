@@ -5,9 +5,9 @@ import { useUserProfile } from '@/entities/mypage/api/useMypage.query'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { MypageAuthSection } from '@/widgets/mypage-auth/ui/MypageAuthSection'
-import { MypageProfile } from '@/widgets/mypage-main/ui/MypageProfile'
-import { MypageSections } from '@/widgets/mypage-main/ui/MypageSections'
+import { MypageProfile } from '@/widgets/profile/MypageProfile'
+import { MypageAuthSection } from '@/widgets/section/MypageAuthSection'
+import { MypageSections } from '@/widgets/section/MypageSections'
 
 export const Mypage = () => {
   const { data: userProfile } = useUserProfile()

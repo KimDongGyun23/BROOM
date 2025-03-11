@@ -7,12 +7,12 @@ import {
   accountInformationSchema,
 } from '@/entities/mypage/model/mypage.schema'
 import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/mypage.type'
-import { NicknameDuplicationCheckField } from '@/features/check-nickname-duplication/ui/NicknameDuplicationCheckField'
-import { AccountInformationEditHeader } from '@/widgets/header/AccountInformationEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { InputGroup } from '@/shared/ui/inputGroup'
+import { AccountInformationEditHeader } from '@/widgets/header/AccountInformationEditHeader'
+import { NicknameDuplicationCheckField } from '@/widgets/input-field/NicknameDuplicationCheckField'
 
 export const AccountInformationEdit = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute

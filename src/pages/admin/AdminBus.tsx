@@ -2,8 +2,8 @@ import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { BusApplicantTable } from '@/widgets/bus-table/ui/BusApplicantTable'
-import { TotalApplicantCount } from '@/widgets/bus-table/ui/TotalApplicantCount'
+import { TotalApplicantCount } from '@/widgets/section/TotalApplicantCount'
+import { BusApplicantTable } from '@/widgets/table/BusApplicantTable'
 
 export const AdminBus = () => {
   return (

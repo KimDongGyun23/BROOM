@@ -2,10 +2,10 @@ import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { useFetchPostDetail } from '@/entities/board/api/useBoard.query'
 import { usePostDetailActions } from '@/entities/board/model/postDetail.store'
 import { useParamId } from '@/shared/hook/useParamId'
+import { PostDetailBottom } from '@/widgets/bottom/PostDetailBottom'
 import { PostDetailHeader } from '@/widgets/header/PostDetailHeader'
-import { PostDetailBottom } from '@/widgets/post-detail/ui/PostDetailBottom'
-import { PostDetailContent } from '@/widgets/post-detail/ui/PostDetailContent'
-import { PostDetailProfile } from '@/widgets/post-detail/ui/PostDetailProfile'
+import { PostDetailProfile } from '@/widgets/profile/PostDetailProfile'
+import { PostDetailContent } from '@/widgets/section/PostDetailContent'
 
 export const PostDetail = () => {
   const boardId = useParamId()

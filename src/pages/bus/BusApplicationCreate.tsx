@@ -4,10 +4,10 @@ import styled from 'styled-components'
 import { Container, FormContainer } from '@/app/style/commonStyles'
 import { busCreateAttribute, busCreateSchema } from '@/entities/bus/config/bus.schema'
 import type { BusApplication } from '@/entities/bus/model/bus.type'
-import { BusApplicationButton } from '@/widgets/button/BusApplicationButton'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
+import { BusApplicationButton } from '@/widgets/button/BusApplicationButton'
 
 export const BusApplicationCreate = () => {
   const { NAME, STUDENT_ID, PHONE_NUMBER } = busCreateAttribute

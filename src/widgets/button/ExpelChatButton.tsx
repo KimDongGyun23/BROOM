@@ -4,7 +4,7 @@ import { useExpelUser } from '@/features/expel-user/hook/useExpelUser'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 
-import { ExpelChatSuccessModal } from './ExpelChatSuccessModal'
+import { ExpelChatSuccessModal } from './modal/ExpelChatSuccessModal'
 
 type ExpelChatButtonProps = {
   userId: string

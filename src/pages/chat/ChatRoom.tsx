@@ -4,10 +4,10 @@ import { useChatMessageActions } from '@/entities/chat/model/chatMessage.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { ChatInput } from '@/widgets/chat-room/ui/ChatInput'
-import { ChatMessageList } from '@/widgets/chat-room/ui/ChatMessageList'
-import { ChatRoomHeader } from '@/widgets/chat-room/ui/ChatRoomHeader'
-import { ChattingRoomProfile } from '@/widgets/chat-room/ui/ChattingRoomProfile'
+import { ChatRoomHeader } from '@/widgets/header/ChatRoomHeader'
+import { ChatInput } from '@/widgets/input-field/ChatInput'
+import { ChatMessageList } from '@/widgets/list/ChatMessageList'
+import { ChattingRoomProfile } from '@/widgets/profile/ChattingRoomProfile'
 
 export const ChatRoom = () => {
   const boardId = useParamId()

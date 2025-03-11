@@ -7,7 +7,7 @@ import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/Button'
 
-import { ApplyBusSuccessModal } from './ApplyBusSuccessModal'
+import { ApplyBusSuccessModal } from './modal/ApplyBusSuccessModal'
 
 export const BusApplicationButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()

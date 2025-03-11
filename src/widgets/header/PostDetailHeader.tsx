@@ -8,7 +8,8 @@ import { useParamId } from '@/shared/hook/useParamId'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Kebab } from '@/shared/ui/Kebab'
 import { SubHeaderWithIcon, SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { DeleteConfirmationModal } from '@/widgets/header/DeleteConfirmationModal'
+
+import { DeleteConfirmationModal } from './modal/DeleteConfirmationModal'
 
 const AuthenticatedHeader = () => {
   const boardId = useParamId()

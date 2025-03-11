@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { HomeNoticeSection } from '@/widgets/home-service/ui/HomeNoticeSection'
-import { HomeServiceSection } from '@/widgets/home-service/ui/HomeServiceSection'
-import { HomeUserSection } from '@/widgets/home-service/ui/HomeUserSection'
+import { HomeNoticeSection } from '@/widgets/section/HomeNoticeSection'
+import { HomeServiceSection } from '@/widgets/section/HomeServiceSection'
+import { HomeUserSection } from '@/widgets/section/HomeUserSection'
 
 export const Home = () => {
   return (

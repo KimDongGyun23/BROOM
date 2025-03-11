@@ -5,7 +5,7 @@ import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
 
-import { BookmarkSuccessModal } from './BookmarkSuccessModal'
+import { BookmarkSuccessModal } from './modal/BookmarkSuccessModal'
 
 export const BookmarkButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()

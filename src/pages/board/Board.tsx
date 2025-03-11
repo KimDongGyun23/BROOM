@@ -4,9 +4,9 @@ import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.stor
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { PostAdditionButton } from '@/widgets/button/PostAdditionButton'
-import { PostFilter } from '@/widgets/post-filter/PostFilter'
-import { BoardMainList } from '@/widgets/post-list/ui/BoardMainList'
-import { PostSearchBar } from '@/widgets/post-search/PostSearchBar'
+import { PostFilter } from '@/widgets/filter/PostFilter'
+import { PostSearchBar } from '@/widgets/input-field/PostSearchBar'
+import { BoardMainList } from '@/widgets/list/BoardMainList'
 
 export const Board = () => {
   return (
