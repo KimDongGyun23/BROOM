@@ -5,14 +5,13 @@ import { SEARCH_OPTIONS } from '@/entities/board/config/post.constant'
 import {
   useFilterDropDownActions,
   useIsFilterDropdownOpen,
-} from '@/features/search/model/filterDropdown.store'
+} from '@/features/search-post/model/filterDropdown.store'
 import { Kebab } from '@/shared/ui/Kebab'
 
 export const PostSearchKebab = () => {
   const isDropdownOpen = useIsFilterDropdownOpen()
 
-  const { setFilterLabel } = useFilterDropDownActions()
-  const { toggleDropdown } = useFilterDropDownActions()
+  const { setFilterLabel, toggleDropdown } = useFilterDropDownActions()
 
   const selectFilter = useCallback(
     (filter: SearchOption) => {

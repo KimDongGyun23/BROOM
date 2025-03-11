@@ -4,7 +4,7 @@ import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.stor
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { PostFilter } from '@/widgets/post-filter/ui/PostFilter'
 import { PostSearchList } from '@/widgets/post-list/ui/PostSearchList'
-import { PostSearchBar } from '@/widgets/post-search/ui/PostSearchBar'
+import { PostSearchBar } from '@/widgets/post-search/PostSearchBar'
 
 export const PostSearch = () => {
   return (

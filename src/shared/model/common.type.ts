@@ -9,7 +9,7 @@ export type StepProps = {
   label: string
 }
 
-export type SearchType = {
+export type Search = {
   search: string
 }
 

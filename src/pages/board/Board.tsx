@@ -6,7 +6,7 @@ import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { PostFilter } from '@/widgets/post-filter/ui/PostFilter'
 import { BoardMainList } from '@/widgets/post-list/ui/BoardMainList'
-import { PostSearchBar } from '@/widgets/post-search/ui/PostSearchBar'
+import { PostSearchBar } from '@/widgets/post-search/PostSearchBar'
 
 export const Board = () => {
   return (
