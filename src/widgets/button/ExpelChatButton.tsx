@@ -1,9 +1,8 @@
 import { styled } from 'styled-components'
 
+import { useExpelUser } from '@/features/expel-user/hook/useExpelUser'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
-
-import { useExpelUser } from '../hook/useExpelUser'
 
 import { ExpelChatSuccessModal } from './ExpelChatSuccessModal'
 
