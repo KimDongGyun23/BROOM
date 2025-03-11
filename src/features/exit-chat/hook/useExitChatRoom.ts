@@ -26,5 +26,5 @@ export const useExitChatRoom = (closeModal: VoidFunction) => {
     )
   }
 
-  return handleClickExitRoom
+  return { handleClickExitRoom }
 }

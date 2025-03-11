@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 import { ChatParticipantList } from '@/features/chat-sidebar/ui/ChatParticipantList'
-import { ChatRoomExitButton } from '@/features/exit-chat/ui/ChatRoomExitButton'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
+import { ExitChatRoomButton } from '@/widgets/button/ExitChatRoomButton'
 
 import { useIsSidebarOpen, useSidebarActions, useSidebarInformation } from '../model/sidebar.store'
 
@@ -30,7 +30,7 @@ export const ChatSidebar = () => {
         </ParticipantSection>
 
         <SidebarFooter>
-          <ChatRoomExitButton />
+          <ExitChatRoomButton />
           <CloseButton onClick={closeSidebar}>닫기</CloseButton>
         </SidebarFooter>
       </ModalContent>
