@@ -24,21 +24,17 @@ const ENDPOINTS = {
     const queryString = searchParams.toString()
     return queryString ? `${baseUrl}?${queryString}` : baseUrl
   },
-  fetchMyPostList: (pageParam: unknown) => `/mypage/board/${pageParam}`,
-  fetchBookmarkList: (pageParam: unknown) => `/mypage/bookmark/${pageParam}`,
-  fetchPostDetail: (urls: PostDetailRequest['urls']) => `/board/view/detail/${urls.boardId}`,
-  dateTag: `/date-tag`,
 } as const
 
 export const boardQueryKeys = {
   all: ['board'] as const,
-  carpoolList: (urls: PostListRequest['urls']) =>
-    [...boardQueryKeys.all, 'list', ...Object.values(urls)] as const,
+  dateTag: () => [...boardQueryKeys.all, 'date-filter'] as const,
   myPostList: () => [...boardQueryKeys.all, 'my-post'] as const,
   bookmarkList: () => [...boardQueryKeys.all, 'bookmark'] as const,
+  carpoolList: (urls: PostListRequest['urls']) =>
+    [...boardQueryKeys.all, 'list', ...Object.values(urls)] as const,
   carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
     [...boardQueryKeys.all, 'detail', ...Object.values(urls)] as const,
-  dateTag: () => [...boardQueryKeys.all, 'date-filter'] as const,
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
@@ -58,28 +54,24 @@ export const useFetchMyPostList = () =>
   useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.myPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(ENDPOINTS.fetchMyPostList(pageParam)),
+      instance.get<PostListResponse>(`/mypage/board/${pageParam}`),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
 export const useFetchBookmarkList = () =>
   useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.bookmarkList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(ENDPOINTS.fetchBookmarkList(pageParam)),
+      instance.get<PostListResponse>(`/mypage/bookmark/${pageParam}`),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
 export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
     queryKey: boardQueryKeys.carpoolPostDetail(urls),
-    queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
+    queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
     select: (data): PostForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
@@ -99,13 +91,13 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
     queryKey: boardQueryKeys.carpoolPostDetail(urls),
-    queryFn: () => instance.get<PostDetailResponse>(ENDPOINTS.fetchPostDetail(urls)),
+    queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
   })
 }
 
 export const useFetchDateFilter = () => {
   return useQuery({
     queryKey: boardQueryKeys.dateTag(),
-    queryFn: () => instance.get<DateFilterResponse>(ENDPOINTS.dateTag),
+    queryFn: () => instance.get<DateFilterResponse>(`/date-tag`),
   })
 }

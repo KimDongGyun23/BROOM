@@ -1,19 +1,16 @@
-import { useFormContext } from 'react-hook-form'
 import type { To } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 
-import { useEditPost } from '@/entities/board/api/useBoard.mutation'
 import type { PostForm } from '@/entities/board/model/post.type'
 import { useParamId } from '@/shared/hook/useParamId'
-import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-export const PostEditHeader = () => {
+import { useEditPostMutation } from '../api/useEditPost.mutation'
+
+export const useEditPost = () => {
   const boardId = useParamId()
   const navigate = useNavigate()
 
-  const { mutate: postUpdate } = useEditPost()
-
-  const { handleSubmit } = useFormContext<PostForm>()
+  const { mutate: editPost } = useEditPostMutation()
 
   const handleEditPost = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
@@ -23,17 +20,11 @@ export const PostEditHeader = () => {
       ...rest,
     }
 
-    postUpdate(
+    editPost(
       { urls: { boardId }, body: submissionData },
       { onSuccess: () => navigate(-1 as To, { replace: true }) },
     )
   }
 
-  return (
-    <SubHeaderWithoutIcon
-      type="complete"
-      title="승차 공유 수정"
-      onClickComplete={handleSubmit(handleEditPost)}
-    />
-  )
+  return { handleEditPost }
 }
