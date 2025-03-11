@@ -8,7 +8,7 @@ import {
 } from '@/entities/mypage/model/mypage.schema'
 import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/mypage.type'
 import { NicknameDuplicationCheckField } from '@/features/check-nickname-duplication/ui/NicknameDuplicationCheckField'
-import { AccountInformationEditHeader } from '@/features/edit-account/ui/AccountInformationEditHeader'
+import { AccountInformationEditHeader } from '@/widgets/header/AccountInformationEditHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'

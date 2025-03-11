@@ -6,21 +6,21 @@ import { useNicknameUniqueState } from '@/features/check-nickname-duplication/mo
 import type { OpenModal } from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 
-import { useEditAccountInformationMutation } from '../api/useEditAccountInformationMutation'
+import { useEditAccountInformationMutation } from '../api/useEditAccountInformation.mutation'
 
 export const useEditAccountInformation = (openModal: OpenModal) => {
-  const { handleSubmit, setError, clearErrors } = useFormContext<AccountInformation>()
+  const { setError, clearErrors } = useFormContext<AccountInformation>()
 
   const nicknameField = accountInformationAttribute.NICKNAME.section
 
   const isNicknameUnique = useNicknameUniqueState()
 
-  const { mutate: updateAccountInformation } = useEditAccountInformationMutation()
+  const { mutate: editAccountInformation } = useEditAccountInformationMutation()
 
-  const handleSubmitForm = (formData: AccountInformation) => {
+  const handleEditAccountInformation = (formData: AccountInformation) => {
     if (isNicknameUnique) {
       clearErrors(nicknameField)
-      updateAccountInformation(
+      editAccountInformation(
         { body: formData },
         { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
       )
@@ -29,5 +29,5 @@ export const useEditAccountInformation = (openModal: OpenModal) => {
     }
   }
 
-  return { onSubmit: handleSubmit(handleSubmitForm) }
+  return { handleEditAccountInformation }
 }

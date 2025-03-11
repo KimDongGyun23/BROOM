@@ -12,13 +12,14 @@ export const EditPostSuccessModal = ({
 
   const handleClickModalButton = () => {
     navigate(-1 as To, { replace: true })
+    closeModal()
   }
 
   return (
     <ModalWithOneButton
       label={label}
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={handleClickModalButton}
       button={{ onClickButton: handleClickModalButton }}
     />
   )

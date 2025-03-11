@@ -12,13 +12,14 @@ export const EditPasswordSuccessModal = ({
 
   const handleClickModalButton = () => {
     navigate('/mypage', { replace: true })
+    closeModal()
   }
 
   return (
     <ModalWithOneButton
       label={label}
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      closeModal={handleClickModalButton}
       button={{ onClickButton: handleClickModalButton }}
     />
   )
