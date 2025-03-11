@@ -13,21 +13,20 @@ export const PostAdditionButton = () => {
   if (!isLoggedIn) return null
 
   return (
-    <AddButton type="button" onClick={handleButtonClick}>
+    <StyledButton type="button" onClick={handleButtonClick}>
       <AdditionIcon />
       <ButtonText>글 올리기</ButtonText>
-    </AddButton>
+    </StyledButton>
   )
 }
 
-const AddButton = styled.button`
+const StyledButton = styled.button`
   ${({ theme }) => `
     ${theme.flexBox('row', 'center', 'center', 'xs')}
     ${theme.padding('sm', 'lg', 'sm', 'md')}
     ${theme.border('post-addition-button')}
     ${theme.borderRadius('lg')}
     ${theme.boxShadow('sm')}
-      
   `}
   position: absolute;
   bottom: 100px;

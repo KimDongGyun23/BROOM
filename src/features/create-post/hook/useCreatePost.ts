@@ -1,4 +1,3 @@
-import { useFormContext } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import type { PostForm } from '@/entities/board/model/post.type'
@@ -9,8 +8,6 @@ export const useCreatePost = () => {
   const navigate = useNavigate()
 
   const { mutate: createPost } = useCreatePostMutation()
-
-  const { handleSubmit } = useFormContext<PostForm>()
 
   const handleCreatePost = (formData: PostForm) => {
     const { hour, minute, personnel, ...rest } = formData
@@ -26,5 +23,5 @@ export const useCreatePost = () => {
     )
   }
 
-  return { onSubmit: handleSubmit(handleCreatePost) }
+  return { handleCreatePost }
 }
