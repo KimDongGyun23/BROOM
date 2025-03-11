@@ -1,22 +1,20 @@
-import { useFormContext } from 'react-hook-form'
-
-import { useUpdatePassword } from '@/entities/mypage/api/useMypage.mutation'
 import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
 import type { OpenModal } from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 
-export const useEditPassword = (openModal: OpenModal) => {
-  const { handleSubmit } = useFormContext<PasswordUpdateForm>()
+import { useEditPasswordMutation } from '../api/useEditPassword.mutation'
 
-  const { mutate: updatePassword } = useUpdatePassword()
+export const useEditPassword = (openModal: OpenModal) => {
+  const { mutate: editPassword } = useEditPasswordMutation()
 
   const handleEditPassword = (formData: PasswordUpdateForm) => {
     const { confirm: _confirm, ...rest } = formData
-    updatePassword(
+
+    editPassword(
       { body: { ...rest } },
       { onSuccess: (response) => openModal(MODAL_KEYS.success, response) },
     )
   }
 
-  return { onSubmit: handleSubmit(handleEditPassword) }
+  return { handleEditPassword }
 }

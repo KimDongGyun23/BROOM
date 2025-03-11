@@ -3,12 +3,8 @@ import { useMutation } from '@tanstack/react-query'
 import { instance } from '@/app/api'
 import type { PasswordUpdateRequest } from '@/entities/mypage/model/mypage.type'
 
-const ENDPOINTS = {
-  updatePassword: `/mypage/password`,
-} as const
-
-export const useUpdatePassword = () =>
+export const useEditPasswordMutation = () =>
   useMutation({
     mutationFn: ({ body }: PasswordUpdateRequest) =>
-      instance.post<string>(ENDPOINTS.updatePassword, body),
+      instance.post<string>(`/mypage/password`, body),
   })

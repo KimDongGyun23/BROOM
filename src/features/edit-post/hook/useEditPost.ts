@@ -1,14 +1,12 @@
-import type { To } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
-
 import type { PostForm } from '@/entities/board/model/post.type'
+import type { OpenModal } from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 
 import { useEditPostMutation } from '../api/useEditPost.mutation'
 
-export const useEditPost = () => {
+export const useEditPost = (openModal: OpenModal) => {
   const boardId = useParamId()
-  const navigate = useNavigate()
 
   const { mutate: editPost } = useEditPostMutation()
 
@@ -22,7 +20,7 @@ export const useEditPost = () => {
 
     editPost(
       { urls: { boardId }, body: submissionData },
-      { onSuccess: () => navigate(-1 as To, { replace: true }) },
+      { onSuccess: () => openModal(MODAL_KEYS.success, '게시글이 수정되었습니다.') },
     )
   }
 
