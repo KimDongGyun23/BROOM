@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
-import { EnterChatButton } from '@/features/enter-chat/ui/EnterChatButton'
+import { EnterChatButton } from '@/widgets/button/EnterChatButton'
 import { useIsLoggedIn } from '@/features/login/model/auth.store'
 
 export const PostDetailBottom = () => {

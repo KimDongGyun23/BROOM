@@ -8,7 +8,7 @@ import { MODAL_KEYS } from '@/shared/lib/constants'
 import { Button } from '@/shared/ui/Button'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
-import { useEnterChatRoom } from '../hook/useEnterChatRoom'
+import { useEnterChatRoom } from '../../features/enter-chat/hook/useEnterChatRoom'
 
 export const EnterChatButton = () => {
   const post = usePostDetail()
@@ -35,6 +35,7 @@ export const EnterChatButton = () => {
       >
         {isFull ? '모집 마감' : '채팅하기'}
       </StyledButton>
+
       <ModalWithOneButton
         label={modalLabel(MODAL_KEYS.error)}
         isModalOpen={isModalOpen(MODAL_KEYS.error)}
