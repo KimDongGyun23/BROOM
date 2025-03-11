@@ -12,8 +12,6 @@ import type {
 
 const ENDPOINTS = {
   fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,
-  fetchRoomInformation: (urls: ChatRoomInformationRequest['urls']) =>
-    `/chat/room/${urls.boardId}?page=${urls.pageParam}`,
   fetchSidebarInformation: (urls: ChatSidebarInformationRequest['urls']) =>
     `/chat/list/participant/${urls.boardId}`,
   enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
@@ -45,13 +43,9 @@ export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest
   useSuspenseInfiniteQuery({
     queryKey: chatQueryKeys.roomInformation(urls),
     queryFn: ({ pageParam = 0 }) =>
-      instance.get<ChatRoomInformationResponse>(
-        ENDPOINTS.fetchRoomInformation({ ...urls, pageParam }),
-      ),
+      instance.get<ChatRoomInformationResponse>(`/chat/room/${urls.boardId}?page=${pageParam}`),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
     select: (data) => {
       if (!data.pages[0]) return null
       const { boardTitle, ownerNickname, militaryBranches } = data.pages[0]

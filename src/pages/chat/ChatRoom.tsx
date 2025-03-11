@@ -1,10 +1,10 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
 import { useChatMessageActions } from '@/entities/chat/model/chatMessage.store'
-import { MessageInput } from '@/features/send-message/ui/MessageInput'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
+import { ChatInput } from '@/widgets/chat-room/ui/ChatInput'
 import { ChatMessageList } from '@/widgets/chat-room/ui/ChatMessageList'
 import { ChatRoomHeader } from '@/widgets/chat-room/ui/ChatRoomHeader'
 import { ChattingRoomProfile } from '@/widgets/chat-room/ui/ChattingRoomProfile'
@@ -24,15 +24,13 @@ export const ChatRoom = () => {
   return (
     <Container>
       <ChatRoomHeader />
-
       <ChattingRoomProfile
         profileIconList={militaryBranches}
         ownerNickname={ownerNickname}
         title={boardTitle}
       />
-
       <ChatMessageList />
-      <MessageInput />
+      <ChatInput />
     </Container>
   )
 }

@@ -12,3 +12,7 @@ export type StepProps = {
 export type SearchType = {
   search: string
 }
+
+export type ChatMessage = {
+  message: string
+}

@@ -1,10 +1,9 @@
 import { styled } from 'styled-components'
 
+import { ChatProfileImageBox } from '@/entities/chat/ui/ChatProfileImageBox'
 import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/entities/chat/ui/ChatStyle'
 import type { MilitaryBranchCode } from '@/shared/lib/constants'
 import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
-
-import { ChatProfileImageBox } from '../../../entities/chat/ui/ChatProfileImageBox'
 
 type ChattingRoomProfileProps = {
   profileIconList: MilitaryBranchCode[]
