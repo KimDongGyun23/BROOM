@@ -4,7 +4,7 @@ import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { PostFilter } from '@/widgets/post-filter/ui/PostFilter'
+import { PostFilter } from '@/widgets/post-filter/PostFilter'
 import { BoardMainList } from '@/widgets/post-list/ui/BoardMainList'
 import { PostSearchBar } from '@/widgets/post-search/PostSearchBar'
 

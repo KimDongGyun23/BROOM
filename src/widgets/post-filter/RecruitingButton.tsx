@@ -5,6 +5,7 @@ import { CheckBoxIcon } from '@/shared/ui/icons/ActiveIcons'
 
 export const RecruitingButton = () => {
   const isRecruiting = useIsRecruiting()
+
   const { toggleRecruiting } = useRecruitingActions()
 
   return (

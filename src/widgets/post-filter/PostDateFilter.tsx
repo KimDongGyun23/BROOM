@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
 import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
+import { useDateTag, useDateTagActions } from '@/features/filter/model/dateTag.store'
 import { formatDate } from '@/shared/lib/formatDate'
-
-import { useDateTag, useDateTagActions } from '../model/dateTag.store'
 
 type TagProps = {
   date: string
