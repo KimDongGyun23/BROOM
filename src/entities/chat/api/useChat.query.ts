@@ -10,13 +10,6 @@ import type {
   EnterChatRoomRequest,
 } from '@/entities/chat/model/chat.type'
 
-const ENDPOINTS = {
-  fetchRoomList: (pageParam: unknown) => `/chat/list?page=${pageParam}`,
-  fetchSidebarInformation: (urls: ChatSidebarInformationRequest['urls']) =>
-    `/chat/list/participant/${urls.boardId}`,
-  enterRoom: (urls: EnterChatRoomRequest['urls']) => `/chat/room/enter/${urls.boardId}`,
-} as const
-
 export const chatQueryKeys = {
   all: ['chat'] as const,
   roomList: () => [...chatQueryKeys.all, 'list'] as const,
@@ -32,11 +25,9 @@ export const useFetchChatRoomList = () =>
   useSuspenseInfiniteQuery({
     queryKey: chatQueryKeys.roomList(),
     queryFn: ({ pageParam = 0 }) =>
-      instance.get<ChatRoomListResponse>(ENDPOINTS.fetchRoomList(pageParam)),
+      instance.get<ChatRoomListResponse>(`/chat/list?page=${pageParam}`),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
 export const useFetchChatRoomInformation = ({ urls }: ChatRoomInformationRequest) =>
@@ -63,13 +54,13 @@ export const useFetchChatSidebarInformation = ({ urls }: ChatSidebarInformationR
   useQuery({
     queryKey: chatQueryKeys.sidebarInformation(urls),
     queryFn: () =>
-      instance.get<ChatSidebarInformationResponse>(ENDPOINTS.fetchSidebarInformation(urls)),
+      instance.get<ChatSidebarInformationResponse>(`/chat/list/participant/${urls.boardId}`),
     enabled: false,
   })
 
 export const useFetchEnteredChatRoom = ({ urls }: EnterChatRoomRequest) =>
   useQuery({
     queryKey: chatQueryKeys.enterRoom(urls),
-    queryFn: () => instance.get<string>(ENDPOINTS.enterRoom(urls)),
+    queryFn: () => instance.get<string>(`/chat/room/enter/${urls.boardId}`),
     enabled: false,
   })
