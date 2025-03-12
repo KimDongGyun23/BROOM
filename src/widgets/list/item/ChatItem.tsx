@@ -15,7 +15,7 @@ export const ChatItem = ({
     ? '방장에 의해 내보내졌습니다.'
     : lastMessage.length
       ? lastMessage
-      : '아직 메세지가 존재하지 않습니다.'
+      : '[ 아직 메세지가 존재하지 않습니다. ]'
 
   const isNoMessage = !expelled && !lastMessage.length
 
