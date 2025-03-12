@@ -1,19 +1,19 @@
-export type TrainingSchedule = {
+export type TrainingDate = {
   id: number
   trainingDate: string
 }
 
-export type TrainingScheduleListResponse = {
-  dates: TrainingSchedule[]
+export type TrainingDateListResponse = {
+  dates: TrainingDate[]
 }
 
-export type CreateTrainingScheduleRequest = {
-  body: Pick<TrainingSchedule, 'trainingDate'>
+export type AddTrainingDateRequest = {
+  body: Pick<TrainingDate, 'trainingDate'>
 }
-export type CreateTrainingScheduleResponse = TrainingSchedule
+export type AddTrainingDateResponse = TrainingDate
 
-export type DeleteTrainingScheduleRequest = {
-  urls: Pick<TrainingSchedule, 'id'>
+export type RemoveTrainingDateRequest = {
+  urls: Pick<TrainingDate, 'id'>
 }
 
 export type BusApplicant = {
@@ -27,7 +27,7 @@ export type BusApplicantListResponse = {
   result: BusApplicant[]
 }
 
-export type BusTotalApplicantCountResponse = {
+export type BusApplicantCountResponse = {
   reservationCount: number
 }
 
@@ -35,10 +35,10 @@ export type BusApplicationToggleResponse = {
   activated: boolean
 }
 
-export type TotalPostCountResponse = {
+export type PostCountResponse = {
   boardCount: number
 }
 
-export type TotalUserCountResponse = {
+export type UserCountResponse = {
   userCount: number
 }

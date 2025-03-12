@@ -1,7 +1,6 @@
-import { useQuery, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
 
 import type {
-  DateFilterResponse,
   PostDetailRequest,
   PostDetailResponse,
   PostForm,
@@ -28,7 +27,6 @@ const ENDPOINTS = {
 
 export const boardQueryKeys = {
   all: ['board'] as const,
-  dateTag: () => [...boardQueryKeys.all, 'date-filter'] as const,
   myPostList: () => [...boardQueryKeys.all, 'my-post'] as const,
   bookmarkList: () => [...boardQueryKeys.all, 'bookmark'] as const,
   carpoolList: (urls: PostListRequest['urls']) =>
@@ -92,12 +90,5 @@ export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
     queryKey: boardQueryKeys.carpoolPostDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
-  })
-}
-
-export const useFetchDateFilter = () => {
-  return useQuery({
-    queryKey: boardQueryKeys.dateTag(),
-    queryFn: () => instance.get<DateFilterResponse>(`/date-tag`),
   })
 }

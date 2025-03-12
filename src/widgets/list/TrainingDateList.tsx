@@ -1,25 +1,25 @@
 import { styled } from 'styled-components'
 
+import { useTrainingDates } from '@/entities/admin/hook/useTrainingDates'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { DeleteTrainingScheduleButton } from '@/widgets/button/DeleteTrainingScheduleButton'
 
-import { useTrainingSchedule } from '../../entities/admin/hook/useTrainingSchedule'
+import { RemoveTrainingDateButton } from '../button/RemoveTrainingDateButton'
 
-export const TrainingScheduleList = () => {
-  const { sortedScheduleList, isError, fetchedScheduleList } = useTrainingSchedule()
+export const TrainingDateList = () => {
+  const { sortedDates, isError, fetchedDates } = useTrainingDates()
 
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-  if (!fetchedScheduleList || !fetchedScheduleList.dates.length)
-    return <EmptyMessage label={ERROR_MESSAGES.NO_DATE_TAG} />
+  if (!fetchedDates || !fetchedDates.dates.length)
+    return <EmptyMessage label={ERROR_MESSAGES.NO_DATA} />
 
   return (
     <Container>
-      {sortedScheduleList.map((schedule) => (
-        <DateListContainer key={schedule.trainingDate}>
-          <span>{formatDate(schedule.trainingDate, 'dotFullDate')}</span>
-          <DeleteTrainingScheduleButton schedule={schedule} />
+      {sortedDates.map((date) => (
+        <DateListContainer key={date.trainingDate}>
+          <span>{formatDate(date.trainingDate, 'dotFullDate')}</span>
+          <RemoveTrainingDateButton dateId={date.id} />
         </DateListContainer>
       ))}
     </Container>

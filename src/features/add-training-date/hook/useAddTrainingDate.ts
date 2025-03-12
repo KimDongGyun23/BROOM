@@ -3,19 +3,19 @@ import { useFormContext } from 'react-hook-form'
 import { useTrainingScheduleActions } from '@/entities/admin/model/trainingSchedule.store'
 import { formatDate } from '@/shared/lib/formatDate'
 
-import { useCreateTrainingScheduleMutation } from '../api/useCreateTrainingSchedule.mutation'
+import { useAddTrainingDateMutation } from '../api/useAddTrainingDate.mutation'
 
-export const useCreateTrainingSchedule = () => {
-  const { mutate: createTrainingSchedule } = useCreateTrainingScheduleMutation()
+export const useAddTrainingDate = () => {
+  const { mutate: addTrainingDateMutation } = useAddTrainingDateMutation()
 
   const { addTrainingDate } = useTrainingScheduleActions()
 
   const { getValues, resetField } = useFormContext()
 
-  const handleCreateTrainingSchedule = () => {
+  const handleAddTrainingDate = () => {
     const inputDate = getValues('trainingDate')
 
-    createTrainingSchedule(
+    addTrainingDateMutation(
       { body: { trainingDate: formatDate(inputDate, 'default') } },
       {
         onSuccess: (response) => {
@@ -26,5 +26,5 @@ export const useCreateTrainingSchedule = () => {
     )
   }
 
-  return { handleCreateTrainingSchedule }
+  return { handleAddTrainingDate }
 }

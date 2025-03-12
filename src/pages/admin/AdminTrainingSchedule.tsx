@@ -2,14 +2,14 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import type { TrainingSchedule } from '@/entities/admin/model/admin.type'
+import type { TrainingDate } from '@/entities/admin/model/admin.type'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { CreateTrainingScheduleButton } from '@/widgets/button/CreateTrainingScheduleButton'
-import { TrainingScheduleList } from '@/widgets/list/TrainingScheduleList'
+import { AddTrainingDateButton } from '@/widgets/button/AddTrainingDateButton'
+import { TrainingDateList } from '@/widgets/list/TrainingDateList'
 
 export const AdminTrainingSchedule = () => {
-  const formMethods = useForm<TrainingSchedule>()
+  const formMethods = useForm<TrainingDate>()
 
   return (
     <Container>
@@ -20,11 +20,11 @@ export const AdminTrainingSchedule = () => {
             <InputGroup.DateInput />
           </InputGroup>
 
-          <CreateTrainingScheduleButton />
+          <AddTrainingDateButton />
         </InputContainer>
       </FormProvider>
 
-      <TrainingScheduleList />
+      <TrainingDateList />
     </Container>
   )
 }

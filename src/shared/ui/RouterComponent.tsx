@@ -2,6 +2,10 @@ import { useEffect } from 'react'
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 
 import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
+import { Admin } from '@/pages/admin/Admin'
+import { AdminBusApplicationStatus } from '@/pages/admin/AdminBusApplicationStatus'
+import { AdminOverview } from '@/pages/admin/AdminOverview'
+import { AdminTrainingSchedule } from '@/pages/admin/AdminTrainingSchedule'
 import { LoginPage } from '@/pages/auth/LoginPage'
 import { SignupCompletePage } from '@/pages/auth/SignupCompletePage'
 import { SignupPage } from '@/pages/auth/SignupPage'
@@ -24,11 +28,6 @@ import { Mypage } from '@/pages/mypage/Mypage'
 import { MypageBookmarkedPost } from '@/pages/mypage/MypageBookmarkedPost'
 import { MypageMyPost } from '@/pages/mypage/MypageMyPost'
 import { PasswordEdit } from '@/pages/mypage/PasswordEdit'
-
-import { Admin } from '../../pages/admin/Admin'
-import { AdminBus } from '../../pages/admin/AdminBus'
-import { AdminOverview } from '../../pages/admin/AdminOverview'
-import { AdminTrainingSchedule } from '../../pages/admin/AdminTrainingSchedule'
 
 const LoginPrivateRoute = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -87,7 +86,7 @@ export const RouterComponent = () => {
         <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
 
         <Route path="/kw/broom" element={<Admin />} />
-        <Route path="/kw/broom/bus" element={<AdminBus />} />
+        <Route path="/kw/broom/bus" element={<AdminBusApplicationStatus />} />
         <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
         <Route path="/kw/broom/overview" element={<AdminOverview />} />
       </Route>

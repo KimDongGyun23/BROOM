@@ -7,12 +7,12 @@ import { MainHeader } from '@/shared/ui/MainHeader'
 import { LogoutButton } from '@/widgets/button/LogoutButton'
 import { BusApplicationToggle } from '@/widgets/toggle/BusApplicationToggle'
 
-type NavigationLink = {
+type NavigationLinkProps = {
   label: string
   to: string
 }
 
-const NavigationLink = ({ label, to }: NavigationLink) => (
+const NavigationLink = ({ label, to }: NavigationLinkProps) => (
   <StyledLink to={to}>
     <p className="button-label">{label}</p>
     <ArrowRightIcon active />
@@ -28,7 +28,7 @@ export const Admin = () => {
       <PageContent>
         <ToggleSection>
           <ToggleLabel>버스 신청 활성화</ToggleLabel>
-          <BusApplicationToggle isToggled={toggleState.activated} />
+          <BusApplicationToggle isToggled={toggleState.activated || false} />
         </ToggleSection>
 
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />

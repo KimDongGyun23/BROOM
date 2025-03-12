@@ -1,13 +1,16 @@
 import { styled } from 'styled-components'
 
-import { useFetchBusApplicantList } from '@/entities/admin/api/useAdmin.query'
+import type { BusApplicant } from '@/entities/admin/model/admin.type'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 
-export const BusApplicantTable = () => {
-  const { data, isError } = useFetchBusApplicantList()
+type BusApplicantListTableProps = {
+  applicantList: BusApplicant[]
+}
 
-  if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+export const BusApplicantListTable = ({ applicantList }: BusApplicantListTableProps) => {
+  if (!applicantList) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
+  if (!applicantList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_DATA} />
 
   return (
     <>
@@ -19,8 +22,9 @@ export const BusApplicantTable = () => {
             <th>연락처</th>
           </tr>
         </thead>
+
         <tbody>
-          {data.result.map(({ reservationId, name, studentId, phoneNumber }) => (
+          {applicantList.map(({ reservationId, name, studentId, phoneNumber }) => (
             <tr key={reservationId}>
               <td>{name}</td>
               <td>{studentId}</td>

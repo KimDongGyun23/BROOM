@@ -1,69 +1,57 @@
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
 
 import { instance } from '../../../app/api'
 import type {
+  BusApplicantCountResponse,
   BusApplicantListResponse,
   BusApplicationToggleResponse,
-  BusTotalApplicantCountResponse,
-  TotalPostCountResponse,
-  TotalUserCountResponse,
-  TrainingScheduleListResponse,
+  PostCountResponse,
+  TrainingDateListResponse,
+  UserCountResponse,
 } from '../model/admin.type'
 
-const ENDPOINTS = {
-  fetchDateTag: `/date-tag`,
-  fetchBusApplicantToggleState: `/admin/bus/activate`,
-  fetchBusApplicantList: `/admin/bus/reservation`,
-  fetchBusTotalApplicantCont: `/admin/bus/reservation/count`,
-  fetchTotalPostCont: `/admin/board-count`,
-  fetchTotalUserCont: `/admin/user-count`,
-} as const
-
-export const queryKeys = {
+export const adminQueryKeys = {
   all: ['admin'] as const,
-  dateTag: () => [...queryKeys.all, 'date-filter'] as const,
-  busApplicantToggleState: () => [...queryKeys.all, 'bus-applicant-toggle-state'] as const,
-  busApplicantList: () => [...queryKeys.all, 'bus-applicant-list'] as const,
-  busTotalApplicantCount: () => [...queryKeys.all, 'bus-applicant-count'] as const,
-  totalPostCount: () => [...queryKeys.all, 'post-count'] as const,
-  totalUserCount: () => [...queryKeys.all, 'user-count'] as const,
+  dateTag: () => [...adminQueryKeys.all, 'training-dates'] as const,
+  busApplicantToggleState: () => [...adminQueryKeys.all, 'bus-applicant-toggle'] as const,
+  busApplicantList: () => [...adminQueryKeys.all, 'bus-applicant-list'] as const,
+  busTotalApplicantCount: () => [...adminQueryKeys.all, 'bus-applicant-count'] as const,
+  totalPostCount: () => [...adminQueryKeys.all, 'post-count'] as const,
+  totalUserCount: () => [...adminQueryKeys.all, 'user-count'] as const,
 }
 
-export const useFetchDateFilter = () => {
-  return useQuery({
-    queryKey: queryKeys.dateTag(),
-    queryFn: () => instance.get<TrainingScheduleListResponse>(ENDPOINTS.fetchDateTag),
+export const useFetchTrainingDates = () =>
+  useQuery({
+    queryKey: adminQueryKeys.dateTag(),
+    queryFn: () => instance.get<TrainingDateListResponse>('/date-tag'),
   })
-}
 
 export const useFetchBusApplicantToggleState = () =>
   useSuspenseQuery({
-    queryKey: queryKeys.busApplicantToggleState(),
-    queryFn: () =>
-      instance.get<BusApplicationToggleResponse>(ENDPOINTS.fetchBusApplicantToggleState),
+    queryKey: adminQueryKeys.busApplicantToggleState(),
+    queryFn: () => instance.get<BusApplicationToggleResponse>('/admin/bus/activate'),
   })
 
 export const useFetchBusApplicantList = () =>
   useSuspenseQuery({
-    queryKey: queryKeys.busApplicantList(),
-    queryFn: () => instance.get<BusApplicantListResponse>(ENDPOINTS.fetchBusApplicantList),
+    queryKey: adminQueryKeys.busApplicantList(),
+    queryFn: () => instance.get<BusApplicantListResponse>('/admin/bus/reservation'),
   })
 
-export const useFetchBusTotalApplicantCount = () =>
-  useQuery({
-    queryKey: queryKeys.busTotalApplicantCount(),
-    queryFn: () =>
-      instance.get<BusTotalApplicantCountResponse>(ENDPOINTS.fetchBusTotalApplicantCont),
-  })
-
-export const useFetchTotalPostCount = () =>
-  useQuery({
-    queryKey: queryKeys.totalPostCount(),
-    queryFn: () => instance.get<TotalPostCountResponse>(ENDPOINTS.fetchTotalPostCont),
-  })
-
-export const useFetchTotalUserCount = () =>
-  useQuery({
-    queryKey: queryKeys.totalUserCount(),
-    queryFn: () => instance.get<TotalUserCountResponse>(ENDPOINTS.fetchTotalUserCont),
+export const useFetchAdminOverviewData = () =>
+  useSuspenseQueries({
+    queries: [
+      {
+        queryKey: adminQueryKeys.busTotalApplicantCount(),
+        queryFn: () => instance.get<BusApplicantCountResponse>('/admin/bus/reservation/count'),
+      },
+      {
+        queryKey: adminQueryKeys.totalPostCount(),
+        queryFn: () => instance.get<PostCountResponse>('/admin/board-count'),
+      },
+      {
+        queryKey: adminQueryKeys.totalUserCount(),
+        queryFn: () => instance.get<UserCountResponse>('/admin/user-count'),
+      },
+    ],
   })

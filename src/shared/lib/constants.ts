@@ -14,7 +14,7 @@ export const ERROR_MESSAGES = {
   NO_SEARCH_NAME: '검색어를 입력해주세요.',
   FETCH_FAIL: '데이터를 불러오지 못했습니다.',
   NO_CHAT: '채팅 목록이 존재하지 않습니다.',
-  NO_DATE_TAG: '날짜 태그 목록이 존재하지 않습니다.',
+  NO_DATA: '데이터가 존재하지 않습니다.',
 }
 
 export const MODAL_KEYS = { confirm: 'confirm', success: 'success', error: 'error' } as const

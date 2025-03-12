@@ -1,38 +1,39 @@
 import { create } from 'zustand'
 
-import type { TrainingSchedule } from './admin.type'
+import type { TrainingDate } from './admin.type'
 
-type Actions = {
-  sortedDates: () => TrainingSchedule[]
-  addTrainingDate: (newDate: TrainingSchedule) => void
+type TrainingScheduleActions = {
+  getSortedDates: () => TrainingDate[]
+  addTrainingDate: (newDate: TrainingDate) => void
   removeTrainingDate: (id: number) => void
-  initializeSchedules: (dates: TrainingSchedule[]) => void
+  initializeTrainingDates: (dates: TrainingDate[]) => void
 }
 
 type TrainingScheduleStore = {
-  selectedDates: TrainingSchedule[]
-  actions: Actions
+  trainingDates: TrainingDate[]
+  actions: TrainingScheduleActions
 }
 
 export const useTrainingScheduleStore = create<TrainingScheduleStore>((set, get) => ({
-  selectedDates: [],
+  trainingDates: [],
   actions: {
-    sortedDates: () =>
-      [...get().selectedDates].sort(
+    getSortedDates: () =>
+      [...get().trainingDates].sort(
         (a, b) => new Date(a.trainingDate).getTime() - new Date(b.trainingDate).getTime(),
       ),
     addTrainingDate: (newDate) =>
       set((state) => ({
-        selectedDates: [...state.selectedDates, newDate],
+        trainingDates: [...state.trainingDates, newDate],
       })),
     removeTrainingDate: (id) =>
       set((state) => ({
-        selectedDates: state.selectedDates.filter((date) => date.id !== id),
+        trainingDates: state.trainingDates.filter((date) => date.id !== id),
       })),
-    initializeSchedules: (dates) => set({ selectedDates: dates }),
+    initializeTrainingDates: (dates) => set({ trainingDates: dates }),
   },
 }))
 
 export const useTrainingScheduleList = () =>
-  useTrainingScheduleStore((state) => state.selectedDates)
+  useTrainingScheduleStore((state) => state.trainingDates)
+
 export const useTrainingScheduleActions = () => useTrainingScheduleStore((state) => state.actions)
