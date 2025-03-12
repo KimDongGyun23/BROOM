@@ -19,11 +19,13 @@ function App() {
   }, [])
   return (
     <AppContainer>
-      <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Suspense fallback={<Loading isFull />}>
-          <ContentWrapper>{showSplash ? <Splash /> : <RouterComponent />}</ContentWrapper>
-        </Suspense>
-      </ErrorBoundary>
+      <ContentWrapper>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={<Loading isFull />}>
+            {showSplash ? <Splash /> : <RouterComponent />}
+          </Suspense>
+        </ErrorBoundary>
+      </ContentWrapper>
     </AppContainer>
   )
 }
