@@ -10,22 +10,35 @@ export const ChatItem = ({
   expelled,
   lastMessage,
   lastMessageTime,
-}: ChatRoom) => (
-  <ChatItemContainer>
-    <ChatProfileImageBox profileIconList={militaryBranches} />
-    <ChatInformation>
-      <ChatPostTitle>{boardName}</ChatPostTitle>
-      <LastMessage $expelled={expelled}>
-        {expelled ? '방장에 의해 내보내졌습니다.' : lastMessage}
-      </LastMessage>
-    </ChatInformation>
-    {!expelled && <LastMessageTime>{lastMessageTime}</LastMessageTime>}
-  </ChatItemContainer>
-)
+}: ChatRoom) => {
+  const messageText = expelled
+    ? '방장에 의해 내보내졌습니다.'
+    : lastMessage.length
+      ? lastMessage
+      : '아직 메세지가 존재하지 않습니다.'
 
-const LastMessage = styled.p<{ $expelled?: boolean }>`
-  ${({ theme, $expelled }) =>
-    theme.font(800, $expelled ? theme.colors.orange : theme.colors.black[300])};
+  const isNoMessage = !expelled && !lastMessage.length
+
+  return (
+    <ChatItemContainer>
+      <ChatProfileImageBox profileIconList={militaryBranches} />
+      <ChatInformation>
+        <ChatPostTitle>{boardName}</ChatPostTitle>
+        <LastMessage $expelled={expelled} $noMessage={isNoMessage}>
+          {messageText}
+        </LastMessage>
+      </ChatInformation>
+      {!expelled && <LastMessageTime>{lastMessageTime}</LastMessageTime>}
+    </ChatItemContainer>
+  )
+}
+
+const LastMessage = styled.p<{ $expelled?: boolean; $noMessage?: boolean }>`
+  ${({ theme, $expelled, $noMessage }) => {
+    if ($expelled) return theme.font(800, theme.colors.orange)
+    if ($noMessage) return theme.font(800, theme.colors.black[200])
+    return theme.font(800, theme.colors.black[300])
+  }};
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
