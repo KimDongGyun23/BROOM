@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import styled from 'styled-components'
 
 import { Splash } from './pages/home/Splash'
+import { ErrorFallback } from './shared/ui/ErrorFallback'
+import { Loading } from './shared/ui/Loading'
 import { RouterComponent } from './shared/ui/RouterComponent'
 
 function App() {
@@ -16,7 +19,11 @@ function App() {
   }, [])
   return (
     <AppContainer>
-      <ContentWrapper>{showSplash ? <Splash /> : <RouterComponent />}</ContentWrapper>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<Loading isFull />}>
+          <ContentWrapper>{showSplash ? <Splash /> : <RouterComponent />}</ContentWrapper>
+        </Suspense>
+      </ErrorBoundary>
     </AppContainer>
   )
 }
