@@ -3,10 +3,7 @@ import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import {
-  FilterDropdownStoreProvider,
-  useFilterLabel,
-} from '@/features/search-post/model/filterDropdown.store'
+import { useFilterLabel } from '@/features/search-post/model/filterDropdown.store'
 import type { Search } from '@/shared/model/common.type'
 import { SearchBar } from '@/shared/ui/SearchBar'
 
@@ -37,15 +34,13 @@ export const PostSearchBar = () => {
   )
 
   return (
-    <FilterDropdownStoreProvider>
-      <FormProvider {...formMethod}>
-        <Container>
-          <FilterToggleButton />
-          <PostSearchKebab />
-          <SearchBar currentFilter={currentFilter} onSubmit={handleSubmit(handleSearchPost)} />
-        </Container>
-      </FormProvider>
-    </FilterDropdownStoreProvider>
+    <FormProvider {...formMethod}>
+      <Container>
+        <FilterToggleButton />
+        <PostSearchKebab />
+        <SearchBar currentFilter={currentFilter} onSubmit={handleSubmit(handleSearchPost)} />
+      </Container>
+    </FormProvider>
   )
 }
 

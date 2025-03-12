@@ -8,8 +8,7 @@ import { Button } from '@/shared/ui/Button'
 export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const navigate = useNavigate()
 
-  console.log(error)
-  const { status } = error.response
+  const { status } = error?.response || -1
   const { title, content, buttonLabel } = getErrorMessage(status)
 
   const onClickHandler = () => {

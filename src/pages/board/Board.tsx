@@ -1,6 +1,7 @@
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
 import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
+import { FilterDropdownStoreProvider } from '@/features/search-post/model/filterDropdown.store'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { PostAdditionButton } from '@/widgets/button/PostAdditionButton'
@@ -12,15 +13,17 @@ export const Board = () => {
   return (
     <DateTagStoreProvider>
       <RecruitingStoreProvider>
-        <FlexColumnContainer>
-          <MainHeader secondary title="승차 공유" />
-          <PostSearchBar />
-          <PostFilter />
+        <FilterDropdownStoreProvider>
+          <FlexColumnContainer>
+            <MainHeader secondary title="승차 공유" />
+            <PostSearchBar />
+            <PostFilter />
 
-          <BoardMainList />
-          <PostAdditionButton />
-          <BottomNavigation />
-        </FlexColumnContainer>
+            <BoardMainList />
+            <PostAdditionButton />
+            <BottomNavigation />
+          </FlexColumnContainer>
+        </FilterDropdownStoreProvider>
       </RecruitingStoreProvider>
     </DateTagStoreProvider>
   )
