@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { BUS_NOTICE } from '../../entities/bus/config/busNotice.constant'
+import { BUS_NOTICE } from '@/entities/bus/config/busNotice.constant'
 
 export const BusNoticeSection = () => {
   return (

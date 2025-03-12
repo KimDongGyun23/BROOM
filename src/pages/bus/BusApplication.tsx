@@ -33,7 +33,8 @@ export const BusApplication = () => {
 }
 
 const MainContent = styled.main`
-  ${({ theme }) => theme.margin('container')}
+  ${({ theme }) => theme.margin(0, 'container')}
+  ${({ theme }) => theme.padding('lg')}
   flex-grow: 1;
   overflow-y: scroll;
 `
