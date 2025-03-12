@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const accountInformationAttribute = {
+export const accountAttribute = {
   NICKNAME: {
     section: 'nickname',
     label: '닉네임',
@@ -34,12 +34,12 @@ export const newPasswordAttribute = {
 
 const currentYear = new Date().getFullYear()
 
-export const accountInformationSchema = z
+export const accountSchema = z
   .object({
     nickname: z
       .string()
-      .min(2, { message: '닉네임은 2글자 이상입니다.' })
-      .max(8, { message: '닉네임은 8글자 이하입니다.' }),
+      .min(2, { message: '닉네임은 최소 2글자 이상이어야 합니다.' })
+      .max(8, { message: '닉네임은 최대 8글자까지만 가능합니다.' }),
     dischargeYear: z
       .string()
       .refine((val) => Number(val) >= currentYear - 4 && Number(val) <= currentYear, {

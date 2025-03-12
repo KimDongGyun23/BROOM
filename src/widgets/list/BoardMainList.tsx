@@ -8,7 +8,7 @@ export const BoardMainList = () => {
   const dateTag = useDateTag()
   const isRecruiting = useIsRecruiting()
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
+  const { data, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: null,
       place: null,
@@ -19,13 +19,5 @@ export const BoardMainList = () => {
 
   const postList = data?.pages.flatMap((page) => page.result) || []
 
-  return (
-    <PostList
-      postList={postList}
-      isPending={isPending}
-      isError={isError}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-    />
-  )
+  return <PostList postList={postList} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
 }

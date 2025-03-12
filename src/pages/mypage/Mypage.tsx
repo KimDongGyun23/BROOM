@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { useUserProfile } from '@/entities/mypage/api/useMypage.query'
+import { useFetchUserProfile } from '@/entities/mypage/api/useMypage.query'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { MypageProfile } from '@/widgets/profile/MypageProfile'
-import { MypageAuthSection } from '@/widgets/section/MypageAuthSection'
-import { MypageSections } from '@/widgets/section/MypageSections'
+import { AuthenticationSection } from '@/widgets/section/AuthenticationSection'
+import { MypageMenuSection } from '@/widgets/section/MypageMenuSection'
 
 export const Mypage = () => {
-  const { data: userProfile } = useUserProfile()
+  const { data: userProfile } = useFetchUserProfile()
 
   if (!userProfile) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
@@ -18,8 +18,8 @@ export const Mypage = () => {
     <Container>
       <ScrollContainer>
         <MypageProfile {...userProfile} />
-        <MypageSections />
-        <MypageAuthSection />
+        <MypageMenuSection />
+        <AuthenticationSection />
       </ScrollContainer>
 
       <BottomNavigation />

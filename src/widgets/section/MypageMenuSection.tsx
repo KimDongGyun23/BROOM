@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { CustomerSupportSection } from './CustomerSupportSection'
 
-const MYPAGE_SECTIONS = [
+const MYPAGE_MENU_ITEMS = [
   {
     sectionTitle: '내 정보',
     links: [
@@ -20,10 +20,10 @@ const MYPAGE_SECTIONS = [
   },
 ] as const
 
-export const MypageSections = () => (
+export const MypageMenuSection = () => (
   <Container>
-    {MYPAGE_SECTIONS.map(({ sectionTitle, links }, index) => (
-      <Section key={sectionTitle} $hasBorder={index !== MYPAGE_SECTIONS.length - 1}>
+    {MYPAGE_MENU_ITEMS.map(({ sectionTitle, links }, index) => (
+      <Section key={sectionTitle} $hasBorder={index !== MYPAGE_MENU_ITEMS.length - 1}>
         <SectionTitle>{sectionTitle}</SectionTitle>
         <SectionList>
           {links.map(({ name, path }) => (

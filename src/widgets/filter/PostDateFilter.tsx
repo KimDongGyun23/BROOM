@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useFetchDateFilter } from '@/entities/board/api/useBoard.query'
+import { useFetchTrainingDates } from '@/entities/admin/api/useAdmin.query'
 import { useDateTag, useDateTagActions } from '@/features/filter/model/dateTag.store'
 import { formatDate } from '@/shared/lib/formatDate'
 
@@ -26,7 +26,7 @@ const Tag = ({ date }: TagProps) => {
 }
 
 export const PostDateFilter = () => {
-  const { data, isPending, isError } = useFetchDateFilter()
+  const { data, isPending, isError } = useFetchTrainingDates()
 
   if (isPending || isError || !data || !data.dates?.length) return null
 

@@ -23,11 +23,11 @@ import { ErrorPage } from '@/pages/home/ErrorPage'
 import { Home } from '@/pages/home/Home'
 import { Onboarding } from '@/pages/home/Onboarding'
 import { AccountInformation } from '@/pages/mypage/AccountInformation'
-import { AccountInformationEdit } from '@/pages/mypage/AccountInformationEdit'
+import { BookmarkedPost } from '@/pages/mypage/BookmarkedPost'
 import { Mypage } from '@/pages/mypage/Mypage'
-import { MypageBookmarkedPost } from '@/pages/mypage/MypageBookmarkedPost'
 import { MypageMyPost } from '@/pages/mypage/MypageMyPost'
-import { PasswordEdit } from '@/pages/mypage/PasswordEdit'
+import { PasswordUpdate } from '@/pages/mypage/PasswordUpdate'
+import { UpdateAccountDetails } from '@/pages/mypage/UpdateAccountDetails'
 
 const LoginPrivateRoute = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -80,10 +80,10 @@ export const RouterComponent = () => {
 
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-information" element={<AccountInformation />} />
-        <Route path="/mypage/account-information/edit" element={<AccountInformationEdit />} />
-        <Route path="/mypage/password" element={<PasswordEdit />} />
+        <Route path="/mypage/account-information/edit" element={<UpdateAccountDetails />} />
+        <Route path="/mypage/password" element={<PasswordUpdate />} />
         <Route path="/mypage/my-post" element={<MypageMyPost />} />
-        <Route path="/mypage/bookmark" element={<MypageBookmarkedPost />} />
+        <Route path="/mypage/bookmark" element={<BookmarkedPost />} />
 
         <Route path="/kw/broom" element={<Admin />} />
         <Route path="/kw/broom/bus" element={<AdminBusApplicationStatus />} />

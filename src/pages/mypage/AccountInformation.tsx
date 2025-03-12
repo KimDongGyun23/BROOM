@@ -2,12 +2,9 @@ import { FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 import { FormContainer } from '@/app/style/commonStyles'
-import { useFetchAccountInformation } from '@/entities/mypage/api/useMypage.query'
-import {
-  accountInformationAttribute,
-  accountInformationSchema,
-} from '@/entities/mypage/model/mypage.schema'
-import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/mypage.type'
+import { useFetchAccountDetails } from '@/entities/mypage/api/useMypage.query'
+import { accountAttribute, accountSchema } from '@/entities/mypage/model/mypage.schema'
+import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
@@ -15,11 +12,11 @@ import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 export const AccountInformation = () => {
   const navigate = useNavigate()
 
-  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
+  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
 
-  const { data: defaultValues } = useFetchAccountInformation()
+  const { data: defaultValues } = useFetchAccountDetails()
 
-  const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
+  const formMethod = useCustomForm<AccountDetails>(accountSchema, { defaultValues })
 
   return (
     <FormProvider {...formMethod}>

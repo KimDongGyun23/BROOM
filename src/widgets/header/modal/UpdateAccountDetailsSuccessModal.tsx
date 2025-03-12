@@ -1,16 +1,15 @@
 import { useNavigate } from 'react-router-dom'
 
-import type { ModalWithOneButtonProps } from '@/shared/ui/modal/ButtonModal'
-import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
+import { ModalWithOneButton, type ModalWithOneButtonProps } from '@/shared/ui/modal/ButtonModal'
 
-export const EditPasswordSuccessModal = ({
+export const UpdateAccountDetailsSuccessModal = ({
   label,
   isModalOpen,
   closeModal,
 }: Omit<ModalWithOneButtonProps, 'button'>) => {
   const navigate = useNavigate()
 
-  const handleClickModalButton = () => {
+  const handleClickModal = () => {
     navigate('/mypage', { replace: true })
     closeModal()
   }
@@ -19,8 +18,8 @@ export const EditPasswordSuccessModal = ({
     <ModalWithOneButton
       label={label}
       isModalOpen={isModalOpen}
-      closeModal={handleClickModalButton}
-      button={{ onClickButton: handleClickModalButton }}
+      closeModal={handleClickModal}
+      button={{ onClickButton: handleClickModal }}
     />
   )
 }

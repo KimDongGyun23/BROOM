@@ -11,13 +11,11 @@ import { PostItem } from './item/PostItem'
 
 type PostListProps = {
   postList: PostListResponse['result']
-  isPending: boolean
-  isError: boolean
   hasNextPage: boolean
   fetchNextPage: VoidFunction
 }
 
-export const PostList = ({ postList, isError, hasNextPage, fetchNextPage }: PostListProps) => {
+export const PostList = ({ postList, hasNextPage, fetchNextPage }: PostListProps) => {
   const isRecruiting = useIsRecruiting()
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
@@ -30,7 +28,6 @@ export const PostList = ({ postList, isError, hasNextPage, fetchNextPage }: Post
     }
   }, [isRecruiting])
 
-  if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (

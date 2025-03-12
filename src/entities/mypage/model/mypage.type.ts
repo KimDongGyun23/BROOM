@@ -10,21 +10,21 @@ type YearOfArmy = {
   dischargeYear: number
 }
 
-export type PasswordUpdateForm = {
+export type UpdatePasswordForm = {
   password: string
   newPassword: string
   confirm: string
 }
 
-export type AccountInformation = UserInformation & Pick<YearOfArmy, 'dischargeYear'>
+export type AccountDetails = UserInformation & Pick<YearOfArmy, 'dischargeYear'>
 
 export type MypageProfileResponse = UserInformation & Pick<YearOfArmy, 'reserveYear'>
 
-export type AccountInformationResponse = AccountInformation
-export type UpdateAccountInformationRequest = {
-  body: AccountInformation
+export type AccountDetailsResponse = AccountDetails
+export type UpdateAccountDetailsRequest = {
+  body: AccountDetails
 }
 
-export type PasswordUpdateRequest = {
-  body: Omit<PasswordUpdateForm, 'confirm'>
+export type UpdatePasswordRequest = {
+  body: Omit<UpdatePasswordForm, 'confirm'>
 }

@@ -16,7 +16,7 @@ export const PostSearchList = () => {
   const dateTag = useDateTag()
   const isRecruiting = useIsRecruiting()
 
-  const { data, isPending, isError, hasNextPage, fetchNextPage } = useFetchPostList({
+  const { data, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: filterKey === 'title' ? searchKeyword : null,
       place: filterKey === 'place' ? searchKeyword : null,
@@ -28,12 +28,6 @@ export const PostSearchList = () => {
   const searchPostList = data?.pages.flatMap((page) => page.result) || []
 
   return (
-    <PostList
-      postList={searchPostList}
-      isPending={isPending}
-      isError={isError}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-    />
+    <PostList postList={searchPostList} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
   )
 }

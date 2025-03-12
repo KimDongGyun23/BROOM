@@ -28,22 +28,20 @@ const ENDPOINTS = {
 export const boardQueryKeys = {
   all: ['board'] as const,
   myPostList: () => [...boardQueryKeys.all, 'my-post'] as const,
-  bookmarkList: () => [...boardQueryKeys.all, 'bookmark'] as const,
-  carpoolList: (urls: PostListRequest['urls']) =>
+  bookmarkedPostList: () => [...boardQueryKeys.all, 'bookmark'] as const,
+  postList: (urls: PostListRequest['urls']) =>
     [...boardQueryKeys.all, 'list', ...Object.values(urls)] as const,
-  carpoolPostDetail: (urls: PostDetailRequest['urls']) =>
+  postDetail: (urls: PostDetailRequest['urls']) =>
     [...boardQueryKeys.all, 'detail', ...Object.values(urls)] as const,
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
   useSuspenseInfiniteQuery({
-    queryKey: boardQueryKeys.carpoolList(urls),
+    queryKey: boardQueryKeys.postList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      return lastPage.hasNext ? allPages.length : undefined
-    },
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
     gcTime: 0,
     staleTime: 0,
   })
@@ -57,9 +55,9 @@ export const useFetchMyPostList = () =>
     getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
-export const useFetchBookmarkList = () =>
+export const useFetchBookmarkedPostList = () =>
   useSuspenseInfiniteQuery({
-    queryKey: boardQueryKeys.bookmarkList(),
+    queryKey: boardQueryKeys.bookmarkedPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instance.get<PostListResponse>(`/mypage/bookmark/${pageParam}`),
     initialPageParam: 0,
@@ -68,7 +66,7 @@ export const useFetchBookmarkList = () =>
 
 export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
-    queryKey: boardQueryKeys.carpoolPostDetail(urls),
+    queryKey: boardQueryKeys.postDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
     select: (data): PostForm => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
@@ -88,7 +86,7 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
 
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
-    queryKey: boardQueryKeys.carpoolPostDetail(urls),
+    queryKey: boardQueryKeys.postDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
   })
 }

@@ -2,19 +2,19 @@ import { FormProvider } from 'react-hook-form'
 
 import { FormContainer } from '@/app/style/commonStyles'
 import { newPasswordAttribute, newPasswordSchema } from '@/entities/mypage/model/mypage.schema'
-import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
+import type { UpdatePasswordForm } from '@/entities/mypage/model/mypage.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { PasswordEditHeader } from '@/widgets/header/PasswordEditHeader'
+import { UpdatePasswordHeader } from '@/widgets/header/UpdatePasswordHeader'
 
-export const PasswordEdit = () => {
-  const formMethod = useCustomForm<PasswordUpdateForm>(newPasswordSchema)
+export const PasswordUpdate = () => {
+  const formMethod = useCustomForm<UpdatePasswordForm>(newPasswordSchema)
 
   const { PREV_PASSWORD, NEW_PASSWORD, CONFIRM } = newPasswordAttribute
 
   return (
     <FormProvider {...formMethod}>
-      <PasswordEditHeader />
+      <UpdatePasswordHeader />
       <FormContainer>
         <InputGroup section={PREV_PASSWORD.section}>
           <InputGroup.Label label={PREV_PASSWORD.label} />

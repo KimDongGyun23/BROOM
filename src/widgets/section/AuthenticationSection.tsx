@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 import { DeleteIdButton } from '@/widgets/button/DeleteIdButton'
 import { LogoutButton } from '@/widgets/button/LogoutButton'
 
-export const MypageAuthSection = () => {
+export const AuthenticationSection = () => {
   return (
     <ButtonContainer>
       <LogoutButton />

@@ -1,29 +1,29 @@
 import { useFormContext } from 'react-hook-form'
 
-import type { PasswordUpdateForm } from '@/entities/mypage/model/mypage.type'
-import { useEditPassword } from '@/features/edit-password/hook/useEditPassword'
+import type { UpdatePasswordForm } from '@/entities/mypage/model/mypage.type'
+import { useUpdatePassword } from '@/features/edit-password/hook/useUpdatePassword'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-import { EditPasswordSuccessModal } from './modal/EditPasswordSuccessModal'
+import { UpdatePasswordSuccessModal } from './modal/UpdatePasswordSuccessModal'
 
-export const PasswordEditHeader = () => {
+export const UpdatePasswordHeader = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
-  const { handleSubmit } = useFormContext<PasswordUpdateForm>()
+  const { handleSubmit } = useFormContext<UpdatePasswordForm>()
 
-  const { handleEditPassword } = useEditPassword(openModal)
+  const { handleUpdatePassword } = useUpdatePassword(openModal)
 
   return (
     <>
       <SubHeaderWithoutIcon
         type="complete"
         title="비밀번호 재설정"
-        onClickComplete={handleSubmit(handleEditPassword)}
+        onClickComplete={handleSubmit(handleUpdatePassword)}
       />
 
-      <EditPasswordSuccessModal
+      <UpdatePasswordSuccessModal
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}

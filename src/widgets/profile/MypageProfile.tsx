@@ -7,9 +7,9 @@ import { ProfileImage } from '@/shared/ui/ProfileImage'
 export const MypageProfile = ({ nickname, militaryBranch, reserveYear }: MypageProfileResponse) => {
   return (
     <Container>
-      <ChainContainer>
+      <ChainIconContainer>
         <ChainIcon />
-      </ChainContainer>
+      </ChainIconContainer>
 
       <ProfileImage iconType={militaryBranch} size="lg" />
 
@@ -33,7 +33,7 @@ const Container = styled.div`
   width: fit-content;
 `
 
-const ChainContainer = styled.div`
+const ChainIconContainer = styled.div`
   width: fit-content;
   height: fit-content;
   position: absolute;

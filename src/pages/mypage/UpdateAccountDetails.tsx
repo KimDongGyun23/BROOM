@@ -1,31 +1,28 @@
 import { FormProvider } from 'react-hook-form'
 
 import { FormContainer } from '@/app/style/commonStyles'
-import { useFetchAccountInformation } from '@/entities/mypage/api/useMypage.query'
-import {
-  accountInformationAttribute,
-  accountInformationSchema,
-} from '@/entities/mypage/model/mypage.schema'
-import type { AccountInformation as AccountInfo } from '@/entities/mypage/model/mypage.type'
+import { useFetchAccountDetails } from '@/entities/mypage/api/useMypage.query'
+import { accountAttribute, accountSchema } from '@/entities/mypage/model/mypage.schema'
+import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { InputGroup } from '@/shared/ui/inputGroup'
-import { AccountInformationEditHeader } from '@/widgets/header/AccountInformationEditHeader'
+import { UpdateAccountHeader } from '@/widgets/header/EditAccountHeader'
 import { NicknameDuplicationCheckField } from '@/widgets/input-field/NicknameDuplicationCheckField'
 
-export const AccountInformationEdit = () => {
-  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountInformationAttribute
+export const UpdateAccountDetails = () => {
+  const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
 
-  const { data: defaultValues } = useFetchAccountInformation()
+  const { data: defaultValues } = useFetchAccountDetails()
 
-  const formMethod = useCustomForm<AccountInfo>(accountInformationSchema, { defaultValues })
+  const formMethod = useCustomForm<AccountDetails>(accountSchema, { defaultValues })
 
   if (!defaultValues) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
   return (
     <FormProvider {...formMethod}>
-      <AccountInformationEditHeader />
+      <UpdateAccountHeader />
       <FormContainer $isFull>
         <NicknameDuplicationCheckField {...NICKNAME} />
 
