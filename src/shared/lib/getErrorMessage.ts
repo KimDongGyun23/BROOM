@@ -9,7 +9,6 @@ export const HttpErrorType = {
 
 export const ErrorButtonLabels = {
   LOGIN: '로그인',
-  GO_HOME: '홈으로 이동',
   REFRESH: '새로고침',
 }
 
@@ -57,7 +56,7 @@ export const getErrorMessage = (status: number) => {
         type: errorType,
         title: '접근 권한이 없습니다.',
         content: '관리자에게 문의해주세요.',
-        buttonLabel: ErrorButtonLabels.GO_HOME,
+        buttonLabel: ErrorButtonLabels.REFRESH,
       }
     case HttpErrorType.CLIENT:
       if (status === 404) {
@@ -65,7 +64,7 @@ export const getErrorMessage = (status: number) => {
           type: errorType,
           title: '페이지를 찾을 수 없습니다.',
           content: '',
-          buttonLabel: ErrorButtonLabels.GO_HOME,
+          buttonLabel: ErrorButtonLabels.REFRESH,
         }
       } else {
         return {

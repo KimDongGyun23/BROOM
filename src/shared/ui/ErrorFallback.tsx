@@ -11,11 +11,11 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { status } = error?.response || -1
   const { title, content, buttonLabel } = getErrorMessage(status)
 
-  const onClickHandler = () => {
+  const handleClickGoHome = () => navigate('/home')
+
+  const handleClickPrimaryButton = () => {
     if (buttonLabel === ErrorButtonLabels.LOGIN) {
       navigate('/login')
-    } else if (buttonLabel === ErrorButtonLabels.GO_HOME) {
-      navigate('/home')
     } else {
       resetErrorBoundary()
     }
@@ -29,9 +29,13 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
           <p className="error-message">{content}</p>
         </TextContainer>
         <ButtonContainer>
-          <StyledButton size="lg" onClick={onClickHandler}>
+          <Button size="lg" secondary onClick={handleClickGoHome}>
+            홈으로 가기
+          </Button>
+
+          <Button size="lg" onClick={handleClickPrimaryButton}>
             {buttonLabel}
-          </StyledButton>
+          </Button>
         </ButtonContainer>
       </ContentWrapper>
     </Container>
@@ -72,15 +76,11 @@ const TextContainer = styled.div`
 `
 
 const ButtonContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')}
   width: 100%;
   padding-top: 80px;
-`
 
-const StyledButton = styled(Button)`
-  width: 100%;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.02);
+  & > button {
+    flex-grow: 1;
   }
 `
