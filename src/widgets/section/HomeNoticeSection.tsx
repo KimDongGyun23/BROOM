@@ -10,7 +10,7 @@ const NOTICE_ARR = [
 
 export const HomeNoticeSection = () => {
   return (
-    <StyledSection>
+    <NoticeSection>
       <SectionHeader>
         <h4 className="title">공지사항</h4>
         <ViewAllLink to={'/home'}>전체보기</ViewAllLink>
@@ -23,11 +23,11 @@ export const HomeNoticeSection = () => {
           </li>
         ))}
       </NoticeList>
-    </StyledSection>
+    </NoticeSection>
   )
 }
 
-const StyledSection = styled.section`
+const NoticeSection = styled.section`
   ${({ theme }) => `
     ${theme.flexBox('column', undefined, undefined, 'xl')}
     ${theme.padding('lg')}

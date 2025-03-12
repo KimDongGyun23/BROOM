@@ -9,7 +9,7 @@ export const ErrorPage = () => {
   return (
     <Container>
       <ContentWrapper className="flex-column-align min-w-[260px] gap-8">
-        <h2 className="error-title">404</h2>
+        <h2 className="error-title">ERROR</h2>
         <p className="error-message">{`현재 페이지가 존재하지 않아요...\n재시도 부탁드립니다.`}</p>
         <ButtonContainer>
           <StyledButton size="lg" onClick={() => navigate('/home', { replace: true })}>

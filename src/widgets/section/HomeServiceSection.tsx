@@ -6,7 +6,7 @@ import carWhite from '/assets/icons/CarWhite.svg'
 
 export const HomeServiceSection = () => {
   return (
-    <StyledSection>
+    <ServiceSection>
       <h4 className="title">어떤 서비스를 찾고 있나요?</h4>
 
       <ServiceOptions>
@@ -20,11 +20,11 @@ export const HomeServiceSection = () => {
           <img src={carBlack} alt="car-black" />
         </LinkContainer>
       </ServiceOptions>
-    </StyledSection>
+    </ServiceSection>
   )
 }
 
-const StyledSection = styled.section`
+const ServiceSection = styled.section`
   ${({ theme }) => `
     ${theme.flexBox('column', undefined, undefined, 'xl')}
     ${theme.padding('lg')}

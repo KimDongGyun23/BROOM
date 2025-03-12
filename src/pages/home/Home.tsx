@@ -11,18 +11,18 @@ export const Home = () => {
   return (
     <Container>
       <MainHeader />
-      <Main>
+      <MainContent>
         <HomeUserSection />
         <HomeNoticeSection />
         <HomeServiceSection />
-      </Main>
+      </MainContent>
 
       <BottomNavigation />
     </Container>
   )
 }
 
-const Main = styled.main`
+const MainContent = styled.main`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'sm')}
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.black[100]};

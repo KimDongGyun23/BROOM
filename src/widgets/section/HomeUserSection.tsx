@@ -49,7 +49,7 @@ export const HomeUserSection = () => {
   const isLoggedIn = useIsLoggedIn()
 
   return (
-    <Section>
+    <UserSection>
       <ContentContainer>
         <MainTextContainer>
           {isLoggedIn ? <LoggedInUserContent /> : <LoggedOutUserContent />}
@@ -58,11 +58,11 @@ export const HomeUserSection = () => {
       </ContentContainer>
 
       <AuthButtonContainer />
-    </Section>
+    </UserSection>
   )
 }
 
-const Section = styled.section`
+const UserSection = styled.section`
   ${({ theme }) => `
     ${theme.boxShadow('sm')}
     ${theme.padding('3xl', 'lg')}
