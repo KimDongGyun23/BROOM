@@ -16,6 +16,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const handleClickPrimaryButton = () => {
     if (buttonLabel === ErrorButtonLabels.LOGIN) {
       navigate('/login')
+      resetErrorBoundary()
     } else {
       resetErrorBoundary()
     }
