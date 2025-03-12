@@ -1,4 +1,4 @@
-type BusPassenger = {
+export type BusPassenger = {
   name: string
   studentId: string
   phoneNumber: string
@@ -7,12 +7,11 @@ type BusPassenger = {
 
 export type StudentId = Pick<BusPassenger, 'studentId'>
 export type BusApplication = Omit<BusPassenger, 'reserved'>
-export type ApplicationStatus = Pick<BusPassenger, 'reserved'>
 
 export type BusApplicationRequest = {
   body: BusApplication
 }
 
-export type BusApplicationInfoRequest = {
+export type BusApplicationStatusRequest = {
   urls: StudentId
 }

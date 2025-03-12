@@ -1,19 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { instance } from '../../../app/api'
-import type { ApplicationStatus, BusApplicationInfoRequest } from '../model/bus.type'
+import type { BusApplicationStatusRequest, BusPassenger } from '../model/bus.type'
 
 const queryKeys = {
   all: ['bus'] as const,
-  reservation: (urls: BusApplicationInfoRequest['urls']) =>
+  reservation: (urls: BusApplicationStatusRequest['urls']) =>
     [...queryKeys.all, ...Object.values(urls)] as const,
 }
 
-export const useBusApplicationQuery = ({ urls }: BusApplicationInfoRequest) => {
+export const useFetchBusApplicationStatus = ({ urls }: BusApplicationStatusRequest) => {
   return useQuery({
     queryKey: queryKeys.reservation(urls),
-    queryFn: async () =>
-      await instance.get<ApplicationStatus>(`/bus/reservation/${urls.studentId}`),
+    queryFn: async () => await instance.get<BusPassenger>(`/bus/reservation/${urls.studentId}`),
     enabled: false,
   })
 }

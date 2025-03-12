@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 
-import { useBusApplicationQuery } from '@/entities/bus/api/useBus.query'
+import { useFetchBusApplicationStatus } from '@/entities/bus/api/useBus.query'
 import { BUS_APPLICATION_STATUS } from '@/entities/bus/config/bus.constant'
 import { busStatusAttribute } from '@/entities/bus/config/bus.schema'
 import { useBusApplicationStatusActions } from '@/features/check-bus-application/model/busApplication'
@@ -13,17 +13,17 @@ export const CheckBusApplicationButton = () => {
 
   const { setApplicationStatus } = useBusApplicationStatusActions()
 
-  const { refetch: fetchBusApplication } = useBusApplicationQuery({ urls: { studentId } })
+  const { refetch: fetchApplicationStatus } = useFetchBusApplicationStatus({ urls: { studentId } })
 
-  const fetchApplicationStatus = async () => {
-    const { data, isSuccess } = await fetchBusApplication()
+  const handleClickButton = async () => {
+    const { isSuccess } = await fetchApplicationStatus()
 
-    if (isSuccess && data.reserved) setApplicationStatus(BUS_APPLICATION_STATUS.COMPLETED)
+    if (isSuccess) setApplicationStatus(BUS_APPLICATION_STATUS.COMPLETED)
     else setApplicationStatus(BUS_APPLICATION_STATUS.NOT_FOUND)
   }
 
   return (
-    <Button size="md" onClick={handleSubmit(fetchApplicationStatus)}>
+    <Button size="md" onClick={handleSubmit(handleClickButton)}>
       조회하기
     </Button>
   )
