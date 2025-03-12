@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 
@@ -24,7 +24,7 @@ export const PostSearchBar = () => {
     defaultValues: { search: defaultSearchName },
   })
 
-  const { handleSubmit } = useFormContext<Search>()
+  const { handleSubmit } = formMethod
 
   const handleSearchPost = useCallback(
     ({ search }: Search) => {
