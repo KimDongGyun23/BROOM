@@ -11,12 +11,15 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   const { status } = error?.response || -1
   const { title, content, buttonLabel } = getErrorMessage(status)
 
-  const handleClickGoHome = () => navigate('/home')
+  const handleClickGoHome = () => {
+    resetErrorBoundary()
+    navigate('/home')
+  }
 
   const handleClickPrimaryButton = () => {
     if (buttonLabel === ErrorButtonLabels.LOGIN) {
-      navigate('/login')
       resetErrorBoundary()
+      navigate('/login')
     } else {
       resetErrorBoundary()
     }
