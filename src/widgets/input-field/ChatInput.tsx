@@ -1,21 +1,31 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useSendMessage } from '@/features/send-message/hook/useSendMessage'
+import { useWebSocket } from '@/entities/chat/hook/useWebsocket'
 import type { ChatMessage } from '@/shared/model/common.type'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 export const ChatInput = () => {
   const formMethod = useForm<ChatMessage>({ defaultValues: { message: '' } })
 
-  const { onSubmit } = useSendMessage()
+  const { reset, register, handleSubmit } = formMethod
+  const { client, sendMessage } = useWebSocket()
 
-  const { register } = formMethod
+  const handleSendMessage = ({ message }: ChatMessage) => {
+    if (message.length !== 0) {
+      if (client.current && client.current.connected) {
+        sendMessage(message)
+        reset()
+      } else {
+        console.log('WebSocket is not connected')
+      }
+    }
+  }
 
   return (
     <FormProvider {...formMethod}>
       <Container>
-        <ChatInputForm onSubmit={onSubmit}>
+        <ChatInputForm onSubmit={handleSubmit(handleSendMessage)}>
           <ChatInputField
             type="text"
             size={8}
