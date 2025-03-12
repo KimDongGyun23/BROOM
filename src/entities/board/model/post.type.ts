@@ -34,11 +34,11 @@ export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
   minute: string
 }
 
-export type PostCreateRequest = {
+export type CreatePostRequest = {
   body: PostDetail
 }
 
-export type PostEditRequest = {
+export type EditPostRequest = {
   body: PostDetail
   urls: PostId
 }
@@ -52,7 +52,7 @@ export type PostDetailResponse = {
   contentDetail: PostDetail
 }
 
-export type PostDeleteRequest = {
+export type DeletePostRequest = {
   urls: PostId
 }
 

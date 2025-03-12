@@ -10,13 +10,13 @@ import { LoginPage } from '@/pages/auth/LoginPage'
 import { SignupCompletePage } from '@/pages/auth/SignupCompletePage'
 import { SignupPage } from '@/pages/auth/SignupPage'
 import { Board } from '@/pages/board/Board'
-import { PostCreate } from '@/pages/board/PostCreate'
+import { CreatePost } from '@/pages/board/CreatePost'
+import { EditPost } from '@/pages/board/EditPost'
 import { PostDetail } from '@/pages/board/PostDetail'
-import { PostEdit } from '@/pages/board/PostEdit'
-import { PostSearch } from '@/pages/board/PostSearch'
+import { SearchPost } from '@/pages/board/SearchPost'
 import { BusApplication } from '@/pages/bus/BusApplication'
-import { BusApplicationCreate } from '@/pages/bus/BusApplicationCreate'
 import { BusApplicationStatus } from '@/pages/bus/BusApplicationStatus'
+import { CreateBusApplication } from '@/pages/bus/CreateBusApplication'
 import { Chat } from '@/pages/chat/Chat'
 import { ChatRoom } from '@/pages/chat/ChatRoom'
 import { ErrorPage } from '@/pages/home/ErrorPage'
@@ -59,10 +59,10 @@ export const RouterComponent = () => {
 
       <Route path="/board" element={<Board />} />
       <Route path="/board/detail/:id" element={<PostDetail />} />
-      <Route path="/board/search" element={<PostSearch />} />
+      <Route path="/board/search" element={<SearchPost />} />
 
       <Route path="/bus-application" element={<BusApplication />} />
-      <Route path="/bus-application/create" element={<BusApplicationCreate />} />
+      <Route path="/bus-application/create" element={<CreateBusApplication />} />
       <Route path="/bus-application/status" element={<BusApplicationStatus />} />
 
       <Route element={<LoginPrivateRoute />}>
@@ -72,8 +72,8 @@ export const RouterComponent = () => {
       </Route>
 
       <Route element={<PrivateRoute />}>
-        <Route path="/board/create" element={<PostCreate />} />
-        <Route path="/board/edit/:id" element={<PostEdit />} />
+        <Route path="/board/create" element={<CreatePost />} />
+        <Route path="/board/edit/:id" element={<EditPost />} />
 
         <Route path="/chat" element={<Chat />} />
         <Route path="/chat/:id" element={<ChatRoom />} />

@@ -7,7 +7,7 @@ import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { PostCreateHeader } from '@/widgets/header/PostCreateHeader'
 import { PostFormSection } from '@/widgets/section/PostFormSection'
 
-export const PostCreate = () => {
+export const CreatePost = () => {
   const formMethod = useCustomForm<PostForm>(postSchema)
 
   return (

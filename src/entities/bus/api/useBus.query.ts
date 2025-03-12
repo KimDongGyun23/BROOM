@@ -1,11 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { instance } from '../../../app/api'
-import type { BusApplicationInfoRequest, ReservationStatus } from '../model/bus.type'
-
-const ENDPOINTS = {
-  reservation: (studentId: string) => `/bus/reservation/${studentId}`,
-} as const
+import type { ApplicationStatus, BusApplicationInfoRequest } from '../model/bus.type'
 
 const queryKeys = {
   all: ['bus'] as const,
@@ -17,7 +13,7 @@ export const useBusApplicationQuery = ({ urls }: BusApplicationInfoRequest) => {
   return useQuery({
     queryKey: queryKeys.reservation(urls),
     queryFn: async () =>
-      await instance.get<ReservationStatus>(ENDPOINTS.reservation(urls.studentId)),
+      await instance.get<ApplicationStatus>(`/bus/reservation/${urls.studentId}`),
     enabled: false,
   })
 }

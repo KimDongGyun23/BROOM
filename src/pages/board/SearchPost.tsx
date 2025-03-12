@@ -6,7 +6,7 @@ import { PostFilter } from '@/widgets/filter/PostFilter'
 import { PostSearchBar } from '@/widgets/input-field/PostSearchBar'
 import { PostSearchList } from '@/widgets/list/PostSearchList'
 
-export const PostSearch = () => {
+export const SearchPost = () => {
   return (
     <DateTagStoreProvider>
       <RecruitingStoreProvider>

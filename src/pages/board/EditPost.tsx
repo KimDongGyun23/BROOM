@@ -11,7 +11,7 @@ import { EmptyMessage } from '@/shared/ui/Error'
 import { PostEditHeader } from '@/widgets/header/PostEditHeader'
 import { PostFormSection } from '@/widgets/section/PostFormSection'
 
-export const PostEdit = () => {
+export const EditPost = () => {
   const boardId = useParamId()
 
   const { data: defaultValues } = useFetchPostEditData({ urls: { boardId } })

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const busReserveInfoAttribute = {
+export const busStatusAttribute = {
   STUDENT_ID: {
     section: 'studentId',
     label: '학번',
@@ -8,7 +8,7 @@ export const busReserveInfoAttribute = {
   },
 } as const
 
-export const busCreateAttribute = {
+export const busApplicationAttribute = {
   NAME: { section: 'name', label: '이름', input: { placeholder: '이름을 입력해주세요.' } },
   STUDENT_ID: {
     section: 'studentId',
@@ -22,11 +22,11 @@ export const busCreateAttribute = {
   },
 } as const
 
-export const busReserveInfoSchema = z.object({
+export const busStatusSchema = z.object({
   studentId: z.string().length(10, { message: '학번은 10자리 숫자여야 합니다.' }),
 })
 
-export const busCreateSchema = z.object({
+export const busApplicationSchema = z.object({
   name: z.string().min(1, { message: '이름을 입력해주세요.' }),
   studentId: z.string().length(10, { message: '학번은 10자리 숫자여야 합니다.' }),
   phoneNumber: z

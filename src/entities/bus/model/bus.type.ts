@@ -7,7 +7,7 @@ type BusPassenger = {
 
 export type StudentId = Pick<BusPassenger, 'studentId'>
 export type BusApplication = Omit<BusPassenger, 'reserved'>
-export type ReservationStatus = Pick<BusPassenger, 'reserved'>
+export type ApplicationStatus = Pick<BusPassenger, 'reserved'>
 
 export type BusApplicationRequest = {
   body: BusApplication
