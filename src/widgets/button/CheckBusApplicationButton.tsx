@@ -2,14 +2,14 @@ import { useFormContext } from 'react-hook-form'
 
 import { useBusApplicationQuery } from '@/entities/bus/api/useBus.query'
 import { BUS_APPLICATION_STATUS } from '@/entities/bus/config/bus.constant'
-import { busReserveInfoAttribute } from '@/entities/bus/config/bus.schema'
+import { busStatusAttribute } from '@/entities/bus/config/bus.schema'
 import { useBusApplicationStatusActions } from '@/features/check-bus-application/model/busApplication'
 import { Button } from '@/shared/ui/Button'
 
 export const CheckBusApplicationButton = () => {
   const { handleSubmit, watch } = useFormContext()
 
-  const studentId = watch(busReserveInfoAttribute.STUDENT_ID.section)
+  const studentId = watch(busStatusAttribute.STUDENT_ID.section)
 
   const { setApplicationStatus } = useBusApplicationStatusActions()
 

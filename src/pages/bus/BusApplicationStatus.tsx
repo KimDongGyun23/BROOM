@@ -2,7 +2,7 @@ import { FormProvider } from 'react-hook-form'
 import styled from 'styled-components'
 
 import { Container, FormContainer, ValidateContainer } from '@/app/style/commonStyles'
-import { busReserveInfoAttribute, busReserveInfoSchema } from '@/entities/bus/config/bus.schema'
+import { busStatusAttribute, busStatusSchema } from '@/entities/bus/config/bus.schema'
 import type { StudentId } from '@/entities/bus/model/bus.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { InputGroup } from '@/shared/ui/inputGroup'
@@ -11,9 +11,9 @@ import { CheckBusApplicationButton } from '@/widgets/button/CheckBusApplicationB
 import { BusApplicationStatusTable } from '@/widgets/table/BusApplicationStatusTable'
 
 export const BusApplicationStatus = () => {
-  const { STUDENT_ID } = busReserveInfoAttribute
+  const { STUDENT_ID } = busStatusAttribute
 
-  const formMethod = useCustomForm<StudentId>(busReserveInfoSchema)
+  const formMethod = useCustomForm<StudentId>(busStatusSchema)
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 
 import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
-import { useUpdateAccountDetails } from '@/features/edit-account/hook/useUpdateAccountDetails'
+import { useUpdateAccountDetails } from '@/features/update-account/hook/useUpdateAccountDetails'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
