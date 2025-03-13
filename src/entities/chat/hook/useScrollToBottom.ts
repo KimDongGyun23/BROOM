@@ -10,6 +10,8 @@ export const useScrollToBottom = () => {
   const messageList = useChatMessages()
 
   useEffect(() => {
+    console.log(messageList)
+
     const handleScroll = () => {
       if (chatListRef.current) {
         const scrollPosition = chatListRef.current.scrollTop
