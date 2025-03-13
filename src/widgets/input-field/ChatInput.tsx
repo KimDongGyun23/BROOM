@@ -1,26 +1,21 @@
+import type { RefObject } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useWebSocket } from '@/entities/chat/hook/useWebsocket'
+import { useSendMessage } from '@/features/send-message/hook/useSendMessage'
 import type { ChatMessage } from '@/shared/model/common.type'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 
-export const ChatInput = () => {
+type ChatInputProps = {
+  messageEndRef: RefObject<HTMLDivElement>
+}
+
+export const ChatInput = ({ messageEndRef }: ChatInputProps) => {
   const formMethod = useForm<ChatMessage>({ defaultValues: { message: '' } })
 
   const { reset, register, handleSubmit } = formMethod
-  const { client, sendMessage } = useWebSocket()
 
-  const handleSendMessage = ({ message }: ChatMessage) => {
-    if (message.length !== 0) {
-      if (client.current && client.current.connected) {
-        sendMessage(message)
-        reset()
-      } else {
-        console.log('WebSocket is not connected')
-      }
-    }
-  }
+  const { handleSendMessage } = useSendMessage(messageEndRef, reset)
 
   return (
     <FormProvider {...formMethod}>

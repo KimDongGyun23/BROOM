@@ -1,3 +1,4 @@
+import type { RefObject } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import styled from 'styled-components'
 
@@ -7,7 +8,11 @@ import { useParamId } from '@/shared/hook/useParamId'
 
 import { ChatMessageItem } from './item/ChatMessageItem'
 
-export const ChatMessageList = () => {
+type ChatMessageListProps = {
+  messageEndRef: RefObject<HTMLDivElement>
+}
+
+export const ChatMessageList = ({ messageEndRef }: ChatMessageListProps) => {
   const boardId = useParamId()
   const messageList = useChatMessages()
 
@@ -25,6 +30,7 @@ export const ChatMessageList = () => {
         {messageList?.map((message) => (
           <ChatMessageItem key={message.messageId} messageData={message} />
         ))}
+        <div ref={messageEndRef} />
       </InfiniteScrollContainer>
     </ChatContainer>
   )
