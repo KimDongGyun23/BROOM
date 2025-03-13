@@ -57,7 +57,7 @@ const InfiniteScrollContainer = styled(InfiniteScroll)`
 `
 
 const RefSection = styled.div`
-  ${({ theme }) => theme.margin('lg', 0, 0)}
+  margin-top: -16px;
 `
 
 const ArrowDownButton = styled.button`

@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
+import { useChatMessages } from '../model/chatMessage.store'
+
 export const useScrollToBottom = () => {
   const chatListRef = useRef<HTMLDivElement | null>(null)
+
   const [showScrollButton, setShowScrollButton] = useState(false)
+
+  const messageList = useChatMessages()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +37,7 @@ export const useScrollToBottom = () => {
         element.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [chatListRef])
+  }, [chatListRef, messageList])
 
   const handleScrollToBottom = () => {
     if (chatListRef.current) {
