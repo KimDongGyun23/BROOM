@@ -1,4 +1,3 @@
-import type { RefObject } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -6,16 +5,12 @@ import { useSendMessage } from '@/features/send-message/hook/useSendMessage'
 import type { ChatMessage } from '@/shared/model/common.type'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 
-type ChatInputProps = {
-  messageEndRef: RefObject<HTMLDivElement>
-}
-
-export const ChatInput = ({ messageEndRef }: ChatInputProps) => {
+export const ChatInput = () => {
   const formMethod = useForm<ChatMessage>({ defaultValues: { message: '' } })
 
   const { reset, register, handleSubmit } = formMethod
 
-  const { handleSendMessage } = useSendMessage(messageEndRef, reset)
+  const { handleSendMessage } = useSendMessage(reset)
 
   return (
     <FormProvider {...formMethod}>

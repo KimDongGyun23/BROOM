@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 import { Container } from '@/app/style/commonStyles'
 import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
 import { useChatMessageActions } from '@/entities/chat/model/chatMessage.store'
@@ -14,7 +12,6 @@ import { ChattingRoomProfile } from '@/widgets/profile/ChattingRoomProfile'
 export const ChatRoom = () => {
   const boardId = useParamId()
   const { setInitialMessage } = useChatMessageActions()
-  const messageEndRef = useRef<HTMLDivElement | null>(null)
 
   const { data: roomInformation } = useFetchChatRoomInformation({ urls: { boardId } })
 
@@ -32,8 +29,8 @@ export const ChatRoom = () => {
         ownerNickname={ownerNickname}
         title={boardTitle}
       />
-      <ChatMessageList messageEndRef={messageEndRef} />
-      <ChatInput messageEndRef={messageEndRef} />
+      <ChatMessageList />
+      <ChatInput />
     </Container>
   )
 }

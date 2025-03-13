@@ -27,6 +27,7 @@ const sizeMap = {
     'post-addition-button': `2px solid ${colors.black[100]}`,
     'tab-active': `2px solid ${colors.black[500]}`,
     'tab-nonactive': `2px solid ${colors.black[200]}`,
+    'chat-down-button': `1px solid ${colors.black[200]}`,
   },
   'border-radius': {
     ...gap,
