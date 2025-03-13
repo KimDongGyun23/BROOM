@@ -1,45 +1,55 @@
-import { useEffect, useRef, useState } from 'react'
-
-import { useChatMessages } from '../model/chatMessage.store'
+import { useRef, useState } from 'react'
 
 export const useScrollToBottom = () => {
   const chatListRef = useRef<HTMLDivElement | null>(null)
 
   const [showScrollButton, setShowScrollButton] = useState(false)
 
-  const messageList = useChatMessages()
+  console.log(
+    chatListRef.current?.scrollTop,
+    chatListRef.current?.scrollHeight,
+    chatListRef.current?.clientHeight,
+  )
 
-  useEffect(() => {
-    console.log(messageList)
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (chatListRef.current) {
+  //       const scrollPosition = chatListRef.current.scrollTop
+  //       const scrollHeight = chatListRef.current.scrollHeight
+  //       const clientHeight = chatListRef.current.clientHeight
 
-    const handleScroll = () => {
-      if (chatListRef.current) {
-        const scrollPosition = chatListRef.current.scrollTop
-        const scrollHeight = chatListRef.current.scrollHeight
-        const clientHeight = chatListRef.current.clientHeight
+  //       console.log(
+  //         scrollPosition,
+  //         scrollHeight,
+  //         clientHeight,
+  //         scrollPosition + clientHeight < scrollHeight,
+  //       )
+  //       setShowScrollButton(scrollPosition + clientHeight < scrollHeight)
+  //     }
+  //   }
 
-        console.log(
-          scrollPosition,
-          scrollHeight,
-          clientHeight,
-          scrollPosition + clientHeight < scrollHeight,
-        )
-        setShowScrollButton(scrollPosition + clientHeight < scrollHeight)
-      }
-    }
+  //   const element = chatListRef.current
 
-    const element = chatListRef.current
+  //   if (element) {
+  //     element.addEventListener('scroll', handleScroll)
+  //   }
 
-    if (element) {
-      element.addEventListener('scroll', handleScroll)
-    }
+  //   return () => {
+  //     if (element) {
+  //       element.removeEventListener('scroll', handleScroll)
+  //     }
+  //   }
+  // }, [chatListRef])
 
-    return () => {
-      if (element) {
-        element.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [chatListRef, messageList])
+  // useEffect(() => {
+  //   if (chatListRef.current) {
+  //     const scrollPosition = chatListRef.current.scrollTop
+  //     const scrollHeight = chatListRef.current.scrollHeight
+  //     const clientHeight = chatListRef.current.clientHeight
+
+  //     setShowScrollButton(scrollPosition + clientHeight < scrollHeight)
+  //   }
+  // }, [messageList])
 
   const handleScrollToBottom = () => {
     if (chatListRef.current) {
@@ -47,5 +57,15 @@ export const useScrollToBottom = () => {
     }
   }
 
-  return { showScrollButton, handleScrollToBottom, chatListRef }
+  const handleScroll = () => {
+    if (chatListRef.current) {
+      const scrollPosition = chatListRef.current.scrollTop
+      const scrollHeight = chatListRef.current.scrollHeight
+      const clientHeight = chatListRef.current.clientHeight
+
+      setShowScrollButton(scrollPosition + clientHeight < scrollHeight)
+    }
+  }
+
+  return { showScrollButton, handleScroll, handleScrollToBottom, chatListRef }
 }

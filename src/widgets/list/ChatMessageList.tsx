@@ -13,12 +13,12 @@ export const ChatMessageList = () => {
   const boardId = useParamId()
   const messageList = useChatMessages()
 
-  const { showScrollButton, handleScrollToBottom, chatListRef } = useScrollToBottom()
+  const { showScrollButton, handleScroll, handleScrollToBottom, chatListRef } = useScrollToBottom()
 
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <ChatContainer>
+    <ChatContainer ref={chatListRef} onScroll={handleScroll}>
       <InfiniteScrollContainer
         hasMore={hasNextPage}
         threshold={200}
@@ -29,7 +29,7 @@ export const ChatMessageList = () => {
         {messageList?.map((message) => (
           <ChatMessageItem key={message.messageId} messageData={message} />
         ))}
-        <RefSection ref={chatListRef} />
+        {/* <RefSection ref={chatListRef} /> */}
       </InfiniteScrollContainer>
 
       {showScrollButton && (
@@ -56,9 +56,9 @@ const InfiniteScrollContainer = styled(InfiniteScroll)`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')}
 `
 
-const RefSection = styled.div`
-  margin-top: -16px;
-`
+// const RefSection = styled.div`
+//   margin-top: -16px;
+// `
 
 const ArrowDownButton = styled.button`
   ${({ theme }) => `
