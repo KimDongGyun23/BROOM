@@ -29,7 +29,7 @@ export const ChatMessageList = () => {
         {messageList?.map((message) => (
           <ChatMessageItem key={message.messageId} messageData={message} />
         ))}
-        <div ref={chatListRef} />
+        <RefSection ref={chatListRef} />
       </InfiniteScrollContainer>
 
       {showScrollButton && (
@@ -54,6 +54,10 @@ const ChatContainer = styled.main`
 
 const InfiniteScrollContainer = styled(InfiniteScroll)`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')}
+`
+
+const RefSection = styled.div`
+  ${({ theme }) => theme.margin('lg', 0, 0)}
 `
 
 const ArrowDownButton = styled.button`
