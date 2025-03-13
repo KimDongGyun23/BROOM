@@ -13,12 +13,12 @@ export const ChatMessageList = () => {
   const boardId = useParamId()
   const messageList = useChatMessages()
 
-  const { showScrollButton, handleScroll, handleScrollToBottom, chatListRef } = useScrollToBottom()
+  const { showScrollButton, handleScrollToBottom, chatListRef } = useScrollToBottom()
 
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <ChatContainer ref={chatListRef} onScroll={handleScroll}>
+    <ChatContainer ref={chatListRef}>
       <InfiniteScrollContainer
         hasMore={hasNextPage}
         threshold={200}
@@ -29,7 +29,6 @@ export const ChatMessageList = () => {
         {messageList?.map((message) => (
           <ChatMessageItem key={message.messageId} messageData={message} />
         ))}
-        {/* <RefSection ref={chatListRef} /> */}
       </InfiniteScrollContainer>
 
       {showScrollButton && (
@@ -56,17 +55,13 @@ const InfiniteScrollContainer = styled(InfiniteScroll)`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')}
 `
 
-// const RefSection = styled.div`
-//   margin-top: -16px;
-// `
-
 const ArrowDownButton = styled.button`
   ${({ theme }) => `
     ${theme.flexBox('row', 'center', 'center')}
     ${theme.padding('xs')}
     ${theme.borderRadius('full')}
     ${theme.border('chat-down-button')}
-    background-color: ${theme.colors.black[100]};
+    background-color: ${theme.colors.black[400]};
   `}
   position: absolute;
   opacity: 80%;
