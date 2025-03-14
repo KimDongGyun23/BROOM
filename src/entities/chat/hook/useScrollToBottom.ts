@@ -8,7 +8,6 @@ export const useScrollToBottom = () => {
   const [showScrollButton, setShowScrollButton] = useState(false)
 
   const handleScroll = useDebounceFn(() => {
-    console.log('scroll')
     if (chatListRef.current) {
       const scrollPosition = chatListRef.current.scrollTop
 
