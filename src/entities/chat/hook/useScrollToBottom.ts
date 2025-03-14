@@ -5,8 +5,16 @@ export const useScrollToBottom = () => {
 
   const [showScrollButton, setShowScrollButton] = useState(false)
 
+  console.log(
+    chatListRef,
+    chatListRef.current?.scrollTop,
+    chatListRef.current?.scrollHeight,
+    chatListRef.current?.clientHeight,
+  )
+
   useEffect(() => {
     const handleScroll = () => {
+      console.log('scroll')
       if (chatListRef.current) {
         const scrollPosition = chatListRef.current.scrollTop
         const scrollHeight = chatListRef.current.scrollHeight
@@ -32,6 +40,7 @@ export const useScrollToBottom = () => {
   const handleScrollToBottom = () => {
     if (chatListRef.current) {
       chatListRef.current.scrollTop = chatListRef.current.scrollHeight
+      setShowScrollButton(false)
     }
   }
 
