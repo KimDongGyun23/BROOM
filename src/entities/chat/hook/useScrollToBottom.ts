@@ -14,7 +14,7 @@ export const useScrollToBottom = () => {
 
       setShowScrollButton(scrollPosition + 10 < 0)
     }
-  }, 500)
+  }, 200)
 
   useEffect(() => {
     const element = chatListRef.current
