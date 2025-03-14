@@ -18,25 +18,26 @@ export const ChatMessageList = () => {
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <ChatContainer ref={chatListRef}>
-      <InfiniteScrollContainer
-        hasMore={hasNextPage}
-        threshold={200}
-        loadMore={() => fetchNextPage()}
-        useWindow={false}
-        isReverse
-      >
-        {messageList?.map((message) => (
-          <ChatMessageItem key={message.messageId} messageData={message} />
-        ))}
-      </InfiniteScrollContainer>
-
+    <>
+      <ChatContainer ref={chatListRef}>
+        <InfiniteScrollContainer
+          hasMore={hasNextPage}
+          threshold={200}
+          loadMore={() => fetchNextPage()}
+          useWindow={false}
+          isReverse
+        >
+          {messageList?.map((message) => (
+            <ChatMessageItem key={message.messageId} messageData={message} />
+          ))}
+        </InfiniteScrollContainer>
+      </ChatContainer>
       {showScrollButton && (
         <ArrowDownButton onClick={handleScrollToBottom}>
           <ArrowFatLinesDownIcon />
         </ArrowDownButton>
       )}
-    </ChatContainer>
+    </>
   )
 }
 
@@ -46,7 +47,6 @@ const ChatContainer = styled.main`
     ${theme.margin(0, 'container')}
     ${theme.padding('lg', 0)}
   `}
-  position: relative;
   flex-grow: 1;
   overflow-y: scroll;
 `
