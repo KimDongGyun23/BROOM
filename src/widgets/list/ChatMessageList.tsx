@@ -58,7 +58,7 @@ const InfiniteScrollContainer = styled(InfiniteScroll)`
 const ArrowDownButton = styled.button`
   ${({ theme }) => `
     ${theme.flexBox('row', 'center', 'center')}
-    ${theme.padding('xs')}
+    ${theme.padding('sm')}
     ${theme.borderRadius('full')}
     ${theme.border('chat-down-button')}
     background-color: ${theme.colors.black[400]};
