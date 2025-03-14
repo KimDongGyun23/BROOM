@@ -18,7 +18,7 @@ export const ChatMessageList = () => {
   const { hasNextPage, fetchNextPage } = useFetchChatRoomInformation({ urls: { boardId } })
 
   return (
-    <Container>
+    <>
       <ChatContainer ref={chatListRef}>
         <InfiniteScrollContainer
           hasMore={hasNextPage}
@@ -37,14 +37,9 @@ export const ChatMessageList = () => {
           <ArrowFatLinesDownIcon />
         </ArrowDownButton>
       )}
-    </Container>
+    </>
   )
 }
-
-const Container = styled.div`
-  position: relative;
-  overflow-y: scroll;
-`
 
 const ChatContainer = styled.main`
   ${({ theme }) => `
@@ -70,6 +65,6 @@ const ArrowDownButton = styled.button`
   `}
   position: absolute;
   opacity: 80%;
-  bottom: 12px;
+  bottom: 80px;
   right: 12px;
 `
