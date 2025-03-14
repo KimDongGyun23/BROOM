@@ -32,7 +32,7 @@ export const useScrollToBottom = () => {
 
   const handleScrollToBottom = () => {
     if (chatListRef.current) {
-      chatListRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      chatListRef.current.scrollTop = chatListRef.current.scrollHeight
       setShowScrollButton(false)
     }
   }
