@@ -43,6 +43,7 @@ export const ChatMessageList = () => {
 
 const Container = styled.div`
   position: relative;
+  overflow-y: scroll;
 `
 
 const ChatContainer = styled.main`
