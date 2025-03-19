@@ -7,9 +7,9 @@ import { useTouchEvent } from '../hook/useTouchEvent'
 
 import { DotIndicator } from './DotIndicator'
 
-import onboarding_first from '/assets/onboarding/onboarding1.svg'
-import onboarding_second from '/assets/onboarding/onboarding2.svg'
-import onboarding_third from '/assets/onboarding/onboarding3.svg'
+import onboarding_first from '/assets/onboarding/onboarding1.webp'
+import onboarding_second from '/assets/onboarding/onboarding2.webp'
+import onboarding_third from '/assets/onboarding/onboarding3.webp'
 
 const onboardingImages = [onboarding_first, onboarding_second, onboarding_third]
 
@@ -24,7 +24,7 @@ export const OnboardingCarousel = () => {
       <Container ref={carouselRef} {...mouseEventHandlers} {...touchEventHandlers}>
         {onboardingImages.map((image, index) => (
           <Slide key={index}>
-            <img src={image} alt={`onboarding-${index}`} />
+            <img src={image} alt={`onboarding-${index}`} fetchPriority="high" />
           </Slide>
         ))}
       </Container>
