@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/assets/favicon.svg" />
+    <link rel="alternate icon" href="/assets/favicon.svg" type="svg" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/logo/152_152.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="description" content="BROOM" />
+    <meta name="theme-color" content="#ffffff" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"
@@ -14,5 +19,19 @@
     <div id="modal" style="z-index: 100; position: relative"></div>
     <div id="chat-sidebar" style="z-index: 90; position: relative"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/sw.js')
+          .then((registration) => {
+            console.log('Service worker registration succeeded:', registration)
+          })
+          .catch((err) => {
+            console.log('Service worker registration failed:', error)
+          })
+      } else {
+        console.log('Service workers are not supported.')
+      }
+    </script>
   </body>
 </html>
