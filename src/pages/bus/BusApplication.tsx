@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
@@ -8,21 +7,18 @@ import { MainHeader } from '@/shared/ui/MainHeader'
 import { BusNoticeSection } from '@/widgets/section/BusNoticeSection'
 
 export const BusApplication = () => {
-  const navigate = useNavigate()
+  const handleClickButton = () => (window.location.href = 'https://www.google.com')
 
   return (
     <Container>
-      <MainHeader title="버스 신청" />
+      <MainHeader secondary title="버스 신청" />
 
       <MainContent>
         <BusNoticeSection />
 
         <ButtonContainer>
-          <Button size="md" onClick={() => navigate('/bus-application/create')}>
-            예약하러 가기
-          </Button>
-          <Button size="md" secondary onClick={() => navigate('/bus-application/status')}>
-            예약 내역 조회하기
+          <Button size="md" onClick={handleClickButton}>
+            신청하러 가기
           </Button>
         </ButtonContainer>
       </MainContent>
