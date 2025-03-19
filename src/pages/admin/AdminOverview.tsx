@@ -7,9 +7,8 @@ import { AdminCountSection } from '@/widgets/section/AdminCountSection'
 export const AdminOverview = () => {
   const queries = useFetchAdminOverviewData()
 
-  const busApplicantCount = queries[0].data.reservationCount || '조회 불가'
-  const totalPostCount = queries[1].data.boardCount || '조회 불가'
-  const totalUserCount = queries[2].data.userCount || '조회 불가'
+  const totalPostCount = queries[0].data.boardCount || '조회 불가'
+  const totalUserCount = queries[1].data.userCount || '조회 불가'
 
   return (
     <>
@@ -18,7 +17,6 @@ export const AdminOverview = () => {
       <OverviewContainer>
         <AdminCountSection label="총 가입된 회원 수" count={totalUserCount} />
         <AdminCountSection label="총 게시글 수" count={totalPostCount} />
-        <AdminCountSection label="버스 신청 인원 수" count={busApplicantCount} />
       </OverviewContainer>
     </>
   )

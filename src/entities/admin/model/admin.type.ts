@@ -16,21 +16,6 @@ export type RemoveTrainingDateRequest = {
   urls: Pick<TrainingDate, 'id'>
 }
 
-export type BusApplicant = {
-  reservationId: number
-  name: string
-  studentId: string
-  phoneNumber: string
-}
-
-export type BusApplicantListResponse = {
-  result: BusApplicant[]
-}
-
-export type BusApplicantCountResponse = {
-  reservationCount: number
-}
-
 export type BusApplicationToggleResponse = {
   activated: boolean
 }

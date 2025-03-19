@@ -3,7 +3,6 @@ import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 
 import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Admin } from '@/pages/admin/Admin'
-import { AdminBusApplicationStatus } from '@/pages/admin/AdminBusApplicationStatus'
 import { AdminOverview } from '@/pages/admin/AdminOverview'
 import { AdminTrainingSchedule } from '@/pages/admin/AdminTrainingSchedule'
 import { LoginPage } from '@/pages/auth/LoginPage'
@@ -15,8 +14,6 @@ import { EditPost } from '@/pages/board/EditPost'
 import { PostDetail } from '@/pages/board/PostDetail'
 import { SearchPost } from '@/pages/board/SearchPost'
 import { BusApplication } from '@/pages/bus/BusApplication'
-import { BusApplicationStatus } from '@/pages/bus/BusApplicationStatus'
-import { CreateBusApplication } from '@/pages/bus/CreateBusApplication'
 import { Chat } from '@/pages/chat/Chat'
 import { ChatRoom } from '@/pages/chat/ChatRoom'
 import { ErrorPage } from '@/pages/home/ErrorPage'
@@ -62,8 +59,6 @@ export const RouterComponent = () => {
       <Route path="/board/search" element={<SearchPost />} />
 
       <Route path="/bus-application" element={<BusApplication />} />
-      <Route path="/bus-application/create" element={<CreateBusApplication />} />
-      <Route path="/bus-application/status" element={<BusApplicationStatus />} />
 
       <Route element={<LoginPrivateRoute />}>
         <Route path="/login" element={<LoginPage />} />
@@ -86,7 +81,6 @@ export const RouterComponent = () => {
         <Route path="/mypage/bookmark" element={<BookmarkedPost />} />
 
         <Route path="/kw/broom" element={<Admin />} />
-        <Route path="/kw/broom/bus" element={<AdminBusApplicationStatus />} />
         <Route path="/kw/broom/dates" element={<AdminTrainingSchedule />} />
         <Route path="/kw/broom/overview" element={<AdminOverview />} />
       </Route>
