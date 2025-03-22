@@ -21,9 +21,6 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
     onConnect: () => {
       subscribeToTopic(roomId, client, addMessage)
     },
-    onDisconnect: () => {
-      throw new Error('네트워크 상태를 확인해주세요.')
-    },
     onWebSocketError: () => {
       throw new Error('오류가 발생했습니다.')
     },
@@ -63,7 +60,7 @@ const sendMessage = (
 ) => {
   if (client && client.connected) {
     try {
-      client.publish({
+      const publish = client.publish({
         destination: `/pub/chat.message`,
         headers: { Authorization: token },
         body: JSON.stringify({
@@ -71,6 +68,8 @@ const sendMessage = (
           message: content,
         }),
       })
+
+      console.log(publish)
       reset()
     } catch (error) {
       console.error('메시지 전송에 실패했습니다.', error)
