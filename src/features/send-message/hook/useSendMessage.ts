@@ -9,8 +9,7 @@ export const useSendMessage = (reset: UseFormReset<ChatMessage>) => {
   const handleSendMessage = ({ message }: ChatMessage) => {
     if (message.length !== 0) {
       if (client.current && client.current.connected) {
-        sendMessage(message)
-        reset()
+        sendMessage(message, reset)
       }
     }
   }
