@@ -1,11 +1,10 @@
 import { useEffect, useRef } from 'react'
-import type { UseFormReset } from 'react-hook-form'
+import type { FieldValues, UseFormReset } from 'react-hook-form'
 import { useFormContext } from 'react-hook-form'
 import { Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
 import { useParamId } from '@/shared/hook/useParamId'
-import type { ChatMessage } from '@/shared/model/common.type'
 
 import type { Message } from '../model/chat.type'
 import { useChatMessageActions } from '../model/chatMessage.store'
@@ -50,7 +49,7 @@ const sendMessage = (
   token: string,
   roomId: string,
   content: string,
-  reset: UseFormReset<ChatMessage>,
+  reset: UseFormReset<FieldValues>,
 ) => {
   if (client && client.connected) {
     try {
