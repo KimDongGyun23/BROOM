@@ -21,6 +21,9 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
     onConnect: () => {
       subscribeToTopic(roomId, client, addMessage)
     },
+    onDisconnect: () => {
+      throw new Error('네트워크 상태를 확인해주세요.')
+    },
     onStompError: (frame) => {
       console.error('Broker reported error: ' + frame.headers['message'])
       console.error('Additional details: ' + frame.body)
@@ -44,7 +47,6 @@ const subscribeToTopic = (
   )
 }
 
-// 메시지 전송 기능
 const sendMessage = (
   client: Client | null,
   token: string,
@@ -53,22 +55,17 @@ const sendMessage = (
   reset: UseFormReset<ChatMessage>,
 ) => {
   if (client && client.connected) {
-    try {
-      client.publish({
-        destination: `/pub/chat.message`,
-        headers: { Authorization: token },
-        body: JSON.stringify({
-          boardId: roomId,
-          message: content,
-        }),
-      })
-      reset()
-    } catch (error) {
-      console.error('메시지 전송에 실패했습니다:', error)
-      throw new Error('메세지 전송에 실패했습니다.')
-    }
+    client.publish({
+      destination: `/pub/chat.message`,
+      headers: { Authorization: token },
+      body: JSON.stringify({
+        boardId: roomId,
+        message: content,
+      }),
+    })
+    reset()
   } else {
-    console.error('WebSocket is not connected')
+    throw new Error('네트워크 상태를 확인해주세요.')
   }
 }
 
