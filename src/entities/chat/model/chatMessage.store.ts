@@ -5,7 +5,6 @@ import type { Message } from './chat.type'
 type Actions = {
   setInitialMessage: (messages: Message[]) => void
   addMessage: (message: Message) => void
-  sendMessage: (message: Message) => void
 }
 
 type ChatMessageStore = {
@@ -18,7 +17,6 @@ const useChatMessageStore = create<ChatMessageStore>((set) => ({
   actions: {
     setInitialMessage: (messages) => set(() => ({ messages: [...messages] })),
     addMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
-    sendMessage: (message) => set((state) => ({ messages: [...state.messages, message] })),
   },
 }))
 
