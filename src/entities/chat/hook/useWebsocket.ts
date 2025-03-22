@@ -24,6 +24,9 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
     onDisconnect: () => {
       throw new Error('네트워크 상태를 확인해주세요.')
     },
+    onWebSocketError: () => {
+      throw new Error('오류가 발생했습니다.')
+    },
     onStompError: (frame) => {
       console.error('Broker reported error: ' + frame.headers['message'])
       console.error('Additional details: ' + frame.body)
@@ -40,8 +43,12 @@ const subscribeToTopic = (
   client.subscribe(
     `/topic/broom.chat.room.${roomId}`,
     (message) => {
-      const parsedMessage = JSON.parse(message.body)
-      addMessage(parsedMessage)
+      try {
+        const parsedMessage = JSON.parse(message.body)
+        addMessage(parsedMessage)
+      } catch {
+        throw new Error('오류가 발생했습니다.')
+      }
     },
     { 'Content-Type': 'application/json' },
   )
