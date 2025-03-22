@@ -1,51 +1,60 @@
 import { useEffect, useRef } from 'react'
+import type { UseFormReset } from 'react-hook-form'
+import { useFormContext } from 'react-hook-form'
 import { Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
+import { useParamId } from '@/shared/hook/useParamId'
+import type { ChatMessage } from '@/shared/model/common.type'
 
-import { useParamId } from '../../../shared/hook/useParamId'
+import type { Message } from '../model/chat.type'
 import { useChatMessageActions } from '../model/chatMessage.store'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
-export const useWebSocket = () => {
-  const roomId = useParamId()
-  const client = useRef<Client | null>(null)
-  const { addMessage } = useChatMessageActions()
+const createClient = (token: string, roomId: string, addMessage: (message: Message) => void) => {
+  return new Client({
+    brokerURL: `${SERVER}/chat`,
+    connectHeaders: {
+      host: '/',
+      Authorization: token,
+    },
+    onConnect: () => {
+      subscribeToTopic(roomId, this as unknown as Client, addMessage)
+    },
+    onStompError: (frame) => {
+      console.error('Broker reported error: ' + frame.headers['message'])
+      console.error('Additional details: ' + frame.body)
+    },
+  })
+}
 
-  const token = instance.getAccessToken() as string
+const subscribeToTopic = (
+  roomId: string,
+  client: Client,
+  addMessage: (message: Message) => void,
+) => {
+  client.subscribe(
+    `/topic/broom.chat.room.${roomId}`,
+    (message) => {
+      const parsedMessage = JSON.parse(message.body)
+      addMessage(parsedMessage)
+    },
+    { 'Content-Type': 'application/json' },
+  )
+}
 
-  const connectHandler = () => {
-    if (client.current?.connected) return
-
-    client.current = new Client({
-      brokerURL: `${SERVER}/chat`,
-      connectHeaders: {
-        host: '/',
-        Authorization: token,
-      },
-      onConnect: () => {
-        client.current?.subscribe(
-          `/topic/broom.chat.room.${roomId}`,
-          (message) => {
-            const parsedMessage = JSON.parse(message.body)
-            addMessage(parsedMessage)
-          },
-          { 'Content-Type': 'application/json' },
-        )
-      },
-      onStompError: (frame) => {
-        console.error('Broker reported error: ' + frame.headers['message'])
-        console.error('Additional details: ' + frame.body)
-      },
-    })
-
-    client.current.activate()
-  }
-
-  const sendMessage = (content: string) => {
-    if (client.current && client.current.connected) {
-      client.current.publish({
+// 메시지 전송 기능
+const sendMessage = (
+  client: Client | null,
+  token: string,
+  roomId: string,
+  content: string,
+  reset: UseFormReset<ChatMessage>,
+) => {
+  if (client && client.connected) {
+    try {
+      client.publish({
         destination: `/pub/chat.message`,
         headers: { Authorization: token },
         body: JSON.stringify({
@@ -53,13 +62,30 @@ export const useWebSocket = () => {
           message: content,
         }),
       })
-    } else {
-      console.error('WebSocket is not connected')
+      reset()
+    } catch {
+      throw new Error('메세지 전송에 실패했습니다.')
     }
+  } else {
+    console.error('WebSocket is not connected')
   }
+}
+
+export const useWebSocket = () => {
+  const roomId = useParamId()
+  const client = useRef<Client | null>(null)
+
+  const { addMessage } = useChatMessageActions()
+  const { reset } = useFormContext()
+
+  const token = instance.getAccessToken() as string
 
   useEffect(() => {
-    connectHandler()
+    if (!client.current) {
+      client.current = createClient(token, roomId, addMessage)
+      client.current.activate()
+    }
+
     return () => {
       if (client.current) {
         client.current.deactivate()
@@ -68,5 +94,8 @@ export const useWebSocket = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId, token])
 
-  return { client, sendMessage }
+  return {
+    client,
+    sendMessage: (content: string) => sendMessage(client.current, token, roomId, content, reset),
+  }
 }
