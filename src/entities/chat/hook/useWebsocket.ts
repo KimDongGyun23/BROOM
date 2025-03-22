@@ -12,20 +12,22 @@ import { useChatMessageActions } from '../model/chatMessage.store'
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
 const createClient = (token: string, roomId: string, addMessage: (message: Message) => void) => {
-  return new Client({
+  const client = new Client({
     brokerURL: `${SERVER}/chat`,
     connectHeaders: {
       host: '/',
       Authorization: token,
     },
     onConnect: () => {
-      subscribeToTopic(roomId, this as unknown as Client, addMessage)
+      // 연결 성공 시 구독 설정
+      subscribeToTopic(roomId, client, addMessage)
     },
     onStompError: (frame) => {
       console.error('Broker reported error: ' + frame.headers['message'])
       console.error('Additional details: ' + frame.body)
     },
   })
+  return client
 }
 
 const subscribeToTopic = (
