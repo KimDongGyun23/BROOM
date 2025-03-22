@@ -19,7 +19,6 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
       Authorization: token,
     },
     onConnect: () => {
-      // 연결 성공 시 구독 설정
       subscribeToTopic(roomId, client, addMessage)
     },
     onStompError: (frame) => {
@@ -64,7 +63,8 @@ const sendMessage = (
         }),
       })
       reset()
-    } catch {
+    } catch (error) {
+      console.error('메시지 전송에 실패했습니다:', error)
       throw new Error('메세지 전송에 실패했습니다.')
     }
   } else {
