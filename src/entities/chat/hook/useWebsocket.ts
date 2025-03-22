@@ -62,16 +62,22 @@ const sendMessage = (
   reset: UseFormReset<ChatMessage>,
 ) => {
   if (client && client.connected) {
-    client.publish({
-      destination: `/pub/chat.message`,
-      headers: { Authorization: token },
-      body: JSON.stringify({
-        boardId: roomId,
-        message: content,
-      }),
-    })
-    reset()
+    try {
+      client.publish({
+        destination: `/pub/chat.message`,
+        headers: { Authorization: token },
+        body: JSON.stringify({
+          boardId: roomId,
+          message: content,
+        }),
+      })
+      reset()
+    } catch (error) {
+      console.error('메시지 전송에 실패했습니다.', error)
+      throw new Error('메시지 전송에 실패했습니다.')
+    }
   } else {
+    console.error('WebSocket is not connected')
     throw new Error('네트워크 상태를 확인해주세요.')
   }
 }
@@ -100,7 +106,13 @@ export const useWebSocket = () => {
 
   return {
     client,
-    sendMessage: (content: string, reset: UseFormReset<ChatMessage>) =>
-      sendMessage(client.current, token, roomId, content, reset),
+    sendMessage: (content: string, reset: UseFormReset<ChatMessage>) => {
+      try {
+        sendMessage(client.current, token, roomId, content, reset)
+      } catch (error) {
+        console.error('메시지 전송에 실패했습니다.', error)
+        alert('메시지 전송에 실패했습니다. 네트워크 상태를 확인해주세요.')
+      }
+    },
   }
 }
