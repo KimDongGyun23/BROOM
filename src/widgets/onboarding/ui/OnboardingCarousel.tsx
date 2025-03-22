@@ -24,7 +24,7 @@ export const OnboardingCarousel = () => {
       <Container ref={carouselRef} {...mouseEventHandlers} {...touchEventHandlers}>
         {onboardingImages.map((image, index) => (
           <Slide key={index}>
-            <img src={image} alt={`onboarding-${index}`} fetchPriority="high" />
+            <img src={image} alt={`onboarding-${index}`} />
           </Slide>
         ))}
       </Container>

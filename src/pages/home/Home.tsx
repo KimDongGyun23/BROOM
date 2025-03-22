@@ -16,7 +16,6 @@ export const Home = () => {
         <HomeNoticeSection />
         <HomeServiceSection />
       </MainContent>
-
       <BottomNavigation />
     </Container>
   )
