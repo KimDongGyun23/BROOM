@@ -22,7 +22,7 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
       subscribeToTopic(roomId, client, addMessage)
     },
     onWebSocketError: () => {
-      throw new Error('오류가 발생했습니다.')
+      throw new Error('예상치 못한 오류가 발생했습니다.')
     },
     onStompError: (frame) => {
       console.error('Broker reported error: ' + frame.headers['message'])
@@ -44,7 +44,7 @@ const subscribeToTopic = (
         const parsedMessage = JSON.parse(message.body)
         addMessage(parsedMessage)
       } catch {
-        throw new Error('오류가 발생했습니다.')
+        throw new Error('예상치 못한 오류가 발생했습니다.')
       }
     },
     { 'Content-Type': 'application/json' },
@@ -58,26 +58,18 @@ const sendMessage = (
   content: string,
   reset: UseFormReset<ChatMessage>,
 ) => {
-  if (client && client.connected) {
-    try {
-      const publish = client.publish({
-        destination: `/pub/chat.message`,
-        headers: { Authorization: token },
-        body: JSON.stringify({
-          boardId: roomId,
-          message: content,
-        }),
-      })
+  console.log(client && client.connected)
 
-      console.log(publish)
-      reset()
-    } catch (error) {
-      console.error('메시지 전송에 실패했습니다.', error)
-      throw new Error('메시지 전송에 실패했습니다.')
-    }
-  } else {
-    console.error('WebSocket is not connected')
-    throw new Error('네트워크 상태를 확인해주세요.')
+  if (client && client.connected) {
+    client.publish({
+      destination: `/pub/chat.message`,
+      headers: { Authorization: token },
+      body: JSON.stringify({
+        boardId: roomId,
+        message: content,
+      }),
+    })
+    reset()
   }
 }
 
@@ -105,13 +97,7 @@ export const useWebSocket = () => {
 
   return {
     client,
-    sendMessage: (content: string, reset: UseFormReset<ChatMessage>) => {
-      try {
-        sendMessage(client.current, token, roomId, content, reset)
-      } catch (error) {
-        console.error('메시지 전송에 실패했습니다.', error)
-        alert('메시지 전송에 실패했습니다. 네트워크 상태를 확인해주세요.')
-      }
-    },
+    sendMessage: (content: string, reset: UseFormReset<ChatMessage>) =>
+      sendMessage(client.current, token, roomId, content, reset),
   }
 }
