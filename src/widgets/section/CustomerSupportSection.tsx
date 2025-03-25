@@ -58,7 +58,7 @@ export const CustomerSupportSection = () => {
       <SectionTitle>{sectionTitle}</SectionTitle>
       <SectionList>
         {links.map(({ name }, index) => (
-          <React.Fragment key="name">
+          <React.Fragment key={name}>
             <li>
               <SectionItemButton onClick={() => openModal(MODAL_KEYS.confirm, '')}>
                 {name}
