@@ -1,9 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { TermModal } from '@/features/agree-term/ui/TermViewButton'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
+import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const CUSTOMER_SUPPORT = {
   sectionTitle: '고객 지원',
@@ -15,6 +17,8 @@ const CUSTOMER_SUPPORT = {
   ],
 } as const
 
+const CHANNEL = import.meta.env.VITE_PUBLIC_KAKAO
+
 type SectionModalType = {
   index: number
   isModalOpen: boolean
@@ -22,11 +26,20 @@ type SectionModalType = {
 }
 
 const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
+  const navigate = useNavigate()
+
   switch (index) {
     case 0:
       return null
     case 1:
-      return null
+      return (
+        <ModalWithTwoButton
+          label="문의하기 채널로 이동하시겠습니까?"
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          primaryButton={{ onClickButton: () => navigate(CHANNEL) }}
+        />
+      )
     case 2:
       return <TermModal id="personalConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
     case 3:
