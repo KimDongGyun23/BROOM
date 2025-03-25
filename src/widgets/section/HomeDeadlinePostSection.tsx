@@ -15,11 +15,11 @@ const SectionContent = () => {
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (
-    <>
+    <Container>
       {postList.map((item) => (
         <PostItem key={item.status.boardId} item={item} />
       ))}
-    </>
+    </Container>
   )
 }
 
@@ -51,4 +51,8 @@ const Header = styled.div`
   .title {
     ${({ theme }) => theme.font(600, theme.colors.black[600])};
   }
+`
+
+const Container = styled.div`
+  ${({ theme }) => theme.border('divider', 'top')}
 `
