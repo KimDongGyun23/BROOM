@@ -4,7 +4,6 @@ import { styled } from 'styled-components'
 
 import { TermModal } from '@/features/agree-term/ui/TermViewButton'
 import useModal from '@/shared/hook/useModal'
-import { MODAL_KEYS } from '@/shared/lib/constants'
 import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const CUSTOMER_SUPPORT = {
@@ -62,11 +61,7 @@ export const CustomerSupportSection = () => {
             <li>
               <SectionItemButton onClick={() => openModal(name, '')}>{name}</SectionItemButton>
             </li>
-            <SectionModal
-              index={index}
-              isModalOpen={isModalOpen(MODAL_KEYS.confirm)}
-              closeModal={closeModal}
-            />
+            <SectionModal index={index} isModalOpen={isModalOpen(name)} closeModal={closeModal} />
           </React.Fragment>
         ))}
       </SectionList>
