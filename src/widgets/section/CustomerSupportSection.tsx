@@ -60,9 +60,7 @@ export const CustomerSupportSection = () => {
         {links.map(({ name }, index) => (
           <React.Fragment key={name}>
             <li>
-              <SectionItemButton onClick={() => openModal(MODAL_KEYS.confirm, '')}>
-                {name}
-              </SectionItemButton>
+              <SectionItemButton onClick={() => openModal(name, '')}>{name}</SectionItemButton>
             </li>
             <SectionModal
               index={index}
