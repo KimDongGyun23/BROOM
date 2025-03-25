@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { HomeNoticeSection } from '@/widgets/section/HomeNoticeSection'
+import { HomeDeadlinePostSection } from '@/widgets/section/HomeDeadlinePostSection'
 import { HomeServiceSection } from '@/widgets/section/HomeServiceSection'
 import { HomeUserSection } from '@/widgets/section/HomeUserSection'
 
@@ -13,8 +13,8 @@ export const Home = () => {
       <MainHeader />
       <MainContent>
         <HomeUserSection />
-        <HomeNoticeSection />
         <HomeServiceSection />
+        <HomeDeadlinePostSection />
       </MainContent>
       <BottomNavigation />
     </Container>

@@ -29,6 +29,7 @@ export const boardQueryKeys = {
   all: ['board'] as const,
   myPostList: () => [...boardQueryKeys.all, 'my-post'] as const,
   bookmarkedPostList: () => [...boardQueryKeys.all, 'bookmark'] as const,
+  deadlinePostList: () => [...boardQueryKeys.all, 'deadline-list'] as const,
   postList: (urls: PostListRequest['urls']) =>
     [...boardQueryKeys.all, 'list', ...Object.values(urls)] as const,
   postDetail: (urls: PostDetailRequest['urls']) =>
@@ -90,3 +91,9 @@ export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
   })
 }
+
+export const useFetchDeadLinePostList = () =>
+  useSuspenseQuery({
+    queryKey: boardQueryKeys.deadlinePostList(),
+    queryFn: () => instance.get<PostListResponse>(`/board/view/almost-full`),
+  })
