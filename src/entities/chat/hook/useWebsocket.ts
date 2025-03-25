@@ -21,9 +21,6 @@ const createClient = (token: string, roomId: string, addMessage: (message: Messa
     reconnectDelay: 5000,
     heartbeatIncoming: 4000,
     heartbeatOutgoing: 4000,
-    debug: function (str) {
-      console.log(str)
-    },
     onConnect: () => {
       subscribeToTopic(roomId, client, addMessage)
     },
