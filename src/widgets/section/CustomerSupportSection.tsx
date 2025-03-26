@@ -36,7 +36,7 @@ const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
           label="문의하기 채널로 이동하시겠습니까?"
           isModalOpen={isModalOpen}
           closeModal={closeModal}
-          primaryButton={{ onClickButton: () => navigate(CHANNEL) }}
+          primaryButton={{ buttonLabel: '확인', onClickButton: () => navigate(CHANNEL) }}
         />
       )
     case 2:
