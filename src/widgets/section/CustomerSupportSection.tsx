@@ -1,5 +1,4 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 import { TermModal } from '@/features/agree-term/ui/TermViewButton'
@@ -25,8 +24,6 @@ type SectionModalType = {
 }
 
 const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
-  const navigate = useNavigate()
-
   switch (index) {
     case 0:
       return null
@@ -36,7 +33,10 @@ const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
           label="문의하기 채널로 이동하시겠습니까?"
           isModalOpen={isModalOpen}
           closeModal={closeModal}
-          primaryButton={{ buttonLabel: '확인', onClickButton: () => navigate(CHANNEL) }}
+          primaryButton={{
+            buttonLabel: '확인',
+            onClickButton: () => window.open(CHANNEL, '_blank'),
+          }}
         />
       )
     case 2:
