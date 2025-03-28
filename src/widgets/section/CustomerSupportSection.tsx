@@ -35,7 +35,10 @@ const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
           closeModal={closeModal}
           primaryButton={{
             buttonLabel: '확인',
-            onClickButton: () => window.open(CHANNEL, '_blank'),
+            onClickButton: () => {
+              window.open(CHANNEL, '_blank')
+              closeModal()
+            },
           }}
         />
       )
