@@ -80,6 +80,6 @@ export const useWebSocket = () => {
   return {
     sendMessage: publishMessage,
     error,
-    isConnected: client.current?.connected || false,
+    client,
   }
 }
