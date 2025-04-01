@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
@@ -8,7 +9,16 @@ import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 export const ChatInput = () => {
   const formMethod = useForm<ChatMessage>({ defaultValues: { message: '' } })
 
-  const { reset, register, handleSubmit } = formMethod
+  const {
+    reset,
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = formMethod
+
+  useEffect(() => {
+    console.error('formError', errors)
+  }, [errors])
 
   const { handleSendMessage } = useSendMessage(reset)
 

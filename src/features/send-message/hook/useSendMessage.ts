@@ -7,6 +7,9 @@ export const useSendMessage = (reset: UseFormReset<ChatMessage>) => {
   const { sendMessage, isConnected } = useWebSocket()
 
   const handleSendMessage = ({ message }: ChatMessage) => {
+    console.log('handleSendMessage', message)
+    console.log('handleSendMessage 연결상태', isConnected)
+
     if (message.length !== 0) {
       if (isConnected) {
         sendMessage(message, reset)
