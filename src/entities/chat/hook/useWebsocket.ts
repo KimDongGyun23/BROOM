@@ -25,6 +25,8 @@ export const useWebSocket = () => {
   const token = instance.getAccessToken() as string
 
   const handleAck = (ack: Ack) => {
+    console.log('handleAck', ack)
+
     if (ack.status === 'SUCCESS') {
       resetRef.current?.()
       resetRef.current = null
@@ -44,11 +46,9 @@ export const useWebSocket = () => {
     })
 
     client.current.activate()
+
     return () => {
-      if (client.current?.connected) {
-        client.current.deactivate().catch((err) => console.error('연결 해제 오류:', err))
-      }
-      resetRef.current = null
+      client.current?.deactivate()
     }
   }
 
@@ -64,6 +64,8 @@ export const useWebSocket = () => {
 
     resetRef.current = reset
     setError(null)
+
+    console.log('publishMessage 연결 상태', client.current?.connected, content)
 
     client.current.publish({
       destination: '/pub/chat.message',

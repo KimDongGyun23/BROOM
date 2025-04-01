@@ -33,6 +33,9 @@ export const createChatClient = (
     heartbeatIncoming: 4000,
     heartbeatOutgoing: 4000,
     connectHeaders: { Authorization: token },
+    debug: function (str) {
+      console.log(str)
+    },
     onConnect: () => {
       client.subscribe(SUBSCRIPTION_PATHS.chatRoom(roomId), (message) =>
         handleMessage(message, handlers.onMessage),
