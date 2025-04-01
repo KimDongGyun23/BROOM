@@ -45,11 +45,11 @@ export const createChatClient = (
         handleAck(message, handlers.onAck),
       )
     },
-    onStompError: (frame) => {
-      handlers.onError(frame.headers['message'] || 'Unknown STOMP error')
+    onStompError: () => {
+      handlers.onError('예기치 않은 오류가 발생했습니다.')
     },
     onWebSocketError: () => {
-      handlers.onError('WebSocket connection error')
+      handlers.onError('통신 상태가 원할하지 않습니다.')
     },
   })
 
@@ -59,7 +59,6 @@ export const createChatClient = (
 const handleMessage = (message: IMessage, onMessage: (message: Message) => void) => {
   try {
     const parsed = JSON.parse(message.body)
-    console.log('message : ', message)
     onMessage(parsed)
   } catch (error) {
     console.error('Message parsing error:', error)
@@ -69,7 +68,6 @@ const handleMessage = (message: IMessage, onMessage: (message: Message) => void)
 const handleAck = (message: IMessage, onAck: (ack: Ack) => void) => {
   try {
     const ack = JSON.parse(message.body)
-    console.log('ack: ', ack)
     onAck(ack)
   } catch (error) {
     console.error('ACK parsing error:', error)

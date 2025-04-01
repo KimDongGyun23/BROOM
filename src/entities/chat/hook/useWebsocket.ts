@@ -5,7 +5,9 @@ import type { Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
 import { useUserData } from '@/features/login/model/auth.store'
+import useModal from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 import type { ChatMessage } from '@/shared/model/common.type'
 
 import { type Ack, createChatClient } from '../lib/websocket.lib'
@@ -19,20 +21,18 @@ export const useWebSocket = () => {
   const client = useRef<Client | null>(null)
   const resetRef = useRef<UseFormReset<ChatMessage> | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
   const { addMessage } = useChatMessageActions()
 
   const token = instance.getAccessToken() as string
 
   const handleAck = (ack: Ack) => {
-    console.log('handleAck', ack)
-
     if (ack.status === 'SUCCESS') {
       resetRef.current?.()
       resetRef.current = null
-      setError(null)
     } else {
-      setError(ack.message || '메시지 전송 실패')
+      openModal(MODAL_KEYS.error, ack.message || '메시지 전송 실패')
     }
   }
 
@@ -41,7 +41,7 @@ export const useWebSocket = () => {
       client.current = createChatClient(`${SERVER}/chat`, token, roomId, user.nickname, {
         onMessage: addMessage,
         onAck: handleAck,
-        onError: (error) => setError(error),
+        onError: (error) => openModal(MODAL_KEYS.error, error || '메시지 전송 실패'),
       })
 
       client.current.activate()
@@ -64,8 +64,6 @@ export const useWebSocket = () => {
     resetRef.current = reset
     setError(null)
 
-    console.log('publishMessage', content)
-
     client.current.publish({
       destination: '/pub/chat.message',
       headers: { Authorization: token },
@@ -81,5 +79,8 @@ export const useWebSocket = () => {
     sendMessage: publishMessage,
     error,
     client,
+    errorModalLabel: modalLabel(MODAL_KEYS.error),
+    isErrorModalOpen: isModalOpen(MODAL_KEYS.error),
+    closeErrorModal: closeModal,
   }
 }

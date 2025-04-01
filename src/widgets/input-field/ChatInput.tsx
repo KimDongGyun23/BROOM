@@ -4,31 +4,42 @@ import styled from 'styled-components'
 import { useSendMessage } from '@/features/send-message/hook/useSendMessage'
 import type { ChatMessage } from '@/shared/model/common.type'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 export const ChatInput = () => {
   const formMethod = useForm<ChatMessage>({ defaultValues: { message: '' } })
 
   const { reset, register, handleSubmit } = formMethod
 
-  const { handleSendMessage } = useSendMessage(reset)
+  const { handleSendMessage, errorModalLabel, isErrorModalOpen, closeErrorModal } =
+    useSendMessage(reset)
 
   return (
-    <FormProvider {...formMethod}>
-      <Container>
-        <ChatInputForm onSubmit={handleSubmit(handleSendMessage)}>
-          <ChatInputField
-            type="text"
-            size={8}
-            {...register('message')}
-            placeholder="메세지를 입력해주세요."
-          />
+    <>
+      <FormProvider {...formMethod}>
+        <Container>
+          <ChatInputForm onSubmit={handleSubmit(handleSendMessage)}>
+            <ChatInputField
+              type="text"
+              size={8}
+              {...register('message')}
+              placeholder="메세지를 입력해주세요."
+            />
 
-          <SendMessageButton type="submit">
-            <SendingIcon />
-          </SendMessageButton>
-        </ChatInputForm>
-      </Container>
-    </FormProvider>
+            <SendMessageButton type="submit">
+              <SendingIcon />
+            </SendMessageButton>
+          </ChatInputForm>
+        </Container>
+      </FormProvider>
+
+      <ModalWithOneButton
+        label={errorModalLabel}
+        isModalOpen={isErrorModalOpen}
+        closeModal={closeErrorModal}
+        button={{ onClickButton: closeErrorModal }}
+      />
+    </>
   )
 }
 
