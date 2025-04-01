@@ -49,7 +49,15 @@ export const createChatClient = (
       handlers.onError('예기치 않은 오류가 발생했습니다.')
     },
     onWebSocketError: () => {
-      handlers.onError('통신 상태가 원할하지 않습니다.')
+      handlers.onError('서버와의 연결이 끊어졌습니다')
+    },
+    onDisconnect: () => {
+      handlers.onError('서버와의 연결이 끊어졌습니다')
+    },
+    onWebSocketClose: (event) => {
+      if (event.code === 1006) {
+        handlers.onError('네트워크 연결이 불안정합니다')
+      }
     },
   })
 
