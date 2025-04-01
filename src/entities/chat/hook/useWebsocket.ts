@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState } from 'react'
 import type { UseFormReset } from 'react-hook-form'
-import type { Client } from '@stomp/stompjs'
+import { ActivationState, type Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
 import { useUserData } from '@/features/login/model/auth.store'
@@ -55,6 +55,11 @@ export const useWebSocket = () => {
   }, [roomId, token])
 
   const publishMessage = (content: string, reset: UseFormReset<ChatMessage>) => {
+    if (!client.current?.active || client.current.state === ActivationState.INACTIVE) {
+      openModal(MODAL_KEYS.error, '연결이 종료되었습니다. 새로고침 후 재시도해주세요.')
+      return
+    }
+
     if (!client.current?.connected || !user) {
       console.error('publishMessage 에러', client.current?.connected, user)
       setError('연결 상태를 확인해주세요')
