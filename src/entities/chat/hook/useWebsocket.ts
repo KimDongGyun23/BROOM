@@ -36,28 +36,27 @@ export const useWebSocket = () => {
     }
   }
 
-  const initializeClient = () => {
-    if (!user || !roomId) return
+  useEffect(() => {
+    if (!client.current && user) {
+      client.current = createChatClient(`${SERVER}/chat`, token, roomId, user.nickname, {
+        onMessage: addMessage,
+        onAck: handleAck,
+        onError: (error) => setError(error),
+      })
 
-    client.current = createChatClient(`${SERVER}/chat`, token, roomId, user.nickname, {
-      onMessage: addMessage,
-      onAck: handleAck,
-      onError: (error) => setError(error),
-    })
-
-    client.current.activate()
+      client.current.activate()
+    }
 
     return () => {
-      client.current?.deactivate()
+      if (client.current) {
+        client.current.deactivate()
+      }
     }
-  }
-
-  useEffect(() => {
-    initializeClient()
-  }, [roomId, user])
+  }, [roomId, token])
 
   const publishMessage = (content: string, reset: UseFormReset<ChatMessage>) => {
     if (!client.current?.connected || !user) {
+      console.error('publishMessage 에러', client.current?.connected, user)
       setError('연결 상태를 확인해주세요')
       return
     }
@@ -65,7 +64,7 @@ export const useWebSocket = () => {
     resetRef.current = reset
     setError(null)
 
-    console.log('publishMessage 연결 상태', client.current?.connected, content)
+    console.log('publishMessage', content)
 
     client.current.publish({
       destination: '/pub/chat.message',
