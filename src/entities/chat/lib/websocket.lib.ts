@@ -59,6 +59,7 @@ export const createChatClient = (
 const handleMessage = (message: IMessage, onMessage: (message: Message) => void) => {
   try {
     const parsed = JSON.parse(message.body)
+    console.log('message : ', message)
     onMessage(parsed)
   } catch (error) {
     console.error('Message parsing error:', error)
@@ -68,6 +69,7 @@ const handleMessage = (message: IMessage, onMessage: (message: Message) => void)
 const handleAck = (message: IMessage, onAck: (ack: Ack) => void) => {
   try {
     const ack = JSON.parse(message.body)
+    console.log('ack: ', ack)
     onAck(ack)
   } catch (error) {
     console.error('ACK parsing error:', error)
