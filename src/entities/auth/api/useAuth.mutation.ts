@@ -1,12 +1,8 @@
 import { instance, instanceWithoutAuth } from '@/app/api'
 
-const ENDPOINTS = {
-  reIssue: `/reissue`,
-} as const
-
 export const reIssue = async () => {
   try {
-    const response = await instanceWithoutAuth.post(ENDPOINTS.reIssue, null)
+    const response = await instanceWithoutAuth.post(`/reissue`, null)
     const token = response.headers['authorization']
 
     if (token) {
@@ -14,9 +10,9 @@ export const reIssue = async () => {
       return token
     }
 
-    return null
+    throw new Error('토큰 재발급 실패')
   } catch (error) {
     console.error('재발급 요청 실패:', error)
-    return null
+    throw error
   }
 }

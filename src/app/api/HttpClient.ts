@@ -98,8 +98,6 @@ export class HttpClient {
 
         return this.client(originalRequest)
       } catch (refreshError) {
-        console.error('토큰 재발급 실패:', refreshError)
-
         this.failedQueue.forEach(({ reject }) => reject(refreshError))
         this.failedQueue = []
 

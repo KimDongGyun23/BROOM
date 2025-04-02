@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 
 import { reIssue } from '@/entities/auth/api/useAuth.mutation'
-import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
+import { useAuthActions, useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Admin } from '@/pages/admin/Admin'
 import { AdminOverview } from '@/pages/admin/AdminOverview'
 import { AdminTrainingSchedule } from '@/pages/admin/AdminTrainingSchedule'
@@ -41,13 +41,18 @@ const LoginPrivateRoute = () => {
 const PrivateRoute = () => {
   const navigate = useNavigate()
   const isLoggedIn = useIsLoggedIn()
+
+  const { refresh, logout } = useAuthActions()
+
   const [isCheckingToken, setIsCheckingToken] = useState(true)
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
         await reIssue()
+        refresh()
       } catch {
+        logout()
         navigate('/login', { replace: true })
       } finally {
         setIsCheckingToken(false)
@@ -56,7 +61,7 @@ const PrivateRoute = () => {
 
     if (!isLoggedIn) checkAuth()
     else setIsCheckingToken(false)
-  }, [isLoggedIn, navigate])
+  }, [isLoggedIn, logout, navigate, refresh])
 
   if (isCheckingToken) {
     return <Loading isFull />
