@@ -47,11 +47,13 @@ const PrivateRoute = () => {
   const [isCheckingToken, setIsCheckingToken] = useState(true)
 
   useEffect(() => {
+    console.log('isLoggedIn', isLoggedIn)
     const checkAuth = async () => {
       try {
         await reIssue()
         refresh()
       } catch {
+        console.log('logout')
         logout()
         navigate('/login', { replace: true })
       } finally {
