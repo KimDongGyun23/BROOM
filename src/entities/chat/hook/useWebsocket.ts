@@ -61,7 +61,9 @@ export const useWebSocket = () => {
       }
 
       if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-        openModal(MODAL_KEYS.confirm, '네트워크가 불안하여 이전 페이지로 돌아갑니다.')
+        console.log(client.current?.connected)
+        client.current?.deactivate()
+        openModal(MODAL_KEYS.confirm, '서버와의 연결이 끊어졌습니다')
         return
       }
 
@@ -92,7 +94,7 @@ export const useWebSocket = () => {
       if (content.length === 0) return
 
       if (!user || !client.current?.connected) {
-        openModal(MODAL_KEYS.error, '연결 상태를 확인해주세요.')
+        openModal(MODAL_KEYS.error, '서버와의 연결이 끊어졌습니다')
         return
       }
 
