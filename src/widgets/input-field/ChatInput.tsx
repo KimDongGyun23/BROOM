@@ -1,7 +1,8 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-import { useSendMessage } from '@/features/send-message/hook/useSendMessage'
+import { useWebSocket } from '@/entities/chat/hook/useWebsocket'
+import { MODAL_KEYS } from '@/shared/lib/constants'
 import type { ChatMessage } from '@/shared/model/common.type'
 import { SendingIcon } from '@/shared/ui/icons/NonActiveIcons'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
@@ -11,8 +12,10 @@ export const ChatInput = () => {
 
   const { reset, register, handleSubmit } = formMethod
 
-  const { handleSendMessage, errorModalLabel, isErrorModalOpen, closeErrorModal } =
-    useSendMessage(reset)
+  const { sendMessage, modalLabel, isModalOpen, closeMoveToPrevModal, closeErrorModal } =
+    useWebSocket()
+
+  const handleSendMessage = ({ message }: ChatMessage) => sendMessage(message, reset)
 
   return (
     <>
@@ -34,10 +37,17 @@ export const ChatInput = () => {
       </FormProvider>
 
       <ModalWithOneButton
-        label={errorModalLabel}
-        isModalOpen={isErrorModalOpen}
+        label={modalLabel(MODAL_KEYS.error)}
+        isModalOpen={isModalOpen(MODAL_KEYS.error)}
         closeModal={closeErrorModal}
         button={{ onClickButton: closeErrorModal }}
+      />
+
+      <ModalWithOneButton
+        label={modalLabel(MODAL_KEYS.confirm)}
+        isModalOpen={isModalOpen(MODAL_KEYS.confirm)}
+        closeModal={closeMoveToPrevModal}
+        button={{ onClickButton: closeMoveToPrevModal }}
       />
     </>
   )

@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useRef } from 'react'
 import type { UseFormReset } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { type Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
@@ -23,6 +24,7 @@ const SERVER_DOMAIN = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 export const useWebSocket = () => {
   const roomId = useParamId()
   const user = useUserData()
+  const navigate = useNavigate()
 
   const { addMessage } = useChatMessageActions()
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
@@ -45,6 +47,13 @@ export const useWebSocket = () => {
     [openModal],
   )
 
+  const handleMoveToPrevPage = useCallback(() => {
+    client.current?.deactivate()
+    client.current = null
+    closeModal()
+    navigate(-1)
+  }, [navigate])
+
   const handleConnectionError = useCallback(
     (message: string) => {
       if (!isModalOpen(MODAL_KEYS.error)) {
@@ -52,7 +61,7 @@ export const useWebSocket = () => {
       }
 
       if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-        console.error('최대 재연결 시도 횟수에 도달했습니다.')
+        openModal(MODAL_KEYS.confirm, '네트워크가 불안하여 이전 페이지로 돌아갑니다.')
         return
       }
 
@@ -80,6 +89,8 @@ export const useWebSocket = () => {
 
   const publishMessage = useCallback(
     (content: string, reset: UseFormReset<ChatMessage>) => {
+      if (content.length === 0) return
+
       if (!user || !client.current?.connected) {
         openModal(MODAL_KEYS.error, '연결 상태를 확인해주세요.')
         return
@@ -132,8 +143,9 @@ export const useWebSocket = () => {
 
   return {
     sendMessage: publishMessage,
-    errorModalLabel: modalLabel(MODAL_KEYS.error),
-    isErrorModalOpen: isModalOpen(MODAL_KEYS.error),
+    modalLabel,
+    isModalOpen,
     closeErrorModal: closeModal,
+    closeMoveToPrevModal: handleMoveToPrevPage,
   }
 }
