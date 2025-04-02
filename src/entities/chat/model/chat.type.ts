@@ -23,6 +23,18 @@ export type Message = {
   dischargeYear: number
 }
 
+export type WebSocketParams = {
+  brokerURL: string
+  token: string
+  roomId: string
+  nickname: string
+  handlers: {
+    onMessage: (message: Message) => void
+    onAck: (ack: Ack) => void
+    onError: (error: string) => void
+  }
+}
+
 type BoardInformation = {
   boardTitle: string
   ownerNickname: string
