@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import type { UseFormReset } from 'react-hook-form'
 import { ActivationState, type Client } from '@stomp/stompjs'
 
@@ -20,7 +20,6 @@ export const useWebSocket = () => {
   const user = useUserData()
   const client = useRef<Client | null>(null)
   const resetRef = useRef<UseFormReset<ChatMessage> | null>(null)
-  const [error, setError] = useState<string | null>(null)
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
   const { addMessage } = useChatMessageActions()
@@ -32,8 +31,15 @@ export const useWebSocket = () => {
       resetRef.current?.()
       resetRef.current = null
     } else {
-      openModal(MODAL_KEYS.error, ack.message || '메시지 전송 실패')
+      openModal(MODAL_KEYS.error, ack.message || '메시지 전송에 실패했습니다.')
     }
+  }
+  const handleConnectionError = (message: string) => {
+    if (!isModalOpen(MODAL_KEYS.error)) {
+      openModal(MODAL_KEYS.error, message)
+    }
+    client.current?.deactivate()
+    setTimeout(() => client.current?.activate(), 5000)
   }
 
   useEffect(() => {
@@ -41,7 +47,7 @@ export const useWebSocket = () => {
       client.current = createChatClient(`${SERVER}/chat`, token, roomId, user.nickname, {
         onMessage: addMessage,
         onAck: handleAck,
-        onError: (error) => openModal(MODAL_KEYS.error, error || '메시지 전송 실패'),
+        onError: handleConnectionError,
       })
 
       client.current.activate()
@@ -54,6 +60,16 @@ export const useWebSocket = () => {
     }
   }, [roomId, token])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (client.current && !client.current.connected) {
+        handleConnectionError('연결이 종료되었습니다. 새로고침 후 재시도해주세요.')
+      }
+    }, 10000)
+
+    return () => clearInterval(interval)
+  }, [handleConnectionError])
+
   const publishMessage = (content: string, reset: UseFormReset<ChatMessage>) => {
     if (!client.current?.active || client.current.state === ActivationState.INACTIVE) {
       openModal(MODAL_KEYS.error, '연결이 종료되었습니다. 새로고침 후 재시도해주세요.')
@@ -62,12 +78,10 @@ export const useWebSocket = () => {
 
     if (!client.current?.connected || !user) {
       console.error('publishMessage 에러', client.current?.connected, user)
-      setError('연결 상태를 확인해주세요')
       return
     }
 
     resetRef.current = reset
-    setError(null)
 
     client.current.publish({
       destination: '/pub/chat.message',
@@ -82,7 +96,6 @@ export const useWebSocket = () => {
 
   return {
     sendMessage: publishMessage,
-    error,
     client,
     errorModalLabel: modalLabel(MODAL_KEYS.error),
     isErrorModalOpen: isModalOpen(MODAL_KEYS.error),
