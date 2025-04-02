@@ -26,13 +26,16 @@ export const useAuthStore = create<AuthStore>()(
       ...initialStates,
       actions: {
         login: (user) => set({ isLoggedIn: true, user }),
-        logout: () => set({ ...initialStates }),
+        logout: () => {
+          localStorage.removeItem('user')
+          set({ ...initialStates })
+        },
         refresh: () => set((state) => ({ ...state.user, isLoggedIn: true })),
       },
     }),
     {
       name: 'user',
-      partialize: (state) => ({ isLoggedIn: state.isLoggedIn, user: state.user }),
+      partialize: (state) => ({ user: state.user }),
     },
   ),
 )
