@@ -35,9 +35,7 @@ export const useAuthStore = create<AuthStore>()(
     }),
     {
       name: 'user',
-      partialize: (state) => ({
-        user: { nickname: state.user?.nickname, militaryBranch: state.user?.militaryBranch },
-      }),
+      partialize: (state) => ({ user: state.user }),
     },
   ),
 )
