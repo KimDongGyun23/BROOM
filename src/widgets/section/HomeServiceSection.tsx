@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import carBlack from '/assets/icons/CarBlack.svg'
-import carWhite from '/assets/icons/CarWhite.svg'
+import carBlack from '@/assets/CarBlack.svg'
+import carWhite from '@/assets/CarWhite.svg'
 
 export const HomeServiceSection = () => {
   return (
