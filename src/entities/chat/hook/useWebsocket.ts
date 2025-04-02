@@ -79,10 +79,9 @@ export const useWebSocket = () => {
       const randomDelay = delay + Math.floor(Math.random() * 3000)
 
       setTimeout(() => {
-        if (client.current) {
+        if (client.current && reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
           client.current.activate()
           reconnectAttempts++
-          console.log(`재연결 시도: ${reconnectAttempts}회`)
         }
       }, randomDelay)
     },
