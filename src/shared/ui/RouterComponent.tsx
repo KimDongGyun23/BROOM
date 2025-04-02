@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
 
+import { reIssue } from '@/entities/auth/api/useAuth.mutation'
 import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Admin } from '@/pages/admin/Admin'
 import { AdminOverview } from '@/pages/admin/AdminOverview'
@@ -26,6 +27,8 @@ import { MypageMyPost } from '@/pages/mypage/MypageMyPost'
 import { PasswordUpdate } from '@/pages/mypage/PasswordUpdate'
 import { UpdateAccountDetails } from '@/pages/mypage/UpdateAccountDetails'
 
+import { Loading } from './Loading'
+
 const LoginPrivateRoute = () => {
   const isLoggedIn = useIsLoggedIn()
   const user = useUserData()
@@ -38,14 +41,28 @@ const LoginPrivateRoute = () => {
 const PrivateRoute = () => {
   const navigate = useNavigate()
   const isLoggedIn = useIsLoggedIn()
+  const [isCheckingToken, setIsCheckingToken] = useState(true)
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login', { replace: true })
+    const checkAuth = async () => {
+      try {
+        await reIssue()
+      } catch {
+        navigate('/login', { replace: true })
+      } finally {
+        setIsCheckingToken(false)
+      }
     }
+
+    if (!isLoggedIn) checkAuth()
+    else setIsCheckingToken(false)
   }, [isLoggedIn, navigate])
 
-  return isLoggedIn ? <Outlet /> : null
+  if (isCheckingToken) {
+    return <Loading isFull />
+  }
+
+  return isLoggedIn ? <Outlet /> : <Navigate to="/login" replace />
 }
 
 export const RouterComponent = () => {
