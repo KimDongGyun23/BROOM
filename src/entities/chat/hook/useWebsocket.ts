@@ -10,7 +10,8 @@ import { useParamId } from '@/shared/hook/useParamId'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import type { ChatMessage } from '@/shared/model/common.type'
 
-import { type Ack, createChatClient } from '../lib/websocket.lib'
+import { createChatClient } from '../lib/websocket.lib'
+import type { Ack } from '../model/chat.type'
 import { useChatMessageActions } from '../model/chatMessage.store'
 
 const SERVER = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN

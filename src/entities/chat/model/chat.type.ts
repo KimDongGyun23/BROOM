@@ -6,6 +6,14 @@ export type User = {
   militaryBranch: MilitaryBranchCode
 }
 
+export type Ack = {
+  status: string
+  statusCode: number
+  message: string
+  senderNickname: string
+  boardId: string
+}
+
 export type Message = {
   messageId: number
   message: string

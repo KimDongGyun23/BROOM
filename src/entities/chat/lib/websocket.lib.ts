@@ -1,15 +1,7 @@
 import type { IMessage } from '@stomp/stompjs'
 import { Client } from '@stomp/stompjs'
 
-import type { Message } from '../model/chat.type'
-
-export type Ack = {
-  status: string
-  statusCode: number
-  message: string
-  senderNickname: string
-  boardId: string
-}
+import type { Ack, Message } from '../model/chat.type'
 
 const SUBSCRIPTION_PATHS = {
   chatRoom: (roomId: string) => `/topic/broom.chat.room.${roomId}`,
