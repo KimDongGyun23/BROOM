@@ -14,7 +14,9 @@ import { createChatClient } from '../lib/websocket.lib'
 import type { Ack } from '../model/chat.type'
 import { useChatMessageActions } from '../model/chatMessage.store'
 
-const RECONNECT_DELAY = 5000
+const INITIAL_RECONNECT_DELAY = 1000
+const MAX_RECONNECT_DELAY = 16000
+const MAX_RECONNECT_ATTEMPTS = 5
 const CONNECTION_CHECK_INTERVAL = 10000
 const SERVER_DOMAIN = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
 
@@ -28,6 +30,8 @@ export const useWebSocket = () => {
   const client = useRef<Client | null>(null)
   const resetRef = useRef<UseFormReset<ChatMessage> | null>(null)
   const token = instance.getAccessToken() as string
+
+  let reconnectAttempts = 0
 
   const handleAck = useCallback(
     (ack: Ack) => {
@@ -46,8 +50,30 @@ export const useWebSocket = () => {
       if (!isModalOpen(MODAL_KEYS.error)) {
         openModal(MODAL_KEYS.error, message)
       }
-      client.current?.deactivate()
-      setTimeout(() => client.current?.activate(), RECONNECT_DELAY)
+
+      if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
+        console.error('최대 재연결 시도 횟수에 도달했습니다.')
+        return
+      }
+
+      if (client.current) {
+        client.current.deactivate()
+      }
+
+      const delay = Math.min(
+        INITIAL_RECONNECT_DELAY * Math.pow(2, reconnectAttempts),
+        MAX_RECONNECT_DELAY,
+      )
+
+      const randomDelay = delay + Math.floor(Math.random() * 3000)
+
+      setTimeout(() => {
+        if (client.current) {
+          client.current.activate()
+          reconnectAttempts++
+          console.log(`재연결 시도: ${reconnectAttempts}회`)
+        }
+      }, randomDelay)
     },
     [isModalOpen, openModal],
   )
@@ -80,7 +106,11 @@ export const useWebSocket = () => {
         token,
         roomId,
         nickname: user.nickname,
-        handlers: { onMessage: addMessage, onAck: handleAck, onError: handleConnectionError },
+        handlers: {
+          onMessage: addMessage,
+          onAck: handleAck,
+          onError: handleConnectionError,
+        },
       })
 
       client.current.activate()
