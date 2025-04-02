@@ -28,6 +28,6 @@ const HeaderTitle = styled.h1<{ $secondary: boolean }>`
     font-size: ${$secondary ? '28px' : '32px'};
     color: ${theme.colors.black[600]};
   `}
-  font-family: 'Jalnan2', sans-serif;
+  font-family: 'Jalnan', sans-serif;
   line-height: 36px;
 `

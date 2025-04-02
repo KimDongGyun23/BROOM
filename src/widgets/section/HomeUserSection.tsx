@@ -87,7 +87,7 @@ const Text = styled.p`
 `
 
 const Logo = styled.span`
-  font-family: 'Jalnan2', sans-serif;
+  font-family: 'Jalnan', sans-serif;
   font-size: 24px;
   line-height: 32px;
   color: ${({ theme }) => theme.colors.black[600]};

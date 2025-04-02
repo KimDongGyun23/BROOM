@@ -24,7 +24,7 @@ const Container = styled.div`
 const Logo = styled.h1`
   ${({ theme }) => theme.margin('logo-lg-top', 'container', 'logo-lg-bottom')};
   text-align: center;
-  font-family: 'Jalnan2', sans-serif;
+  font-family: 'Jalnan', sans-serif;
   font-size: 60px;
   line-height: 44px;
   color: ${({ theme }) => theme.colors.black[600]};

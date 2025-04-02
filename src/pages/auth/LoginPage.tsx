@@ -50,7 +50,7 @@ const Logo = styled.h1`
     color: ${theme.colors.black[600]};
   `}
   text-align: center;
-  font-family: 'Jalnan2', sans-serif;
+  font-family: 'Jalnan', sans-serif;
   font-size: 60px;
   line-height: 44px;
 `

@@ -4,9 +4,9 @@ import { inputStyle } from './input'
 
 const GlobalStyles = createGlobalStyle`
 	@font-face {
-    font-family: Jalnan2;
+    font-family: Jalnan;
     font-weight: 300;
-    src: url('/assets/fonts/JALNAN2TTF.TTF') format('truetype');
+    src: url('/assets/fonts/Jalnan.woff') format('truetype');
     font-style: normal;
     font-display: block;
   }
@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: Moneygraphy;
     font-weight: 300;
-    src: url('/assets/fonts/Moneygraphy.ttf') format('truetype');
+    src: url('/assets/fonts/Moneygraphy.woff') format('truetype');
     font-style: normal;
     font-display: block;
   }

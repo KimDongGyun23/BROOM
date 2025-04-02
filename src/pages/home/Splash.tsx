@@ -23,7 +23,7 @@ const Content = styled.div`
 `
 
 const Logo = styled.h1`
-  font-family: 'Jalnan2', sans-serif;
+  font-family: 'Jalnan', sans-serif;
   font-size: 64px;
   color: ${({ theme }) => theme.colors.black[100]};
 `

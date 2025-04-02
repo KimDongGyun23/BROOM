@@ -67,7 +67,7 @@ const TextContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', 'center', undefined, 'xl')}
 
   .error-title {
-    font-family: 'Jalnan2', sans-serif;
+    font-family: 'Jalnan', sans-serif;
     font-size: 24px;
     color: ${({ theme }) => theme.colors.black[600]};
   }
