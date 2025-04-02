@@ -53,7 +53,9 @@ const numberStyle = css`
 const dateStyle = css`
   input[type='date'] {
     position: relative;
-    background: url(${calendarIcon}) no-repeat right;
+    background-image: url(${calendarIcon});
+    background-repeat: no-repeat;
+    background-position: right center;
     padding-right: 10px;
   }
 
