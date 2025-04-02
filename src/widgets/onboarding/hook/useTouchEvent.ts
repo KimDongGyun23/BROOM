@@ -23,6 +23,7 @@ export const useTouchEvent = (
 
   const onTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     touchStartPosition.current = e.targetTouches[0].clientX
+    touchEndPosition.current = e.targetTouches[0].clientX
   }, [])
 
   const onTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
@@ -30,7 +31,10 @@ export const useTouchEvent = (
   }, [])
 
   const onTouchEnd = useCallback(() => {
-    handleSwipe(touchStartPosition.current - touchEndPosition.current)
+    const deltaX = touchStartPosition.current - touchEndPosition.current
+    if (Math.abs(deltaX) > 30) {
+      handleSwipe(deltaX)
+    }
   }, [handleSwipe])
 
   return {

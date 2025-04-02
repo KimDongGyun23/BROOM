@@ -6,12 +6,11 @@ import { useMouseEvent } from '../hook/useMouseEvent'
 import { useTouchEvent } from '../hook/useTouchEvent'
 
 import { DotIndicator } from './DotIndicator'
+import { FirstOnboarding } from './FirstOnboarding'
+import { SecondOnboarding } from './SecondOnboarding'
+import { ThirdOnboarding } from './ThirdOnboarding'
 
-import onboarding_first from '/assets/onboarding/onboarding1.webp'
-import onboarding_second from '/assets/onboarding/onboarding2.webp'
-import onboarding_third from '/assets/onboarding/onboarding3.webp'
-
-const onboardingImages = [onboarding_first, onboarding_second, onboarding_third]
+const onboardingImages = [FirstOnboarding, SecondOnboarding, ThirdOnboarding]
 
 export const OnboardingCarousel = () => {
   const { currentTab, carouselRef, onDotClick } = useCarousel()
@@ -22,9 +21,9 @@ export const OnboardingCarousel = () => {
   return (
     <>
       <Container ref={carouselRef} {...mouseEventHandlers} {...touchEventHandlers}>
-        {onboardingImages.map((image, index) => (
+        {onboardingImages.map((Component, index) => (
           <Slide key={index}>
-            <img src={image} alt={`onboarding-${index}`} />
+            <Component />
           </Slide>
         ))}
       </Container>
@@ -35,14 +34,14 @@ export const OnboardingCarousel = () => {
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
   overflow: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  margin: 0 70px;
 `
 
 const Slide = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'flex-end')};
+  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
   width: 100%;
   flex-shrink: 0;
 `

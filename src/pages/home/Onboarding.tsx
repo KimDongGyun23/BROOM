@@ -29,6 +29,7 @@ const Container = styled.div`
 
 const CarouselContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', 'center', 'center')};
+  width: 100%;
   flex: 1;
 `
 

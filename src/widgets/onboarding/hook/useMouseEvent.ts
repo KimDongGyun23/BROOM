@@ -25,6 +25,7 @@ export const useMouseEvent = (
   const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     mouseDown.current = true
     startX.current = e.clientX
+    endX.current = e.clientX
   }, [])
 
   const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -34,7 +35,10 @@ export const useMouseEvent = (
 
   const onMouseUp = useCallback(() => {
     mouseDown.current = false
-    handleSwipe(startX.current - endX.current)
+    const deltaX = startX.current - endX.current
+    if (Math.abs(deltaX) > 30) {
+      handleSwipe(deltaX)
+    }
   }, [handleSwipe])
 
   return {
