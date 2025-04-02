@@ -11,7 +11,7 @@ export const reIssue = async () => {
 
     if (token) {
       instance.setAccessToken(token)
-      return response
+      return token
     }
 
     return null

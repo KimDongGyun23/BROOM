@@ -7,9 +7,17 @@ import axios, {
   isAxiosError,
 } from 'axios'
 
+import { reIssue } from '@/entities/auth/api/useAuth.mutation'
+
 export class HttpClient {
   private readonly client: AxiosInstance
   private accessToken: string | null = null
+  private isRefreshing = false
+  private failedQueue: Array<{
+    resolve: (value?: unknown) => void
+    reject: (reason?: unknown) => void
+    config: AxiosRequestConfig
+  }> = []
 
   constructor(config?: AxiosRequestConfig) {
     this.client = axios.create(config)
@@ -66,13 +74,39 @@ export class HttpClient {
   }
 
   private async onError(error: AxiosError) {
-    const response = error.response as AxiosResponse
+    const originalRequest = error.config as InternalAxiosRequestConfig
 
-    if (isAxiosError(error)) {
-      return Promise.reject({
-        message: response?.data || '알 수 없는 서버 오류가 발생했습니다.',
-        status: response?.status,
-      })
+    if (isAxiosError(error) && error.response?.status === 401) {
+      if (this.isRefreshing) {
+        return new Promise((resolve, reject) => {
+          this.failedQueue.push({ resolve, reject, config: originalRequest })
+        })
+      }
+
+      this.isRefreshing = true
+
+      try {
+        const newAccessToken = await reIssue()
+        if (newAccessToken) {
+          this.failedQueue.forEach(({ resolve, config }) => {
+            config.headers = config.headers || {}
+            config.headers.Authorization = newAccessToken
+            resolve(this.client(config))
+          })
+          this.failedQueue = []
+        }
+
+        return this.client(originalRequest)
+      } catch (refreshError) {
+        console.error('토큰 재발급 실패:', refreshError)
+
+        this.failedQueue.forEach(({ reject }) => reject(refreshError))
+        this.failedQueue = []
+
+        throw refreshError
+      } finally {
+        this.isRefreshing = false
+      }
     }
 
     return Promise.reject(error)
