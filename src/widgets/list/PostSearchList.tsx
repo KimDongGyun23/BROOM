@@ -25,7 +25,7 @@ export const PostSearchList = () => {
     },
   })
 
-  const searchPostList = data?.pages.flatMap((page) => page.result) || []
+  const searchPostList = data?.pages.flatMap((page) => page.data.result) || []
 
   return (
     <PostList postList={searchPostList} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />

@@ -17,7 +17,7 @@ export const BoardMainList = () => {
     },
   })
 
-  const postList = data?.pages.flatMap((page) => page.result) || []
+  const postList = data?.pages.flatMap((page) => page.data.result) || []
 
   return <PostList postList={postList} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
 }
