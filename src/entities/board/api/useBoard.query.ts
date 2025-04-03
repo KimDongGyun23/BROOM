@@ -40,9 +40,9 @@ export const useFetchPostList = ({ urls }: PostListRequest) =>
   useSuspenseInfiniteQuery({
     queryKey: boardQueryKeys.postList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
+      instanceWithoutAuth.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
+    getNextPageParam: (lastPage, allPages) => (lastPage.data.hasNext ? allPages.length : undefined),
     gcTime: 0,
     staleTime: 0,
   })
@@ -88,7 +88,9 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
   return useSuspenseQuery({
     queryKey: boardQueryKeys.postDetail(urls),
-    queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
+    queryFn: () =>
+      instanceWithoutAuth.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
+    select: (data) => data.data,
   })
 }
 
