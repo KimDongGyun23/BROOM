@@ -6,7 +6,7 @@ const GlobalStyles = createGlobalStyle`
 	@font-face {
     font-family: Jalnan;
     font-weight: 300;
-    src: url('/assets/fonts/Jalnan.woff') format('truetype');
+    src: url('/assets/fonts/JALNAN.woff') format('truetype');
     font-style: normal;
     font-display: block;
   }
