@@ -87,6 +87,8 @@ export class HttpClient {
 
       try {
         const newAccessToken = await reIssue()
+        this.setAccessToken(newAccessToken)
+
         if (newAccessToken) {
           this.failedQueue.forEach(({ resolve, config }) => {
             config.headers = config.headers || {}

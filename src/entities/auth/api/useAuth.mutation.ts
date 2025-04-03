@@ -1,4 +1,4 @@
-import { instance, instanceWithoutAuth } from '@/app/api'
+import { instanceWithoutAuth } from '@/app/api'
 
 export const reIssue = async () => {
   try {
@@ -6,7 +6,6 @@ export const reIssue = async () => {
     const token = response.headers['authorization']
 
     if (token) {
-      instance.setAccessToken(token)
       return token
     }
 
