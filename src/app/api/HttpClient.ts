@@ -102,7 +102,6 @@ export class HttpClient {
       } catch (refreshError) {
         this.failedQueue.forEach(({ reject }) => reject(refreshError))
         this.failedQueue = []
-        window.location.href = '/login'
 
         throw refreshError
       } finally {
