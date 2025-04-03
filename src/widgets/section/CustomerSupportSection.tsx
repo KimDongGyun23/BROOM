@@ -7,12 +7,7 @@ import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const CUSTOMER_SUPPORT = {
   sectionTitle: '고객 지원',
-  links: [
-    { name: '자주 묻는 질문' },
-    { name: '문의하기' },
-    { name: '서비스 이용 약관' },
-    { name: '개인정보 처리 방침' },
-  ],
+  links: [{ name: '문의하기' }, { name: '서비스 이용 약관' }, { name: '개인정보 처리 방침' }],
 } as const
 
 const CHANNEL = import.meta.env.VITE_PUBLIC_KAKAO
@@ -26,8 +21,6 @@ type SectionModalType = {
 const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
   switch (index) {
     case 0:
-      return null
-    case 1:
       return (
         <ModalWithTwoButton
           label="문의하기 채널로 이동하시겠습니까?"
@@ -42,9 +35,9 @@ const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalType) => {
           }}
         />
       )
-    case 2:
+    case 1:
       return <TermModal id="personalConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
-    case 3:
+    case 2:
       return <TermModal id="serviceConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
     default:
       return null
