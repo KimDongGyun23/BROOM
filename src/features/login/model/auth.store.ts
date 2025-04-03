@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 import type { LoginResponse } from '@/entities/auth/model/auth.type'
 
@@ -27,14 +27,15 @@ export const useAuthStore = create<AuthStore>()(
       actions: {
         login: (user) => set({ isLoggedIn: true, user }),
         logout: () => {
-          localStorage.clear()
+          sessionStorage.clear()
           set({ ...initialStates })
         },
         refresh: () => set((state) => ({ ...state.user, isLoggedIn: true })),
       },
     }),
     {
-      name: 'user',
+      name: 'SESSION',
+      storage: createJSONStorage(() => sessionStorage),
       partialize: (state) => ({ isLoggedIn: state.isLoggedIn, user: state.user }),
     },
   ),
