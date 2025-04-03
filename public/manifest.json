@@ -7,46 +7,39 @@
   "theme_color": "#595551",
   "icons": [
     {
-      "src": "logo/48x_8.png",
+      "src": "logo/48_48.png",
       "sizes": "48x48",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "logo/72x_2.png",
+      "src": "logo/72_72.png",
       "sizes": "72x72",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "logo/96x_6.png",
+      "src": "logo/96_96.png",
       "sizes": "96x96",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "logo/128_128.png",
       "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "logo/144_144.png",
       "sizes": "144x144",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "logo/152_152.png",
       "sizes": "152x152",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "logo/192_192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "logo/384_384.png",
