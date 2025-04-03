@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 
-import { reIssue } from '@/entities/auth/api/useAuth.mutation'
-import { useAuthActions, useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
+import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Admin } from '@/pages/admin/Admin'
 import { AdminOverview } from '@/pages/admin/AdminOverview'
 import { AdminTrainingSchedule } from '@/pages/admin/AdminTrainingSchedule'
@@ -27,8 +25,6 @@ import { MypageMyPost } from '@/pages/mypage/MypageMyPost'
 import { PasswordUpdate } from '@/pages/mypage/PasswordUpdate'
 import { UpdateAccountDetails } from '@/pages/mypage/UpdateAccountDetails'
 
-import { Loading } from './Loading'
-
 const LoginPrivateRoute = () => {
   const isLoggedIn = useIsLoggedIn()
   const user = useUserData()
@@ -39,35 +35,7 @@ const LoginPrivateRoute = () => {
 }
 
 const PrivateRoute = () => {
-  const navigate = useNavigate()
   const isLoggedIn = useIsLoggedIn()
-
-  const { refresh, logout } = useAuthActions()
-
-  const [isCheckingToken, setIsCheckingToken] = useState(true)
-
-  useEffect(() => {
-    console.log('isLoggedIn', isLoggedIn)
-    const checkAuth = async () => {
-      try {
-        await reIssue()
-        refresh()
-      } catch {
-        console.log('logout')
-        logout()
-        navigate('/login', { replace: true })
-      } finally {
-        setIsCheckingToken(false)
-      }
-    }
-
-    if (!isLoggedIn) checkAuth()
-    else setIsCheckingToken(false)
-  }, [isLoggedIn, logout, navigate, refresh])
-
-  if (isCheckingToken) {
-    return <Loading isFull />
-  }
 
   return isLoggedIn ? <Outlet /> : <Navigate to="/login" replace />
 }
