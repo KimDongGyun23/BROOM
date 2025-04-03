@@ -19,19 +19,5 @@
     <div id="modal" style="z-index: 100; position: relative"></div>
     <div id="chat-sidebar" style="z-index: 90; position: relative"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('/sw.js')
-          .then((registration) => {
-            console.log('Service worker registration succeeded:', registration)
-          })
-          .catch((err) => {
-            console.log('Service worker registration failed:', error)
-          })
-      } else {
-        console.log('Service workers are not supported.')
-      }
-    </script>
   </body>
 </html>
