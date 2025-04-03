@@ -8,7 +8,7 @@ import type {
   PostListResponse,
 } from '@/entities/board/model/post.type'
 
-import { instance } from '../../../app/api'
+import { instance, instanceWithoutAuth } from '../../../app/api'
 
 const ENDPOINTS = {
   fetchPostList: (urls: PostListRequest['urls']) => {
@@ -95,5 +95,6 @@ export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
 export const useFetchDeadLinePostList = () =>
   useSuspenseQuery({
     queryKey: boardQueryKeys.deadlinePostList(),
-    queryFn: () => instance.get<PostListResponse>(`/board/view/almost-full`),
+    queryFn: () => instanceWithoutAuth.get<PostListResponse>(`/board/view/almost-full`),
+    select: (data) => data.data,
   })
