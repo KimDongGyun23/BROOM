@@ -64,7 +64,7 @@ export class HttpClient {
 
   private onRequest(config: InternalAxiosRequestConfig) {
     if (this.accessToken) {
-      config.headers.Authorization = this.accessToken
+      config.headers.Authorization = this.accessToken || ''
     }
     return config
   }
