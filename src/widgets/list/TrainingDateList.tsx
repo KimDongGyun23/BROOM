@@ -1,17 +1,19 @@
 import { styled } from 'styled-components'
 
 import { useTrainingDates } from '@/entities/admin/hook/useTrainingDates'
+import { useTrainingScheduleList } from '@/entities/admin/model/trainingSchedule.store'
 import { DeleteTrainingDateButton } from '@/features/delete-training-date/ui/DeleteTrainingDateButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'
 
 export const TrainingDateList = () => {
-  const { sortedDates, isError, fetchedDates } = useTrainingDates()
+  const trainingDates = useTrainingScheduleList()
+
+  const { sortedDates, isError } = useTrainingDates()
 
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-  if (!fetchedDates || !fetchedDates.dates.length)
-    return <EmptyMessage label={ERROR_MESSAGES.NO_DATA} />
+  if (!trainingDates.length) return <EmptyMessage label={ERROR_MESSAGES.NO_DATA} />
 
   return (
     <Container>

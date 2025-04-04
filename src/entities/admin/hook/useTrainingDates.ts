@@ -14,7 +14,7 @@ export const useTrainingDates = () => {
   const { initializeTrainingDates } = useTrainingScheduleActions()
 
   useEffect(() => {
-    if (fetchedDates && fetchedDates.dates.length) {
+    if (fetchedDates) {
       initializeTrainingDates(fetchedDates.dates)
     }
   }, [fetchedDates, initializeTrainingDates])
@@ -23,5 +23,5 @@ export const useTrainingDates = () => {
     (a, b) => new Date(a.trainingDate).getTime() - new Date(b.trainingDate).getTime(),
   )
 
-  return { sortedDates, isError, fetchedDates }
+  return { sortedDates, isError }
 }
