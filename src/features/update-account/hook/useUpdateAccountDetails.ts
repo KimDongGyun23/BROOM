@@ -25,7 +25,15 @@ export const useUpdateAccountDetails = (openModal: OpenModal) => {
   const { mutate: updateAccountDetails } = useUpdateAccountDetailsMutation()
 
   const handleUpdateAccountDetails = (formData: AccountDetails) => {
-    if (user?.nickname === formData.nickname && isNicknameUnique !== false) {
+    const isNicknameChanged = user?.nickname !== formData.nickname
+    const requiresVerification = isNicknameChanged && isNicknameUnique !== true
+
+    if (requiresVerification) {
+      setError(nicknameField, {
+        type: 'manual',
+        message: '닉네임 중복 검사를 진행해주세요.',
+      })
+    } else {
       updateAccountDetails(
         { body: formData },
         {
@@ -36,8 +44,6 @@ export const useUpdateAccountDetails = (openModal: OpenModal) => {
           },
         },
       )
-    } else {
-      setError(nicknameField, { type: 'manual', message: '닉네임 중복 확인을 해주세요.' })
     }
   }
 
