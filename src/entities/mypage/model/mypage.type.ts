@@ -10,7 +10,7 @@ type YearOfArmy = {
   dischargeYear: number | string
 }
 
-export type UpdatePasswordForm = {
+export type NewPasswordForm = {
   password: string
   newPassword: string
   confirm: string
@@ -26,5 +26,5 @@ export type UpdateAccountDetailsRequest = {
 }
 
 export type UpdatePasswordRequest = {
-  body: Omit<UpdatePasswordForm, 'confirm'>
+  body: Omit<NewPasswordForm, 'confirm'>
 }

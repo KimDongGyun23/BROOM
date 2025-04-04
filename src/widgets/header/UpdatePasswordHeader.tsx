@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form'
 
-import type { UpdatePasswordForm } from '@/entities/mypage/model/mypage.type'
+import type { NewPasswordForm } from '@/entities/mypage/model/mypage.type'
 import { useUpdatePassword } from '@/features/update-password/hook/useUpdatePassword'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
@@ -11,7 +11,7 @@ import { UpdatePasswordSuccessModal } from './modal/UpdatePasswordSuccessModal'
 export const UpdatePasswordHeader = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
-  const { handleSubmit } = useFormContext<UpdatePasswordForm>()
+  const { handleSubmit } = useFormContext<NewPasswordForm>()
 
   const { handleUpdatePassword } = useUpdatePassword(openModal)
 
