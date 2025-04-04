@@ -20,7 +20,7 @@ export const IdDuplicationCheckField = ({ section, label, input }: FieldType) =>
   const { mutate } = useIdDuplicationCheckMutation()
   const { setDuplicationCheckState } = useIdDuplicationCheckActions()
 
-  const checkHandler = useDuplicationCheck<'userId', ValidateIdRequest>({
+  const handleCheckDuplication = useDuplicationCheck<'userId', ValidateIdRequest>({
     mutate,
     sectionKey: 'userId',
     setState: setDuplicationCheckState,
@@ -36,7 +36,7 @@ export const IdDuplicationCheckField = ({ section, label, input }: FieldType) =>
       />
       <ValidateContainer>
         <InputGroup.Input {...input} />
-        <Button size="md" onClick={checkHandler}>
+        <Button size="md" onClick={handleCheckDuplication}>
           중복 확인
         </Button>
       </ValidateContainer>

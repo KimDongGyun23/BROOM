@@ -1,6 +1,8 @@
+import { useFormContext } from 'react-hook-form'
 import { styled } from 'styled-components'
 
 import type { ValidateNicknameRequest } from '@/entities/auth/model/auth.type'
+import { useUserData } from '@/features/login/model/auth.store'
 import type { FieldType } from '@/shared/model/common.type'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
@@ -14,10 +16,13 @@ import {
 } from '../model/duplication.store'
 
 export const NicknameDuplicationCheckField = ({ section, label, input }: FieldType) => {
-  const { mutate } = useNicknameDuplicationCheckMutation()
-  const { setDuplicationCheckState } = useNicknameDuplicationCheckActions()
+  const user = useUserData()
   const isUnique = useNicknameUniqueState()
   const message = useNicknameDuplicationResultMessage()
+
+  const { getValues } = useFormContext()
+  const { mutate } = useNicknameDuplicationCheckMutation()
+  const { setDuplicationCheckState } = useNicknameDuplicationCheckActions()
 
   const checkHandler = useDuplicationCheck<'nickname', ValidateNicknameRequest>({
     mutate,
@@ -25,6 +30,17 @@ export const NicknameDuplicationCheckField = ({ section, label, input }: FieldTy
     setState: setDuplicationCheckState,
     errorMessage: message || '닉네임 중복 검사에 실패했습니다.',
   })
+
+  const handleCheckDuplication = () => {
+    const currentNickname = getValues(section)
+
+    if (user && user.nickname === currentNickname) {
+      setDuplicationCheckState(true, '기존 닉네임과 동일합니다.')
+      return
+    }
+
+    checkHandler()
+  }
 
   return (
     <InputGroup section={section}>
@@ -35,7 +51,7 @@ export const NicknameDuplicationCheckField = ({ section, label, input }: FieldTy
       />
       <ValidateContainer>
         <InputGroup.Input {...input} />
-        <Button size="md" onClick={checkHandler}>
+        <Button size="md" onClick={handleCheckDuplication}>
           중복 확인
         </Button>
       </ValidateContainer>
