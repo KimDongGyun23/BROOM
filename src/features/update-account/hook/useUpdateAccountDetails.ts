@@ -25,7 +25,7 @@ export const useUpdateAccountDetails = (openModal: OpenModal) => {
   const { mutate: updateAccountDetails } = useUpdateAccountDetailsMutation()
 
   const handleUpdateAccountDetails = (formData: AccountDetails) => {
-    if (user?.nickname === formData.nickname && isNicknameUnique === true) {
+    if (user?.nickname === formData.nickname && isNicknameUnique !== false) {
       updateAccountDetails(
         { body: formData },
         {
