@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 import { useFetchAdminOverviewData } from '@/entities/admin/api/useAdmin.query'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { AdminCountSection } from '@/widgets/section/AdminCountSection'
 
 export const AdminOverview = () => {
   const queries = useFetchAdminOverviewData()
@@ -15,8 +14,15 @@ export const AdminOverview = () => {
       <SubHeaderWithoutIcon type="null" title="운영 현황" />
 
       <OverviewContainer>
-        <AdminCountSection label="총 가입된 회원 수" count={totalUserCount} />
-        <AdminCountSection label="총 게시글 수" count={totalPostCount} />
+        <AdminInformationContainer>
+          <AdminLabel>총 가입된 회원 수</AdminLabel>
+          <AdminCount>{totalUserCount}</AdminCount>
+        </AdminInformationContainer>
+
+        <AdminInformationContainer>
+          <AdminLabel>총 게시글 수</AdminLabel>
+          <AdminCount>{totalPostCount}</AdminCount>
+        </AdminInformationContainer>
       </OverviewContainer>
     </>
   )
@@ -26,4 +32,16 @@ const OverviewContainer = styled.div`
   ${({ theme }) => theme.flexBox('column', undefined, undefined, 'lg')};
   ${({ theme }) => theme.margin('container')};
   height: 100%;
+`
+
+const AdminInformationContainer = styled.div`
+  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')}
+`
+
+const AdminLabel = styled.p`
+  ${({ theme }) => theme.font(700, theme.colors.black[600])}
+`
+
+const AdminCount = styled.p`
+  ${({ theme }) => theme.font(700, theme.colors.blue[500])}
 `
