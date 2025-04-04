@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 
 import { signupAttribute } from '@/entities/auth/config/auth.schema'
-import { useNicknameUniqueState } from '@/features/check-nickname-duplication/model/nicknameDuplicationCheck.store'
+import { useNicknameUniqueState } from '@/features/check-duplication/model/duplication.store'
 import { useStepsActions } from '@/features/signup/model/steps.store'
 
 export const useSignupTwoStepNext = () => {

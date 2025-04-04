@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 
 import { signupAttribute } from '@/entities/auth/config/auth.schema'
-import { useIdUniqueState } from '@/features/check-id-duplication/model/idDuplicationCheck.store'
+import { useIdUniqueState } from '@/features/check-duplication/model/duplication.store'
 import { useStepsActions } from '@/features/signup/model/steps.store'
 
 export const useSignupOneStepNext = () => {

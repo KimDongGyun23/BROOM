@@ -4,7 +4,7 @@ import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import {
   useNicknameDuplicationCheckActions,
   useNicknameUniqueState,
-} from '@/features/check-nickname-duplication/model/nicknameDuplicationCheck.store'
+} from '@/features/check-duplication/model/duplication.store'
 import { useUserData } from '@/features/login/model/auth.store'
 import type { OpenModal } from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
@@ -20,7 +20,7 @@ export const useUpdateAccountDetails = (openModal: OpenModal) => {
   const user = useUserData()
   const isNicknameUnique = useNicknameUniqueState()
 
-  const { clearNicknameDuplicationCheckState } = useNicknameDuplicationCheckActions()
+  const { clearDuplicationCheckState } = useNicknameDuplicationCheckActions()
 
   const { mutate: updateAccountDetails } = useUpdateAccountDetailsMutation()
 
@@ -39,7 +39,7 @@ export const useUpdateAccountDetails = (openModal: OpenModal) => {
         {
           onSuccess: (response) => {
             openModal(MODAL_KEYS.success, response)
-            clearNicknameDuplicationCheckState()
+            clearDuplicationCheckState()
             clearErrors(nicknameField)
           },
         },
