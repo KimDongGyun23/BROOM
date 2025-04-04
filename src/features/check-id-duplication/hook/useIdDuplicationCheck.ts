@@ -20,7 +20,10 @@ export const useIdDuplicationCheck = (section: FieldType['section']) => {
       { body: { userId } },
       {
         onSuccess: (response) => setIdDuplicationCheckState(true, response),
-        onError: (error) => setIdDuplicationCheckState(false, error.message),
+        onError: (error) => {
+          const errorMessage = error.response?.data || '아이디 중복 검사에 실패했습니다.'
+          setIdDuplicationCheckState(false, errorMessage)
+        },
       },
     )
   }, [getValues, section, clearErrors, checkIdDuplication, setIdDuplicationCheckState])

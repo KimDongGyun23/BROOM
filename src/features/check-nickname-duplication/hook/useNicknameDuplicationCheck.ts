@@ -21,8 +21,8 @@ export const useNicknameDuplicationCheck = (section: FieldType['section']) => {
       {
         onSuccess: (response) => setNicknameDuplicationCheckState(true, response),
         onError: (error) => {
-          console.log(error)
-          setNicknameDuplicationCheckState(false, error.message)
+          const errorMessage = error.response?.data || '닉네임 중복 검사에 실패했습니다.'
+          setNicknameDuplicationCheckState(false, errorMessage)
         },
       },
     )

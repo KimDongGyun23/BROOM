@@ -109,6 +109,6 @@ export class HttpClient {
       }
     }
 
-    return Promise.reject<Promise<AxiosResponse | undefined>>(error.response)
+    return Promise.reject<AxiosError>(error)
   }
 }

@@ -16,7 +16,8 @@ export const useEnterChatRoom = (openModal: OpenModal) => {
     if (isSuccess) {
       navigate(`/chat/${boardId}`)
     } else if (isError) {
-      openModal(MODAL_KEYS.error, error.message)
+      const errorMessage = error.response?.data || '채팅방 입장에 실패했습니다.'
+      openModal(MODAL_KEYS.error, errorMessage)
     }
   }
 

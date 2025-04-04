@@ -13,8 +13,7 @@ const onResponse = (response: AxiosResponse) => {
 
   return response.data
 }
-const onError = (error: AxiosError): Promise<AxiosResponse | undefined> =>
-  Promise.reject(error.response)
+const onError = (error: AxiosError): Promise<AxiosError> => Promise.reject(error)
 
 const get = <T>(...args: Parameters<typeof client.get>): Promise<T> => client.get(...args)
 const post = <T>(...args: Parameters<typeof client.post>): Promise<T> => client.post(...args)
@@ -22,6 +21,7 @@ const put = <T>(...args: Parameters<typeof client.put>): Promise<T> => client.pu
 const patch = <T>(...args: Parameters<typeof client.patch>): Promise<T> => client.patch(...args)
 const del = <T>(...args: Parameters<typeof client.delete>): Promise<T> => client.delete(...args)
 
+client.interceptors.request.use(undefined, onError)
 client.interceptors.response.use(onResponse, onError)
 
 export const instanceWithoutAuth = {

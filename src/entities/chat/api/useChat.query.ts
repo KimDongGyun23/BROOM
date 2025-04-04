@@ -1,4 +1,5 @@
 import { useQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
 
 import { instance } from '@/app/api'
 import type {
@@ -59,8 +60,8 @@ export const useFetchChatSidebarInformation = ({ urls }: ChatSidebarInformationR
   })
 
 export const useFetchEnteredChatRoom = ({ urls }: EnterChatRoomRequest) =>
-  useQuery({
+  useQuery<string, AxiosError<string>>({
     queryKey: chatQueryKeys.enterRoom(urls),
-    queryFn: () => instance.get<string>(`/chat/room/enter/${urls.boardId}`),
+    queryFn: () => instance.get(`/chat/room/enter/${urls.boardId}`),
     enabled: false,
   })
