@@ -37,7 +37,7 @@ export const IdDuplicationCheckField = ({ section, label, input }: FieldType) =>
       <ValidateContainer>
         <InputGroup.Input {...input} />
         <Button size="md" onClick={checkHandler}>
-          아이디 중복 확인
+          중복 확인
         </Button>
       </ValidateContainer>
     </InputGroup>

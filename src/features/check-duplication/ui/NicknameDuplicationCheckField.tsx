@@ -36,7 +36,7 @@ export const NicknameDuplicationCheckField = ({ section, label, input }: FieldTy
       <ValidateContainer>
         <InputGroup.Input {...input} />
         <Button size="md" onClick={checkHandler}>
-          닉네임 중복 확인
+          중복 확인
         </Button>
       </ValidateContainer>
     </InputGroup>
