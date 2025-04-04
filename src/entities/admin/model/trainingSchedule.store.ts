@@ -2,16 +2,14 @@ import { create } from 'zustand'
 
 import type { TrainingDate } from './admin.type'
 
-type TrainingScheduleActions = {
-  getSortedDates: () => TrainingDate[]
-  addTrainingDate: (newDate: TrainingDate) => void
-  removeTrainingDate: (id: number) => void
-  initializeTrainingDates: (dates: TrainingDate[]) => void
-}
-
 type TrainingScheduleStore = {
   trainingDates: TrainingDate[]
-  actions: TrainingScheduleActions
+  actions: {
+    getSortedDates: () => TrainingDate[]
+    addTrainingDate: (newDate: TrainingDate) => void
+    removeTrainingDate: (id: number) => void
+    initializeTrainingDates: (dates: TrainingDate[]) => void
+  }
 }
 
 export const useTrainingScheduleStore = create<TrainingScheduleStore>((set, get) => ({

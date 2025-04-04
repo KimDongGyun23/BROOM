@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-import { useRemoveTrainingDate } from '@/features/remove-training-date/hook/useRemoveTrainingDate'
+import { useRemoveTrainingDate } from '../hook/useRemoveTrainingDate'
 
 type RemoveTrainingDateButtonProps = {
   dateId: number
 }
 
-export const RemoveTrainingDateButton = ({ dateId }: RemoveTrainingDateButtonProps) => {
+export const DeleteTrainingDateButton = ({ dateId }: RemoveTrainingDateButtonProps) => {
   const { handleRemoveTrainingDate } = useRemoveTrainingDate()
 
   return (
@@ -18,6 +18,5 @@ export const RemoveTrainingDateButton = ({ dateId }: RemoveTrainingDateButtonPro
 
 const StyledButton = styled.button`
   ${({ theme }) => theme.font(800, theme.colors.error)};
-  color: ${({ theme }) => theme.colors.error};
   flex-shrink: 0;
 `

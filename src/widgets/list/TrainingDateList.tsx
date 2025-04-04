@@ -1,11 +1,10 @@
 import { styled } from 'styled-components'
 
 import { useTrainingDates } from '@/entities/admin/hook/useTrainingDates'
+import { DeleteTrainingDateButton } from '@/features/delete-training-date/ui/DeleteTrainingDateButton'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { formatDate } from '@/shared/lib/formatDate'
 import { EmptyMessage } from '@/shared/ui/Error'
-
-import { RemoveTrainingDateButton } from '../button/RemoveTrainingDateButton'
 
 export const TrainingDateList = () => {
   const { sortedDates, isError, fetchedDates } = useTrainingDates()
@@ -19,7 +18,7 @@ export const TrainingDateList = () => {
       {sortedDates.map((date) => (
         <DateListContainer key={date.trainingDate}>
           <span>{formatDate(date.trainingDate, 'dotFullDate')}</span>
-          <RemoveTrainingDateButton dateId={date.id} />
+          <DeleteTrainingDateButton dateId={date.id} />
         </DateListContainer>
       ))}
     </Container>
@@ -27,8 +26,10 @@ export const TrainingDateList = () => {
 }
 
 const Container = styled.div`
-  ${({ theme }) => theme.flexBox('column', undefined, undefined, 'xl')};
-  ${({ theme }) => theme.margin('container')};
+  ${({ theme }) => `
+    ${theme.flexBox('column', undefined, undefined, 'xl')}
+    ${theme.margin('container')}
+  `}
   overflow-y: scroll;
 `
 

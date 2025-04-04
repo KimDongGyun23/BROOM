@@ -9,6 +9,7 @@ import { useFetchTrainingDates } from '../api/useAdmin.query'
 
 export const useTrainingDates = () => {
   const { data: fetchedDates, isError } = useFetchTrainingDates()
+
   const scheduleList = useTrainingScheduleList()
   const { initializeTrainingDates } = useTrainingScheduleActions()
 
