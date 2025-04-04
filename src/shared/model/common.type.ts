@@ -16,3 +16,9 @@ export type Search = {
 export type ChatMessage = {
   message: string
 }
+
+export type FieldType = {
+  section: string
+  label: string
+  input: { [fieldName: string]: string }
+}

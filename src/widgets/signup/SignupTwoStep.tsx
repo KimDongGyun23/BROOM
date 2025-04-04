@@ -1,12 +1,11 @@
 import { styled } from 'styled-components'
 
 import { signupAttribute } from '@/entities/auth/config/auth.schema'
-import { useNicknameUniqueState } from '@/features/check-nickname-duplication/model/nicknameDuplicationCheck.store'
+import { useNicknameUniqueState } from '@/features/check-duplication/model/duplication.store'
+import { NicknameDuplicationCheckField } from '@/features/check-duplication/ui/NicknameDuplicationCheckField'
 import { useSignupTwoStepNext } from '@/features/signup/hook/useSignupTwoStepNext'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
-
-import { NicknameDuplicationCheckField } from '../input-field/NicknameDuplicationCheckField'
 
 export const SignupTwoStep = () => {
   const isNicknameUnique = useNicknameUniqueState()

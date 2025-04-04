@@ -1,7 +1,6 @@
 import { FormContainer } from '@/app/style/commonStyles'
+import { NicknameDuplicationCheckField } from '@/features/check-duplication/ui/NicknameDuplicationCheckField'
 import { InputGroup } from '@/shared/ui/inputGroup'
-
-import { NicknameDuplicationCheckField } from '../input-field/NicknameDuplicationCheckField'
 
 import { accountAttribute } from './schema/account.schema'
 
