@@ -21,6 +21,7 @@ export const useNicknameDuplicationCheck = (section: FieldType['section']) => {
       {
         onSuccess: (response) => setNicknameDuplicationCheckState(true, response),
         onError: (error) => {
+          console.log(error)
           setNicknameDuplicationCheckState(false, error.message)
         },
       },
