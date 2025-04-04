@@ -2,16 +2,17 @@ import { create } from 'zustand'
 
 type Actions = {
   setNicknameDuplicationCheckState: (isUnique: boolean, resultMessage: string) => void
+  clearNicknameDuplicationCheckState: VoidFunction
 }
 
 type NicknameDuplicationCheckStore = {
-  isUnique: boolean
+  isUnique: boolean | null
   resultMessage: string
   actions: Actions
 }
 
 const initialValue = {
-  isUnique: false,
+  isUnique: null,
   resultMessage: '',
 }
 
@@ -19,6 +20,7 @@ const useNicknameDuplicationCheckStore = create<NicknameDuplicationCheckStore>((
   ...initialValue,
   actions: {
     setNicknameDuplicationCheckState: (isUnique, resultMessage) => set({ isUnique, resultMessage }),
+    clearNicknameDuplicationCheckState: () => set({ ...initialValue }),
   },
 }))
 

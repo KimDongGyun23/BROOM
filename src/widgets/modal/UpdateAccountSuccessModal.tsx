@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { ModalWithOneButton, type ModalWithOneButtonProps } from '@/shared/ui/modal/ButtonModal'
 
-export const UpdateAccountDetailsSuccessModal = ({
+export const UpdateAccountSuccessModal = ({
   label,
   isModalOpen,
   closeModal,
