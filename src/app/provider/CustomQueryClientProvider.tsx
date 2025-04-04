@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from 'react'
 import { useMemo } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { isAxiosError } from 'axios'
 
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
@@ -22,13 +21,7 @@ export const CustomQueryClientProvider = ({ children }: PropsWithChildren) => {
             retry: 0,
           },
           mutations: {
-            onError: (error) => {
-              if (isAxiosError(error)) {
-                openModal(MODAL_KEYS.error, error.response?.data)
-              } else {
-                openModal(MODAL_KEYS.error, error.message)
-              }
-            },
+            onError: (error) => openModal(MODAL_KEYS.error, error.message),
           },
         },
       }),

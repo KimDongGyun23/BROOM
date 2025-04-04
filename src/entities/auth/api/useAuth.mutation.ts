@@ -1,17 +1,16 @@
-import { instanceWithoutAuth } from '@/app/api'
+import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
 
 export const reIssue = async () => {
   try {
-    const response = await instanceWithoutAuth.post(`/reissue`, null)
-    const token = response.headers['authorization']
+    const response = await instanceWithoutAuth.post<{ token: string; response: string }>(
+      `/reissue`,
+      null,
+    )
 
-    if (token) {
-      return token
-    }
+    if (response) return response
 
     throw new Error('토큰 재발급 실패')
   } catch (error) {
-    console.error('재발급 요청 실패:', error)
     throw error
   }
 }

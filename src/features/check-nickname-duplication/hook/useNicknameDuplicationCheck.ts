@@ -19,9 +19,8 @@ export const useNicknameDuplicationCheck = (section: FieldType['section']) => {
     checkNicknameDuplication(
       { body: { nickname } },
       {
-        onSuccess: (response) => setNicknameDuplicationCheckState(true, response.data),
+        onSuccess: (response) => setNicknameDuplicationCheckState(true, response),
         onError: (error) => {
-          console.error(error)
           setNicknameDuplicationCheckState(false, error.message)
         },
       },

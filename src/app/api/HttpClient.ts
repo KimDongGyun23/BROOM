@@ -86,7 +86,7 @@ export class HttpClient {
       this.isRefreshing = true
 
       try {
-        const newAccessToken = await reIssue()
+        const { token: newAccessToken } = await reIssue()
         this.setAccessToken(newAccessToken)
 
         if (newAccessToken) {

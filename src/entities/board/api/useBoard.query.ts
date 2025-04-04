@@ -1,5 +1,7 @@
 import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
 
+import { instance } from '@/app/api'
+import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
 import type {
   PostDetailRequest,
   PostDetailResponse,
@@ -7,8 +9,6 @@ import type {
   PostListRequest,
   PostListResponse,
 } from '@/entities/board/model/post.type'
-
-import { instance, instanceWithoutAuth } from '../../../app/api'
 
 const ENDPOINTS = {
   fetchPostList: (urls: PostListRequest['urls']) => {
@@ -42,7 +42,7 @@ export const useFetchPostList = ({ urls }: PostListRequest) =>
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
       instanceWithoutAuth.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => (lastPage.data.hasNext ? allPages.length : undefined),
+    getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
     gcTime: 0,
     staleTime: 0,
   })
@@ -65,8 +65,8 @@ export const useFetchBookmarkedPostList = () =>
     getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
-export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
-  return useSuspenseQuery({
+export const useFetchPostEditData = ({ urls }: PostDetailRequest) =>
+  useSuspenseQuery({
     queryKey: boardQueryKeys.postDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
     select: (data): PostForm => {
@@ -83,20 +83,16 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) => {
       }
     },
   })
-}
 
-export const useFetchPostDetail = ({ urls }: PostDetailRequest) => {
-  return useSuspenseQuery({
+export const useFetchPostDetail = ({ urls }: PostDetailRequest) =>
+  useSuspenseQuery({
     queryKey: boardQueryKeys.postDetail(urls),
     queryFn: () =>
       instanceWithoutAuth.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
-    select: (data) => data.data,
   })
-}
 
 export const useFetchDeadLinePostList = () =>
   useSuspenseQuery({
     queryKey: boardQueryKeys.deadlinePostList(),
     queryFn: () => instanceWithoutAuth.get<PostListResponse>(`/board/view/almost-full`),
-    select: (data) => data.data,
   })

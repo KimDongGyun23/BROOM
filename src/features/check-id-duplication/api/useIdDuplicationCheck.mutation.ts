@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 
-import { instanceWithoutAuth } from '@/app/api'
+import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
 import type { ValidateIdRequest } from '@/entities/auth/model/auth.type'
 
 export const useIdDuplicationCheckMutation = () =>

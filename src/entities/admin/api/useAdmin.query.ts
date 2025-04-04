@@ -1,6 +1,8 @@
 import { useQuery, useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
 
-import { instance, instanceWithoutAuth } from '../../../app/api'
+import { instance } from '@/app/api'
+import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
+
 import type {
   BusApplicationToggleResponse,
   PostCountResponse,
@@ -20,7 +22,6 @@ export const useFetchTrainingDates = () =>
   useQuery({
     queryKey: adminQueryKeys.dateTag(),
     queryFn: () => instanceWithoutAuth.get<TrainingDateListResponse>('/date-tag'),
-    select: (data) => data.data,
   })
 
 export const useFetchBusApplicantToggleState = () =>

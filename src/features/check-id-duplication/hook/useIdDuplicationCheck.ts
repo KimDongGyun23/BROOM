@@ -19,7 +19,7 @@ export const useIdDuplicationCheck = (section: FieldType['section']) => {
     checkIdDuplication(
       { body: { userId } },
       {
-        onSuccess: (response) => setIdDuplicationCheckState(true, response.data),
+        onSuccess: (response) => setIdDuplicationCheckState(true, response),
         onError: (error) => setIdDuplicationCheckState(false, error.message),
       },
     )
