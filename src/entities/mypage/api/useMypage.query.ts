@@ -21,4 +21,5 @@ export const useFetchAccountDetails = () =>
   useSuspenseQuery({
     queryKey: mypageQueryKeys.account(),
     queryFn: () => instance.get<AccountDetailsResponse>('/mypage/info'),
+    select: (data) => ({ ...data, dischargeYear: data.dischargeYear.toString() }),
   })

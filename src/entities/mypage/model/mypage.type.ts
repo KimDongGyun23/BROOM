@@ -7,7 +7,7 @@ type UserInformation = {
 
 type YearOfArmy = {
   reserveYear: number
-  dischargeYear: number
+  dischargeYear: number | string
 }
 
 export type UpdatePasswordForm = {
