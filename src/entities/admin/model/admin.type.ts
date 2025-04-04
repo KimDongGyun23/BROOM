@@ -16,10 +16,6 @@ export type RemoveTrainingDateRequest = {
   urls: Pick<TrainingDate, 'id'>
 }
 
-export type BusApplicationToggleResponse = {
-  activated: boolean
-}
-
 export type PostCountResponse = {
   boardCount: number
 }

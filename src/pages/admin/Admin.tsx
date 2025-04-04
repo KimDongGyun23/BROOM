@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { useFetchBusApplicantToggleState } from '@/entities/admin/api/useAdmin.query'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { LogoutButton } from '@/widgets/button/LogoutButton'
-import { BusApplicationToggle } from '@/widgets/toggle/BusApplicationToggle'
 
 type NavigationLinkProps = {
   label: string
@@ -20,17 +18,10 @@ const NavigationLink = ({ label, to }: NavigationLinkProps) => (
 )
 
 export const Admin = () => {
-  const { data: toggleState } = useFetchBusApplicantToggleState()
-
   return (
     <>
       <MainHeader />
       <PageContent>
-        <ToggleSection>
-          <ToggleLabel>버스 신청 활성화</ToggleLabel>
-          <BusApplicationToggle isToggled={toggleState.activated || false} />
-        </ToggleSection>
-
         <NavigationLink label="버스 신청 현황 조회" to="/kw/broom/bus" />
         <NavigationLink label="예비군 날짜 선택" to="/kw/broom/dates" />
         <NavigationLink label="운영 현황" to="/kw/broom/overview" />
@@ -48,14 +39,6 @@ const PageContent = styled.main`
     ${theme.flexBox('column', undefined, undefined, 'xl')}
     ${theme.margin('container')}
   `}
-`
-
-const ToggleSection = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', 'space-between')}
-`
-
-const ToggleLabel = styled.div`
-  ${({ theme }) => theme.font(700, theme.colors.black[600])}
 `
 
 const StyledLink = styled(Link)`

@@ -1,10 +1,9 @@
-import { useQuery, useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
+import { useQuery, useSuspenseQueries } from '@tanstack/react-query'
 
 import { instance } from '@/app/api'
 import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
 
 import type {
-  BusApplicationToggleResponse,
   PostCountResponse,
   TrainingDateListResponse,
   UserCountResponse,
@@ -13,7 +12,6 @@ import type {
 export const adminQueryKeys = {
   all: ['admin'] as const,
   dateTag: () => [...adminQueryKeys.all, 'training-dates'] as const,
-  busApplicantToggleState: () => [...adminQueryKeys.all, 'bus-applicant-toggle'] as const,
   totalPostCount: () => [...adminQueryKeys.all, 'post-count'] as const,
   totalUserCount: () => [...adminQueryKeys.all, 'user-count'] as const,
 }
@@ -22,12 +20,6 @@ export const useFetchTrainingDates = () =>
   useQuery({
     queryKey: adminQueryKeys.dateTag(),
     queryFn: () => instanceWithoutAuth.get<TrainingDateListResponse>('/date-tag'),
-  })
-
-export const useFetchBusApplicantToggleState = () =>
-  useSuspenseQuery({
-    queryKey: adminQueryKeys.busApplicantToggleState(),
-    queryFn: () => instance.get<BusApplicationToggleResponse>('/admin/bus/activate'),
   })
 
 export const useFetchAdminOverviewData = () =>
