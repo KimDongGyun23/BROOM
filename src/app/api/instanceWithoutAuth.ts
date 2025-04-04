@@ -13,7 +13,8 @@ const onResponse = (response: AxiosResponse) => {
 
   return response.data
 }
-const onError = (error: AxiosError) => Promise.reject(error)
+const onError = (error: AxiosError): Promise<AxiosResponse | undefined> =>
+  Promise.reject(error.response)
 
 const get = <T>(...args: Parameters<typeof client.get>): Promise<T> => client.get(...args)
 const post = <T>(...args: Parameters<typeof client.post>): Promise<T> => client.post(...args)
