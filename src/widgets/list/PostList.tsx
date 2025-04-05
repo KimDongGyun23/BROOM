@@ -5,10 +5,12 @@ import styled from 'styled-components'
 import type { PostListResponse } from '@/entities/board/model/post.type'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
+import { Loading } from '@/shared/ui/Loading'
 
 import { PostItem } from './item/PostItem'
 
 type PostListProps = {
+  isPending?: boolean
   isRecruiting?: boolean
   postList: PostListResponse['result']
   hasNextPage: boolean
@@ -16,6 +18,7 @@ type PostListProps = {
 }
 
 export const PostList = ({
+  isPending = false,
   isRecruiting = false,
   postList,
   hasNextPage,
@@ -32,6 +35,7 @@ export const PostList = ({
     }
   }, [isRecruiting])
 
+  if (isPending) return <Loading />
   if (!postList || !postList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_POST} />
 
   return (

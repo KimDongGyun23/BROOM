@@ -16,7 +16,7 @@ export const PostSearchList = () => {
   const dateTag = useSearchPostDateTag()
   const isRecruiting = useSearchRecruitingState()
 
-  const { data, hasNextPage, fetchNextPage } = useFetchPostList({
+  const { data, isPending, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: filterKey === 'title' ? searchKeyword : null,
       place: filterKey === 'place' ? searchKeyword : null,
@@ -29,6 +29,7 @@ export const PostSearchList = () => {
 
   return (
     <PostList
+      isPending={isPending}
       isRecruiting={isRecruiting}
       postList={searchPostList}
       hasNextPage={hasNextPage}

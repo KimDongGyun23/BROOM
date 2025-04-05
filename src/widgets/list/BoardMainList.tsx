@@ -8,7 +8,7 @@ export const BoardMainList = () => {
   const dateTag = usePostDateTag()
   const isRecruiting = usePostRecruitingState()
 
-  const { data, hasNextPage, fetchNextPage } = useFetchPostList({
+  const { data, isPending, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
       title: null,
       place: null,
@@ -21,6 +21,7 @@ export const BoardMainList = () => {
 
   return (
     <PostList
+      isPending={isPending}
       isRecruiting={isRecruiting}
       postList={postList}
       hasNextPage={hasNextPage}
