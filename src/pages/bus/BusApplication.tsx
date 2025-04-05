@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
+import { BusNoticeSection } from '@/features/bus-application/ui/BusNoticeSection'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { BusNoticeSection } from '@/widgets/section/BusNoticeSection'
 
 export const BusApplication = () => {
   const isBusFormOpen = import.meta.env.VITE_BUS_STATE === 'true'
