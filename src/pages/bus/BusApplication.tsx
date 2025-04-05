@@ -3,24 +3,40 @@ import styled from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
+import { EmptyMessage } from '@/shared/ui/Error'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { BusNoticeSection } from '@/widgets/section/BusNoticeSection'
 
 export const BusApplication = () => {
-  const handleClickButton = () => (window.location.href = 'https://www.google.com')
+  const isBusFormOpen = import.meta.env.VITE_PUBLIC_BUS_STATE === 'true'
+  const busNoticeURL = import.meta.env.VITE_PUBLIC_BUS_NOTICE_URL
+  const busFormURL = import.meta.env.VITE_PUBLIC_BUS_FORM_URL
+
+  const handleClickNoticeButton = () => (window.location.href = busNoticeURL)
+  const handleClickFormButton = () => (window.location.href = busFormURL)
 
   return (
     <Container>
       <MainHeader secondary title="버스 신청" />
 
       <MainContent>
-        <BusNoticeSection />
+        {isBusFormOpen ? (
+          <>
+            <BusNoticeSection />
 
-        <ButtonContainer>
-          <Button size="md" onClick={handleClickButton}>
-            신청하러 가기
-          </Button>
-        </ButtonContainer>
+            <ButtonContainer>
+              <Button size="md" secondary onClick={handleClickNoticeButton}>
+                공지사항 보러 가기
+              </Button>
+
+              <Button size="md" onClick={handleClickFormButton}>
+                신청하러 가기
+              </Button>
+            </ButtonContainer>
+          </>
+        ) : (
+          <EmptyMessage label={`현재 버스 신청 기한이 아닙니다. \n다음에 다시 시도해주세요.`} />
+        )}
       </MainContent>
 
       <BottomNavigation />

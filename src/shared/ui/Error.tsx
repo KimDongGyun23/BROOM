@@ -9,9 +9,13 @@ export const EmptyMessage = ({ label }: EmptyMessageProps) => {
 }
 
 const StyledEmptyMessage = styled.p`
-  ${({ theme }) => theme.flexBox('row', 'center', 'center')};
-  ${({ theme }) => theme.padding('3xl')};
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', 'center')};
+    ${theme.padding('3xl')};
+    ${theme.font(700, theme.colors.black[500])};
+  `}
   width: 100%;
   height: 100%;
+  white-space: pre;
+  text-align: center;
 `
