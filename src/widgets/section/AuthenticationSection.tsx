@@ -1,15 +1,17 @@
 import { styled } from 'styled-components'
 
+import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { DeleteIdButton } from '@/widgets/button/DeleteIdButton'
-import { LogoutButton } from '@/widgets/button/LogoutButton'
 
 export const AuthenticationSection = () => {
   return (
-    <ButtonContainer>
-      <LogoutButton />
-      <span className="divider" />
-      <DeleteIdButton />
-    </ButtonContainer>
+    <>
+      <ButtonContainer>
+        <LogoutButton />
+        <span className="divider" />
+        <DeleteIdButton />
+      </ButtonContainer>
+    </>
   )
 }
 

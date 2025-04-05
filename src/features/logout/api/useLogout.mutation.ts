@@ -1,8 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
 
 import { instance } from '@/app/api'
 
 export const useLogoutMutation = () =>
-  useMutation({
-    mutationFn: () => instance.post<string>('/logout', null),
+  useMutation<string, AxiosError<string>>({
+    mutationFn: () => instance.post('/logout', null),
   })

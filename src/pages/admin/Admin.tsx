@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { LogoutButton } from '@/features/logout/ui/LogoutButton'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { LogoutButton } from '@/widgets/button/LogoutButton'
 
 type NavigationLinkProps = {
   label: string
