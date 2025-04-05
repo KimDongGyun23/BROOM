@@ -8,7 +8,9 @@ import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 export const LogoutButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
-  const { handleOpenModal, handleClickModal } = useLogout(openModal, closeModal)
+  const { handleClickLogout } = useLogout(closeModal)
+
+  const handleOpenModal = () => openModal(MODAL_KEYS.success, '로그아웃하시겠습니까?')
 
   return (
     <>
@@ -18,7 +20,7 @@ export const LogoutButton = () => {
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}
-        primaryButton={{ buttonLabel: '확인', onClickButton: handleClickModal }}
+        primaryButton={{ buttonLabel: '확인', onClickButton: handleClickLogout }}
         secondaryButton={{ buttonLabel: '취소', onClickButton: closeModal }}
       />
     </>
