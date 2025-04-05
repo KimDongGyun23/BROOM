@@ -10,17 +10,16 @@ type TagProps = {
 
 const Tag = ({ date }: TagProps) => {
   const selectedDate = useDateTag()
+
   const { setDateTag } = useDateTagActions()
 
   const isSelected = selectedDate === date
 
-  const handleClick = () => {
-    setDateTag(isSelected ? null : date)
-  }
+  const handleClickTag = () => setDateTag(isSelected ? null : date)
 
   return (
-    <TagButton onClick={handleClick} $isSelected={isSelected}>
-      {formatDate(date, 'dotDate')}
+    <TagButton onClick={handleClickTag} $isSelected={isSelected}>
+      {formatDate(date, 'dotDate', 'default')}
     </TagButton>
   )
 }
@@ -33,7 +32,7 @@ export const PostDateFilter = () => {
   return (
     <Container>
       {data.dates.map(({ id, trainingDate }) => (
-        <Tag key={id} date={formatDate(trainingDate, 'default')} />
+        <Tag key={id} date={formatDate(trainingDate, 'default', 'dotFullDate')} />
       ))}
     </Container>
   )
