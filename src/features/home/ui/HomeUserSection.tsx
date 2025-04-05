@@ -5,59 +5,45 @@ import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
 import { Button } from '@/shared/ui/Button'
 import { TentIcon } from '@/shared/ui/icons/NonActiveIcons'
 
-const LoggedInUserContent = () => {
-  const user = useUserData()
-
-  return (
-    <>
-      <Text>{user?.nickname}님 안녕하세요.</Text>
-      <Text>
-        <Logo>BROOM</Logo>에 오신걸 환영합니다.
-      </Text>
-    </>
-  )
-}
-
-const LoggedOutUserContent = () => (
-  <>
-    <Text>
-      <Logo>BROOM</Logo>에 가입하고
-    </Text>
-    <Text>다른 사람들을 모아보세요.</Text>
-  </>
-)
-
-const AuthButtonContainer = () => {
-  const navigate = useNavigate()
-  const isLoggedIn = useIsLoggedIn()
-
-  if (isLoggedIn) return null
-
-  return (
-    <ButtonContainer>
-      <StyledButton size="sm" onClick={() => navigate('/login')}>
-        로그인
-      </StyledButton>
-      <StyledButton size="sm" secondary onClick={() => navigate('/sign-up')}>
-        회원가입
-      </StyledButton>
-    </ButtonContainer>
-  )
-}
-
 export const HomeUserSection = () => {
   const isLoggedIn = useIsLoggedIn()
+  const navigate = useNavigate()
+  const user = useUserData()
 
   return (
     <UserSection>
       <ContentContainer>
         <MainTextContainer>
-          {isLoggedIn ? <LoggedInUserContent /> : <LoggedOutUserContent />}
+          {isLoggedIn ? (
+            <>
+              <Text>{user?.nickname}님 안녕하세요.</Text>
+              <Text>
+                <Logo>BROOM</Logo>에 오신걸 환영합니다.
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text>
+                <Logo>BROOM</Logo>에 가입하고
+              </Text>
+              <Text>다른 사람들을 모아보세요.</Text>
+            </>
+          )}
         </MainTextContainer>
         <TentIcon />
       </ContentContainer>
 
-      <AuthButtonContainer />
+      {!isLoggedIn && (
+        <ButtonContainer>
+          <StyledButton size="sm" onClick={() => navigate('/login')}>
+            로그인
+          </StyledButton>
+
+          <StyledButton size="sm" secondary onClick={() => navigate('/sign-up')}>
+            회원가입
+          </StyledButton>
+        </ButtonContainer>
+      )}
     </UserSection>
   )
 }

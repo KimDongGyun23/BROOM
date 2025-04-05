@@ -2,12 +2,12 @@ import { styled } from 'styled-components'
 
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { BoardMainList } from '@/features/board-main/ui/BoardMainList'
+import { PostAdditionButton } from '@/features/board-main/ui/PostAdditionButton'
 import { DateFilterForPost } from '@/features/search-post/ui/dateFilter/DateFilterForPost'
 import { RecruitingFilterForPost } from '@/features/search-post/ui/recruitingFilter/RecruitingFilterForPost'
 import { SearchBarForPost } from '@/features/search-post/ui/searchBar/SearchBarForPost'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { PostAdditionButton } from '@/widgets/button/PostAdditionButton'
 
 export const Board = () => {
   return (

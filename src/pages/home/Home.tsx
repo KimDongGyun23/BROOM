@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
+import { HomeDeadlinePostSection } from '@/features/home/ui/HomeDeadlinePostSection'
+import { HomeServiceSection } from '@/features/home/ui/HomeServiceSection'
+import { HomeUserSection } from '@/features/home/ui/HomeUserSection'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
-import { HomeDeadlinePostSection } from '@/widgets/section/HomeDeadlinePostSection'
-import { HomeServiceSection } from '@/widgets/section/HomeServiceSection'
-import { HomeUserSection } from '@/widgets/section/HomeUserSection'
 
 export const Home = () => {
   return (

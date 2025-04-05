@@ -13,14 +13,14 @@ export const PostAdditionButton = () => {
   if (!isLoggedIn) return null
 
   return (
-    <StyledButton type="button" onClick={handleButtonClick}>
+    <AdditionButton type="button" onClick={handleButtonClick}>
       <AdditionIcon />
       <ButtonText>글 올리기</ButtonText>
-    </StyledButton>
+    </AdditionButton>
   )
 }
 
-const StyledButton = styled.button`
+const AdditionButton = styled.button`
   ${({ theme }) => `
     ${theme.flexBox('row', 'center', 'center', 'xs')}
     ${theme.padding('sm', 'lg', 'sm', 'md')}
