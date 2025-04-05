@@ -1,14 +1,14 @@
 import { styled } from 'styled-components'
 
-import { useBookmark } from '@/features/bookmark/hook/useBookmark'
+import { useBookmark } from '@/features/bookmark/model/useBookmark'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { BookmarkIcon } from '@/shared/ui/icons/ActiveIcons'
-
-import { BookmarkSuccessModal } from './modal/BookmarkSuccessModal'
+import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'
 
 export const BookmarkButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
+
   const { isBookmarked, toggleBookmark } = useBookmark(openModal)
 
   return (
@@ -18,10 +18,11 @@ export const BookmarkButton = () => {
         <p className="label">북마크</p>
       </BookmarkStyledButton>
 
-      <BookmarkSuccessModal
+      <ModalWithOneButton
         label={modalLabel(MODAL_KEYS.success)}
         isModalOpen={isModalOpen(MODAL_KEYS.success)}
         closeModal={closeModal}
+        button={{ onClickButton: closeModal }}
       />
     </>
   )

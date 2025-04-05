@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
+import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
+import { EnterChatButton } from '@/features/enter-chat/ui/EnterChatButton'
 import { useIsLoggedIn } from '@/features/login/model/auth.store'
-import { BookmarkButton } from '@/widgets/button/BookmarkButton'
-import { EnterChatButton } from '@/widgets/button/EnterChatButton'
 
 export const PostDetailBottom = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -17,7 +17,7 @@ export const PostDetailBottom = () => {
   )
 }
 
-const Container = styled.div`
+const Container = styled.section`
   ${({ theme }) => `
     ${theme.flexBox('row', 'center', undefined, 'xl')};
     ${theme.boxShadow('md')};

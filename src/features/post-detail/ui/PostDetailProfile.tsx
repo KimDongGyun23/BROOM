@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-import { usePostDetail } from '@/entities/board/model/postDetail.store'
+import { usePostDetailContent } from '@/features/post-detail/model/postDetail.store'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
 export const PostDetailProfile = () => {
-  const post = usePostDetail()
+  const post = usePostDetailContent()
+
   if (!post || !post.author) return null
 
   const { militaryBranch, nickname, reserveYear } = post.author

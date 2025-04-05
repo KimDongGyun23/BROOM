@@ -12,11 +12,12 @@ export const useEnterChatRoom = (openModal: OpenModal) => {
   const { refetch } = useFetchEnteredChatRoom({ urls: { boardId } })
 
   const enterChatRoom = async () => {
-    const { isSuccess, isError, error } = await refetch()
+    const { isSuccess, error } = await refetch()
+
     if (isSuccess) {
       navigate(`/chat/${boardId}`)
-    } else if (isError) {
-      const errorMessage = error.response?.data || '채팅방 입장에 실패했습니다.'
+    } else {
+      const errorMessage = error?.response?.data || '채팅방 입장에 실패했습니다.'
       openModal(MODAL_KEYS.error, errorMessage)
     }
   }
