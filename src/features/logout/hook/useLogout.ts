@@ -19,6 +19,7 @@ export const useLogout = (openModal: OpenModal, closeModal: VoidFunction) => {
       onSuccess: () => {
         openModal(MODAL_KEYS.success, '로그아웃에 성공했습니다.')
         instance.resetAccessToken()
+        logout()
       },
     })
   }
@@ -26,7 +27,6 @@ export const useLogout = (openModal: OpenModal, closeModal: VoidFunction) => {
   const handleClickModal = () => {
     closeModal()
     navigate('/home')
-    logout()
   }
 
   return { handleOpenModal, handleClickModal }
