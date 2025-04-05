@@ -17,6 +17,7 @@ export const useLogin = () => {
       {
         onSuccess: (response) => {
           login(response)
+          console.log(response)
           if (response.role === 'ROLE_MEMBER') navigate('/home', { replace: true })
           else if (response.role === 'ROLE_ADMIN') navigate('/kw/broom', { replace: true })
           else {
