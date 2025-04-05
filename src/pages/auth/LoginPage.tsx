@@ -1,44 +1,14 @@
-import { FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { Container, FormContainer } from '@/app/style/commonStyles'
-import { loginAttribute, loginSchema } from '@/entities/auth/config/auth.schema'
-import type { LoginCredentials } from '@/entities/auth/model/auth.type'
-import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { InputGroup } from '@/shared/ui/inputGroup'
-import { LoginButton } from '@/widgets/button/LoginButton'
+import { Container } from '@/app/style/commonStyles'
+import { LoginForm } from '@/widgets/form/LoginForm'
 
 export const LoginPage = () => {
-  const formMethod = useCustomForm<LoginCredentials>(loginSchema, {
-    defaultValues: {
-      userId: 'test01',
-      password: 'password',
-    },
-  })
-
-  const { ID, PASSWORD } = loginAttribute
-
   return (
     <Container>
       <Logo>BROOM</Logo>
-
-      <FormProvider {...formMethod}>
-        <FormContainer>
-          <InputGroup section={ID.section}>
-            <InputGroup.Label label={ID.label} />
-            <InputGroup.Input {...ID.input} />
-          </InputGroup>
-
-          <InputGroup section={PASSWORD.section}>
-            <InputGroup.Label label={PASSWORD.label} />
-            <InputGroup.Input {...PASSWORD.input} />
-          </InputGroup>
-
-          <LoginButton />
-        </FormContainer>
-      </FormProvider>
-
+      <LoginForm />
       <SignUpLink to={'/sign-up'}>회원가입</SignUpLink>
     </Container>
   )
