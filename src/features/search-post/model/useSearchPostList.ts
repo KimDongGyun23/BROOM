@@ -1,12 +1,13 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { useFetchPostList } from '@/entities/board/api/useBoard.query'
-import { PostList } from '@/entities/board/ui/PostList'
-import { SEARCH_OPTIONS } from '@/features/search-post/config/searchOptions.constant'
-import { useSearchPostDateTag } from '@/features/search-post/model/dateTag.store'
-import { useSearchRecruitingState } from '@/features/search-post/model/recruitingFilter.store'
 
-export const PostSearchList = () => {
+import { SEARCH_OPTIONS } from '../config/searchOptions.constant'
+
+import { useSearchPostDateTag } from './dateTag.store'
+import { useSearchRecruitingState } from './recruitingFilter.store'
+
+export const useSearchPostList = () => {
   const [searchParams] = useSearchParams()
   const filterLabel = searchParams.get('filterName') || ''
   const searchKeyword = searchParams.get('searchName') || ''
@@ -26,13 +27,10 @@ export const PostSearchList = () => {
 
   const searchPostList = data?.pages.flatMap((page) => page.result) || []
 
-  return (
-    <PostList
-      isPending={isPending}
-      isRecruiting={isRecruiting}
-      postList={searchPostList}
-      hasNextPage={hasNextPage}
-      fetchNextPage={fetchNextPage}
-    />
-  )
+  return {
+    searchPostList,
+    isPending,
+    hasNextPage,
+    fetchNextPage,
+  }
 }

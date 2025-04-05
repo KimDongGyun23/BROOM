@@ -2,10 +2,10 @@ import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { DateFilterForSearch } from '@/features/search-post/ui/dateFilter/DateFilterForSearch'
+import { PostSearchList } from '@/features/search-post/ui/PostSearchList'
 import { RecruitingFilterForSearch } from '@/features/search-post/ui/recruitingFilter/RecruitingFilterForSearch'
 import { SearchBarForSearch } from '@/features/search-post/ui/searchBar/SearchBarForSearch'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { PostSearchList } from '@/widgets/list/PostSearchList'
 
 export const SearchPost = () => {
   return (
