@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
-import type { SearchOption } from '@/entities/board/config/post.constant'
+import type { SearchOption } from '@/features/search-post/config/searchOptions.constant'
 import { SearchIcon } from '@/shared/ui/icons/NonActiveIcons'
 
 type SearchBarProps = {

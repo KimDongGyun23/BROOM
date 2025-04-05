@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
-import type { SearchOption } from '@/entities/board/config/post.constant'
-import { SEARCH_OPTIONS } from '@/entities/board/config/post.constant'
+import type { SearchOption } from '@/features/search-post/config/searchOptions.constant'
+import { SEARCH_OPTIONS } from '@/features/search-post/config/searchOptions.constant'
 import {
   useFilterDropDownActions,
   useIsFilterDropdownOpen,

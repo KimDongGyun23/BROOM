@@ -1,30 +1,36 @@
+import { styled } from 'styled-components'
+
 import { FlexColumnContainer } from '@/app/style/commonStyles'
-import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
-import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
-import { FilterDropdownStoreProvider } from '@/features/search-post/model/filterDropdown.store'
+import { DateFilterForPost } from '@/features/search-post/ui/dateFilter/DateFilterForPost'
+import { RecruitingFilterForPost } from '@/features/search-post/ui/recruitingFilter/RecruitingFilterForPost'
+import { SearchBarForPost } from '@/features/search-post/ui/searchBar/SearchBarForPost'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { MainHeader } from '@/shared/ui/MainHeader'
 import { PostAdditionButton } from '@/widgets/button/PostAdditionButton'
-import { PostFilter } from '@/widgets/filter/PostFilter'
-import { PostSearchBar } from '@/widgets/input-field/PostSearchBar'
 import { BoardMainList } from '@/widgets/list/BoardMainList'
 
 export const Board = () => {
   return (
-    <DateTagStoreProvider>
-      <RecruitingStoreProvider>
-        <FilterDropdownStoreProvider>
-          <FlexColumnContainer>
-            <MainHeader secondary title="승차 공유" />
-            <PostSearchBar />
-            <PostFilter />
+    <FlexColumnContainer>
+      <MainHeader secondary title="승차 공유" />
+      <SearchBarForPost />
+      <FilterContainer>
+        <DateFilterForPost />
+        <RecruitingFilterForPost />
+      </FilterContainer>
 
-            <BoardMainList />
-            <PostAdditionButton />
-            <BottomNavigation />
-          </FlexColumnContainer>
-        </FilterDropdownStoreProvider>
-      </RecruitingStoreProvider>
-    </DateTagStoreProvider>
+      <BoardMainList />
+      <PostAdditionButton />
+      <BottomNavigation />
+    </FlexColumnContainer>
   )
 }
+
+const FilterContainer = styled.section`
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', 'space-between')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding('sm', 0)}
+    ${theme.border('divider', 'bottom')}
+  `}
+`

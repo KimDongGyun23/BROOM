@@ -3,20 +3,24 @@ import InfiniteScroll from 'react-infinite-scroller'
 import styled from 'styled-components'
 
 import type { PostListResponse } from '@/entities/board/model/post.type'
-import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 
 import { PostItem } from './item/PostItem'
 
 type PostListProps = {
+  isRecruiting?: boolean
   postList: PostListResponse['result']
   hasNextPage: boolean
   fetchNextPage: VoidFunction
 }
 
-export const PostList = ({ postList, hasNextPage, fetchNextPage }: PostListProps) => {
-  const isRecruiting = useIsRecruiting()
+export const PostList = ({
+  isRecruiting = false,
+  postList,
+  hasNextPage,
+  fetchNextPage,
+}: PostListProps) => {
   const scrollRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {

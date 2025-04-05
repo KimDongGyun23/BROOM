@@ -1,4 +1,4 @@
-import { useQuery, useSuspenseQueries } from '@tanstack/react-query'
+import { useSuspenseQueries, useSuspenseQuery } from '@tanstack/react-query'
 
 import { instance } from '@/app/api'
 import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
@@ -17,7 +17,7 @@ export const adminQueryKeys = {
 }
 
 export const useFetchTrainingDates = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: adminQueryKeys.dateTag(),
     queryFn: () => instanceWithoutAuth.get<TrainingDateListResponse>('/date-tag'),
   })

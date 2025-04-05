@@ -1,12 +1,12 @@
 import { useFetchPostList } from '@/entities/board/api/useBoard.query'
-import { useDateTag } from '@/features/filter/model/dateTag.store'
-import { useIsRecruiting } from '@/features/filter/model/recruiting.store'
+import { usePostDateTag } from '@/features/search-post/model/dateTag.store'
+import { usePostRecruitingState } from '@/features/search-post/model/recruitingFilter.store'
 
 import { PostList } from './PostList'
 
 export const BoardMainList = () => {
-  const dateTag = useDateTag()
-  const isRecruiting = useIsRecruiting()
+  const dateTag = usePostDateTag()
+  const isRecruiting = usePostRecruitingState()
 
   const { data, hasNextPage, fetchNextPage } = useFetchPostList({
     urls: {
@@ -19,5 +19,12 @@ export const BoardMainList = () => {
 
   const postList = data?.pages.flatMap((page) => page.result) || []
 
-  return <PostList postList={postList} hasNextPage={hasNextPage} fetchNextPage={fetchNextPage} />
+  return (
+    <PostList
+      isRecruiting={isRecruiting}
+      postList={postList}
+      hasNextPage={hasNextPage}
+      fetchNextPage={fetchNextPage}
+    />
+  )
 }

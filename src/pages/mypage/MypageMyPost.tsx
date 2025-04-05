@@ -1,6 +1,6 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchMyPostList } from '@/entities/board/api/useBoard.query'
-import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
+import { RecruitingStoreProvider } from '@/features/search-post/model/recruitingFilter.store'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 import { PostList } from '@/widgets/list/PostList'
 

@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { useIsRecruiting, useRecruitingActions } from '@/features/filter/model/recruiting.store'
 import { CheckBoxIcon } from '@/shared/ui/icons/ActiveIcons'
 
-export const RecruitingButton = () => {
-  const isRecruiting = useIsRecruiting()
+type Props = {
+  isRecruiting: boolean
+  toggleRecruiting: VoidFunction
+}
 
-  const { toggleRecruiting } = useRecruitingActions()
-
+export const RecruitingFilter = ({ isRecruiting, toggleRecruiting }: Props) => {
   return (
     <ToggleButton onClick={toggleRecruiting}>
       <CheckBoxIcon active={isRecruiting} />

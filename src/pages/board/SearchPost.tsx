@@ -1,23 +1,32 @@
+import { styled } from 'styled-components'
+
 import { Container } from '@/app/style/commonStyles'
-import { DateTagStoreProvider } from '@/features/filter/model/dateTag.store'
-import { RecruitingStoreProvider } from '@/features/filter/model/recruiting.store'
+import { DateFilterForSearch } from '@/features/search-post/ui/dateFilter/DateFilterForSearch'
+import { RecruitingFilterForSearch } from '@/features/search-post/ui/recruitingFilter/RecruitingFilterForSearch'
+import { SearchBarForSearch } from '@/features/search-post/ui/searchBar/SearchBarForSearch'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { PostFilter } from '@/widgets/filter/PostFilter'
-import { PostSearchBar } from '@/widgets/input-field/PostSearchBar'
 import { PostSearchList } from '@/widgets/list/PostSearchList'
 
 export const SearchPost = () => {
   return (
-    <DateTagStoreProvider>
-      <RecruitingStoreProvider>
-        <Container>
-          <SubHeaderWithoutIcon type="null" title="검색" />
-          <PostSearchBar />
-          <PostFilter />
+    <Container>
+      <SubHeaderWithoutIcon type="null" title="검색" />
+      <SearchBarForSearch />
+      <FilterContainer>
+        <DateFilterForSearch />
+        <RecruitingFilterForSearch />
+      </FilterContainer>
 
-          <PostSearchList />
-        </Container>
-      </RecruitingStoreProvider>
-    </DateTagStoreProvider>
+      <PostSearchList />
+    </Container>
   )
 }
+
+const FilterContainer = styled.section`
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', 'space-between')}
+    ${theme.margin(0, 'container')}
+    ${theme.padding('sm', 0)}
+    ${theme.border('divider', 'bottom')}
+  `}
+`

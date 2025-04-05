@@ -3,20 +3,25 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import { useFilterLabel } from '@/features/search-post/model/filterDropdown.store'
 import type { Search } from '@/shared/model/common.type'
 import { SearchBar } from '@/shared/ui/SearchBar'
 
-import { FilterToggleButton } from '../button/FilterToggleButton'
-import { PostSearchKebab } from '../kebab/PostSearchKebab'
+import type { SearchOption } from '../../config/searchOptions.constant'
 
-export const PostSearchBar = () => {
+import { FilterDropdownButton } from './FilterDropdownButton'
+
+type Props = {
+  isOpen: boolean
+  currentFilter: SearchOption
+  setFilterLabel: (filterLabel: SearchOption) => void
+  toggleDropdown: VoidFunction
+}
+
+export const PostSearchBar = ({ isOpen, currentFilter, setFilterLabel, toggleDropdown }: Props) => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
 
   const defaultSearchName = searchParams.get('searchName') || ''
-
-  const currentFilter = useFilterLabel()
 
   const formMethod = useForm<Search>({
     mode: 'onSubmit',
@@ -36,8 +41,12 @@ export const PostSearchBar = () => {
   return (
     <FormProvider {...formMethod}>
       <Container>
-        <FilterToggleButton />
-        <PostSearchKebab />
+        <FilterDropdownButton
+          isOpen={isOpen}
+          currentFilter={currentFilter}
+          setFilterLabel={setFilterLabel}
+          toggleDropdown={toggleDropdown}
+        />
         <SearchBar currentFilter={currentFilter} onSubmit={handleSubmit(handleSearchPost)} />
       </Container>
     </FormProvider>
