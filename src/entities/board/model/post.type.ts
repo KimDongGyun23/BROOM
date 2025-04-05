@@ -28,7 +28,7 @@ type PostStatus = {
 
 export type PostId = Pick<PostStatus, 'boardId'>
 
-export type PostForm = Omit<PostDetail, 'time' | 'personnel'> & {
+export type PostFormType = Omit<PostDetail, 'time' | 'personnel'> & {
   personnel: string
   hour: string
   minute: string

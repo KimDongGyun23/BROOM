@@ -2,19 +2,19 @@ import { FormProvider } from 'react-hook-form'
 
 import { FlexColumnContainer } from '@/app/style/commonStyles'
 import { postSchema } from '@/entities/board/config/post.schema'
-import type { PostForm } from '@/entities/board/model/post.type'
+import type { PostFormType } from '@/entities/board/model/post.type'
+import { PostForm } from '@/entities/board/ui/PostForm'
+import { PostCreateHeader } from '@/features/create-post/ui/PostCreateHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { PostCreateHeader } from '@/widgets/header/PostCreateHeader'
-import { PostFormSection } from '@/widgets/section/PostFormSection'
 
 export const CreatePost = () => {
-  const formMethod = useCustomForm<PostForm>(postSchema)
+  const formMethod = useCustomForm<PostFormType>(postSchema)
 
   return (
     <FormProvider {...formMethod}>
       <FlexColumnContainer>
         <PostCreateHeader />
-        <PostFormSection />
+        <PostForm />
       </FlexColumnContainer>
     </FormProvider>
   )

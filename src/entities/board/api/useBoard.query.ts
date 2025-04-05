@@ -6,7 +6,7 @@ import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
 import type {
   PostDetailRequest,
   PostDetailResponse,
-  PostForm,
+  PostFormType,
   PostListRequest,
   PostListResponse,
 } from '@/entities/board/model/post.type'
@@ -70,7 +70,7 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) =>
   useSuspenseQuery({
     queryKey: boardQueryKeys.postDetail(urls),
     queryFn: () => instance.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
-    select: (data): PostForm => {
+    select: (data): PostFormType => {
       const { title, trainingDate, place, content, time, personnel } = data.contentDetail
       const [hour, minute] = time.split(':')
       return {

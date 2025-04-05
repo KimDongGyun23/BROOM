@@ -2,14 +2,14 @@ import { useFormContext } from 'react-hook-form'
 
 import { FormContainer, GridContainer } from '@/app/style/commonStyles'
 import { postAttribute } from '@/entities/board/config/post.schema'
-import type { PostForm } from '@/entities/board/model/post.type'
+import type { PostFormType } from '@/entities/board/model/post.type'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-export const PostFormSection = () => {
+export const PostForm = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute
   const {
     formState: { errors },
-  } = useFormContext<PostForm>()
+  } = useFormContext<PostFormType>()
 
   return (
     <FormContainer>

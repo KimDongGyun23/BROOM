@@ -1,4 +1,4 @@
-import type { PostForm } from '@/entities/board/model/post.type'
+import type { PostFormType } from '@/entities/board/model/post.type'
 import type { OpenModal } from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
 import { MODAL_KEYS } from '@/shared/lib/constants'
@@ -10,7 +10,7 @@ export const useEditPost = (openModal: OpenModal) => {
 
   const { mutate: editPost } = useEditPostMutation()
 
-  const handleEditPost = (formData: PostForm) => {
+  const handleEditPost = (formData: PostFormType) => {
     const { hour, minute, personnel, ...rest } = formData
     const submissionData = {
       time: `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`,

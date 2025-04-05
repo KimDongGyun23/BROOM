@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form'
 
-import type { PostForm } from '@/entities/board/model/post.type'
-import { useCreatePost } from '@/features/create-post/hook/useCreatePost'
+import type { PostFormType } from '@/entities/board/model/post.type'
+import { useCreatePost } from '@/features/create-post/model/useCreatePost'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
 export const PostCreateHeader = () => {
-  const { handleSubmit } = useFormContext<PostForm>()
+  const { handleSubmit } = useFormContext<PostFormType>()
 
   const { handleCreatePost } = useCreatePost()
 
