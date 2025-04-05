@@ -1,4 +1,5 @@
-import { useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useInfiniteQuery, useSuspenseInfiniteQuery, useSuspenseQuery } from '@tanstack/react-query'
+import type { AxiosError } from 'axios'
 
 import { instance } from '@/app/api'
 import { instanceWithoutAuth } from '@/app/api/instanceWithoutAuth'
@@ -37,10 +38,10 @@ export const boardQueryKeys = {
 }
 
 export const useFetchPostList = ({ urls }: PostListRequest) =>
-  useSuspenseInfiniteQuery({
+  useInfiniteQuery<PostListResponse, AxiosError<string>>({
     queryKey: boardQueryKeys.postList(urls),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instanceWithoutAuth.get<PostListResponse>(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
+      instanceWithoutAuth.get(ENDPOINTS.fetchPostList({ ...urls, pageParam })),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
     gcTime: 0,
@@ -48,19 +49,19 @@ export const useFetchPostList = ({ urls }: PostListRequest) =>
   })
 
 export const useFetchMyPostList = () =>
-  useSuspenseInfiniteQuery({
+  useSuspenseInfiniteQuery<PostListResponse, AxiosError<string>>({
     queryKey: boardQueryKeys.myPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(`/mypage/board/${pageParam}`),
+      instance.get(`/mypage/board/${pageParam}`),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
 
 export const useFetchBookmarkedPostList = () =>
-  useSuspenseInfiniteQuery({
+  useSuspenseInfiniteQuery<PostListResponse, AxiosError<string>>({
     queryKey: boardQueryKeys.bookmarkedPostList(),
     queryFn: ({ pageParam = 0 }: { pageParam: unknown }) =>
-      instance.get<PostListResponse>(`/mypage/bookmark/${pageParam}`),
+      instance.get(`/mypage/bookmark/${pageParam}`),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => (lastPage.hasNext ? allPages.length : undefined),
   })
@@ -85,14 +86,13 @@ export const useFetchPostEditData = ({ urls }: PostDetailRequest) =>
   })
 
 export const useFetchPostDetail = ({ urls }: PostDetailRequest) =>
-  useSuspenseQuery({
+  useSuspenseQuery<PostDetailResponse, AxiosError<string>>({
     queryKey: boardQueryKeys.postDetail(urls),
-    queryFn: () =>
-      instanceWithoutAuth.get<PostDetailResponse>(`/board/view/detail/${urls.boardId}`),
+    queryFn: () => instanceWithoutAuth.get(`/board/view/detail/${urls.boardId}`),
   })
 
 export const useFetchDeadLinePostList = () =>
-  useSuspenseQuery({
+  useSuspenseQuery<PostListResponse, AxiosError<string>>({
     queryKey: boardQueryKeys.deadlinePostList(),
-    queryFn: () => instanceWithoutAuth.get<PostListResponse>(`/board/view/almost-full`),
+    queryFn: () => instanceWithoutAuth.get(`/board/view/almost-full`),
   })
