@@ -1,7 +1,7 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchMyPostList } from '@/entities/board/api/useBoard.query'
+import { PostList } from '@/entities/board/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { PostList } from '@/widgets/list/PostList'
 
 export const MypageMyPost = () => {
   const { data, hasNextPage, fetchNextPage } = useFetchMyPostList()

@@ -1,8 +1,7 @@
 import { useFetchPostList } from '@/entities/board/api/useBoard.query'
+import { PostList } from '@/entities/board/ui/PostList'
 import { usePostDateTag } from '@/features/search-post/model/dateTag.store'
 import { usePostRecruitingState } from '@/features/search-post/model/recruitingFilter.store'
-
-import { PostList } from './PostList'
 
 export const BoardMainList = () => {
   const dateTag = usePostDateTag()

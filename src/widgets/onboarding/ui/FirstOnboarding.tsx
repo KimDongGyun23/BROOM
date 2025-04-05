@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { PostItem } from '@/widgets/list/item/PostItem'
+import { PostItem } from '@/entities/board/ui/PostItem'
 
 export const FirstOnboarding = () => {
   return (

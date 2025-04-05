@@ -5,7 +5,7 @@ import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { Tooltip } from '@/shared/ui/Tooltip'
 
-import { PostItem } from '../list/item/PostItem'
+import { PostItem } from '../../entities/board/ui/PostItem'
 
 const SectionContent = () => {
   const { data } = useFetchDeadLinePostList()

@@ -1,7 +1,7 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchBookmarkedPostList } from '@/entities/board/api/useBoard.query'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { PostList } from '@/widgets/list/PostList'
+import { PostList } from '@/entities/board/ui/PostList'
 
 export const BookmarkedPost = () => {
   const { data, hasNextPage, fetchNextPage } = useFetchBookmarkedPostList()

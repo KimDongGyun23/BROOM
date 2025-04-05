@@ -7,7 +7,7 @@ import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
 import { Loading } from '@/shared/ui/Loading'
 
-import { PostItem } from './item/PostItem'
+import { PostItem } from './PostItem'
 
 type PostListProps = {
   isPending?: boolean

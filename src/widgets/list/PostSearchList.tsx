@@ -1,11 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
 
 import { useFetchPostList } from '@/entities/board/api/useBoard.query'
+import { PostList } from '@/entities/board/ui/PostList'
 import { SEARCH_OPTIONS } from '@/features/search-post/config/searchOptions.constant'
 import { useSearchPostDateTag } from '@/features/search-post/model/dateTag.store'
 import { useSearchRecruitingState } from '@/features/search-post/model/recruitingFilter.store'
-
-import { PostList } from './PostList'
 
 export const PostSearchList = () => {
   const [searchParams] = useSearchParams()
