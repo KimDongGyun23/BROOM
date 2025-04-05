@@ -2,7 +2,7 @@ import type { AxiosError, AxiosResponse } from 'axios'
 import axios from 'axios'
 
 const client = axios.create({
-  baseURL: import.meta.env.VITE_PUBLIC_SERVER_DOMAIN,
+  baseURL: import.meta.env.VITE_SERVER_DOMAIN,
   withCredentials: true,
   headers: { 'Content-Type': 'application/json' },
 })

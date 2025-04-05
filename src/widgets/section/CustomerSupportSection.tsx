@@ -10,7 +10,7 @@ const CUSTOMER_SUPPORT = {
   links: [{ name: '문의하기' }, { name: '서비스 이용 약관' }, { name: '개인정보 처리 방침' }],
 } as const
 
-const CHANNEL = import.meta.env.VITE_PUBLIC_KAKAO
+const CHANNEL = import.meta.env.VITE_KAKAO
 
 type SectionModalType = {
   index: number

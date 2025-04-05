@@ -1,6 +1,6 @@
 import { HttpClient } from './HttpClient'
 
-const BASE_URL = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
+const BASE_URL = import.meta.env.VITE_SERVER_DOMAIN
 
 export const instance = new HttpClient({
   baseURL: BASE_URL,

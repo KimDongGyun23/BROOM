@@ -8,9 +8,9 @@ import { MainHeader } from '@/shared/ui/MainHeader'
 import { BusNoticeSection } from '@/widgets/section/BusNoticeSection'
 
 export const BusApplication = () => {
-  const isBusFormOpen = import.meta.env.VITE_PUBLIC_BUS_STATE === 'true'
-  const busNoticeURL = import.meta.env.VITE_PUBLIC_BUS_NOTICE_URL
-  const busFormURL = import.meta.env.VITE_PUBLIC_BUS_FORM_URL
+  const isBusFormOpen = import.meta.env.VITE_BUS_STATE === 'true'
+  const busNoticeURL = import.meta.env.VITE_BUS_NOTICE_URL
+  const busFormURL = import.meta.env.VITE_BUS_FORM_URL
 
   const handleClickNoticeButton = () => (window.location.href = busNoticeURL)
   const handleClickFormButton = () => (window.location.href = busFormURL)

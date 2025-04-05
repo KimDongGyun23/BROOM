@@ -19,7 +19,7 @@ const INITIAL_RECONNECT_DELAY = 1000
 const MAX_RECONNECT_DELAY = 16000
 const MAX_RECONNECT_ATTEMPTS = 5
 const CONNECTION_CHECK_INTERVAL = 10000
-const SERVER_DOMAIN = import.meta.env.VITE_PUBLIC_SERVER_DOMAIN
+const SERVER_DOMAIN = import.meta.env.VITE_SERVER_DOMAIN
 
 export const useWebSocket = () => {
   const roomId = useParamId()
