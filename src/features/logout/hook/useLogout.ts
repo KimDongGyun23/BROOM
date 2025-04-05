@@ -15,9 +15,9 @@ export const useLogout = (closeModal: VoidFunction) => {
   const handleClickLogout = () => {
     logoutMutation(undefined, {
       onSuccess: () => {
+        navigate('/home')
         instance.resetAccessToken()
         closeModal()
-        navigate('/home')
         logout()
       },
     })
