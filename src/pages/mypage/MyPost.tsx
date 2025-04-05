@@ -3,7 +3,7 @@ import { useFetchMyPostList } from '@/entities/board/api/useBoard.query'
 import { PostList } from '@/entities/board/ui/PostList'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 
-export const MypageMyPost = () => {
+export const MyPost = () => {
   const { data, hasNextPage, fetchNextPage } = useFetchMyPostList()
   const postList = data?.pages.flatMap((page) => page.result) || []
 

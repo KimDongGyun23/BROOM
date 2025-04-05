@@ -2,7 +2,7 @@ import { FormContainer } from '@/app/style/commonStyles'
 import { NicknameDuplicationCheckField } from '@/features/check-duplication/ui/NicknameDuplicationCheckField'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-import { accountAttribute } from './schema/account.schema'
+import { accountAttribute } from '../../../entities/mypage/config/account.schema'
 
 export const UpdateAccountForm = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute

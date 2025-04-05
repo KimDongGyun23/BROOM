@@ -2,16 +2,16 @@ import { FormProvider } from 'react-hook-form'
 
 import { useFetchAccountDetails } from '@/entities/mypage/api/useMypage.query'
 import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
+import { accountSchema } from '@/entities/mypage/config/account.schema'
+import { UpdateAccountForm } from '@/features/update-account/ui/UpdateAccountForm'
+import { UpdateAccountHeader } from '@/features/update-account/ui/UpdateAccountHeader'
+import { UpdateAccountSuccessModal } from '@/features/update-account/ui/UpdateAccountSuccessModal'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import useModal from '@/shared/hook/useModal'
 import { ERROR_MESSAGES, MODAL_KEYS } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { accountSchema } from '@/widgets/form/schema/account.schema'
-import { UpdateAccountForm } from '@/widgets/form/UpdateAccountForm'
-import { UpdateAccountHeader } from '@/widgets/header/EditAccountHeader'
-import { UpdateAccountSuccessModal } from '@/widgets/modal/UpdateAccountSuccessModal'
 
-export const UpdateAccountDetails = () => {
+export const UpdateAccount = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()
 
   const { data: defaultValues } = useFetchAccountDetails()

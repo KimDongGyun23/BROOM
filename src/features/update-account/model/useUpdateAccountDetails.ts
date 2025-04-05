@@ -6,9 +6,9 @@ import {
   useNicknameUniqueState,
 } from '@/features/check-duplication/model/duplication.store'
 import { useUserData } from '@/features/login/model/auth.store'
+import { accountAttribute } from '@/entities/mypage/config/account.schema'
 import type { OpenModal } from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
-import { accountAttribute } from '@/widgets/form/schema/account.schema'
 
 import { useUpdateAccountDetailsMutation } from '../api/useUpdateAccountDetails.mutation'
 

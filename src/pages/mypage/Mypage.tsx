@@ -2,12 +2,13 @@ import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { useFetchUserProfile } from '@/entities/mypage/api/useMypage.query'
+import { CustomerSupportSection } from '@/features/mypage/ui/CustomerSupportSection'
+import { MypageMenuSection } from '@/features/mypage/ui/MypageMenuSection'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { MypageProfile } from '@/widgets/profile/MypageProfile'
-import { AuthenticationSection } from '@/widgets/section/AuthenticationSection'
-import { MypageMenuSection } from '@/widgets/section/MypageMenuSection'
+import { AuthenticationSection } from '@/widgets/AuthenticationSection'
+import { MypageProfile } from '@/widgets/MypageProfile'
 
 export const Mypage = () => {
   const { data: userProfile } = useFetchUserProfile()
@@ -18,7 +19,11 @@ export const Mypage = () => {
     <Container>
       <ScrollContainer>
         <MypageProfile {...userProfile} />
-        <MypageMenuSection />
+        <MenuContainer>
+          <MypageMenuSection />
+          <CustomerSupportSection />
+        </MenuContainer>
+
         <AuthenticationSection />
       </ScrollContainer>
 
@@ -32,4 +37,11 @@ const ScrollContainer = styled.div`
   ${({ theme }) => theme.padding(0, 0, 'lg')};
   flex-grow: 1;
   overflow-y: scroll;
+`
+
+const MenuContainer = styled.section`
+  ${({ theme }) => `
+    ${theme.flexBox('column')}
+    ${theme.margin(0, 'container')}
+  `}
 `

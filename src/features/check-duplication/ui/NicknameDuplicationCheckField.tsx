@@ -8,12 +8,12 @@ import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
 import { useNicknameDuplicationCheckMutation } from '../api/useDuplication.mutation'
-import { useDuplicationCheck } from '../hook/useDuplicationCheck'
 import {
   useNicknameDuplicationCheckActions,
   useNicknameDuplicationResultMessage,
   useNicknameUniqueState,
 } from '../model/duplication.store'
+import { useDuplicationCheck } from '../model/useDuplicationCheck'
 
 export const NicknameDuplicationCheckField = ({ section, label, input }: FieldType) => {
   const user = useUserData()

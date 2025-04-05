@@ -5,8 +5,8 @@ import { useFetchAccountDetails } from '@/entities/mypage/api/useMypage.query'
 import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { AccountInformationForm } from '@/widgets/form/AccountInformationForm'
-import { accountSchema } from '@/widgets/form/schema/account.schema'
+import { AccountInformationForm } from '@/entities/mypage/ui/AccountInformationForm'
+import { accountSchema } from '@/entities/mypage/config/account.schema'
 
 export const AccountInformation = () => {
   const navigate = useNavigate()

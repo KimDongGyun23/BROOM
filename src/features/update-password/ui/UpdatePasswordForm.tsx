@@ -1,7 +1,7 @@
 import { FormContainer } from '@/app/style/commonStyles'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-import { newPasswordAttribute } from './schema/password.schema'
+import { newPasswordAttribute } from '../config/password.schema'
 
 export const UpdatePasswordForm = () => {
   const { PREV_PASSWORD, NEW_PASSWORD, CONFIRM } = newPasswordAttribute
