@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
+import { instance } from '@/app/api'
 import type { LoginCredentials } from '@/entities/auth/model/auth.type'
 
 import { useLoginMutation } from '../api/useLogin.mutation'
@@ -17,7 +18,7 @@ export const useLogin = () => {
       {
         onSuccess: (response) => {
           login(response)
-          console.log(response)
+          instance.setAccessToken(response.token)
           if (response.role === 'ROLE_MEMBER') navigate('/home', { replace: true })
           else if (response.role === 'ROLE_ADMIN') navigate('/kw/broom', { replace: true })
           else {

@@ -29,4 +29,5 @@ export type ValidateNicknameRequest = {
 
 export type LoginResponse = Pick<User, 'nickname' | 'militaryBranch'> & {
   role: 'ROLE_ADMIN' | 'ROLE_MEMBER'
+  token: string
 }
