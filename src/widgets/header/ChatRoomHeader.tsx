@@ -2,12 +2,20 @@ import { useOpenChatSidebarWithInformation } from '@/features/chat-sidebar/hook/
 import { ChatSidebar } from '@/features/chat-sidebar/ui/ChatSidebar'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 
-export const ChatRoomHeader = () => {
+type Props = {
+  handleMoveToPrevPage: VoidFunction
+}
+
+export const ChatRoomHeader = ({ handleMoveToPrevPage }: Props) => {
   const handleOpenSidebar = useOpenChatSidebarWithInformation()
 
   return (
     <>
-      <SubHeaderWithIcon type={'kebab'} onClickKebab={handleOpenSidebar} />
+      <SubHeaderWithIcon
+        type={'kebab'}
+        onClickCancel={handleMoveToPrevPage}
+        onClickKebab={handleOpenSidebar}
+      />
       <ChatSidebar />
     </>
   )

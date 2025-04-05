@@ -1,5 +1,6 @@
 import { Container } from '@/app/style/commonStyles'
 import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
+import { useWebSocket } from '@/entities/chat/hook/useWebsocket'
 import { useChatMessageActions } from '@/entities/chat/model/chatMessage.store'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
@@ -15,6 +16,9 @@ export const ChatRoom = () => {
 
   const { data: roomInformation } = useFetchChatRoomInformation({ urls: { boardId } })
 
+  const { sendMessage, modalLabel, isModalOpen, handleMoveToPrevPage, closeErrorModal } =
+    useWebSocket()
+
   if (!roomInformation) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
 
   const { militaryBranches, ownerNickname, boardTitle, messages } = roomInformation
@@ -23,14 +27,20 @@ export const ChatRoom = () => {
 
   return (
     <Container>
-      <ChatRoomHeader />
+      <ChatRoomHeader handleMoveToPrevPage={handleMoveToPrevPage} />
       <ChattingRoomProfile
         profileIconList={militaryBranches}
         ownerNickname={ownerNickname}
         title={boardTitle}
       />
       <ChatMessageList />
-      <ChatInput />
+      <ChatInput
+        sendMessage={sendMessage}
+        modalLabel={modalLabel}
+        isModalOpen={isModalOpen}
+        handleMoveToPrevPage={handleMoveToPrevPage}
+        closeErrorModal={closeErrorModal}
+      />
     </Container>
   )
 }

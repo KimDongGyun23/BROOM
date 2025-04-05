@@ -48,8 +48,10 @@ export const useWebSocket = () => {
   )
 
   const handleMoveToPrevPage = useCallback(() => {
-    client.current?.deactivate()
-    client.current = null
+    if (client.current) {
+      client.current.deactivate()
+      client.current = null
+    }
     closeModal()
     navigate(-1)
   }, [navigate])
@@ -61,7 +63,6 @@ export const useWebSocket = () => {
       }
 
       if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-        console.log(client.current?.connected)
         client.current?.deactivate()
         openModal(MODAL_KEYS.confirm, '서버와의 연결이 끊어졌습니다')
         return
@@ -128,7 +129,10 @@ export const useWebSocket = () => {
       client.current.activate()
     }
     return () => {
-      if (client.current) client.current.deactivate()
+      if (client.current) {
+        client.current.deactivate()
+        client.current = null
+      }
     }
   }, [roomId, token])
 
@@ -147,6 +151,6 @@ export const useWebSocket = () => {
     modalLabel,
     isModalOpen,
     closeErrorModal: closeModal,
-    closeMoveToPrevModal: handleMoveToPrevPage,
+    handleMoveToPrevPage,
   }
 }
