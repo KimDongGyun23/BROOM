@@ -1,6 +1,8 @@
 import type { AxiosError, AxiosResponse } from 'axios'
 import axios from 'axios'
 
+import { instance } from '.'
+
 const client = axios.create({
   baseURL: import.meta.env.VITE_SERVER_DOMAIN,
   withCredentials: true,
@@ -9,6 +11,7 @@ const client = axios.create({
 
 const onResponse = (response: AxiosResponse) => {
   const token = response.headers['authorization']
+  instance.setAccessToken(token)
   if (token) return { token, ...response.data }
 
   return response.data
