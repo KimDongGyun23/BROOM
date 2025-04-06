@@ -1,7 +1,6 @@
 import { styled } from 'styled-components'
 
 import { PRIVACY_TERM, SERVICE_TERM } from '@/entities/auth/config/term.constant'
-import { MODAL_KEYS } from '@/shared/config/modalKeys'
 import { useModalActions, useModalState } from '@/shared/model/modal.store'
 import { Button } from '@/shared/ui/Button'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
@@ -17,7 +16,7 @@ export const TermModal = ({ id }: Props) => {
 
   const { closeModal } = useModalActions()
 
-  const isModalOpen = modalState[MODAL_KEYS.LOGOUT]?.isOpen || false
+  const isModalOpen = modalState[id]?.isOpen || false
 
   const term = id === 'personalConsent' ? PRIVACY_TERM : SERVICE_TERM
 

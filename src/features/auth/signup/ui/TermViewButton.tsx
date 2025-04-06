@@ -1,13 +1,18 @@
 import { styled } from 'styled-components'
 
-import { MODAL_KEYS } from '@/shared/config/modalKeys'
 import { useModalActions } from '@/shared/model/modal.store'
 
-export const TermViewButton = () => {
+import type { AgreementId } from '../model/terms.store'
+
+type Props = {
+  id: AgreementId
+}
+
+export const TermViewButton = ({ id }: Props) => {
   const { openModal } = useModalActions()
 
   return (
-    <ViewButton type="button" onClick={() => openModal(MODAL_KEYS.TERM, '')}>
+    <ViewButton type="button" onClick={() => openModal(id, '')}>
       보기
     </ViewButton>
   )

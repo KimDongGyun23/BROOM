@@ -28,7 +28,7 @@ export const AgreementItem = ({ id, text, isChecked }: Props) => {
         <p className="label">{text}</p>
       </AgreementToggleButton>
 
-      <TermViewButton />
+      <TermViewButton id={id} />
       <TermModal id={id} />
     </Container>
   )
