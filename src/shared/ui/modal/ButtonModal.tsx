@@ -27,8 +27,8 @@ export const ModalWithOneButton = ({
 
   const { closeModal } = useModalActions()
 
-  const isModalOpen = modal[modalKey].isOpen
-  const label = modal[modalKey].label
+  const isModalOpen = modal[modalKey]?.isOpen || false
+  const label = modal[modalKey]?.label || ''
 
   const handleCloseButton = () => {
     if (onClickButton) onClickButton()
@@ -61,8 +61,8 @@ export const ModalWithTwoButton = ({
 
   const { closeModal } = useModalActions()
 
-  const isModalOpen = modal[modalKey].isOpen
-  const label = modal[modalKey].label
+  const isModalOpen = modal[modalKey]?.isOpen || false
+  const label = modal[modalKey]?.label || ''
 
   const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
   const { buttonLabel: secondaryButtonLabel, onClickButton: onClickSecondaryButton } =
