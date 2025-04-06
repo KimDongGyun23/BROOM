@@ -158,17 +158,21 @@ export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) 
 }
 
 const InputContainer = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'lg')};
-  ${({ theme }) => theme.padding('md', 'md', 'md', 'md')};
-  ${({ theme }) => theme.border('input')};
-  ${({ theme }) => theme.borderRadius('sm')};
+  ${({ theme }) => `
+    ${theme.flexBox('row', 'center', undefined, 'lg')}
+    ${theme.padding('md', 'md', 'md', 'md')}
+    ${theme.border('input')}
+    ${theme.borderRadius('sm')}
+  `}
   width: 100%;
 `
 
 const StyledInput = styled.input`
-  ${({ theme }) => theme.padding('xs', 0)};
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
-  width: 100%;
+  ${({ theme }) => `
+    ${theme.padding('xs', 0)}
+    ${theme.font(700, theme.colors.black[500])}
+  `}
+  flex-grow: 1;
   height: 24px;
 `
 
@@ -177,7 +181,7 @@ const VisibilityButton = styled.button`
 `
 
 const InputLabel = styled.span`
-  ${({ theme }) => theme.padding('xs', 0)};
+  ${({ theme }) => theme.padding('xs', 0)}
   flex-shrink: 0;
   color: ${({ theme }) => theme.colors.black[500]};
 `
@@ -189,10 +193,12 @@ const StyledUnitInput = styled(StyledInput)<{ $textAlign: string }>`
 `
 
 const StyledTextArea = styled.textarea`
-  ${({ theme }) => theme.padding('md', 'lg')};
-  ${({ theme }) => theme.border('input')};
-  ${({ theme }) => theme.borderRadius('sm')};
-  ${({ theme }) => theme.font(700, theme.colors.black[500])};
+  ${({ theme }) => `
+    ${theme.padding('md', 'lg')}
+    ${theme.border('input')}
+    ${theme.borderRadius('sm')}
+    ${theme.font(700, theme.colors.black[500])}
+  `}
   height: 104px;
   resize: none;
 `
