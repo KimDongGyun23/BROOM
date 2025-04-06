@@ -62,6 +62,8 @@ export const useWebSocket = () => {
 
   const handleConnectionError = useCallback(
     (message: string) => {
+      if (client.current === null) return
+
       if (!isModalOpen) {
         openModal(MODAL_KEYS.CHAT_ERROR, message)
       }
