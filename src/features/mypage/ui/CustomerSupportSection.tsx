@@ -12,12 +12,16 @@ export const CustomerSupportSection = () => {
   const { openModal } = useModalActions()
 
   const openSectionModal = (index: number, name: string) => {
-    if (index === 0) {
-      openModal(name, '문의하기 채널로 이동하시겠습니까?')
-      return
+    switch (index) {
+      case 0:
+        return openModal(name, '문의하기 채널로 이동하시겠습니까?')
+      case 1:
+        return openModal('personalConsent', '')
+      case 2:
+        return openModal('serviceConsent', '')
+      default:
+        return null
     }
-
-    openModal(name, '')
   }
 
   return (
