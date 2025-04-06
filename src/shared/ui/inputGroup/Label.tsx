@@ -29,14 +29,16 @@ export const Label = ({ successMessage, errorMessage, label }: LabelProps) => {
   const currentErrorMessage = errors[section]?.message?.toString()
 
   return (
-    <LabelContainer>
-      <p className="label">{label}</p>
+    <Container>
+      <label className="label" htmlFor={section}>
+        {label}
+      </label>
       {renderMessage(currentErrorMessage, errorMessage, successMessage)}
-    </LabelContainer>
+    </Container>
   )
 }
 
-const LabelContainer = styled.div`
+const Container = styled.div`
   ${({ theme }) => theme.flexBox('row', 'center', undefined, 'md')};
 
   .label {

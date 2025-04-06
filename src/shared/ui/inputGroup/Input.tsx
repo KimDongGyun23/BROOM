@@ -17,8 +17,9 @@ export const Input = ({ type = 'text', ...rest }: InputHTMLAttributes<HTMLInputE
     <InputContainer>
       <StyledInput
         type={type}
-        {...register(section)}
+        id={section}
         autoComplete={type === 'id' ? 'username' : 'off'}
+        {...register(section)}
         {...rest}
       />
     </InputContainer>
@@ -37,7 +38,12 @@ export const NumberInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) 
 
   return (
     <InputContainer>
-      <StyledInput type="text" {...register(section, { onChange: handleChange })} {...rest} />
+      <StyledInput
+        type="text"
+        id={section}
+        {...register(section, { onChange: handleChange })}
+        {...rest}
+      />
     </InputContainer>
   )
 }
@@ -48,7 +54,14 @@ export const DateInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>) =>
 
   return (
     <InputContainer>
-      <StyledInput type="date" {...register(section)} required aria-required="true" {...rest} />
+      <StyledInput
+        type="date"
+        id={section}
+        required
+        aria-required="true"
+        {...register(section)}
+        {...rest}
+      />
     </InputContainer>
   )
 }
@@ -62,8 +75,9 @@ export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>
     <InputContainer>
       <StyledInput
         type={isVisible ? 'text' : 'password'}
-        {...register(section)}
+        id={section}
         autoComplete="current-password"
+        {...register(section)}
         {...rest}
       />
       <VisibilityButton type="button" onClick={toggleVisibility}>
@@ -92,6 +106,7 @@ export const PersonnelInput = () => {
       <StyledUnitInput
         type="text"
         size={5}
+        id={section}
         $textAlign="right"
         placeholder="0"
         {...register(section, { onChange: handleChange })}
@@ -134,6 +149,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
       <StyledUnitInput
         type="text"
         $textAlign="center"
+        id={hourSection}
         placeholder="00"
         size={5}
         {...register(hourSection, { onChange: handleHourChange })}
@@ -143,6 +159,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
       <StyledUnitInput
         type="text"
         $textAlign="center"
+        id={minuteSection}
         placeholder="00"
         size={5}
         {...register(minuteSection, { onChange: handleMinuteChange })}
@@ -156,7 +173,7 @@ export const TextArea = ({ ...rest }: InputHTMLAttributes<HTMLTextAreaElement>) 
   const { register } = useFormContext()
   const section = useContext(InputGroupContext)
 
-  return <StyledTextArea {...register(section)} {...rest} />
+  return <StyledTextArea id={section} {...register(section)} {...rest} />
 }
 
 const InputContainer = styled.div`
