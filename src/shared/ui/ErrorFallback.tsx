@@ -27,7 +27,7 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
 
   return (
     <Container>
-      <ContentWrapper className="flex-column-align min-w-[260px] gap-8">
+      <ContentWrapper>
         <TextContainer>
           <h2 className="error-title">{title}</h2>
           <p className="error-message">{content}</p>
