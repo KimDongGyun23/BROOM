@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form'
 import { styled } from 'styled-components'
 
-import type { ValidateNicknameRequest } from '@/entities/auth/model/auth.type'
 import { useUserData } from '@/entities/auth/model/auth.store'
+import type { ValidateNicknameRequest } from '@/entities/auth/model/auth.type'
 import type { FieldType } from '@/shared/model/common.type'
 import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'

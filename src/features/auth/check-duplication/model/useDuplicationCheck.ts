@@ -23,9 +23,13 @@ export const useDuplicationCheck = <
   setState: SetStateFunction
   errorMessage: string
 }) => {
-  const { getValues, clearErrors } = useFormContext()
+  const { trigger, getValues, clearErrors } = useFormContext()
 
-  return useCallback(() => {
+  return useCallback(async () => {
+    const isValid = await trigger(sectionKey)
+
+    if (!isValid) return
+
     const value = getValues(sectionKey)
     clearErrors(sectionKey)
 
@@ -38,5 +42,5 @@ export const useDuplicationCheck = <
         setState(false, message)
       },
     })
-  }, [getValues, clearErrors, mutate, setState, sectionKey, errorMessage])
+  }, [trigger, sectionKey, getValues, clearErrors, mutate, setState, errorMessage])
 }
