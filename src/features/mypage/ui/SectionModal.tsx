@@ -1,22 +1,22 @@
-import { TermModal } from '@/features/agree-term/ui/TermViewButton'
+import { TermModal } from '@/features/auth/signup/ui/TermModal'
+import { useModalActions } from '@/shared/model/modal.store'
 import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 
 const CHANNEL = import.meta.env.VITE_KAKAO
 
-type SectionModalProps = {
+type Props = {
   index: number
-  isModalOpen: boolean
-  closeModal: VoidFunction
+  name: string
 }
 
-export const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalProps) => {
+export const SectionModal = ({ index, name }: Props) => {
+  const { closeModal } = useModalActions()
+
   switch (index) {
     case 0:
       return (
         <ModalWithTwoButton
-          label="문의하기 채널로 이동하시겠습니까?"
-          isModalOpen={isModalOpen}
-          closeModal={closeModal}
+          modalKey={name}
           primaryButton={{
             buttonLabel: '확인',
             onClickButton: () => {
@@ -27,9 +27,9 @@ export const SectionModal = ({ index, isModalOpen, closeModal }: SectionModalPro
         />
       )
     case 1:
-      return <TermModal id="personalConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
+      return <TermModal id="personalConsent" />
     case 2:
-      return <TermModal id="serviceConsent" isModalOpen={isModalOpen} closeModal={closeModal} />
+      return <TermModal id="serviceConsent" />
     default:
       return null
   }

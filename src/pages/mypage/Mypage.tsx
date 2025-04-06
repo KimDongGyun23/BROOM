@@ -2,8 +2,10 @@ import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import { useFetchUserProfile } from '@/entities/mypage/api/useMypage.query'
-import { DeleteIdButton } from '@/features/delete-id/ui/DeleteIdButton'
-import { LogoutButton } from '@/features/logout/ui/LogoutButton'
+import { DeleteAccountButton } from '@/features/account/delete-account/ui/DeleteAccountButton'
+import { DeleteAccountSuccessModal } from '@/features/account/delete-account/ui/DeleteAccountSuccessModal'
+import { LogoutButton } from '@/features/auth/logout/ui/LogoutButton'
+import { LogoutSuccessModal } from '@/features/auth/logout/ui/LogoutSuccessModal'
 import { CustomerSupportSection } from '@/features/mypage/ui/CustomerSupportSection'
 import { MypageMenuSection } from '@/features/mypage/ui/MypageMenuSection'
 import { MypageProfile } from '@/features/mypage/ui/MypageProfile'
@@ -28,9 +30,12 @@ export const Mypage = () => {
         <ButtonContainer>
           <LogoutButton />
           <span className="divider" />
-          <DeleteIdButton />
+          <DeleteAccountButton />
         </ButtonContainer>
       </ScrollContainer>
+
+      <LogoutSuccessModal />
+      <DeleteAccountSuccessModal />
 
       <BottomNavigation />
     </Container>

@@ -1,7 +1,7 @@
 import { FormContainer } from '@/app/style/commonStyles'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
-import { accountAttribute } from '../config/account.schema'
+import { accountAttribute } from '../config/account.attribute'
 
 export const AccountInformationForm = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute

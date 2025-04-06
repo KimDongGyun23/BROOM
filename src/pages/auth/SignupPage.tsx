@@ -3,21 +3,18 @@ import { FormProvider } from 'react-hook-form'
 import { Container } from '@/app/style/commonStyles'
 import { signupSchema } from '@/entities/auth/config/auth.schema'
 import type { SignupData } from '@/entities/auth/model/auth.type'
-import { signupMap, useCurrentStep } from '@/features/signup/model/steps.store'
-import { SignupForm } from '@/features/signup/ui/SignupForm'
-import { SignupHeader } from '@/features/signup/ui/SignupHeader'
+import { LabelWithStep } from '@/features/auth/signup/ui/LabelWithStep'
+import { SignupForm } from '@/features/auth/signup/ui/SignupForm'
+import { SignupHeader } from '@/features/auth/signup/ui/SignupHeader'
 import { useCustomForm } from '@/shared/hook/useCustomForm'
-import { LabelWithStep } from '@/shared/ui/LabelWithStep'
 
 export const SignupPage = () => {
   const formMethod = useCustomForm<SignupData>(signupSchema)
 
-  const currentStep = useCurrentStep()
-
   return (
     <Container>
       <SignupHeader />
-      <LabelWithStep label={signupMap[currentStep as keyof typeof signupMap]} />
+      <LabelWithStep />
 
       <FormProvider {...formMethod}>
         <SignupForm />

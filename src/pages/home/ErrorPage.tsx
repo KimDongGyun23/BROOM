@@ -8,9 +8,10 @@ export const ErrorPage = () => {
 
   return (
     <Container>
-      <ContentWrapper className="flex-column-align min-w-[260px] gap-8">
+      <ContentWrapper>
         <h2 className="error-title">ERROR</h2>
         <p className="error-message">{`현재 페이지가 존재하지 않아요...\n재시도 부탁드립니다.`}</p>
+
         <ButtonContainer>
           <StyledButton size="lg" onClick={() => navigate('/home', { replace: true })}>
             홈으로 이동하기

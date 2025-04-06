@@ -1,9 +1,10 @@
 import { useFormContext } from 'react-hook-form'
 
 import { FormContainer, GridContainer } from '@/app/style/commonStyles'
-import { postAttribute } from '@/entities/board/config/post.schema'
 import type { PostFormType } from '@/entities/board/model/post.type'
 import { InputGroup } from '@/shared/ui/inputGroup'
+
+import { postAttribute } from '../config/post.attribute'
 
 export const PostForm = () => {
   const { TITLE, TRAINING_DATE, PLACE, PERSONNEL, TIME, CONTENT } = postAttribute

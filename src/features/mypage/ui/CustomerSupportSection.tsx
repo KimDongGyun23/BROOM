@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from 'styled-components'
 
-import useModal from '@/shared/hook/useModal'
+import { useModalActions } from '@/shared/model/modal.store'
 
 import { CUSTOMER_SUPPORT } from '../config/mypageMenu.constant'
 
@@ -9,7 +9,16 @@ import { SectionModal } from './SectionModal'
 
 export const CustomerSupportSection = () => {
   const { sectionTitle, links } = CUSTOMER_SUPPORT
-  const { isModalOpen, openModal, closeModal } = useModal()
+  const { openModal } = useModalActions()
+
+  const openSectionModal = (index: number, name: string) => {
+    if (index === 0) {
+      openModal(name, '문의하기 채널로 이동하시겠습니까?')
+      return
+    }
+
+    openModal(name, '')
+  }
 
   return (
     <Section>
@@ -18,9 +27,11 @@ export const CustomerSupportSection = () => {
         {links.map(({ name }, index) => (
           <React.Fragment key={name}>
             <li>
-              <SectionItemButton onClick={() => openModal(name, '')}>{name}</SectionItemButton>
+              <SectionItemButton onClick={() => openSectionModal(index, name)}>
+                {name}
+              </SectionItemButton>
             </li>
-            <SectionModal index={index} isModalOpen={isModalOpen(name)} closeModal={closeModal} />
+            <SectionModal index={index} name={name} />
           </React.Fragment>
         ))}
       </SectionList>

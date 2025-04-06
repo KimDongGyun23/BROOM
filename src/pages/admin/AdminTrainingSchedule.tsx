@@ -3,8 +3,8 @@ import { styled } from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
 import type { TrainingDate } from '@/entities/admin/model/admin.type'
-import { AddTrainingDateButton } from '@/features/add-training-date/ui/AddTrainingDateButton'
-import { TrainingDateList } from '@/features/training-date/ui/TrainingDateList'
+import { AddTrainingDateButton } from '@/features/training-date/add-training-date/ui/AddTrainingDateButton'
+import { TrainingDateList } from '@/features/training-date/training-date-list/ui/TrainingDateList'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 

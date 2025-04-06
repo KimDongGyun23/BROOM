@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { ChatMessageItem } from '@/features/chat-room/ui/ChatMessageItem'
+import { ChatMessageItem } from '@/features/chat/chat-room/ui/ChatMessageItem'
 
 export const SecondOnboarding = () => {
   return (

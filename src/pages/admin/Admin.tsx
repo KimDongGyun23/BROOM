@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-import { LogoutButton } from '@/features/logout/ui/LogoutButton'
+import { LogoutButton } from '@/features/auth/logout/ui/LogoutButton'
+import { LogoutSuccessModal } from '@/features/auth/logout/ui/LogoutSuccessModal'
 import { ArrowRightIcon } from '@/shared/ui/icons/ActiveIcons'
 import { MainHeader } from '@/shared/ui/MainHeader'
 
@@ -29,6 +30,8 @@ export const Admin = () => {
       <ButtonContainer>
         <LogoutButton />
       </ButtonContainer>
+
+      <LogoutSuccessModal />
     </>
   )
 }

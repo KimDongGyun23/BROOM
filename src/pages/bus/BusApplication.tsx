@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
+import { useBusApplication } from '@/features/bus-application/model/useBusApplication'
 import { BusNoticeSection } from '@/features/bus-application/ui/BusNoticeSection'
 import { BottomNavigation } from '@/shared/ui/BottomNavigation'
 import { Button } from '@/shared/ui/Button'
@@ -8,12 +9,7 @@ import { EmptyMessage } from '@/shared/ui/Error'
 import { MainHeader } from '@/shared/ui/MainHeader'
 
 export const BusApplication = () => {
-  const isBusFormOpen = import.meta.env.VITE_BUS_STATE === 'true'
-  const busNoticeURL = import.meta.env.VITE_BUS_NOTICE_URL
-  const busFormURL = import.meta.env.VITE_BUS_FORM_URL
-
-  const handleClickNoticeButton = () => (window.location.href = busNoticeURL)
-  const handleClickFormButton = () => (window.location.href = busFormURL)
+  const { isBusFormOpen, handleNoticeRedirect, handleFormRedirect } = useBusApplication()
 
   return (
     <Container>
@@ -25,11 +21,11 @@ export const BusApplication = () => {
             <BusNoticeSection />
 
             <ButtonContainer>
-              <Button size="md" secondary onClick={handleClickNoticeButton}>
+              <Button size="md" secondary onClick={handleNoticeRedirect}>
                 공지사항 보러 가기
               </Button>
 
-              <Button size="md" onClick={handleClickFormButton}>
+              <Button size="md" onClick={handleFormRedirect}>
                 신청하러 가기
               </Button>
             </ButtonContainer>

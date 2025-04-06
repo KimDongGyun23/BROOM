@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { useModalActions } from '@/shared/model/modal.store'
+
 import { Button } from '../Button'
 
 import { ModalLayout } from './ModalLayout'
@@ -10,9 +12,7 @@ type ModalButtonProps = {
 }
 
 type ModalProps = {
-  label: string
-  isModalOpen: boolean
-  closeModal: VoidFunction
+  modalKey: string
 }
 
 export type ModalWithOneButtonProps = ModalProps & {
@@ -20,20 +20,20 @@ export type ModalWithOneButtonProps = ModalProps & {
 }
 
 export const ModalWithOneButton = ({
-  label,
-  isModalOpen,
-  closeModal,
+  modalKey,
   button: { buttonLabel = '확인', onClickButton },
 }: ModalWithOneButtonProps) => {
+  const { isModalOpen, getModalLabel, closeModal } = useModalActions()
+
   const handleCloseButton = () => {
     if (onClickButton) onClickButton()
     closeModal()
   }
 
   return (
-    <ModalLayout id="modal" isOpen={isModalOpen} onClose={closeModal}>
+    <ModalLayout id="modal" isOpen={isModalOpen(modalKey)} onClose={handleCloseButton}>
       <ModalContent>
-        <ModalText>{label}</ModalText>
+        <ModalText>{getModalLabel(modalKey)}</ModalText>
         <Button size="lg" onClick={handleCloseButton}>
           {buttonLabel}
         </Button>
@@ -48,12 +48,12 @@ export type ModalWithTwoButtonProps = ModalProps & {
 }
 
 export const ModalWithTwoButton = ({
-  label,
-  isModalOpen,
-  closeModal,
+  modalKey,
   primaryButton,
   secondaryButton,
 }: ModalWithTwoButtonProps) => {
+  const { isModalOpen, getModalLabel, closeModal } = useModalActions()
+
   const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
   const { buttonLabel: secondaryButtonLabel, onClickButton: onClickSecondaryButton } =
     secondaryButton || {}
@@ -64,9 +64,9 @@ export const ModalWithTwoButton = ({
   }
 
   return (
-    <ModalLayout id="modal" isOpen={isModalOpen} onClose={closeModal}>
+    <ModalLayout id="modal" isOpen={isModalOpen(modalKey)} onClose={closeModal}>
       <ModalContent>
-        <ModalText>{label}</ModalText>
+        <ModalText>{getModalLabel(modalKey)}</ModalText>
         <ButtonGrid>
           <Button size="lg" onClick={() => handleClickButton(onClickSecondaryButton)} secondary>
             {secondaryButtonLabel ? secondaryButtonLabel : '취소'}

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import { Container } from '@/app/style/commonStyles'
-import { LoginForm } from '@/features/login/ui/LoginForm'
+import { LoginForm } from '@/features/auth/login/ui/LoginForm'
 
 export const LoginPage = () => {
   return (

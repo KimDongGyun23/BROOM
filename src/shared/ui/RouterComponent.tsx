@@ -22,8 +22,8 @@ import { AccountInformation } from '@/pages/mypage/AccountInformation'
 import { BookmarkedPost } from '@/pages/mypage/BookmarkedPost'
 import { Mypage } from '@/pages/mypage/Mypage'
 import { MyPost } from '@/pages/mypage/MyPost'
-import { PasswordUpdate } from '@/pages/mypage/PasswordUpdate'
 import { UpdateAccount } from '@/pages/mypage/UpdateAccount'
+import { UpdatePassword } from '@/pages/mypage/UpdatePassword'
 
 const LoginPrivateRoute = () => {
   const isLoggedIn = useIsLoggedIn()
@@ -68,7 +68,7 @@ export const RouterComponent = () => {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/mypage/account-information" element={<AccountInformation />} />
         <Route path="/mypage/account-information/edit" element={<UpdateAccount />} />
-        <Route path="/mypage/password" element={<PasswordUpdate />} />
+        <Route path="/mypage/password" element={<UpdatePassword />} />
         <Route path="/mypage/my-post" element={<MyPost />} />
         <Route path="/mypage/bookmark" element={<BookmarkedPost />} />
 
