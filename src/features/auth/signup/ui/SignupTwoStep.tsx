@@ -21,7 +21,7 @@ export const SignupTwoStep = () => {
 
       <InputGroup section={DISCHARGE_YEAR.section}>
         <InputGroup.Label label={DISCHARGE_YEAR.label} />
-        <InputGroup.Input {...DISCHARGE_YEAR.input} />
+        <InputGroup.NumberInput {...DISCHARGE_YEAR.input} />
       </InputGroup>
 
       <InputGroup section={MILITARY_BRANCH.section}>
