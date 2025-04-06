@@ -6,11 +6,12 @@ import { InputGroup } from '@/shared/ui/inputGroup'
 
 import { useNicknameUniqueState } from '../../check-duplication/model/duplication.store'
 import { NicknameDuplicationCheckField } from '../../check-duplication/ui/NicknameDuplicationCheckField'
+import { useMoveToThirdStep } from '../model/useMoveToThirdStep'
 
 export const SignupTwoStep = () => {
   const isNicknameUnique = useNicknameUniqueState()
 
-  const { handleNextStep } = useSignupTwoStepNext()
+  const { handleNextStep } = useMoveToThirdStep()
 
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = signupAttribute
 
@@ -38,6 +39,3 @@ export const SignupTwoStep = () => {
 const StyledButton = styled(Button)`
   ${({ theme }) => theme.margin('auto', 0, '4xl')};
 `
-function useSignupTwoStepNext(): { handleNextStep: any } {
-  throw new Error('Function not implemented.')
-}
