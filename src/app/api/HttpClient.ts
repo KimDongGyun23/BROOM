@@ -102,6 +102,7 @@ export class HttpClient {
       } catch (refreshError) {
         this.failedQueue.forEach(({ reject }) => reject(refreshError))
         this.failedQueue = []
+        sessionStorage.clear()
 
         throw refreshError
       } finally {
