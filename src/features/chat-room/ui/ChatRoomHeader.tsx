@@ -1,4 +1,4 @@
-import { useOpenChatSidebarWithInformation } from '@/features/chat-sidebar/hook/useOpenChatSidebarWithInformation'
+import { useOpenChatSidebar } from '@/features/chat-sidebar/model/useOpenChatSidebar'
 import { ChatSidebar } from '@/features/chat-sidebar/ui/ChatSidebar'
 import { SubHeaderWithIcon } from '@/shared/ui/SubHeader'
 
@@ -7,7 +7,7 @@ type Props = {
 }
 
 export const ChatRoomHeader = ({ handleMoveToPrevPage }: Props) => {
-  const handleOpenSidebar = useOpenChatSidebarWithInformation()
+  const { handleOpenSidebar } = useOpenChatSidebar()
 
   return (
     <>

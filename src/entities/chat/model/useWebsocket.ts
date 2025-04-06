@@ -12,8 +12,9 @@ import { MODAL_KEYS } from '@/shared/lib/constants'
 import type { ChatMessage } from '@/shared/model/common.type'
 
 import { createChatClient } from '../lib/websocket.lib'
-import type { Ack } from '../model/chat.type'
-import { useChatMessageActions } from '../model/chatMessage.store'
+
+import type { Ack } from './chat.type'
+import { useChatMessageActions } from './chatMessage.store'
 
 const INITIAL_RECONNECT_DELAY = 1000
 const MAX_RECONNECT_DELAY = 16000

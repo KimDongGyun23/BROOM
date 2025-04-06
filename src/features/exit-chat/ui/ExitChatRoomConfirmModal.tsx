@@ -1,4 +1,4 @@
-import { useExitChatRoom } from '@/features/exit-chat/hook/useExitChatRoom'
+import { useExitChatRoom } from '@/features/exit-chat/model/useExitChatRoom'
 import type { ModalWithTwoButtonProps } from '@/shared/ui/modal/ButtonModal'
 import { ModalWithTwoButton } from '@/shared/ui/modal/ButtonModal'
 

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 import { ChatParticipantList } from '@/features/chat-sidebar/ui/ChatParticipantList'
+import { ExitChatRoomButton } from '@/features/exit-chat/ui/ExitChatRoomButton'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
-import { ExitChatRoomButton } from '@/widgets/button/ExitChatRoomButton'
 
 import { useIsSidebarOpen, useSidebarActions, useSidebarInformation } from '../model/sidebar.store'
 

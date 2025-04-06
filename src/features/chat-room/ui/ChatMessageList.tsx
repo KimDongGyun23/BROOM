@@ -2,12 +2,11 @@ import InfiniteScroll from 'react-infinite-scroller'
 import styled from 'styled-components'
 
 import { useFetchChatRoomInformation } from '@/entities/chat/api/useChat.query'
-import { useScrollToBottom } from '@/entities/chat/hook/useScrollToBottom'
 import { useChatMessages } from '@/entities/chat/model/chatMessage.store'
+import { useScrollToBottom } from '@/entities/chat/model/useScrollToBottom'
+import { ChatMessageItem } from '@/features/chat-room/ui/ChatMessageItem'
 import { useParamId } from '@/shared/hook/useParamId'
 import { ArrowFatLinesDownIcon } from '@/shared/ui/icons/NonActiveIcons'
-
-import { ChatMessageItem } from './item/ChatMessageItem'
 
 export const ChatMessageList = () => {
   const boardId = useParamId()
@@ -32,6 +31,7 @@ export const ChatMessageList = () => {
           ))}
         </InfiniteScrollContainer>
       </ChatContainer>
+
       {showScrollButton && (
         <ArrowDownButton onClick={handleScrollToBottom}>
           <ArrowFatLinesDownIcon />

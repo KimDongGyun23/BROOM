@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 
-import { ExitChatRoomConfirmModal } from './modal/ExitChatRoomConfirmModal'
+import { ExitChatRoomConfirmModal } from './ExitChatRoomConfirmModal'
 
 export const ExitChatRoomButton = () => {
   const { modalLabel, isModalOpen, openModal, closeModal } = useModal()

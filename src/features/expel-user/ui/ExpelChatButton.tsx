@@ -1,10 +1,10 @@
 import { styled } from 'styled-components'
 
-import { useExpelUser } from '@/features/expel-user/hook/useExpelUser'
+import { useExpelUser } from '@/features/expel-user/model/useExpelUser'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 
-import { ExpelChatSuccessModal } from './modal/ExpelChatSuccessModal'
+import { ExpelChatSuccessModal } from './ExpelChatSuccessModal'
 
 type ExpelChatButtonProps = {
   userId: string

@@ -1,9 +1,9 @@
 import { useFetchChatSidebarInformation } from '@/entities/chat/api/useChat.query'
 import { useParamId } from '@/shared/hook/useParamId'
 
-import { useSidebarActions } from '../model/sidebar.store'
+import { useSidebarActions } from './sidebar.store'
 
-export const useOpenChatSidebarWithInformation = () => {
+export const useOpenChatSidebar = () => {
   const boardId = useParamId()
 
   const { openSidebar, setSidebarInformation } = useSidebarActions()
@@ -18,5 +18,5 @@ export const useOpenChatSidebarWithInformation = () => {
     }
   }
 
-  return handleOpenSidebar
+  return { handleOpenSidebar }
 }

@@ -1,25 +1,23 @@
 import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-import { useFetchChatRoomList } from '@/entities/chat/api/useChat.query'
+import { ChatRoomItem } from '@/features/chat/ui/ChatRoomItem'
 import { ERROR_MESSAGES } from '@/shared/lib/constants'
 import { EmptyMessage } from '@/shared/ui/Error'
-import { ChatItem } from '@/widgets/list/item/ChatItem'
 
-export const ChatList = () => {
-  const { data, isError } = useFetchChatRoomList()
+import { useChatList } from '../model/useChatList'
+
+export const ChatRoomList = () => {
+  const { chatRoomList, isError } = useChatList()
 
   if (isError) return <EmptyMessage label={ERROR_MESSAGES.FETCH_FAIL} />
-
-  const chatList = data?.pages.flatMap((page) => page.chatRooms) || []
-
-  if (!chatList || !chatList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_CHAT} />
+  if (!chatRoomList || !chatRoomList.length) return <EmptyMessage label={ERROR_MESSAGES.NO_CHAT} />
 
   return (
     <Container>
-      {chatList.map((chatRoom) => (
+      {chatRoomList.map((chatRoom) => (
         <Link key={chatRoom.boardId} to={`/chat/${chatRoom.boardId}`}>
-          <ChatItem {...chatRoom} />
+          <ChatRoomItem {...chatRoom} />
         </Link>
       ))}
     </Container>

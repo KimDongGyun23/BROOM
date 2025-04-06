@@ -2,41 +2,14 @@ import { styled } from 'styled-components'
 
 import type { User } from '@/entities/chat/model/chat.type'
 import { useUserData } from '@/features/login/model/auth.store'
-import type { MilitaryBranchCode } from '@/shared/lib/constants'
-import { CrownIcon } from '@/shared/ui/icons/NonActiveIcons'
-import { ProfileImage } from '@/shared/ui/ProfileImage'
-import { ExpelChatButton } from '@/widgets/button/ExpelChatButton'
 
-type ChatParticipantListProps = {
+import { ChatParticipantItem } from './ChatParticipantItem'
+
+type Props = {
   participantList: User[]
 }
 
-type ChatParticipantItemProps = {
-  isAuthor: boolean
-  isChatRoomMine: boolean
-  participant: User
-}
-
-const ChatParticipantItem = ({
-  isAuthor,
-  isChatRoomMine,
-  participant,
-}: ChatParticipantItemProps) => {
-  const { userId, userNickname, militaryBranch } = participant
-
-  return (
-    <ParticipantItem>
-      <ProfileImage size="sm" iconType={militaryBranch as MilitaryBranchCode} />
-      <ProfileInfo>
-        <p>{userNickname}</p>
-        {isAuthor && <CrownIcon />}
-      </ProfileInfo>
-      {isChatRoomMine && !isAuthor && <ExpelChatButton userId={userId} />}
-    </ParticipantItem>
-  )
-}
-
-export const ChatParticipantList = ({ participantList }: ChatParticipantListProps) => {
+export const ChatParticipantList = ({ participantList }: Props) => {
   const user = useUserData()
   const isChatRoomMine = user?.nickname === participantList[0].userNickname
 
@@ -59,14 +32,4 @@ const Container = styled.div`
   ${({ theme }) => theme.padding('md', 0)};
   flex-grow: 1;
   overflow-y: scroll;
-`
-
-const ParticipantItem = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'sm')};
-`
-
-const ProfileInfo = styled.div`
-  ${({ theme }) => theme.flexBox('row', 'center', undefined, 'xs')};
-  ${({ theme }) => theme.font(800, theme.colors.black[100])};
-  flex-grow: 1;
 `

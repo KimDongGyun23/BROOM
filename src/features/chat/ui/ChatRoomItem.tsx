@@ -4,7 +4,7 @@ import type { ChatRoom } from '@/entities/chat/model/chat.type'
 import { ChatProfileImageBox } from '@/entities/chat/ui/ChatProfileImageBox'
 import { ChatInformation, ChatItemContainer, ChatPostTitle } from '@/entities/chat/ui/ChatStyle'
 
-export const ChatItem = ({
+export const ChatRoomItem = ({
   boardName,
   militaryBranches,
   expelled,
