@@ -31,7 +31,10 @@ export const BusApplication = () => {
             </ButtonContainer>
           </>
         ) : (
-          <EmptyMessage label={`현재 버스 신청 기한이 아닙니다. \n다음에 다시 시도해주세요.`} />
+          <EmptyStateContainer>
+            <EmptyStateTitle>To Be Continue..</EmptyStateTitle>
+            <EmptyMessage label={`현재 버스 신청 기한이 아닙니다. \n조금만 기다려주세요.`} />
+          </EmptyStateContainer>
         )}
       </MainContent>
 
@@ -43,6 +46,7 @@ export const BusApplication = () => {
 const MainContent = styled.main`
   ${({ theme }) => theme.margin(0, 'container')}
   ${({ theme }) => theme.padding('lg', 0)}
+  position: relative;
   flex-grow: 1;
   overflow-y: scroll;
 `
@@ -52,4 +56,19 @@ const ButtonContainer = styled.div`
     ${theme.flexBox('column', undefined, undefined, 'md')}
     ${theme.margin('xl', 0, 0)}
   `}
+`
+
+const EmptyStateContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+`
+
+const EmptyStateTitle = styled.p`
+  font-family: Jalnan;
+  font-size: 30px;
+  color: ${({ theme }) => theme.colors.black[500]};
+  text-align: center;
 `
