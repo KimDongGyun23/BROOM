@@ -135,6 +135,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
         type="text"
         $textAlign="center"
         placeholder="00"
+        size={5}
         {...register(hourSection, { onChange: handleHourChange })}
         {...rest}
       />
@@ -143,6 +144,7 @@ export const TimeInput = ({ hourSection, minuteSection, ...rest }: TimeInputProp
         type="text"
         $textAlign="center"
         placeholder="00"
+        size={5}
         {...register(minuteSection, { onChange: handleMinuteChange })}
         {...rest}
       />
