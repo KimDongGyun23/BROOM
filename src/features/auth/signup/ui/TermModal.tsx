@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 import { PRIVACY_TERM, SERVICE_TERM } from '@/entities/auth/config/term.constant'
 import { MODAL_KEYS } from '@/shared/config/modalKeys'
-import { useModalActions } from '@/shared/model/modal.store'
+import { useModalActions, useModalState } from '@/shared/model/modal.store'
 import { Button } from '@/shared/ui/Button'
 import { ModalLayout } from '@/shared/ui/modal/ModalLayout'
 
@@ -13,12 +13,16 @@ type Props = {
 }
 
 export const TermModal = ({ id }: Props) => {
-  const { isModalOpen, closeModal } = useModalActions()
+  const modalState = useModalState()
+
+  const { closeModal } = useModalActions()
+
+  const isModalOpen = modalState[MODAL_KEYS.LOGOUT]?.isOpen || false
 
   const term = id === 'personalConsent' ? PRIVACY_TERM : SERVICE_TERM
 
   return (
-    <ModalLayout id="modal" isOpen={isModalOpen(MODAL_KEYS.TERM)} onClose={closeModal}>
+    <ModalLayout id="modal" isOpen={isModalOpen} onClose={closeModal}>
       <ModalContent>
         <ScrollSection>
           {term.map(({ title, content }) => (

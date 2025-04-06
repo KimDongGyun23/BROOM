@@ -10,7 +10,7 @@ import type { Ack } from '@/entities/chat/model/chat.type'
 import { MODAL_KEYS } from '@/shared/config/modalKeys'
 import { useParamId } from '@/shared/hook/useParamId'
 import type { ChatMessage } from '@/shared/model/common.type'
-import { useModalActions } from '@/shared/model/modal.store'
+import { useModalActions, useModalState } from '@/shared/model/modal.store'
 
 import { createChatClient } from '../lib/websocket.lib'
 
@@ -26,13 +26,16 @@ export const useWebSocket = () => {
   const roomId = useParamId()
   const user = useUserData()
   const navigate = useNavigate()
+  const modalState = useModalState()
 
   const { addMessage } = useChatMessageActions()
-  const { isModalOpen, openModal, closeModal } = useModalActions()
+  const { openModal, closeModal } = useModalActions()
 
   const client = useRef<Client | null>(null)
   const resetRef = useRef<UseFormReset<ChatMessage> | null>(null)
+
   const token = instance.getAccessToken() as string
+  const isModalOpen = modalState[MODAL_KEYS.CHAT_ERROR]?.isOpen || false
 
   let reconnectAttempts = 0
 
@@ -59,7 +62,7 @@ export const useWebSocket = () => {
 
   const handleConnectionError = useCallback(
     (message: string) => {
-      if (!isModalOpen(MODAL_KEYS.CHAT_ERROR)) {
+      if (!isModalOpen) {
         openModal(MODAL_KEYS.CHAT_ERROR, message)
       }
 

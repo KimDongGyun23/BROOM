@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAuthActions } from '@/entities/auth/model/auth.store'
 import { MODAL_KEYS } from '@/shared/config/modalKeys'
-import { useModalActions } from '@/shared/model/modal.store'
+import { useModalActions, useModalState } from '@/shared/model/modal.store'
 
 export const useNavigateAfterLogout = () => {
+  const modalState = useModalState()
   const navigate = useNavigate()
+
   const { logout } = useAuthActions()
-  const { isModalOpen, closeModal } = useModalActions()
+  const { closeModal } = useModalActions()
+
+  const isModalOpen = modalState[MODAL_KEYS.LOGOUT]?.isOpen || false
 
   const handleNavigateAfterLogout = useCallback(() => {
     closeModal()
@@ -21,7 +25,7 @@ export const useNavigateAfterLogout = () => {
   }, [closeModal, navigate, logout])
 
   useEffect(() => {
-    if (isModalOpen(MODAL_KEYS.LOGOUT)) {
+    if (isModalOpen) {
       const handlePopState = (event: PopStateEvent) => {
         if (event.state?.isLogoutModalOpen) {
           handleNavigateAfterLogout()

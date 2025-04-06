@@ -23,12 +23,12 @@ export const ModalWithOneButton = ({
   modalKey,
   button: { buttonLabel = '확인', onClickButton },
 }: ModalWithOneButtonProps) => {
-  const modal = useModalState()
+  const modalState = useModalState()
 
   const { closeModal } = useModalActions()
 
-  const isModalOpen = modal[modalKey]?.isOpen || false
-  const label = modal[modalKey]?.label || ''
+  const isModalOpen = modalState[modalKey]?.isOpen || false
+  const label = modalState[modalKey]?.label || ''
 
   const handleCloseButton = () => {
     if (onClickButton) onClickButton()
@@ -57,12 +57,12 @@ export const ModalWithTwoButton = ({
   primaryButton,
   secondaryButton,
 }: ModalWithTwoButtonProps) => {
-  const modal = useModalState()
+  const modalState = useModalState()
 
   const { closeModal } = useModalActions()
 
-  const isModalOpen = modal[modalKey]?.isOpen || false
-  const label = modal[modalKey]?.label || ''
+  const isModalOpen = modalState[modalKey]?.isOpen || false
+  const label = modalState[modalKey]?.label || ''
 
   const { buttonLabel: primaryButtonLabel, onClickButton: onClickPrimaryButton } = primaryButton
   const { buttonLabel: secondaryButtonLabel, onClickButton: onClickSecondaryButton } =

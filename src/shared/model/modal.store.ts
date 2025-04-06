@@ -5,12 +5,10 @@ type ModalStore = {
   actions: {
     openModal: (id: string, label: string) => void
     closeModal: () => void
-    isModalOpen: (id: string) => boolean
-    getModalLabel: (id: string) => string | undefined
   }
 }
 
-export const useModalStore = create<ModalStore>((set, get) => ({
+export const useModalStore = create<ModalStore>((set) => ({
   modals: {},
   actions: {
     openModal: (id, label) =>
@@ -18,8 +16,6 @@ export const useModalStore = create<ModalStore>((set, get) => ({
         modals: { ...state.modals, [id]: { isOpen: true, label } },
       })),
     closeModal: () => set({ modals: {} }),
-    isModalOpen: (id) => !!get().modals[id]?.isOpen,
-    getModalLabel: (id) => get().modals[id]?.label,
   },
 }))
 
