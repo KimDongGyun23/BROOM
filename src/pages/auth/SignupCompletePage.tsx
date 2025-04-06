@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui/Button'
 
 export const SignupCompletePage = () => {
   const navigate = useNavigate()
+
   return (
     <Container>
       <Logo>BROOM</Logo>

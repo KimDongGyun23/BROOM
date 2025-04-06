@@ -6,17 +6,15 @@ export const signupMap = {
   3: '약관 동의',
 } as const
 
-type Actions = {
-  setCurrentStep: (newStep: number) => void
-  goNextStep: () => void
-  goPreviousStep: () => void
-  setTotalStep: (totalStep: number) => void
-}
-
 type StepsStore = {
   currentStep: number
   totalStep: number
-  actions: Actions
+  actions: {
+    setCurrentStep: (newStep: number) => void
+    goNextStep: VoidFunction
+    goPreviousStep: VoidFunction
+    setTotalStep: (totalStep: number) => void
+  }
 }
 
 export const useStepsStore = create<StepsStore>((set, get) => ({

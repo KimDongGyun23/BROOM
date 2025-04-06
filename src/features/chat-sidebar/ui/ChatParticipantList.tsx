@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 import type { User } from '@/entities/chat/model/chat.type'
-import { useUserData } from '@/features/login/model/auth.store'
+import { useUserData } from '@/entities/auth/model/auth.store'
 
 import { ChatParticipantItem } from './ChatParticipantItem'
 

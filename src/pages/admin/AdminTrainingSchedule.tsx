@@ -4,9 +4,9 @@ import { styled } from 'styled-components'
 import { Container } from '@/app/style/commonStyles'
 import type { TrainingDate } from '@/entities/admin/model/admin.type'
 import { AddTrainingDateButton } from '@/features/add-training-date/ui/AddTrainingDateButton'
+import { TrainingDateList } from '@/features/training-date/ui/TrainingDateList'
 import { InputGroup } from '@/shared/ui/inputGroup'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
-import { TrainingDateList } from '@/widgets/list/TrainingDateList'
 
 export const AdminTrainingSchedule = () => {
   const formMethods = useForm<TrainingDate>()

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { BookmarkButton } from '@/features/bookmark/ui/BookmarkButton'
 import { EnterChatButton } from '@/features/enter-chat/ui/EnterChatButton'
-import { useIsLoggedIn } from '@/features/login/model/auth.store'
+import { useIsLoggedIn } from '@/entities/auth/model/auth.store'
 
 export const PostDetailBottom = () => {
   const isLoggedIn = useIsLoggedIn()

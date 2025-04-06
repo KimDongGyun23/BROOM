@@ -1,8 +1,8 @@
 import { FormProvider } from 'react-hook-form'
 
 import { useFetchAccountDetails } from '@/entities/mypage/api/useMypage.query'
-import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import { accountSchema } from '@/entities/mypage/config/account.schema'
+import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import { UpdateAccountForm } from '@/features/update-account/ui/UpdateAccountForm'
 import { UpdateAccountHeader } from '@/features/update-account/ui/UpdateAccountHeader'
 import { UpdateAccountSuccessModal } from '@/features/update-account/ui/UpdateAccountSuccessModal'

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { type Client } from '@stomp/stompjs'
 
 import { instance } from '@/app/api'
-import { useUserData } from '@/features/login/model/auth.store'
+import { useUserData } from '@/entities/auth/model/auth.store'
 import useModal from '@/shared/hook/useModal'
 import { useParamId } from '@/shared/hook/useParamId'
 import { MODAL_KEYS } from '@/shared/lib/constants'

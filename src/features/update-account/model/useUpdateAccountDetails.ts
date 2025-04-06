@@ -1,12 +1,12 @@
 import { useFormContext } from 'react-hook-form'
 
+import { accountAttribute } from '@/entities/mypage/config/account.schema'
 import type { AccountDetails } from '@/entities/mypage/model/mypage.type'
 import {
   useNicknameDuplicationCheckActions,
   useNicknameUniqueState,
 } from '@/features/check-duplication/model/duplication.store'
-import { useUserData } from '@/features/login/model/auth.store'
-import { accountAttribute } from '@/entities/mypage/config/account.schema'
+import { useUserData } from '@/entities/auth/model/auth.store'
 import type { OpenModal } from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 

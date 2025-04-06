@@ -1,7 +1,7 @@
 import { css, styled } from 'styled-components'
 
 import type { Message } from '@/entities/chat/model/chat.type'
-import { useUserData } from '@/features/login/model/auth.store'
+import { useUserData } from '@/entities/auth/model/auth.store'
 import { ProfileImage } from '@/shared/ui/ProfileImage'
 
 export const ChatMessageItem = ({ messageData }: { messageData: Message }) => {

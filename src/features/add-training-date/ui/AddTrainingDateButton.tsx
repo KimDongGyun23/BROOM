@@ -1,5 +1,6 @@
-import { useAddTrainingDate } from '@/features/add-training-date/hook/useAddTrainingDate'
 import { Button } from '@/shared/ui/Button'
+
+import { useAddTrainingDate } from '../model/useAddTrainingDate'
 
 export const AddTrainingDateButton = () => {
   const { handleAddTrainingDate } = useAddTrainingDate()

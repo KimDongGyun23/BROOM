@@ -1,6 +1,6 @@
 import { styled } from 'styled-components'
 
-import { useDeleteId } from '@/features/delete-id/hook/useDeleteId'
+import { useDeleteId } from '@/features/delete-id/model/useDeleteId'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useUserData } from '@/features/login/model/auth.store'
+import { useUserData } from '@/entities/auth/model/auth.store'
 import { usePostDetailContent } from '@/features/post-detail/model/postDetail.store'
 import useModal from '@/shared/hook/useModal'
 import { canJoinChatRoom } from '@/shared/lib/canJoinChatRoom'

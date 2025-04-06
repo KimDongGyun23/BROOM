@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form'
 
 import type { PostFormType } from '@/entities/board/model/post.type'
-import { useEditPost } from '@/features/edit-post/hook/useEditPost'
+import { useEditPost } from '@/features/edit-post/model/useEditPost'
 import { EditPostSuccessModal } from '@/features/edit-post/ui/EditPostSuccessModal'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'

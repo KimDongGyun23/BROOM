@@ -1,4 +1,4 @@
-import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
+import { useIsLoggedIn, useUserData } from '@/entities/auth/model/auth.store'
 import { usePostDetailContent } from '@/features/post-detail/model/postDetail.store'
 import { SubHeaderWithoutIcon } from '@/shared/ui/SubHeader'
 

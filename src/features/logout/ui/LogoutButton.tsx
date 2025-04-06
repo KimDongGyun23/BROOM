@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { styled } from 'styled-components'
 
-import { useLogout } from '@/features/logout/hook/useLogout'
+import { useLogout } from '@/features/logout/model/useLogout'
 import useModal from '@/shared/hook/useModal'
 import { MODAL_KEYS } from '@/shared/lib/constants'
 import { ModalWithOneButton } from '@/shared/ui/modal/ButtonModal'

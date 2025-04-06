@@ -1,6 +1,6 @@
 import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 
-import { useIsLoggedIn, useUserData } from '@/features/login/model/auth.store'
+import { useIsLoggedIn, useUserData } from '@/entities/auth/model/auth.store'
 import { Admin } from '@/pages/admin/Admin'
 import { AdminOverview } from '@/pages/admin/AdminOverview'
 import { AdminTrainingSchedule } from '@/pages/admin/AdminTrainingSchedule'

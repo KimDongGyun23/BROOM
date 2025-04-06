@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { useRemoveTrainingDate } from '../hook/useRemoveTrainingDate'
+import { useRemoveTrainingDate } from '../model/useRemoveTrainingDate'
 
 type RemoveTrainingDateButtonProps = {
   dateId: number
