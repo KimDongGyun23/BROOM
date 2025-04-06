@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { OnboardingCarousel } from '@/features/onboarding/ui/OnboardingCarousel'
 import { Button } from '@/shared/ui/Button'
-import { OnboardingCarousel } from '@/widgets/onboarding/ui/OnboardingCarousel'
 
 export const Onboarding = () => {
   const navigate = useNavigate()

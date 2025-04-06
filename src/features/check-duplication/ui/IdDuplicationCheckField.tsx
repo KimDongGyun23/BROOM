@@ -6,12 +6,12 @@ import { Button } from '@/shared/ui/Button'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
 import { useIdDuplicationCheckMutation } from '../api/useDuplication.mutation'
-import { useDuplicationCheck } from '../hook/useDuplicationCheck'
 import {
   useIdDuplicationCheckActions,
   useIdDuplicationResultMessage,
   useIdUniqueState,
 } from '../model/duplication.store'
+import { useDuplicationCheck } from '../model/useDuplicationCheck'
 
 export const IdDuplicationCheckField = ({ section, label, input }: FieldType) => {
   const isUnique = useIdUniqueState()
