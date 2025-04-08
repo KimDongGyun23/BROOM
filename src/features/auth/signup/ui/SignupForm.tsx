@@ -4,7 +4,7 @@ import { FormContainer } from '@/app/style/commonStyles'
 import type { SignupData } from '@/entities/auth/model/auth.type'
 
 import { useCurrentStep } from '../model/steps.store'
-import { useResetForm } from '../model/useResetForm'
+import { useResetSignupForm } from '../model/useResetSignupForm'
 import { useSignup } from '../model/useSignupForm'
 
 import { SignupOneStep } from './SignupOneStep'
@@ -31,7 +31,7 @@ export const SignupForm = () => {
 
   const { handleSubmit } = useFormContext<SignupData>()
 
-  useResetForm()
+  useResetSignupForm()
 
   return (
     <FormContainer onSubmit={handleSubmit(handleSignup)} $isFull>

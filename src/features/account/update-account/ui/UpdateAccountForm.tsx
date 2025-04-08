@@ -3,8 +3,12 @@ import { accountAttribute } from '@/entities/mypage/config/account.attribute'
 import { NicknameDuplicationCheckField } from '@/features/auth/check-duplication/ui/NicknameDuplicationCheckField'
 import { InputGroup } from '@/shared/ui/inputGroup'
 
+import { useResetAccountForm } from '../model/useResetAccountForm'
+
 export const UpdateAccountForm = () => {
   const { NICKNAME, DISCHARGE_YEAR, MILITARY_BRANCH } = accountAttribute
+
+  useResetAccountForm()
 
   return (
     <FormContainer $isFull>
