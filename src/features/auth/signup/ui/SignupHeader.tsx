@@ -11,7 +11,7 @@ export const SignupHeader = () => {
   const { goPreviousStep } = useStepsActions()
 
   const handleClose = () => {
-    navigate('/login')
+    navigate(-1)
   }
 
   return (
