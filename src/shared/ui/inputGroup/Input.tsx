@@ -191,7 +191,7 @@ const StyledInput = styled.input`
     ${theme.padding('xs', 0)}
     ${theme.font(700, theme.colors.black[500])}
   `}
-  flex-grow: 1;
+  width: 100%;
   height: 24px;
 `
 
