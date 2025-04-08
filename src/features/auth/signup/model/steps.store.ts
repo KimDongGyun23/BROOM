@@ -14,6 +14,7 @@ type StepsStore = {
     goNextStep: VoidFunction
     goPreviousStep: VoidFunction
     setTotalStep: (totalStep: number) => void
+    resetSteps: VoidFunction
   }
 }
 
@@ -44,6 +45,7 @@ export const useStepsStore = create<StepsStore>((set, get) => ({
       })
     },
     setTotalStep: (totalStep: number) => set(() => ({ currentStep: 1, totalStep })),
+    resetSteps: () => set(() => ({ currentStep: 1 })),
   },
 }))
 
