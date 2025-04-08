@@ -81,7 +81,7 @@ export const PasswordInput = ({ ...rest }: InputHTMLAttributes<HTMLInputElement>
         {...rest}
       />
       <VisibilityButton type="button" onClick={toggleVisibility}>
-        {isVisible ? <EyeIcon /> : <EyeCloseIcon />}
+        {isVisible ? <EyeCloseIcon /> : <EyeIcon />}
       </VisibilityButton>
     </InputContainer>
   )
