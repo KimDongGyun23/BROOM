@@ -3,6 +3,7 @@ import {
   useSearchFilterDropdownState,
   useSearchFilterLabel,
 } from '../../model/filterDropdown.store'
+import { useSearchFilterName } from '../../model/useSearchFilterName'
 
 import { PostSearchBar } from './PostSearchBar'
 
@@ -12,6 +13,8 @@ export const SearchBarForSearch = () => {
   const currentFilter = useSearchFilterLabel()
 
   const { setFilterLabel, toggleDropdown } = useSearchFilterDropDownActions()
+
+  useSearchFilterName()
 
   return (
     <PostSearchBar
