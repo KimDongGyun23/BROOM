@@ -1,65 +1,66 @@
-# 광운대학교 동아리 연합 해커톤
+# BROOM
 
-### **🏆 광운대학교 동아리 연합 해커톤 대상**
-<img width="1498" alt="스크린샷 2024-11-17 오후 2 19 47" src="https://github.com/user-attachments/assets/3c04e8d2-5a8d-43e6-bf91-e8d75861f701">
+광운대학교 예비군 종합 서비스 / 광운대학교 동아리 연합 해커톤 대상
 
-## Idea
+<br/><br/>
 
-- [부름 - Broom](https://broom.life)
-- 부담스러운 교통 비용  ➡️  승차 공유 커뮤니티 기능 제공
-- 원치않는 소극적인 팀원  ➡️  조기 퇴소 희망자 모집 게시판 제공
-- 셔틀버스 예약 불가  ➡️  총학생회 연계 셔틀버스 통합 예약 서비스
-- 원활한 소통을 위한 채팅 기반 커뮤니티
+## 프로젝트 개요
 
+- **프로젝트 기간**: 2024.11.13 ~ 2024.11.16 (1차 개발, 해커톤) / 2025.01.01 ~ 2025.04.11 (2, 3차 개발)
+- **맡은 역할**: 기획, 디자인, 프론트엔드
+- **배포 주소**: https://broom.life/
 
+<br/><br/>
 
-## Member
+## 프로젝트 배경
 
-|                    name                    |          role           |
-| :----------------------------------------: | :---------------------: |
-|     [강선후](https://github.com/SXXHU)     |          기획           |
-| [김동균](https://github.com/KimDongGyun23) | 디자인, 프론트엔드 개발 |
-|  [이해인](https://github.com/saranghein)   |       백엔드 개발       |
-|  [박경민](https://github.com/Kyoung-M1N)   |       백엔드 개발       |
-|   [이혜진](https://github.com/hyejinll)    |       인프라 구축       |
-|  [정지환](https://github.com/JJhwan7099)   |       인프라 구축       |
+학생 예비군을 3년간 다니며 여러 불편한 점들을 보게 되었다. 그중에서도 가장 큰 불편함은 이동수단이다. 학교에서 운영하는 버스 대절 사업은 입퇴소 시에 모든 예약 인원이 탈 때까지 기다려야지만 함께 이동할 수 있다. 때문에, 조기 퇴소자들은 시간적으로 큰 불편을 겪는다. 대중교통을 이용하기에도 학교 위치 특성상 환승이 복잡하고, 출퇴근 시간에 겹쳐 탑승이 어려운 경우도 잦다. 그렇다고 택시나 렌트를 이용하기에는 비용 부담이 크다.
 
+<br/>
 
+이러한 불편함을 어떻게 하면 조금이나마 해결할 수 있을까 고민하게 되었다. 만약, 근처에 거주하는 학생들끼리 택시를 함께 타거나 인원을 모아 렌트를 할 수 있다면 시간과 비용 측면 모두에서 효율적일 것이라고 판단했다. 특히 학생 예비군은 같은 학과 친구들과 함께 이동하는 경우가 많기 때문에, 자연스럽게 친목 형성에도 도움이 될 수 있다. 단순한 교통 수단 공유를 넘어, 학교 내 소속감을 높이고 긍정적인 경험을 만들 수 있는 플랫폼을 목표로 아이디어를 구상하게 되었다.
 
-## Dev tools
+<br/><br/>
 
-### Cooperation
+## 주요 기능
 
-<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=Git&logoColor=white"/> <img src="https://img.shields.io/badge/Github-222222?style=flat&logo=Github&logoColor=white"/> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/Discord-5865F2?style=flat&logo=discord&logoColor=white"/> <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white"/>
+- 로그인 / 회원가입
+- 게시글 조회 및 관리
+- 그룹 채팅을 통한 약속 정하기
+- 마이페이지 (계정 설정, 올린 게시글 관리, 북마크)
+- 버스 대절 신청
+- 문의하기
 
-### Back-end
+<br/><br/>
 
-<img src="https://img.shields.io/badge/Java-21-007396?style=flat&logo=openjdk&logoColor=white"/> <img src="https://img.shields.io/badge/Spring%20boot-3.3.5-6DB33F?style=flat&logo=Springboot&logoColor=white"/> <img src="https://img.shields.io/badge/Spring%20Security-3.3.5-6DB33F?style=flat&logo=Springsecurity&logoColor=white"/> <img src="https://img.shields.io/badge/Spring%20Data%20JPA-3.3.5-6DB33F?style=flat&logo=hibernate&logoColor=white"/>
+## 사용 기술
 
-<img src="https://img.shields.io/badge/MySQL-8.0.39-4479A1?style=flat&logo=MySQL&logoColor=white"/> <img src="https://img.shields.io/badge/JWT-0.12.3-000000?style=flat&logo=jsonwebtokens&logoColor=white"/> <img src="https://img.shields.io/badge/Web%20Socket-3.3.5-010101?style=flat&logo=socketdotio&logoColor=white"/> <img src="https://img.shields.io/badge/RabbitMQ-3.13.7-FF6600?style=flat&logo=rabbitmq&logoColor=white"/> <img src="https://img.shields.io/badge/Erlang-26.2.5.5-A90533?style=flat&logo=erlang&logoColor=white"/>
+| 분야 | 기술 스택 |
+| --- | --- |
+| **Frontend** | React, TypeScript |
+| **상태 관리** | TanStack Query, Zustand |
+| **스타일링** | styled-components |
+| **폼 관리** | React Hook Form, Zod |
+| **기타** | Vite, Vercel, sockjs-client, Stomp, Day.js |
 
-### Front-end
+<br/><br/>
 
-<img src="https://img.shields.io/badge/TypeScript-5.6.2-3178C6?style=flat&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/React-18.3.1-61DAFB?style=flat&logo=react&logoColor=white"/> <img src="https://img.shields.io/badge/React%20Query-5.59.20-FF4154?style=flat&logo=reactquery&logoColor=white"/> <img src="https://img.shields.io/badge/React Hook Form-7.53.2-EC5990?style=flat&logo=reacthookform&logoColor=white"/>   
+## 폴더 구조
 
-<img src="https://img.shields.io/badge/Tailwind%20CSS-3.4.14-06B6D4?style=flat&logo=tailwindcss&logoColor=white"/> <img src="https://img.shields.io/badge/Axios-1.7.7-5A29E4?style=flat&logo=axios&logoColor=white"/> <img src="https://img.shields.io/badge/Zod-3.23.8-3E67B1?style=flat&logo=zod&logoColor=white"/>
-
-<img src="https://img.shields.io/badge/Vercel-000000?style=flat&logo=vercel&logoColor=white"/> 
-
-### Infra 
-
-<img src="https://img.shields.io/badge/AWS EC2-FF9900?style=flat&logo=amazonec2&logoColor=white"/> <img src="https://img.shields.io/badge/AWS RDS-527FFF?style=flat&logo=amazonrds&logoColor=white"/> <img src="https://img.shields.io/badge/AWS ELB-8C4FFF?style=flat&logo=awselasticloadbalancing&logoColor=white"/> <img src="https://img.shields.io/badge/AWS Route 53-8C4FFF?style=flat&logo=amazonroute53&logoColor=white"/>
-
-
-
-
-## ERDiagram
-
-<img width="913" alt="erd" src="https://github.com/user-attachments/assets/0f4b2d15-ffb2-46a3-998c-0d6084ca2098">
-
-
-## Service Architecture
-
-<img width="936" alt="service_architecture" src="https://github.com/user-attachments/assets/11489866-fd1c-4b81-a8d7-a85fcaec8a7b">
-
-
+```
+src/
+├── app               # 앱 초기 설정
+│   │── api/          # 전역 API 설정
+│   │── provider/     # 전역 Provider 컴포넌트
+│   └── style/        # 글로벌 스타일
+├── assets            # 이미지
+├── entities/         # 도메인 속성 및 타입 설정
+├── features/         # 행동 단위의 로직과 UI
+├── pages/            # 라우트 단위 페이지
+└── shared/           # 재사용 가능한 유틸리티 및 설정
+    │── config/       # 전역 상수
+    │── hook/         # 재사용 가능한 커스텀 훅
+    │── lib/          # 유틸 함수
+    │── model/        # 전역 타입 및 스토어
+    └── ui/           # 공통 UI 컴포넌트
+```
